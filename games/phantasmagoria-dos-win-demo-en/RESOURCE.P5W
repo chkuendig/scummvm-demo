@@ -1,0 +1,13 @@
+[Windows]
+title           = Police Quest SWAT Demo
+titleBar        = TRUE
+allowresize     = FALSE
+wwidth          = 640
+wheight         = 480
+pagelock        = FALSE
+scimink         = 2400
+scimaxk         = 5000
+borderpixels    = 10
+reservek        = 300
+confirmdac      = TRUE
+audioSize       = 60k

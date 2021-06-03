@@ -1,0 +1,152 @@
+clear
+space %1: 4000 nospace2
+godir %1:%4 cantcreate
+
+copy %2:..\sierra.exe
+copy %2:..\bootdisk.exe
+copy %2:..\pdoco.txt
+copy %2:..\sierra.err
+copy %2:..\interp.err
+copy %2:..\phcheck.bat %1:checkcd.bat
+copy %2:..\what.exe
+copy %2:*.drv
+copy %2:install.*
+copy %2:readme
+copy %2:readme.bat
+copy %2:havevesa.exe
+copy %2:uvconfig.exe
+copy %2:cpuid.exe
+copy %2:dos4gw.exe
+copy %2:hddtec.exe
+copy %2:frog.bmp
+copy %2:resource.cfg
+clear
+
+REM BATCH FILE TO RUN GAME FROM SIERRA DIRECTORY
+echo @echo off >..\phcd.bat
+echo cd %4 >>..\phcd.bat
+echo call CheckCD   %2 >>..\phcd.bat
+echo @if exist vesadrv.bat call vesadrv.bat >>..\phcd.bat
+echo %1:%4\sierra %1:%4\resource.cfg >>..\phcd.bat
+echo :end >> ..\phcd.bat
+echo cd .. >>..\phcd.bat
+
+REM BATCH FILE TO RUN GAME FROM GAME DIRECTORY
+echo @echo off >phcd.bat
+echo call CheckCD   %2 >>phcd.bat
+echo @if exist vesadrv.bat call vesadrv.bat >>phcd.bat
+echo %1:%4\sierra %1:%4\resource.cfg >>phcd.bat
+echo :end >> phcd.bat
+echo cd .. >>phcd.bat
+
+rem *** making vesa batch ***
+godir %1:%4
+echo %2:>vesa.bat
+echo cd \install\vesa>>vesa.bat
+echo vesainst /Vvesa /B%1:%4 /TSIERRA.DIB>>vesa.bat
+echo cd\>>vesa.bat
+echo %1:>>vesa.bat
+
+echo %3 >resource.cfg
+echo resaud=%2:\ >>resource.cfg
+echo resmap=%2:\ >>resource.cfg
+echo ressfx=%2:\ >>resource.cfg
+echo rescdisc=%2:\ >>resource.cfg
+echo sync=%2:\ >>resource.cfg
+echo movieDir=%2:\vmd >>resource.cfg
+echo patchDir=%1:%4;%2:\;%2:\patches >>resource.cfg
+echo robot=%1:%4;%2:\patches;%2:\robot >>resource.cfg
+echo audiosize=63 >>resource.cfg
+
+REM Test for vesa support 
+godir %1:%4
+havevesa.exe
+if ERRORLEVEL 1 goto novesa
+goto done
+
+REM Offer to create Universal Vesa Driver.
+:novesa
+echo
+echo VESA support has not been detected. However you do 
+echo have the option of constructing a universal VESA 
+echo driver.
+echo
+echo Creating the universal VESA driver will not work 
+echo on every computer system and/or video card.  If 
+echo this function fails, you may have to contact your 
+echo video card manufacturer for a VESA driver that will 
+echo work for you.  Please consult the README file for 
+echo more information.
+echo  
+echo Would you like to attempt this now? (Y/N) 
+pick yn univesa done
+
+:univesa
+clear
+alert Warning... Performing this function may cause your computer to lock. If this occurs, restart your computer, re-run the install program, and select NO for attempting to create the universal driver.
+uvconfig.exe -gen
+if exist univbe.drv goto success
+clear
+alert ERROR: Universal VESA driver not created.
+goto done
+
+:success
+clear
+echo
+echo
+echo
+echo
+echo    A Universal VESA driver was successfully created. 
+echo 
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+pause
+goto done
+
+:done
+rem cd ..>NUL
+cls
+echo
+echo ÿTo play Phantasmagoria later:
+echo ÿ   From the directory of %1:%4,
+echo ÿ   Type phcd and press [ENTER].
+echo
+echo 
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+pause
+goto quit
+
+:cantcreate
+alert Unable to create directory %1:%4
+pause
+goto quit
+
+:nospace2
+cls
+echo
+echo There is not enough space on %1: to install. 
+echo 4 Megabytes of disk space is necessary for
+echo the install.
+echo
+pause
+goto quit
+
+:quit
+end
+

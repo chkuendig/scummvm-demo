@@ -1,0 +1,26 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 27D1-504A
+
+ Directory of C:\Downloads\bs2-demo
+
+17/04/2009  21:58    <DIR>          .
+17/04/2009  21:58    <DIR>          ..
+26/08/1997  17:18               294 cd.inf
+21/08/1997  09:31           289,700 demo.smk
+25/09/1997  11:46        20,262,263 Docks.clu
+12/08/1997  14:12           592,936 Enddemo.smk
+17/04/2009  21:58                 0 files.txt
+01/10/1997  12:32           186,880 game.exe
+25/09/1997  11:44         8,030,769 General.clu
+24/09/1997  12:04        10,091,432 Players.clu
+04/09/1997  12:12               881 readme.txt
+25/09/1997  11:46               175 resource.inf
+25/09/1997  11:46            16,588 resource.tab
+19/08/1997  15:50           160,256 RVScroll.dll
+25/09/1997  10:56         1,039,952 SCRIPTS.CLU
+01/10/1997  12:18                10 Settings.dat
+12/03/1997  15:46            71,680 SMACKW32.DLL
+04/09/1997  12:34               390 Startup.inf
+08/09/1997  15:23           304,968 TEXT.CLU
+              17 File(s)     41,049,174 bytes
+               2 Dir(s)  23,880,122,368 bytes free

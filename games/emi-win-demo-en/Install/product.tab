@@ -1,0 +1,24 @@
+Dummy	0	Empty
+ID_PRODUCT_NAME	0xff00	Monkey 4 Web Demo
+ID_PRODUCT_FOLDER	0xff01	Monkey 4 Web Demo
+ID_PRODUCT_UNINSTALL_STRING	0xff02	Monkey 4 Web Demo
+ID_PRODUCT_START_MENU	0xff03	LucasArts\\Monkey 4 Web Demo
+ID_PRODUCT_LANGUAGE	0xfff0	USA
+ID_LANG_BASE	0xfff1	0009
+ID_SETTINGS_CONFIGURE_JOYSTICKS	0xfff2	Configure \&Joysticks
+ID_SETTINGS_ACCEPT	0xfff3	Accept
+ID_SETTINGS_JOYSTICK_CONFIGURATION	0xfff4	Joystick Configuration
+ID_SETTINGS_CONFIGURE_VIDEO	0xfff5	Configure \&Video
+ID_SETTINGS_VIDEO_CONFIGURATION	0xfff6	Video Configuration
+ID_SETTINGS_NO_VIDEO_INSTALLED	0xfff7	No Display Adapter Installed
+ID_SETTINGS_NO_JOYSTICK_INSTALLED	0xfff8	No Joystick Installed
+ID_SETTINGS_ENABLE_OPENGL	0xfff9	Enable OpenGL
+ID_SETTINGS_ENABLE_DIRECTX	0xfffa	Enable DirectX
+IDBTN_LAUNCHER_HOO_HAH	0xfffb	Marketing Hoo-Haa
+ID_MEDIA_NAME	0xfffc	Monkey 4 Web Demo
+IDBTN_LAUNCHER_PLAY_DEMO	0xfffd	Play Monkey 4 Web Demo
+IDBTN_LAUNCHER_HOW_TO_PLAY	0xfffe	How To Play
+IDMSG_DOWNLOAD_DRIVERS	0xffff	You can download the DirectX drivers through the LucasArts Web Site at 
+
+
+

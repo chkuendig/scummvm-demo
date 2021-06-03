@@ -1,0 +1,313 @@
+[Script]
+:Begin
+;
+:which
+DIALOG WHICHGAME
+FLAG3 goto pick
+FLAG4 goto pick
+FLAG5 goto pick
+DIALOG MUSTSELECT
+goto which
+;
+:pick
+PICKDEST End
+;PICKDEST ChooseDest
+;PICKDEST End
+;
+;check for vfw 
+;FLAG6 TOGGLEON (VFW.SOL)
+VERSIONCHECK *SYSTEMDIR\MCIAVI.DRV 1.1.0.0 FLAG6
+;
+;check for win95
+;if FLAG10 is TRUE, this is win 3.1
+NOTWINNT FLAG10
+;
+COPY
+TESTMIDIEX FLAG2
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 
+;  Phantasmagoria Section
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+:CheckPhant
+FLAG3 GOTO CopyPhant
+GOTO CheckPQ5
+;
+:CopyPhant
+; Extended MIDI
+FLAG2 ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, synthtype, highsynth
+FLAG2 GOTO Resume
+;
+; Base MIDI
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, synthtype, basesynth
+;
+:Resume
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, resAud, *SOURCEDIR\
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, resSfx, *SOURCEDIR\
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, robot, *DESTDIR;*SOURCEDIR\ROBOT
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, patchDir, *DESTDIR;*SOURCEDIR\PATCHES;*SOURCEDIR\
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, movieDir, *SOURCEDIR\VMD
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, rescdisc, *SOURCEDIR\
+ADDTOINI *DESTDIR\RESOURCE.WIN, Windows, resmap, *SOURCEDIR\
+ADDPROGMANGROUP Sierra
+ADDPROGMANITEM *DESTDIR\sierraW.EXE, Title, *DESTDIR\PHAN1W.ICO, *DESTDIR
+FLAG10 ADDPROGMANITEM *DESTDIR\BOOTDISK.EXE -s512 -wcrwin/n, BootTitle, *DESTDIR\BOOTDISK.ICO
+ADDPROGMANITEM *SIERRADIR\SETUP.EXE, SetupTitle
+ADDPROGMANITEM /D *SIERRADIR\SETUP.EXE /r, RegisterTitle, *SOURCEDIR\REG.ICO
+ADDPROGMANITEM WRITE.EXE *DESTDIR\readme.wri, ReadMeTitle
+ADDPROGMANITEM *SOURCEDIR\AVI\PHANT2.AVI, PhantDemo, *DESTDIR\PHANT2.ICO
+ADDPROGMANITEM *SOURCEDIR\AVI\GK2.AVI, GabrielDemo, *DESTDIR\GK2.ICO
+ADDPROGMANITEM *SOURCEDIR\AVI\SHIVERS.AVI, ShiversDemo, *DESTDIR\SHIVERS.ICO
+;ADDPROGMANITEM *SOURCEDIR\CATALOG.HLP, GamesPreview, *DESTDIR\CATALOG.ICO
+ADDPROGMANITEM *DESTDIR\INNW.EXE, InnTitle, *DESTDIR\INN.ICO
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 
+;  End Phantasmagoria Section
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+:CheckPQ5
+FLAG5 GOTO CopyPQ5
+GOTO CheckSQ6
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 
+;  Police Quest V Section
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+:CopyPQ5
+FLAG2 GOTO PQ5HIGHSYNTH
+ADDTOINI *DESTDIR\RESOURCE.P5W, Windows, synthtype, basesynth
+GOTO PQ5CONTINUE
+;
+:PQ5HIGHSYNTH
+ADDTOINI *DESTDIR\RESOURCE.P5W, Windows, synthtype, highsynth
+;
+:PQ5CONTINUE
+ADDTOINI *DESTDIR\RESOURCE.P5W, Windows, resAud, *SOURCEDIR\SWAT
+ADDTOINI *DESTDIR\RESOURCE.P5W, Windows, resSfx, *SOURCEDIR\SWAT
+ADDTOINI *DESTDIR\RESOURCE.P5W, Windows, resMap, *SOURCEDIR\SWAT
+ADDTOINI *DESTDIR\RESOURCE.P5W, Windows, robot, *SOURCEDIR\SWAT\ROBOTS
+ADDTOINI *DESTDIR\RESOURCE.P5W, Windows, patchDir, *SOURCEDIR\SWAT\PATCHES;*SOURCEDIR\SWAT\ROBOTS
+ADDPROGMANGROUP Sierra
+ADDPROGMANITEM *SOURCEDIR\SWAT\SIERRAW.EXE -o *DESTDIR\RESOURCE.P5W, PQ5DEMO, *DESTDIR\PQ5W.ICO
+ADDPROGMANITEM *SOURCEDIR\AVI\PHANT2.AVI, PhantDemo, *DESTDIR\PHANT2.ICO
+ADDPROGMANITEM *SOURCEDIR\AVI\GK2.AVI, GabrielDemo, *DESTDIR\GK2.ICO
+ADDPROGMANITEM *SOURCEDIR\AVI\SHIVERS.AVI, ShiversDemo, *DESTDIR\SHIVERS.ICO
+;ADDPROGMANITEM *SOURCEDIR\CATALOG.HLP, GamesPreview, *DESTDIR\CATALOG.ICO
+ADDPROGMANITEM *DESTDIR\INNW.EXE, InnTitle, *DESTDIR\INN.ICO
+;APPEND *DESTDIR\SWAT.BAT set sdrive=*SOURCEDRIVE:
+;APPEND *DESTDIR\SWAT.BAT set sdir=*SOURCEDIR\SWAT
+;APPEND *DESTDIR\SWAT.BAT set ddrive=*DESTDRIVE:
+;APPEND *DESTDIR\SWAT.BAT set ddir=*DESTDIR
+;APPEND *DESTDIR\SWAT.BAT GOTO checkCD
+;APPEND *DESTDIR\SWAT.BAT :end
+;APPEND *DESTDIR\SWAT.BAT cd \
+;APPEND *DESTDIR\SWAT.BAT %ddrive%
+;APPEND *DESTDIR\SWAT.BAT cd %ddir%\..
+;APPEND *DESTDIR\SWAT.BAT set sdrive=
+;APPEND *DESTDIR\SWAT.BAT set sdir=
+;APPEND *DESTDIR\SWAT.BAT set ddrive=
+;APPEND *DESTDIR\SWAT.BAT set ddir=
+;APPEND *DESTDIR\SWAT.BAT echo.
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 
+;  End Police Quest IV Section
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+:CheckSQ6
+FLAG4 GOTO CopySQ6
+GOTO MoreStuff
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 
+;  SQ6 Section
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+:CopySQ6
+FLAG2 GOTO SQ6HIGHSYNTH
+ADDTOINI *DESTDIR\RESOURCE.SQ6, Windows, synthtype, basesynth
+GOTO SQ6CONTINUE
+;
+:SQ6HIGHSYNTH
+ADDTOINI *DESTDIR\RESOURCE.SQ6, Windows, synthtype, highsynth
+;
+:SQ6CONTINUE
+ADDTOINI *DESTDIR\RESOURCE.SQ6, Windows, resAud, *SOURCEDIR\SQ6
+ADDTOINI *DESTDIR\RESOURCE.SQ6, Windows, resSfx, *SOURCEDIR\SQ6
+ADDTOINI *DESTDIR\RESOURCE.SQ6, Windows, resMap, *SOURCEDIR\SQ6
+ADDTOINI *DESTDIR\RESOURCE.SQ6, Windows, patchDir, *SOURCEDIR\SQ6\PATCHES
+ADDTOINI *DESTDIR\RESOURCE.SQ6, Windows, rescdisc, *SOURCEDIR\
+ADDPROGMANGROUP Sierra
+ADDPROGMANITEM *SOURCEDIR\SQ6\SQ6W.EXE *DESTDIR\RESOURCE.SQ6, SQ6Title, *DESTDIR\SQ6.ICO, *SOURCEDIR
+ADDPROGMANITEM *SOURCEDIR\AVI\PHANT2.AVI, PhantDemo, *DESTDIR\PHANT2.ICO
+ADDPROGMANITEM *SOURCEDIR\AVI\GK2.AVI, GabrielDemo, *DESTDIR\GK2.ICO
+ADDPROGMANITEM *SOURCEDIR\AVI\SHIVERS.AVI, ShiversDemo, *DESTDIR\SHIVERS.ICO
+;ADDPROGMANITEM *SOURCEDIR\CATALOG.HLP, GamesPreview, *DESTDIR\CATALOG.ICO
+ADDPROGMANITEM *DESTDIR\INNW.EXE, InnTitle, *DESTDIR\INN.ICO
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;  End SQ6 Section
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+:MoreStuff
+;
+PHYSICALMEM_LT 8000 FLAG16
+;
+DIALOG Register
+FLAG7 REGISTER
+;
+FLAG10 GOTO DoBoot
+goto NoBoot
+;
+:DoBoot
+; Ask if they want to make a boot disk
+FLAG16 DIALOG BootDisk
+FLAG9 RUN 0 foo *SOURCEDIR\BOOTDISK.EXE -s512 -cwrwin/n
+;
+:NoBoot
+;
+FLAG6 RUN 0 *SOURCEDIR\VFW\VFWSETUP.EXE *SOURCEDIR\VFW\VFWSETUP.EXE
+;
+DIALOG ReadMe
+FLAG8 RUN 0 x WRITE *SOURCEDIR\readme.wri
+;
+:End
+END
+
+[Requirements]
+WinVer=310
+CPU=486-66
+Colors=256
+MemKB=7600
+Wave=2
+MIDI=2
+CDROM=2
+ScreenWidth=640
+ScreenHeight=480
+PhysicalMem=7600
+VideoSpeed=425
+
+[Ident]
+Version=11
+ProductID=83277
+
+[Archives]
+
+[Files]
+RESOURCE.WIN,	NOARCHIVE, 1, 172,	 0
+sierraw.exe,	NOARCHIVE, 1, 885401, 0
+PHAN1W.ICO,    NOARCHIVE, 1, 766,       0
+pdoco.txt,		NOARCHIVE, 1, 12648,	 0
+readme.wri,    NOARCHIVE, 1, 1226624,0
+RESOURCE.P5W,  NOARCHIVE, 1, 309,    0
+PQ5W.ICO,      NOARCHIVE, 1, 766,    0
+sq6.ico,       NOARCHIVE, 1, 766,    0
+resource.sq6,  NOARCHIVE, 1, 371,    0
+scidll.dll,    NOARCHIVE, 1, 142934, 0
+sierra.err,    NOARCHIVE, 1, 8475,   0
+bootdisk.exe,  NOARCHIVE, 1, 36451,  1
+bootdisk.ico,  NOARCHIVE, 1, 766,    1
+INN.ICO,			NOARCHIVE, 1, 766,    1
+INNW.EXE,		NOARCHIVE, 1, 12416,  1
+;catalog.ico,   NOARCHIVE, 1, 766,    1
+gk2.ico,       NOARCHIVE, 1, 766,    1
+phant2.ico,    NOARCHIVE, 1, 766,    1
+shivers.ico,   NOARCHIVE, 1, 766,    1
+ 
+[Setup]
+SetupSize=800
+BillboardSize=0
+
+[Dialogs]
+BEGIN 0, Restart
+Installation Complete
+1, DonePrompt1
+1, DonePrompt2
+10, DoneNow, (), FLAG1
+13, DoneLater
+END
+BEGIN 1, VfW
+Video for Windows
+1, VideoPrompt1
+1, VideoPrompt2
+10, OKText
+11, AbortText
+END
+BEGIN 2, Indeo
+Indeo Video
+1, IndeoPrompt
+10, OKText
+11, AbortText
+END
+BEGIN 3, Win32s
+Win32s
+1, Win32sPrompt
+10, OKText
+11, AbortText
+END
+BEGIN 4, WinG
+WinG
+1, WinGPrompt
+10, OKText
+11, AbortText
+END
+BEGIN 5, Bootdisk
+Bootdisk
+1, BootPrompt1
+1, BootPrompt2
+13, NOText
+10, YESText, (), FLAG9
+END
+BEGIN 6, Done
+AllDone
+1, AllDoneText
+10, OKText
+END
+BEGIN 7, ReadMe
+ReadMe
+1, ReadmePrompt1
+10, YESText, (), FLAG8
+13, NOText
+END
+BEGIN 8, Register
+Register
+1, RegisterPrompt1
+10, YESText, (), FLAG7
+13, NOText
+END
+BEGIN 9, WHICHGAME
+INTROTITLE
+1, WHICHGAME
+10, OK
+11, CANCEL
+2, PHANTLONGTITLE, (resource.win, sierraw.exe, PHAN1W.ICO, pdoco.txt, readme.wri, scidll.dll, sierra.err), FLAG3
+END
+BEGIN 9, MUSTSELECT
+INTROTITLE
+1, MUSTSELECT
+10, OK
+11, CANCEL
+END
+

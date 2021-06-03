@@ -1,0 +1,210 @@
+Object              ;system.sc
+  Code              ;system.sc
+    Actions         ;feature.sc
+    Scaler          ;scaler.sc
+      ScaleTo       ;scaleto.sc
+      SlopedScaler  ;slscaler.sc
+    OnMeAndLowY     ;user.sc
+    GradualLooper   ;grooper.sc
+    SmoothLooper    ;smooper.sc
+    PseudoMouse     ;pmouse.sc
+    PAvoider        ;pavoid.sc
+    Panner          ;scrlplan.sc
+    PointGauge      ;pcntr.sc
+    Debugger        ;debug.sc
+  Collection        ;system.sc
+    List            ;system.sc
+      Set           ;system.sc
+        EventHandler;system.sc
+          Cast      ;system.sc
+          Sounds    ;game.sc
+        Dialog      ;dialog.sc
+          SRDialog  ;save.sc
+            Restore ;save.sc
+            Save    ;save.sc
+          oTranslucentDialog;talker.sc
+        IconBar     ;iconbar.sc
+          Inventory ;invent.sc
+        NewHandlerList;events.sc
+        PEditor     ;debpoly.sc
+        Dice        ;liars.sc
+        ScoreDisplay;410.sc
+      Controls      ;dialog.sc
+      Conversation  ;conv.sc
+      RadioGroup    ;button.sc
+  Script            ;system.sc
+    Tutorial        ;tutorial.sc
+    CueObj          ;feature.sc
+    SoTwinkle       ;twinkle.sc
+    SoSuperTwinkle  ;twinkle.sc
+    OceanMotion     ;430.sc
+    SineOceanMotion ;430.sc
+  Event             ;system.sc
+  Cue               ;system.sc
+  Array             ;array.sc
+    IntArray        ;array.sc
+    IDArray         ;array.sc
+      PArray        ;parray.sc
+    ByteArray       ;array.sc
+      String        ;string.sc
+  Rectangle         ;rect.sc
+  Timer             ;timer.sc
+  TimeOut           ;timer.sc
+  Sound             ;sound.sc
+    QueuedSound     ;qsound.sc
+    TPSound         ;tpsound.sc
+  Cycle             ;motion.sc
+    Forward         ;motion.sc
+      Walk          ;motion.sc
+      SyncWalk      ;motion.sc
+      StopWalk      ;stopwalk.sc
+      ForwardCounter;forcount.sc
+    CycleTo         ;motion.sc
+      EndLoop       ;motion.sc
+      BegLoop       ;motion.sc
+    Reverse         ;reverse.sc
+    MouthSync       ;sync.sc
+    GradualCycler   ;grooper.sc
+    MoveCycle       ;movecyc.sc
+    RandCycle       ;randcyc.sc
+      RTRandCycle   ;randcyc.sc
+    Oscillate       ;osc.sc
+    RangeOsc        ;rangeosc.sc
+    Blink           ;talker.sc
+  Motion            ;motion.sc
+    MoveTo          ;motion.sc
+      Path          ;path.sc
+        RelPath     ;path.sc
+      RegionPath    ;regpath.sc
+    Chase           ;chase.sc
+    Follow          ;follow.sc
+    Wander          ;wander.sc
+    PolyPath        ;polypath.sc
+      MoveFwd       ;movefwd.sc
+      PChase        ;pchase.sc
+      PFollow       ;pfollow.sc
+    Jump            ;jump.sc
+      JumpTo        ;jump.sc
+    Orbit           ;orbit.sc
+    DPath           ;dpath.sc
+      RelDPath      ;reldpath.sc
+    Track           ;track.sc
+    Approach        ;approach.sc
+    TPCPath         ;tpcpath.sc
+    TPPolyPath      ;tpppath.sc
+      TPChase       ;pchase.sc
+      TPOrbit       ;porbit.sc
+      TPWander      ;pwander.sc
+  Polygon           ;polygon.sc
+    EditablePolygon ;debpoly.sc
+  WalkieTalkie      ;walktalk.sc
+  Sync              ;sync.sc
+  ScriptSync        ;sync.sc
+  Feature           ;feature.sc
+    View            ;actor.sc
+      Prop          ;actor.sc
+        Actor       ;actor.sc
+          Ego       ;ego.sc
+            LarryEgo;l7ego.sc
+          Cat       ;cat.sc
+        Door        ;door.sc
+        Mouth       ;talker.sc
+        Indicator   ;pcntr.sc
+        Die         ;liars.sc
+        AIBabe      ;liars.sc
+        ScoreDigit  ;410.sc
+      Cursor        ;cursor.sc
+        IconBarCursor;iconbar.sc
+      DItem         ;ditem.sc
+        DText       ;dtext.sc
+          DButton   ;dbutton.sc
+            SRDButton;save.sc
+          DEdit     ;dedit.sc
+          SelectorDText;dselectr.sc
+          TPText    ;talker.sc
+          ToolHelpView;events.sc
+        DIcon       ;dicon.sc
+          DCIcon    ;dcicon.sc
+        DSelector   ;dselectr.sc
+          FileSelector;filesel.sc
+      IconItem      ;iconbar.sc
+        InvItem     ;invent.sc
+      TextView      ;textview.sc
+      TiledView     ;tiledbmp.sc
+      PushButton    ;button.sc
+        ToggleButton;button.sc
+          RadioButton;button.sc
+        TextButton  ;button.sc
+          MessageButton;button.sc
+          DismissTextButton;button.sc
+        DismissButton;button.sc
+      TextItem      ;button.sc
+      EditItem      ;button.sc
+      TPSelector    ;tpselect.sc
+      TransView     ;transluc.sc
+      ScrollView    ;scrlplan.sc
+      InvSlot       ;inv.sc
+      MenuItem      ;menus.sc
+        MenuHeader  ;menus.sc
+      ScrollBar     ;scrllbar.sc
+      DragButton    ;scrllbar.sc
+      TorScrollHandle;tpscroll.sc
+      BetDie        ;liars.sc
+    InventWellFeature;inv.sc
+    OpaqueFeature   ;modalpl.sc
+    MoveFeature     ;modalpl.sc
+    ExitFeature     ;exitfeat.sc
+    CUExitFeature   ;exitfeat.sc
+    ScrollExit      ;tpscroll.sc
+    TravelFeature   ;travel.sc
+    BetSlot         ;liars.sc
+  Magnifier         ;magnify.sc
+  Styler            ;styler.sc
+  Plane             ;plane.sc
+    TiledPlane      ;tiledbmp.sc
+    TranslucentPlane;transluc.sc
+    ScrollPlane     ;scrlplan.sc
+      TorScrollPlane;tpscroll.sc
+    ModalPlane      ;modalpl.sc
+      DialogPlane   ;gendialg.sc
+    ToolHelpPlane   ;events.sc
+    TextWindowClass ;textpop.sc
+  Print             ;print.sc
+  User              ;user.sc
+    NewUser         ;events.sc
+  Block             ;block.sc
+    Cage            ;block.sc
+  File              ;file.sc
+  Game              ;game.sc
+    DoitChangedGame ;events.sc
+      NewGame       ;newgame.sc
+  Region            ;game.sc
+    Room            ;game.sc
+      L7Room        ;l7room.sc
+  StatusLine        ;game.sc
+  Messager          ;messager.sc
+    TPMessager      ;tpmessag.sc
+  Narrator          ;talker.sc
+    Talker          ;talker.sc
+  MessageObj        ;conv.sc
+  Inset             ;inset.sc
+  Flags             ;flags.sc
+    oFlagsClass     ;l7flags.sc
+  CueMe             ;cueme.sc
+    FaceCue         ;actor.sc
+  FeatureInfo       ;featinfo.sc
+  TiledBitmap       ;tiledbmp.sc
+  InventItem        ;inv.sc
+  InvHandler        ;inv.sc
+  TimePauser        ;timepaus.sc
+  MenuHandler       ;menus.sc
+  EventCode         ;events.sc
+  NewEventHandler   ;events.sc
+  L7PopupMenuHandler;popmenu.sc
+  delayDisposeScript;dds.sc
+  VerbHandler       ;l7ego.sc
+  MotionNoLoop      ;mowoloop.sc
+    MoveToNoLoop    ;mowoloop.sc
+  TextDisplayClass  ;textpop.sc
+  TextSaverClass    ;textpop.sc
+  L7TalkWindow      ;l7talk.sc

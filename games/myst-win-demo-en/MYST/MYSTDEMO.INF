@@ -1,0 +1,1187 @@
+;;====================================================================
+;;  Files processing module.  All file and directory tasks required for
+;;  the installation should be centralized in this module.
+;;====================================================================
+
+;;====================================================================
+;;
+;;                       V A R I A B L E S
+;;
+;;====================================================================
+
+DefineVariables
+Text [BaseName] := mystdemo
+;;************************************************************************
+;;
+;;  Variables specific to this module.
+;;  (SDF variables are initialized from an external data file.)
+;;
+;;************************************************************************
+
+  Number [UtilMenuSelection]
+Text [ProgramGroupDesc] := Broderbund Software
+Text [ProgramGroupFile] := MYSTDEMO.GRP
+Number [ProgramGroupItemCount] := 1
+  Text [HeaderBitMapFile] := BRODLOGO.BMP
+  Text [InfoBitMapFile] := ESC.BMP
+  Text [ProductIconFile]
+Text [ReadMeFile] := README.TXT
+Number [MainSwitchFull] := 0
+
+  Number [Yes] := 1
+  Number [No] := 0
+
+  Number [AcceptValue] := 1
+  Number [CancelValue] := 102
+
+Logical [ArchiveAvailable] := Y
+Logical [ProgramGroupAvailable] := Y
+
+  Number [ProgramGroupInstalled]
+  Number [ProgramItemsInstalled]
+
+;;*************
+;; these variables are common to the DOS files module
+;;*************
+  Number [FilesMenuSelection]
+  Text [ExtractionOptions] := ShowJustOne
+  Directory [InstallRootDirectory]
+  Text [DeleteProductDirFileName] := DELDIRW.EXE
+  Text [DeleteKey] := HOBIEJOE
+
+  Text [Array1]
+  Text [Array2]
+  Text [Array3]
+  Text [Array4]
+  Text [Array5]
+  Text [Array6]
+
+  Directory [OrigDirectory]
+  Directory [Tree]
+  Number [TreeLength]
+  Logical [TreeDeleted]
+
+  Number [Error] := 0
+  Number [NoError] := 0
+  Number [NoDirectory] := 1
+  Number [FilesSkipped] := 2
+  Number [NoInstall] := 3
+  Number [NoPGInstall] := 4
+
+Text [DefaultInstallationDirectory] := MYSTDEMO
+  Directory [SavedSelectedInstallDir]
+
+  Directory [SelectedInstallDirectory]
+  Number [FilesInstalled]             
+
+;;************************************************************************
+;;
+;;  Variables common to all script modules.
+;;  (SDF variables are initialized from and external data file.)
+;;
+;;************************************************************************
+  
+  Text [ModuleName]
+  Text [SDFFileName]
+
+Text [ProductName] := Myst Demo
+  Text [TechSupportPhoneNumber] := (415) 382-4419
+
+  Number [WorkFilesGroup] := 1
+
+   Number [Abort]
+
+   Logical [UseShadows]
+   Text [MainBorder]
+   Text [PopupBorder]
+   Text [TopLineColors]
+   Text [BottomLineColors]
+   Text [ShadowColors]
+   Text [ScreenColors]
+   Text [PopupColors]
+
+   Text [AttentionColors]
+   Text [NotifyColors]
+   Text [StaticInfoColors]
+   Text [DynamicInfoColors]
+   Text [BackgroundCharacter]
+
+EndDefineVariables
+
+;;=================================================================== 
+;;
+;;                        P R O C E D U R E S
+;;
+;;=================================================================== 
+
+[ProductIconFile] := [BaseName].BMP
+[ModuleName] := [BaseName].INF
+[SDFFileName] := [BaseName].SDF
+[ProgramGroupInstalled] := [No]
+[ProgramItemsInstalled] := [No]
+[FilesInstalled] := [No]
+
+
+Do GetWorkFiles
+Do SetDisplay
+Do ReadSDF
+If [Abort] = [Yes]
+  Do Abort
+EndIf
+Do ModuleProcess
+
+:EndModule
+[Abort] := [No]
+Do ExitModule
+
+
+;;==================
+;; Main Module Process
+;;  All module-specific, custom procedures
+;;  should be called from here.
+;;==================
+
+Procedure ModuleProcess
+
+  Do MainSwitch
+
+EndProcedure ;; ModuleProcess
+
+
+Procedure MainSwitch
+
+:MainSwitchGT
+  If [MainSwitchFull] = 1
+	[String1] := Utilities
+  Else
+	[String1] := Help
+  EndIf
+
+  [Number2] := LengthOf [ProductName]
+  [Number3] := 275/2
+  [Number4] := [Number3] - [Number2] - [Number2]
+  [Number2] := 4 * [Number2]
+  DialogBox @xy(CENTERWINDOW,CENTERWINDOW) 275 78 Returns [Number1] NoCaption ModalFrame BorDlg
+	BorGroup @xy(10,10) 255 38 "Installation for:"
+	CText @xy([Number4],20) [Number2] 8 [ProductName]
+	DefPushButton @xy(33,56) 57 14 "INSTALL" 100
+	PushButton @xy(184,56) 57 14 "Cancel" 101
+	PushButton @xy(116,58) 45 11 [String1] 102
+  EndDialogBox
+
+  If [Number1] = 100
+    Do FullInstall
+  EndIf
+
+  If [Number1] = 102
+	If [MainSwitchFull] = 1
+	  Do UtilMenu
+	Else
+	  Do ShowHelpInfo
+	  GoTo MainSwitchGT
+	EndIf
+  EndIf
+
+EndProcedure ;; MainSwitch
+
+
+Procedure UtilMenu
+
+  [UtilMenuSelection] := 1
+:UtilMenuGT
+  ClearScreen
+
+  [Error] := NoError
+  [String1] := BlankString
+  GetMenuChoice [DynamicInfoColors] @xy(Center,Center) Highlight [UtilMenuSelection] UseHeader "UTILITIES MENU"
+	Deinstall [ProductName]
+    ;Deinstall entire product (files, program groups, etc.)
+	[String1]
+	Install Program Group
+    ;Install the program group and program items for
+    ;"[ProductName]"
+	[String1]
+	Install All Files
+    ;Install all files required for a full installation
+    Install A Single File
+    ;Select a single file from the installation disk(s)
+    Deinstall All Files
+    ;Delete all directories, subdirectories,
+    ;and files related to the installation of
+    ;"[ProductName]"
+	[String1]
+	Exit
+    ;Exit the installer.
+  EndGetMenuChoice
+  
+  InCase choice is
+	=1:  [UtilMenuSelection] := 1
+		 Do GetSelectedDirectory
+	     If [Error] <> [NoDirectory]
+	       Do DeinstallProductFiles
+		   [ProgramItemsInstalled] := [Yes] ;; this is as far as I'm willing to commit myself
+		   Do DeinstallProgramGroup
+		 EndIf 
+	=2:  [UtilMenuSelection] := 2
+	=3:  [UtilMenuSelection] := 3
+		 Do GetSelectedDirectory
+         If [Error] <> [NoDirectory]
+		   If [ProgramGroupAvailable] = YesCharacter
+			 Do ProgramGroupBuild
+		   Else
+			 Dialog
+	           Sorry, but there is no program group for
+	           "[ProductName]"
+			 EndDialog
+		   EndIf
+         EndIf
+	=4:  [UtilMenuSelection] := 4
+	=5:  [UtilMenuSelection] := 5
+		 If [ArchiveAvailable] = NoCharacter
+		   Dialog
+			 Sorry, but the installation for
+			 "[ProductName]"
+             has no files.
+		   EndDialog
+         Else
+ 		   Do ExtractAllFiles
+		 EndIf
+	=6:  [UtilMenuSelection] := 6
+		 If [ArchiveAvailable] = NoCharacter
+		   Dialog
+			 Sorry, but the installation for
+			 "[ProductName]"
+             has no files.
+		   EndDialog
+         Else
+		   Do ExtractSingleFile
+		 EndIf
+	=7:  [UtilMenuSelection] := 7
+		 If [ArchiveAvailable] = NoCharacter
+		   Dialog
+			 Sorry, but the installation for
+			 "[ProductName]"
+             has no files.
+		   EndDialog
+         Else
+		   Do GetSelectedDirectory
+	       If [Error] <> [NoDirectory]
+	         Do DeinstallProductFiles
+		   EndIf
+         EndIf
+	=8:  [UtilMenuSelection] := 8
+	=9:  [UtilMenuSelection] := 9
+		 GoTo UtilMenuExit
+  EndInCase
+
+  GoTo UtilMenuGT
+:UtilMenuExit
+
+EndProcedure ;; UtilMenu
+
+
+Procedure FullInstall
+
+  If [ArchiveAvailable] = YesCharacter
+	Do ExtractAllFiles
+    If [Error] = [NoDirectory] .OR. [Error] = [NoInstall]
+      GoTo FullInstallExit
+    EndIf
+  EndIf
+  If [ProgramGroupAvailable] = YesCharacter
+	Do ProgramGroupBuild
+  EndIf
+
+  Do SetProductINIFile
+
+  If FileExists [SelectedInstallDirectory]\[ReadMeFile]
+    Dialog [YesOrNo1] [StaticInfoColors]
+	  Would you like to read the file "[ReadMeFile]" now?
+	EndDialog
+	If [YesOrNo1] = YesCharacter
+	  BrowseFile [SelectedInstallDirectory]\[ReadMeFile]
+	EndIf
+  EndIf
+
+  If [Error] = [NoPGInstall]
+	Dialog PressAKey
+	  The icons for "[ProductName]"
+	  may not exist or may be out of date.
+
+	  You may have to run the program from
+      the Program Manager's "File\Run" menu.
+	EndDialog
+  EndIf
+
+  If [Error] = [NoError]
+	Dialog PressAKey [StaticInfoColors]
+      You've sucessfully installed
+	  "[ProductName]"
+
+	  Have Fun!
+	EndDialog
+  EndIf
+
+:FullInstallExit
+
+EndProcedure ;; FullInstall
+
+
+
+
+Procedure ProgramGroupBuild
+
+  If [ProgramGroupDesc] = BlankString
+    [Error] := [NoPGInstall]
+	GoTo ProgramGroupBuildExit
+  EndIf
+
+  [Error] := [NoError]
+
+  [Abort] := [Yes]
+  [ProgramGroupInstalled] := [Yes]
+  Do SetSDF
+
+  [Array4] := GetProgramManagerGroupInfo [ProgramGroupDesc]
+  If [Array4][1] <> BlankString
+	ProgramManagerDDE
+      CreateGroup([ProgramGroupDesc])
+	EndProgramManagerDDE
+	If [ProgramGroupItemCount] = 0
+	  Dialog PressAKey [StaticInfoColors]
+		The program group "[ProgramGroupDesc]"
+        has been installed.
+	  EndDialog
+	  GoTo ProgramGroupBuildExit
+	EndIf
+  EndIf
+
+  ClearScreen
+  TextBox [StaticInfoColors]
+	Installing program icons. One moment please...
+  EndTextBox
+  Do BuildPGIAddArray ;; fill [Array2] with program group item names
+
+  [Number1] := 0
+  [Number3] := 1
+  While [Number1] < [ProgramGroupItemCount]
+	IncrementNumber [Number1]
+	[YesOrNo1] := NoCharacter
+
+	[String10] := [Array2][[Number1]]
+	[Number2] := [Number1] + 1
+	[Number4] := 0
+	While [Number4] < [ProgramGroupItemCount] .AND. [YesOrNo1] = NoCharacter
+	  IncrementNumber [Number4]
+      [Number5] := [Number4] + 1
+      [String11] := [Array4][[Number5]]
+
+	  If [String11] Contains [String10]
+		[YesOrNo1] := YesCharacter
+	  Else
+		[YesOrNo1] := NoCharacter
+	  EndIf
+	EndWhile
+
+	If [YesOrNo1] = YesCharacter
+	  [Array5][[Number3]] := [Array2][[Number1]]
+	  IncrementNumber [Number3]
+	Else
+      ProgramManagerDDE
+		CreateGroup([ProgramGroupDesc])
+	    ReplaceItem([String10])
+        AddItem ([Array3][[Number1]])
+	  EndProgramManagerDDE
+	EndIf
+  EndWhile
+
+  ClearScreen
+  If [Array5][1] <> BlankString
+	[String2] := [ProgramGroupDesc]
+	DialogBox @xy(CENTER,CENTER) 268 120 Returns [Number2] UseHeader "Icon List"
+	  LText @xy(35,10) 198 8 "The following icons should to be replaced in the program group"
+      CText @xy(35,20) 198 8 [ProgramGroupDesc]
+	  ListBox @xy(10,32) 248 32 Uses [Array6] LoadWith [Array5] multiplesel Border
+	  LText @xy(33,69) 98 8 "'Replace' replaces the icons,"
+      LText @xy(33,79) 202 8 "'Skip' leaves the old icons and does not install the new ones."
+	  DefPushButton @xy(91,96) 38 14 "Replace" [AcceptValue]
+      PushButton @xy(139,96) 38 14 "Skip" [CancelValue]
+    EndDialogBox
+
+	If [Number2] = [AcceptValue]
+	  [Number1] := 1
+      While [Array2][[Number1]] <> BlankString
+		ProgramManagerDDE
+		  CreateGroup([ProgramGroupDesc])
+	      ReplaceItem([Array2][[Number1]])
+		  AddItem ([Array3][[Number1]])
+	    EndProgramManagerDDE
+		IncrementNumber [Number1]
+	  EndWhile
+	Else
+      [Error] := [NoPGInstall]
+      GoTo ProgramGroupBuildExit
+	EndIf
+  EndIf
+
+  If [ProgramGroupItemCount] > 0
+    Dialog PressAKey [StaticInfoColors]
+	  The icons for "[ProductName]"
+	  have been installed in the program group
+	  "[ProgramGroupDesc]"
+	EndDialog
+  EndIf
+
+:ProgramGroupBuildExit
+  ClearScreen
+
+EndProcedure ;; ProgramGroupBuild
+
+
+
+
+Procedure DeinstallProgramGroup
+
+  If [ProgramGroupDesc] = BlankString
+	GoTo DeinstallProgramGroupExit
+  EndIf
+  If FileExists [WindowsDirectory]\[ProgramGroupFile]
+  Else
+	GoTo DeinstallProgramGroupExit
+  EndIf
+
+  If [ProgramGroupInstalled] = [Yes]
+    Dialog [YesOrNo1] [StaticInfoColors]
+      Remove the program group "[ProgramGroupDesc]"?
+    EndDialog
+    If [YesOrNo1] = NoCharacter
+      GoTo DeinstallProgramGroupExit
+	EndIf
+    ProgramManagerDDE
+      DeleteGroup([ProgramGroupDesc])
+    EndProgramManagerDDE
+    [ProgramGroupInstalled] := [No]
+    GoTo DeinstallProgramGroupExit
+  EndIf
+
+  If [ProgramItemsInstalled] = [Yes]
+	Dialog [YesOrNo1] [StaticInfoColors]
+	  Remove the installed program items from the program group
+	  "[ProgramGroupDesc]"?
+	EndDialog
+	If [YesOrNo1] = NoCharacter
+	  GoTo DeinstallProgramGroupExit
+	EndIf
+    Do DeletePGI
+	[ProgramItemsInstalled] := [No]
+  EndIf
+
+:DeinstallProgramGroupExit
+
+EndProcedure ;; DeinstallPG
+
+
+
+Procedure DDENonfatalErrorTrap
+EndProcedure ;; DDENonfatalErrorTrap
+
+
+
+Procedure RetrieveFirstMedia
+
+;; Important Note: make sure that file MEDIA1.TAG 
+;; is the first file indicated in the ".pvd" file.
+;; This will ensure that the first diskette is
+;; reinserted by the user.
+
+  SetReplacementInquiry Off
+  QueFiles to ShadowDirectory
+    MEDIA1.TAG
+  EndQueFiles
+  GetQuedFiles Quietly
+  DeleteFiles from ShadowDirectory Quietly
+    MEDIA1.TAG
+  EndDeleteFiles
+
+EndProcedure ;; RetrieveFirstMedia
+
+;;=========================
+;; ExtractAllFiles
+;;  Extracts all files from the archive.
+;;  If user skips certain files during installation
+;;  (e.g., because they're duplicates) we inform
+;;  them of possible version incompatibility of
+;;  product.
+;;=========================
+
+Procedure ExtractAllFiles
+
+  QueAllFiles
+  UnQueFileGroup [WorkFilesGroup]
+  Do GetInstallDirectory
+
+  If [Error] = [NoDirectory]
+    GoTo ExtractAllFilesExit
+  EndIf
+  If QueSize = 0
+	CreateDirectoryIfNecessary [SelectedInstallDirectory]
+    GoTo ExtractAllFilesExit
+  EndIf
+
+  Do AssignAddTreeArray
+  If [Array1][2] <> BlankString
+    [String2] := [InstallRootDirectory]
+    DialogBox @xy(CENTER,CENTER) 268 100 Returns [Number1] UseHeader "Install Directory List"
+	  LText @xy(46,10) 162 8 "The following directories will be installed on drive"
+      LText @xy(210,10) 12 8 [String2]
+      ListBox @xy(10,22) 248 32 Uses [String1] LoadWith [Array1] Border
+	  LText @xy(38,58) 191 8 "Press OK to continue or Cancel to return to the main menu."
+	  DefPushButton @xy(91,76) 38 14 "OK" [AcceptValue]
+      PushButton @xy(139,76) 38 14 "Cancel" [CancelValue]
+    EndDialogBox
+  EndIf
+
+  If [Number1] = [CancelValue]
+	[Error] := [NoInstall]
+	GoTo ExtractAllFilesExit
+  EndIf
+
+  [Abort] := [Yes]
+  [FilesInstalled] := [Yes]
+  Do SetSDF
+
+  GetQuedFiles [ExtractionOptions]
+
+  If QueSize <> 0  ;; Some files were not installed
+    [Error] := [FilesSkipped]
+    Dialog PressAKey [StaticInfoColors]
+	  Some files were selected but not installed.
+
+      This might cause problems when running
+      "[ProductName]",
+      if the skipped files are incompatible with
+      the version just installed.
+	EndDialog
+  Else
+	Dialog 2000 [StaticInfoColors]
+	  All files for "[ProductName]"
+	  have installed successfully.
+    EndDialog
+  EndIf
+
+  Do RetrieveFirstMedia
+
+:ExtractAllFilesExit
+  UnqueAllFiles
+
+EndProcedure ;; ExtractAllFiles
+
+
+;;=========================
+;; GetInstallDirectory
+;;  The target directory structure can be:
+;;  single directory - all data installed on
+;;    user's disk in a single directory (not the root)
+;;  multiple directory - more than one directory
+;;    is installed off of the root
+;;=========================
+
+Procedure GetInstallDirectory
+
+:GetInstallDirectoryEnter
+  [Error] := [NoDirectory]
+  DetermineInstallationDrive QueSize RequireFixed
+  [String10] := InstallationDrive
+  [Number10] := FreeSpaceOnDrive [String10]
+  If [Number10] < QueSize
+	Dialog [YesOrNo1] UseHeader "Insufficient Disk Space"
+	  "[ProductName]" requires QueSize bytes.
+	  Drive "[String10]" only has [Number10] bytes.
+
+      Select a different drive?
+	EndDialog
+	If [YesOrNo1] = YesCharacter
+	  GoTo GetInstallDirectoryEnter
+	Else
+	  GoTo GetInstallDirectoryExit2
+    EndIf
+  EndIf
+
+  If [DefaultInstallationDirectory] = BlankString
+	GoTo GetInstallDirectoryExit
+  EndIf
+
+  [InstallationDirectory] := InstallationDrive:\[DefaultInstallationDirectory]
+  DetermineInstallationDirectory [InstallationDirectory] QueSize NoCreate
+
+  [Number1] := LengthOf [InstallationDirectory] 
+  If [Number1] < 4
+  ;; specified target directory is root
+    Dialog [PressAKey] [AttentionColors] ;; Can't install to root directory
+      Sorry, but you cannot install directly to the root directory "[InstallationDirectory]"
+    EndDialog
+	GoTo GetInstallDirectoryExit2
+  EndIf
+
+  If DirectoryExists [InstallationDirectory]
+  Else
+    GoTo GetInstallDirectoryExit
+  EndIf
+
+  Dialog [YesOrNo1] [StaticInfoColors] ;; Installation directory already exists notice
+    Files will be installed to the directory
+    "[InstallationDirectory]"
+	    
+    Since this directory already exists, files
+    with the same names will be overwritten.
+
+    Do you want to install to the directory
+    "[InstallationDirectory]"?
+  EndDialog
+  If [YesOrNo1] = NoCharacter
+	GoTo GetInstallDirectoryExit2
+  EndIf
+
+  Dialog [YesOrNo1] [StaticInfoColors]
+    Do you wish to be prompted before any duplicate files are replaced? 
+  EndDialog
+  If [YesOrNo1] = YesCharacter
+    SetReplacementInquiry On
+  Else
+    SetReplacementInquiry Off
+  EndIf
+
+:GetInstallDirectoryExit
+  [SelectedInstallDirectory] := [InstallationDirectory]
+  [SavedSelectedInstallDir] := [InstallationDirectory]
+  [String1] := [InstallationDirectory]
+  [String2] := SubStringOf [String1] from 1 to 3
+  [InstallRootDirectory] := [String2]
+  [InstallationDirectory] := [String2] ;; set install dir to root
+  [String1] := SubStringOf [String1] from 4 to End
+  [Dir1] := [String1] ;; InstallationDirectory without the drive
+
+  [Error] := [NoError]
+
+:GetInstallDirectoryExit2
+
+EndProcedure ;; GetInstallDirectory
+
+
+Procedure GetSelectedDirectory
+
+  [Error] := [NoDirectory]
+  If [SelectedInstallDirectory] = BlankString
+    DetermineInstallationDrive QueSize RequireFixed
+	[Dir10] := InstallationDrive:\[DefaultInstallationDirectory]
+  Else
+	[Dir10] := [SelectedInstallDirectory]
+  EndIf
+
+  Dialog [Dir10] [DynamicInfoColors] UpperCase
+    Verify the default installation directory below and press <ENTER>.
+  EndDialog
+
+  [Number1] := LengthOf [Dir10] 
+  If [Number1] < 4
+  ;; specified target directory is root
+    Dialog [PressAKey] [AttentionColors] ;; Can't deal directly with root directory
+      Sorry, but you must indicate a directory below the root directory "[Dir10]"
+	EndDialog
+    [Dir1] := BlankString
+	GoTo GetSelectedDirectoryExit
+  EndIf
+
+  If DirectoryExists [Dir10]
+	GoTo GetSelectedDirectoryExit
+  EndIf
+
+  Dialog PressAKey [StaticInfoColors] ;; Directory does not exist
+    The directory "[Dir10]"
+    doesn't exist.    
+  EndDialog
+  [Dir1] := BlankString
+  GoTo GetSelectedDirectoryExit
+
+:GetSelectedDirectoryExit
+  [SelectedInstallDirectory] := [Dir10]
+  [String1] := [Dir10]
+  [String2] := SubStringOf [String1] from 1 to 3
+  [InstallRootDirectory] := [String2]
+  [Dir10] := [String2]
+  [String1] := SubStringOf [String1] from 4 to End
+  [Dir1] := [String1] ;; InstallationDirectory without the drive
+
+  [Error] := [NoError]
+
+:GetSelectedDirectoryExit2
+
+EndProcedure ;; GetSelectedDirectory
+
+
+;;===========================
+;; ExtractSingleFile
+;;===========================
+
+Procedure ExtractSingleFile
+
+  [String1] := BlankString
+:ExtractSingleFileGT
+  DialogBox @xy(CENTER,CENTER) 135 76 Returns [Number1] UseHeader "Select A File"
+	LText @xy(5,10) 120 10 "Enter the file name (without the path)."
+	EditText @xy(26,25) 83 12 Uses [String1] Border UpperCase
+	DefPushButton @xy(19,52) 38 14 "Accept" [AcceptValue]
+	PushButton @xy(77,52) 38 14 "Cancel" [CancelValue]
+  EndDialogBox
+
+  If [Number1] = [CancelValue]
+	GoTo ExtractSingleFileExit
+  EndIf
+  If [String1] = BlankString
+	GoTo ExtractSingleFileGT
+  EndIf
+
+  If [String1] contains \
+    Popup Please enter just the file name with no path.
+    GoTo ExtractSingleFileGT
+  EndIf
+  If FileIsInLibrary [String1]
+  Else
+    Popup Cannot find a file named [String1]
+	GoTo ExtractSingleFileGT
+  EndIf
+  QueFiles
+    [String1]
+  EndQueFiles
+	
+  Do GetSelectedDirectory
+  If [Error] = [NoDirectory]
+    UnQueFiles
+	  [String1]
+    EndUnQueFiles
+    GoTo ExtractSingleFileExit
+  EndIf
+  SetReplacementInquiry On
+  GetQuedFiles [ExtractionOptions]
+
+  Do RetrieveFirstMedia
+
+:ExtractSingleFileExit
+
+EndProcedure ;; ExtractSingleFile
+
+
+
+			
+;;=============================
+;; DeinstallProductFiles
+;;=============================
+
+Procedure DeinstallProductFiles
+
+  Do AssignAddTreeArray
+
+  [OrigDirectory] := CurrentDirectory
+  Dialog [YesOrNo1] [AttentionColors] UseHeader "DIRECTORY DELETION NOTICE"
+    Delete the files and directories for
+    "[ProductName]"?
+  EndDialog
+
+  If [YesOrNo1] = NoCharacter
+    GoTo DeinstallProductFilesExit
+  EndIf
+
+  [Number1] := 1
+  While [Array1][[Number1]] <> BlankString
+	[Tree] := [InstallRootDirectory][Array1][[Number1]]
+    Do DeleteTree
+
+    If [TreeDeleted] = YesCharacter
+      [FilesInstalled] := [No]
+	Else
+      [FilesInstalled] := [Yes]
+    EndIf
+
+    If Windows
+      ;;"DirectoryIsEmpty" does not work in Instalit for Windows
+    Else
+      Do DeleteNextLevel
+    EndIf
+    IncrementNumber [Number1]
+  EndWhile
+
+:DeinstallProductFilesExit
+  ChangeDirectoryTo [OrigDirectory]
+
+EndProcedure ;; DeinstallProductFiles
+
+
+Procedure DeleteTree
+
+  [TreeDeleted] := NoCharacter
+  If DirectoryExists [Tree]
+  Else
+    [TreeDeleted] := YesCharacter
+	GoTo DeleteTreeExit
+  EndIf
+
+  ClearScreen
+
+  [TreeLength] := LengthOf [Tree]
+  If [TreeLength] < 4
+	GoTo DeleteTreeExit
+  EndIf
+  If [Tree] = [WindowsDirectory]
+	GoTo DeleteTreeExit
+  EndIf
+  If [Tree] = [WindowsSystemDirectory]
+	GoTo DeleteTreeExit
+  EndIf
+
+  Dialog [YesOrNo1] [AttentionColors] UseHeader "DIRECTORY DELETION NOTICE"
+    Delete the directory
+    "[Tree]"
+    including all its files and subdirectories?
+  EndDialog
+  If [YesOrNo1] = NoCharacter
+	GoTo DeleteTreeExit
+  EndIf
+
+  ClearScreen
+  TextBox [StaticInfoColors]  ;; Deinstall product files and inst. dir.
+    Deleting directory
+    "[Tree]"...
+  EndTextBox
+
+  ChangeDirectoryTo [Tree]
+  Run ShadowDirectory\[DeleteProductDirFileName] [DeleteKey] Quietly SwapOut
+  ClearScreen
+
+  If OSErrorCode <> 0
+    Dialog PressAKey
+      Cannot delete files and directories for
+      "[ProductName]".
+    EndDialog
+    GoTo DeleteTreeExit
+  EndIf
+
+  [TreeDeleted] := YesCharacter
+
+:DeleteTreeExit
+
+EndProcedure ;; DeleteTree
+
+
+Procedure DeleteNextLevel
+
+:DeleteNextLevelGT
+  [TreeLength] := LengthOf [Tree]
+  [String1] := BlankString
+  While [String1] <> "\" .AND. [TreeLength] > 3
+    [TreeLength] := LengthOf [Tree]
+    [String1] := SubstringOf [Tree] from [TreeLength] to End
+    DecrementNumber [TreeLength]
+    [Tree] := SubstringOf [Tree] from Beginning to [TreeLength]
+  EndWhile
+
+  If [TreeLength] < 4
+	GoTo DeleteNextLevelExit
+  EndIf
+
+  If DirectoryIsEmpty [Tree]
+    Dialog [YesOrNo1] [StaticInfoColors]
+      The directory "[Tree]" is empty.
+      Shall we delete it?
+    EndDialog
+    If [YesOrNo1] = YesCharacter
+      DeleteDirectory [Tree]
+    Else
+	  GoTo DeleteNextLevelExit
+    EndIf
+  Else
+	GoTo DeleteNextLevelExit
+  EndIf
+  GoTo DeleteNextLevelGT
+
+:DeleteNextLevelExit
+
+EndProcedure ;; DeleteNextLevel
+
+;;************************************
+;;  The following procedures are common to
+;;  all script modules for the Broderbund
+;;  Installer Package for DOS/MOHAWK.
+;; 
+;;  These procedures will probably require
+;;  customization.
+;;************************************
+
+
+;;==================
+;; ReadSDF
+;;  Read information from the sdf.
+;;  Customization should occure in the 
+;;  "Module-Specific Variables" section.
+;;  No other modifications should be made
+;;  to this procedure.
+;;==================
+
+Procedure ReadSDF
+
+  If FileExists [InstallFromDirectory]\[SDFFileName]
+  Else
+	GoTo ReadSDFExit
+  EndIf
+
+  TextBox @xy(Center,Center) ;; Getting custom information...
+    Getting custom information...one moment, please.
+  EndTextBox
+
+  CopyFiles from [InstallFromDirectory] to ShadowDirectory Quietly
+    [SDFFileName]
+  EndCopyFiles
+
+  ExamineTextFile ShadowDirectory\[SDFFileName]
+
+  [Abort] := SettingFor Abort
+
+  [FilesInstalled] := SettingFor FilesInstalled
+  [ProgramGroupInstalled] := SettingFor ProgramGroupInstalled
+  [ProgramItemsInstalled] := SettingFor ProgramItemsInstalled
+  [String1] := SettingFor SelectedInstallDirectory
+;;  If [String1] <> BlankString
+    [SelectedInstallDirectory] := [String1]
+;;  EndIf
+
+  ForgetTextFile
+:ReadSDFExit
+
+EndProcedure ;; ReadSDF
+
+
+Procedure SetSDF
+
+  ModifyTextFile ShadowDirectory\[SDFFileName] Quietly NoBackup
+    AddOrChangeLineWith (Abort,=,) as "Abort=[Abort]" at End
+	AddOrChangeLineWith (FilesInstalled,=,) as "FilesInstalled=[FilesInstalled]" At End
+	AddOrChangeLineWith (SelectedInstallDirectory,=,) as "SelectedInstallDirectory=[SavedSelectedInstallDir]" At End
+	AddOrChangeLineWith (ProgramGroupInstalled,=,) as "ProgramGroupInstalled=[ProgramGroupInstalled]" At End
+	AddOrChangeLineWith (ProgramItemsInstalled,=,) as "ProgramItemsInstalled=[ProgramItemsInstalled]" At End
+  EndModifyTextFile
+
+EndProcedure ;; SetSDF
+
+
+;;==================
+;; ExitModule
+;;  Perform the last tasks required
+;;  before quiting this module.
+;;  This procedure is called in all
+;;  circumstances, whether the module
+;;  is terminating normally, or being
+;;  aborted.
+;;==================
+
+Procedure ExitModule
+
+;;^^^^^^^^^^^^^^^^^^^^^^^^^
+;;  Do not modify this block
+;;----------------------------
+
+  Do SetSDF
+
+;;^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  DeleteFiles from ShadowDirectory Quietly
+    [HeaderBitMapFile]
+	[InfoBitMapFile]
+	[ProductIconFile]
+	[SDFFileName]
+	[DeleteProductDirFileName]
+  EndDeleteFiles
+
+  If [InstallationDirectory] <> BlankString
+  DeleteFiles from [InstallationDirectory] Quietly
+    [HeaderBitMapFile]
+	[InfoBitMapFile]
+	[ProductIconFile]
+	[SDFFileName]
+	[DeleteProductDirFileName]
+    MEDIA1.TAG
+  EndDeleteFiles
+  EndIf
+
+  SoLong
+
+EndProcedure ;; ExitModule
+
+
+;;==================
+;; Abort
+;;  In this procedure, place your
+;;  custom code right before the call
+;;  to "Exit Module".
+;;  Perform tasks relating to abortion of
+;;  this modules processes *only*.
+;;==================
+
+Procedure Abort
+
+  ;;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
+  ;;  This block should remain unaltered.
+  ;;..............................
+
+  [Abort] := [Yes]
+  
+  ClearScreen
+  TextBox [AttentionColors]
+    Aborting Installation Process...
+  EndTextBox
+
+  ;;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ;;  Custom script should be placed here,
+  ;;  before the call to "ExitModule.
+  ;;..............................
+
+  UnqueAllFiles ;; Remove uninstalled files from que
+	
+  If [FilesInstalled] = [Yes]
+    Do DeinstallProductFiles
+  EndIf
+  Do DeinstallProgramGroup
+
+  Do ExitModule
+
+EndProcedure ;; Abort
+
+
+
+
+;;************************************
+;;  The following procedures are common to
+;;  all script modules for the Broderbund
+;;  Installer Package for DOS/MOHAWK.
+;; 
+;;  These procedures should not be altered.
+;;************************************
+
+
+
+;;================================
+;; ShowHelpInfo
+;;================================
+
+Procedure ShowHelpInfo
+
+  Dialog PressAKey [StaticInfoColors]
+	You are installing
+	"[ProductName]".
+
+	Description of buttons on main dialog:
+
+	INSTALL - press this button to install all necessary product files,
+	directories, and icons.
+
+	Cancel - press this button to exit the installer.
+  EndDialog
+
+EndProcedure ;; ShowHelpInfo
+
+
+Procedure GetWorkFiles
+
+  QueFileGroup [WorkFilesGroup] to ShadowDirectory
+  GetQuedFiles Quietly
+
+EndProcedure ;; GetWorkFiles
+
+
+Procedure SetDisplay
+
+[UseShadows] := YesCharacter
+[MainBorder] := None
+[PopupBorder] := Single
+[TopLineColors] := WhiteOnBlue
+[BottomLineColors] := WhiteOnLightGray
+[ShadowColors] := DarkGrayOnBlack
+[ScreenColors] := WhiteOnBlue
+[PopupColors] := BlueOnWhite
+
+[AttentionColors] := WhiteOnRed
+[NotifyColors] := WhiteOnBrown
+[StaticInfoColors] := BlueOnWhite
+[DynamicInfoColors] := BlueOnYellow
+[BackgroundCharacter] := B0
+
+  If [UseShadows] = YesCharacter
+    SetShadows On
+  else
+    SetShadows Off
+  EndIf
+
+  If Windows
+  ;;  SetBackdrop off
+  ;;  SetBackgroundColor 255 255 255 255 255 255
+    SetDefaultBitmap off
+	ShowWindow Maximize
+  Else
+    SetAllowExit        Off
+    SetBackgroundCharTo [BackgroundCharacter]
+    SetBottomLineAttrTo [BottomLineColors]
+    SetTopLineAttrTo    [TopLineColors]
+  EndIf
+
+  SetAttentionAttrTo  [AttentionColors]
+  SetMainBorderTo     [MainBorder]
+  SetPopupAttrTo      [PopupColors]
+  SetPopupBorderTo    [PopupBorder]
+  SetScreenAttrTo     [ScreenColors]
+  SetShadowAttrTo     [ShadowColors]
+  SetTopLineTo        Installation For: [ProductName]
+
+  [Number1] := MaxX
+  [Number1] := [Number1]/2
+  [Number1] := [Number1] - 86
+  LoadBitMap 1 ShadowDirectory\[HeaderBitMapFile]
+  ShowBitMap 1 @xy([Number1],10)
+
+  [Number1] := MaxX
+  [Number1] := [Number1]/2
+  [Number1] := [Number1] - 226
+  [Number2] := MaxY
+  [Number2] := [Number2] - 80
+  LoadBitMap 2 ShadowDirectory\[InfoBitMapFile]
+  ShowBitMap 2 @xy([Number1],[Number2])
+
+  If FileExists ShadowDirectory\[ProductIconFile]
+    LoadBitMap 3 ShadowDirectory\[ProductIconFile]
+    ShowBitMap 3 @xy(10,10)
+  EndIf
+
+EndProcedure ;; SetDisplay
+
+Procedure SetProductINIFile
+DeleteFiles from [SelectedInstallDirectory]
+MYST.INI
+EndDeleteFiles
+ModifyTextFile [SelectedInstallDirectory]\MYST.INI
+InsertAtLine End [MystMPCDrive]
+InsertAtLine End Drive=[InstallFromDrive]
+InsertAtLine End 
+InsertAtLine End [Volume]
+InsertAtLine End 
+InsertAtLine End 
+EndModifyTextFile
+EndProcedure;;SetProductINIFile
+Procedure AssignAddTreeArray
+[Array1][1] := [Dir1]
+EndProcedure;;AssignAddTreeArray
+Procedure BuildPGIAddArray
+[Array2][1] := Myst Demo
+[Array3][1] := [SelectedInstallDirectory]\MYSTDEMO.EXE,Myst Demo
+EndProcedure;;BuildPGIAddArray
+Procedure DeletePGI
+ProgramManagerDDE
+CreateGroup(Broderbund Software,MYSTDEMO.GRP)
+EndProgramManagerDDE
+EndProcedure;;DeletePGI

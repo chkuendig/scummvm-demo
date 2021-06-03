@@ -1,0 +1,413 @@
+\\; Msg_CriticalErr
+\\1
+DOS Error:
+%s
+ENTER to retry
+ESC to %s
+\\; Msg_Cancel
+\\2
+cancel
+\\; Msg_Quit
+\\3
+quit
+\\; Msg_DiskErrors
+\\4
+Disk is write protected
+\\5
+Unknown unit
+\\6
+Disk drive is not ready
+\\7
+Unknown command
+\\8
+CRC error
+\\9
+Bad request
+\\10
+Seek error
+\\11
+Unknown media type
+\\12
+Sector not found
+\\13
+Printer out of paper
+\\14
+Write error
+\\15
+Read error
+\\16
+General failure
+\\; Msg_Sorry
+\\25
+We're sorry, you have encountered an internal game error.  Please restart your
+game and restore a saved game.  If you have continued problems, please report
+the following information to Sierra Technical Support:
+
+\\; Msg_Oops
+\\26
+Oops!
+\\; Msg_NoDebug
+\\27
+Debug not available! error #%d 
+\\; Msg_NoAudioDrv
+\\28
+Can't find audio driver '%s'.
+Please run INSTALL.
+\\; Msg_NoAudio
+\\29
+Unable to initialize your audio hardware
+\\; Msg_CantFind
+\\30
+Couldn't find %s
+\\; Msg_NoMusic
+\\31
+Unable to initialize your music hardware
+\\; Msg_MaxServers
+\\32
+Maximum number of servers exceeded
+\\; Msg_UnknownLanguage
+\\33
+%u is not a supported language code
+\\; Msg_Message
+\\34
+Invalid Message() function: %d
+\\; Msg_Bresen
+\\35
+Bresen failed
+\\; Msg_DisposedScript
+\\36
+Executing in disposed script number %u, MemID %u
+\\; Msg_BadMsgVersion
+\\37
+Message file has not been updated to current version
+\\; Msg_MsgStackOverflow
+\\38
+Message stack overflow:  references are nested beyond %d levels
+\\; Msg_MsgStackStackOverflow
+\\39
+Message stack stack overflow:  stacks are stacked beyond %d levels
+\\; Msg_MsgStackStackUnderflow
+\\40
+Mismatched (Message MsgPop)
+\\; Msg_InvalidProperty
+\\41
+Invalid property %u
+\\; Msg_VerStampMismatch
+\\42
+This game has not been version-stamped
+\\; Msg_BadDispatch
+\\43
+Dispatch number too large: %u
+\\; Msg_BadOpcode
+\\44
+Bad opcode: $%x
+\\; Msg_BadKernel
+\\45
+Kernel entry %u too large
+\\; Msg_LoadClass
+\\46
+Can't load class %u
+\\; Msg_NotObject
+\\47
+Not an object: $%x
+\\; Msg_BadSelector
+\\48
+%s is not a selector for %s
+\\; Msg_ZeroDivide
+\\49
+Division by zero
+\\; Msg_StackBlown
+\\50
+Stack overflow
+\\; Msg_ZeroModulo
+\\51
+Zero modulo
+\\; Msg_LeftClone
+\\52
+Script %u is being disposed and there is still a cloned object that uses a class in it
+\\; Msg_NoSoundDrv
+\\53
+Can't find sound driver '%s'.
+Please run INSTALL.
+\\; Msg_CantFindSI
+\\54
+Can't find screen item
+\\; Msg_ScaleExceedMax
+\\55
+CelObj scaling exceeded max
+\\; Msg_InvalidView
+\\56
+Invalid view type %d, should be %d
+\\; Msg_LoopTooLarge
+\\57
+Loop %d too large for view %d
+\\; Msg_CelTooLarge
+\\58
+Cel %d too large for loop %d, view %d
+\\; Msg_BadCacheIndex
+\\59
+Bad cache index %d
+\\; Msg_CelTooLargeForPic
+\\60
+Cel too large for pic
+\\; Msg_VariableAddress
+\\61
+Can't take the address of a variable any more
+\\; Msg_FixupError
+\\62
+Can't find id corresponding to offset %x in script %u
+\\; Msg_PalMemMoved
+\\63
+Memory moved
+\\; Msg_WindowTextTooBig
+\\64
+Window not large enough for text
+\\; Msg_WindowTitleTooBig
+\\65
+Window not large enough for title
+\\;Msg_WindowSizeTooSmall
+\\66
+Window size not large enough for character 'M'
+\\; Msg_BadArrayType
+\\67
+Bad array type: %d
+\\; Msg_ArrayTooBig
+\\68
+%s is greater than 65535 (%u + %u)
+\\; Msg_RectListNoRoom
+\\69
+Out of rect list room
+\\; Msg_NoInitMemory
+\\70
+Can't start with %u bytes of memory.
+Please run Install and make a boot disk.
+\\; Msg_NoHandles
+\\71
+Out of handles: Max %u
+\\; Msg_BadHandleSignature
+\\72
+Signature not valid for handle %u in %s
+\\; Msg_MemError
+\\73
+Internal error in MemMgr: handle = %u
+\\; Msg_MemInitError
+\\74
+Memory can not be initialized to 'F'
+\\; Msg_NoMemory
+\\75
+Not enough memory: %u memory requested
+Please run Install and make a boot disk.
+\\; Msg_InvalidHandle
+\\76
+Invalid handle %u
+\\; Msg_PackCantLocate
+\\77
+Pack can not locate handle for memory after ID=%u
+\\; Msg_PackError
+\\78
+Pack error
+\\; Msg_MemChecksumInvalid
+\\79
+Checksum not valid for handle %u
+\\; Msg_MemFreeNotZero
+\\80
+Free memory not set to zero for handle %u
+\\; Msg_NoMonoMem
+\\81
+Can not start mono monitor with %u bytes of memory
+\\; Msg_ViewDoesntContainLoop
+\\82
+View %u does not contain loop %u
+\\; Msg_ViewDoesntContainLoopCel
+\\83
+View %u does not contain loop %u, cel %u
+\\; Msg_KStrStripTSNArgs
+\\84
+Too few args to KStrStripTSN
+\\; Msg_KStrStripTSNShowArg
+\\85
+No arg after #show in KStrStripTSN
+\\; Msg_KStrStripTSNUnk
+\\86
+Unknown parameter to KStrStripTSN
+\\; Msg_DonePainting
+\\87
+DonePainting called before GonnaPaint
+\\; Msg_CursorUnHide
+\\88
+Cursor UnHide had no corresponding Hide
+\\; Msg_StackUnderflow
+\\89
+Stack underflow
+\\; Msg_ConfigFileName
+\\90
+Config file name can not exceed %u characters
+\\; Msg_InvalidFlag
+\\91
+Invalid flag: %s
+\\; Msg_ConfigFileOpen
+\\92
+Can't open configuration file: %s
+\\; Msg_NoWindowTitle
+\\93
+Title not given for window
+\\; Msg_TooManyScreenItems
+\\94
+Exceeded max screen item list size
+\\; Msg_InvalidScreenItemIndex
+\\95
+Invalid screen item index
+\\; Msg_TooManyPlanes
+\\96
+Too many planes
+\\; Msg_InvalidPlaneIndex
+\\97
+Plane index out of range
+\\; Msg_InvalidResType
+\\98
+ResType %u is not supported
+\\; Msg_ResLoadErr
+\\99
+Error loading resource %u%s
+\\; Msg_ResFreeErr
+\\100
+Can't find $%x/%u to free it
+\\; Msg_ResVolOpenErr
+\\101
+Can't open volume file %s
+\\; Msg_ResMapOpenErr
+\\102
+Can't load resource map
+\\; Msg_CompressedVol
+\\103
+%s:  Compressed vol resources not supported
+\\; Msg_InvalidResFileHandle
+\\104
+%s:  File handle not valid
+\\; Msg_WrongResType
+\\105
+%s:  Attempt to load wrong type
+\\; Msg_NoMouseDriver
+\\106
+Unable to find mouse driver
+\\107
+Plane %u not found
+\\; Msg_InvalidPlane
+\\108
+Screenitem contains invalid plane %x
+\\; Msg_PrevPlaneNotFound
+\\109
+Previous plane not found
+\\; Msg_AddScreenItem
+\\110
+Adding screenitem already in list
+\\; Msg_ScreenItemNotExist
+\\111
+Screenitem does not exist in list
+\\; Msg_CantFindPlaneID
+\\112
+Couldn't find planeID
+\\; Msg_InvalidMemInfoCall
+\\113
+Invalid MemoryInfo call: %u
+\\; Msg_NotAPolygon
+\\114
+Not enough points in a polygon (less than 3)
+\\; Msg_TooManyPolygons
+\\115
+Too many polygons submited to GetPath
+\\; Msg_TooManyPointsInPath
+\\116
+GetPath generated too many points for the path
+\\; Msg_GetPathInternalError
+\\117
+GetPath internal error
+\\; Msg_MergedPolygonTooLarge
+\\118
+Merging polygon that has too many points
+\\; Msg_PolygonTooManyPatches
+\\119
+Merging polygon generated too many patches
+\\; Msg_PolygonTooManyPoints
+\\120
+Merging polygon generated too many points for polygon
+\\; Msg_SavingHandleWithClient
+\\121
+Trying to save handle %u, type %s that has a client
+\\; Msg_SavingLockedHandle
+\\122
+Trying to save locked handle %u, type %s
+\\; Msg_InvalidRestoreData
+\\123
+Restore must overwrite the %s %s handle %u of size %u  
+\\; Msg_InternalErrorOnRestore
+\\124
+Internal error during restore, handle %u
+\\; Msg_InvalidList
+\\ 125
+Invalid list
+\\; Msg_NoList
+\\ 126
+Calling %s on uninitialized list
+\\; Msg_DOSRepaint
+\\ 127
+DOS repaint of rectangle (%d,%d) (%d,%d).
+\\; Msg_ClassNumTooLarge
+\\ 128
+Class number %u is too large
+\\; Msg_ShowStyleSpeed
+\\ 129
+Show style speed computes to zero
+\\; Msg_ShowStyleInProgress
+\\ 130
+Show style currently in progress on plane %u 
+\\; Msg_InternalErrorOnLastLine
+\\ 131
+Window internal error, lastLine larger than lineCount
+\\; Msg_ScrollAlreadyInProgress
+\\ 132
+Scroll currently in progess on plane %u
+\\; Msg_ScrollInXAndY
+\\ 133
+Scroll in both X and Y not currently implemented
+\\; Msg_InvalidArrayElement
+\\ 134
+Invalid array element
+\\; Msg_DivideByZero
+\\ 135
+Divide by zero
+\\; Msg_InvalidVideoMode
+\\ 136
+Invalid video mode
+\\; Msg_MovieError
+\\ 137
+Movie error
+\\; Msg_RemapError
+\\ 138
+Remap error
+\\; Msg_GlobalPointer
+\\ 139
+Global pointer error
+\\; Msg_CompressSource
+\\ 140
+Decompression: source not exhausted
+\\; Msg_CompressDestination
+\\ 141
+Decompression: destination length invalid
+\\; Msg_ResourceData
+\\ 142
+Resource Data: Resource Number Invalid
+\\; Msg_AVIOpen
+\\ 143
+AVI Open Failed
+\\; Msg_AVIPut
+\\ 144
+AVI Put Failed
+\\; Msg_AVISetPalette
+\\ 145
+AVI Set Palette Failed
+\\; Msg_AVIPlay
+\\ 146
+AVI Play Failed
+\\ This comment must be at the end of the file
+

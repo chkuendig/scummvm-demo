@@ -1,0 +1,204 @@
+SIERRA INFORMATION REPORTING FORM
+
+This form contains a list of questions that will help us solve your 
+technical problems more efficiently.  Please fill out the form and send it 
+to us by fax, modem, or mail
+
+Sierra Technical Support
+P.O. Box 85006
+Bellevue WA 98015-8506
+Fax Number: (206) 644-7697
+Sierra BBS Modem Number: (206) 644-0112
+Compuserve:   GO SIERRA
+America On-line:   KEYWORD SIERRA
+
+Try calling our 24 hour Automated Technical Support Line at (206) 644-4343.
+The answer you need may already be waiting for you.  Note: This service 
+will be fully operational in Winter 1995.
+
+Problem:__________________________________________________________________
+	__________________________________________________________________
+	__________________________________________________________________
+	__________________________________________________________________
+
+
+Your Name:___________________
+Date:     __________
+Company:  _____________________
+Your Daytime Telephone Number:____________
+Your Evening/Voice Number:    ____________
+Your Address:_____________________________________________________________
+Your E-Mail Address:______________________
+
+
+Please circle or fill in the following:
+
+Game Name               SQ6     KQ7     Phantasmagoria    Other:__________
+Game Ver ("EDIT D:\VERSION")       ____________
+Game was played in:     DOS     Windows     Other:___________
+
+Computer Brand          Compaq   AST   Acer   IBM   Clone   Other:__________
+Computer Model          Presario-CDS524   Advantage   Aptiva  Other:________  
+Processor Maker         Intel   Cyrix   AMD     IBM     Other:_____
+Processor Model         386     486     Pentium   Other:_________
+Processor Speed Mhz     25      33      50      66      90      Other:______
+BIOS Manufacturer       AMI     Phoenix      Award      Other:______
+BIOS Date, Version      ________________
+
+Total Memory Counts up to     4096    7808    8192    Other:_________
+Free Conventional       _________
+Free Expanded EMS       _________
+Free Extended XMS       _________
+Memory Manager          DOS-HIMEM-EMM386    QEMM6.03   QEMM7.5   Other:_____
+
+Video Card Brand        ATI   Cirrus   Diamond   Hercules   Other:______     
+Video Card Model        Mach32    Stingray    SpeedStarPlus  Other:_______
+Video Card Memory       512K    1meg    2meg    Other:__________
+Video Card Bus          ISA     Built-in        VLB     PCI
+Windows Video Res       640x480   800x600   1024x768   1280x1024
+Windows Video Color     256    32000   65535   16million  Other:_______
+Last time Win video driver was updated:   Today  MonthAgo  Never  Other:____
+Command used to enable VESA in DOS:   C:\MACH32\VVESA   None   Other:______
+
+Number of Hard Drives   _____
+Hard Drive Controller   MFM     IDE     EIDE    SCSI    ESDI    Other:_____
+Hard Drive Size         ________
+Hard Drive Space Available     _____________
+
+CD-ROM Brand            Mitsumi    NEC   Sony   Oak   Other:_________   
+CD-ROM came with computer:      YES     NO      UNSURE
+CD-ROM Speed            1x(Single)    2x(Double)    3x(Triple)   Other:____    
+CD-ROM Controller       Soundcard     IDE      SCSI     Other:_______
+MSCDEX Version          2.20    2.21    2.22    2.23    Other:
+
+Music Sound Card Brand     SoundBlaster16  RolandMT-32  Other:____________ 
+Speech Sound Card Brand    SoundBlaster16  ProAudioSpectrum16  Other:______
+I/O Port Address           220    240    Other:______
+IRQ Setting                3   5   7   10   Other:________
+DMA Setting                1   3   5   Other:________
+SET BLASTER =              A220-I5-D1  Other:_____________________
+Last time Win sound driver was updated:   Today  MonthAgo  Never  Other:_____
+Windows' CANYON.MID plays OK            Yes     No
+
+DOS Version             MS-DOS-5.0      MS-DOS-6.22    Other:___________
+Windows Version         3.1     WFW3.11    95    Other:___________
+Windows Swapfile Type   Temporary       Permanent       None
+Windows Swapfile Size   ______________
+Other O/S               DR-DOS-6     OS/2-2.1      OS/2-Warp    Other:
+Windows Shell Used      RegularProgramManager   NDW   PCTools   KidDesk
+C:\WINDOWS\SYSTEM.INI   SHELL = _______________________
+C:\WINDOWS\WIN.INI      LOAD = ________________________
+
+Mouse Brand             Microsoft   Logitech   Dell   Other:________
+Mouse Type              Serial    Bus    PS/2-Style   Other:________
+Mouse Software Ver:     ________________
+Mouse works in "EDIT"   Yes     No
+Mouse works with other games    Yes     No
+
+Is a Scanner installed?    YES    NO
+Other Special Hardware Installed?   Network   VidCapCard  Other:________
+Make sure any special hardware doesn't conflict with your sound card
+Have you tried a boot disk?     YES     NO
+
+Please print out or copy-and-paste a copy of your C:\AUTOEXEC.BAT and 
+C:\CONFIG.SYS files to this form.
+
+
+
+
+Here are some ways to gather information to help:
+
+Please read the README files for our game in DOS and Windows.  Your 
+question may already be answered in one of these files.  To read the
+README file in DOS, run INSTALL from the CD.  To read the README
+file in Windows, run SETUP.EXE from the CD.
+
+Type "MEM" at the C:\> prompt.
+Make sure you have enough free memory.  Try a boot disk.
+
+Type "CHKDSK" at the C:\> prompt, or where the game is installed.
+Make sure you have enough hard drive space free
+Make sure you don't have any lost allocation units or cross-linked files
+
+Type "VER" at the C:\> prompt to get your DOS Brand and version.
+
+Type "SET" at the C:\> prompt.
+Make sure you have a SET BLASTER line.  Check the IRQ setting ("I5, I7")
+
+Type "MSD" at the C:\DOS> prompt.
+Make sure your mouse IRQ setting is not the same as your Soundcard IRQ.
+
+Type "MSCDEX" at the C:\> prompt.
+Check the MSCDEX version you have.  Make sure it's not outdated.
+MS-DOS version 6.2 and above should use MSCDEX version 2.23
+MS-DOS version 6.0 should use MSCDEX version 2.22
+MS-DOS version 5.0 should use MSCDEX version 2.21
+If you have MSCDEX version 2.20, please get a later version.
+
+Type "MOUSE" at the C:\> prompt.
+Check the mouse version.  There may be a later version available from the
+mouse manufacturer
+
+Type "TYPE C:\CONFIG.SYS | MORE" at any C: prompt
+
+Type "TYPE C:\AUTOEXEC.BAT | MORE" at any C: prompt
+
+Type "D:\DRIVERS\VESA\GENERIC\UNIVBE.EXE".
+Check the video card maker, model, and video RAM.
+Note: This file is the copyright of SciTech
+
+Look at the game's RESOURCE.CFG or RESOURCE.WIN files in the game directory
+on your hard drive.  Sometimes there are options to adjust brightness or
+memory requirements of our game to work better on your computer.  Please make
+a backup of this file before editing it.  If you experience problems, please
+restore the original file.
+
+If the game is slow in Windows, try it in DOS.
+
+Make sure your computer is in Turbo mode.
+
+Check with the Sound card and Video card makers to make sure you have their
+latest Windows drivers.
+
+In Windows, run "SETUP.EXE" on the Space Quest 6 CD-ROM to test hardware.
+
+In Windows at Program Manager, click on HELP, then ABOUT PROGRAM MANAGER
+Check if you're not in 386 Enhanced Mode
+Make sure you have enough Memory and System Resources
+
+In Windows press CTRL-ESC to view the Task List.  
+Check if any programs are running beside Program Manager.
+
+In Windows at File Manager, run CANYON.MID
+Make sure the music plays OK.
+
+In Windows / Main / Control Panel / 386 Enhanced / Virtual Memory, check
+your Swapfile Size, Type, and Location.
+
+In Windows / Main / Control Panel / MIDI Mapper, select EDIT to see setup
+Make sure your MIDI Mapper is on the proper settings for your sound card.  
+If you have a sound card that can do both BASE and EXTENDED, please use a 
+MIDI MAPPER for either BASE or EXTENDED, not for both at the same time.  
+Example: If you have a Sound Blaster 16, please use "SB16 EXT FM" or 
+"SB16 BASIC FM" MIDI Mapper.  Please do not use the "SB16 ALL FM" MIDI
+Mapper while using our game.
+
+In Windows / Main / Control Panel / Drivers, make sure you have the
+following drivers:
+(Your appropriate sound card drivers for Windows)
+MIDI Mapper
+Timer
+[MCI] MIDI Sequencer
+[MCI] Sound
+
+Type "TYPE C:\WINDOWS\SYSTEM.INI | MORE" from the C: prompt.
+Look for the line "SHELL = ".  If the line is NOT "SHELL = PROGMAN.EXE",
+please let us know.
+
+Type "TYPE C:\WINDOWS\WIN.INI | MORE" from the C: prompt.
+Please tell us what's on the "LOAD = " line
+
+
+
+
+

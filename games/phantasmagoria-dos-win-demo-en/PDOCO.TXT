@@ -1,0 +1,591 @@
+                       PHANTASMAGORIA 
+ 
+Game Strategy 
+
+   The world of Phantasmagoria is a world of exploration, and you 
+   wouldn't want to miss anything!   Look at each new room carefully.  
+   Click on anything and everything that causes your cursor to 
+   highlight.  Think creatively:  Sometimes there is more than one 
+   solution to a puzzle, and the most obvious one may not be the best.  
+   If you feel you are "stuck", leave the room and explore others, or 
+   click on the Hintkeeper (the red skull) on the bottom left corner.  
+   The Hintkeeper will give you hints.  You never know where you might
+   find just what you need.  Turn down the lights, crank up the volume
+   on your speakers, and let your imagination run wild! 
+
+Playing Phantasmagoria - The First Screen 
+
+1. Start New Game 
+
+   Click on this button to start a new game.  You will be prompted 
+   to name your game.  You must give it a unique name that is not 
+   already being used.  For example: if you have a game named 
+   "SIERRA" you will not be able to start a new game and also call 
+   it "SIERRA". 
+
+2. Continue Old Game 
+
+   Click on this button to continue a game you've already been 
+   playing.  This will put you back to where you dropped your
+   bookmark so you can continue right from there.  This option 
+   will not appear until you have an old game to continue. 
+
+3. Watch Intro 
+
+   Click on this button to watch the opening movie of the game. 
+
+4. About 
+
+   Click on this button to get information about the game, hints on 
+   how to play, help with the interface, customer support questions, 
+   credits, etc.  This file you are reading is the "About" screen.
+
+5. Quit 
+
+   Click on this button to quit the game.  When you quit (if you've 
+   been playing a game), a "bookmark" will be placed where
+   you left off.  The next time you start you will be able to continue
+   this game by clicking on the "Continue Old Game" button and selecting
+   the game with the name you gave it.
+
+6. Watch Movie (review chapter 7)
+
+   Once Don begins to "chase" you in chapter 7 (you'll know when the
+   chase has started), you can no longer access the save game feature 
+   in the control panel. As you play through the chase in chapter 7,
+   the game is automatically being saved for you, but in a fashion 
+   different than before.  Once the chase begins, there is no going 
+   back.  You must keep going forward...until the ultimate outcome. 
+   From this point on, your "old" saved game will not exist in the 
+   same form anymore.  Instead, it will resemble a "saved" movie 
+   sequence instead.   
+
+   To restart a chase sequence, click on the Watch Movie button. It 
+   will prompt you for which game to restart (based on the name of 
+   the save game you were playing prior to starting the chase).
+   Your entire "saved movie" sequence from the point you started the 
+   chase until the place you made a bad decision will automatically be 
+   reviewed. If you don't want to watch this, just click on the >> 
+   (fast forward) button on the interface panel. You will regain control
+   of the game at the last point at which you could have made a better 
+   decision that would have allowed you to win the game.
+   
+
+The Interface 
+
+1. The Cursor 
+
+   The Phantasmagoria interface is based on a single cursor.  With 
+   this cursor, you can fully explore and interact with the game 
+   world.  Pass your cursor over the screen.   When there is 
+   something to interact with, the cursor will highlight (turn red).  
+   You can then click the cursor on the object highlighted by using 
+   your left mouse button, and find out what happens! 
+
+   There is no cursor control during movies.  If you wish to fast-
+   forward a movie, press the ESC key on your keyboard.
+
+2. Inventory Objects 
+
+   Taking Inventory Objects 
+
+   Sometimes when you click your cursor on an object on the screen, 
+   you will take that object and it will appear in your inventory. 
+
+   Examining Inventory Objects 
+    
+   You can examine your inventory objects by clicking on one of the 
+   items that appears at the bottom of your game screen, and then 
+   click that item on the EYE.  This will allow you to see the 
+   inventory object in three dimensions.  You can rotate the object
+   by clicking and holding down the right mouse button and then 
+   moving the mouse in the direction you want the item to rotate.
+   
+   Manipulating Inventory Objects 
+   
+   In some instances, you can manipulate the object by clicking on 
+   it with your play cursor.  Check each inventory item carefully.  
+   It may conceal something important!
+
+   Inventory items can be clicked on the hint skull for a verbal 
+   description of the object.
+
+   Some inventory objects can be further manipulated in the large 
+   inventory window.  By moving your play cursor over the enlarged 
+   inventory object, you may notice that it will turn red over certain 
+   portions of said object.  Those portions may then change to reveal 
+   something new.
+
+3. The CONTROLS Icon 
+
+   Clicking on the "P" icon in the bottom center of the interface
+   screen brings up the control panel. In the first screen you can:
+
+   View chapter progress - the bar at the top of the screen
+   lets you see how far you are in a particular chapter.
+
+   RESTORE - restore the game to the last bookmark you dropped
+   in that particular game. You cannot restore a different saved
+   game from this screen.
+
+   SAVE - this will drop a bookmark at your current location. A
+   bookmark is a snapshot of the game, including a history of
+   what you have done and the inventory you have.
+
+   PLAY - takes you back to the game
+     
+   QUIT - allows you to quit the game.  Your progress in the game
+    will automatically be saved, or "bookmarked".
+
+   FULL SCREEN/HALF SCREEN - the size at which the movies will
+   play. After Setup tests your machine, default values for
+   movie size and detail are set. Full screen movies are best,
+   but if you find the audio skipping or the movies look "jerky"
+   try playing in half screen mode. 
+
+   UNCENSORED/CENSORED - if you don't like graphic detail of
+   gore and horror, select censored mode. You will be prompted
+   for a password. Once you enter a password, ALL of your games
+   will be censored (even if you continue an uncensored game).
+   You can switch back to uncensored game play by entering your
+   password again.
+
+   If you want the "Intro" movie censored before watching it, then 
+   start a "new" game first.  Turn to censored mode, and then go 
+   back and watch the "Intro."
+
+   The "More" button on the first screen allows you to customize your
+   game with these advanced options:
+
+   TITLE BAR - if you are playing in Windows, you can turn the
+   Windows title bar back on (default is off).  You must quit
+   and restart Phantasmagoria for a title bar change to take
+   effect.
+
+   MOVIE DETAIL - if the movies seem to be playing slowly,
+   try turning off the detail.  If they still seem to play
+   slowly, try playing them half size.
+
+   MIDI VOLUME - MIDI is primarily used for background music
+   inside the house. If it is playing too soft or loud, you
+   can adjust the volume by clicking on the up or down arrows.
+
+   DAC VOLUME - DAC (also called WAV) is sampled sound. All the
+   voices, outside sounds, movie music, and special effects are 
+   DAC.  If they are playing too soft or loud, you can adjust 
+   the volume by clicking on the up or down arrows.
+
+   MOVIE BRIGHTNESS - If the movie detail is turned off, the
+   movies may appear darker. You can adjust the brightness of
+   the movies by clicking on the up or down arrows.
+ 
+Technical Support and Customer Service 
+ 
+U.S. Technical Support 
+
+   Direct your inquiries to the Technical Support Department if your 
+   question is about hardware and software compatibility specific to 
+   Sierra games (i.e., sound card configuration and memory management).  
+   Technical assistance is only a phone call away, dial (206) 644-4343.
+   For 24-hour automated Tech Support, call (206) 786-8100.  If you 
+   prefer, you may request assistance by facsimile; the US fax number 
+   is: (206) 644-7697. 
+ 
+Hint Number: 
+1-900-370-5583 
+$.75 per minute 
+ 
+For on-line support and hints: 
+
+   Access Sierra's BBS through Compuserve by typing GO SIERRA.  Access 
+   the Sierra Forum on America On Line with the keyword: SIERRA 
+ 
+European Technical Support and Customer Service 
+Customer Support UK 
+Sierra On-Line Limited 
+4 Brewery Court 
+The Old Brewery 
+Theale Reading, Berkeshire 
+RG 7 5AJ  United Kingdom 
+ 
+Customer Service/Technical Support France 
+Coktel Vision 
+Park Tertiaire de Meudon 
+Immeuble "Le Newton" 
+25 rue Jeanne Braconnier 
+92366 Meudon La Foret Cedex 
+France 
+ 
+For telephone or fax inquiries, call: 
+UK 
+44-734-303171 
+44-734-303362 (fax) 
+FRANCE 
+33-1-46-01-4650 
+33-1-46-31-7172 (fax) 
+33-1-36-68-4650 (hint line) 
+
+U.S. Customer Service 
+
+   Direct any inquiries to the Customer Service department for issues 
+   pertaining to returned or defective merchandise, back orders, 
+   company policy, and general game information.  Call (800) 743-7725 
+   (800-Sierra5). 
+ 
+The Sierra No-Risk Guarantee 
+
+   The Promise:  We want you to be happy with every Sierra product you 
+   purchase from us.  Period.  If for any reason you're unhappy with 
+   the product, return it within 30 days for an exchange or a full 
+   refund... EVEN IF YOU BOUGHT IT RETAIL.  (Hardware ordered direct 
+   must be returned within ten days.) 
+ 
+   The Only Catch:  You've got to tell us why you don't like the game.  
+   Otherwise, we'll never get better.  Send it back to us and we 
+   promise we'll make things right.  (If you bought it at a retail 
+   outlet, please send your original sales receipt.) 
+ 
+ 
+Write in to Sierra Services 
+
+To enjoy prompt and efficient service, direct your requests to the 
+appropriate department: 
+ 
+Customer Service: 
+In the US: 
+Sierra On-Line 
+Customer Support 
+PO Box 85007 
+Bellevue, WA 98105-8507 
+(800) 743-7725 (800-Sierra5) 
+fax (206) 562-4423 
+ 
+Technical Service: 
+Sierra On-Line 
+Technical Support 
+PO Box 85006 
+Bellevue, WA 98105-8507 
+Monday through Friday 8:15 AM-4:45 PM 
+(206) 644-4343 
+fax (206) 644-7697 
+ 
+Direct Telesales: 
+Sierra On-Line 
+Sales Department 
+PO Box 53250 
+Bellevue, WA 98015-3250 
+(800) 757-7707 
+fax (408) 644-2018 
+ 
+Phantasmagoria Credits 
+
+Designed and Written by
+   Roberta Williams
+
+Story by 
+   Roberta Williams
+   Andy Hoyos
+
+Director
+   Peter Maris
+
+Producers
+   Mark Seibert
+   J.Mark Hood
+   Roberta Williams
+
+Art Director
+   Andy Hoyos
+
+Game Directors
+   Roberta Williams
+   Andy Hoyos
+   Mark Seibert
+   J.Mark Hood
+
+Lead Programmer
+   Doug Oldfield
+
+Musicians
+   Jay Usher
+   Mark Seibert
+
+Movie Sequences Scored By
+   Mark Seibert
+
+Opening and Closing Themes 
+   
+   "Consumite Furore" (Opening Theme)
+   Written by Mark Seibert
+   Performed by Mark Seibert
+   The CSUF Concert Choir
+   Conducted by Dr. Gary Unruh
+
+   "Take a Stand" (Closing Theme)
+   Wrtten by Mark Seibert
+   Performed by Mark Seibert
+   Mike Berkowitz  - Bass
+   Paul Thaxter - Drums
+   Jacqueline Goodwin - Lead Vocal
+  
+Both recorded at Maximus & Engineered by Jeff Hall
+
+Choir on Movies
+   "The Esoterics"
+
+Additional Music by
+   Neal Grandstaff
+   Brian Min
+   Jon Usher
+   Victor Crews
+
+Quality Assurance Lead
+   Robin Bradley
+
+Video Production by Sierra Studios
+Video Production Supervisor:  Bill Crow
+Lighting and Camera: Randy Littlejohn
+Assistant Lighting and Camera:  Robert Ballew, Craig Denny
+Ultimatte and Video Engineer: Robert Koeppel
+Stage Manager: Robert Ballew
+Property Master: Craig Denny
+Best Boy: Chris Williams
+
+Cinematographer: Gerold Wolfe
+
+Video Post Production by Sierra Studios
+Video Post Production and Visual Effects Supervisor:  Bill Crow
+Video Editing: Peter Maris
+Additional Video Editing:  Bill Crow
+Assitant Video Editors:  Robert Koeppel, Ron Lawson
+Video Compositing and Effects:  Bill Crow
+Digital Compositing and Effects:  Robert Koeppel
+Additional Digital Art and Effects : Linda Lubken
+
+3-D Environments 
+   Designed by
+   Andy Hoyos
+  
+Modeled by
+   Kronos
+   Kim White
+   Brandee Prugh
+   Brian Judy
+ 
+2-D Adaptations
+   Dana Moody
+
+2-D Art Coordinator
+   Ken Prugh
+
+SGI Animations, Renderings and Effects
+   Kronos
+   Kim White
+   Brandee Prugh
+   Brian Judy
+
+Cast
+   Victoria Morsell as Adrienne Delaney
+   David Homb as Don Gordon
+   Robert Miano as Carno
+   Taylor Bernard as Marie
+   Steven Bailey as Cyrus
+   V. Joy Lee as Harriet
+   Stella Stevens as Lou
+   Hoke Howell as Harv
+   Douglas Seale as Old Malcolm
+   Devon Myers as Young Malcolm
+   Lillian Chauvin as Ethel
+   Christine Armond as Hortencia
+   Holly Chant as Victoria
+   Wanda Smith as Regina
+   Dana Moody as Leonora
+   Karl Neimiec as Mike
+   Geoff Pryser as Bob
+   Jeff Rector as Gaston
+   Josh Mandel as the Flip Card Machine Emcee
+   Greg Belemjian as the Hintkeeper
+   
+Kronos
+
+   Producer  - Stanley Liu
+   Art Direction - Albert Co
+   Entity Modeling and Animation - Albert Co
+   3D Motion Control Composites - Francis Co
+   CG Modelers / Animators
+      Stanley Liu 
+      Albert Co
+      Mohammed Davoudian
+      Francis Co
+      Lisa Kim
+      Dallas Good
+      Andy Koo
+      Darrek Rosen
+   Software Support - James T. Tomasko
+
+Art and Video Post Production
+   Dana Moody
+   Darvin Atkeson
+   Maria Fruhe
+   Desi Hartman
+   Robin Braze-Phanco
+   Travis Leonard
+   Ken Prugh
+   Daryle Smith
+   Frankie Powell
+   Richard Powell
+   Don Waller
+   Tony Hernandez
+   Barry Smith
+   Bill Davis Jr.
+   Paul Trowe
+
+Animation Editing
+   Ken Prugh
+   Travis Leonard
+   Daryle Smith
+   Robin Braze-Phanco
+
+Programmers
+   Doug Oldfield
+   Dave Artis
+   Vana Baker
+   Adam Bentley
+   Chris Carr
+   Carlos Escobar
+   Bryan Waters
+
+Additional Programming
+   Sean Mooney
+   Steve Conrad
+   Michael Lytton
+   Kerry Sergent
+   J. Mark Hood 
+ 
+Systems Programmers
+   Larry Scott
+   Ed Critchlow
+   Dan Foy
+   Ken Koch
+   Jay Lee
+   Terry McHenry
+   Chris Smith
+   Greg Tomko-Pavia
+   Mark Wilden
+   Mathieu-Marciacq
+
+Installation / Utilities Programmers
+   Chris Hunt
+   Nancy Hamilton
+   Dave Moore
+
+QA Configuration Testing:
+   Michael D. Jones
+   Steve Deckert
+   John Cunney
+   Sharon Simmons
+   Douglas Wheeler
+   John Trauger
+   Lynne Dayton
+   John Ratcliffe
+   Bill Davis Jr.
+   Roger Clendenning
+   Scott Howell
+   Mike Pickhinke
+   Jillian Leonard
+   Matthew Ross
+   Leonard Salas
+   Marsha McCarty
+   Cindy Romero
+   Paul Trowe
+
+Additional QA:
+   Robin Bradley
+   Dan Woolard
+   Mike Brosius
+   Joe Carper
+   Dan Peters
+   Mark MacKay
+   Scott Coventon
+   Michael Chong
+   Scott Multer
+
+Off Site QA:
+   Dave Steele - Dynamix
+   Gary Stevens - Dynamix
+   Andrew Binder - Dynamix
+   Scott Gilbert - Dynamix
+   Dan Hinds - Dynamix
+   John Wolf - Dynamix
+   PCTest Incorporated
+
+Beta Test & Coordination
+   Gary Brown - Technical Support/Beta
+   Beth Quintana - Technical Support/Beta
+   Paul Trowe - Beta Tester Tracker
+
+Audio/Foley/SFX 
+   Rick Spurgeon
+   Kelli Spurgeon
+   Brian Min
+   Victor Crews
+   Mark Seibert
+
+Latin Translations
+   Bruce Thornton
+
+Audio DNR
+   Maximus Studios
+
+Additional Audio
+   Tim Loucks
+   Maria Fruehe
+   Desi Hartman
+   Daryle Smith
+   Bill Davis, Jr.
+   Jay Usher
+
+Documentation Design
+   Design: Julie Collinge
+   Design: Lori Lucia
+   Copy:   Susan Frischer
+   Copy:   Aimee Macdonald
+
+Movie Special Effects
+   The Character Shop
+
+Animals Handled by
+   World Wide Movie Animals
+
+Motion Control
+   McCloud Productions
+
+Make up Artist
+   Cindy Jordan
+
+Costuming
+   Roberta Williams
+
+Movie Audio
+   MacDonald Recording
+
+Movie Sequence Post Production
+   Darvin Atkeson
+
+Casting Agencies
+   Rothfield, Ryan and Roth
+   Bressler and Associates
+
+Casting Directors
+   Peter Maris
+   Mark Seibert
+
+Special Thanks to
+   Chris Braymen, Steve Conrad, Neil Matz, 
+   Sean Mooney, Robin Kleeman, Sunny Maris,
+   Micrografx (r) for Picture Publisher (r),
+   Fresno Flats Historical Society,
+   Jerry Bowerman, Craig Alexander,
+   Cyndi Wharton
+
+Portion copyright SciTech Software

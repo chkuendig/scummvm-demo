@@ -1,0 +1,1714 @@
+The Sierra Troubleshooting Guide
+
+This document is intended to help Sierra customers who are experiencing 
+trouble with our Software. Within these pages you will find all of our 
+standard troubleshooting steps, Windows configuration information, boot 
+disk instructions, and general sound card troubleshooting steps. The 
+information contained in this document should help our customers resolve 
+almost all common problems you can experience with our software.
+
+The Sierra Troubleshooting Guide is broken up into four basic sections:
+
+I.      General Troubleshooting Steps                   
+	Some basic steps to start with
+
+II.     Windows Configuration & Troubleshooting Configuring Windows for 
+	Sierra games            
+	a. Changing Video Drivers
+	b. Setting up a Windows Swapfile
+	c. Setting up your Midi Mapper
+	d. Troubleshooting General Protection Faults
+	
+III.    General Sound Card Troubleshooting              
+	Steps to resolve sound card conflicts
+
+IV.     Boot disk instructions                          
+	Steps to create a boot disk for nearly any configuration
+
+
+ I. General Troubleshooting Techniques for DOS and Windows programs
+
+NOTE: Before you begin troubleshooting, we strongly recommend you begin 
+by using steps 1 through 3 of this section before doing anything else. 
+This will help insure that the game is installed under an optimal environ-
+ment and eliminate any basic problems from the beginning. Corrupted or bad 
+installations can cause a variety of problems, and it is best to eliminate 
+this possibility before you begin additional troubleshooting steps.
+
+1.) Check for Corrupt Files or Other problems on the hard drive (All 
+Programs): Before you do anything else, try running one of the following 
+DOS Commands (listed below) on the hard drive where the game is installed. 
+These commands will check for lost allocation units, corrupted files, 
+cross-linked files, and other disk errors which can corrupt game files 
+and/or the game's installation. These commands will also allow you to 
+correct such errors if they find them. For more information on these 
+commands, consult your DOS manual.
+
+CHKDSK /F   <Enter>     (This command is for MS-DOS 6.0 or earlier)
+SCANDISK    <Enter>     (This command is for MS-DOS 6.2 or higher)
+
+If you DO find any errors at all, once you have corrected them with the 
+commands above (or other disk utility programs like Norton Disk Doctor, 
+PC Tools, or similar programs), proceed to Step 2, and then Step 3 below.
+
+2.) Check hard disk space (All Programs): Run the CHKDSK command (regard-
+less of the DOS version you are using) and check the available hard disk 
+space ("Bytes Available on Disk"). Make sure you have sufficient space on 
+the hard drive to install the game, and remember that our games generally 
+double in size if installed to a compressed drive. Therefore, if you use 
+any disk compression, and you wish to install a game that requires 10 MB  
+of disk space, be sure you have AT LEAST 20 MB of space available, 
+preferably 25 MB to allow a safe margin. After installation, it is best to 
+have at least 3 MB of Disk space available (roughly 5 under a compressed 
+environment).
+
+3.) Re-install the program (All Programs):  Once you have tried the steps 
+above, even if no problems are found, sometimes it is a good idea to try 
+re-installing the game anyway. Delete all files and sub directories off the 
+hard drive and reinstall from scratch.  It is highly recommended that you 
+try booting up with a basic boot disk prior to re-installing the game. This 
+will help insure there are no memory resident programs that may (for 
+whatever the reason) interfere with the game's installation.
+
+4.) Manually install the program (Some Programs): Try a Manual Installation 
+if all else fails.  We have the instructions available on many of the newer 
+product's README files, the Sierra BBS, and available by fax from Technical 
+Support. However, not all products support or can be manually installed.
+
+5.) Check Available Memory: 
+	
+A) DOS Programs: Different games require different types of memory in 
+different amounts. If you ever receive any error messages from a DOS program 
+like "Out of Hunk", "Out of Heap Space", or if it just reports an insuf-
+ficient memory message, then you will probably need to free up more memory 
+to play the game. You can check to see how much memory you have available 
+and how it is configured by typing MEM (then press ENTER) at your DOS prompt. 
+Make sure that your system's memory is configured so as to provide enough 
+memory for the game to function properly. If it is not, or you have 
+encountered any of the messages above, then we recommend creating a boot 
+disk for the game.
+
+B) Windows Programs: Most Sierra Widnows-based programs require a minimum 
+of 2 or 4 MB of free memory to run under Windows. Go to the menu bar of the 
+Program Manager and select HELP and then "About Program Manager". A screen 
+will come up with memory information at the bottom. To maximize available 
+Extended Memory (the type of memory that Windows uses, try making a Windows 
+Boot Disk as outlined in the boot disk instructions included with this 
+document. Also, try increasing your Swap File size (also called Virtual 
+Memory). Instructions for this are included under "Configuring Windows for 
+Sierra Games". Also make sure you disable any and all other memory-resident 
+programs (screen savers, shell programs like Norton Desktop, virus checkers, 
+etc.) prior to playing your game.
+
+6.) Make a boot disk! Many of our newer DOS games have an automatic boot 
+disk maker that you can access by running the program's INSTALL program and 
+choose "Make a Bootable Floppy Disk" from the menu.  You will need a high 
+density disk that fits in your A: drive.  The boot disk is worth a try even 
+if there is enough memory! Using a boot disk creates a clean environment 
+that helps in isolating potential conflicts, along with freeing up more 
+memory. We also recommend using boot disks for Windows as well. We have a 
+disk called BDALL which not only has a boot disk creator program, but also 
+has a compilation of boot disk instructions for a variety of configurations 
+(including Windows systems), in case you need to make a boot disk manually. 
+You can download this disk via our BBS at 206-644-0112, or you can call 
+Technical Support at 206-644-4343 and request the disk to be sent to you. 
+We have also included instructions with this document so you can try 
+creating a boot disk manually.
+
+7.) Sound Card Problems: Sound card conflicts are one of the most common 
+causes of lockups or other problems you can experience with games. See our 
+section on Sound Card Troubleshooting for a suggestions regarding different 
+types of sound card problems.
+
+8. CD ROM Drivers: Generally, it is a good idea to make sure you have the 
+latest available drivers for your CD ROM drive. You can obtain these from 
+the CD ROM manufacturer. Additionally, it is a good idea to have the latest 
+version of the Microsoft CD ROM Extensions (MSCDEX), which is currently 2.23. 
+Sometimes older drivers can contribute to 'Drive Read Errors', 'xxxxx Not 
+Found' type messages, 'CDR101' errors, or 'Drive not Ready' errors. You can 
+check your MSCDEX version by typing MSCDEX and pressing ENTER at your C:\ 
+prompt.
+
+9. Mouse Drivers (DOS programs only): Sometimes, incompatible mouse drivers 
+can cause graphics distortion, lock-ups and other problems.  If the game you 
+are using does not require a mouse, try creating a boot disk and REM out the 
+Mouse line in either the Config.sys or Autoexec.bat file on the boot disk.  
+Otherwise, try using a different mouse driver or contacting the mouse 
+manufacturer for more troubleshooting information.
+
+
+II. Configuring Windows for Sierra Games
+
+Sometimes you may need to make changes or adjust your Windows configuration 
+in order to run your Sierra programs. This document contains steps for three 
+of the most common Windows Setup issues that are encountered by our 
+customers: Changing Video Drivers, Setting up a Swapfile, and Setting up the 
+Midi Mapper.
+
+IIa. Changing Video Drivers
+
+Most Sierra and Brightstar Windows programs require Windows to be run using 
+a 256 Color Display driver. Even though almost all video cards are capable 
+of displaying 256 colors, for Windows to be able to display 256 colors it 
+must be using a 256 color display driver. If you are running Windows with 
+a 16 color driver and you try to run one of our games that requires 256 
+color graphics, you will most likely receive an error message like "Your 
+current Display Driver is not supported by this game." Additionally, 
+running a high color driver, like 32,000 colors or more, can sometimes 
+generate a similar error message, or cause graphics distortion. It is for 
+this reason that we recommend running Windows with a 256 Color Driver for 
+optimal results with Sierra Windows programs. Below is a step by step set 
+of instructions for changing your video driver in Windows.
+
+IMPORTANT NOTE: While we can tell you HOW to change your video driver, we 
+cannot tell you the exact driver you need to choose because it is directly 
+related to the specific brand and type of video card you have installed in 
+your computer. When selecting a video driver, you must select a video driver 
+specific to the video card installed in your computer. Most often, when you 
+purchase a new video card, those drivers will be on floppy disks. If the 
+video card came pre-installed with an entire computer system, the drivers 
+should have been installed for you by the hardware manufacturer, or you 
+should have received the drivers on floppy disks. If you choose an incorrect 
+video driver when changing drivers, Windows will not boot. Should this happen 
+to you, don't panic. You can restore your previous video driver by running 
+the SETUP program from the WINDOWS directory, in DOS. (Just go to your 
+C:\WINDOWS directory when you are in DOS and type SETUP, then press ENTER).
+
+From within the PROGRAM MANAGER:
+
+1.)     Double-click the MAIN program group icon.
+
+2.)     Double-click the WINDOWS SETUP icon.
+
+3.)     You will see a dialog box with "Display" "Keyboard", "Mouse", and 
+	"Network".
+
+4.)     On the menu bar, click on OPTIONS..., then go down to CHANGE SYSTEM 
+	SETTINGS.
+
+5.)     You will see another dialog box, similar to the previous one. Click  
+	on the down arrow to the right of  "Display". You will get a list 
+	of Video drivers available to you. You can use the scroll bar to 
+	scroll up and down the list of drivers. Select a 256 color driver 
+	appropriate for your video card. If you are installing the driver 
+	from floppy disks or some other source, choose "Other Display", and 
+	you will be instructed to type a path to the driver, or to insert 
+	the disk with the drivers into your floppy drive.
+
+If you have any problems changing your video driver and need more 
+information, consult your Windows documentation, or contact the hardware 
+or video card manufacturer. Additionally, if you do not seem to have the 
+appropriate video drivers available to you, you will need to contact the 
+hardware or video card manufacturer to obtain them.
+
+IIb. Setting up a Windows Swapfile (Virtual Memory)
+
+Virtual Memory, also referred to as a Swapfile, is essentially hard disk 
+space that is used as memory. If you have a computer with 8 MB of RAM, and 
+a 4 MB Swapfile, Windows treats that as 12 MB RAM. Sometimes if you do not 
+have enough Extended memory available to run a Windows program, Windows will 
+try to use Virtual memory instead. Some Sierra programs require a small 
+amount of Virtual memory in order to run properly. 
+
+If you are experiencing "Insufficient Memory" messages in Windows, then it 
+would be a good idea to check your Virtual Memory. (We also recommend a 
+Windows boot disk for these problems as well.) We typically recommend a 
+Swapfile of around 4096k.
+
+To check and set up your Virtual Memory (Swapfile):
+
+From within the PROGRAM MANAGER:
+
+1.)     Double-click the MAIN program group icon.
+
+2.)     Double-click the 386 ENHANCED Icon.
+
+3.)     You will see a dialog box. Click on the button "Virtual Memory". 
+	This will bring up a second dialog box that will tell you the size, 
+	type (permanent or temporary), and the drive your Swapfile is 
+	located on. To change the drive that the Swapfile is located on, or 
+	the Type of Swapfile being used, you can click on the arrow next to 
+	those options to view your other choices. You will also see the 
+	following information listed: Space Available (the amount of hard 
+	drive space available for use as a Swapfile), Maximum Size (the 
+	largest size of Swapfile available), Recommended Maximum Size (The 
+	largest setting of Swapfile Windows will allow you to use), and New 
+	Size (You can specify the size of the Swapfile by typing it into 
+	this box).
+
+4.)     IF you wish to change the size of your Swapfile, you can type the 
+	size in the New Size box. Then click on OK. Windows will ask you if 
+	you are sure you wish to make changes. Click on "Yes". You will then 
+	need to restart Windows for your change to take effect.
+
+Again, we typically recommend using a permanent Swapfile at least 4096k in 
+size. A permanent swap file is best because it gives the fastest access 
+time, but a Temporary Swap File doesn't use any hard drive space when you 
+are not using Windows. After you make the swap file, you will be asked to 
+restart Windows. Choose restart then start your Windows program. For further 
+information on Swap Files, please consult your Windows documentation.
+
+NOTE: You cannot use compressed disk space as a Swapfile. If you use disk 
+compression, you can only establish a Swapfile on either the non-compressed 
+host drive, or another non-compressed hard drive.
+
+IIc. Setting Up Your Midi Mapper 
+
+Since Sierra uses MIDI (Musical Instrument Digital Interface) music, in 
+order to hear music in our games you must have your Midi Mapper set up 
+correctly. Normally, this is done when you install your sound card software, 
+but many sound cards will default to an incorrect Midi Setup.
+
+The instructions below are for setting up the Midi Mapper for a standard FM 
+sound card like a Soundblaster (regular, Pro and 16 varieties), Pro-Audio 
+Spectrum, and other similar sound cards. These instructions will work for 
+nearly all sound cards, though if you have a more advanced sound card like 
+a Gravis Ultrasound, Sound cards using Wave table Synthesis, or a Roland 
+MT32, RAP 10 or Sound Canvas, or any other advanced MIDI device, the set up 
+instructions below will probably not provide the optimal Midi configuration 
+to take advantage of more advanced hardware. Please contact the 
+hardware/sound card manufacturer if you need additional help configuring 
+your Midi Mapper for one of these more advanced sound modules.
+
+NOTE: When you install a Sierra Windows game, make sure you choose BASE 
+level if you are prompted for a "Base" or "Extended". (Or "Other sound 
+cards" or whatever is appropriate). The Extended setting is strictly for 
+users with Midi devices like the Roland MT32 installed in their systems. 
+Even if the game you are playing and the sound card you are using support 
+an "Extended" level Midi Setting, we recommend trying a Base level setting 
+if you experience any problems.
+
+From within PROGRAM MANAGER:
+
+1.)     Double-Click your MAIN group. 
+
+2.)     Double-click the CONTROL PANEL Icon.
+
+3.)     Double-click the MIDI MAPPER icon. [NOTE: If you do not have this 
+	icon, go back to the CONTROL PANEL, and Double-click the DRIVERS 
+	section. Click on the "Add" button, and in the list of drivers 
+	presented to you highlight the MIDI MAPPER selection and click on 
+	OK. After the driver is installed, you will need to restart Windows 
+	and start at step 1 above.]
+	
+4.)     You will get a dialog box. Click on the NEW Button. 
+
+5.)     Type in a name (any name will do), then click on the OK Button.
+
+6.)     Now you will get the MIDI SETUP screen. Find the Port Name Column, 
+	and go down it until you reach the box for channel 13. Click on the 
+	box, then click on the arrow and you should get a list of drivers.
+
+7.)     Select the driver that has "FM Synthesis" in it. The name may vary 
+	depending on the sound card you have, but some examples are 
+	"Voyetra SuperSapi FM Driver", "Yamaha OPL-3 FM Synthesizer", 
+	"SBP FM Synth".
+
+8.)     Repeat step 7 for Channels 14, 15 and 16.
+
+(NOTE: For an "Extended" Midi Setup, you would configure channels 1-10 and 
+leave 11-16 as "None")
+
+9.)     Click on OK, and when the computer asks you if you want to save the 
+	setting, choose yes.
+
+10.) Close the MIDI MAPPER.
+
+Additional Note: Always make sure you have the proper Drivers installed for 
+your sound card, as well as the following standard Windows drivers: Timer, 
+Midi Mapper, [mci] CD Audio, [mci] Sound, and [mci] Midi Sequencer. If these 
+are not present, you can add them following the steps below:
+
+Again, from the CONTROL PANEL:
+
+1.)     Double-click the DRIVERS icon.
+
+2.)     You will get a list of drivers presented in a dialog box. Click on 
+	the ADD button.
+
+3.)     Select the driver you wish to add (Timer, Midi Mapper, 
+	[MCI] CD Audio, Sound, or Midi Sequencer)
+
+4.)     Click on OK. If you are asked to use the Current driver or a New 
+	one, click on Current. You may be asked to insert a Windows disk 
+	to install the driver from. Follow the instructions on screen. 
+
+5.)     Once new drivers are installed, you will need to re-start Windows. 
+	If you have any difficulty installing the drivers, or need additional 
+	help with Windows, please contact Microsoft or your authorized 
+	hardware manufacturer.  
+
+Finally, it's usually a good idea to have the latest sound drivers available 
+for your sound card. You can contact the Sound card manufacturer to obtain 
+the most current drivers. 
+
+
+IId. Sierra Troubleshooting Steps: General Protection Faults
+
+General Protection Faults are errors that occur in Windows. They are 
+typically the results of a memory conflict between one or more drivers or 
+programs. One program may inadvertently overwrite another program's code, 
+corrupting both programs and causing a General Protection Fault. Another 
+type of error similar to a General Protection fault is a System Integrity 
+Violation, which is basically a General Protection Fault caused by an MS-DOS 
+program running Windows. 
+
+However, Sierra does not support running our DOS programs through Windows, 
+so this document will be focused on troubleshooting Windows General 
+Protection Faults. If a Sierra DOS program causes any error messages or a 
+System Integrity Violation, we recommend that you run that program in DOS.
+
+Preparing to Troubleshoot 
+
+Before you begin to troubleshooting General Protection Faults, you must 
+have a basic boot disk for your system. At the end of this document are a 
+complete set of boot disk instructions. We also have boot disk instructions 
+available via FAX (document #2475), and a also have a disk called BDALL 
+which contains a boot disk creator utility and a complete set of boot disk 
+instructions for a variety of systems. This disk can be downloaded via our 
+BBS at 206-644-0112, or you can contact us in Technical Support via FAX at 
+206-644-7697 or phone at 206-644-4343 and have the disk sent to you.
+
+In addition to the standard boot disk files, however, it is important to 
+copy your DOS text editor (including Qbasic.EXE) to the boot disk as well. 
+You can do this using the following commands, entered at the C:\ prompt:
+
+COPY C:\DOS\EDIT.COM A: <ENTER>
+COPY C:\DOS\QBASIC.EXE A:       <ENTER>
+
+Finally, you will want a backup copy of your WIN.INI and SYSTEM.INI files 
+on this disk. Copy them to the boot disk using the following commands:
+
+COPY C:\WINDOWS\WIN.INI A:      <ENTER>
+COPY C:\WINDOWS\SYSTEM.INI A:   <ENTER>
+
+(NOTE: If your Windows directory is on another drive, use the letter of that 
+drive instead of C:).
+
+Troubleshooting Steps
+
+1.)     First, correct any and all FAT table errors and lost allocation 
+units by running SCANDISK or CHKDSK.  Refer to Section I. General Trouble-
+shooting Techniques for DOS and Windows programs, and read the instructions 
+for Step 1 if you need additional information.
+
+2.)     Make sure your Windows System Resources are over 60 percent. You 
+	can check this by going to the HELP menu in Program Manager, and 
+	choosing About Program Manager. If resources are below 60 percent, 
+	close any and all other Windows applications before continuing to 
+	the next step.
+
+3.)     Check the DOS version you are using. If you are using an OEM DOS 
+	version, such as IBM DOS or Compaq DOS, those should only be run on 
+	their respective OEM computer systems. (However, the Microsoft's 
+	DOS 5 and DOS 6 upgrades will work on all machines.) 
+
+4.)     Run Windows in Standard Mode (Not available in Windows for 
+	Workgroups 3.11). You can run Windows in Standard mode by typing 
+	WIN /S and then pressing ENTER. If the GP fault occurs in Standard 
+	Mode and Enhanced Mode Windows, the problem could be a corrupted 
+	file or conflict between Windows and a hardware device. 
+
+5.)     Run Windows without using your WIN.INI file. The best way to do this 
+	is to rename the WIN.INI file to something else. You can do this by 
+	going to DOS, then to your WINDOWS directory. Then type:
+
+REN WIN.INI WIN.OLD     <ENTER>
+
+If running Windows without the WIN.INI file active corrects the problem, 
+make sure the LOAD= and the RUN= lines in the [WINDOWS] section of the 
+WIN.INI are blank, or insert a semi-colon (:) at the beginning of each line. 
+(You can edit the WIN.INI with a text editor program like Windows Notepad.) 
+This will prevent any other Windows software from loading. If this fails to 
+correct the problem, Sierra recommends calling either MICROSOFT, or if you 
+received your DOS/WINDOWS software with your computer system, you will need 
+to contact the hardware manufacturer. They should be able to help you 
+isolate the conflict between your WIN.INI file and your SIERRA program.
+
+6.)     Reinstall your Sierra Windows program, or the program to which the 
+	GPF seems to be specific. Sometimes corrupted files and drivers 
+	(especially sound and/or video drivers in the case of Sierra 
+	Software) can cause GP faults, and re-installing them may correct 
+	the problem. Often times, updating to the latest available versions 
+	of these drivers will correct problems as well. Contact the software 
+	manufacturer if you need assistance re-installing and/or updating 
+	drivers.
+
+7.)     Eliminate any memory-resident software. Close any and all other 
+	applications, make sure the STARTUP group is empty, and disable any 
+	and all screen savers (including the standard Windows screen saver) 
+	and shell replacement programs like Norton Desktop for Windows, 
+	PC Tools, etc. Also, don't run Windows from a menu program like 
+	DOS Shell or similar programs.
+
+8.)     To check for a Video driver conflict, change your Video driver to 
+	"VGA 3.0". A number of Video Drivers from third party vendors will 
+	conflict with some Sierra Windows programs. IMPORTANT NOTE: If your 
+	SIERRA program requires a 256 color driver, use Microsoft's "SVGA 
+	(640 by 480, 256 color) driver if you have it available. If you do 
+	not have this driver available, try using some other drivers for 
+	your video card and see if they make a difference. You may try 
+	contacting Microsoft to see if you can obtain the driver from them. 
+	Refer to step 6 for more information. 
+
+9.) Check for other possible conflicts with other, third-party software 
+drivers. Edit your SYSTEM.INI file and temporarily comment out any and all 
+third party drivers, e.g. Adobe Type Manager, third party printer drivers, 
+Bitstream, etc. You can use Windows Notepad to edit the SYSTEM.INI file, 
+and insert a semi-colon (;) at the beginning of each line that loads a third 
+party driver. In your SYSTEM.INI file, the [BOOT] section should be set to a 
+standard Windows default, which is listed below:
+
+shell=progman.exe
+system.drv=system.drv
+keyboard.drv=keyboard.drv
+mouse.drv=mouse.drv
+display.drv=vga.drv             
+comm.drv=comm.drv
+sound.drv=mmsound.drv
+
+10.) Eliminate potential conflicts in DOS by creating a basic boot disk 
+that loads only those drivers necessary to start your system and Windows. 
+A minimum boot configuration is listed below:
+
+AUTOEXEC.BAT                            CONFIG.SYS
+
+Path=c:\;c:\dos;c:\windows              Files=50                                
+Prompt $p$g                             Buffers=30
+Set temp=c:\temp                        Device=c:\dos\himem.sys 
+					Stacks=9,256                                                                                                                    
+					Device=c:\windows\ifshlp.sys  
+					(This last line is only for WFW 3.11)
+
+Depending on your particular systems, the files above may not be sufficient 
+or meet the minimum requirements for your system to boot normally. If you 
+need additional assistance creating a boot disk, continue on to Section IV. 
+MS-DOS 5.0 and up Boot Disk Instructions.
+
+If creating a boot disk seems to correct the problem, then your GP fault 
+was caused by one of the memory resident DOS programs or drivers that your 
+system loads. Try adding in, one at a time, any drivers REMed or excluded 
+from your boot disk, then see if the problem occurs. Continue this step 
+until you've isolated the specific driver that is causing the problem.
+
+This list is by no means exhaustive, but it does represent the most common 
+solutions to General Protection Faults encountered with Sierra Windows 
+Software. For additional assistance, you may wish to contact Microsoft or 
+your Hardware dealer (if Windows came pre-installed on your computer).
+
+
+
+III. General Sound Card Troubleshooting Steps
+
+
+Due to the tremendous number of sound cards and drivers available today, 
+it can often be difficult getting a sound card and a game's sound driver 
+to work together correctly. Unfortunately, while most sound cards claim 
+to be 100% Sound Blaster compatible, the differences in the various methods 
+of achieving this compatibility makes the claim itself dubious at best. 
+Add to that the different methods of programming games and their sound 
+drivers, it is not uncommon to encounter a conflict between a game's sound 
+driver and your sound card.
+
+Sierra has composed the following list of Sound Card troubleshooting steps 
+to help resolve the most common problems experienced when trying to 
+configure a sound card to work correctly with a game (and vice-versa). 
+Please note that we cannot possibly know everything about your specific 
+sound card, it's drivers, set up requirements, or the related software that 
+is packaged with it. Therefore, if you have any questions as to how to 
+change the settings of your sound card, re configure it, or otherwise 
+manipulate it in a manner specific to the sound card itself or its software, 
+please refer to your sound card's documentation or consult your sound card's 
+manufacturer.
+
+UNDERSTANDING DIFFERENT TYPES OF SOUND CARD SOUND
+
+There are four main types of sound used by games and played through sound 
+cards. These are briefly explained below to help you understand a little a
+bout the different types of sound and how sound cards work.
+
+Digital Sound: Digital Sound (also called Waveform Audio, Sampled Sound, 
+or DAC Sound) is sound that is recorded just like you would record something 
+on a tape recorder. Digital Sound can be virtually any type of sound. Some 
+examples include speech, gunshots, footsteps, explosions, and most sound 
+effects used in current games. Digital Sound is often described as '8 bit' 
+or '16 bit', but in laymans terms all you really need to know is that 16 Bit 
+Audio will sound sharper and clearer than 8 Bit Audio. Digitized Sound is 
+often referred to as 'DAC' sound. DAC actually stands for "Digital to Audio 
+Converter." Small DAC chips on your sound card convert recorded signals into 
+audible sounds.
+
+Midi Music: MIDI stands for Musical Instrument Digital Interface. MIDI 
+technology allows a sequence of commands to call up sounds from a music 
+synthesizer, which has significant advantages over digitized audio.  Each 
+command instructs the synthesizer to play another note, or substitute a 
+different sound, or adjust the synthesizers' audio output level, etc.  
+These commands are only a few bytes in length, regardless of the duration 
+of the sound,  so MIDI data is very compact.  In addition, since MIDI music 
+isn't interpreted until playback, it is possible to modify a MIDI performance 
+at any time and in any way imaginable with proper software tools. For MIDI 
+songs to play properly on your MIDI system, it is important that your 
+synthesizer be able to produce the sounds intended by the music author.  
+Not all synthesizers can provide the same sound (or sound quality) in 
+response to a single command via MIDI.  For this reason, most pre-recorded 
+MIDI material is written to the General MIDI format found on the Roland 
+RAP-10, SC-7, SCC-1, SC-55 and SC-300 as well as the TG-100 from Yamaha.  
+This format has been endorsed and recommended for general purpose use by all 
+MIDI manufactures as well as IBM, Microsoft and Apple.  As an alternative, 
+song data is also available for the Roland MT-32, CM-32L and LAPC-1.
+
+FM Synthesis: Most sound cards used today employ inexpensive FM Synthesizers 
+(such as the Yamaha OPL3) to generate music. These chips synthesize musical 
+instruments and are responsible for the music playback from your sound card. 
+
+CD Audio: Sound that is recorded to and played from a CD is called. Playing 
+CD Audio is the same as a playing a music CD. In order for sound cards to 
+play CD Audio, a special CD Audio cable is required and must be connected 
+from the CD ROM drive to the sound card. The sound card itself is not 
+responsible for playing any music on the CD, however. It is just being used 
+as a conduit, so to speak, so you can hear the music through the speakers 
+connected to the sound card. You can also hear CD Audio by plugging in 
+headphones to the headphone jack on your CD ROM drive.
+
+TYPICAL SYMPTOMS OF SOUND CARD CONFLICTS AND RELATED PROBLEMS
+
+1)      Lockups. Often times a DOS or Windows program  will lock up the 
+	system if there is a sound card conflict. Often, the game will still 
+	appear to be playing normally -- you will be able to move the mouse, 
+	the background music will be playing, and you may even be able to 
+	access the Save/Restore functions. However, the mouse pointer will 
+	remain a "wait" cursor and all action in the game will effectively 
+	stop. Other times, even the mouse pointer will freeze (A "hard" 
+	lock up), and the sound card may become stuck on one continuous note. 
+	Occasionally this might even force the system to re-boot itself.
+
+2)      No music and/or Sound effects. Sometimes you may hear music, but no 
+	speech or sound effects, or  vice-versa.
+
+3)      Distorted or garbled music or sound effects, possibly with crackling 
+	noises. 
+
+4)      Repeating or "broken record" type sound. Sometimes this will manifest 
+	itself in the form of one continuous, long musical note as well.
+
+5)      DOS Error Messages:
+	"Unable to initialize your audio hardware" (or something similar)
+	"Unable to initialize your music hardware" (or something similar)
+	"Invalid General Protection Fault" followed by lots of numbers and 
+	code.
+	
+6)      WINDOWS Error Messages: 
+	"Wave Out Open Error"
+	"Panic: Use Capabilities Function..." 
+	"Sound Device already in use by another application".
+
+COMMON SOLUTIONS AND SUGGESTIONS FOR SOUND CARD PROBLEMS AND CONFLICTS 
+IN DOS OR WINDOWS
+
+Listed below are suggestions and the most common solutions to resolving 
+sound card conflicts. Some of these fixes are specific to DOS, some to 
+Windows, and many will apply to either DOS or Windows. We recommend reading 
+ALL of these steps, even if some of them may not seem to directly apply to 
+the problem you may be experiencing with your game. 
+
+(DOS/WINDOWS): First and foremost, make sure you choose the appropriate 
+sound drivers or sound choices when you install the game !  Don't always 
+trust the default values, because sometimes installation programs will 
+incorrectly detect your hardware. Obviously, if you have a standard 
+Soundblaster, Soundblaster Pro or Soundblaster 16,  and the game's 
+installation program detects "Roland MT32", this isn't going to work. 
+Sometimes choosing the correct driver can be tricky, but for most sound 
+cards, selecting "Soundblaster/Ad-lib" for the music selection and 
+"Soundblaster" for the Audio/Speech  selection (if there is an Audio/Speech 
+selection -- not all games will have one) is the best place to start if you 
+do not see a driver listed for your specific sound card. If you experience 
+problems with these selections, try using some of the others -- it can't 
+hurt. For Windows programs, if you are given a choice of selecting "Base" 
+or "Extended", start with Base level.
+
+(DOS/WINDOWS): Check the DMA and IRQ settings for your sound card. Generally 
+speaking, we recommend using DMA 1 and IRQ 5, I/O address 220 for best 
+results. However, as a general rule, our DOS games will support DMA channels 
+1 and 3, and IRQ settings of 3, 5 and 7. If you are experiencing any of the 
+previously mentioned problems, you might try changing the DMA and/or IRQ 
+setting for your sound card and see if that works. Try our recommended 
+settings if possible.
+
+(DOS/WINDOWS): If you are not hearing any music or sound, try the steps 
+above, but also try running the mixer program for your sound card and 
+turning up your music and sound effects volume levels. If you are having 
+the problem under DOS, run the DOS-based mixer, if the problem is under 
+Windows, run the Windows-based mixer program. Sometimes not hearing music 
+or sound effects is just due to the volume levels that the sound card is 
+set to.
+
+(DOS/WINDOWS) Some games use CD Audio (music/audio played directly off of 
+the CD like a music album), and if you do not have a CD Audio cable 
+connecting the sound card to the CD Rom drive, you won't be able to hear 
+CD Audio. An easy way to test this is to plug in some headphones to the 
+jack on the CD ROM drive and listen. If you hear sound through the head-
+phones, then you are hearing CD Audio, but most likely you do not have a 
+CD Audio cable connecting the drive to the sound card. You can get a 
+CD Audio cable from some computer supply stores, or the CD Rom manufacturer 
+may be able to sell one to you.
+
+(DOS/WINDOWS): Running Dos-based games in Windows will generally not work, 
+and produce either repeating sounds, no sound or music, or other error 
+messages like "DMA Buffer Size is Too Small....". Run DOS based games in 
+DOS for best results.
+
+(DOS): Try new drivers ! For DOS based games, it never hurts to check with 
+Sierra Technical Support or our BBS to see if there are any updated sound 
+drivers for some games.We have enclosed a list of our current drivers 
+available on the BBS. We can also mail these drivers out free of charge. 
+
+(DOS) If you experience audio that 'stutters' or sounds a little 'broken 
+up', there may be a DMA or an IRQ conflict. However, the problem may also 
+be either insufficient audio buffering, or too much audio buffering. There 
+is usually a setting in the MSCDEX line in the Autoexec.bat file, like 
+/M:20, or something similar. Try changing this number to 8, 10, 12, or 
+maybe 15. Also, try removing the /M: <number> entirely, or if it is not 
+present, add it to the end of the MSCDEX line with a value (like /M:10). 
+We recommend making changes only in the Autoexec.bat file on a boot disk.
+
+(DOS) Make sure all the appropriate drivers and configuration lines 
+specific to your sound card are being loaded, especially if you are using 
+a boot disk created by the game. While boot disk creators can generally 
+recognize common drivers and set them up in your Autoexec.bat and 
+Config.sys files, drivers specific to particular sound cards will not be 
+recognized, and the boot disk maker will most likely not set the 
+Autoexec.bat and/or the Config.sys file on the boot disk up to load the 
+drivers. You may need to add these drivers or settings manually. We have a 
+list of common drivers typically loaded by various sound cards included in 
+this document. However, for more specific information, consult your sound 
+card's documentation or the manufacturer of the sound card.
+
+(DOS) Sometimes if you are playing an older game on a faster computer 
+(usually a 486 or higher), the computer may be to fast for the game to 
+initialize the sound card, resulting in no sound or music. This is often 
+accompanied by the message "Unable to initialize your Audio/Music Hardware", 
+but not always. Try turning off your computer's TURBO switch (if it has one) 
+and starting the game. Usually, this will let the game initialize the sound 
+card, and you can turn the Turbo back on after the game has started. 
+Consult the drivers list towards the end of this document for information 
+about our updated driver 486SBDRV, which can correct this problem for a 
+number of games.
+
+(WINDOWS) If you are not hearing any music in your game, and you are playing 
+under WINDOWS, make sure the Midi Mapper is set up correctly. First, make 
+sure you install the game for "BASE" level Midi. Then use the following 
+steps to correctly set up the Windows Midi Mapper for a standard sound card 
+(Soundblaster, Pro-Audio Spectrum, etc.  1) Double-Click your Main group, 
+then double-click the Control panel icon, then double-click the Midi Mapper 
+icon. 2) Click on the NEW Button. Type in a name (any name will do), then 
+click on the OK Button. 3) Now you will get the MIDI SETUP screen. Find the 
+Port Name Column, and go down it until you reach the box for channel 13. 
+Click on the box, then click on the arrow and you should get a list of 
+drivers. 4) Select the driver that has "FM Synthesis" in it. The name may 
+vary depending on the sound card you have, but some examples are "Voyetra 
+SuperSapi FM Driver" and "Yamaha OPL-3 FM Synthesizer". 5) Do the same thing 
+for Channels 14, 15 and 16. 6) Then click on OK, and when the computer asks 
+you if you want to save the setting, choose yes. 7) Close the Midi Mapper 
+and play the game. You should now get music in your game.
+
+(WINDOWS) If you experience 'stuttering' or 'broken' audio with a Windows 
+game, it may be caused by either insufficient or excessive audio buffering. 
+Try this: There will usually be a line like "DMABufferSize=32" (or some 
+other number) in the [386ENH] section of the SYSTEM.INI file, which is 
+located in the Windows directory. Make a backup copy of the SYSTEM.INI file. 
+Then open the SYSTEM.INI file with Windows NOTEPAD or any other text editing 
+program, and find the DMABufferSize line. Try setting the value to 256. 
+Other valid values are 128, 64, or 32. We do not recommend going above 256. 
+If you cannot find a DMABufferSize line, add it to the end of the [386ENH] 
+section. It should look like: DMABufferSize=256    (Case is important, so 
+make sure it matches the example exactly.)
+
+(WINDOWS): Always make sure you have the proper Drivers installed for your 
+sound card, as well as the following standard Windows drivers: Timer, Midi 
+Mapper, [mci] CD Audio, [mci] Sound, and [mci] Midi Sequencer. Also, it's 
+usually a good idea to have the latest sound drivers available for your 
+sound card. You can contact the Sound card manufacturer to obtain the most 
+current drivers. 
+
+(WINDOWS): Some Windows sound enhancement programs or screen savers can 
+conflict with games if they are running at the same time. Often, they 
+produce error messages like "Wave Out Open Error" or "Panic: Use 
+Capabilities Function...". Some examples of programs that can produce these 
+types of errors are Afterdark, Wired for Sound, Icon Hear-it or Icon Do-it, 
+and Microsoft Windows Sound Bits. Try closing these programs or removing 
+the drivers.
+
+	SIERRA DRIVER UPDATES -- CURRENT AS OF 10/1/94
+
+This list contains all the current sound driver updates and revisions 
+currently available from Sierra. If you would like to obtain one of these, 
+you can contact Technical Support at 1-206-644-4343 and request it, or you 
+can download the driver via the Sierra BBS at 206-644-0112, Compuserve, or 
+America On-Line.
+
+Filename        Description
+486SBDRV        Many older Sierra programs will produce an 
+		"Unable to Initialize Audio/Music Hardware" message when 
+		they are run are 486 systems. This updated Soundblaster 
+		driver will correct this.
+GUS32           This driver will allow Gravis Ultrasound users to use their 
+		Gravis Ultrasound with Sierra's 32 bit DOS games, which 
+		currently include Police Quest 4, Gabriel Knight, Quest for 
+		Glory 4, and the CD ROM version of Leisure Suit Larry 6.
+GUSDRV          This is a Gravis Ultrasound driver that will work with the 
+		following games: The Dagger of Amon Ra (CD), Hoyle Classic 
+		Card Games, King's Quest 6, Pepper's Adventures in Time, 
+		Quest for Glory 3, Freddy Pharkas, Island of Dr. Brain, 
+		Eco Quest 2, Police Quest 1, and Slater & Charlie go camping.
+MGCD486         This is an updated Sound Blaster driver for Mixed Up Mother 
+		Goose (CD-ROM). This will correct "Unable to Initialize 
+		Music/Audio Hardware" messages when trying to run the game 
+		under DOS on a 486 system.
+SB16DRV         This is an updated SoundBlaster 16 driver. It will correct 
+		sound problems with games that will only play one digitized 
+		speech or sound sample, then stop playing them. This will 
+		work for most games released after King's Quest 5 (11-15-90), 
+		but not including King's Quest 5 (disk or CD version).
+SBSCI32         This Sound Blaster driver is for Sierra's 32 bit games 
+		(refer to the list under GUS32 for a list of these), and 
+		will allow you to use an I/O address other than 220 for 
+		your sound card. "ERROR 29" is the usual indicator that you 
+		need this driver.
+		
+SOME TRICKS OF THE TRADE
+
+We have included in this section some common solutions and work arounds to 
+some problems our customers have experienced with specific sound cards.  
+
+ENSONIQ SOUNDSCAPE
+
+Common Problem: Varies; usually no sound or unusual sound 
+
+Windows & DOS (general): First, make sure you have Ensoniq's latest Windows 
+and DOS drivers. These have corrected a lot of problems experienced by 
+Ensoniq users with our software. Ensoinq's number is given at the end of 
+this document, and the Drivers are also available via Compuserve.
+
+Front Page Sports Baseball & Football 95' Generally these games do not work 
+with the Ensoniq Soundscape. Select No Sound.
+
+Aces of the Pacific / Aces Over Europe: These games will generally work one 
+of two ways: 1) Using 'MT32', in which case the music will be great but the 
+DAC sound will sound odd; or 2) Using Soundblaster, the sound effects will 
+sound OK but the music will sound strange. No other work arounds are known 
+at this time.
+
+Sierra's Quest Games (King's Quest, Police Quest, Space Quest, Quest for 
+Glory) - All sound fine in Windows if there is a Window's version of the 
+program. For the DOS versions, during installation for the MUSIC setting, 
+you will want to choose GENERAL MIDI if it is listed or SOUNDBLASTER/ ADLIB 
+OR COMPATIBLE. For the SPEECH/AUDIO/SOUND settings you will want to choose 
+THUNDERBOARD or SOUNDBLASTER, one or the other should work properly. One 
+exception is King's Quest 6 (Dos version): It will loose the sound when you 
+are in the bookstore. Unfortunately, there is no work around other than 
+playing through Windows.
+
+
+SOUNDBLASTER 16
+
+Common Problem: Lock ups. Most commonly, the game will appear stuck 
+"thinking" about something.
+
+Solution: This won't work for all games, but it will work for most of our 
+more recent titles. Run the game's Installation program from the game's 
+directory on your hard drive. Choose "Thunderboard" for your Audio instead 
+of "Soundblaster". For older games, choose "Ad-lib" for your sound card 
+choice.
+
+Common Problem: No Sound or Audio, or messages like "Incorrect INT setting 
+in System.INI file" when starting Windows.
+
+Solution: This usually happens when using a boot disk that doesn't have the 
+necessary configuration lines for the Soundblaster 16 sound card. You will 
+need to add one or more of these lines to the boot disk manually. These 
+lines usually look like:
+
+SET SOUND=C:\SB16
+SET BLASTER= A220 I5 D1
+C:\SB16\SBCONFIG.EXE /S
+
+There may also be a line containing SB16SET that we would recommend adding 
+as well.
+
+
+MULTIMEDIA PRO 16 (also Sound Galaxy sound cards)
+
+Common Problem: Inaudible Speech or Sound FX (sometimes music too)
+
+Solution: First, you need to run the game's Installation program and choose 
+"Soundblaster" for Music and "Microsoft Windows Sound System" for Audio. 
+Then you need to go to the MMP16P\UTILITY directory and type SETMODE /MSS 
+(and press Enter). Then play your game, and you should get speech and sound 
+effects. Just remember to run the SETMODE program before you run the game, 
+and the speech and sound effects should work fine.
+
+Alternately, sometimes we find it necessary to run the mixer program for the 
+card also. If the SETMODE command doesn't seem to do the trick by itself, 
+try typing:
+
+SETMODE /MSS            (press Enter)
+SG16MIX                 (press Enter)
+SG16MIX /Q              (press Enter)
+
+Then try running your game. If you still have troubles, contact Reveal. 
+Their number is listed below.
+
+
+MOZART & DIAMOND SONIC SOUND
+
+Common Problem: Inaudible Speech or Sound FX (sometimes music too)
+
+We find these cards, like the Sound Galaxy, also tend to work better when 
+used to emulate a Windows Sound System sound card. The commands to enable 
+this are as follows:
+
+Mozart Sound Card:
+
+CD\MOZART               (press Enter)
+MZTMODE/WSS             (press Enter)
+
+Diamond Sonic LX:
+
+CD\DIAMOND              (press Enter)
+SNDINIT/WSS             (press Enter)
+
+As with the Sound Galaxy cards, you must remember to run these commands 
+prior to starting the game.
+
+
+GRAVIS ULTRASOUND & ULTRASOUND MAX (under Windows)
+
+Common Problems: No music under Windows; often 'Divide by Zero' error 
+messages can also occur.
+
+Most Sierra products do not currently support patch caching for sound cards, 
+which the GUS in its default configuration requires for MIDI output. To 
+get MIDI music working with a GUS, follow the instructions in the GUS 
+Windows Help file to put the GUS in non-patch caching mode.
+
+The instructions in a nutshell (do the following steps once:)
+
+1) Open the Control Panel, then open the MIDI mapper.
+
+2) Select the setup labeled "Ultra???" where ??? represents the amount of 
+   memory installed on your Ultrasound. (The GUS Max comes with 512K, the 
+   GUS with 256K). Close the MIDI mapper and the Control Panel. If you don't 
+   find a setup with the correct name (or a similar name -- different 
+   revisions of the software named the setups differently), re-install your 
+   GUS software.
+
+Do the following steps each time before running a Sierra game:
+
+1) In File Manager, go to your \ULTRASND\MIDI directory and double-click the 
+   file labeled "load???.mid" where again ??? represents the amount of 
+   memory on your GUS. (If you don't find the file there, look in other 
+   subdirectories -- different GUS installation versions put the files in 
+   different places.) This should launch the Media Player and play a 
+   10-second MIDI file that will load all the patches your GUS needs.
+
+(Advanced tip: by dragging the .MID file above into the Sierra group in the 
+program manager, you can make an icon that will always be handy when you are 
+about to run a Sierra program.)
+
+2) If double-clicking the .MID file doesn't load Media Player, try running 
+   Media Player directly (it's in the Accessories group of Program Manager), 
+   then selecting "Open..." and opening the file. Then click the Play button.
+
+3) Run the Sierra game.
+
+
+DRIVER & CONFIGURATION INFORMATION
+
+While we can't possibly know everything about all possible sound cards or 
+their drivers, we have compiled a general list of drivers and configuration 
+lines necessary to the proper setup of certain sound cards. This information 
+may be especially useful if you have used one of our automatic boot disk 
+maker programs. Boot disk makers can typically only detect the most common 
+types of sound configuration lines and drivers, but not sound card specific 
+drivers that many of today's newer cards require for proper configuration.
+
+Below is a list of various sound cards and the necessary configuration 
+and/or driver lines that must be present in the AUTOEXEC.BAT file and/or 
+the CONFIG.SYS files. Most boot disk makers will be able to identify and 
+correctly place the SET BLASTER= and SET SOUND= lines in the Autoexec.bat 
+file on the boot disk, but any other lines you may need to add manually.
+
+If you have any further questions or require additional information 
+regarding the correct setup of your sound card, please consult the 
+documentation for your sound card or contact the sound card manufacturer.
+
+Sound Card:     Adlib
+Autoexec.bat:   NONE
+Config.sys:     NONE
+Notes:          Can play music only
+
+Sound Card:      Aria 16
+Autoexec.bat:   SET ARIA=
+		SET BLASTER=
+		C:\DOS\SOUNDCLT.COM
+Config.sys:     DEVICE=C:\ARIA\BIN\SOUNDCFG.SYS
+		DEVICE=C:\ARIA\BIN\SNDSAVER.SYS
+Notes:          Used in a number of IBM models
+
+Sound Card:     Diamond LX
+Autoexec.bat:   SET SONIC=
+		C:\SONIC\SONIC /B/C*
+		SET BLASTER=A220 I5 D1 T4
+Config.sys:     NONE
+Notes:          *Use the /C switch for Soundblaster mode, use the /B switch 
+		for Microsoft Sound System Mode
+
+Sound Card:     Ensoniq Soundscape
+Autoexec.bat:   SET BLASTER=
+		SET SNDSCAPE=
+		C:\SNDSCAPE\SSINIT /I*
+Config.sys:     NONE
+Notes:          *Older drivers use /FM for Soundblaster mode, /GM for 
+		General Midi mode.
+
+Sound Card:     Forte 16
+Autoexec.bat:   SET BLASTER=
+		SET GALAXY=
+		SET SOUND=
+		C:\FORTE16\EMUTSR
+Config.sys:     NONE
+Notes:          Shipped mainly with Packard Bell computers.
+
+Sound Card:     Gravis Ultrasound
+Autoexec.bat:   SET ULTRASND=
+		SET ULTRADIR=
+		C:\ULTRASND\ULTRINIT
+		SBOS.BAT
+		SET BLASTER=
+Config.sys:     NONE
+Note:           The SBOS.BAT line must be loading to enable the card's 
+		Sound Blaster emulation.
+
+Sound Card:     ISP 16
+Autoexec.bat:   C:\ISP16\ISPINIT /B/M*
+Config.sys:     NONE
+Note:           */B is used for Soundblaster mode, /M is used for a 
+		Microsoft Sound System Mode
+
+Sound Card:     Jazz 16
+Autoexec.bat:   SET BLASTER=
+Config.sys:     DEVICE=C:\JAZZ\JAZZ.SYS D:* Q:*
+Note:           THE D: DESIGNATES THE DMA CHANNEL.
+		THE Q: DESIGNATES THE IRQ SEETTING.
+		This card is basically identical to the Proaudio Spectrum 16. 
+		Specific values and directories may be different on your 
+		system than what is printed here.
+
+Sound Card:     Mad 16
+Autoexec.bat:   SET MAD16=
+		SET BLASTER=
+		C:\MAD16\M16INIT /B /M *
+Config.sys:     NONE
+Note:           */B is used for Soundblaster mode, /M is used for a 
+		Microsoft Sound System Mode
+
+Sound Card:     Magic S20
+Autoexec.bat:   SET BLASTER=
+		SET SOUND=
+		C:\MAGICS20\SNDINIT /B /M*
+Config.sys:     NONE
+Note:           */B is used for Soundblaster mode, /M is used for a 
+		Microsoft Sound System Mode
+
+Sound Card:     Mozart Sound Card
+Autoexec.bat:   SET BLASTER=
+		SET SOUND=
+		C:\MOZART\MTZVOL.EXE
+Config.sys:     DEVICE=C:\MOZART\MZTINIT.SYS
+
+Sound Card:     Orchid Gamewave
+Autoexec.bat:   SET BLASTER=
+		SET SOUND=
+		C:\GW32\GW32.EXE
+Config.sys:     NONE
+
+Sound Card:     Pro Audio Spectrum 16
+Autoexec.bat:   SET BLASTER=
+Config.sys:     DEVICE=C:\SPECTRUM\MVSOUND.SYS D:* Q:*
+Note:           THE D: DESIGNATES THE DMA CHANNEL.
+		THE Q: DESIGNATES THE IRQ SEETTING.
+		This card is the same as a Jazz and sold/packaged with 
+		systems under different names. Specific names, values and 
+		directories may be different depending on the system.
+
+Sound Card:     Pro Sonic Sound Card
+Autoexec.bat:   SET BLASTER=
+Config.sys:     DEVICE=C:\PROSONIC\PROSYS.SYS P220 I5 D1 E1
+
+Sound Card:     Sound-blaster 16
+Autoexec.bat:   SET BLASTER=
+		SET SOUND=
+		C:\SB16\DIAGNOSE /S*
+Config.sys:     DEVICE=C:\SB16\DRV\CTSB16.SYS /UNIT=0 /BLASTER=A:220 I:5 D:1 
+		H:5
+		DEVICE=C:\SB16\DRV\CTMM.SYS
+Note:           THESE LINES ARE ONLY REQUIRED TO ENABLE THE SOUND CARD'S CD 
+		ROM INTERFACE.
+		* On some older Soundblaster 16 cards this may appear as 
+		C:\sb16\sbconfig.exe /s
+		There may be other lines such as SET MIDI and SB16SET in the 
+		Autoexec.bat on some systems.
+
+Sound Card:     Sound 16A
+Autoexec.bat:   SET BLASTER=
+		SET GALAXY=
+		C:\AUDIO\SNDINIT.EXE /B
+		SET SOUND16=
+Config.sys:     NONE
+Note:           Usually shipped with Packard Bell systems.
+
+Sound Card:     Sound 144
+Autoexec.bat:   SET BLASTER=
+		SET GALAXY=
+		SET SOUND=
+Config.sys:     NONE
+Note:           Usually shipped with Packard Bell Systems
+
+Sound Card:     Vibra 16
+Autoexec.bat:   SET BLASTER=
+		SET SOUND=
+		C:\VIBRA16\DIAGNOSE /S
+		C:\VIBRA16\MIXERSET /P/Q
+Config.sys:     DEVICE=C:\VIBRA16\DRV\VIBRA16.SYS
+		DEVICE=C:\VIBRA16\DRV\CTMMSYS.SYS (TO ENABLE CD ROM INTERFACE)
+Note:           As far as we have seen, the Vibra 16 is virtually identical 
+		to the Soundblaster 16 sound card.
+
+Sound Card:     Voyetra Sound
+Autoexec.bat:   SET BLASTER=
+		SET ISP16=
+		C:\ISP16\ISPINIT /B
+Config.sys:     NONE
+Note:           This card appears to be the same as an ISP 16.
+
+
+SOUND CARD MANUFACTURERS
+
+Listed below are some of the more popular sound card manufacturers in case 
+you need to contact them for more information, or help in configuring your 
+sound card or using its accompanying utility software.
+
+
+Ad-lib Inc.
+Ad-lib, Ad-lib Gold
+Tech Support:   800-463-9676
+
+Aztech
+Sound Galaxy, Sound Galaxy Pro 16
+Tech Support:   800-886-8879
+
+CompuAdd Multimedia
+Compuadd Computer Systems with Compuadd sound Cards
+Tech Support:   512-250-1489
+
+Creative Labs
+Gameblaster, Sound Blaster, Soundblaster Pro, Soundblaster 16, AWE 32
+Tech Support:   405-742-6622
+BBS:            405-742-6660
+
+Ensoniq
+Ensoniq Soundscape, Soundscape Daughterboard
+Tech Support:   215-647-3930
+
+Gravis 
+Ultrasound, Ultrasound Max
+Tech Support:   604-431-1807
+BBS:            604-451-9358
+FAX:            604-431-5927
+
+Media Vision 
+Thunderboard, Pro Audio Spectrum, Pro Audio Spectrum/Studio 16
+Tech Support:   510-770-8600
+BBS:            510-770-0968
+
+Packard Bell 
+Computers
+Packard Bell typically packages one of the following sound cards with 
+their systems: Sound 16A, Sound 144, Sound Galaxy, Multimedia Pro 16, 
+Forte 16, ISP 16 sound cards.
+Tech Support:   800-733-4411
+BBS:            818-773-7207
+FAX:            818-773-9831
+
+Reveal
+Multimedia Pro, Multimedia Pro 16. 
+Reveal cards are bundled with a variety of systems, most frequently 
+Packard Bell systems.
+Tech Support:   818-704-6300
+FAX:            818-340-2379
+
+
+
+SIERRA ON-LINE 
+MS-DOS 5.0 +
+Boot Disk Instructions 
+
+The following instructions have been prepared by Sierra's Technical 
+Support Department as an added service to our customers.  
+PLEASE NOTE: Sierra does not make any claims, guarantees, and/or 
+PROMISES THAT THE FOLLOWING INSTRUCTIONS WILL WORK ON ANY AND/OR ALL 
+COMPUTER SYSTEMS. 
+
+These instructions are only for 386, 486 and Pentium computers using 
+MS DOS 5.0 and above.
+
+Step 1: Determining the type of boot disk you need:
+	
+The first thing you need to do before creating a boot disk is determine 
+the requirements of the game and the system for which you are creating the 
+boot disk. Consult the documentation for the game, the SRL label (the small 
+label on the box listing the game's requirements), the game's documentation, 
+and if necessary your system documentation to help determine the requirements 
+necessary to make a functional boot disk for your system. Of key importance 
+is the type of memory the game requires.  In short, there are three main 
+types of Boot Disks you need to be aware of:
+
+WINDOWS BOOT DISKS: Windows Boot disks should free up as much Extended (XMS) 
+Memory as possible. Windows Boot disks do NOT need Expanded (EMS) Memory, 
+nor do they need to be concerned with freeing up Conventional memory. 
+Windows boot disks do not need to load mouse drivers because Windows has its 
+own mouse driver. To summarize, you need to keep these things in mind when 
+creating a Windows Boot Disk:
+
+A Windows Boot Disk should free up as much Extended Memory as possible. To 
+do this HIMEM.SYS must be loaded in the CONFIG.SYS file.  Windows is not 
+generally concerned with the amount of free Conventional Memory.  Windows 
+has its own mouse driver.  You do not need to load a DOS mouse driver.
+
+STANDARD DOS BOOT DISKS: The purpose of these boot disks is to provide as 
+much free Conventional Memory (out of 640k) as possible, and in many cases 
+Expanded (EMS) Memory as well. Most older Sierra games fall into this 
+category, as well as many more recent titles. (Some examples are given 
+below). To summarize, a Standard Dos Boot Disk should:
+
+Maximize the amount of free Conventional Memory available out of the base 
+640k.  If necessary, configure the computer to provide Expanded Memory. 
+To enable Expanded (EMS) Memory, and maximize Conventional Memory your boot 
+disk must load HIMEM.SYS and EMM386.EXE.  Load all necessary drivers for 
+sound cards, CD Rom drivers, mice, etc.
+
+King's Quest 1-6        
+Space Quest 1-5 
+Police Quest 1-3        
+Leisure Suit Larry 1-5
+Quest for Glory 1-3     
+Aces Over Europe*       
+Aces of the Pacific*    
+FPS: Football Pro (all)*        
+Betrayal at Krondor*    
+FPS: Baseball*          
+
+*denotes a game requiring Expanded (EMS) Memory 
+
+
+Note that there are exceptions to those listed above. For example, King's 
+Quest 6 CD can be run in Windows, so you would want to make a Windows boot 
+disk for it if you were going to install and run it under Windows.
+
+(DOS) SCI 32 BOOT DISKS: SCI 32 games use programs called DOS Extenders, 
+which handle all the memory management functions for the game. Because of 
+this, SCI 32 Boot disks don't need to load ANY memory managers, such as 
+HIMEM.SYS and EMM386.EXE. SCI 32 Boot disks also aren't concerned with 
+freeing up conventional memory, like Standard Dos Boot Disks (q.v.) are. 
+IMPORTANT NOTE: You only need to concern yourself with these guidelines if 
+you intend to run your SCI 32 game in DOS. If you are going to run it in 
+Windows (and it can be run in Windows), then you want to create a WINDOWS 
+boot disk. 
+
+To summarize, a DOS SCI 32 Boot disk should:
+
+Not load any memory management, such as HIMEM.SYS, EMM386.EXE, QEMM, etc.
+Load all necessary drivers for sound cards, CD Rom drivers, mice, etc.
+
+Listed below are our currently released SCI 32 programs:
+
+Police Quest 4              
+Gabriel Knight           
+Quest for Glory 4  
+Leisure Suit Larry 6 (VESA CD version only)     
+Inca II                       
+Aces of the Deep
+EarthSiege              
+Battledrome
+
+Once you know the general type of boot disk you need to make, consult the 
+following list to help determine what individual drivers may be necessary 
+for your boot disk.
+
+Does your game or system require...
+
+1.) CD ROM ?  Most games on CD will require CD ROM drivers to be loaded for 
+    the game to play properly, though this is not always the case. Some CD 
+    games can install to the hard drive and be played without the CD, such 
+    as Aces Over Europe\Pacific and Betrayal at Krondor. 
+    
+2.) A Mouse ?  For many DOS-based games a mouse is recommended or even 
+    required, and to allow the mouse to operate in a DOS game a Mouse 
+    Driver, (a memory-resident program that tells DOS how to communicate 
+    with your Mouse), must be loading from either the Autoexec.bat or 
+    Config.sys file on the boot disk. Some examples include Sierra's 
+    "Quest" titles like Police Quest, King's Quest, etc. 
+    
+3.) Disk Compression Drivers ? If you use STACKER, DBLSPACE, DRVSPACE, or 
+    any other Disk Compression program, you will need to load a special 
+    memory resident device driver for your compression program.
+
+4.) Sound card drivers ? Some sound card's require special memory resident 
+    Device Drivers to be loaded so DOS can use your sound card. Some popular 
+    examples include the Pro Audio Spectrum 16 and the Gravis Ultrasound.         
+    Once you have determined your requirements, proceed to STEP 2: 
+    FORMATTING THE DISK.
+
+IMPORTANT NOTE:  Please read the entire set of instructions prior to 
+creating the boot disk.
+
+
+STEP 2: FORMATTING THE DISK
+
+PLEASE NOTE: It is necessary to format the disk even if the disk is already 
+formatted.  The /S switch will transfer files to the boot disk which are 
+necessary for the disk to work correctly.
+
+To make a Boot Disk, you need to format a high density diskette in the A: 
+drive.  Note: This will not work in the B: drive.  Type the command as 
+follows:  
+
+FORMAT  A:/S  <ENTER>
+
+(Add a space and then the /F:360 or  /F:720 parameter to the end of the 
+command before pressing ENTER if you are using a low density diskette) 
+For more information on using the FORMAT command, consult your DOS manual.  
+
+If the system responds with a "Bad command or file name" message after 
+entering this command, then type:
+
+PATH=C:\DOS  <ENTER>
+
+Now retype the FORMAT command above.  If you still receive the same error, 
+the MS DOS FORMAT command may not be on your system or it may have been 
+renamed.  Programs such as PC Tools and Norton Disk Utilities can rename 
+the format command to prevent accidental loss of data. 
+
+Once you have completed the step above and the disk has been properly 
+formatted, you will need to create the AUTOEXEC.BAT and CONFIG.SYS files 
+for your Boot Disk. The easiest way to create these files is using the DOS 
+"EDIT" Command, which brings up the DOS editor, a simple, easy to use text 
+editing program that functions like a simple word-processor. All you need 
+to do is type in the first line of the file you are creating, then press 
+ENTER to go to the next line. You can move the cursor with a mouse or 
+keyboard to navigate the menus in order to save or open files. For more 
+information regarding the DOS editor program, consult your DOS documentation.
+
+Go to your C:\ prompt. With floppy disk in the A drive, type:
+
+A: <ENTER>
+
+Now you can create the CONFIG.SYS or AUTOEXEC.BAT file by typing:
+
+EDIT CONFIG.SYS <ENTER> 
+
+OR
+
+EDIT AUTOEXEC.BAT <ENTER>
+
+If the system responds with a "Bad command or file name" message after 
+entering this command , then type:
+
+PATH=C:\DOS  <ENTER>
+
+The DOS Editor will create a new file called CONFIG.SYS or AUTOEXEC.BAT, 
+and you should get a blank blue screen where you can input the data to 
+create and save the CONFIG.SYS for AUTOEXEC.BAT file. If you need help using 
+the DOS editor or EDIT command, consult your DOS manual.
+
+We will be creating the CONFIG.SYS file first. 
+
+SUGGESTION
+
+If possible, we strongly recommend making a printout of the AUTOEXEC.BAT 
+and CONFIG.SYS on your hard drive (C:) to use as a reference while creating 
+the boot disk. If you cannot make a print out, you can view the AUTOEXEC.BAT 
+or CONFIG.SYS on your hard drive for reference at any time by going to your 
+C:\ prompt and typing:
+
+TYPE AUTOEXEC.BAT | MORE    <ENTER>
+
+OR 
+
+TYPE CONFIG.SYS | MORE    <ENTER>
+
+NOTE: The | symbol is called a "pipe" command and is created by pressing 
+<SHIFT> \ (backslash).
+
+If you are working on creating the CONFIG.SYS or AUTOEXEC.BAT file, and 
+decide you need to view the AUTOEXEC.BAT and/or CONFIG.SYS on your hard 
+drive, be sure to SAVE your work prior to exiting the DOS EDITOR. You can 
+do this either clicking the mouse on "FILE" and then "SAVE", or by pressing 
+the ALT key, holding it down, pressing the F key, and then pressing the "X" 
+key. The DOS Editor will ask you if you wish to save the file. Respond by 
+pressing "Y" for "Yes".
+
+STEP 3: Creating the CONFIG.SYS File
+
+Go to your A: drive and type EDIT CONFIG.SYS and press ENTER, as outlined 
+above. This will bring you into the DOS editor program so you can begin 
+creating your boot disk files. Below are instructions as to what to type 
+into your CONFIG.SYS (and later the AUTOEXEC.BAT file). Listed next to each 
+line below are notes providing information about the line, and whether or 
+not you may need that particular line for the game or system for which you 
+are creating the boot disk. Additionally, make sure you type in each line 
+exactly as it appears, in the order in which it appears. After you type in 
+a line, go to the next line by pressing ENTER or cursoring down with the 
+arrow keys. If you come to a line that does not apply to the game or system 
+for which you are creating the boot disk, skip to the next line. Read the 
+instructions thoroughly to make sure you create the best possible CONFIG.SYS 
+and AUTOEXEC.BAT for your system and the game you wish to run. 
+
+
+DEVICE=C:\DOS\HIMEM.SYS
+This line is necessary for virtually all DOS (except SCI 32) boot disks, and 
+absolutely REQUIRED for a Windows Boot disk. It allows access to Extended 
+(XMS) memory and it is also necessary to establish Expanded (EMS) memory 
+should your DOS game require it.
+
+DEVICE=C:\DOS\EMM386.EXE  NOEMS
+This line is necessary for Standard Dos Bootdisks. It allows access to upper 
+memory and expanded memory. If the game you are creating the boot disk for 
+requires Expanded Memory, use the second EMM386 line instead of this one. 
+(you don't need both!). EMM386 is not needed for a Windows Boot disk, so 
+ignore this line if you are making a boot disk for Windows.
+
+DEVICE=C:\DOS\EMM386 RAM 1024
+For Programs requiring 1 MB of Expanded (EMS) Memory. If the game requires 
+more than 1 MB of EMS, substitute the amount of RAM necessary. For example, 
+put 2048 instead of 1024 if the game reequires 2 MB of RAM, 3072 for 3 MB of 
+Ram, etc.
+
+DOS=HIGH,UMBFILES=30BUFFERS=20DEVICEHIGH=C:\DOS\SETVER.EXE
+These four lines are necessary and/or suitable for any boot disk 
+configuration.STACKS=9,256This line is only required for Windows boot disks. 
+If the boot disk you are making is not for Windows or a Windows game, you do 
+not need this line.If you use Disk Compression: The following section list 
+some common lines you may need to add to your CONFIG.SYS file if you use 
+disk compression software, like Doublespace, Drivespace, Stacker or 
+Superstor. If you do not use any disk compression on your hard drive, skip 
+to the next section.
+
+DEVICEHIGH=C:\DOS\DBLSPACE.SYS /MOVE
+For DOS 6.0 or 6.2 users using Doublespace you need this line.
+
+DEVICEHIGH=C:\DOS\DRVSPACE.SYS /MOVE
+For DOS 6.22 users using Drivespace, you need this line.
+
+DEVICEHIGH=C:\STACKER\STACHIGH.SYS
+For Stacker 3.1 AND MS-DOS 6.0 users, you need this line.
+
+DEVICE=C:\STACKER\STACKER.COMDEVICE=C:\STACKER\SSWAP.COM
+For Stacker 3.1 and MS-DOS 5.0 or below you need these lines.
+
+DEVICEHIGH=SSTORDRV.SYS  DEVICE=DEVSWAP.COM
+For Superstor users, you need these lines
+
+For CD-ROM games: If your game requires CD ROM, the next line should be the 
+line loading your CD ROM device driver. If you are unsure of what this line 
+is (it will be different from system to system), proceed to the boxed 
+section titled Reference Box A: "Locating your CD ROM Device Driver for the 
+Config.sys file."  Make sure you save the work you've done so far by going 
+to FILE and then SAVE from the menu bar in the DOS Editor. Once you have 
+located the line loading your CD-ROM device driver, write it in the line 
+below. Then begin at STEP 3 above and add the line you wrote down to the 
+CONFIG.SYS file on our boot disk. Then proceed on.
+
+Your CD ROM DEVICE DRIVER LINE: _______________________________________
+
+For systems requiring a driver for their sound card to be loaded:  Some 
+sound cards require specific drivers to be loaded in the CONFIG.SYS for 
+the computer to be able to recognize and use them.   
+
+
+DEVICEHIGH=C:\PROAUDIO\MVSOUND.SYS D:3 Q:7 
+
+DEVICEHIGH=C:\ROAUDIO\MVSOUND.SYS D:3 Q:7 J:1
+
+DEVICE=C:\PROAUDIO\MVSOUND.SYS D:3 Q:7 S:1,220,1,5
+These three lines are different examples of the device line used for a 
+Pro Audio Spectrum 16 sound card set to DMA 3 and IRQ 7. Note that the 
+actual line may appear similar to one of these, but it may not be identical.
+
+DEVICEHIGH=C:\JAZZ\JAZZ.SYS D:3 Q:7
+This is for a Jazz 16 sound card (which is the same as a Pro Audio Spectrum 
+16 actually) set to DMA 3 and IRQ 7.  For more specific information 
+regarding your sound card's device driver (if it uses one), try consulting 
+the Drivers & Configuration Information section of the Sound Card 
+Troubleshooting steps (Section III). You might also wish to consult your 
+sound card's documentation, the AUTOEXEC.BAT or CONFIG.SYS file on your 
+C: drive, or your Sound Card Manufacturer.
+
+For DOS-based games requiring a mouse, or if you wish to use a mouse with 
+your DOS program: Some Mouse Drivers need to be loaded in the Config.sys 
+file, but more often it will need to be in the AUTOEXEC.BAT file instead. 
+If you are unsure of how the line loading your mouse driver should look, 
+refer to REFERENCE BOX A:  "Locating your Mouse driver." (Before you go 
+hunting for your Mouse Driver, make sure you save the work you've done so 
+far by going to FILE and then SAVE from the menu bar in the DOS Editor. )
+
+STEP 4: CREATING THE AUTOEXEC.BAT:
+
+Once you have created the CONFIG.SYS file, you will need to make an 
+AUTOEXEC.BAT file. (Again using the command EDIT AUTOEXEC.BAT at your A: 
+prompt to bring up the DOS editor.
+
+SET COMPSPEC=C:\DOS\COMMAND.COM
+PROMPT $P$G
+PATH C:\DOS
+These three lines can and should be used on any and all boot disks.
+For systems requiring a driver for their sound card to be loaded:  
+Some sound cards require specific drivers to be loaded for the computer to 
+be able to configure, recognize and/or use them. One popular example is the 
+Soundblaster 16 sound card, which requires these two lines:
+
+SET BLASTER=A220 Ix Dx  
+A220 is the port address for your sound card. 
+Another possible value is 240. 
+The x will equal the IRQ and the DMA setting for your Soundblaster 16 card, 
+respectively.  Typical settings are DMA 1 and IRQ 5, in which case the line 
+would look like: SET BLASTER=A220 I5 D1. 
+
+C:\SB16\SBCONFIG.EXE /S
+This configures the Soundblaster 16 card. Another possible variation of this 
+line (depending on the make of the Soundblaster 16 you might have) may 
+appear as C:\SB16\DIAGNOSE /S. For more specific information regarding your 
+sound card's device driver and/or configuration lines (if necessary), you 
+will need to consult your sound card's documentation and/or manufacturer. 
+We also recommend consulting the AUTOEXEC.BAT file on your C: drive.
+
+If your game requires the use of a CD-ROM drive: The next line should load 
+the "MSCDEX" line so your computer can recognize and use the CD ROM drive. 
+If you are unsure of how this line should look, please refer to "Reference 
+Box C: Locating MSCDEX." (Again, make sure you save the work you've done so 
+far by going to FILE and then SAVE from the menu bar in the DOS Editor. )
+
+Your MSCDEX Line: ______________________________________________________
+
+For DOS-based games requiring a mouse, or if you wish to use a mouse with 
+your DOS program: You MAY need to load a mouse driver in the CONFIG.SYS file, 
+but more often it will need to be in the AUTOEXEC.BAT file instead. If you 
+are unsure of how the line loading your mouse driver should look, refer to 
+REFERENCE BOX A:  "Locating your Mouse driver." (Before you go hunting for 
+your Mouse Driver, make sure you save the work you've done so far by going 
+to FILE and then SAVE from the menu bar in the DOS Editor. )
+
+
+REFERENCE BOX A
+
+LOCATING THE CD ROM DEVICE DRIVER FOR THE CONFIG.SYS FILE
+
+In order to recognize and access the CD ROM drive, your computer must load t
+he correct device driver for your CD ROM drive. This driver is loaded in the 
+CONFIG.SYS file. The best way to locate and identify the correct CD ROM 
+device driver is to consult the CONFIG.SYS file on your hard drive. If you 
+were able to print out your CONFIG.SYS as a reference, look for a line that 
+is something like the example provided and write it in the space provided 
+below (or just mark it on your print out.). If you do not have a print out 
+of your CONFIG.SYS file, view it using the instructions provided in the 
+"Suggestion" box at the beginning of this document.
+
+Once you have the file on screen, look for the line that contains CD ROM 
+device name which immediately follows the same "/D:" switch as the MSCDEX 
+line in the AUTOEXEC.BAT file.  Using the example above, we would be looking 
+for a line containing "MSCD001" or something very similar. This line should 
+look something like one of the following lines.
+
+DEVICE=C:\DRV\CDROMDRV.SYS  /D:MSCD001  /P:220  
+DEVICEHIGH=C:\DRV\CDROMDRV.SYS  /D:MSCD001  /P:220  
+DEVICEHIGH  /L:14652  =C:\DRV\CDROMDRV.SYS  /D:MSCD001  /P:220  
+
+Your line may differ from the ones listed above. Please write down the 
+entire line following the drive letter in the space provided below.  Be sure 
+and include the full drive and path to your CD ROM device driver.  For 
+example, any of the above lines should appear as follows:
+
+DEVICEHIGH=C:\DRV\CDROMDRV.SYS  /D:MSCD001  /P:220                              
+
+YOUR CD-ROM DEVICE DRIVER (in the CONFIG.SYS file):
+DEVICEHIGH=                                                                                                                                                               
+       
+
+
+REFERENCE BOX B
+
+LOCATING THE MOUSE DRIVER
+	
+If you plan to use a mouse with your game, it will be necessary to first 
+load the mouse driver.  To do this, locate the mouse driver and copy it to 
+the boot disk in your A: drive.  There are two types of mouse drivers 
+available, MOUSE.SYS, which must be loaded in the CONFIG.SYS file and 
+MOUSE.COM or MOUSE.EXE which must be loaded in the AUTOEXEC.BAT file.  
+Note: You do not need to load both MOUSE.SYS and MOUSE.COM.  Locate the 
+MOUSE.SYS or MOUSE.COM file.  Because the file MOUSE.SYS is usually smaller 
+than MOUSE.COM we recommend that the MOUSE.SYS file be used in order to free 
+more memory.
+
+a) Locating the mouse drivers:
+If you do not know where the MOUSE.SYS or MOUSE.COM files are located on 
+your system, the command below should help in locating your mouse drivers.  
+For users of MS DOS 5.0 or above, try typing the following commands at the 
+C:\> prompt to help you locate your mouse drivers.
+
+DIR  \MOUSE  /S  <ENTER>
+DIR ?MOUSE /S   <ENTER>
+DIR  ??MOUSE /S  <ENTER>
+
+This command only works with MS-DOS 5.0 or above and will cause the system 
+to search all sub-directories for a file called mouse.  If the system 
+locates a file called mouse, it will display the path where the mouse files 
+are located.  For example, if the MOUSE.SYS file is located in a C:\MOUSE> 
+directory, the system will display:
+
+Directory of C:\MOUSE
+MOUSE    SYS    55160 03-10-92   3:10a
+MOUSE    COM    56408 03-10-93   6:00a
+
+If the system does not locate a mouse, your driver may have a different name 
+or these files may not be currently installed on the system.  Some other 
+common names for mouse drivers are IMOUSE, GMOUSE, and HPMOUSE.  Your mouse 
+drivers may have been included on a floppy disk which came packaged along 
+with your mouse.  For information on the proper name for your mouse, check 
+the owners manual which came with your mouse.  Listed below are some fairly 
+common lines that load mouse drivers. Consulting your mouse or system 
+documentation, or your CONFIG.SYS or AUTOEXEC.BAT file on your C: drive, 
+write the line loading your mouse driver on the line provided below:
+
+(For the CONFIG.SYS file)
+DEVICEHIGH=C:\WINDOWS\MOUSE.SYS
+DEVICEHIGH=C:\MOUSE\MOUSE.SYS
+
+(For the Autoexec.bat file)
+LOADHIGH C:\MOUSE\MOUSE
+LH C:\MSMOUSE\MOUSE
+		
+YOUR MOUSE DRIVER: _______________________________________________
+
+
+
+REFERENCE BOX C
+
+LOCATING MSCDEX
+
+MSCDEX is the Microsoft extension for CD ROM drives.  It must be loaded in 
+order for your CD ROM drive to operate.  The following steps should assist 
+you in locating this file on your system To locate MSCDEX, at the C:\ 
+prompt, view your AUTOEXEC.BAT file (see instructions at the beginning of 
+this document if you do not know how to do this).
+
+C:\DOS\MSCDEX  /D:MSCD001
+LH  C:\DOS\MSCDEX  /D:MSCD001
+LOADHIGH  /L:14429  \DOS\MSCDEX  /D:MSCD001
+
+Your MSCDEX line may differ from the ones listed above.  Please write down
+the entire line following the drive letter in the space provided below.  
+Be sure and include the full drive and path to your MSCDEX file.  For 
+example, any of the above lines could appear as follows:
+
+LH  C:\DOS\MSCDEX  /D:MSCD001                                                           
+	
+Your MSCDEX line: _____________________________________________________________
+
+A SAMPLE CONFIG.SYS and AUTOEXEC.BAT file for a STANDARD DOS BOOT DISK
+
+Below are three basic examples of an Autoexec.bat and a Config.sys file. 
+These configurations are intended only as examples, not how your files 
+should read. The boot disk configurations below were created for a system 
+running DOS 6.0 and Windows 3.1, Additionally, our fictitious computer that 
+we are creating the bootdisk for has a CD ROM drive, a Soundblaster 16 sound 
+card, and a hard drive that is compressed via DOUBLESPACE. 
+
+Our first example is for a fictitious game called Banana Quest that requires 
+570k of free Conventional Memory, 1024k (1 MB) of Expanded (EMS) Memory, a 
+CD ROM drive, and a mouse driver.
+
+CONFIG.SYS File:
+
+DEVICE =C:\DOS\HIMEM.SYS
+DEVICE=C:\DOS\EMM386.EXE RAM 1024
+DOS=HIGH, UMB
+FILES=30
+BUFFERS=20
+DEVICEHIGH=C:\DOS\DBLESPACE.SYS /MOVE
+DEVICEHIGH=C:\SB16\DRV\SBCD.SYS /D:MSCD001
+
+AUTOEXEC.BAT File:
+SET COMSPEC=C:\COMMAND.COM  
+SET SOUND=C:\SB16
+SET BLASTER= A220 I5 D1
+C:\SB16\SBCONFIG.EXE /S
+PROMPT  $P$G  
+PATH=C:\DOS
+LH C:\DOS\MSCDEX /D:MSCD001
+LH C:\MOUSE\MOUSE.COM
+
+A SAMPLE CONFIG.SYS and AUTOEXEC.BAT file for a WINDOWS BOOT DISK
+Let's pretend Banana Quest (used in the example above) can also be run under 
+Windows.  A Windows boot disk for it could look like this:
+
+CONFIG.SYS File:
+
+DEVICE=C:\DOS\HIMEM.SYS
+DOS=HIGH, UMB
+FILES=30
+BUFFERS=20
+DEVICE=C:\DOS\DBLESPACE.SYS /MOVE
+DEVICE=C:\SB16\DRV\SBCD.SYS /D:MSCD001
+
+AUTOEXEC.BAT File:
+SET COMSPEC=C:\COMMAND.COM  
+SET SOUND=C:\SB16
+SET BLASTER= A220 I5 D1
+C:\SB16\SBCONFIG.EXE /S
+PROMPT  $P$G  
+PATH=C:\DOS
+C:\DOS\MSCDEX /D:MSCD001
+
+A SAMPLE CONFIG.SYS and AUTOEXEC.BAT file for a DOS SCI 32 BOOT DISK
+Now let's pretend Banana Quest is actually an SCI 32 game, and we want to 
+run it under DOS. Now our boot disk might look like this:
+
+CONFIG.SYS File:
+
+FILES=30
+BUFFERS=20
+DEVICE=C:\DOS\DBLESPACE.SYS /MOVE
+DEVICE=C:\SB16\DRV\SBCD.SYS /D:MSCD001
+
+AUTOEXEC.BAT File:
+SET COMSPEC=C:\COMMAND.COM  
+SET SOUND=C:\SB16
+SET BLASTER= A220 I5 D1
+C:\SB16\SBCONFIG.EXE /S
+PROMPT $P$G  
+PATH=C:\DOS
+C:\DOS\MSCDEX /D:MSCD001
+C:\MOUSE\MOUSE
+
+Take some time to examine the different types of boot disks and note the 
+differences in how they were made. Using these instructions will help you 
+create a similar boot disk for your Sierra Game. Remember, however, that a 
+proper boot disk's Autoexec.bat and Config.sys files not only depend upon 
+the game for which you are creating them, but the computer system the game 
+is being run on. We cannot account for each and every sound driver, mouse 
+driver, CD ROM driver, etc., that is on a specific computer system. 
+Hopefully, however, these instructions will help you create the proper boot 
+disk for your computer system and your game, and give you a little 
+understanding about the different types of  boot disks and how they 
+configure your memory.
+

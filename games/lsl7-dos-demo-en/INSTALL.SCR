@@ -1,0 +1,185 @@
+:start
+clear
+
+echo
+echo                    Music Quality
+echo
+echo Give us ALL your hard drive! Now!! The more we take,
+echo the better we sound.
+echo
+echo 1) Large  = 23 Megs (Real Men Only)
+echo 2) Medium = 12 Megs (Indecisive Wimps)
+echo 3) Small  =  7 Megs (Inadequate Size)
+echo 4) Exit and cancel installation
+echo
+echo Please choose 1, 2, 3 or 4
+pick 1234 large medium small quit
+
+:large
+space %1: 23000 nospaceL
+
+REM Create the DOS game directory
+godir %1:%4 cantcreate
+
+REM Copy over music files
+echo Copying music files to %1:%4\music ...
+godir %1:%4\music cantcreate
+copy %2:..\music\22s16\*.aud
+goto done
+
+:medium
+space %1: 12000 nospaceM
+
+REM Create the DOS game directory
+godir %1:%4 cantcreate
+
+REM Copy over music files
+echo Copying music files to %1:%4\music ...
+godir %1:%4\music cantcreate
+copy %2:..\music\22s8\*.aud
+goto done
+
+:small
+space %1: 7000 nospaceS
+
+REM Create the DOS game directory
+godir %1:%4 cantcreate
+
+REM Copy over music files
+echo Copying music files to %1:%4\music ...
+godir %1:%4\music cantcreate
+copy %2:..\music\22m8\*.aud
+
+:done
+
+REM Go back to DOS game directory
+godir %1:%4 cantcreate
+
+echo Copying files to %1:%4 ...
+
+copy %2:..\sier.exe %1:
+copy %2:l7check.bat %1:checkcd.bat
+copy %2:vesatest.exe %1:
+copy %2:install.exe %1:
+copy %2:install.scr %1:
+copy %2:install.txt %1:
+copy %2:install.hlp %1:
+copy %2:*.drv %1:
+rem copy %2:*.chk %1:
+rem copy %2:\patches\*.* %1: /q
+copy %2:..\version %1:
+copy %2:..\sierra.err %1:
+
+REM Create resource.cfg
+echo %3 >resource.cfg
+
+clear
+echo audio=%1:%4\music >>resource.cfg
+echo resSfx=%2:\ >>resource.cfg
+echo resAud=%2:\ >>resource.cfg
+echo resMap=%2:\ >>resource.cfg
+echo patchDir=%1:%4; %2:\ >>resource.cfg
+REM echo patchDir=%1:%4;%2:;%2:\MOVIES >>resource.cfg
+REM echo movieDir=%2:\MOVIES >>resource.cfg
+REM echo robot=%2:\ROBOTS >>resource.cfg
+REM echo audiosize=62k >>resource.cfg
+REM echo dacsize=30720 >>resource.cfg
+
+clear
+
+REM BATCH FILE TO RUN GAME FROM SIERRA DIRECTORY
+echo @echo off >..\l7dosdmo.bat
+echo cd %4 >>..\l7dosdmo.bat
+echo call CheckCD   %2 >>..\l7dosdmo.bat
+echo call vesatest >>..\l7dosdmo.bat
+echo if errorlevel 0 goto vesafound >>..\l7dosdmo.bat
+echo echo A VESA driver was not found on your system. Please rerun install >>..\l7dosdmo.bat
+echo echo and check the readme file for help on installing a VESA driver. >>..\l7dosdmo.bat
+echo goto end >>..\l7dosdmo.bat
+echo :vesafound >>..\l7dosdmo.bat
+echo %1:%4\sier %1:%4\resource.cfg >>..\l7dosdmo.bat
+echo :end >> ..\l7dosdmo.bat
+echo cd .. >>..\l7dosdmo.bat
+
+REM BATCH FILE TO RUN GAME FROM GAME DIRECTORY
+echo @echo off >l7dosdmo.bat
+echo call CheckCD   %2 >>l7dosdmo.bat
+echo call vesatest >>l7dosdmo.bat
+echo if errorlevel 0 goto vesafound >>l7dosdmo.bat
+echo echo A VESA driver was not found on your system. Please rerun install >>l7dosdmo.bat
+echo echo and check the readme file for help on installing a VESA driver. >>l7dosdmo.bat
+echo goto end >>l7dosdmo.bat
+echo :vesafound >>l7dosdmo.bat
+REM echo %1:%4\sierra %1:%4\resource.cfg >>l7dosdmo.bat
+echo %1:%4\sier %1:%4\resource.cfg >>l7dosdmo.bat
+echo :end >>l7dosdmo.bat
+
+cd ..
+cls
+echo
+echo ÿTo play the Leisure Suit Larry 7 Demo now:
+echo ÿ At the DOS prompt, type L7dosdmo and press [ENTER].
+echo
+echo ÿTo play the Leisure Suit Larry 7 Demo later:
+echo ÿ Change to the directory %1:%4,
+echo   type L7dosdmo and press [ENTER].
+echo
+pause
+goto quit
+
+:cantcreate
+alert Unable to create directory %1:%4
+pause
+goto quit
+
+:nospaceL
+cls
+echo
+echo                    What a woosie!
+echo
+echo You don't have enough free space on your hard drive
+echo for the "large music" version of the Larry7 Preview.
+echo
+echo Erase at least 23 megabytes of	that 'Net pornography
+echo you're hiding and re-run install. Or, if you want to
+echo wimp out, choose one of the smaller music choices.
+echo
+pause
+goto quit
+
+:nospaceM
+cls
+echo
+echo                    What a woosie!
+echo
+echo You don't have enough free space on your hard drive
+echo for the "medium music" version of the Larry7 Preview.
+echo
+echo Erase at least 12 megabytes of	that 'Net pornography
+echo you're hiding and re-run install. Better yet, erase
+echo 23 megabytes and install the "Large music" version.
+echo
+echo Unless...you're a wimp!
+echo
+pause
+goto quit
+
+:nospaceS
+cls
+echo
+echo                   What a woosie!
+echo
+echo You don't have enough free space on your hard drive
+echo for even the "small music" Larry7 Preview.
+echo
+echo Erase at least 7 megabytes of that 'Net pornography
+echo you're hiding and re-run install. Better yet, erase
+echo 23 megabytes and install the "Large music" version.
+echo
+echo Unless...you're a wimp!
+echo
+pause
+
+:quit
+end
+

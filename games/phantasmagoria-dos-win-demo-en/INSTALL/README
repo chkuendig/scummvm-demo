@@ -1,0 +1,791 @@
+
+         PHANTASMAGORIA TECHNICAL TIPS AND SUGGESTIONS
+
+Thank you for purchasing Phantasmagoria.  In order for you to receive 
+the best possible performance with this adventure, Sierra has included 
+additional technical tips and game information that was not available 
+when the documentation was printed.  The following supplemental 
+information should be considered part of the game documentation.
+
+
+TABLE OF CONTENTS
+
+* Installation Procedures
+* Handy To Know
+* MS-DOS Problems and Solutions
+* Memory Troubleshooting
+* Sound Card Troubleshooting
+* Special Thanks
+
+
+INSTALLATION PROCEDURES 
+
+If you are using file deletion tracking utilities, such as Mirror, 
+SmartCan, Undelete, etc., please disable these utilities before 
+installing Phantasmagoria.
+
+To Install Phantasmagoria under MS-DOS, follow these instructions:
+
+1)  Insert the Phantasmagoria CD #1 into your CD-ROM drive.
+2)  From a MS-DOS prompt, type the CD-Drive letter followed by a colon 
+    and press the <ENTER> key.  For example, if your CD-ROM drive is 
+    labeled as your D drive, you would type:   D: <ENTER>
+3)  At your CD-Rom drive label prompt, type:  INSTALL <ENTER>
+4)  Be sure the correct choices have been made for MUSIC and AUDIO.
+    Choose ACCEPT THESE CHOICES AND INSTALL
+    Follow the on-screen prompts to complete the installation.
+
+
+HANDY TO KNOW
+
+Do not remove the CD while playing the game unless you are prompted 
+to do so.
+
+Phantasmagoria defaults to Uncensored mode.  There is no default 
+password.  If you wish to Censor the game's more intense moments, 
+open the game's Control Panel and turn on the Censor option.  You 
+will then be asked to make up a new password.  This password will 
+allow you to return the game to Uncensored mode if you wish.
+
+To fast-forward through the movies you've already seen before, press 
+the ESC key on your keyboard.
+
+Bonus: We have included screen shots from our first graphic adventure 
+game, Mystery House, released in 1980 for the Apple II.  These can be
+found in the \MYSTERY directory on CD #1.  You'll need a PCX graphics 
+file viewer (such as Windows' Paintbrush) to display these screens.  
+If you don't have a PCX file viewer for DOS, download and run the 
+PICEM21.EXE file found in library 99 on the Sierra BBS at 
+(206) 644-0112.
+
+A list of BBS and Tech Support Numbers for Sound Card, Video Card,
+and Miscellaneous Computer Peripheral / Software Manufacturers is 
+provided on the Phantasmagoria CD #1.  To view this file, type
+"EDIT D:\CONTACT.TXT" (if your CD-ROM drive is D:).
+
+If you have any technical issues that are not covered by this README, 
+please look at the THEGUIDE.TXT file on the Phantasmagoria CD #1.  
+To view this file, type "EDIT D:\THEGUIDE.TXT" (if your CD-ROM drive 
+is D:).
+
+A Problem Reporting text file is also on CD #1.  Please type
+"EDIT D:\MOREINFO.TXT" (if your CD-ROM drive is D:) and follow its 
+instructions to report any problems not covered in this README or 
+THEGUIDE.TXT.
+
+
+MS-DOS PROBLEMS AND SOLUTIONS
+
+
+-DOCUMENTATION CORRECTIONS
+
+Question: Under "DOS INSTALLATION", it mentions you cannot auto-
+   matically read the README file using INSTALL.  It also mentions 
+   you can view the "README.TXT" file, but there is no README.TXT.
+Explanation:  There is now an option to view the README file during 
+   INSTALL.  The manual was printed before this change was made.  
+   You are currently viewing this README file.  The file you want to
+   print is D:\INSTALL\README (if D: is your CD-ROM drive).
+
+The complete list of the credits for the game can be found by clicking 
+on the ABOUT button on Phantasmagoria's Main Menu.
+
+Additional System Requirements:
+486-25 or better for MS-DOS (486-66 or better for Windows)
+8 meg of RAM
+5 meg of hard drive space
+MS-DOS 5.0 or better
+256 color or better Super VGA video card with at least 512K of memory
+VESA driver for your video card
+Sound card - Sound Blaster compatible
+CD-ROM - Double Speed or better
+Mouse
+Also Supports:
+General MIDI devices
+
+
+-INSTALLING THE GAME
+
+Problem: After running INSTALL, a row of dots runs across the screen, 
+   then stops and locks up.
+Solution: At the CD-ROM drive prompt (such as D:\), Type the following:
+   CD\INSTALL
+   INSTALL -m
+   (If this doesn't work, try typing INSTALL -f)
+   These commands bypass hardware detection.  The dots are our way of
+   saying "Please wait, we're checking what kind of hardware you have".
+   When the dots stop, this means some hardware is not responding to our
+   tests.
+
+Problem:  "Invalid Directory, Bad Command or Filename".
+Solution: This means you typed "D:INSTALL".  Please type "D:" and press 
+   ENTER, then type "INSTALL" and press ENTER.
+
+Problem:  "Can't create output file" or "Not enough space" during 
+   installation.
+Solution:  You need to free up more hard drive space before installing
+   the game. 
+
+Problem: The install doesn't work from your second CD-ROM drive.
+Solution:  Run the install from your first CD-ROM drive.
+
+Problem:  Your video card's VESA driver is not listed during INSTALL's
+   VESA test.
+Solution:  Although we try to provide as many VESA drivers as possible,
+   your particular video card may not be listed.  If this is the case,
+   exit INSTALL, and refer to your video card manual to find the command 
+   to enable VESA on your particular video card.  Run this command to 
+   enable VESA, then rerun Phantasmagoria's INSTALL program.
+ 
+Problem: You ran a VESA driver before installing the game, but you want 
+   to use a different VESA driver that works better.  However, you are 
+   not given new VESA choices since it looks like you have VESA already 
+   installed.
+Solution: Reboot your computer.  This will remove the VESA driver from 
+   memory.  Do not reload the VESA driver you do not want to use.  Now 
+   run our INSTALL to enable the VESA support provided by our game CD.
+
+Problem: The ATI VESA choice did not work for the ATI Mach 32 video card
+Solution: Select the MACH32 VESA driver instead.
+
+Question: Why isn't there a LARGE INSTALL choice for Phantasmagoria like
+   there was on other Sierra games?
+Explanation: Each chapter in Phantasmagoria uses different resources.  
+   The only common files for each chapter are already copied to the hard 
+   drive during installation.
+
+
+-STARTING THE GAME
+
+Question:  How do you start Phantasmagoria?
+Explanation:  We assume you installed Phantasmagoria onto your C: drive.
+   If you installed it to another drive, like D:, please type D: (ENTER)
+   instead of C: (ENTER):
+Commands To Type:  
+   C:        (and press the ENTER key)
+   CD\SIERRA (and press the ENTER key)
+   PHCD      (and press the ENTER key)
+
+Problem: "DOS/4GW Professional Fatal Error (1307): Not enough memory"
+Solution: Rerun the INSTALL program.  Select the option to MAKE A 
+   BOOTABLE FLOPPY DISK.  Follow the prompts.  When you are finished 
+   making one, leave the boot disk in your floppy drive A:, turn off 
+   your computer, then turn it back on.  This will allow the boot disk 
+   to run to free up more memory for the game to run successfully.
+
+Problem: "No VESA support detected"
+Solution: This means your video card's VESA program was not run before 
+   the game started.  VESA allows MS-DOS games to run in colorful, crisp 
+   high-resolution.  Please refer to your video card manual for 
+   more information to run your particular VESA program to enable high 
+   resolution in MS-DOS.  Some examples are "VVESA.COM", "VESA.COM", and 
+   "VMODE VESA".
+More Information:  We have provided many popular VESA drivers for you 
+   on the Phantasmagoria CD.  They are located in the \INSTALL\VESA\VESA
+   directory on the CD.  
+
+Problem: "Fatal: Unable to find mouse driver" or "Mouse driver not found"
+Solution: This means your MS-DOS mouse program was not run before the 
+   game started.  Rerun INSTALL and choose MAKE A BOOTABLE FLOPPY DISK to
+   help us find and use your MS-DOS mouse driver.
+More Information: MS-DOS needs a mouse program to be run before it can 
+   use the mouse.  To see if a mouse program is hidden on your hard drive
+   type "DIR \MOUSE /S /P".  Let's say you see:
+   Directory of C:\MSMOUSE
+   MOUSE   COM
+   Directory of C:\WINDOWS
+   MOUSE   DRV
+   MOUSE   INI
+   A mouse program will end in ".COM" or ".EXE", so the mouse drivers in
+   C:\WINDOWS in this example won't do.  To run the mouse driver in
+   MSMOUSE in this example, type "C:\MSMOUSE\MOUSE.COM".  You should see
+   a message saying your mouse is now enabled.  You can now play 
+   Phantasmagoria.  If there is no .COM or .EXE file that has to do with 
+   your mouse, please refer to your mouse documentation or computer
+   dealer for more assistance.
+
+Problem: "Cannot find 999.pal resource.  If this is a CD-ROM game, please
+   make sure that a CD-ROM is loaded.  If you continue to experience this
+   dialog, make sure your CD-ROM drivers are loaded properly."
+Solution #1: Make sure one of the Phantasmagoria CDs is on the CD-ROM
+   drive before starting the game.
+Solution #2: If you booted off a boot disk that does not load your CD-ROM
+   drivers, please reboot without that boot disk.  If you need to use
+   a boot disk, please rerun Phantasmagoria's INSTALL and choose MAKE A
+   BOOTABLE FLOPPY DISK.
+
+Problem: "Error 29: Unable to initialize audio hardware"
+Solution #1: This can be caused by choosing Microsoft Sound System for 
+   Music on a Sound Blaster compatible card.  Rerun INSTALL and choose
+   Sound Blaster for both MUSIC and AUDIO.
+Solution #2: If you have a Gravis Ultrasound, please install and run the
+   game in Windows.
+Note:  Phantasmagoria requires a Sound Blaster compatible sound card that
+   supports DAC speech and FM (or MIDI) music.
+ 
+
+
+-MUSIC, SPEECH, AND SOUND EFFECTS
+   
+Problem: You get no music on a Sound Blaster 16, but the voices are OK.
+Solution: Rerun INSTALL and make sure you picked Sound Blaster for MUSIC.  
+   If you chose MT-32 or General MIDI, you may not hear music on your 
+   Sound Blaster 16.
+
+Problem: You get no music on any Sound Blaster compatible card, or you 
+   get a blank screen when the game starts, or the game gets stuck on the
+   opening Sierra logo.
+Solution: Check if your SET BLASTER environment variable is enabled and 
+   at the correct setting.  To check this, at the C: prompt, type SET and 
+   press <ENTER>.  You should see a line that says BLASTER = A220 I7 D1 
+   (or something similar).  If you do not see such a line and your sound 
+   card is on Address 220, IRQ 10, and DMA 1, at the C: prompt, type 
+   SET BLASTER = A220 I10 D1 and press <ENTER>.  This line tells MS-DOS 
+   how to access your sound card.  Now you can run the game.
+
+Problem: You get no music or no speech in the game
+Solution: Many sound cards have mixer software to adjust the volume 
+   levels of music and speech.  Please refer to your sound card 
+   documentation for more information.
+
+Question:  Why does the Hintkeeper (the red skull in the lower left 
+   side of the game screen) speak all the hints in Chapter 1 to 6, 
+   but only displays text hints in Chapter 7?
+Explanation:  The timing of the sound and video during the interactive 
+   movies prevent the Hintkeeper from speaking in Chapter 7.  We 
+   provided text hints, rather than providing no hints at all.
+
+Problem: Moving the mouse causes audio static on your sound card, or
+   the audio just "pops" a lot.
+Solution: This can be a problem with your VESA driver.  Please try a 
+   different VESA driver to eliminate the problem, or run the game 
+   in Windows.  Contact your video card manufacturer for more 
+   information to update your VESA driver
+
+Problem: The speech and sound effects sound distorted.
+Solution:  The speech, sound effects, and some music in the game are 
+   DAC samples.  If they are played too loudly, they will "clip", or
+   distort.  Instead of increasing the DAC Volume, try decreasing the
+   MIDI Volume in the Phantasmagoria Control Panel.
+More Information:  On some sound cards, such as the Sound Blaster 16, 
+   the mixer software (SB16SET) lets you control bass and treble 
+   equalizer controls in adddition to master volume control.  Adjust 
+   these settings if you are having distortion problems.  Better 
+   speakers allow for better music and sound reproduction.
+
+Problem: In MS-DOS, using a Reveal or Aztech Labs sound card, the music 
+   is fine but the speech is barely audible.
+Solution: The chipset used to emulate the Sound Blaster digital to analog
+   conversion is not 100% compatible with the Sound Blaster driver 
+   built-in to the game.  Install Phantasmagoria in Windows for full 
+   sound.
+
+
+-VIDEO AND GRAPHICS
+
+Question: What is "VESA"?
+Explanation: VESA stands for Video Electronics Standard Association.  
+   A VESA driver is a small program your video card needs to provide
+   high resolution graphics for MS-DOS games.  A VESA program either 
+   comes on a floppy disk with your video card, or your video card 
+   automatically supports VESA.  
+Information: A group of VESA drivers can be found on Phantasmagoria CD#1
+   in the \INSTALL\VESA\VESA directory.  Go to the directory name that
+   matches your video card and run that VESA program.  Example: If you
+   have an ATI Mach 64, go to the INSTALL\VESA\VESA\MACH64 directory and
+   run the M64VBE.COM file.
+
+Problem: Moving the mouse leaves garbage on the game screen, such as
+   random blocks of the background image or multiple cursor images.
+Solution: You need the latest VESA driver from your video card 
+   manufacturer.  Please refer to your video card manual for more
+   information.  We have provided many VESA drivers for you to try
+   on the Phantasmagoria CD #1.  They are located in the 
+   \INSTALL\VESA\VESA directory on the CD.  Please refer to the READ.ME 
+   file in the VESA directory for more information.  
+
+Problem: On the ATI Mach 64 video card, moving the mouse leaves 
+   garbage on the screen.
+Solution: ATI has an updated VESA driver that will solve this problem.
+   You can download and unzip the file "64VBE101.ZIP" from the ATI BBS 
+   at 905-764-9404.  This file unzips into "M64VBE.COM".  We have 
+   included an unzipped copy of this file in the 
+   \INSTALL\VESA\VESA\MACH64 directory on the Phantasmagoria CD #1.  
+   Please read the 64VBE101.TXT file in that directory for more 
+   information.
+
+Problem: On Cirrus 542x video cards, moving the mouse leave garbage
+   on the screen.
+Solution: Cirrus has an updated VESA driver that will solve this
+   problem.  You can download the file "UNIVESA.EXE" from the Cirrus
+   BBS at 510-440-9080.  We have included a copy of this file in the
+   \INSTALL\VESA\VESA\542X directory on the Phantasmagoria CD #1.
+
+Problem: On Diamond Viper video cards, the Universal Driver will not load 
+   and run.
+Solution: Use the "VPRMODE VESA" command that is provided by Diamond
+   to give you VESA support on Viper cards, or run the game in Windows.
+   This card's chipset is not support by the Universal VESA driver.
+
+Problem: The game looks too dark
+Solution: In the game directory on your hard drive, edit the 
+   RESOURCE.CFG file.  For example, type 
+   EDIT C:\SIERRA\SCARYDOS\RESOURCE.CFG
+   Add the line "brightness=10" after the last line.  If the movies are 
+   too dark, increase the "vmdRgb" value up to 100.  The default is 35.  
+   You can also adjust the movie brightness in Phantasmagoria's Control 
+   Panel.
+Information: The default brightness is 0 if there is no brightness 
+   line in RESOURCE.CFG.  If 10 is too bright, try smaller values, like 
+   brightness=5.
+
+Problem: The colors look wrong in the movies.
+Solution: In the Phantasmagoria Control Panel, turn MOVIE DETAIL on.  
+   If the MOVIE DETAIL is off, black lines are inserted between each 
+   line of the movies.  This will play the movies smoother on some 
+   computers, but will make the movies look darker.
+
+Question:  What options are available to improve playing the movies 
+   on your computer?
+Explanation:  Phantasmagoria's Control Panel's MOVIE DETAIL ON/OFF, 
+   FULL/HALF SCREEN, and MOVIE BRIGHTNESS will help adjust movie play 
+   for your computer.  Try Movie Detail Off, Half Screen, and increase 
+   the brightness.  If you are still having problems, edit the 
+   \SIERRA\SCARY\RESOURCE.CFG file on your hard drive and make the
+   VideoSpeed=400.  This will tell Phantasmagoria to play the 
+   5 frames per second movies instead of the 10 frames per second 
+   movies.  This will speed up movie play.
+More information:  If you wish for more improvement, try making and 
+   using a boot disk.  Try running the game from MS-DOS instead of 
+   Windows, especially if your Display test failed.  The last resort is 
+   to edit the \SIERRA\SCARY\RESOURCE.CFG file on your hard drive and 
+   add the line "vmdskip=false".  This will prevent the movies from 
+   skipping frames to keep up with the audio.  In most cases, adding 
+   this line will make the audio repeat as it waits for the video to 
+   catch up.  If there is no "vmdskip" line in RESOURCE.WIN, the 
+   default setting is vmdskip=true.
+
+
+-MOUSE AND GAME CURSOR
+
+Problem: Moving the mouse causes audio static on your sound card, or
+   the audio just "pops" a lot.
+Solution: This can be a problem with your VESA driver.  Please try a 
+   different VESA driver to eliminate the problem, or run the game 
+   in Windows.  
+
+Problem: The mouse cannot get past the left side of the screen
+Solution: You need either an updated mouse driver or an updated VESA 
+   driver.
+
+Problem: There is no mouse cursor during the movies.  The >> fast-
+   forward button cannot be accessed.
+Solution: Most of the movies are non-interactive.  If you don't have
+   cursor control, you can only watch the movie.  To fast-forward a 
+   movie, press the ESC key on your keyboard.
+
+
+-THE HINTKEEPER
+
+Question:  Why does the Hintkeeper (the red skull in the lower left 
+   side of the game screen) speak all the hints in Chapter 1 to 6, 
+   but only displays text hints in Chapter 7?
+Explanation:  The timing of the sound and video during the interactive 
+   movies prevent the Hintkeeper from speaking in Chapter 7.  We 
+   provided text hints, rather than providing no hints at all.
+
+
+-CONTROL PANEL
+
+Question:  Where is the Control Panel for Phantasmagoria?
+Explanation:  Start a new game.  When you have control of the cursor 
+   with your mouse, click on the "P" near the bottom of the game screen.  
+   This will bring up your control panel for Phantasmagoria.
+
+Problem:  Changing the TITLE BAR do anything in the game.
+Solution:  This Control Panel option works only in Windows.  There is
+   no title bar in MS-DOS.
+
+Problem:  What does MOVIE DETAIL ON/OFF mean for Phantasmagoria?
+Explanation:  When MOVIE DETAIL is OFF, the movies play faster because 
+   black lines are inserted between each line of the movie.  Black 
+   lines draw faster.  If the movies look too dark with MOVIE DETAIL
+   set to OFF, increase the MOVIE BRIGHTNESS.  When MOVIE DETAIL is ON, 
+   the movies will look sharper because black lines are not inserted 
+   between each line of the movie.  The disadvantage
+   to MOVIE DETAIL = ON is that on some systems, the video will be 
+   out-of-sync with the audio, or the audio will repeat as it waits for 
+   the video to catch up.
+
+Question:  What's a "movie" in the game?
+Explanation:  Phantasmagoria has non-interactive scenes called "movies".  
+   These will give you more background plot and clues to win the game.  
+   The "Watch Intro" option on the Main Menu of the game is an example of 
+   a non-interactive movie.  Press ESC to bypass movies.  If you have 
+   mouse control, you are not watching a movie.
+Note: Chapter 7 has interactive movies, so you will have mouse control 
+   there.
+
+Question:  What is the difference between DAC and MIDI volume controls in 
+  the Control Panel?
+Explanation:  The DAC volume control controls the speech and sound 
+   effects in the game.  The MIDI volume control controls the music in 
+   the game.
+
+Question:  Why does changing the Censored, Volume, or other options 
+   during one particular bookmark affect all the other bookmarks in the 
+   game?
+Explanation:  These changes are global changes.  The changes are not 
+   saved in the individual bookmark files.
+
+Question:  What does each part of the Control Panel do?
+Explanation:  Each option is listed below:
+
+                  Main Menu Options:
+
+Chapter Progress Bar:
+Shows how much of the game you've completed so far.
+
+Restore:
+Lets you restore the game to the last bookmark you dropped in the game.  
+If you want to restore a different saved game, you'll need to QUIT the 
+game and choose CONTINUE OLD GAME from the main menu.
+
+Play:
+Exits the Control Panel and lets you continue the game.
+
+Full Screen / Half Screen:
+Adjusts the size of the movies in the game.  Full Screen may cause 
+repeating audio and jerky video on some computers.  Half Screen helps the
+movies play better on low-end computers.
+
+More:
+Brings up the second control panel screen of advanced game options.
+
+Save:
+Lets you save your position in the game so you don't have to replay the 
+entire game over again to get to where you are now.
+
+Quit:
+Lets you quit the game.  You'll have the option to update your bookmark.
+
+Censored / Uncensored:
+Allows you to control the content of the game.  Censored will blur the 
+gory parts of the game so you can't see what's happening.  Uncensored 
+will show you all the nasty details.  The Censored option will ask you to
+enter a password.  Once you enter a password, ALL your saved games will 
+be censored, even if you continue a saved game that was not censored.  
+You can switch back to Uncensored game play by entering the password you
+created.
+
+                  More Menu Options:
+
+Title Bar On / Off:
+In Windows, this lets you the "Phantasmagoria" title bar.  This option is
+only for Windows. It is ignored in MS-DOS.
+
+Volume MIDI / DAC:
+MIDI controls the music volume in the game.  DAC controls the speech and
+sound effects volume in the game.  Users may experience degradation in 
+audio quality when turning down the DAC.  We recommend that you adjust
+the volume levels of MIDI, your speaker, and your sound card mixer 
+settings first.
+
+Main Menu:
+Returns you to the first screen of Control Panel choices.
+
+Movie Detail On / Off:
+Movie Detail Off makes the movies play better on low-end computers by 
+inserting black lines in the movies.  Black lines draw faster but make 
+movies look darker.  Movie Detail On plays movies with more detail and
+brightness, but makes movies run slower.  If your movies video is jerky,
+or is out-of-synch with the audio, please turn the Movie Detail Off.  
+Many users actually prefer the black lines for its visual appeal.
+
+Movie Brightness:
+Lets you control the brightness of the non-interactive movies.  This is 
+useful if you have Movie Detail set to Off to insert black lines in 
+movies.
+
+
+-MAKING AND USING A BOOT DISK
+
+Question: What is a boot disk?
+Explanation: A boot disk is a way to make games work faster and better on 
+   your computer.  All you need is a blank floppy disk for your A: drive.  
+   This will not work in your B: drive.  To make a boot disk, rerun the
+   INSTALL program and choose the menu option MAKE A BOOTABLE FLOPPY DISK.
+
+Problem: "Can't find FORMAT.COM--Unable to make boot disk"
+Solution: This is caused when our boot disk maker program cannot find
+   FORMAT.COM on your hard drive.  This usually happens if you installed
+   PC Tools or Norton Utilities.  These utilities rename FORMAT.COM
+   to either FORMAT!.COM or XXFORMAT.COM.  If this is the case, please
+   type the following commands
+   CD\DOS
+   COPY FORMAT!.COM FORMAT.COM
+   COPY XXFORMAT.COM FORMAT.COM
+   One of these commands will help restore your FORMAT command back to
+   normal, and will allow our boot disk maker to work.
+
+Problem: "Can't make bootdisk since you're not using COMMAND.COM" or 
+   "Boot disk was not created"
+Solution: This can be caused if you are using 4DOS or NDOS (in Norton 
+   Utilities).  Get to a C:\> prompt.  Type:  SET  and press the ENTER
+   key.  COMSPEC should equal C:\COMMAND.COM or C:\DOS\COMMAND.COM.
+   If COMSPEC = 4DOS.COM or NDOS.COM, the boot disk maker will not
+   work.  To correct this, type:  SET COMSPEC=C:\DOS\COMMAND.COM 
+   This will allow our boot disk maker to work.  When you reboot
+   without a boot disk, the COMSPEC will return to your original 
+   setting.
+
+Problem: "Can't Find SIERRA.ERR" after using a boot disk.
+Solution: The boot disk maker did not find your CD-ROM driver or some 
+   other files required to run for CD-ROM access.  Edit the A:\CONFIG.SYS
+   file on the boot disk.  Make sure there is a line that loads your 
+   CD-ROM drive.
+
+Problem: "Invalid Drive Specification" using a boot disk on a Western 
+   Digital IDE controller.
+Explanation:  The Western Digital IDE hard drive controller displays a 
+   message "Press the SPACEBAR to boot from a floppy disk."  If you 
+   insert the boot disk and reboot before seeing this message, you'll 
+   get the message "Invalid Drive Specification" and won't have hard 
+   drive access until you reboot without the boot disk.   
+Solution: Remove the boot disk from the floppy drive.  Reboot your 
+   computer.  When you see this message, insert the boot disk and press 
+   the SPACEBAR.
+
+Problem: "Invalid Drive Specification" using a boot disk on larger 
+   Seagate hard drives, such as the Seagate 800 meg hard drive.
+Explanation:  Seagate hard drives larger than 528 meg use a disk manager 
+   called "EZ-DRIVE".  If you insert the boot disk and reboot before 
+   seeing this message, you'll get the message "Invalid Drive Specifica-
+   tion" and won't have hard drive access until you reboot without the 
+   boot disk.   
+Solution: Remove the boot disk from the floppy drive.  Hold down the 
+   CTRL key and reboot your computer.  You'll see a message "Insert 
+   bootdisk and hit ENTER to reboot".  Insert the boot disk and press
+   ENTER.
+
+Problem: "Invalid Drive Specification" using a boot disk on a removable 
+   media drive, such as Bernoulli, Seagate, or SyQuest drives.
+Explanation: Our boot disk maker does not load the removable media drive 
+   software drivers.  If your removable drive was D: and your CD-ROM was 
+   E: when the game was installed, then you booted with our boot disk to 
+   free up more memory, your Bernoulli drive would not be seen, and your 
+   CD-ROM drive would now be D:.  The Phantasmagoria icon's properties 
+   will not be correct to run the game in this case.
+Solution:  Add your removable media drivers to the boot disk.
+
+
+-RUNNING THE GAME
+
+Problem: The game runs too slow
+Solution: Make and use a boot disk.  
+
+Problem: Random crashes on Compaq Presario CDS 524, 920, etc. 
+Solution:  Make a boot disk.
+   
+Problem: Random crashes and errors
+Solution:  Make sure your C:\SIERRA\SCARYDOS\RESOURCE.CFG file is 
+   correct and complete.  A sample RESOURCE.CFG file is listed below.
+   In this example, D: = the CD-ROM drive
+videoDrv  = VESA.DRV
+soundDrv  = ADL.DRV
+audioDrv  = DACBLAST.DRV
+joyDrv    = NO
+directory = \sierra\scarydos
+minCPU = 486
+minDOS = 500
+mode = protected
+CD = yes
+CPU=486
+CPUSpeed=63
+VideoSpeed=322
+CDROM=2
+mouseDrv  = NONE
+memoryDrv = NONE
+language  = 1
+audioSize = 22k
+cmd       = sierra
+cd        = yes
+smartdrv  = yes
+hires=630,450
+midiBuffSize5=30000
+midiBuffSize6=65000
+vmdRgb=35
+resaud=D:\ 
+resmap=D:\ 
+ressfx=D:\ 
+rescdisc=D:\ 
+sync=D:\ 
+movieDir=D:\vmd 
+patchDir=C:\sierra\scarydos;D:\;D:\patches 
+robot=C:\sierra\scarydos;D:\patches;D:\robot 
+audiosize=63 
+
+Problem: "EMM386 Error 6 or Error 12... " The error number may vary.
+Solution:  This is caused by a memory conflict.  Running the game from 
+   the boot disk will usually correct this problem.  Please see "Create 
+   a Boot Disk" and "Create a Clean Windows Environment" under Memory 
+   Troubleshooting.
+
+Problem: "Can't allocate X bytes in ..\(somename).cpp"
+Solution: You are running low on conventional memory.  Please rerun 
+   INSTALL and make a boot disk.
+
+Problem: "Out of Low Memory" or "Out of High Memory"
+Solution:  Make a boot disk.  Please make sure you have enough memory 
+   to run the game.  If you have 4 meg of RAM instead of 8 meg, the
+   game will try to run, but will fail when more memory is required.
+
+Problem: "CDR 101 Error reading" or "DOS Error, Read Error".
+Solution:  Make sure the CD is not scratched, dirty, or smudged with
+   fingerprints.  If so, clean it with a soft cloth and try again.  
+   This can also be caused by an outdated version of the MSCDEX file.
+   MS-DOS version 6.2 and above should use MSCDEX version 2.23
+   MS-DOS version 6.0 should use MSCDEX version 2.22
+   MS-DOS version 5.0 should use MSCDEX version 2.21
+   If you have MSCDEX version 2.20, please get a later version from 
+   your CD-ROM manufacturer.
+
+Problem:  "Error 105: ResSound (or ResView): Attempt to load wrong 
+   type"
+Solution #1:  Make sure you do not swap a CD too soon.  Only insert a 
+   new CD when it is asked for, and please make sure it is the correct 
+   CD asked for.
+Solution #2:  This type of error is usually caused by corrupted program 
+   files or a bad installation of the game.  To correct this, delete the game 
+   and run CHKDSK /F or SCANDISK to detect and correct any hard 
+   drive errors.  Then, boot up with a Phantasmagoria boot disk and 
+   reinstall the game in a clean Windows environment.  Please see 
+   "Create a Boot Disk" and "Create a Clean Windows Environment" 
+   Memory Troubleshooting for complete steps.
+
+Problem:  "Error 99: Error Loading Resource 999.PAL, restype.cpp(56)
+Solution #1: This type of error is usually caused by having the wrong 
+   game CD in the drive when you try to start Phantasmagoria.  Please 
+   make sure the Phantasmagoria CD is in the drive before you start the 
+   game.
+Solution #2: If you booted with a non-CD boot disk or bypassed your 
+   CD-ROM drivers on bootup, you'll get this error message.  Please
+   reboot and make sure your CD-ROM is responding before starting the 
+   game.
+
+Problem:  "Unable To Allocate XXXX Bytes" even with a boot disk.
+Solution:  Phantasmagoria doesn't require a lot of conventional 
+   memory, but some users have found adding these lines to the 
+   Phantasmagoria boot disk's CONFIG.SYS solves their problems:
+   DEVICE=C:\DOS\HIMEM.SYS
+   DOS=HIGH
+
+Problem:  You are tired of seeing the same movies over and over during
+   the Chapter 7 chase.
+Solution:  Press the ESC key once during each movie segment to skip
+   to the next movie segment.
+
+
+-BOOKMARKS AND SAVING GAMES-
+
+Problem:  In the Control Panel, you can restore to the point where you 
+   last made a bookmark, but you cannot restore a different saved game.
+Solution:  In the Control Panel, select QUIT to return to the Main Menu.  
+   On the Main Menu, select CONTINUE OLD GAME.  This will allow you to 
+   choose whatever saved game you want, to restore.  The red skulled 
+   bookmark is the last saved bookmark you used.
+
+Problem:  You can't access the save game feature in Chapter 7.
+Explanation:  Once Don begins to "chase" you in chapter 7 (you'll know 
+   when the chase has started), you can no longer access the save game 
+   feature in the control panel.  As you play through the chase in
+   Chapter 7, the game is automatically being saved for you, but in a 
+   fashion different than before.  Once the chase begins, there is no 
+   going back.  You must keep going forward...until the ultimate outcome.
+   From this point on, your "old" saved game will not exist in the same 
+   form anymore.  Instead, it will resemble a "saved" movie sequence 
+   instead.
+Solution:  To restart a chase sequence, click on the Watch Movie button. 
+   It will prompt you for which game to restart (based on the name of the 
+   save game you were playing prior to starting the chase).  Your entire 
+   "saved movie" sequence from the point you started the chase until the 
+   place you made a bad decision will automatically be reviewed. If you 
+   don't want to watch this, just click on the >> (fast forward) button 
+   on the interface panel. You will regain control of the game at the 
+   last point at which you could have made a better decision that would 
+   have allowed you to win the game.
+
+
+-OTHER QUESTIONS 
+
+If you don't see your question listed, most difficulties with 
+Phantasmagoria can be resolved by simply running the game with a boot 
+disk.  Please see "Create a Boot Disk" under Memory Troubleshooting.
+Also look at the file D:\THEGUIDE.TXT (if your CD-ROM drive is D:).
+
+
+MEMORY TROUBLESHOOTING
+
+Some game players have experienced difficulty getting enough memory to 
+run Phantasmagoria.  This usually occurs on computer systems with 8 
+Megabytes of RAM, but can happen on machines with more memory.  If you 
+are having trouble starting the game because of memory problems or are 
+receiving memory-related errors during the game (such as an "Out of 
+Hunk" or "Out of Memory" message), please make and use a boot disk.
+
+Create a Boot Disk:  Sierra has included a boot disk maker with 
+Phantasmagoria.  You can access it by running INSTALL from game CD #1.
+
+You can also access the boot disk maker from the MS-DOS prompt.
+Type "BOOTDISK -c -p -s" at the D:\> prompt (if your CD-ROM is
+D:).
+
+
+SOUND CARD TROUBLESHOOTING
+
+Phantasmagoria's Control Panel can adjust the volume control in the
+game.  If you need more control, most sound cards' speech and music 
+volume can be controlled separately through software provided by the 
+sound card manufacturer.  Here is a list of some common sound cards' 
+mixer volume control commands in MS-DOS.
+
+Sound Blaster 16:
+Type C:\SB16\SB16MIX
+
+Vibra 16 in AST Advantage: 
+Type C:\VIBRA16\MIXERSET
+
+Sound Galaxy 16 in Packard Bell: 
+Type C:\SOUND16A\UTILITY\MIXTSR or type C:\SOUND144\MIXTSR
+
+Ensoniq Soundscape:
+Type:  SSINIT
+
+Compaq Presario CDS 524, 920, etc.: 
+If DEVICE=C:\CPQDOS\VOLCTRL.EXE is in CONFIG.SYS on the boot disk, then:
+Press CTRL-RIGHTSHIFT to increase volume
+Press CTRL-LEFTSHIFT to decrease volume
+
+Proaudio Spectrum Family:
+Type PAS * to bring up the mixer controls
+Press CTRL-ALT-U to increase the master volume level
+Press CTRL-ALT-D to lower the master volume level
+
+Sound Blaster 8 bit: No software control. Adjust thumbwheel on card.
+
+Thunderboard: No software control. Adjust thumbwheel on back of card.
+
+
+SPECIAL THANKS
+
+Special thanks to the people at Micrografx for Picture Publisher
+
+Thanks to Chris Hunt, Nancy Hamilton, and Dave Moore of Dynamix for 
+the DOS INSTALL and Boot Disk Maker updates and corrections.
+
+Thanks to JVC CD Replication for the special duplication run of the 
+pre-market beta CDs.
+
+A very special thanks to our hard-working, bug-crushing 650 beta testers.
+
+

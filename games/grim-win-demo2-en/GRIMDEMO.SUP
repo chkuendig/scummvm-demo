@@ -1,0 +1,16 @@
+//SUPPRESSIONPROJ:grimdemo
+//VERSION:5.00
+//ENABLE:Yes
+!include RTL.SUP
+ignore param 3 KERNEL32.DLL:LCMapStringW in function EXE:"__crtLCMapStringA"
+ignore param 3 KERNEL32.DLL:LCMapStringA in function EXE:"__crtLCMapStringA"
+ignore param 2 DDRAW.DLL:DirectDrawEnumerateA in function EXE:"stdDisplay_Startup"
+
+ignore failure KERNEL32.DLL:GetStringTypeW in module iMUSE.dll
+ignore failure KERNEL32.DLL:LCMapStringW in module iMUSE.dll
+ignore failure KERNEL32.DLL:AddAtomW in module iMUSE.dll
+ignore failure KERNEL32.DLL:GetStringTypeW in module Lua.dll
+ignore failure USER32.DLL:LoadIconA in everywhere 
+ignore failure OLE32.DLL:CoCreateInstance in everywhere 
+ignore param 1 USER32.DLL:GetSystemMetrics in everywhere 
+ignore failure KERNEL32.DLL:FindClose in everywhere 

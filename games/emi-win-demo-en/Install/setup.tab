@@ -1,0 +1,245 @@
+Dummy	0	Empty
+IDBTN_LAUNCHER_INSTALL	0x1000	Install
+IDBTN_LAUNCHER_ANALYZE	0x1001	Analyze Your Computer
+IDBTN_LAUNCHER_HELP	0x1002	Help
+IDBTN_LAUNCHER_OPTIONS	0x1003	Options
+IDBTN_LAUNCHER_EXIT	0x1004	Exit
+IDBTN_LAUNCHER_REGISTER	0x1005	Register Online
+IDBTN_LAUNCHER_WWW	0x1006	Visit www.lucasarts.com
+IDBTN_LAUNCHER_UNINSTALL	0x1007	Uninstall
+IDBTN_LAUNCHER_ADVANCED	0x1008	Advanced Options
+IDBTN_LAUNCHER_BACK	0x1009	Go Back
+IDBTN_LAUNCHER_AUDIO	0x100a	Sound Options
+IDBTN_LAUNCHER_VIDEO	0x100b	Display Options
+IDBTN_LAUNCHER_SUPPORT	0x100c	LucasArts Technical Support
+IDBTN_LAUNCHER_CANCEL	0x100e	Cancel
+IDBTN_LAUNCHER_START_NEW_GAME	0x100f	Start Game
+IDBTN_LAUNCHER_RESUME_PLAY	0x1010	Resume Play
+IDBTN_LAUNCHER_OK	0x1011	Ok
+IDBTN_LAUNCHER_START	0x1012	Start
+IDBTN_LAUNCHER_REINSTALL_DIRECTX	0x1013	Reinstall DirectX
+IDBTN_LAUNCHER_VIEW_README	0x1014	View Readme
+IDBTN_LAUNCHER_VIEW_TSG	0x1015	View Troubleshooting Guide
+IDBTN_LAUNCHER_VIEW_LICENSE	0x1016	View License Agreement
+IDBTN_LAUNCHER_README_TSG	0x1017	Readme && Troubleshooting Guide
+IDBTN_LAUNCHER_DXDIAG	0x1018	DirectX Diagnostics
+IDBAR_LAUNCHER_LAUNCH	0x2000	Launch
+IDBAR_LAUNCHER_INSTALL	0x2001	Install
+IDBAR_LAUNCHER_OPTIONS	0x2002	Options
+IDBAR_LAUNCHER_ADVANCED	0x2003	Advanced Options
+IDBAR_LAUNCHER_UNINSTALL	0x2004	Uninstall
+IDBAR_LAUNCHER_README_TSG	0x2005	Readme & Troubleshooting Guide
+IDBAR_LAUNCHER_HELP	0x2006	Help
+IDTXT_LAUNCHER_UNINSTALL_WARNING	0x3000	WARNING: Clicking Uninstall may delete some game files without further prompting.
+IDCHK_LAUNCHER_KEEP_GAMES	0x4000	Keep Savegames?
+IDMSG_REGISTER_PRODUCT	0x5000	Would you like to electronically register\n$[ProductName] now?
+IDMSG_INSERT_A_GAME_CD	0x5001	Please insert one of the $[ProductName] CDs into your CD-ROM drive to proceed.
+IDMSG_INSERT_THE_GAME_CD	0x5002	Please insert the $[ProductName] CD into your CD-ROM drive to proceed.
+IDMSG_INSERT_FIRST_GAME_CD	0x5003	Please insert the first $[ProductName] CD into your CD-ROM drive to proceed.
+IDMSG_INSERT_GAME_CD_INSTALL	0x5004	Please insert the first CD into your CD-ROM drive to install $[ProductName].
+IDMSG_DELETE_SAVE_GAMES	0x5005	Do you really want to delete all saved games?
+IDMSG_REINSTALL_DIRECTX	0x5006	This game needs to update your DirectX installation\nbefore you can proceed!\n\nDo you want to perform the update now?
+IDMSG_CORRUPT_INSTALLATION	0x5007	A required file is missing or corrupted!\n\nPlease reinstall $[ProductName] to fix this problem.
+IDMSG_PHYSICAL_MEMORY	0x5008	$[ProductName] requires more physical memory to run properly!\nPlease consult the Troubleshooting Guide for further information.\n\nDo you want to proceed anyway?
+IDMSG_PAGE_FILE	0x5009	$[ProductName] may require more virtual memory to run properly!\nPlease consult the Troubleshooting Guide for further information.\n\nDo you want to proceed anyway?
+IDMSG_DIRECTX_WARNING	0x5010	Reinstalling DirectX may disable some video card utilities.\nPlease refer to the Troubleshooting Guide for a list of hardware that may possibly conflict with DirectX.\n\nDirectX may ask you for the Win95/98 installation CD.
+IDMSG_REMOVE_GAME_DATA	0x5011	Do you want to keep all saved games and configuration files?
+IDMSG_EXTERNAL_DIRECTX	0x5012	DirectX $[DirectXVersion] or better needs to be installed before this option will work.\nYou can download these DirectX drivers through the LucasArts Web Site at\n$[DirectXUrl]
+IDMSG_NO_SOUNDCARD	0x5013	A sound card was not detected in your system. Please choose yes to continue without a sound card or no to exit.
+IDMSG_DSETUP_MB_TITLE	0x7800	DirectX Setup
+IDMSG_DSETUPERR_SUCCESS	0x7801	Congratulations! DirectX is now properly installed on your system.
+IDMSG_DSETUPERR_BADSOURCESIZE	0x7802	A file's size could not be verified or was incorrect.
+IDMSG_DSETUPERR_BADSOURCETIME	0x7803	A file's date and time could not be verified or were incorrect.
+IDMSG_DSETUPERR_BADWINDOWSVERSION	0x7804	DirectX does not support the Windows version on the system.
+IDMSG_DSETUPERR_CANTFINDDIR	0x7805	The setup program could not find the working directory.
+IDMSG_DSETUPERR_CANTFINDINF	0x7806	A required .inf file could not be found.
+IDMSG_DSETUPERR_INTERNAL	0x7807	An internal error occurred.
+IDMSG_DSETUPERR_NEWERVERSION	0x7808	A later version of DirectX is already installed on your system.\n\nAn update is not required.
+IDMSG_DSETUPERR_NOCOPY	0x7809	A file's version could not be verified or was incorrect.
+IDMSG_DSETUPERR_NOTPREINSTALLEDONNT	0x780A	The version of Windows NT on the system does not contain the current version of DirectX. An older version of DirectX may be present, or DirectX may be absent altogether.
+IDMSG_DSETUPERR_OUTOFDISKSPACE	0x780B	The setup program ran out of disk space during installation.
+IDMSG_DSETUPERR_SOURCEFILENOTFOUND	0x780C	One of the required source files could not be found.
+IDMSG_DSETUPERR_UNKNOWNOS	0x780D	The operating system on your system is not currently supported.
+IDMSG_DSETUPERR_USERHITCANCEL	0x780E	The Cancel button was pressed before DirectX was fully installed.
+IDMSG_DSETUPERR_ERROR	0x7880	A problem occurred during the installation of DirectX:
+IDMSG_DSETUPERR_TSG	0x7881	Please consult the Troubleshooting Guide for more information.
+IDMSG_DSETUPERR_REBOOT	0x7882	You must restart your computer for the desired changes to take effect.\n\nDo you want to restart your computer now?
+IDMSG_DSETUP_OK	0x7883	DirectX setup needs to restart your machine, press OK to restart now.
+IDMSG_TDCHECK_ERROR	0x7884	There is no 3D hardware installed in your system.
+IDMSG_COLORDEPTH_ERROR	0x7885	You must be running in 256 color or higher. You can change the color depth in Display Properties and then restart the installation.
+IDBTN_PERFORMANCE_OPTIONS	0x7886	Configuration Options
+INST001	0x8001	Visit www.lucasarts.com
+INST002	0x8002	LEC Multiplayer Home Page
+INST003	0x8003	Customer Survey
+INST004	0x8004	View %s Readme
+INST005	0x8005	Uninstall %s
+INST006	0x8006	%s Setup Question:
+INST007	0x8007	%s Main Menu
+INST008	0x8008	Please select an option.
+INST009	0x8009	Install %s
+INST010	0x800A	Which size installation would you like?
+INST011	0x800B	Choose an installation size. Larger installs may improve game performance, but take up more room on the hard drive.
+INST012	0x800C	Minimum Installation %d MB
+INST013	0x800D	Standard Installation %d MB
+INST014	0x800E	Complete Installation %d MB
+INST015	0x800F	The installation sizes listed here already INCLUDE whichever sound resolution you have elected to install on the previous page.
+INST016	0x8010	View ReadMe
+INST017	0x8011	There is not enough space available on the disk\n'%s'.\nPlease free up at least %d MB or change the target location to a different disk.
+INST018	0x8012	Please free up some space or change the target location to a different disk.
+INST019	0x8013	Setup will now create shortcuts for the items checked below in the Start menu. If you do not wish a shortcut to be made for a particular item, please uncheck its check box.
+INST020	0x8014	Unable to create key:
+INST021	0x8015	 directory.
+INST022	0x8016	Copying files...
+INST023	0x8017	Decompressing files...
+INST025	0x8018	Creating Program Folder and Icons....
+INST026	0x8019	Installation complete.
+INST027	0x801A	Do you want to view the README file now?
+INST028	0x801B	Setup will install %s in the following directory.
+INST029	0x801C	To install to this directory, click Next.
+INST030	0x801D	To install to a different directory, click Browse and select another directory.
+INST031	0x801E	You can choose not to install %s by clicking Cancel to exit Setup.
+INST036	0x801F	Are you SURE you wish to ABORT the %s installation? Click No to continue the installation or Yes to exit.
+INST037	0x8020	
+INST038	0x8021	Setup Type:
+INST039	0x8022	Start Menu Folder:
+INST040	0x8023	Target Directory:
+INST041	0x8024	(Not selected;
+INST051	0x8025	This program requires VGA or better resolution.
+INST052	0x8026	Setup
+INST053	0x8027	Setup has detected previously installed components of %s on your computer.  Do you want to reinstall %s?
+INST054	0x8028	Setup is complete.  You may run %s by running %s in the %s directory.
+INST055	0x8029	Setup Complete
+INST056	0x802A	You may also run %s by clicking the %s icon in the Start menu.
+INST057	0x802B	Setup is complete.  You may run %s by running %s where you installed the game.
+INST058	0x802C	Setup will copy the %s files to the
+INST060	0x802D	If you like, you may now view the %s README. If you do not wish to view the %s README, uncheck the check box.
+INST061	0x802E	Setup will now install DirectX on your computer. Please see the Troubleshooting Guide for a list of hardware known to conflict with DirectX.
+INST062	0x802F	What is DirectX? DirectX is a combination of functions, routines, drivers, etc. that give programmers more direct access to hardware devices like the video card, sound card, joysticks/mice/keyboards, etc.
+INST063	0x8030	NOTE: If you know your machine is not DirectX compatible, please uncheck the box and follow the instructions.
+INST064	0x8031	.
+INST065	0x8032	 If, after running DirectX Setup, you have problems restarting, call Microsoft or your hardware vendor.
+INST066	0x8033	Setup has determined that your machine's DirectX (tm) drivers are current, and that you do not need to reinstall DirectX.
+INST067	0x8034	 You may, however, reinstall DirectX if you wish (you must check the box).
+INST069	0x8036	DirectX installation complete
+INST070	0x8037	%s Setup has successfully installed DirectX on your system. You must restart your computer for the desired changes to take effect.
+INST071	0x8038	DirectX MAY ask you for the Win95/98 installation CD.
+INST072	0x8039	You have chosen not to install DirectX. Please refer to the troubleshooting guide for more information.
+INST073	0x803A	Install DirectX %s now.
+INST078	0x803D	You must reboot to reinstall DirectX.
+INST090	0x8048	%s
+INST091	0x8049	LucasLearning\%s
+INST092	0x804A	Program Files
+INST094	0x804B	LucasArts' %s
+INST095	0x804C	 by running
+INST096	0x804D	If you wish, you may calibrate your joystick now (make sure it's connected first).
+INST097	0x804E	 in the
+INST098	0x804F	Calibrate Joystick
+INST099	0x8050	Do you want a shortcut to %s made on your desktop?
+INST100	0x8051	Play %s
+INST101	0x8052	Would you like to electronically register %s now? (Note: you need to be connected to your Internet Service Provider.)
+INST102	0x8053	 MB
+INST103	0x8054	Destination directory cannot be the root of a drive.
+INST104	0x8055	NOTE: Complete installation is required for multiplayer.
+INST105	0x8056	A pathname cannot contain any of the following characters:
+INST106	0x8057	Install %s      %d MB
+INST107	0x8058	There is not enough space available on the disk. You will need at least %d MB free on your primary hard drive to run the installation.
+INST108	0x8059	Note: Once installed, you will need at least %d MB free on your hard drive in order to run %s.
+INST109	0x805A	NOTE: For best results, please run %s with the Windows(tm) desktop set to High Color (16-bit) mode. Please consult the Troubleshooting Guide for further information.
+INST200	0x805B	Setup needs to Install QuickTime(tm) 3.0. Once QuickTime has been installed, %s will resume its installation process.
+INST201	0x805C	Your machine's QuickTime(tm) drivers are current, you do not need to reinstall QuickTime. You may, however, reinstall QuickTime if you wish (you must check the box).
+INST202	0x805D	Reinstall QuickTime(tm) 3.0
+INST203	0x805E	Install QuickTime(tm) 3.0
+INST204	0x8060	NOTE: The QuickTime(tm) installation can only be run in English.
+INST111	0x8061	Troubleshooting Guide
+INST112	0x8062	Register On-Line
+INST114	0x8064	Install DirectX %s
+INST115	0x8065	%s savegame
+INST116	0x8066	Please insert CD #2 and click Yes to continue or No to cancel the installation.
+INST117	0x8067	Please reinsert CD #1 and click Yes to continue or No to cancel the installation.
+INST_OPTION_VIEW_HELP_FILE	0x8068	View Help File
+INST_MSG_VIEW_HELP_FILE	0x8069	Do you want to view the help file now?
+INST_HELP_FILE_SHORTCUT	0x806A	View %s Help File
+INST_INSTDX_HELP_FILE	0x806B	Setup will now install DirectX on your computer. Please see the help file for a list of hardware known to conflict with DirectX.
+INST_FULL_INST_NEEDS_MORE_RAM	0x806C	ALSO, THE FULL INSTALL IS NOT RECOMMENDED IF YOU HAVE LESS THAN 64 MB RAM.
+INST119	0x806D	You may also run %s by clicking the %s icon on the Desktop or in the Start menu. 
+INST118	0x806E	Installation path can not exceed 96 characters.
+INST205	0x8070	Please reinsert CD #1 and click Ok to cancel the installation.
+INST206	0x8071	Please reinsert CD #2 and click Ok to cancel the installation.
+ANLZ001	0xA001	System Checker
+ANLZ002	0xA002	&OK
+ANLZ003	0xA003	Item
+ANLZ004	0xA004	RAM
+ANLZ005	0xA005	O/S
+ANLZ006	0xA006	CPU
+ANLZ007	0xA007	CD-ROM speed
+ANLZ008	0xA008	Hard drive space
+ANLZ009	0xA009	DirectSound
+ANLZ010	0xA00A	DirectDraw
+ANLZ011	0xA00B	DirectPlay
+ANLZ012	0xA00C	Direct3D
+ANLZ013	0xA00D	DirectInput
+ANLZ014	0xA00E	Required
+ANLZ015	0xA00F	16 MB
+ANLZ016	0xA010	Windows 95/98
+ANLZ017	0xA011	Pentium 90
+ANLZ018	0xA012	Windows 98
+ANLZ022	0xA013	Your machine
+ANLZ023	0xA014	Status
+ANLZ024	0xA015	For best results, do not have any other programs running.
+ANLZ025	0xA016	Determining CD-ROM speed...  Please wait...
+ANLZ026	0xA017	You can install the correct DirectX drivers from the launcher.
+ANLZ027	0xA018	You can install the correct DirectX drivers from the installer.
+ANLZ028	0xA019	Your computer failed %d of the above %d tests.
+ANLZ029	0xA01A	Your computer is qualified to play %s!
+ANLZ030	0xA01B	Your computer has more disk drives than can be displayed here.
+ANLZ031	0xA01C	Please refer to the troubleshooting guide for more information.
+ANLZ032	0xA01D	Jedi Knight
+ANLZ033	0xA01E	Passed
+ANLZ034	0xA01F	Failed
+ANLZ035	0xA020	DirectX drivers
+ANLZ036	0xA021	 MB
+ANLZ037	0xA022	Windows 3.1
+ANLZ038	0xA023	Windows NT
+ANLZ039	0xA024	unknown
+ANLZ040	0xA025	 MHz
+ANLZ041	0xA026	Couldn't find the file '%s', or this program is not being run from a valid CD-ROM drive.  Please insert the %s install CD and try again.
+ANLZ042	0xA027	 KB/sec
+ANLZ043	0xA028	Pentium 
+ANLZ044	0xA029	(Installed)
+ANLZ045	0xA02A	NOTE: CPU speed represents this program's best guess.
+ANLZ046	0xA02B	Please configure your video card before playing.
+ANLZ047	0xA02C	Note: %s requires a 3D video card.
+ANLZ048	0xA02D	&DXDIAG
+ANLZ049	0xA02E	&Install DirectX %s
+ANLZ050	0xA02F	Couldn't find the DirectX folder.  Please insert the %s install CD and try again.
+ANLZ051	0xA030	You must first install DirectX before you can run the DirectX diagnostic program.
+ANLZ052	0xA031	Display Adapter
+ANLZ053	0xA032	No 3D Hardware
+ANLZ054	0xA033	3D Hardware
+DIRX001	0xD02D	DirectX Setup
+DIRX002	0xD02E	Unable to create the message dialog.
+DIRX003	0xD02F	&Yes
+DIRX004	0xD030	&No
+DIRX005	0xD031	&Cancel
+DIRX006	0xD032	&Ok
+DIRX007	0xD033	&Retry
+DIRX008	0xD034	&Abort
+DIRX009	0xD035	&Ignore
+DIRX010	0xD036	Starting DirectXSetup...
+DIRX011	0xD037	DirectXSetup returned %d.
+DIRX012	0xD038	DirectX does not support the Windows version on the system.
+DIRX013	0xD039	One of the required source files could not be found.
+DIRX014	0xD03A	A file's size could not be verified or was incorrect.
+DIRX015	0xD03B	A file's date and time could not be verified or were incorrect.
+DIRX016	0xD03C	A file's version could not be verified or was incorrect.
+DIRX017	0xD03D	The setup program ran out of disk space during installation.
+DIRX018	0xD03E	A required .inf file could not be found.
+DIRX019	0xD03F	The setup program could not find the working directory.
+DIRX020	0xD040	An internal error occurred.
+DIRX021	0xD041	This version of DirectX on Windows NT has no 3D support.
+DIRX022	0xD042	The operating system on your system is not currently supported.
+DIRX023	0xD043	The Cancel button was pressed before the application was fully installed.
+DIRX024	0xD044	The version of Windows NT on the system does not contain the current  version of DirectX. An older version of DirectX may be present, or DirectX may be absent altogether.
+DIRX025	0xD045	DirectX was successfully installed on your system, you must now restart Windows for the changes to take effect. Do you wish to restart Windows?
+DIRX026	0xD046	DirectX was successfully installed on your system.
+DIRX027	0xD047	Please insert Disk #1 to install DirectX.

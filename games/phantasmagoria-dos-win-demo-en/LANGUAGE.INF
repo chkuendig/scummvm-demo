@@ -1,0 +1,85 @@
+[Ident]
+Title=Phantasmagoria
+ShortTitle=Phantasmagoria
+DirName=SCARY
+
+[Strings]
+SetupTitle=Setup/Uninstall
+Title=Phantasmagoria
+ShortTitle=Phantasmagoria
+DirName=SCARY
+
+AbortText=Abort Install
+OKText=O&K
+YESText=&Yes
+NOText=&No
+OK=OK
+CANCEL=Cancel
+
+VideoPrompt1=This game requires Microsoft Video for Windows.
+VideoPrompt2=It will now be installed automatically.
+
+IndeoPrompt=The Indeo Video drivers will now be added to supplement Video for Windows.
+
+Win32sPrompt=The Win32s drivers will now be added to enhance 32 bit performance.
+
+WinGPrompt=The WinG drivers will now be added to enhance graphics performance.
+
+Bootdisk=Optional Bootdisk
+BootPrompt1=Low memory machines may have trouble running this game without a boot disk.
+BootPrompt2=Run Boot Disk Maker?
+
+DonePrompt1=Phantasmagoria has been successfully installed.
+DonePrompt2=Windows must be restarted before you can play.
+DoneNow=Restart now
+DoneLater=Restart later
+
+MidiPrompt1=Choose MIDI support level.
+MidiPrompt2=If in doubt, choose base level.
+MidiExt=Use extended
+MidiBase=Use base
+Video For Windows=Install Video for Windows
+Indeo Video=Install Indeo
+Win32s=Install Win32s
+WinG=Install Windows graphics library (WinG)
+Installation Complete=Installation Complete
+KidSampler=Sierra Kid's Sampler
+PhantDemo=Phantasmagoria II Promo
+GabrielDemo=Gabriel Knight II Promo
+ShiversDemo=Shivers Promo
+BootTitle=Boot Disk Maker
+LodeDemo=Lode Runner Demo
+ToonDemo=Toon's Machine Demo
+InnTitle=ImagiNation
+GamesPreview=Sierra Catalog
+
+ACCESSORIES=Accessories
+MPLAYER=Media Player
+RESTARTTITLE=Restart Windows?
+RESTARTPROMPT=You must restart Windows before you can run this Sierra product.
+RESTARTPROMPT2=Do you want to restart Windows now?
+YES=&Yes
+NO=&No
+
+AllDone=Installation	Completed
+AllDoneText=Installation successful
+ReadmeTitle=Read This First
+InstallTitle=Install Help
+
+ReadMe=View README
+ReadMePrompt1=Do you want to view additional documentation?
+
+Register=Register this product
+RegisterPrompt1=Do you want to register this product?
+
+
+RegisterTitle=Register Phantasmagoria
+
+WHICHGAME=Please choose which games you wish to install.
+MUSTSELECT=Please choose at least one product to install.
+INTROTITLE=Phantasmagoria
+PHANTLONGTITLE=&Phantasmagoria
+SQ6LONGTITLE=&SQ 6 Demo
+SWATLONGTITLE=S&WAT Demo
+PQ5DEMO=S.W.A.T. Demo
+SQ6Title=Space Quest 6 Demo
