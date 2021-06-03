@@ -1,0 +1,3 @@
+[submodule "scummvm"]
+	path = scummvm
+	url = https://github.com/chkuendig/scummvm
