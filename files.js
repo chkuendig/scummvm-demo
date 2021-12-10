@@ -8,14 +8,12 @@
   (function() {
    var loadPackage = function(metadata) {
   
-      var PACKAGE_PATH;
+      var PACKAGE_PATH = '';
       if (typeof window === 'object') {
         PACKAGE_PATH = window['encodeURIComponent'](window.location.pathname.toString().substring(0, window.location.pathname.toString().lastIndexOf('/')) + '/');
-      } else if (typeof location !== 'undefined') {
-        // worker
+      } else if (typeof process === 'undefined' && typeof location !== 'undefined') {
+        // web worker
         PACKAGE_PATH = encodeURIComponent(location.pathname.toString().substring(0, location.pathname.toString().lastIndexOf('/')) + '/');
-      } else {
-        throw 'using preloaded data can only be done on a web page or in a web worker';
       }
       var PACKAGE_NAME = 'files.data';
       var REMOTE_PACKAGE_BASE = 'files.data';
@@ -29,6 +27,18 @@
       var PACKAGE_UUID = metadata['package_uuid'];
     
       function fetchRemotePackage(packageName, packageSize, callback, errback) {
+        
+        if (typeof process === 'object' && typeof process.versions === 'object' && typeof process.versions.node === 'string') {
+          require('fs').readFile(packageName, function(err, contents) {
+            if (err) {
+              errback(err);
+            } else {
+              callback(contents.buffer);
+            }
+          });
+          return;
+        }
+      
         var xhr = new XMLHttpRequest();
         xhr.open('GET', packageName, true);
         xhr.responseType = 'arraybuffer';
@@ -86,7 +96,6 @@
         if (!check) throw msg + new Error().stack;
       }
   Module['FS_createPath']("/", "scummvm", true, true);
-Module['FS_createPath']("/scummvm", "shaders", true, true);
 
           /** @constructor */
           function DataRequest(start, end, audio) {
@@ -118,7 +127,7 @@ Module['FS_createPath']("/scummvm", "shaders", true, true);
       
               var files = metadata['files'];
               for (var i = 0; i < files.length; ++i) {
-                new DataRequest(files[i]['start'], files[i]['end'], files[i]['audio']).open('GET', files[i]['filename']);
+                new DataRequest(files[i]['start'], files[i]['end'], files[i]['audio'] || 0).open('GET', files[i]['filename']);
               }
       
         
@@ -343,7 +352,7 @@ Module['FS_createPath']("/scummvm", "shaders", true, true);
     }
   
    }
-   loadPackage({"files": [{"filename": "/scummvm/residualvm.zip", "start": 0, "end": 53254, "audio": 0}, {"filename": "/scummvm/queen.tbl", "start": 53254, "end": 1153759, "audio": 0}, {"filename": "/scummvm/grim-patch.lab", "start": 1153759, "end": 1163049, "audio": 0}, {"filename": "/scummvm/lure.dat", "start": 1163049, "end": 1932169, "audio": 0}, {"filename": "/scummvm/monkey4-patch.m4b", "start": 1932169, "end": 1935159, "audio": 0}, {"filename": "/scummvm/encoding.dat", "start": 1935159, "end": 2026037, "audio": 0}, {"filename": "/scummvm/scummremastered.zip", "start": 2026037, "end": 2119541, "audio": 0}, {"filename": "/scummvm/macgui.dat", "start": 2119541, "end": 2134027, "audio": 0}, {"filename": "/scummvm/scummclassic.zip", "start": 2134027, "end": 2160177, "audio": 0}, {"filename": "/scummvm/translations.dat", "start": 2160177, "end": 3746730, "audio": 0}, {"filename": "/scummvm/drascula.dat", "start": 3746730, "end": 4006349, "audio": 0}, {"filename": "/scummvm/fonts.dat", "start": 4006349, "end": 31342947, "audio": 0}, {"filename": "/scummvm/sky.cpt", "start": 31342947, "end": 31762374, "audio": 0}, {"filename": "/scummvm/scummmodern.zip", "start": 31762374, "end": 31835978, "audio": 0}, {"filename": "/scummvm/shaders/grim_primitive.fragment", "start": 31835978, "end": 31836053, "audio": 0}, {"filename": "/scummvm/shaders/emi_actorlights.vertex", "start": 31836053, "end": 31839137, "audio": 0}, {"filename": "/scummvm/shaders/emi_actor.fragment", "start": 31839137, "end": 31839565, "audio": 0}, {"filename": "/scummvm/shaders/grim_shadowplane.fragment", "start": 31839565, "end": 31839627, "audio": 0}, {"filename": "/scummvm/shaders/grim_background.fragment", "start": 31839627, "end": 31839730, "audio": 0}, {"filename": "/scummvm/shaders/grim_text.fragment", "start": 31839730, "end": 31839872, "audio": 0}, {"filename": "/scummvm/shaders/grim_emerg.fragment", "start": 31839872, "end": 31840014, "audio": 0}, {"filename": "/scummvm/shaders/grim_dim.fragment", "start": 31840014, "end": 31840192, "audio": 0}, {"filename": "/scummvm/shaders/grim_smush.vertex", "start": 31840192, "end": 31840569, "audio": 0}, {"filename": "/scummvm/shaders/grim_dim.vertex", "start": 31840569, "end": 31840868, "audio": 0}, {"filename": "/scummvm/shaders/grim_actorlights.fragment", "start": 31840868, "end": 31841827, "audio": 0}, {"filename": "/scummvm/shaders/emi_actorlights.fragment", "start": 31841827, "end": 31842255, "audio": 0}, {"filename": "/scummvm/shaders/emi_sprite.vertex", "start": 31842255, "end": 31843377, "audio": 0}, {"filename": "/scummvm/shaders/grim_background.vertex", "start": 31843377, "end": 31843757, "audio": 0}, {"filename": "/scummvm/shaders/grim_actorlights.vertex", "start": 31843757, "end": 31846498, "audio": 0}, {"filename": "/scummvm/shaders/grim_smush.fragment", "start": 31846498, "end": 31846753, "audio": 0}, {"filename": "/scummvm/shaders/emi_sprite.fragment", "start": 31846753, "end": 31847181, "audio": 0}, {"filename": "/scummvm/shaders/grim_primitive.vertex", "start": 31847181, "end": 31847429, "audio": 0}, {"filename": "/scummvm/shaders/emi_background.vertex", "start": 31847429, "end": 31847565, "audio": 0}, {"filename": "/scummvm/shaders/grim_shadowplane.vertex", "start": 31847565, "end": 31847742, "audio": 0}, {"filename": "/scummvm/shaders/grim_actor.vertex", "start": 31847742, "end": 31848947, "audio": 0}, {"filename": "/scummvm/shaders/emi_dimplane.vertex", "start": 31848947, "end": 31849153, "audio": 0}, {"filename": "/scummvm/shaders/grim_emerg.vertex", "start": 31849153, "end": 31849557, "audio": 0}, {"filename": "/scummvm/shaders/grim_actor.fragment", "start": 31849557, "end": 31850516, "audio": 0}, {"filename": "/scummvm/shaders/grim_text.vertex", "start": 31850516, "end": 31850792, "audio": 0}, {"filename": "/scummvm/shaders/emi_dimplane.fragment", "start": 31850792, "end": 31850874, "audio": 0}, {"filename": "/scummvm/shaders/emi_actor.vertex", "start": 31850874, "end": 31852141, "audio": 0}, {"filename": "/scummvm/shaders/emi_background.fragment", "start": 31852141, "end": 31852248, "audio": 0}], "remote_package_size": 31852248, "package_uuid": "a054cce8-a26b-4484-917b-2cd7ce7d2173"});
+   loadPackage({"files": [{"filename": "/scummvm/neverhood.dat", "start": 0, "end": 23804}, {"filename": "/scummvm/hadesch_translations.dat", "start": 23804, "end": 24235}, {"filename": "/scummvm/tony.dat", "start": 24235, "end": 48819}, {"filename": "/scummvm/xeen.ccs", "start": 48819, "end": 151774}, {"filename": "/scummvm/residualvm.zip", "start": 151774, "end": 231933}, {"filename": "/scummvm/queen.tbl", "start": 231933, "end": 1332438}, {"filename": "/scummvm/access.dat", "start": 1332438, "end": 1852790}, {"filename": "/scummvm/toon.dat", "start": 1852790, "end": 1870776}, {"filename": "/scummvm/achievements.dat", "start": 1870776, "end": 2018922}, {"filename": "/scummvm/lure.dat", "start": 2018922, "end": 2788042}, {"filename": "/scummvm/kyra.dat", "start": 2788042, "end": 4644432}, {"filename": "/scummvm/cryo.dat", "start": 4644432, "end": 4656931}, {"filename": "/scummvm/encoding.dat", "start": 4656931, "end": 4747809}, {"filename": "/scummvm/supernova.dat", "start": 4747809, "end": 5271020}, {"filename": "/scummvm/scummremastered.zip", "start": 5271020, "end": 5350534}, {"filename": "/scummvm/macgui.dat", "start": 5350534, "end": 5365020}, {"filename": "/scummvm/macventure.dat", "start": 5365020, "end": 5369187}, {"filename": "/scummvm/hugo.dat", "start": 5369187, "end": 5558771}, {"filename": "/scummvm/scummclassic.zip", "start": 5558771, "end": 5572668}, {"filename": "/scummvm/translations.dat", "start": 5572668, "end": 7226814}, {"filename": "/scummvm/pred.dic", "start": 7226814, "end": 7353295}, {"filename": "/scummvm/drascula.dat", "start": 7353295, "end": 7612914}, {"filename": "/scummvm/teenagent.dat", "start": 7612914, "end": 7754004}, {"filename": "/scummvm/cryomni3d.dat", "start": 7754004, "end": 7824420}, {"filename": "/scummvm/mort.dat", "start": 7824420, "end": 7900722}, {"filename": "/scummvm/sky.cpt", "start": 7900722, "end": 8320149}, {"filename": "/scummvm/scummmodern.zip", "start": 8320149, "end": 8380441}], "remote_package_size": 8380441, "package_uuid": "4339e089-5e55-4fc9-9178-a3ee0df715f2"});
   
   })();
   

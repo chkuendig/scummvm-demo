@@ -1,0 +1,38 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.3.19/dist/zip.js"></script>
+<script>
+
+
+    var url = '/frs/demos/sci/msastrochicken-dos-demo-en.zip';
+    const zipReader = new zip.ZipReader(new zip.HttpReader(url, { 'useRangeHeader': true }));
+
+    zipReader.getEntries().then((entries) => {
+        for (const idx in entries) {
+            let filename = entries[idx]['filename']
+            if (filename.toLowerCase().endsWith(".txt")) {
+
+                console.log(filename)
+                let result = false
+                entries[idx].getData(
+                    // writer
+                    new zip.TextWriter(),
+                    // options
+                    {
+                        onprogress: (index, max) => {
+                            // onprogress callback
+                            console.log(index, max)
+                        }
+                    }
+                ).then((text) => {
+                    // text contains the entry data as a String
+                    console.log(text);
+                    result = text
+                })
+                while(!result){
+                    continue;
+                }
+                console.log("Result: "+result)
+            }
+        }
+    });
+
+</script>

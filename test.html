@@ -1,0 +1,79 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Use JavaScript to Change Text</h2>
+<p>This example writes "Hello JavaScript!" into an HTML element with id="demo":</p>
+
+<p id="demo"></p>
+
+<script>
+
+
+function syncDownloadFileModern(p, type='buffer') {
+  const req = new XMLHttpRequest();
+  req.open('GET', p, false);
+
+  // On most platforms, we cannot set the responseType of synchronous downloads.
+  // @todo Test for this; IE10 allows this, as do older versions of Chrome/FF.
+  let data  = null;
+  let err  = null;
+  // Classic hack to download binary data as a string.
+  req.overrideMimeType('text/plain; charset=x-user-defined');
+  req.setRequestHeader('Range', 'bytes=100-200'); // the bytes (in
+  req.onreadystatechange = function(e) {
+    if (req.readyState === 4) {
+      if (req.status === 200 || req.status === 206) {
+        switch (type) {
+          case 'buffer':
+            // Convert the text into a buffer.
+            const text = req.responseText;
+            data = new ArrayBuffer(text.length);
+            // Throw away the upper bits of each character.
+            for (let i = 0; i < text.length; i++) {
+              // This will automatically throw away the upper bit of each
+              // character for us.
+              data[i] = text.charCodeAt(i);
+            }
+            return;
+          case 'json':
+            data = JSON.parse(req.responseText);
+            return;
+        }
+      } else {
+       console.log(req);
+            return;
+      }
+    }
+  };
+  req.send();
+  if (err) {
+    throw err;
+  }
+  return data;
+}
+document.getElementById("demo").innerHTML = "Hello JavaScript!";
+/*
+var xhr = new XMLHttpRequest;
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState != 4) {
+    return;
+  }
+  alert(xhr.status);
+};
+
+xhr.open('GET', 'http://fiddle.jshell.net/img/logo.png', false);
+xhr.setRequestHeader('Range', 'bytes=100-200'); // the bytes (incl.) you request
+xhr.send(null);
+*/
+var data = syncDownloadFileModern("/games/comi-win-large-demo-en/COMI.LA0")
+console.log(data.byteLength)
+console.log(data)
+</script> 
+
+</body>
+</html>

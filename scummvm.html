@@ -105,9 +105,10 @@
   <hr>
   <textarea class="emscripten" id="output" rows="8"></textarea>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.min.js"
-    integrity="sha512-mz0EI+Ay1uIJP7rZEX8C/JlTAcHRIQ8Sny4vxmmj8MSzDJgG9NxxY2pUmOGv1lO7imFIFMyjjCzEXEywNgaUdQ=="
-    crossorigin="anonymous"></script>
+  <script type="module">
+    import { EMFS } from '/emscripten_fs.js'
+    window.EMFS = EMFS
+  </script>
   <script type='text/javascript'>
     var statusElement = document.getElementById('status');
     var progressElement = document.getElementById('progress');
@@ -130,29 +131,11 @@
           localStorage.setItem(key, defaultLocalStorage[key]);
         }
       }
-      BrowserFS.FileSystem.HTTPRequest.Create({
-        index: "/games/index.json",
-        baseUrl: "/games/"
-      }, function (err, xhrfs) {
-        if (err) throw err
-        BrowserFS.FileSystem.LocalStorage.Create(function (err, lsfs) {
-          if (err) throw err
-          BrowserFS.FileSystem.MountableFileSystem.Create({
-            '/games': xhrfs,
-            '/local': lsfs
-          }, function (err, mfs) {
-            if (err) throw err
-            BrowserFS.initialize(mfs);
-            // BFS is now ready to use!
+      FS.mkdir("/mnt");
+      FS.mount(new EMFS(FS, ERRNO_CODES, "/games/"), {}, "/mnt");
 
-            var BFS = new BrowserFS.EmscriptenFS();
-            // Mount the file system into Emscripten.
-            FS.mkdir('/data');
-            FS.mount(BFS, { root: '/' }, '/data');
-            removeRunDependency('browserfs-setup');
-          });
-        });
-      });
+      removeRunDependency('browserfs-setup');
+     
     }
 
     var Module = {
