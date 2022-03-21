@@ -1,0 +1,118 @@
+;
+; Trident Display INF
+;
+[version]
+signature="$CHICAGO$"
+Class=Display
+ClassGUID={4d36e968-e325-11ce-bfc1-08002be10318}
+Provider=%MS%
+SetupClass=BASE
+
+[SourceDisksNames]
+222="DirectX Drivers Disk","",1
+
+[SourceDisksFiles]
+trid_pci.drv=222
+trid_pci.vxd=222
+trid_pci.dll=222
+trid_bio.dll=222
+
+[DestinationDirs]
+DefaultDestDir=11
+
+; Manufacturers
+; ---------------------------------------------------------
+[Manufacturer]
+%Msg%=Mfg
+
+; Driver Sections
+; ---------------------------------------------------------
+[Mfg]
+%String1%=Trident.Install,PCI\VEN_1023&DEV_9320
+%String2%=Trident.Install,PCI\VEN_1023&DEV_9440
+%String3%=Trident.Install,PCI\VEN_1023&DEV_9660
+
+
+
+; Install Sections
+; ---------------------------------------------------------
+
+; -------------- Obsolete utility removal sections
+[Utility.DelReg]
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\DriverPages"
+
+; -------------- Common sections
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,,EnumPropPages
+HKR,INFO
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[VGA.LogConfig]
+ConfigPriority=HARDWIRED
+IOConfig=3B0-3BB
+IOConfig=3C0-3DF
+MemConfig=A0000-AFFFF
+MemConfig=C0000-C7FFF
+MemConfig=B8000-BFFFF
+
+
+; -------------- Trident
+[Trident.Install]
+CopyFiles=Trident.Copy
+AddReg=Trident.AddReg
+DelReg=Prev.DelReg,Utility.DelReg
+LogConfig=VGA.LogConfig
+
+[Trident.Copy]
+trid_pci.drv,,,12
+trid_pci.vxd,,,12
+trid_pci.dll,,,12
+trid_bio.dll,,,12
+
+[Trident.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,trid_pci.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,trid_pci.vxd
+HKR,DEFAULT,RefreshRate,,0
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,ExtModeSwitch,,0
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\720,480"
+HKR,"MODES\8\864,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\720,480"
+HKR,"MODES\16\864,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\720,480"
+HKR,"MODES\24\864,480"
+HKR,"MODES\24\800,600"
+HKR,"MODES\24\1024,600"
+HKR,"MODES\24\1024,768"
+HKR,"MODES\32\640,480"
+HKR,"MODES\32\800,600"
+HKR,"MODES\32\1024,768"
+
+[Trident.Install.PosDup]
+*PNP0903
+
+[Strings]
+MS="Microsoft"
+Msg="Trident Microsystems"
+String1="Trident 9320 PCI (v6.00.20)"
+String2="Trident 9440 PCI (v6.00.20)"
+String3="Trident 9685/9680/9682/9385/9382/9385-1 PCI (v6.00.20)"

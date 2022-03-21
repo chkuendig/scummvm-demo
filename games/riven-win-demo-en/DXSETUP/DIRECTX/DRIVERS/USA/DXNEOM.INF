@@ -1,0 +1,98 @@
+;
+; Neom Magic Display INF
+;
+[version]
+signature="$CHICAGO$"
+Class=Display
+ClassGUID={4d36e968-e325-11ce-bfc1-08002be10318}
+Provider=%MS%
+SetupClass=BASE
+
+[DestinationDirs]
+DefaultDestDir  =11             ;LDID_SYS
+Driver.Copy     =11
+
+; Manufacturers
+; ---------------------------------------------------------
+[Manufacturer]
+%NeoMagic%=Mfg.NeoMagic
+
+[Mfg.NeoMagic]
+%*NMX0010.DeviceDesc%=NeoMagic, *NMX0010
+%PCI\VEN_10C8&DEV_0001.DeviceDesc%=NeoMagic,PCI\VEN_10C8&DEV_0001
+%PCI\VEN_10C8&DEV_0002.DeviceDesc%=NeoMagic,PCI\VEN_10C8&DEV_0002
+%PCI\VEN_10C8&DEV_0003.DeviceDesc%=NeoMagic,PCI\VEN_10C8&DEV_0003
+
+; Install Sections
+; ---------------------------------------------------------
+
+; -------------- Common sections
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,,EnumPropPages
+HKR,INFO
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[VGA.LogConfig]
+ConfigPriority=HARDWIRED
+IOConfig=3B0-3BB
+IOConfig=3C0-3DF
+MemConfig=A0000-AFFFF
+MemConfig=B8000-BFFFF
+MemConfig=C0000-C7FFF,D0000-D7FFF,E0000-E5FFF,E0000-E7FFF
+
+
+; -------------- NeoMagic
+[NeoMagic]
+CopyFiles=NeoMagic.Copy
+DelReg=Prev.DelReg
+AddReg=NeoMagic.AddReg
+
+[NeoMagic.Copy]
+neom.drv,,,12
+neom.vxd,,,12
+neom.dll,,,12
+
+[NeoMagic.AddReg]
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,800,600"
+HKR,DEFAULT,drv,,neom.drv
+HKR,DEFAULT,vdd,,*vdd
+HKR,DEFAULT,minivdd,,neom.vxd
+HKR,DEFAULT,RefreshRate,,0
+HKR,DEFAULT,DDC,,1
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480",,,"60,75,85"
+HKR,"MODES\8\800,600",,,"60,75,85"
+HKR,"MODES\8\1024,768",,,"60,70,75"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\24\640,480"
+
+; User visible strings
+; ---------------------------------------------------------
+[Strings]
+MS="Microsoft"
+NeoMagic="NeoMagic Corporation"
+PCI\VEN_10C8&DEV_0001.DeviceDesc="NeoMagic MagicGraph 128 PCI"
+PCI\VEN_10C8&DEV_0002.DeviceDesc="NeoMagic MagicGraph 128V"
+PCI\VEN_10C8&DEV_0003.DeviceDesc="NeoMagic MagicGraph 128ZV"
+*NMX0010.DeviceDesc="NeoMagic MagicGraph 128 VL"
+
+[SourceDisksNames]
+222="DirectX Drivers Disk","",1
+
+[SourceDisksFiles]
+neom.drv=222
+neom.vxd=222
+neom.dll=222
+
+
+

@@ -1,0 +1,73 @@
+[DirectX Subsection]
+      1, directx\ddhelp.exe,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,32256,SYSTEM,999,,,
+      1, directx\dsound.vxd,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,59839,SYSTEM,999,,,
+      1, directx\mtrr.vxd,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,12009,SYSTEM,999,,,
+      1, directx\license.txt,,,COPY,1997-07-14,,,,!READONLY,,,,,,1315,,999,,,
+
+[DirectX DirectSound Subsection]
+      1, directx\dsound.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,145920,SYSTEM,999,,,
+
+[DirectX DirectSound VMM Subsection]
+      1, directx\vmcpd.x86,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,18602,SYSTEM,999,,,
+      1, directx\vmcpd.nec,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,18602,SYSTEM,999,,,
+
+[DirectX DirectDraw Subsection]
+      1, directx\ddraw.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,270848,SYSTEM,999,,,
+      1, directx\ddraw16.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,27808,SYSTEM,999,,,
+
+[DirectX Direct3D Subsection]
+      1, directx\d3drm.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,344576,SYSTEM,999,,,
+      1, directx\d3dxof.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,120320,SYSTEM,999,,,
+      1, directx\d3dim.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,161792,SYSTEM,999,,,
+      1, directx\d3drampf.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,95744,SYSTEM,999,,,
+      1, directx\d3drgbf.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,96256,SYSTEM,999,,,
+      1, directx\d3drm8f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,458240,SYSTEM,999,,,
+      1, directx\d3drm16f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,459264,SYSTEM,999,,,
+      1, directx\d3drm24f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,125952,SYSTEM,999,,,
+      1, directx\d3drm32f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,125952,SYSTEM,999,,,
+      1, directx\d3drg8f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,224768,SYSTEM,999,,,
+      1, directx\d3drg16f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,224768,SYSTEM,999,,,
+      1, directx\d3drg24f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,168448,SYSTEM,999,,,
+      1, directx\d3drg32f.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,166912,SYSTEM,999,,,
+      1, directx\d3drgbxf.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,100864,SYSTEM,999,,,
+      1, directx\d3drg8x.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,228352,SYSTEM,999,,,
+      1, directx\d3drg55x.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,305152,SYSTEM,999,,,
+      1, directx\d3drg56x.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,305152,SYSTEM,999,,,
+      1, directx\d3drg24x.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,172544,SYSTEM,999,,,
+      1, directx\d3drg32x.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,171520,SYSTEM,999,,,
+      1, directx\d3dhalf.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,124928,SYSTEM,999,,,
+      1, directx\d3dpmesh.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,104448,SYSTEM,999,,,
+
+[DirectX DirectPlay Subsection]
+      1, directx\dplayx.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,172440,SYSTEM,999,,,
+      1, directx\dpmodemx.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,81352,SYSTEM,999,,,
+      1, directx\dpwsockx.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,47568,SYSTEM,999,,,
+      1, directx\dplaysvr.exe,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,23960,SYSTEM,999,,,
+      1, directx\dpwsock.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,24064,SYSTEM,999,,,
+      1, directx\dpserial.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,41472,SYSTEM,999,,,
+      1, directx\dplay.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,39936,SYSTEM,999,,,
+
+[DirectX DirectInput Subsection]
+      1, directx\dinput.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,175616,SYSTEM,999,,,
+      1, directx\dinput.vxd,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,16986,SYSTEM,999,,,
+      1, directx\vjoyd.vxd,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,30320,SYSTEM,999,,,
+      1, directx\msanalog.vxd,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,12101,SYSTEM,999,,,
+      1, directx\joy.cpl,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,229888,SYSTEM,999,,,
+      1, directx\gcdef.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,564224,SYSTEM,999,,,
+      1, directx\gchand.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,80384,SYSTEM,999,,,
+
+[DirectX DirectVideo Subsection]
+
+[DirectX Setup Subsection]
+      1, directx\dxsetup.exe,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,88576,SYSTEM,999,,,
+      1, directx\dsetup.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,127488,SYSTEM,999,,,
+      1, directx\dsetup32.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,41984,SYSTEM,999,,,
+      1, directx\dsetup16.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,63056,SYSTEM,999,,,
+      1, directx\dxinfo.exe,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,299520,SYSTEM,999,,,
+      1, directx\devnode1.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,23040,SYSTEM,999,,,
+      1, directx\devnode2.dll,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,7168,SYSTEM,999,,,
+      1, directx\dxtool.exe,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,33280,SYSTEM,999,,,
+
+[DirectX Help Subsection]
+      1, directx\dijoy.hlp,,,COPY,1997-07-14,,,,!READONLY,,,,,SHARED,16339,SYSTEM,999,,,
+

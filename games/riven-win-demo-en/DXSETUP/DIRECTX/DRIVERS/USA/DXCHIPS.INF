@@ -1,0 +1,227 @@
+;
+; Chips and Technology Display INF
+;
+[version]
+signature="$CHICAGO$"
+Class=Display
+ClassGUID={4d36e968-e325-11ce-bfc1-08002be10318}
+Provider=%MS%
+SetupClass=BASE
+
+[DestinationDirs]
+DefaultDestDir  =11		;LDID_SYS
+Orchid.RenFiles =11		;LDID_SYS
+Chips.RenFiles  =11		;LDID_SYS
+Driver.Copy     =11
+CpqIni.Copy     =10
+
+; Manufacturers
+; ---------------------------------------------------------
+[Manufacturer]
+%Boca%   =Mfg.Boca
+%Chips%  =Mfg.Chips
+%ELSA%   =Mfg.ELSA
+
+
+; Driver Sections
+; ---------------------------------------------------------
+
+[Mfg.Boca]
+%Voyager%=ChipsAcc,, *PNP0931
+
+[Mfg.Chips]
+%*PNP0930.DeviceDesc%=ChipsSVGA, *PNP0930, *PNP0931	; Super VGA
+%*PNP0931.DeviceDesc%=ChipsAcc, *PNP0931, *PNP0930	; Accelerator
+
+%PCI\VEN_102C&DEV_00B8.DeviceDesc%=ChipsAcc,PCI\VEN_102C&DEV_00B8 ;CT 64310
+%PCI\VEN_102C&DEV_00D8.DeviceDesc%=ChipsAcc,PCI\VEN_102C&DEV_00D8 ;CT 65545
+%PCI\VEN_102C&DEV_00DC.DeviceDesc%=ChipsMM,PCI\VEN_102C&DEV_00DC ;CT 65548
+
+%PCI\VEN_102C&DEV_00E0.DeviceDesc%=ChipsMM,PCI\VEN_102C&DEV_00E0 ;CT 65550
+%PCI\VEN_102C&DEV_00E4.DeviceDesc%=ChipsMM,PCI\VEN_102C&DEV_00E4 ;CT 65554
+
+[Mfg.ELSA]
+%WIN1280%=ChipsAcc,, *PNP0931
+%WIN2-1280%=ChipsAcc,, *PNP0931
+
+
+; Install Sections
+; ---------------------------------------------------------
+
+; -------------- Obsolete utility removal sections
+
+
+; -------------- Common sections
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,,EnumPropPages
+HKR,INFO
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[VGA.LogConfig]
+ConfigPriority=HARDWIRED
+IOConfig=3B0-3BB
+IOConfig=3C0-3DF
+MemConfig=A0000-AFFFF
+MemConfig=B8000-BFFFF
+MemConfig=C0000-C7FFF,D0000-D7FFF,E0000-E5FFF,E0000-E7FFF
+
+
+; -------------- Chips & Technologies SVGA
+[ChipsSVGA]
+CopyFiles=Chips.Copy
+DelReg=Prev.DelReg
+AddReg=ChipsSVGA.AddReg
+RenFiles=Chips.RenFiles
+LogConfig=VGA.LogConfig
+
+[Chips.Copy]
+chips.drv,,,12
+chips.vxd,,,12
+framebuf.drv,,,12
+supervga.drv,,,12
+chips.dll,,,12
+framebuf.dll,,,12
+
+[ChipsSVGA.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"4,640,480"
+HKR,DEFAULT,drv,,framebuf.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,chips.vxd
+HKR,DEFAULT,RefreshRate,,0
+HKR,DEFAULT,ExtModeSwitch,,0
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,768"
+
+[Chips.RenFiles]
+chipscpl.cp0, chipscpl.cpl
+
+[ChipsSVGA.PosDup]
+*PNP0930, *PNP0931
+
+; -------------- Chips & Technologies Accelerator
+[ChipsAcc]
+CopyFiles=Chips.Copy
+DelReg=Prev.DelReg
+AddReg=ChipsAcc.AddReg
+RenFiles=Chips.RenFiles
+LogConfig=VGA.LogConfig
+
+[ChipsAcc.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"4,640,480"
+HKR,DEFAULT,drv,,chips.drv
+;HKR,DEFAULT,drv,,framebuf.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,chips.vxd
+HKR,DEFAULT,RefreshRate,,0
+HKR,DEFAULT,ExtModeSwitch,,0
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\800,600"
+
+[ChipsAcc.PosDup]
+*PNP0930, *PNP0931
+
+
+; -------------- Chips & Technologies MM
+[ChipsMM]
+CopyFiles=ChipsMM.Copy
+DelReg=Prev.DelReg
+AddReg=ChipsMM.AddReg
+RenFiles=ChipsMM.RenFiles
+LogConfig=VGA.LogConfig
+
+[ChipsMM.Copy]
+chipmm.drv,,,12
+chipmm.dll,,,12
+chipmm.vxd,,,12
+
+[ChipsMM.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"4,640,480"
+HKR,DEFAULT,drv,,chipmm.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,chipmm.vxd
+HKR,DEFAULT,RefreshRate,,0
+HKR,DEFAULT,ExtModeSwitch,,0
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\800,600"
+
+[ChipsMM.RenFiles]
+chipscpl.cp0, chipscpl.cpl
+
+[ChipsMM.PosDup]
+*PNP0930, *PNP0931
+
+
+; User visible strings
+; ---------------------------------------------------------
+[Strings]
+MS="Microsoft"
+
+Boca="Boca Research"
+Chips="Chips & Technologies"
+ELSA="ELSA"
+
+*PNP0930.DeviceDesc="Chips & Tech. Super VGA"
+*PNP0931.DeviceDesc="Chips & Tech. Accelerator"
+
+PCI\VEN_102C&DEV_00D8.DeviceDesc="Chips & Technologies 65545 PCI"
+PCI\VEN_102C&DEV_00B8.DeviceDesc="Chips & Technologies 64310 PCI"
+PCI\VEN_102C&DEV_00DC.DeviceDesc="Chips & Technologies 65548 PCI"
+PCI\VEN_102C&DEV_00E0.DeviceDesc="Chips & Technologies 65550 PCI"
+PCI\VEN_102C&DEV_00E4.DeviceDesc="Chips & Technologies 65554 PCI"
+
+Voyager="Boca Voyager (C&T)"
+WIN1280="ELSA WINNER 1280 (C&T)"
+WIN2-1280="ELSA WINNER/2-1280 (C&T)"
+
+[SourceDisksNames]
+222="DirectX Drivers Disk","",1
+
+[SourceDisksFiles]
+supervga.drv=222
+framebuf.drv=222
+framebuf.dll=222
+chips.drv=222
+chips.dll=222
+chips.vxd=222
+chipmm.drv=222
+chipmm.dll=222
+chipmm.vxd=222
+

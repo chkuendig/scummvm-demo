@@ -1,0 +1,227 @@
+;****************************************************************************
+;* INF file for Win95 Freedom PCI Audio
+;* Copyright 1996,1997 Diamond Multimedia Systems Inc.
+;* Version  1.00.00
+;*
+;* Modified for minimum upgrade install over existing 1.01 drivers
+;*
+;****************************************************************************
+
+[version]
+Signature="$CHICAGO$"
+Class = MEDIA
+Provider = %Mfg%
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+; Manufacturers
+;----------------------------------------
+[Manufacturer]
+%Mfg% = Diamond
+
+
+; Driver sections
+;----------------------------------------
+[Diamond]
+;;%Free.DeviceDesc% = Free.Install, PCI\VEN_1092&DEV_9999
+;;%VirtSB.DeviceDesc% = VirtSB.Install, VIRTUAL\F3VirtSB
+;;%VirtMPU401.DeviceDesc% = VirtMPU401.Install, VIRTUAL\F3VirtMPU401
+%Free.DeviceDesc% = UpgradeFree.Install, PCI\VEN_1092&DEV_9999
+
+
+[ControlFlags]
+ExcludeFromSelect=VIRTUAL\F3VirtSB
+ExcludeFromSelect=VIRTUAL\F3VirtMPU401
+
+
+; Install sections
+;----------------------------------------
+[UpgradeFree.Install]
+CopyFiles   = UpgradeFree.CopyFiles, FreeJoy.CopyFiles
+AddReg      = UpgradeFree.AddReg
+
+[Free.Install]
+CopyFiles   = Free.CopyFiles, FreeJoy.CopyFiles, AR3D.CopyFiles
+AddReg      = Free.AddReg, AR3D.AddReg
+
+[VirtSB.Install]
+AddReg=VirtSB.AddReg
+
+[VirtMPU401.Install]
+AddReg=VirtMPU401.AddReg
+
+; Copy files sections
+;----------------------------------------
+[UpgradeFree.CopyFiles]
+f3driver.vxd
+f3dsound.vxd
+f3vrtsb.vxd
+f3wavmix.drv
+f3midi.drv
+
+[Free.CopyFiles]
+f3Driver.vxd
+f3DSound.vxd
+f3VrtSB.vxd
+f3WavMix.drv
+f3Midi.drv
+f3Api32.dll
+f3Api16.dll
+f3Win.bdi
+f3strtup.exe
+
+[FreeJoy.CopyFiles]
+f3Joystk.vxd
+vjoyd.vxd
+msjstick.drv
+
+[AR3D.CopyFiles]
+A3D.dll
+A3D.vxd
+EAR.dll
+
+; AddReg sections
+;----------------------------------------
+[UpgradeFree.AddReg]
+
+HKR, , DevLoader, , mmdevldr.vxd
+HKR, , Driver, , "f3Driver.vxd vjoyd.vxd"
+
+HKR, Drivers, , ,
+HKR, Drivers, MIGRATED, , 0
+HKR, Drivers\wave, , , 
+HKR, Drivers\mixer, , , 
+HKR, Drivers\midi, , , 
+HKR, Drivers\aux, , , 
+
+HKR, Drivers\wave\f3WavMix.drv, Driver, , f3WavMix.drv
+HKR, Drivers\mixer\f3WavMix.drv, Driver, , f3WavMix.drv
+HKR, Drivers\aux\f3WavMix.drv, Driver, , f3WavMix.drv
+HKR, Drivers\midi\f3Midi.drv, Driver, , f3Midi.drv
+HKR, Drivers\midi\f3Midi.drv, Description, , %FreeMIDI.DeviceDesc%
+HKR, Drivers, SubClasses, , "wave, mixer, midi, aux, joystick"
+
+HKLM, "SOFTWARE\Diamond Multimedia\Freedom Audio\DynaDrivers", DSoundHAL, ,"f3DSound.vxd"
+HKLM, "SOFTWARE\Diamond Multimedia\Freedom Audio", DspBootDelay, , "10"
+HKLM, "SOFTWARE\Diamond Multimedia\Freedom Audio\f3setup", HardwareInstalled, , 1
+HKLM, "SOFTWARE\Diamond Multimedia\Freedom Audio\f3setup", SoftwareUpdatedToVersion,  , "1.02"  
+
+[Free.AddReg]
+HKR, , DevLoader, , mmdevldr.vxd
+HKR, , Driver, , "f3Driver.vxd vjoyd.vxd"
+
+HKR, Drivers, , ,
+HKR, Drivers, MIGRATED, , 0
+HKR, Drivers\wave, , , 
+HKR, Drivers\mixer, , , 
+HKR, Drivers\midi, , , 
+HKR, Drivers\aux, , , 
+HKR, Drivers\joystick, , ,
+
+HKR, Drivers\wave\f3WavMix.drv, Driver, , f3WavMix.drv
+HKR, Drivers\mixer\f3WavMix.drv, Driver, , f3WavMix.drv
+HKR, Drivers\aux\f3WavMix.drv, Driver, , f3WavMix.drv
+HKR, Drivers\midi\f3Midi.drv, Driver, , f3Midi.drv
+HKR, Drivers\midi\f3Midi.drv, Description, , %FreeMIDI.DeviceDesc%
+HKR, Drivers\joystick\msjstick.drv, Driver, , msjstick.drv
+HKR, Drivers\joystick\msjstick.drv, Description, , %Joystick.DeviceDesc%
+HKR, Drivers, SubClasses, , "wave, mixer, midi, aux, joystick"
+
+HKR, DSPA, RunImageFile, , "%11%\f3Win.bdi"
+HKR, Config, DacBuffSmall, , 48
+HKR, Config, DacBuffMed, , 64
+HKR, Config, DacBuffLarge, , 96
+
+;* Joystick registry settings
+;*
+HKLM, %KEY_OEM_JOY%\FreeJoy, OEMName, , %Joystick.DeviceDesc%
+HKLM, %KEY_OEM_JOY%\FreeJoy, OEMCallout, , f3joystk.vxd
+HKLM, %KEY_OEM_JOY%\FreeJoy, OEMData, 1, 0, 0, 0, 4, 4, 0, 0, 0 
+
+HKLM, "SOFTWARE\Diamond Multimedia\Freedom Audio\DynaDrivers", DSoundHAL, ,"f3DSound.vxd"
+HKLM, "SOFTWARE\Diamond Multimedia\Freedom Audio", DspBootDelay, , "10"
+HKLM, "SOFTWARE\Diamond Multimedia\Freedom Audio\f3setup", HardwareInstalled, , 1
+
+;* Important: Do not use RunOnce to start f3Strtup.exe.
+;* This causes f3Setup to start before MM component installer completes.
+;*
+HKLM, %KEY_RUN%, f3AudioSetup, ,"%11%\f3strtup.exe %01%"
+HKLM, %KEY_RUN%, SystemTray, , "SysTray.Exe"
+HKLM,%KEY_OPT_COMPONENTS%\Vol,,,
+HKLM,%KEY_OPT_COMPONENTS%\ACM,,,
+HKLM,%KEY_OPT_COMPONENTS%\Rec,,,
+HKLM,%KEY_OPT_COMPONENTS%\MPlay,,,
+
+
+[AR3D.AddReg]
+HKCR,A3d,,,"A3d Object"
+HKCR,A3d\CLSID,,,{d8f1eee0-f634-11cf-8700-00a0245d918b}
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b},,,"A3d Object"
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32,,,a3d.dll
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32,"ThreadingModel",,"Apartment"
+
+[VirtSB.AddReg]
+HKR,,DeviceDriver,,f3vrtsb.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+[VirtMPU401.AddReg]
+HKR,,DeviceDriver,,f3vrtsb.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+
+; Disk & Directory sections
+;----------------------------------------
+[DestinationDirs]
+DefaultDestDir    = 11              ; LDID_SYS
+
+[SourceDisksNames]
+1 = "Monster Sound Disk1",,0001
+222="DirectX Drivers Disk","",1
+
+[SourceDisksFiles]
+f3Driver.vxd   = 222
+f3DSound.vxd   = 222
+f3Joystk.vxd   = 1
+f3WavMix.drv   = 222
+f3Midi.drv     = 222
+f3VrtSB.vxd    = 222
+f3Api32.dll    = 1
+f3Api16.dll    = 1
+f3Win.bdi      = 1
+
+;* Setup Files
+f3strtup.exe   = 1
+
+;* Joystick Files
+vjoyd.vxd      = 222
+msjstick.drv   = 222
+
+;* AR3D Files
+A3D.vxd        = 1
+A3D.dll        = 1
+EAR.dll        = 1
+
+
+; User visible strings
+;----------------------------------------
+[Strings]
+Mfg = "Diamond Multimedia"
+Free.DeviceDesc = "Diamond Monster Sound"
+FreeMIDI.DeviceDesc = "Monster Sound MIDI Port"
+VirtSB.DeviceDesc = "Diamond Sound Blaster Emulation"
+VirtMPU401.DeviceDesc = "Diamond MPU-401 Emulation"
+Joystick.DeviceDesc = "Monster Sound Gameport"
+MediaClassName = "Sound, video and game controllers"
+
+KEY_OEM_JOY = "SYSTEM\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM"
+KEY_OPT_COMPONENTS = "SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+KEY_RUN = "Software\Microsoft\Windows\CurrentVersion\Run"
+KEY_RUN_ONCE = "Software\Microsoft\Windows\CurrentVersion\RunOnce"
+
+

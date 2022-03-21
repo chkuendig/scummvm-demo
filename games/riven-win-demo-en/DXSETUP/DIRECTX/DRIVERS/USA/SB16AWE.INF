@@ -1,0 +1,699 @@
+;
+; Creative Technology Ltd. SoundBlaster 16, AWE 32, AWE 64 devices.
+;
+; Description
+;     This .inf files contains the following device for the installation
+;         1. PNPB003                       => SB16 Legacy Device, compatible ID
+;         2. CTL0001                       => SB16 PnP Device
+;         3. CTL0021                       => AWE Device
+;         4. CTL0022                       => AWE64 Wavetable MIDI (AWE32 compatible)
+;         5. CTL0023                       => AWE64 Gold Wavetable MIDI (AWE32 compatible)
+;         6. CTL0024                       => AWE64 compatible Wavetable MIDI (AWE32 compatible)
+;         7. CTL0031                       => SB16 PnP Device
+;         8. CTL0041                       => SB16 PnP Device (V16CL/V32D/V32G)
+;         9. CTL0042                       => AWE64 16-bit Audio (SB16 compatible)
+;         A. CTL0043                       => SB16 PnP Device
+;         B. CTL0044                       => AWE64 Gold 16-bit Audio (SB16 compatible)
+;         C. CTL0045                       => AWE64 16-bit Audio (SB16 compatible)
+;         D. CTL0046                       => AWE64 compatible 16-bit Audio (SB16 compatible)
+;         E: CTL0047                       => SB16 PnP Device
+;         F. CTL0051                       => 3D Stereo Enhancement Device
+;        10. CTL8001                       => Legacy SB Device
+;        11. CTL7002                       => Programmable Game Port
+;        12. CTL7005                       => Programmable Game Port (1 I/O)
+;        13. VIRTUAL\SBAWE-MPUEmulation    => MPU Emulation Device
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+provider=%MSFT%
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%CLMfgName%=Creative
+
+[Creative]
+%*PNPB003.DeviceDesc%=PNPB003_Device, *PNPB003
+%*CTL0001.DeviceDesc%=CTL0001_Device, *CTL0001
+%*CTL0001.DeviceDesc%=CTL0031_Device, *CTL0031
+%*CTL0001.DeviceDesc%=CTL0041_Device, *CTL0041
+%*CTL0001.DeviceDesc%=CTL0043_Device, *CTL0043
+%*CTL0001.DeviceDesc%=CTL0047_Device, *CTL0047
+%*CTL0021.DeviceDesc%=CTL0021_Device, *CTL0021
+%*CTL0021.DeviceDesc%=CTL0021_Device, *CTL8001
+%*CTL0022.DeviceDesc%=CTL0022_Device, *CTL0022
+%*CTL0023.DeviceDesc%=CTL0023_Device, *CTL0023
+%*CTL0024.DeviceDesc%=CTL0024_Device, *CTL0024
+%*CTL0042.DeviceDesc%=CTL0042_Device, *CTL0042
+%*CTL0042.DeviceDesc%=CTL0045_Device, *CTL0045
+%*CTL0044.DeviceDesc%=CTL0044_Device, *CTL0044
+%*CTL0046.DeviceDesc%=CTL0046_Device, *CTL0046
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+;---------------------------------------------------------------;
+
+[PNPB003_Device]
+LogConfig=SB16.LC1,SB16.LC2,SB16.LC3,SB16.LC4,SB16.LC5,SB16.LC6,SB16.LC7,SB16.LC8
+DelFiles=SB.DelList
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,PNPB003.AddReg,SB16.AddReg,CLCheckSB16.AddReg
+UpdateInis=SB.UpdateInis
+UpdateIniFields=Drivers.fields
+Reboot=1
+
+[PNPB003_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=330-331
+IOConfig=388-38B
+IRQConfig=5
+DMAConfig=1
+DMAConfig=5
+
+[CTL0001_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0001S.AddReg
+
+[CTL0031_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0031S.AddReg
+
+[CTL0041_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0041S.AddReg
+
+[CTL0043_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0043S.AddReg
+
+[CTL0047_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0047S.AddReg
+
+[CTL0021_Device]
+CopyFiles=SBAWE.CopyList
+DelReg=CLCheckAWE.DelReg
+AddReg=WAVE.AddReg,CTL0021.AddReg,SBAWE.AddReg,CLCheckAWE.AddReg, CTL0021S.AddReg
+
+[CTL0022_Device]
+CopyFiles=SBAWE.CopyList
+DelReg=CLCheckAWE.DelReg
+AddReg=WAVE.AddReg,CTL0021.AddReg,SBAWE.AddReg,CLCheckAWE.AddReg, CTL0022S.AddReg
+
+[CTL0023_Device]
+CopyFiles=SBAWE.CopyList
+DelReg=CLCheckAWE.DelReg
+AddReg=WAVE.AddReg,CTL0021.AddReg,SBAWE.AddReg,CLCheckAWE.AddReg, CTL0023S.AddReg
+
+[CTL0024_Device]
+CopyFiles=SBAWE.CopyList
+DelReg=CLCheckAWE.DelReg
+AddReg=WAVE.AddReg,CTL0021.AddReg,SBAWE.AddReg,CLCheckAWE.AddReg, CTL0024S.AddReg
+
+[CTL0042_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0042S.AddReg
+
+[CTL0044_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0044S.AddReg
+
+[CTL0045_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0045S.AddReg
+
+[CTL0046_Device]
+CopyFiles=SB16.CopyList
+DelReg=CLCheckSB16.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,CTL0001.AddReg,SB16.AddReg,CLCheckSB16.AddReg, CTL0046S.AddReg
+
+[SB.UpdateInis]
+system.ini,386Enh,"device=wsssb16.386"
+system.ini,386Enh,"device=wsssbpro.386"
+system.ini,386Enh,"device=vtbd.386"
+system.ini,386Enh,"device=vss4d.386"
+system.ini,386Enh,"device=vsbpd.386"
+system.ini,386Enh,"device=vsbd.386"
+system.ini,386Enh,"device=vadlibd.386"
+system.ini,drivers,"wave*=sbwave.drv",,1
+system.ini,drivers,"wave*=sndblst2.drv",,1
+system.ini,drivers,"wave*=sndblst.drv",,1
+system.ini,drivers,"wave*=sb15snd.drv",,1
+system.ini,drivers,"wave*=sb20snd.drv",,1
+system.ini,drivers,"wave*=sbpsnd.drv",,1
+system.ini,drivers,"wave*=sbmcvsnd.drv",,1
+system.ini,drivers,"wave*=spmcvsnd.drv",,1
+system.ini,drivers,"wave*=sb16snd.drv",,1
+system.ini,drivers,"wave*=wsssb16.drv",,1
+system.ini,drivers,"wave*=wsssbpro.drv",,1
+system.ini,drivers,"wave*=tlwave.drv",,1
+system.ini,drivers,"wave*=ss4.drv",,1
+system.ini,drivers,"midi*=sbpfm.drv",,1
+system.ini,drivers,"midi*=sbp2fm.drv",,1
+system.ini,drivers,"midi*=sndblst2.drv",,1
+system.ini,drivers,"midi*=sndblst.drv",,1
+system.ini,drivers,"midi*=sb15snd.drv",,1
+system.ini,drivers,"midi*=sb20snd.drv",,1
+system.ini,drivers,"midi*=sbpsnd.drv",,1
+system.ini,drivers,"midi*=spmcvsnd.drv",,1
+system.ini,drivers,"midi*=sbmcvsnd.drv",,1
+system.ini,drivers,"midi*=sbfm.drv",,1
+system.ini,drivers,"midi*=sb2fm.drv",,1
+system.ini,drivers,"midi*=sb16fm.drv",,1
+system.ini,drivers,"midi*=sb16snd.drv",,1
+system.ini,drivers,"midi*=sbawe32.drv",,1
+system.ini,drivers,"midi*=wsssb16.drv",,1
+system.ini,drivers,"midi*=wsssbpro.drv",,1
+system.ini,drivers,"midi*=mpu401.drv",,1
+system.ini,drivers,"midi*=msadlib.drv",,1
+system.ini,drivers,"midi*=ss4.drv",,1
+system.ini,drivers,"midi*=sc-opl2.drv",,1
+system.ini,drivers,"aux*=sndblst2.drv",,1
+system.ini,drivers,"aux*=sndblst.drv",,1
+system.ini,drivers,"aux*=sbaux.drv",,1
+system.ini,drivers,"aux*=sbpaux.drv",,1
+system.ini,drivers,"aux*=sb16aux.drv",,1
+system.ini,drivers,"aux*=wsssb16.drv",,1
+system.ini,drivers,"aux*=wsssbpro.drv",,1
+system.ini,drivers,"mixer*=sbpmixer.drv",,1
+system.ini,drivers,"mixer*=wsssb16.drv",,1
+system.ini,drivers,"mixer*=wsssbpro.drv",,1
+system.ini,drivers,"mixer*=mvmixer.drv",,1
+system.ini,drivers,"mixer*=sb16aux.drv",,1
+
+[SB16.LC1]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+DMAConfig=5,6,7
+
+[SB16.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[SB16.LC3]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+DMAConfig=5,6,7
+
+[SB16.LC4]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[SB16.LC5]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IOConfig=330-331,300-301
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+DMAConfig=5,6,7
+
+[SB16.LC6]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IOConfig=330-331,300-301
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[SB16.LC7]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IOConfig=330-331,300-301
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+DMAConfig=5,6,7
+
+[SB16.LC8]
+ConfigPriority=NORMAL
+IOConfig=220-22F,240-24F,260-26F,280-28F
+IOConfig=330-331,300-301
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[*PNPB003.Det]
+AddReg=PreCopySection
+
+[SB16.CopyList]
+cspman.dll,,,8
+sb16.vxd,,,40
+sbfm.drv,,,8
+sb16snd.drv,,,40
+wfm0200.acv,,,9
+wfm0200a.csp,,,9
+wfm0201.acv,,,9
+wfm0201a.csp,,,9
+wfm0202.acv,,,9
+wfm0202a.csp,,,9
+wfm0203.acv,,,9
+wfm0203a.csp,,,9
+
+[SBAWE.CopyList]
+sbawe.vxd,,,8
+sbawe32.drv,,,8
+synthgm.sbk,,,8
+
+[SB.DelList]
+msadlib.drv,,,1
+fmsynth.drv,,,1
+sbpmix.cpl,,,1
+sbp2fm.drv,,,1
+sbpfm.drv,,,1
+sbwave.drv,,,1
+mvmixer.drv,,,1
+spmcvsnd.drv,,,1
+sbmcvsnd.drv,,,1
+ss4.drv,,,1
+sc-opl2.drv,,,1
+vss4d.386,,,1
+nullwave.drv,,,1
+mpu401.drv,,,1
+vsbpd.386,,,1
+vsbd.386,,,1
+vadlibd.386,,,1
+sbwave.drv,,,1
+sndblst.drv,,,1
+sndblst2.drv,,,1
+wfm0001a.csp,,,1
+wfm0006.acv,,,1
+wfm0006a.csp,,,1
+wfm0007.acv,,,1
+wfm0007a.csp,,,1
+wfm0011.acv,,,1
+wfm0011a.csp,,,1
+wfm0200.acv,,,1
+wfm0200a.csp,,,1
+wfm0201.acv,,,1
+wfm0201a.csp,,,1
+wfm0202.acv,,,1
+wfm0202a.csp,,,1
+wfm0203.acv,,,1
+wfm0203a.csp,,,1
+
+[CLCheckSB16.DelReg]
+HKLM,%KEY_CHKVER%,sb16snd.drv
+HKLM,%KEY_CHKVER%,cspman.dll
+HKLM,%KEY_CHKVER%,wfm0200.acv
+
+[CLCheckSB16.AddReg]
+HKLM,%KEY_FIL%\fl.UpdateInis,wave.sb16snd,,"system.ini,drivers,""wave*=sb16snd.drv"",,1"
+HKLM,%KEY_FIL%\fl.UpdateInis,aux.sb16aux,,"system.ini,drivers,""aux*=sb16aux.drv"",,1"
+HKLM,%KEY_FIL%\fl.UpdateInis,midi.sb16aux,,"system.ini,drivers,""midi*=sb16aux.drv"",,1"
+HKLM,%KEY_FIL%\fl.UpdateInis,midi.sb16fm,,"system.ini,drivers,""midi*=sb16fm.drv"",,1"
+HKLM,%KEY_FIL%\fl.UpdateInis,midi.sb16snd,,"system.ini,drivers,""midi*=sb16snd.drv"",,1"
+HKLM,%KEY_FIL%\fl.UpdateInis,mixer.sb16aux,,"system.ini,drivers,""mixer*=sb16aux.drv"",,1"
+HKLM,%KEY_FIL%\fl.UpdateInis,mixer.sb16mix,,"system.ini,drivers,""mixer*=sb16mix.drv"",,1"
+HKLM,%KEY_FIL%\fl.UpdateInis,device.wsssb16,,"system.ini,386Enh,""device=wsssb16.386"",,"
+HKLM,%KEY_FIL%\fl.UpdateInis,device.vsbpd,,"system.ini,386Enh,""device=vsbpd.386"",,"
+HKLM,%KEY_FIL%\PostInstall,UpdateIniFields,,"UpdateIniFields=fl.UpdateIniFields"
+HKLM,%KEY_FIL%\fl.UpdateIniFields,,,"1"
+HKLM,%KEY_FIL%\fl.UpdateIniFields,msmixmgr,,"system.ini,boot,drivers,msmixmgr.dll"
+HKLM,%KEY_FIL%\fl.UpdateInis,wavemix.Remix,,"wavemix.ini,default,,""Remix=1"","
+
+[CLCheckAWE.DelReg]
+HKLM,%KEY_CHKVER%,sbawe32.drv,2,0
+HKLM,%KEY_CHKVER%,sbawe.vxd,2,0
+
+[CLCheckAWE.AddReg]
+HKLM,%KEY_FIL%\fl.UpdateInis,midi.sbawe32,,"system.ini,drivers,""midi*=sbawe32.drv"",,1"
+
+[Drivers.fields]
+system.ini,boot,drivers,msmixmgr.dll
+system.ini,boot,drivers,mmmixer.dll
+
+[*PNPB003.KnownDrivers]
+sb16snd.drv
+wsssb16.drv
+
+[DestinationDirs]
+DefaultDestDir=11
+
+[SourceDisksNames]
+222="DirectX Drivers Disk","",1
+
+[SourceDisksFiles]
+sb16.vxd=222
+cspman.dll=222
+sb16snd.drv=222
+sbfm.drv=222
+wfm0200.acv=222
+wfm0200a.csp=222
+wfm0201.acv=222
+wfm0201a.csp=222
+wfm0202.acv=222
+wfm0202a.csp=222
+wfm0203.acv=222
+wfm0203a.csp=222
+sbawe.vxd=222
+sbawe32.drv=222
+synthgm.sbk=222
+
+;---------------------------------------------------------------;
+
+[SB16.AddReg]
+HKR,,Driver,,sb16.vxd
+HKR,Drivers\wave\sb16snd.drv,Driver,,sb16snd.drv
+HKR,Drivers\midi\sbfm.drv,Driver,,sbfm.drv
+HKR,Drivers\midi\sb16snd.drv,Driver,,sb16snd.drv
+HKR,Drivers\midi\sb16snd.drv,External,1,01,00,00,00
+HKR,Drivers\mixer\sb16snd.drv,Driver,,sb16snd.drv
+HKR,Drivers\aux\sb16snd.drv,Driver,,sb16snd.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[SBAWE.AddReg]
+HKR,,Driver,,sbawe.vxd
+HKR,Drivers\midi\sbawe32.drv,Driver,,sbawe32.drv
+HKR,Drivers,SubClasses,,"midi"
+
+[MIXER.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+[WAVE.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+
+[PNPB003.AddReg]
+HKR,Drivers\wave\sb16snd.drv,Description,,%*PNPB003.DeviceDesc%
+HKR,Drivers\midi\sbfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\sb16snd.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\mixer\sb16snd.drv,Description,,%*PNPB003.DeviceDesc%
+HKR,Drivers\aux\sb16snd.drv,Description,,%*PNPB003.DeviceDesc%
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[CTL0001.AddReg]
+HKR,Drivers\wave\sb16snd.drv,Description,,%*CTL0001.DeviceDesc%
+HKR,Drivers\midi\sbfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\sb16snd.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\mixer\sb16snd.drv,Description,,%*CTL0001.DeviceDesc%
+HKR,Drivers\aux\sb16snd.drv,Description,,%*CTL0001.DeviceDesc%  
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[CTL0001S.AddReg]
+HKLM,%*CTL0001.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0001.MIDIOutDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0001.MIDIInDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%WaveInDevName%,,%*CTL0001.WaveInDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0001.WaveOutDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%MixerDevName%,,%*CTL0001.MixerDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0001.AuxCDDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0001.AuxLineInDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0001.AuxMicDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0001.AuxPCSpkDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0001.AuxMasterDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0001.AuxWaveDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0001.AuxMIDIDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%AuxAuxOutDevName%,,%*CTL0001.AuxAuxOutDevName%
+HKLM,%*CTL0001.DeviceInfoKey%,%DSOutDevName%,,%*CTL0001.DSOutDevName%
+
+[CTL0031S.AddReg]
+HKLM,%*CTL0031.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0001.MIDIOutDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0001.MIDIInDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%WaveInDevName%,,%*CTL0001.WaveInDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0001.WaveOutDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%MixerDevName%,,%*CTL0001.MixerDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0001.AuxCDDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0001.AuxLineInDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0001.AuxMicDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0001.AuxPCSpkDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0001.AuxMasterDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0001.AuxWaveDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0001.AuxMIDIDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%AuxAuxOutDevName%,,%*CTL0001.AuxAuxOutDevName%
+HKLM,%*CTL0031.DeviceInfoKey%,%DSOutDevName%,,%*CTL0001.DSOutDevName%
+
+[CTL0041S.AddReg]
+HKLM,%*CTL0041.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0001.MIDIOutDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0001.MIDIInDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%WaveInDevName%,,%*CTL0001.WaveInDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0001.WaveOutDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%MixerDevName%,,%*CTL0001.MixerDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0001.AuxCDDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0001.AuxLineInDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0001.AuxMicDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0001.AuxPCSpkDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0001.AuxMasterDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0001.AuxWaveDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0001.AuxMIDIDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%AuxAuxOutDevName%,,%*CTL0001.AuxAuxOutDevName%
+HKLM,%*CTL0041.DeviceInfoKey%,%DSOutDevName%,,%*CTL0001.DSOutDevName%
+
+[CTL0043S.AddReg]
+HKLM,%*CTL0043.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0001.MIDIOutDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0001.MIDIInDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%WaveInDevName%,,%*CTL0001.WaveInDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0001.WaveOutDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%MixerDevName%,,%*CTL0001.MixerDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0001.AuxCDDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0001.AuxLineInDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0001.AuxMicDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0001.AuxPCSpkDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0001.AuxMasterDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0001.AuxWaveDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0001.AuxMIDIDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%AuxAuxOutDevName%,,%*CTL0001.AuxAuxOutDevName%
+HKLM,%*CTL0043.DeviceInfoKey%,%DSOutDevName%,,%*CTL0001.DSOutDevName%
+
+[CTL0047S.AddReg]
+HKLM,%*CTL0047.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0001.MIDIOutDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0001.MIDIInDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%WaveInDevName%,,%*CTL0001.WaveInDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0001.WaveOutDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%MixerDevName%,,%*CTL0001.MixerDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0001.AuxCDDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0001.AuxLineInDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0001.AuxMicDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0001.AuxPCSpkDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0001.AuxMasterDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0001.AuxWaveDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0001.AuxMIDIDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%AuxAuxOutDevName%,,%*CTL0001.AuxAuxOutDevName%
+HKLM,%*CTL0047.DeviceInfoKey%,%DSOutDevName%,,%*CTL0001.DSOutDevName%
+
+[CTL0021.AddReg]
+HKR,Drivers\midi\sbawe32.drv,Description,,%*CTL0021.DeviceDesc%
+
+[CTL0021S.AddReg]
+HKLM,%*CTL0021a.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0021a.MIDIOutDevName%
+HKLM,%*CTL0021a.DeviceInfoKey%,%DSOutDevName%,,%*CTL0021a.DSOutDevName% 
+
+[CTL0022S.AddReg]
+HKLM,%*CTL0022.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0022.MIDIOutDevName%
+HKLM,%*CTL0022.DeviceInfoKey%,%DSOutDevName%,,%*CTL0022.DSOutDevName%
+
+[CTL0023S.AddReg]
+HKLM,%*CTL0023.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0023.MIDIOutDevName%
+HKLM,%*CTL0023.DeviceInfoKey%,%DSOutDevName%,,%*CTL0023.DSOutDevName%
+
+[CTL0024S.AddReg]
+HKLM,%*CTL0024.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0022.MIDIOutDevName%
+HKLM,%*CTL0024.DeviceInfoKey%,%DSOutDevName%,,%*CTL0022.DSOutDevName%
+
+[CTL0042S.AddReg]
+HKLM,%*CTL0042.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0042.MIDIOutDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0042.MIDIInDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%WaveInDevName%,,%*CTL0042.WaveInDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0042.WaveOutDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%MixerDevName%,,%*CTL0042.MixerDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0042.AuxCDDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0042.AuxLineInDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0042.AuxMicDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0042.AuxPCSpkDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0042.AuxMasterDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0042.AuxWaveDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0042.AuxMIDIDevName%
+HKLM,%*CTL0042.DeviceInfoKey%,%DSOutDevName%,,%*CTL0042.DSOutDevName%
+
+[CTL0044S.AddReg]
+HKLM,%*CTL0044.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0044.MIDIOutDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0044.MIDIInDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%WaveInDevName%,,%*CTL0044.WaveInDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0044.WaveOutDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%MixerDevName%,,%*CTL0044.MixerDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0044.AuxCDDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0044.AuxLineInDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0044.AuxMicDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0044.AuxPCSpkDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0044.AuxMasterDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0044.AuxWaveDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0044.AuxMIDIDevName%
+HKLM,%*CTL0044.DeviceInfoKey%,%DSOutDevName%,,%*CTL0044.DSOutDevName%
+
+[CTL0045S.AddReg]
+HKLM,%*CTL0045.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0042.MIDIOutDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0042.MIDIInDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%WaveInDevName%,,%*CTL0042.WaveInDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0042.WaveOutDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%MixerDevName%,,%*CTL0042.MixerDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0042.AuxCDDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0042.AuxLineInDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0042.AuxMicDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0042.AuxPCSpkDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0042.AuxMasterDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0042.AuxWaveDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0042.AuxMIDIDevName%
+HKLM,%*CTL0045.DeviceInfoKey%,%DSOutDevName%,,%*CTL0042.DSOutDevName%
+
+[CTL0046S.AddReg]
+HKLM,%*CTL0046.DeviceInfoKey%,%MIDIOutDevName%,,%*CTL0042.MIDIOutDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%MIDIInDevName%,,%*CTL0042.MIDIInDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%WaveInDevName%,,%*CTL0042.WaveInDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%WaveOutDevName%,,%*CTL0042.WaveOutDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%MixerDevName%,,%*CTL0042.MixerDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%AuxCDDevName%,,%*CTL0042.AuxCDDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%AuxLineInDevName%,,%*CTL0042.AuxLineInDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%AuxMicDevName%,,%*CTL0042.AuxMicDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%AuxPCSpkDevName%,,%*CTL0042.AuxPCSpkDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%AuxMasterDevName%,,%*CTL0042.AuxMasterDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%AuxWaveDevName%,,%*CTL0042.AuxWaveDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%AuxMIDIDevName%,,%*CTL0042.AuxMIDIDevName%
+HKLM,%*CTL0046.DeviceInfoKey%,%DSOutDevName%,,%*CTL0042.DSOutDevName%
+
+;---------------------------------------------------------------;
+
+[Strings]
+;Non-localized strings
+;Localized strings
+;Non Localized Strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+KEY_FIL="SYSTEM\CurrentControlSet\Control\MediaResources\FilterList"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+MIDIOutDevName="MIDIOutDevName"
+MIDIInDevName="MIDIInDevName"
+WaveInDevName="WaveInDevName"
+WaveOutDevName="WaveOutDevName"
+MixerDevName="MixerDevName"
+AuxCDDevName="AuxCDDevName"
+AuxLineInDevName="AuxLineInDevName"
+AuxMicDevName="AuxMicDevName"
+AuxPCSpkDevName="AuxPCSpkDevName"
+AuxMasterDevName="AuxMasterDevName"
+AuxWaveDevName="AuxWaveDevName"
+AuxMIDIDevName="AuxMIDIDevName"
+DSOutDevName="DSOutDevName"
+
+; should install the rest of audio devices...as SB 16
+*CTL0001.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0001"
+*CTL0031.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0031"
+*CTL0041.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0041"
+*CTL0043.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0043"
+*CTL0047.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0047"
+
+*CTL0021a.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0021"
+*CTL0022.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0022"
+*CTL0042.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0042"
+*CTL0023.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0023"
+*CTL0024.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0024"
+*CTL0044.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0044"
+*CTL0045.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0045"
+*CTL0046.DeviceInfoKey="SOFTWARE\Creative Tech\DeviceInfo\ISAPNP\CTL0046"
+
+
+*CTL0001.MIDIOutDevName="SB16 MIDI Out"
+*CTL0001.MIDIInDevName="SB16 MIDI In"
+*CTL0001.WaveInDevName="SB16 Wave In"
+*CTL0001.WaveOutDevName="SB16 Wave Out"
+*CTL0001.MixerDevName="SB16 Mixer"
+*CTL0001.AuxCDDevName="SB16 Aux: CD"
+*CTL0001.AuxLineInDevName="SB16 Aux: Line-In"
+*CTL0001.AuxMicDevName="SB16 Aux: Mic"
+*CTL0001.AuxPCSpkDevName="SB16 Aux: PC Speaker"
+*CTL0001.AuxMasterDevName="SB16 Aux: Master"
+*CTL0001.AuxWaveDevName="SB16 Aux: Wave"
+*CTL0001.AuxMIDIDevName="SB16 Aux: MIDI Synth"
+*CTL0001.AuxAuxOutDevName="SB16 Aux: Aux Out"
+*CTL0001.DSOutDevName="SB16 Direct Sound Driver"
+
+*CTL0021a.MIDIOutDevName="SB AWE32 MIDI Synth"
+*CTL0021a.DSOutDevName="SB AWE32 Direct Sound Driver" 
+
+*CTL0022.MIDIOutDevName="AWE64 MIDI Synth"
+*CTL0022.DSOutDevName="AWE64 Direct Sound Driver"
+
+*CTL0023.MIDIOutDevName="AWE64G MIDI Synth"
+*CTL0023.DSOutDevName="AWE64G Direct Sound Driver"
+
+*CTL0042.MIDIOutDevName="AWE64 MIDI Out"
+*CTL0042.MIDIInDevName="AWE64 MIDI In"
+*CTL0042.WaveInDevName="AWE64 Wave In"
+*CTL0042.WaveOutDevName="AWE64 Wave Out"
+*CTL0042.MixerDevName="AWE64 Mixer"
+*CTL0042.AuxCDDevName="AWE64 Aux: CD"
+*CTL0042.AuxLineInDevName="AWE64 Aux: Line In"
+*CTL0042.AuxMicDevName="AWE64 Aux: Mic"
+*CTL0042.AuxPCSpkDevName="AWE64 Aux: PC Speaker"
+*CTL0042.AuxMasterDevName="AWE64 Aux: Master"
+*CTL0042.AuxWaveDevName="AWE64 Aux: Wave"
+*CTL0042.AuxMIDIDevName="AWE64 Aux: MIDI"
+*CTL0042.DSOutDevName="AWE64 Direct Sound Driver"
+
+*CTL0044.MIDIOutDevName="AWE64G MIDI Out"
+*CTL0044.MIDIInDevName="AWE64G MIDI In"
+*CTL0044.WaveInDevName="AWE64G Wave In"
+*CTL0044.WaveOutDevName="AWE64G Wave Out"
+*CTL0044.MixerDevName="AWE64G Mixer"
+*CTL0044.AuxCDDevName="AWE64G Aux: CD"
+*CTL0044.AuxLineInDevName="AWE64G Aux: Line In"
+*CTL0044.AuxMicDevName="AWE64G Aux: Mic"
+*CTL0044.AuxPCSpkDevName="AWE64G Aux: PC Speaker"
+*CTL0044.AuxMasterDevName="AWE64G Aux: Master"
+*CTL0044.AuxWaveDevName="AWE64G Aux: Wave"
+*CTL0044.AuxMIDIDevName="AWE64G Aux: MIDI"
+*CTL0044.DSOutDevName="AWE64G Direct Sound Driver"
+
+
+;Localized strings
+MSFT="Microsoft"
+CREAF="Creative"
+CLMfgName="Creative"
+*PNPB003.DeviceDesc="Creative Sound Blaster 16 or AWE-32 or compatible sound device"
+*CTL0001.DeviceDesc="Creative Sound Blaster 16 Plug and Play"
+*CTL0021.DeviceDesc="Creative Advanced Wave Effects Synthesis for AWE 32"
+*CTL0022.DeviceDesc="Creative AWE64 Wavetable MIDI (AWE32 compatible)"
+*CTL0023.DeviceDesc="Creative AWE64 Gold Wavetable MIDI (AWE32 compatible)"
+*CTL0024.DeviceDesc="Creative AWE64-Compatible Wavetable MIDI (AWE32 compatible)"
+*CTL0042.DeviceDesc="Creative AWE64 16-bit Audio (SB16 compatible)"
+*CTL0044.DeviceDesc="Creative AWE64 Gold 16-bit Audio (SB16 compatible)"
+*CTL0046.DeviceDesc="Creative AWE64-Compatible 16-bit Audio (SB16 compatible)"
+*CTL0051.DeviceDesc="Creative 3D Stereo Enhancement Technology"
+*CTL7002.DeviceDesc="Creative Gameport Joystick"
+SBAWE_Virtual_Mpu.DeviceDesc="Creative SBAWE MPU401 Emulation"
+MediaClassName="Sound, video and game controllers"
+V_INTERNAL="Creative Stereo Music Synthesizer"
+V_EXTERNAL="External MIDI Port"

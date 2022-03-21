@@ -1,0 +1,258 @@
+;
+; TSeng Display INF
+;
+[version]
+signature="$CHICAGO$"
+Class=Display
+ClassGUID={4d36e968-e325-11ce-bfc1-08002be10318}
+Provider=%MS%
+SetupClass=BASE
+
+[DestinationDirs]
+DefaultDestDir  =11             ;LDID_SYS
+Driver.Copy     =11
+
+; Manufacturers
+; ---------------------------------------------------------
+[Manufacturer]
+%Diamond%=Mfg.Diamond
+%DFI%    =Mfg.DFI
+%Genoa%  =Mfg.Genoa
+%Herc%   =Mfg.Herc
+%Orchid% =Mfg.Orchid
+%STB%    =Mfg.STB
+%Tseng%  =Mfg.Tseng
+
+
+; Driver Sections
+; ---------------------------------------------------------
+
+[Mfg.Diamond]
+%Stealth32%=TsengW32,, *PNP0912
+%SpeedStar%=ET4000,, *PNP0906
+%SpeedStar24%=ET4000,, *PNP0906
+
+[Mfg.DFI]
+%WG5000%=TsengW32,, *PNP0912
+
+[Mfg.Genoa]
+%Phantom32%=TsengW32,, *PNP0912
+
+[Mfg.Herc]
+%Dynamite%=TsengW32,, *PNP0912
+%DynamitePro%=TsengW32,, *PNP0912
+
+[Mfg.Orchid]
+%ProDesII%=ET4000,, *PNP0906
+
+[Mfg.STB]
+%ErgoMCX%=TsengW32,, *PNP0912
+%Lightspeed%=TsengW32,, *PNP0912
+%MVP-2X%=TsengW32,, *PNP0912
+%MVP-4X%=TsengW32,, *PNP0912
+
+[Mfg.Tseng]
+%*PNP0906.DeviceDesc%=ET4000, *PNP0906, *PNP0912, *PNP091A
+%*PNP0912.DeviceDesc%=TsengW32, *PNP0912
+%PCI\VEN_100C&DEV_3202.DeviceDesc%=TSENGW32, PCI\VEN_100C&DEV_3202
+%PCI\VEN_100C&DEV_3205.DeviceDesc%=TSENGW32, PCI\VEN_100C&DEV_3205
+%PCI\VEN_100C&DEV_3206.DeviceDesc%=TSENGW32, PCI\VEN_100C&DEV_3206
+%PCI\VEN_100C&DEV_3207.DeviceDesc%=TSENGW32, PCI\VEN_100C&DEV_3207
+%PCI\VEN_100C&DEV_3208.DeviceDesc%=ET6000, PCI\VEN_100C&DEV_3208
+
+
+
+; Install Sections
+; ---------------------------------------------------------
+
+; -------------- Obsolete utility removal sections
+
+[Diamond.IniFields]
+win.ini, windows, load, *dcshkey.exe,,1
+
+; -------------- Common sections
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,,EnumPropPages
+HKR,INFO
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[VGA.LogConfig]
+ConfigPriority=HARDWIRED
+IOConfig=3B0-3BB
+IOConfig=3C0-3DF
+MemConfig=A0000-AFFFF
+MemConfig=B8000-BFFFF
+MemConfig=C0000-C7FFF,D0000-D7FFF,E0000-E5FFF,E0000-E7FFF
+
+
+; -------------- Tseng ET4000
+[ET4000]
+CopyFiles=ET4000.Copy
+DelReg=Prev.DelReg
+AddReg=ET4000.AddReg
+LogConfig=VGA.LogConfig
+
+[ET4000.Copy]
+framebuf.drv,,,12
+tseng.vxd,,,12
+supervga.drv,,,12
+framebuf.dll,,,12
+
+[ET4000.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"4,640,480"
+HKR,DEFAULT,drv,,framebuf.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,tseng.vxd
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\24\640,480"
+
+; -------------- Tseng W32/W32i/W32p
+[TsengW32]
+CopyFiles=TsengW32.Copy
+DelReg=Prev.DelReg
+AddReg=TsengW32.AddReg
+UpdateIniFields=Diamond.IniFields
+LogConfig=VGA.LogConfig
+
+[TsengW32.Copy]
+tseng.drv,,,12
+tseng.vxd,,,12
+supervga.drv,,,12
+tseng.dll,,,12
+
+[TsengW32.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,tseng.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,tseng.vxd
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\800,600"
+
+[TsengW32.PosDup]
+
+; -------------- Tseng ET6000
+[ET6000]
+CopyFiles=ET6000.Copy
+DelReg=Prev.DelReg
+AddReg=ET6000.AddReg
+
+[ET6000.Copy]
+et6000.drv,,,12
+et6000.vxd,,,12
+et6000.dll,,,12
+
+[ET6000.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,ET6000.drv
+HKR,DEFAULT,drv2,,ET6000.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,ET6000.vxd
+HKR,DEFAULT,RefreshRate,,0     ; DDC support
+HKR,DEFAULT,DDC,,1              ; DDC support
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480",,,"60,72,75,90"
+HKR,"MODES\8\800,600",,,"60,72,75,90"
+HKR,"MODES\8\1024,768",,,"60,70,75"
+HKR,"MODES\8\1280,1024",,,"60,70,75"
+HKR,"MODES\8\1600,1200",,,"48"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\800,600"
+HKR,"MODES\24\1024,768"
+
+[ET6000.PosDup]
+*PNP0912
+
+
+; User visible strings
+; ---------------------------------------------------------
+[Strings]
+MS="Microsoft"
+
+Diamond="Diamond Multimedia Systems"
+DFI="DFI"
+Genoa="Genoa Systems"
+Herc="Hercules Computer Technology"
+Orchid="Orchid Technology"
+STB="STB Systems"
+Tseng="Tseng Labs"
+
+*PNP0906.DeviceDesc="Tseng Labs ET4000"
+*PNP0912.DeviceDesc="Tseng Labs ET4000/W32"
+*PNP091A.DeviceDesc="Tseng Labs ET4000"
+
+PCI\VEN_100C&DEV_3202.DeviceDesc="Tseng Labs ET4000/W32 PCI"
+PCI\VEN_100C&DEV_3205.DeviceDesc="Tseng Labs ET4000/W32 PCI"
+PCI\VEN_100C&DEV_3206.DeviceDesc="Tseng Labs ET4000/W32 PCI"
+PCI\VEN_100C&DEV_3207.DeviceDesc="Tseng Labs ET4000/W32 PCI"
+PCI\VEN_100C&DEV_3208.DeviceDesc="Tseng Labs ET6000 PCI"
+
+Stealth32="Diamond Stealth 32 (Tseng)"
+SpeedStar="Diamond SpeedStar (Tseng)"
+SpeedStar24="Diamond SpeedStar 24 (Tseng)"
+
+WG5000="DFI WG-5000 (Tseng)"
+
+Phantom32="Genoa Phantom 32I (Tseng)"
+
+Dynamite="Hercules Dynamite (Tseng)"
+DynamitePro="Hercules Dynamite Pro (Tseng)"
+
+ProDesII="Orchid ProDesigner II (Tseng)"
+
+ErgoMCX="STB Ergo MCX (Tseng)"
+LightSpeed="STB LightSpeed (Tseng)"
+MVP-2X="STB MVP-2X (Tseng)"
+MVP-4X="STB MVP-4X (Tseng)"
+
+[SourceDisksNames]
+222="DirectX Drivers Disk","",1
+
+[SourceDisksFiles]
+framebuf.drv=222
+supervga.drv=222
+tseng.drv=222
+tseng.dll=222
+tseng.vxd=222
+et6000.drv=222
+et6000.vxd=222
+et6000.dll=222
+
+
+

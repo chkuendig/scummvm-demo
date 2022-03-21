@@ -1,0 +1,15 @@
+;
+; DirectX Audio INF
+;     This INF is a stub which stop all DX1, DX2, DX3 games from installing drivers.
+;
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+provider=%MS%
+verinfo=4.10.00.2000
+
+; User visible strings
+; ---------------------------------------------------------
+[Strings]
+MS="Microsoft"
+

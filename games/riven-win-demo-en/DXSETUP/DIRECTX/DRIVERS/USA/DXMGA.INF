@@ -1,0 +1,106 @@
+; INF file for Matrox MGA Millennium/Mystique display driver.
+; Copyright 1996, Matrox Graphics Inc.
+
+[version]
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%Matrox%
+
+[SourceDisksNames]
+1=%MGAX.DiskName%,,1
+
+[SourceDisksFiles]
+mgapdx64.drv=1
+mgapdx64.vxd=1
+mgallx64.dll=1
+mgaxdd.drv=1
+mgaxdd32.dll=1
+mgaxdd.vxd=1
+
+[DestinationDirs]
+DefaultDestDir = 11
+
+[Manufacturer]
+%Matrox%=Mfg.Matrox
+
+[Mfg.Matrox]
+%PCI\VEN_102B&DEV_0519.DeviceDesc%=MGAX, PCI\VEN_102B&DEV_0519
+%PCI\VEN_102B&DEV_051A.DeviceDesc%=MGAX, PCI\VEN_102B&DEV_051A
+;%PCI\VEN_102B&DEV_051B.DeviceDesc%=MGAX, PCI\VEN_102B&DEV_051B
+;%PCI\VEN_102B&DEV_051F.DeviceDesc%=MGAX, PCI\VEN_102B&DEV_051F
+
+[MGAX]
+CopyFiles=MGAX.CopyFiles
+DelReg=Prev.DelReg
+AddReg=MGAX.AddReg
+LogConfig=VGA.LogConfig
+
+[MGAX.PosDup]
+*PNP090F
+
+[MGAX.CopyFiles]
+mgapdx64.drv
+mgallx64.dll
+mgapdx64.vxd
+mgaxdd.drv 
+mgaxdd32.dll 
+mgaxdd.vxd
+
+[Prev.DelReg]
+HKR,,DevLoader
+HKR,,Ver
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[MGAX.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,mgapdx64.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,mgapdx64.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1152,864"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\8\1600,1200"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1152,864"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\16\1600,1200"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\800,600"
+HKR,"MODES\24\1024,768"
+HKR,"MODES\24\1152,864"
+HKR,"MODES\24\1280,1024"
+HKR,"MODES\24\1600,1200"
+HKR,"MODES\32\640,480"
+HKR,"MODES\32\800,600"
+HKR,"MODES\32\1024,768"
+HKR,"MODES\32\1152,864"
+HKR,"MODES\32\1280,1024"
+
+[VGA.LogConfig]
+ConfigPriority=HARDWIRED
+IOConfig=3B0-3BB
+IOConfig=3C0-3DF
+MemConfig=A0000-AFFFF
+MemConfig=B8000-BFFFF
+MemConfig=C0000-C7FFF,D0000-D7FFF,E0000-E7FFF
+
+[Strings]
+ClassName="Display"
+Matrox="Matrox Graphics"
+PCI\VEN_102B&DEV_0519.DeviceDesc="Matrox MGA Millennium"
+PCI\VEN_102B&DEV_051A.DeviceDesc="Matrox MGA Mystique"
+PCI\VEN_102B&DEV_051B.DeviceDesc="Matrox MGA Millennium II PowerDesk"
+PCI\VEN_102B&DEV_051F.DeviceDesc="Matrox MGA Millennium II AGP PowerDesk"
+MGAX.DiskName="DirectX Drivers Disk"
