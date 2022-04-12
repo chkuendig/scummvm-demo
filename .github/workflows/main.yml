@@ -32,6 +32,12 @@ jobs:
       # The games are stored as LFS objects so the build script isn't downloading them on every build
       - name: Checkout LFS objects
         run: git lfs checkout
+        
+      - name: Cache scummvm
+        uses: actions/cache@v2
+        with:
+          path: ./scummvm
+          key: scummvm
 
       - name: Move games
         run: mv ./games/ ./scummvm/dists/emscripten/
