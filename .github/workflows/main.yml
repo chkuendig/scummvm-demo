@@ -40,6 +40,7 @@ jobs:
         uses: actions/checkout@v2
         with:
          repository: scummvm/scummvm-icons
+         path: scummvm-icons
 
       - name: Build ScummVM icons 🔧
         run: |
