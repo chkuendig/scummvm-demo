@@ -40,7 +40,9 @@ jobs:
           key: scummvm
 
       - name: Move games
-        run: mv ./games/ ./scummvm/dists/emscripten/
+        run: | 
+          mkdir -p /scummvm/dists/emscripten/games
+          mv ./games/* ./scummvm/dists/emscripten/games
 
       - name: Build ScummVM 🔧
         run: |
