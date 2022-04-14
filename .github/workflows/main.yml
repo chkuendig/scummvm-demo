@@ -42,7 +42,7 @@ jobs:
       - name: Move games
         run: | 
           mkdir -p ./scummvm/dists/emscripten/games
-          mv ./games/* ./scummvm/dists/emscripten/games
+          cp -R ./games/ ./scummvm/dists/emscripten/
 
       - name: Build ScummVM 🔧
         run: |
