@@ -35,6 +35,18 @@ jobs:
 
       - name: Move games
         run: mv ./games/ ./scummvm/dists/emscripten/
+        
+      - name: Checkout icons 🛎️
+        uses: actions/checkout@v2
+        with:
+         repository: scummvm/scummvm-icons
+
+      - name: Build ScummVM icons 🔧
+        run: |
+          cd scummvm-icons
+          python3 gen-set.py
+          cp gui-icons-*.dat ../scummvm/icons
+          cd ..
 
       - name: Build ScummVM 🔧
         run: |
