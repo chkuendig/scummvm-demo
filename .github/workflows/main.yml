@@ -49,8 +49,8 @@ jobs:
           cp build-emscripten/scummvm.html build-emscripten/index.html
           cd ..
 
-      #- name: Deploy Demo 🚀
-      #  uses: JamesIves/github-pages-deploy-action@v4.2.5
-      #  with:
-      #    branch: gh-pages # The branch the action should deploy to.
-      #    folder: scummvm/build-emscripten # The folder the action should deploy.
+      - name: Deploy Demo 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: scummvm/build-emscripten # The folder the action should deploy.
