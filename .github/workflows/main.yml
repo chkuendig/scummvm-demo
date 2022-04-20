@@ -35,17 +35,12 @@ jobs:
           path: ./scummvm
           key: scummvm
 
-      - name: Checkout icons 🛎️
-        uses: actions/checkout@v2
-        with:
-         repository: scummvm/scummvm-icons
-         path: scummvm-icons
-
       - name: Build ScummVM icons 🔧
         run: |
+          git clone https://github.com/scummvm/scummvm-icons
           cd scummvm-icons
           python3 gen-set.py
-          cp gui-icons-*.dat ../scummvm/icons
+          cp gui-icons-*.dat ../scummvm/gui/themes/gui-icons.dat
           cd ..
 
       - name: Build ScummVM 🔧
