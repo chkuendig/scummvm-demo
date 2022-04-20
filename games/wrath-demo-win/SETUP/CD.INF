@@ -1,0 +1,48 @@
+[Default File Settings]
+"STF_BACKUP"     = ""
+"STF_COPY"       = "YES"
+"STF_DECOMPRESS" = "NO"
+"STF_READONLY"   = "NO"
+"STF_OVERWRITE"  = "ALWAYS"
+"STF_ROOT"       = ""
+"STF_SETTIME"    = "YES"
+"STF_TIME"       = "0"
+"STF_VITAL"      = "YES"
+
+[Setup]
+    1, _mssetup.exe,,, COPY, 1994-05-01, ,, , !READONLY,, _mssetup.exe, !ROOT,,, 9813, , 9813,,, VITAL
+    1, _mstest.exe,,, COPY, 1994-05-01, ,, , !READONLY,, _mstest.exe, !ROOT,,, 89504, , 89504,,, VITAL
+    1, mscomstf.dll,,, COPY, 1994-05-01, ,, , !READONLY,, mscomstf.dll, !ROOT,,, 74528, , 74528,,, VITAL
+    1, msdetstf.dll,,, COPY, 1994-05-01, ,, , !READONLY,, msdetstf.dll, !ROOT,,, 24544, , 24544,,, VITAL
+    1, msinsstf.dll,,, COPY, 1994-05-01, ,, , !READONLY,, msinsstf.dll, !ROOT,,, 65440, , 65440,,, VITAL
+    1, msshlstf.dll,,, COPY, 1994-05-01, ,, , !READONLY,, msshlstf.dll, !ROOT,,, 14928, , 14928,,, VITAL
+    1, msuilstf.dll,,, COPY, 1994-05-01, ,, , !READONLY,, msuilstf.dll, !ROOT,,, 6144, , 6144,,, VITAL
+    1, setup.exe,,, COPY, 1994-05-01, ,, , !READONLY,, setup.exe, !ROOT,,, 24624, , 24624,,, VITAL
+    1, setup.dll,,, COPY, 1994-05-01, ,, , !READONLY,, setup.dll, !ROOT,,, 33792, , 33792,,, VITAL
+    1, msdetect.inc,,, COPY, 1994-05-01, ,, , !READONLY,, msdetect.inc, !ROOT,,, 22097, , 22097,,, VITAL
+    1, msregdb.inc,,, COPY, 1994-05-01, ,, , !READONLY,, msregdb.inc, !ROOT,,, 4438, , 4438,,, VITAL
+    1, msshared.inc,,, COPY, 1994-05-01, ,, , !READONLY,, msshared.inc, !ROOT,,, 3603, , 3603,,, VITAL
+    1, setupapi.inc,,, COPY, 1994-05-01, ,, , !READONLY,, setupapi.inc, !ROOT,,, 55620, , 55620,,, VITAL
+    1, setup.lst,,, COPY, 1994-05-01, ,, , !READONLY,, setup.lst, !ROOT,,, 688, , 688,,, VITAL
+    1, setup.mst,,, COPY, 1994-05-01, ,, , !READONLY,, setup.mst, !ROOT,,, 9576, , 9576,,, VITAL
+    1, setup.hlp,,, COPY, 1994-05-01, ,, , !READONLY,, setup.hlp, !ROOT,,, 15847, , 15847,,, VITAL
+
+[QTIM]
+    1, playenu.dll,,, COPY, 1994-05-01, ,, , !READONLY,, playenu.dll, !ROOT,,, 16592, , 16592,,, VITAL
+    1, player.exe,,, COPY, 1994-05-01, ,, , !READONLY,, player.exe, !ROOT,,, 58032, , 58032,,, VITAL
+    1, qthndlr.dll,,, COPY, 1994-05-01, ,, , !READONLY,, qthndlr.dll, !ROOT,,, 8272, , 8272,,, VITAL
+    1, qtole.dll,,, COPY, 1994-05-01, ,, , !READONLY,, qtole.dll, !ROOT,,, 72560, , 72560,,, VITAL
+    1, qtim.dll,,, COPY, 1994-05-01, ,, , !READONLY,, qtim.dll, !ROOT,,, 214976, , 214976,,, VITAL
+    1, qtimcmgr.dll,,, COPY, 1994-05-01, ,, , !READONLY,, qtimcmgr.dll, !ROOT,,, 13712, , 13712,,, VITAL
+    1, qtvhdw.dll,,, COPY, 1994-05-01, ,, , !READONLY,, qtvhdw.dll, !ROOT,,, 15408, , 15408,,, VITAL
+    1, qtnotify.exe,,, COPY, 1994-05-01, ,, , !READONLY,, qtnotify.exe, !ROOT,,, 4080, , 4080,,, VITAL
+    1, qcmc.qtc,,, COPY, 1994-05-01, ,, , !READONLY,, qcmc.qtc, !ROOT,,, 108400, , 108400,,, VITAL
+    1, qtcvid.qtc,,, COPY, 1994-05-01, ,, , !READONLY,, qtcvid.qtc, !ROOT,,, 181968, , 181968,,, VITAL
+    1, qtraw.qtc,,, COPY, 1994-05-01, ,, , !READONLY,, qtraw.qtc, !ROOT,,, 6992, , 6992,,, VITAL
+    1, qtrle.qtc,,, COPY, 1994-05-01, ,, , !READONLY,, qtrle.qtc, !ROOT,,, 92544, , 92544,,, VITAL
+    1, qtrpza.qtc,,, COPY, 1994-05-01, ,, , !READONLY,, qtrpza.qtc, !ROOT,,, 200368, , 200368,,, VITAL
+    1, qtsmc.qtc,,, COPY, 1994-05-01, ,, , !READONLY,, qtsmc.qtc, !ROOT,,, 164480, , 164480,,, VITAL
+    1, qtjpeg.qtc,,, COPY, 1994-05-01, ,, , !READONLY,, qtjpeg.qtc, !ROOT,,, 27600, , 27600,,, VITAL
+
+[Source Media Descriptions]
+    "1","Wrath of the Gods","DISK1.ID","."

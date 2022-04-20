@@ -1,0 +1,300 @@
+rem Required includes to interface with MSSETUP DLL's
+rem -------------------------------------------------
+'$INCLUDE 'setupapi.inc'
+'$INCLUDE 'msdetect.inc'
+
+
+rem Dialog box id's
+rem ---------------
+rem Note: If MSSETUP were really smart, we could use the
+rem #defines in DIALOGS.HR. Instead, we must manually
+rem keep them in step
+rem ----------------------------------------------------
+    CONST DESTPATH      = 300          ''Gets destination path
+    CONST EXITQUIT      = 600          ''Exits on user request
+    CONST EXITSUCCESS   = 700          ''Exits when install is done
+    CONST ASKSETUP      = 800          ''Gets setup options
+    CONST TOOBIG        = 6300         ''Not enough space on target disk error
+    CONST BADPATH       = 6400         ''Bad destination path error
+    CONST BADWINDOWS    = 6500         ''Wrong Windows release
+    CONST BADCOLORS     = 6550         ''Not in 256 colors
+    CONST EXITFAILURE   = 6600         ''Exits on error
+
+
+rem String id's
+rem -----------
+rem Note: If MSSETUP were really smart, we could use the
+rem #defines in DIALOGS.HR. Instead, we must manually
+rem keep them in step
+rem ----------------------------------------------------
+    CONST STR_UTILITY   = 1024         ''Utility
+    CONST STR_GROUP     = 1025         ''Program Manager group
+    CONST STR_TITLE     = 1026         ''Installer Title
+    CONST STR_MSG1      = 1027         ''Version error message part 1
+    CONST STR_MSG2      = 1028         ''Version error message part 2
+    CONST STR_WARNING   = 1029         ''Warning
+    CONST STR_README    = 1030         ''Read Me
+
+
+rem Miscellaneous Constants
+rem -----------------------
+    CONST NOLOGO = 1                   ''Dummy NULL bitmap (must be 1)
+    CONST NOSPACE = 1                  ''No space to complete install
+    CONST INSTALLOK = 2                ''Install completed OK
+    CONST INSTALLFAILED =3             ''Install failed for some reason
+
+
+rem Global Variables
+rem ----------------
+    GLOBAL SOURCE$                     ''Source directory
+    GLOBAL SRCDIR$                     ''Source directory
+    GLOBAL DEST$                       ''Default destination directory
+    GLOBAL SETUPTYPE$                  ''Setup type (Local, Client, Server)
+    GLOBAL QUICKINST$                  ''Setup type (Local, Client, Server)
+    GLOBAL PARTIALINST$                ''Setup type (Local, Client, Server)
+    GLOBAL FULLINST$                   ''Setup type (Local, Client, Server)
+    GLOBAL QTWDIR$                     ''QTW directory
+    GLOBAL CUIDLL$                     ''User interface DLL
+    GLOBAL SETUPPATH$                  ''Setup destination path
+    GLOBAL HELPPROC$                   ''Help dialog procedure
+    GLOBAL EXTRACOSTS$                 ''List of extra costs to add per drive
+    GLOBAL APPNEEDS$                   ''Disk space costs per drive
+    GLOBAL SECTIONKEY$                 ''INF file section key
+    GLOBAL SUCCESS%                    ''Installation completion code
+
+
+rem Initialize global vriables
+rem --------------------------
+    QUICKINST$      = "1"
+    PARTIALINST$    = "2"
+    FULLINST$       = "3"
+    SETUPPATH$      = "C:\"
+    SOURCE$         = GetSymbolValue("STF_SRCDIR")
+    DEST$           = SETUPPATH$
+    SUCCESS%        = INSTALLFAILED
+    EXTRACOSTS$     = "ExtraCosts"
+    APPNEEDS$       = "AppNeeds"
+    SECTIONKEY$     = "SectionKey"
+
+    FOR i% = 1 TO 26 STEP 1
+        AddListItem EXTRACOSTS$, "16384"
+    NEXT i%
+
+
+rem Get name of localized user interface dialogs
+rem --------------------------------------------
+    CUIDLL$ = "setup.DLL"
+
+
+rem Subroutines and Functions
+rem -------------------------
+    DECLARE FUNCTION Install AS INTEGER
+    DECLARE FUNCTION MakePath (szDir$, szFile$) AS STRING
+    DECLARE FUNCTION GetDLLVersion LIB "setup.dll" (szDLL$) AS INTEGER
+    DECLARE FUNCTION HideCriticalDirectory LIB "setup.dll" (szDir$) AS INTEGER
+    DECLARE FUNCTION Has256Colors LIB "setup.dll" (hinst%) AS INTEGER
+    DECLARE FUNCTION GetResourceString LIB "setup.dll" (szResource$, idString%) AS INTEGER
+    DECLARE FUNCTION StartCustomSetup LIB "setup.dll" (hinst%, hwnd%) AS INTEGER
+    DECLARE FUNCTION StopCustomSetup LIB "setup.dll" (hinst%, hwnd%) AS INTEGER
+rem DECLARE FUNCTION WritePrivateProfileString LIB "krnl386.exe" (szSect$, szEntry$, szString$, szINI$) AS INTEGER
+
+
+rem Initialize custom setup logic
+rem -----------------------------
+    SetBitmap CUIDLL$, NOLOGO
+    i% = GetResourceString (CUIDLL$, STR_TITLE)
+    SetTitle GetSymbolValue ("ResourceString")
+    i% = StartCustomSetup (HinstFrame(), HwndFrame ())
+    i% = SetBeepingMode(1)
+
+
+rem Make sure that we are running on Windows 3.1 or better
+rem ------------------------------------------------------
+    IF GetWindowsMajorVersion() < 3 THEN
+       sz$ = UIStartDlg(CUIDLL$, BADWINDOWS, "FInfo0DlgProc", 0, "")
+       UIPop 1
+       GOTO CLEANUP
+    END IF
+
+    IF (GetWindowsMajorVersion() = 3) AND (GetWindowsMinorVersion() < 10) THEN
+       sz$ = UIStartDlg(CUIDLL$, BADWINDOWS, "FInfo0DlgProc", 0, "")
+       UIPop 1
+       GOTO CLEANUP
+    END IF
+
+
+rem Make sure that we are running on a 386 or better
+rem ------------------------------------------------
+    IF GetWinFlags() AND 2 THEN
+       sz$ = UIStartDlg(CUIDLL$, BADWINDOWS, "FInfo0DlgProc", 0, "")
+       UIPop 1
+       GOTO CLEANUP
+    END IF
+
+
+rem Find and read the .INF file
+rem ---------------------------
+    szInf$ = GetSymbolValue("STF_SRCINFPATH")
+
+    IF szInf$ = "" THEN
+       szTemp$ = GetSymbolValue("STF_SRCDIR")
+       szInf$ = szTemp$ + "CD.INF"
+    END IF
+
+    ReadInfFile szInf$
+
+
+rem Where is QTW?
+rem -------------
+FINDQTW:
+    sz$ = FindTargetOnEnvVar("QTIM.DLL", "PATH")
+    IF sz$ = "" THEN
+       QTWDIR$ = GetWindowsSysDir()
+    ELSE
+       QTWDIR$ = MID$(sz$,1,INSTR(sz$,"QTIM.DLL")-1)
+    END IF
+
+
+rem Perform actual installation
+rem ---------------------------
+INSTALLME:
+    SUCCESS% = Install
+
+    IF SUCCESS% = NOSPACE THEN
+       GOSUB TOOBIG
+    END IF
+
+
+rem When done, issue dialog
+rem -----------------------
+QUIT:
+    IF SUCCESS% = INSTALLOK THEN
+       sz$ = UIStartDlg(CUIDLL$, EXITSUCCESS, "FInfo0DlgProc", 0, "")
+    ELSE
+       sz$ = UIStartDlg(CUIDLL$, EXITFAILURE, "FInfo0DlgProc", 0, "")
+    END IF
+    UIPop 1
+
+
+rem Clean up all processing
+rem -----------------------
+CLEANUP:
+    i% = StopCustomSetup (HinstFrame(), HwndFrame ())
+
+    END
+
+
+rem ASKQUIT: The user requested quit; does (s)he really want to?
+rem ------------------------------------------------------------
+ASKQUIT:
+    sz$ = UIStartDlg(CUIDLL$, EXITQUIT, "FInfoDlgProc", 0, "")
+    UIPop 1
+    IF sz$ = "CONTINUE" THEN
+       RETURN
+    END IF
+    GOTO CLEANUP
+
+
+rem BADPATH: The user entered an invalid destination directory
+rem ----------------------------------------------------------
+BADPATH:
+    sz$ = UIStartDlg(CUIDLL$, BADPATH, "FInfo0DlgProc", 0, "")
+    IF sz$ = "REACTIVATE" THEN
+       GOTO BADPATH
+    END IF
+    UIPop 1
+
+    RETURN
+
+
+rem TOOBIG: The source files won't fit on the requested destination disk
+rem --------------------------------------------------------------------
+TOOBIG:
+    sz$ = UIStartDlg(CUIDLL$, TOOBIG, "FInfo0DlgProc", 0, "")
+    IF sz$ = "REACTIVATE" THEN
+       GOTO TOOBIG
+    END IF
+    UIPop 1
+
+    RETURN
+
+
+rem Install: Perform actual installation
+rem ------------------------------------
+FUNCTION Install STATIC AS INTEGER
+
+    rem Build the copy list
+    rem -------------------
+        i% = GetDLLVersion(MakePath(QTWDIR$, "qtim.dll"))
+        szOld$ = GetSymbolValue ("VersionString")
+        i% = GetDLLVersion(MakePath(SOURCE$, "qtim.dll"))
+        szNew$ = GetSymbolValue ("VersionString")
+        rem i% = DoMsgBox(szOld$, szNew$, 0)
+        IF szNew$ < szOld$ THEN
+           rem i% = DoMsgBox("Gods QTW earlier than installed QTW", szNew$, 0)
+           GOTO PROGMAN
+        END IF
+        IF szNew$ = szOld$ THEN
+           rem i% = DoMsgBox("Gods QTW same as installed QTW", szNew$, 0)
+           GOTO PROGMAN
+        END IF
+        rem i% = DoMsgBox("Gods QTW more recent than installed QTW", szNew$, 0)
+    COPYFILES:
+        AddSectionFilesToCopyList "QTIM", SOURCE$, QTWDIR$
+
+    rem Check that we have enough free space to perform the install
+    rem -----------------------------------------------------------
+        ListSym$ = APPNEEDS$
+        StillNeed& = GetCopyListCost(EXTRACOSTS$, ListSym$, "")
+
+        drive$ = MID$(QTWDIR$, 1, 1)
+        ndrive% = ASC(ucase$(drive$)) - ASC("A") + 1
+        cost& = VAL(GetListItem(APPNEEDS$, ndrive%))
+        free& = GetFreeSpaceForDrive(drive$)
+
+        IF cost& >= free& THEN
+           Install = NOSPACE
+           EXIT FUNCTION
+        END IF
+
+    rem Copy all the files from the source to the destination
+    rem -----------------------------------------------------
+        CopyFilesInCopyList
+
+    rem Create a Program Manager group
+    rem ------------------------------
+    PROGMAN:
+        SRCDIR$ = MID$(SOURCE$,1,INSTR(SOURCE$,"SETUP")-1)
+        CreateProgmanGroup "Wrath of the Gods", "", cmoNone
+        CreateProgmanItem "Wrath of the Gods", "Wrath Self-Running Demo",  MakePath(SRCDIR$,"selfrun\000wrath.exe"), "", cmoOverwrite
+        CreateProgmanItem "Wrath of the Gods", "Wrath 50MB Interactive Demo",  MakePath(SRCDIR$,"demo50\000wrath.exe"), "", cmoOverwrite
+        CreateProgmanItem "Wrath of the Gods", "Wrath 20MB Interactive Demo",  MakePath(SRCDIR$,"demo20\000wrath.exe"), "", cmoOverwrite
+        CreateProgmanItem "Wrath of the Gods", "Read Me",  MakePath(SRCDIR$,"readme.wri"), "", cmoOverwrite
+
+    rem Indicate install completed OK
+    rem -----------------------------
+        Install = INSTALLOK
+
+END FUNCTION
+
+
+rem MakePath: Builds path from directory and file
+rem ---------------------------------------------
+FUNCTION MakePath (szDir$, szFile$) STATIC AS STRING
+
+    IF szDir$ = "" THEN
+       MakePath = szFile$
+
+    ELSEIF szFile$ = "" THEN
+       MakePath = szDir$
+
+    ELSEIF MID$(szDir$, LEN(szDir$), 1) = "\" THEN
+       MakePath = szDir$ + szFile$
+
+    ELSE
+       MakePath = szDir$ + "\" + szFile$
+
+    END IF
+
+END FUNCTION
+

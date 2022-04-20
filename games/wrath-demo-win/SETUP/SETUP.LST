@@ -1,0 +1,24 @@
+[Params]
+  WndTitle   = Wrath of the Gods Setup
+  WndMess    = Initializing Wrath of the Gods Setup...
+  TmpDirSize = 1024
+  TmpDirName = ~wrath.tmp
+  CmdLine    = _mstest setup.mst /C "/S %s %s"
+  DrvModName = DSHELL
+
+[Files]
+  setup.mst     = setup.mst
+  cd.inf        = cd.inf
+  setupapi.inc  = setupapi.inc
+  msdetect.inc  = msdetect.inc
+  msregdb.inc   = msregdb.inc
+  msshared.inc  = msshared.inc
+  mscomstf.dll  = mscomstf.dll
+  msinsstf.dll  = msinsstf.dll
+  msuilstf.dll  = msuilstf.dll
+  msshlstf.dll  = msshlstf.dll
+  msdetstf.dll  = msdetstf.dll
+  _mstest.exe   = _mstest.exe
+  _mssetup.exe  = _mssetup.exe
+  setup.dll     = setup.dll
+  setup.hlp     = setup.hlp
