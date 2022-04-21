@@ -29,11 +29,11 @@ jobs:
           submodules: true
           lfs: true
                 
-      - name: Cache scummvm 
-        uses: actions/cache@v2
-        with:
-          path: ./scummvm
-          key: scummvm
+      #- name: Cache scummvm 
+      #  uses: actions/cache@v2
+      #  with:
+      #    path: ./scummvm
+      #    key: scummvm
 
       - name: Build ScummVM icons 🔧
         run: |
