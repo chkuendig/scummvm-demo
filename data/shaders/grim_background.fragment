@@ -4,6 +4,7 @@ OUTPUT
 
 uniform sampler2D tex;
 
-void main() {
+void main()
+{
 	outColor = texture(tex, Texcoord);
 }

@@ -8,7 +8,8 @@ uniform float meshAlpha;
 
 OUTPUT
 
-void main() {
+void main()
+{
 	outColor = Color;
 	if (UBOOL_TEST(textured)) {
 		vec4 texColor = texture(tex, Texcoord);
