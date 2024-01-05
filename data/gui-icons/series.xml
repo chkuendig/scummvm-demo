@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<series>
+	<serie id="1213" name="1213"/>
+	<serie id="adi" name="ADI"/>
+	<serie id="adibou" name="Adibou"/>
+	<serie id="agifan" name="AGI Fan"/>
+	<serie id="alemmo" name="Al Emmo"/>
+	<serie id="alimardan" name="Alimardan"/>
+	<serie id="apprentice" name="Apprentice"/>
+	<serie id="artmurder" name="Art of Murder"/>
+	<serie id="barrowhill" name="Barrow Hill"/>
+	<serie id="beavisbutthead" name="Beavis and Butt-Head"/>
+	<serie id="bigthinkers" name="Big Thinkers"/>
+	<serie id="blackwell" name="Blackwell"/>
+	<serie id="blue" name="Blue's Clues"/>
+	<serie id="brain" name="Dr. Brain"/>
+	<serie id="carmen" name="Carmen Sandiego"/>
+	<serie id="carol" name="Carol Reed Mysteries"/>
+	<serie id="chzo" name="The Chzo Mythos"/>
+	<serie id="conquests" name="Conquests"/>
+	<serie id="crusader" name="Crusader"/>
+	<serie id="danewguys" name="Da New Guys"/>
+	<serie id="darkfall" name="Dark Fall"/>
+	<serie id="deja_vu" name="Deja Vu"/>
+	<serie id="deviltrilogy" name="Devil Came Through Here Trilogy"/>
+	<serie id="disney" name="Disney AGI"/>
+	<serie id="dw" name="Discworld"/>
+	<serie id="ecoquest" name="EcoQuest"/>
+	<serie id="elvira" name="Elvira"/>
+	<serie id="enchanter" name="Enchanter"/>
+	<serie id="eob" name="Eye of the Beholder"/>
+	<serie id="fatman" name="The Adventures of Fatman"/>
+	<serie id="fbear" name="Fatty Bear"/>
+	<serie id="forgottensound" name="Forgotten Sound"/>
+	<serie id="freddi" name="Freddi Fish"/>
+	<serie id="gk" name="Gabriel Knight"/>
+	<serie id="gob" name="Gobliiins"/>
+	<serie id="hires" name="Hi-Res Adventure"/>
+	<serie id="hoyle" name="Hoyle's Official Book of Games"/>
+	<serie id="hugo" name="Hugo House of Horrors"/>
+	<serie id="id4" name="Independence Day"/>
+	<serie id="indy" name="Indiana Jones"/>
+	<serie id="innsmouth" name="Chronicle of Innsmouth"/>
+	<serie id="jit" name="Just Ignore Them"/>
+	<serie id="journeyman" name="The Journeyman Project"/>
+	<serie id="julia" name="J.U.L.I.A."/>
+	<serie id="juniorfield" name="Junior Field Trips"/>
+	<serie id="juniorsports" name="Junior Sports"/>
+	<serie id="kq" name="King's Quest"/>
+	<serie id="kqagdi" name="King's Quest Remakes"/>
+	<serie id="kyra" name="The Legend of Kyrandia"/>
+	<serie id="laurabow" name="Laura Bow"/>
+	<serie id="lba" name="Little Big Adventure"/>
+	<serie id="livingbooks" name="Living Books"/>
+	<serie id="lsl" name="Leisure Suit Larry"/>
+	<serie id="magictales" name="Magic Tales"/>
+	<serie id="manhunt" name="Manhunter"/>
+	<serie id="maniac" name="Maniac Mansion"/>
+	<serie id="mi" name="The Secret of Monkey Island"/>
+	<serie id="mixedup" name="Roberta Williams' Mixed-Up"/>
+	<serie id="mm" name="Might and Magic"/>
+	<serie id="myst" name="Myst"/>
+	<serie id="nancy" name="Nancy Drew"/>
+	<serie id="nelly" name="Nelly Cootalot"/>
+	<serie id="ozorwell" name="Oz Orwell"/>
+	<serie id="pajama" name="Pajama Sam"/>
+	<serie id="papas" name="Papa's Daughters"/>
+	<serie id="petka" name="Red Comrades"/>
+	<serie id="phantasmagoria" name="Phantasmagoria"/>
+	<serie id="planetfall" name="Planetfall"/>
+	<serie id="playtoons" name="Playtoons"/>
+	<serie id="pq" name="Police Quest"/>
+	<serie id="puttputt" name="Putt-Putt"/>
+	<serie id="qfg" name="Quest for Glory"/>
+	<serie id="quantum" name="Quantumnauts"/>
+	<serie id="reversion" name="Reversion"/>
+	<serie id="ringworld" name="Ringworld"/>
+	<serie id="roguestate" name="Rogue State"/>
+	<serie id="sherlock" name="Sherlock Holmes"/>
+	<serie id="sierrachristmas" name="Sierra Christmas Cards"/>
+	<serie id="simon" name="Simon the Sorcerer"/>
+	<serie id="spyfox" name="Spy Fox"/>
+	<serie id="sq" name="Space Quest"/>
+	<serie id="startrek" name="Star Trek"/>
+	<serie id="supernova" name="Mission Supernova"/>
+	<serie id="sword" name="Broken Sword"/>
+	<serie id="syberia" name="Syberia"/>
+	<serie id="t7g" name="The 7th Guest"/>
+	<serie id="tanya" name="Tanya Grotter"/>
+	<serie id="tehran" name="Murder in Tehran"/>
+	<serie id="texmurphy" name="Tex Murphy"/>
+	<serie id="transylvania" name="Transylvania"/>
+	<serie id="ultima" name="Ultima"/>
+	<serie id="zork" name="Zork"/>
+</series>
