@@ -48,7 +48,7 @@
 	<engine id="lastexpress" name="The Last Express" alt_name="" enabled="FALSE"/>
 	<engine id="lilliput" name="Lilliput" alt_name="" enabled="FALSE"/>
 	<engine id="lure" name="Lure of the Temptress" alt_name="" enabled="TRUE"/>
-	<engine id="m4" name="M4" alt_name="" enabled="FALSE"/>
+	<engine id="m4" name="M4" alt_name="" enabled="TRUE"/>
 	<engine id="macventure" name="MacVenture" alt_name="" enabled="FALSE"/>
 	<engine id="made" name="MADE" alt_name="Multimedia Applications Development Environment" enabled="TRUE"/>
 	<engine id="mads" name="MADS" alt_name="MicroProse Adventure Development System" enabled="TRUE"/>
