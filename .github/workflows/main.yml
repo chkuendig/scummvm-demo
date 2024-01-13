@@ -29,26 +29,6 @@ jobs:
           submodules: true
           lfs: true
 
-      - name: Restore ScummVM cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./scummvm/engines/engines.awk
-            ./scummvm/engines/detection_table.h
-            ./scummvm/engines/plugins_table.h
-            ./scummvm/config.h
-            ./scummvm/config.mk
-            ./scummvm/configure.stamp
-            ./scummvm/dists/emscripten/emsdk-3.1.8
-            ./scummvm/dists/emscripten/libs 
-            ./scummvm/**/*.[o,a]
-            ./scummvm/**/**/*.[o,a]
-            ./scummvm/**/**/**/*.[o,a]
-            ./scummvm/**/**/**/**/*.[o,a]
-            ./scummvm/**/**/**/**/**/*.[o,a]
-            ./scummvm/**/**/**/**/**/**/*.[o,a]
-          key: scummvm-cache
-
       - name: Build ScummVM 🔧
         run: |
           cd scummvm
