@@ -12,6 +12,7 @@ demo_folders=$(jq -r '.[:4] | .[].url | .[5:-4]' demos.json)
 echo $demo_folders
 mkdir -p games/
 cd games/
+rm -r */
 games_dir=$(pwd)
 
 # fetch list of games from ftp server (directory names)
@@ -44,5 +45,6 @@ while read p; do
 done <existing_folders.txt
 rm existing_folders.txt
 # upload the games to the ftp server
+rsync -a -v .  "christian@parklife.local:/srv/scummvm/games/"
 
 # upload the demo json to the demo site

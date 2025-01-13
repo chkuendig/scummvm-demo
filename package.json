@@ -1,9 +1,21 @@
 {
+  "scripts": {
+    "build-scummvm": " cd scummvm && ./dists/emscripten/build.sh build --enable-release --enable-plugins --enable-all-engines --disable-engine=hpl1 --default-dynamic --enable-png --enable-ogg --enable-vorbis --enable-gif --enable-mpeg2 --enable-freetype2 --enable-jpeg --enable-theoradec --enable-mad --enable-zlib",
+    "update-icons": "rm -f build-emscripten/data/gui-icons.dat && scripts/update-icons.sh",
+    "download-games": "scripts/download-games.sh",
+    "add-games": "npm run refresh-data-index && ncd scummvm/build-emscripten && node ../../scripts/build-add_games.js",
+    "package-files": "cd scummvm && cp build-emscripten/scummvm.html build-emscripten/index.html && cp AUTHORS build-emscripten/ && cp COPYING build-emscripten/ && cp LICENSES/* build-emscripten/ && cp COPYRIGHT build-emscripten/ && cp NEWS* build-emscripten/ && cp README* build-emscripten/",
+    "refresh-data-index": "node scummvm/dists/emscripten/build-make_http_index.js scummvm/build-emscripten/data/"
+  },
   "dependencies": {
-    "axios": "^1.7.9",
-    "request": "^2.88.2"
+    "axios": "^1.7.9"
   },
   "overrides": {
     "tough-cookie": "^4.1.3"
+  },
+  "devDependencies": {
+    "node-static": "^0.7.11",
+    "puppeteer": "^24.0.0",
+    "request": "^2.88.2"
   }
 }

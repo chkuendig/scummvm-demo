@@ -1,0 +1,441 @@
+<?xml version="1.0" ?>
+<companies>
+	<company id="1c" name="1C Company" alt_name=""/>
+	<company id="21stcentury" name="21st Century Entertainment" alt_name=""/>
+	<company id="3f" name="3f interactivo" alt_name=""/>
+	<company id="4x" name="4X Technologies" alt_name=""/>
+	<company id="8bit" name="Eight Bit Skyline" alt_name=""/>
+	<company id="abeckett" name="Alasdair Beckett" alt_name=""/>
+	<company id="absurdum" name="Absurdum Codice" alt_name=""/>
+	<company id="access" name="Access Software" alt_name=""/>
+	<company id="accolade" name="Accolade" alt_name=""/>
+	<company id="activision" name="Activision" alt_name=""/>
+	<company id="adeline" name="Adeline Software International" alt_name=""/>
+	<company id="adipson" name="Adipson Studio" alt_name=""/>
+	<company id="adventurecompany" name="The Adventure Company" alt_name=""/>
+	<company id="adventureinternational" name="Adventure International" alt_name=""/>
+	<company id="adventuresoft" name="Adventure Soft" alt_name=""/>
+	<company id="aetheric" name="Aetheric Games" alt_name=""/>
+	<company id="aftermath" name="Aftermath Media" alt_name=""/>
+	<company id="agdi" name="AGD Interactive" alt_name=""/>
+	<company id="age" name="Adventurers Guild Entertainment" alt_name=""/>
+	<company id="aka" name="AKA Xportmedia" alt_name=""/>
+	<company id="akella" name="Akella" alt_name=""/>
+	<company id="akkad" name="Akkad Estudios" alt_name=""/>
+	<company id="akril" name="Akril" alt_name=""/>
+	<company id="alawar" name="Alawar Entertainment" alt_name=""/>
+	<company id="alcachofa" name="Alcachofa Soft" alt_name=""/>
+	<company id="aloalo" name="Aloalo International" alt_name=""/>
+	<company id="amatouk" name="Amir Matouk" alt_name=""/>
+	<company id="amber" name="Amber Company" alt_name=""/>
+	<company id="anate" name="Anate Studio" alt_name=""/>
+	<company id="anatola" name="Anatola Howard" alt_name=""/>
+	<company id="animationmagic" name="Animation Magic" alt_name=""/>
+	<company id="anne" name="Anne Carrière" alt_name=""/>
+	<company id="apemarina" name="Ape Marina" alt_name=""/>
+	<company id="aquin" name="Aquin Design" alt_name=""/>
+	<company id="arberth" name="Arberth Studios" alt_name=""/>
+	<company id="arkhouse" name="Ark House" alt_name=""/>
+	<company id="artbox" name="Art in the Box" alt_name=""/>
+	<company id="artech" name="Artech Digital Entertainment" alt_name=""/>
+	<company id="artistic" name="ArtisticSoft" alt_name=""/>
+	<company id="artsectorone" name="ArtSector One" alt_name=""/>
+	<company id="arxel" name="Arxel Tribe" alt_name=""/>
+	<company id="atari" name="Atari" alt_name=""/>
+	<company id="atlantis" name="Atlantis Interactive Entertainment" alt_name=""/>
+	<company id="atombrain" name="Atom Brain Games" alt_name=""/>
+	<company id="azure" name="Azure Mountain" alt_name=""/>
+	<company id="bandai" name="Bandai" alt_name=""/>
+	<company id="bbn" name="Bolt Beranek and Newman Inc." alt_name=""/>
+	<company id="bbool" name="Beyond Booleans" alt_name=""/>
+	<company id="bchandler" name="Ben Chandler" alt_name="Ben304"/>
+	<company id="beardy" name="Beardy Ramblin Games" alt_name=""/>
+	<company id="because" name="Because Because Games" alt_name=""/>
+	<company id="bfactory" name="B-Factory" alt_name=""/>
+	<company id="bigfish" name="Big Fish Games" alt_name=""/>
+	<company id="bigorc" name="Big Orc Software" alt_name=""/>
+	<company id="bjovian" name="Zbychu Jowisz" alt_name="Brick Jovian"/>
+	<company id="blekinge" name="Blekinge Institute of Technology" alt_name=""/>
+	<company id="blondbraid" name="Gertrud Bondesson" alt_name="Blondbraid"/>
+	<company id="bluebyte" name="Blue Byte Software" alt_name=""/>
+	<company id="boffo" name="Boffo Intergalactic Games, Inc" alt_name=""/>
+	<company id="botoole" name="Britton O'Toole" alt_name=""/>
+	<company id="brane" name="Brane Games" alt_name=""/>
+	<company id="brixoft" name="Brixoft Software" alt_name=""/>
+	<company id="brocanty" name="Brocanty Games" alt_name="arj0n"/>
+	<company id="broderbund" name="Brøderbund" alt_name=""/>
+	<company id="brooklyn" name="Brooklyn Multimedia" alt_name=""/>
+	<company id="buka" name="Buka Entertainment" alt_name=""/>
+	<company id="burnedout" name="Burned Out Adventurers!" alt_name=""/>
+	<company id="burst" name="Burst" alt_name=""/>
+	<company id="byteriders" name="Byteriders" alt_name=""/>
+	<company id="calico" name="Calico Reverie" alt_name=""/>
+	<company id="canal" name="Canal Multimedia" alt_name=""/>
+	<company id="canter" name="Canter Technology" alt_name=""/>
+	<company id="capstone" name="Capstone Software" alt_name=""/>
+	<company id="catware" name="Catware" alt_name=""/>
+	<company id="cbe" name="CBE Software" alt_name=""/>
+	<company id="channel8" name="Channel 8 Software" alt_name=""/>
+	<company id="chronerion" name="Chronerion Entertainment" alt_name=""/>
+	<company id="ciberspace" name="ciberspace" alt_name=""/>
+	<company id="cityint" name="City Interactive" alt_name=""/>
+	<company id="clifftop" name="Clifftop Games" alt_name=""/>
+	<company id="clipper" name="Clipper Software" alt_name=""/>
+	<company id="cloakdagger" name="Cloak and Dagger Games" alt_name=""/>
+	<company id="coktel" name="Coktel Vision" alt_name=""/>
+	<company id="colossal" name="(Colossal) Pictures' New Media" alt_name=""/>
+	<company id="corbomite" name="Corbomite Games" alt_name=""/>
+	<company id="coredesign" name="Core Design" alt_name=""/>
+	<company id="coutal" name="Coutal Games" alt_name=""/>
+	<company id="cpcc" name="California Pacific Computer Company" alt_name=""/>
+	<company id="cpondillo" name="Cindy Pondillo" alt_name=""/>
+	<company id="crashable" name="Crashable Studios" alt_name=""/>
+	<company id="creativedream" name="CreativeDream Studio" alt_name=""/>
+	<company id="creativereality" name="Creative Reality" alt_name=""/>
+	<company id="cremation" name="Thinking of Cremation?" alt_name=""/>
+	<company id="croqueta" name="Croqueta Asesina Studios" alt_name=""/>
+	<company id="crothers" name="Crothers Games" alt_name=""/>
+	<company id="cryo" name="Cryo Interactive" alt_name=""/>
+	<company id="crystaldynamics" name="Crystal Dynamics" alt_name=""/>
+	<company id="crystalshard" name="Crystal Shard" alt_name=""/>
+	<company id="csacchi" name="Christopher Sacchi" alt_name="LostTrainDude"/>
+	<company id="cuc" name="CUC Software International" alt_name=""/>
+	<company id="cyan" name="Cyan Worlds" alt_name="Cyan"/>
+	<company id="cyberdreams" name="Cyberdreams" alt_name=""/>
+	<company id="daedalic" name="Daedalic Entertainment" alt_name=""/>
+	<company id="danvzare" name="DanVzare" alt_name=""/>
+	<company id="daringtouch" name="Daring Touch" alt_name=""/>
+	<company id="darkling" name="Darkling Room" alt_name=""/>
+	<company id="deadcode" name="Dead:Code Software" alt_name=""/>
+	<company id="deadidle" name="Dead Idle Games" alt_name=""/>
+	<company id="deirdrakiai" name="Deirdra Kiai Productions" alt_name=""/>
+	<company id="delphine" name="Delphine Software" alt_name=""/>
+	<company id="destiny" name="Destiny Software" alt_name=""/>
+	<company id="dgarrity" name="Devin Garrity" alt_name=""/>
+	<company id="digitaldreams" name="Digital Dreams Multimedia" alt_name=""/>
+	<company id="digitalequipment" name="Digital Equipment Corporation" alt_name=""/>
+	<company id="digitalfantasia" name="Digital Fantasia" alt_name=""/>
+	<company id="digitalmosaic" name="Digital Mosaic Games" alt_name=""/>
+	<company id="digitalvillage" name="The Digital Village" alt_name=""/>
+	<company id="disney" name="Disney" alt_name=""/>
+	<company id="divide" name="Divide By Zero" alt_name=""/>
+	<company id="domark" name="Domark" alt_name=""/>
+	<company id="dosowisko" name="Dosowisko.net" alt_name=""/>
+	<company id="dproctor" name="David Proctor" alt_name=""/>
+	<company id="dreamagination" name="Dreamagination" alt_name=""/>
+	<company id="dreamcatchereurope" name="DreamCatcher Europe" alt_name=""/>
+	<company id="dreamcatcherinteractive" name="DreamCatcher Interactive" alt_name=""/>
+	<company id="dreamersguild" name="The Dreamers Guild" alt_name=""/>
+	<company id="dreamforge" name="DreamForge Intertainment" alt_name=""/>
+	<company id="dreamworks" name="DreamWorks Interactive" alt_name=""/>
+	<company id="dro" name="Dro Soft" alt_name=""/>
+	<company id="dynabyte" name="Dynabyte" alt_name=""/>
+	<company id="dynamix" name="Dynamix" alt_name=""/>
+	<company id="ea" name="Electronic Arts" alt_name=""/>
+	<company id="ecouto" name="Eugene Couto" alt_name=""/>
+	<company id="effigy" name="Team Effigy" alt_name=""/>
+	<company id="eie" name="Empire Interactive Entertainment" alt_name=""/>
+	<company id="eloi" name="ELOI Productions" alt_name=""/>
+	<company id="emotion" name="Emotion Digital" alt_name=""/>
+	<company id="emptyworld" name="EmptyWorld Games" alt_name=""/>
+	<company id="encore" name="Encore Software" alt_name=""/>
+	<company id="eporto" name="Erico Porto" alt_name="eri0o"/>
+	<company id="erbe" name="Erbe Software" alt_name=""/>
+	<company id="ere" name="ERE Informatique" alt_name=""/>
+	<company id="esp" name="Entertainment Software Partners" alt_name=""/>
+	<company id="evryware" name="Evryware" alt_name=""/>
+	<company id="falsely" name="Falsely Profound" alt_name=""/>
+	<company id="fan" name="Fan game" alt_name=""/>
+	<company id="faravid" name="Faravid Interactive" alt_name=""/>
+	<company id="fatfunky" name="Fat Funky" alt_name=""/>
+	<company id="fermin" name="Videojuegos Fermín" alt_name=""/>
+	<company id="firstlight" name="Firstlight" alt_name=""/>
+	<company id="fitz" name="Maciek Fitzner" alt_name="Fitz"/>
+	<company id="flammarion" name="Flammarion" alt_name=""/>
+	<company id="flashpoint" name="Flashpoint Productions" alt_name=""/>
+	<company id="flippingtree" name="FlippingTree" alt_name=""/>
+	<company id="fluik" name="Fluik Entertainment" alt_name=""/>
+	<company id="focushill" name="Focus Hill Games" alt_name=""/>
+	<company id="footprints" name="Footprints Games" alt_name=""/>
+	<company id="forgottenkey" name="Forgotten Key" alt_name=""/>
+	<company id="fractal" name="Fractal Mind" alt_name=""/>
+	<company id="frostlind" name="Frostlind Games" alt_name=""/>
+	<company id="ftl" name="FTL Games" alt_name=""/>
+	<company id="fullyramblomatic" name="Fully Ramblomatic" alt_name=""/>
+	<company id="funcom" name="Funcom" alt_name=""/>
+	<company id="funhouse" name="Funhouse Design" alt_name=""/>
+	<company id="gingertips" name="Gingertips Game Studio" alt_name=""/>
+	<company id="glk" name="Interactive Fiction" alt_name=""/>
+	<company id="gmuhlbock" name="Greg Muhlbock" alt_name=""/>
+	<company id="gnarled" name="Gnarled Scar Manipulations" alt_name=""/>
+	<company id="goa" name="Good Old Adventure" alt_name=""/>
+	<company id="gocgames" name="GOC Games" alt_name=""/>
+	<company id="goldenbough" name="Golden Bough Games" alt_name=""/>
+	<company id="gotgame" name="Got Game Entertainment" alt_name=""/>
+	<company id="graydesign" name="Gray Design Associates" alt_name=""/>
+	<company id="grundislav" name="Grundislav Games" alt_name=""/>
+	<company id="gt" name="GT Interactive" alt_name=""/>
+	<company id="gugames" name="Gugames" alt_name=""/>
+	<company id="guilherme" name="Guilherme" alt_name=""/>
+	<company id="harvester" name="Harvester Games" alt_name=""/>
+	<company id="hbometon" name="Héctor Bometón" alt_name=""/>
+	<company id="he" name="Humongous Entertainment" alt_name=""/>
+	<company id="headware" name="Headware Games" alt_name=""/>
+	<company id="herculean" name="Herculean Effort Productions" alt_name=""/>
+	<company id="herinteractive" name="Her Interactive, Inc." alt_name=""/>
+	<company id="herocraft" name="HeroCraft" alt_name=""/>
+	<company id="himalaya" name="Himalaya Studios" alt_name=""/>
+	<company id="hjuhlin" name="Hampus Juhlin" alt_name=""/>
+	<company id="hofmeier" name="Richard Hofmeier" alt_name=""/>
+	<company id="honza" name="Honza Vávra" alt_name=""/>
+	<company id="hueforest" name="Hue Forest Entertainment" alt_name=""/>
+	<company id="hungry" name="Hungry Software" alt_name=""/>
+	<company id="hungryplanet" name="Hungry Planet Games" alt_name=""/>
+	<company id="hypnotix" name="Hypnotix Inc." alt_name=""/>
+	<company id="ibi" name="Interactive Binary Illusions" alt_name=""/>
+	<company id="ibmjapan" name="IBM Japan" alt_name=""/>
+	<company id="icebox" name="ICEBOX Studios" alt_name=""/>
+	<company id="icom" name="ICOM Simulations" alt_name=""/>
+	<company id="idigicon" name="Idigicon" alt_name=""/>
+	<company id="igc" name="The Illusions Gaming Company" alt_name=""/>
+	<company id="incentive" name="Incentive Software" alt_name=""/>
+	<company id="indiesquish" name="IndieSquish" alt_name=""/>
+	<company id="infamousadv" name="Infamous Adventures" alt_name=""/>
+	<company id="infamousq" name="Infamous Quests" alt_name=""/>
+	<company id="infocom" name="Infocom" alt_name=""/>
+	<company id="infogrames" name="Infogrames" alt_name=""/>
+	<company id="inscape" name="Inscape" alt_name=""/>
+	<company id="instantmillion" name="Instant Million" alt_name=""/>
+	<company id="interlink" name="Interlink Planning" alt_name=""/>
+	<company id="interplay" name="Interplay Productions" alt_name=""/>
+	<company id="invention" name="Invention" alt_name=""/>
+	<company id="ips" name="IPS Computer Group" alt_name=""/>
+	<company id="israndom" name="IsRandomRandom Games" alt_name=""/>
+	<company id="itachoco" name="ITA-Choco" alt_name=""/>
+	<company id="iulyanov" name="Ivan Ulyanov" alt_name=""/>
+	<company id="jbclerfayt" name="Jean-Baptiste de Clerfayt" alt_name=""/>
+	<company id="jbush" name="JBush Productions" alt_name=""/>
+	<company id="jennybee" name="Jennifer McMurray" alt_name="JennyBee"/>
+	<company id="jminamata" name="Julia Minamata" alt_name=""/>
+	<company id="jnuen" name="Joshua Nuernberger" alt_name="TheJBurger"/>
+	<company id="kdlab" name="K-D Lab" alt_name=""/>
+	<company id="kemco" name="Kemco" alt_name=""/>
+	<company id="kirin" name="Kirin Entertainment" alt_name=""/>
+	<company id="kompart" name="Kompart UK" alt_name=""/>
+	<company id="korozif" name="Korozif" alt_name=""/>
+	<company id="krams" name="Krams Design" alt_name=""/>
+	<company id="krumbukt" name="Krumbukt" alt_name=""/>
+	<company id="kyilkhor" name="Kyilkhor Creation" alt_name=""/>
+	<company id="lacemamba" name="Lace Mamba Global" alt_name=""/>
+	<company id="lankhor" name="Lankhor" alt_name=""/>
+	<company id="lazysquirrel" name="Lazy Squirrel" alt_name=""/>
+	<company id="lboni" name="Lorenzo Boni" alt_name=""/>
+	<company id="level9" name="Level 9 Computing" alt_name=""/>
+	<company id="lezard" name="Lezard Interactive" alt_name=""/>
+	<company id="likely" name="Likely Games" alt_name=""/>
+	<company id="linuxgp" name="Linux Game Publishing" alt_name=""/>
+	<company id="littleark" name="Little Ark" alt_name=""/>
+	<company id="livingbooks" name="Living Books" alt_name=""/>
+	<company id="lkavalon" name="L.K. Avalon" alt_name=""/>
+	<company id="lngames" name="LN Games" alt_name=""/>
+	<company id="local" name="Local Studio" alt_name=""/>
+	<company id="lostcraft" name="Lost Craft" alt_name=""/>
+	<company id="lrdg" name="Little Red Dog Games" alt_name=""/>
+	<company id="lucasarts" name="LucasArts" alt_name=""/>
+	<company id="lucyworlds" name="Lucy's Worlds" alt_name=""/>
+	<company id="luminaria" name="Luminaria" alt_name=""/>
+	<company id="mac" name="MAC" alt_name=""/>
+	<company id="macromedia" name="Macromedia" alt_name=""/>
+	<company id="madorange" name="Mad Orange" alt_name=""/>
+	<company id="magnetic" name="Magnetic Scrolls" alt_name=""/>
+	<company id="magnetinteractive" name="Magnet Interactive Studios, Inc." alt_name=""/>
+	<company id="majestic" name="Majestic Studios" alt_name=""/>
+	<company id="marion" name="Marion Poinsot" alt_name=""/>
+	<company id="mattfrith" name="Matt Frith" alt_name=""/>
+	<company id="maximyz" name="Maximyz" alt_name=""/>
+	<company id="maxis" name="Maxis" alt_name=""/>
+	<company id="mcorompt" name="Martine Corompt" alt_name=""/>
+	<company id="mdna" name="MDNA Games" alt_name=""/>
+	<company id="merit" name="Merit Studios" alt_name=""/>
+	<company id="merscom" name="Merscom" alt_name=""/>
+	<company id="metropolis" name="Metropolis Software House" alt_name=""/>
+	<company id="mgutierrez" name="Marcial Gutierrez" alt_name=""/>
+	<company id="mhammill" name="Matt Hammill" alt_name=""/>
+	<company id="microids" name="Microïds" alt_name=""/>
+	<company id="microprose" name="MicroProse" alt_name=""/>
+	<company id="microsoft" name="Microsoft" alt_name=""/>
+	<company id="midian" name="Midian Design" alt_name=""/>
+	<company id="mif2000" name="Denis Galanin" alt_name="Mif2000"/>
+	<company id="millennium" name="Millennium Interactive Ltd." alt_name=""/>
+	<company id="mindfactory" name="MindFactory" alt_name=""/>
+	<company id="mindscape" name="Mindscape" alt_name=""/>
+	<company id="mit" name="Massachusetts Institute of Technology" alt_name=""/>
+	<company id="mitgamelab" name="MIT Game Lab" alt_name="Singapore-MIT GAMBIT Game Lab"/>
+	<company id="mojotouch" name="MojoTouch" alt_name=""/>
+	<company id="molimerx" name="Molimerx Ltd." alt_name=""/>
+	<company id="monkeystone" name="Monkeystone Games" alt_name=""/>
+	<company id="mpcernea" name="Mihai Puiu Cernea" alt_name=""/>
+	<company id="mpe" name="MP Entertainment" alt_name=""/>
+	<company id="mpslabs" name="MPS Labs" alt_name=""/>
+	<company id="mseddas" name="Mathieu Seddas" alt_name=""/>
+	<company id="mythos" name="Mythos Software" alt_name=""/>
+	<company id="nacht" name="Nacht und Nebel" alt_name=""/>
+	<company id="nayma" name="Nayma Software" alt_name=""/>
+	<company id="negator2vc" name="Vasilis Chonianakis" alt_name=""/>
+	<company id="nemoria" name="Nemoria Entertainment" alt_name=""/>
+	<company id="neverhood" name="The Neverhood, Inc." alt_name=""/>
+	<company id="newgen" name="New Generation Software" alt_name=""/>
+	<company id="nihilis" name="NiHiLiS" alt_name=""/>
+	<company id="nintendo" name="Nintendo" alt_name=""/>
+	<company id="nobilis" name="Nobilis" alt_name=""/>
+	<company id="nomore" name="No More For Today Productions" alt_name=""/>
+	<company id="nosense" name="NoSense" alt_name=""/>
+	<company id="nwc" name="New World Computing" alt_name=""/>
+	<company id="nyce" name="Nyce Productions" alt_name="NickyNyce"/>
+	<company id="offstudio" name="Off Studio" alt_name=""/>
+	<company id="ohrock" name="Oh, a Rock! Studios" alt_name=""/>
+	<company id="optik" name="Optik Software, Inc." alt_name=""/>
+	<company id="orbis" name="Orbis Tertius Games" alt_name=""/>
+	<company id="origami" name="OrigamiHero Games" alt_name="Fallen Angel"/>
+	<company id="origin" name="Origin Systems" alt_name=""/>
+	<company id="outerzone" name="The Outer Zone" alt_name=""/>
+	<company id="owlcave" name="Owl Cave" alt_name=""/>
+	<company id="palace" name="Palace Software" alt_name=""/>
+	<company id="pavo" name="Pavo Entertainment" alt_name=""/>
+	<company id="pendulo" name="Péndulo Studios" alt_name=""/>
+	<company id="perfect" name="Perfect Entertainment" alt_name=""/>
+	<company id="perpetualdiversion" name="Perpetual Diversion" alt_name=""/>
+	<company id="petagame" name="PetaGame" alt_name=""/>
+	<company id="philips" name="Philips Interactive Media" alt_name=""/>
+	<company id="pipe" name="Pipe Studio" alt_name=""/>
+	<company id="piranha" name="Piranha Interactive Publishing" alt_name=""/>
+	<company id="playmates" name="Playmates Interactive Entertainment" alt_name=""/>
+	<company id="pnc" name="PnC Narratives" alt_name=""/>
+	<company id="pnpadv" name="Point &amp; Pixel Adventures" alt_name="Ishtar Games"/>
+	<company id="polarware" name="Polarware" alt_name=""/>
+	<company id="pompous" name="The Pompous Pixel" alt_name=""/>
+	<company id="pony" name="Pony Canyon" alt_name=""/>
+	<company id="postmodern" name="Postmodern Adventures" alt_name=""/>
+	<company id="ppa" name="PPAentertainment" alt_name=""/>
+	<company id="presto" name="Presto Studios" alt_name=""/>
+	<company id="prograph" name="Prograph Research" alt_name=""/>
+	<company id="progzmax" name="Shane Stevens" alt_name="ProgZmax"/>
+	<company id="proximity" name="Proximity Games" alt_name=""/>
+	<company id="psychodev" name="PsychoDev" alt_name=""/>
+	<company id="psygnosis" name="Psygnosis" alt_name=""/>
+	<company id="pyrodactyl" name="Pyrodactyl Games" alt_name=""/>
+	<company id="raecreation" name="Raecreations Software" alt_name=""/>
+	<company id="rainbird" name="Rainbird Software" alt_name=""/>
+	<company id="ramorama" name="RamoramaInteractive" alt_name="Ramón Wilhelm"/>
+	<company id="raydunakin" name="Ray Dunakin" alt_name=""/>
+	<company id="reactorinc" name="Reactor Inc." alt_name=""/>
+	<company id="rebellion" name="Rebellion" alt_name=""/>
+	<company id="retrodefender" name="Retro Defender" alt_name=""/>
+	<company id="reunionmusee" name="Réunion des Musées Nationaux" alt_name=""/>
+	<company id="revistronic" name="Revistronic" alt_name=""/>
+	<company id="revolution" name="Revolution" alt_name=""/>
+	<company id="riki" name="Riki Computer Games" alt_name=""/>
+	<company id="rocketscience" name="Rocket Science Games" alt_name=""/>
+	<company id="rockstarv" name="Rockstar Vienna" alt_name=""/>
+	<company id="romank" name="Roman Koksharov" alt_name=""/>
+	<company id="rootbound" name="RootBound Creative" alt_name=""/>
+	<company id="rootfix" name="RootFix Entertainment" alt_name=""/>
+	<company id="rpelect" name="R&amp;P Electronic Media" alt_name=""/>
+	<company id="rskent" name="RSK Entertainment" alt_name=""/>
+	<company id="rtcherniy" name="Ruslan Tcherniy" alt_name=""/>
+	<company id="rthonen" name="Renzo Thönen" alt_name=""/>
+	<company id="rudowski" name="Rudowski Brothers" alt_name=""/>
+	<company id="sacis" name="Sacis" alt_name=""/>
+	<company id="sanctuary" name="Sanctuary Woods" alt_name=""/>
+	<company id="sandcastle" name="Sandcastle" alt_name=""/>
+	<company id="sarubrunei" name="Saru Brunei" alt_name=""/>
+	<company id="scavenger" name="Scavenger" alt_name=""/>
+	<company id="schnibble" name="Schnibble Productions" alt_name=""/>
+	<company id="sebastianronsse" name="Sebastian Ronsse" alt_name=""/>
+	<company id="sega" name="Sega" alt_name=""/>
+	<company id="sektor13" name="Sektor 13" alt_name=""/>
+	<company id="shadowtor" name="Shadow Tor Studios" alt_name=""/>
+	<company id="sierra" name="Sierra" alt_name="Sierra On-Line"/>
+	<company id="siliconbeach" name="Silicon Beach Software" alt_name=""/>
+	<company id="silverspook" name="Silver Spook Games" alt_name=""/>
+	<company id="skaldic" name="Skaldic Games" alt_name=""/>
+	<company id="skif" name="S.K.I.F." alt_name=""/>
+	<company id="skygoblin" name="SkyGoblin" alt_name=""/>
+	<company id="smokingcar" name="Smoking Car Productions" alt_name=""/>
+	<company id="socko" name="SOCKO! Entertainment" alt_name=""/>
+	<company id="softgold" name="Softgold" alt_name=""/>
+	<company id="softwarefarm" name="The Software Farm" alt_name=""/>
+	<company id="solo" name="Solo Design" alt_name=""/>
+	<company id="sony" name="Sony" alt_name=""/>
+	<company id="spectrumholo" name="Spectrum HoloByte" alt_name=""/>
+	<company id="spreadcamp" name="Spreadcamp" alt_name=""/>
+	<company id="squinky" name="Squinky" alt_name=""/>
+	<company id="starbyte" name="Starbyte Software" alt_name=""/>
+	<company id="sticky" name="Sticky Studios" alt_name=""/>
+	<company id="stonespring" name="Stone Spring Studios" alt_name=""/>
+	<company id="stranga" name="Stranga Games" alt_name=""/>
+	<company id="straystar" name="Rik Vargard" alt_name="Straystar"/>
+	<company id="strummer" name="Strummer Games" alt_name=""/>
+	<company id="studiotrophis" name="Studio Trophis" alt_name=""/>
+	<company id="svarun" name="Svarun Entertainment" alt_name=""/>
+	<company id="syn9" name="Daniel Kennedy" alt_name="Syn9"/>
+	<company id="synergy" name="Synergy Inc." alt_name=""/>
+	<company id="tacky" name="TackyWorld Interactive" alt_name=""/>
+	<company id="taito" name="Taito" alt_name=""/>
+	<company id="teamdisaster" name="Team Disaster" alt_name="CaptainD"/>
+	<company id="teamvsb" name="Team VSB" alt_name=""/>
+	<company id="technocrat" name="Technocrat Games" alt_name=""/>
+	<company id="terra" name="Terra Nova Development" alt_name=""/>
+	<company id="terribletoybox" name="Terrible Toybox" alt_name=""/>
+	<company id="theivy" name="Erin Robinson" alt_name="The Ivy"/>
+	<company id="thorsoft" name="Thorsoft of Letchworth" alt_name=""/>
+	<company id="threebees" name="Three Bees" alt_name=""/>
+	<company id="tibba" name="Tibba Games" alt_name=""/>
+	<company id="tlc" name="The Learning Company" alt_name=""/>
+	<company id="tmlediton" name="TML-Edition OHG" alt_name=""/>
+	<company id="tomahawk" name="Tomahawk" alt_name=""/>
+	<company id="tommo" name="Tommo" alt_name=""/>
+	<company id="tomsimpson" name="Tom Simpson" alt_name=""/>
+	<company id="toshiba" name="Toshiba EMI" alt_name=""/>
+	<company id="traktor" name="Traktor Games" alt_name=""/>
+	<company id="trecision" name="Trecision S.p.A." alt_name=""/>
+	<company id="trendmasters" name="Trendmasters" alt_name=""/>
+	<company id="trilobyte" name="Trilobyte" alt_name=""/>
+	<company id="triptilt" name="TripTilt" alt_name="ToxicTuba"/>
+	<company id="trumgottist" name="Trumgottist Entertainment" alt_name=""/>
+	<company id="tsdingel" name="Thomas &amp; Steffen Dingel" alt_name=""/>
+	<company id="tsunami" name="Tsunami Games" alt_name=""/>
+	<company id="turmoil" name="Turmoil Games" alt_name=""/>
+	<company id="twotales" name="Two Tales" alt_name=""/>
+	<company id="ubisoft" name="Ubisoft" alt_name=""/>
+	<company id="ukz" name="UKZ Arts" alt_name=""/>
+	<company id="underdogs" name="Innovative Underdogs" alt_name=""/>
+	<company id="unitedpixtures" name="United Pixtures" alt_name=""/>
+	<company id="unknown" name="Unknown Company" alt_name=""/>
+	<company id="usgold" name="U.S. Gold" alt_name=""/>
+	<company id="viacom" name="Viacom" alt_name=""/>
+	<company id="vicarious" name="Vicarious Visions" alt_name=""/>
+	<company id="victokai" name="Vic Tokai" alt_name=""/>
+	<company id="viperante" name="Viperante" alt_name=""/>
+	<company id="virgin" name="Virgin Interactive" alt_name=""/>
+	<company id="virtual" name="Virtual Image Productions" alt_name=""/>
+	<company id="wadjet" name="Wadjet Eye Games" alt_name=""/>
+	<company id="wanadoo" name="Wanadoo Edition" alt_name=""/>
+	<company id="wandering" name="Wandering Adventures" alt_name=""/>
+	<company id="wanderlust" name="Wanderlust Interactive" alt_name=""/>
+	<company id="warner" name="Warner Interactive" alt_name=""/>
+	<company id="watchdatoast" name="WatchDaToast" alt_name=""/>
+	<company id="wavey" name="Wavey Games" alt_name=""/>
+	<company id="wdehert" name="Wim De Hert" alt_name=""/>
+	<company id="weggie" name="Weggieware Games" alt_name=""/>
+	<company id="westend" name="Westend Studios" alt_name=""/>
+	<company id="westwood" name="Westwood Studios" alt_name=""/>
+	<company id="wham" name="Whamgames" alt_name=""/>
+	<company id="wormwood" name="Wormwood Studios" alt_name=""/>
+	<company id="wtw" name="Walk Thru Walls Studios" alt_name=""/>
+	<company id="wyrmkeep" name="The Wyrmkeep Entertainment" alt_name=""/>
+	<company id="xii" name="XII Games" alt_name=""/>
+	<company id="zojoi" name="Zojoi" alt_name=""/>
+	<company id="zombie" name="Zombie Studios" alt_name=""/>
+	<company id="zombiecow" name="Zombie Cow Studios" alt_name=""/>
+</companies>
