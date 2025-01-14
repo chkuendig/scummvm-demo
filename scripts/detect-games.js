@@ -4,11 +4,13 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 const static = require('node-static');
 
-var file = new (static.Server)("./");
+var file = new static.Server("./", { headers: { 'Cross-Origin-Opener-Policy': 'same-origin','Cross-Origin-Embedder-Policy':'same-origin' } });
 const server = http.createServer(function (req, res) {
-    file.serve(req, res);
+    req.addListener('end', function () {
+        file.serve(req, res);
+    }).resume();
 }).listen({ host: 'localhost', port: 0 },async () => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
     await page.goto('http://localhost:' + server.address().port + '/scummvm.html#--add --path=/data/games --recursive');
