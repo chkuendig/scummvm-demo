@@ -4,7 +4,7 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 const static = require('node-static');
 
-var file = new static.Server("./", { headers: { 'Cross-Origin-Opener-Policy': 'same-origin','Cross-Origin-Embedder-Policy':'same-origin' } });
+var file = new static.Server("./", { headers: { 'Cross-Origin-Opener-Policy': 'same-origin','Cross-Origin-Embedder-Policy':'require-corp','Cross-Origin-Resource-Policy':'same-site' } });
 const server = http.createServer(function (req, res) {
     req.addListener('end', function () {
         file.serve(req, res);
