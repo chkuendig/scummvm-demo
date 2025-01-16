@@ -13,33 +13,204 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-20.04
+permissions:
+  contents: write
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+env:
+  EMSDK_VERSION: "3.1.74"
+  SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --disable-all-engines --enable-engine=testbed,playground3d,scumm,scumm_7_8 --default-dynamic"
+  SCUMMVM_CONFIGURE_LIBS: "--enable-png --enable-ogg --enable-vorbis --enable-gif --enable-mpeg2 --enable-freetype2 --enable-jpeg --enable-theoradec --enable-mad --enable-zlib  "
+  DOWNLOAD_GAMES: "ft,testbed,testbed,playground3d,comi"
+  # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build-scummvm:
+    name: Build ScummVM 🔧
+    runs-on: ubuntu-22.04
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
         with:
           submodules: true
-          lfs: true
+      - name: Define some cache keys 🗝️
+        run: |
+          echo "${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS}" > config_vars.txt
+          echo "${SCUMMVM_CONFIGURE_LIBS}" > config_lib_vars.txt
+          echo "SCUMMVM_COMMIT=$(git rev-parse @:./scummvm)" >> $GITHUB_ENV
+      - uses: actions/cache@v4 ##todo: we should cache also the object files (and save/update them across runs)
+        name: Cache Emscripten SDK 🔨
+        with:
+          path: scummvm/dists/emscripten/emsdk-* # Cache the Emscripten SDK
+          key: emsdk-${{ env.EMSDK_VERSION }}
+      - uses: actions/cache@v4
+        name: Cache Dependencies 📦
+        id: cache-libs
+        with:
+          path: scummvm/dists/emscripten/libs/build
+          key: scummvm-libs-${{ env.EMSDK_VERSION }}-${{ hashFiles('config_lib_vars.txt') }}
+      - uses: actions/cache@v4
+        name: Cache configure artifacts 📦
+        id: cache-configure
+        with:
+          # we need to cache the configure scripts as well so the timestamps are correct and don't cause a re-configure. 
+          path: |
+            scummvm/configure
+            scummvm/engines.awk
+            scummvm/engines/*/configure.engine 
+            scummvm/config.h 
+            scummvm/config.mk 
+            scummvm/config.log 
+            scummvm/configure.stamp 
+            scummvm/engines/engines.mk 
+            scummvm/engines/detection_table.h 
+            scummvm/engines/plugins_table.h
+          key: scummvm-configure-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
+     
+      - uses: actions/cache@v4 
+        name: Cache Build artifacts 📦
+        id: cache-build
+        with:
+          path: |
+            scummvm/build-emscripten/
+            scummvm/**/lib*.a  
+            scummvm/**/*.o
+          key: build-emscripten-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
 
-      - name: Build ScummVM 🔧
+      - if: ${{ steps.cache-configure.outputs.cache-hit != 'true' }}
+        name: Configure ScummVM
+        run: cd scummvm && dists/emscripten/build.sh configure ${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS} && cd ..
+      - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+        name: "Building ScummVM"
         run: |
-          npm run build-scummvm
-      - name: Download Games 🎲
+          find scummvm/dists/emscripten/libs/build
+          echo "Building scummvm-${SCUMMVM_COMMIT}"
+          cd scummvm && dists/emscripten/build.sh make dist
+          cp build-emscripten/scummvm.html build-emscripten/index.html && cp AUTHORS build-emscripten/ && cp COPYING build-emscripten/ && cp LICENSES/* build-emscripten/ && cp COPYRIGHT build-emscripten/ && cp NEWS* build-emscripten/ && cp README* build-emscripten/
+      - name: Save Build
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            scummvm/build-emscripten/
+          key: build-emscripten-${{ github.run_id }}
+  download-games:
+    name: Download Games 🎲
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Define some cache keys 🗝️
         run: |
+          echo "${DOWNLOAD_GAMES}" > download_games.txt
+      - uses: actions/cache@v4
+        with:
+          path: scummvm/build-emscripten/data/games
+          key: games-${{ hashFiles('download_games.txt') }}
+      - run: |
           npm install .
-          npm run download-games ft,grim/grim-win-demo1-en.zip,driller,comi/comi-win-large-demo-en.zip,warlock,sky/BASS-Floppy-1.3.zip,drascula/drascula-1.0.zip,monkey4/emi-win-demo-en.zip,feeble,queen/FOTAQ_Floppy.zip,ft,grim/grim-win-demo2-en.zip,lsl7,lure,myst,phantasmagoria,riven,tlj,sword2,sinistersix,"https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo1-en.zip",asylum,testbed,playground3d
+      - run: |  
+          npm run download-games ft,testbed,testbed,playground3d,comi
+      #- run: |
+      #    npm run download-games ft,grim/grim-win-demo1-en.zip,driller,comi/comi-win-large-demo-en.zip,warlock,sky/BASS-Floppy-1.3.zip,drascula/drascula-1.0.zip,monkey4/emi-win-demo-en.zip,feeble,queen/FOTAQ_Floppy.zip,ft,grim/grim-win-demo2-en.zip,lsl7,lure,myst,phantasmagoria,riven,tlj,sword2,sinistersix,"https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo1-en.zip",asylum,testbed,playground3d
+      - run: |
+          npm run refresh-data-index
+  detect-games:
+    name: Detect Games 🎲
+    runs-on: ubuntu-22.04
+    needs: [build-scummvm, download-games]
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Define some cache keys 🗝️
+        run: |
+            echo "${DOWNLOAD_GAMES}" > download_games.txt
+      - uses: actions/cache@v4
+        with:
+          path: scummvm/build-emscripten/
+          key: build-emscripten-${{ github.run_id }}
+          fail-on-cache-miss: true
+      - uses: actions/cache/restore@v4
+        with:
+          path: scummvm/build-emscripten/data/games
+          key: games-${{ hashFiles('download_games.txt') }}
+      - run: |
+          npm install .
+      - run: |
+          find scummvm/build-emscripten/data/games
+      - run: |
           npm run refresh-data-index
           npm run detect-games
-      - name: Deploy Demo 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+      - run: |
+          npm run refresh-data-index
+      - uses: actions/cache/save@v4
+        with:
+          path: |
+            scummvm/build-emscripten/scummvm.ini
+            scummvm/build-emscripten/index.json
+          key: scummvm-ini-${{ github.run_id }}
+  update-icons:
+    name: Update Icons 🎨
+    runs-on: ubuntu-22.04
+    needs: build-scummvm
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Define  cache keys 🗝️
+        run: |
+          echo "SCUMMVM_ICONS_COMMIT=$(git rev-parse @:./scummvm-icons)" >> $GITHUB_ENV
+          echo "SCUMMVM_ICONS_COMMIT=${SCUMMVM_ICONS_COMMIT}"  
+      - uses: actions/cache@v4
+        id: cache-icons
+        with:
+            path: scummvm/build-emscripten/data/gui-icons
+            key: gui-icons-${{ env.SCUMMVM_ICONS_COMMIT }}
+      - if: ${{ steps.cache-icons.outputs.cache-hit != 'true' }}
+        run: |
+          npm install .
+          npm run update-icons
+          npm run refresh-data-index
+  deploy-demo:
+    name: Deploy Demo 🚀
+    runs-on: ubuntu-22.04
+    needs: [detect-games, update-icons]
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Define  cache keys 🗝️
+        run: |
+            echo "SCUMMVM_ICONS_COMMIT=$(git rev-parse @:./scummvm-icons)" >> $GITHUB_ENV
+            echo "${DOWNLOAD_GAMES}" > download_games.txt
+      - name: Restore ScummVM build
+        uses: actions/cache/restore@v4
+        with:
+          path: scummvm/build-emscripten/
+          key: build-emscripten-${{ github.run_id }}
+      - name: Restore icons
+        uses: actions/cache/restore@v4
+        with:
+          path: scummvm/build-emscripten/data/gui-icons
+          key: gui-icons-${{ env.SCUMMVM_ICONS_COMMIT }}
+      - name: "Restore scummvm.ini"
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            scummvm/build-emscripten/scummvm.ini
+            scummvm/build-emscripten/index.json
+          key: scummvm-ini-${{ github.run_id }}
+      - name: "Restore games"
+        uses: actions/cache/restore@v4
+        with:
+          path: scummvm/build-emscripten/data/games
+          key: games-${{ hashFiles('download_games.txt') }}
+      - run: |
+          find scummvm/build-emscripten/
+      - uses: JamesIves/github-pages-deploy-action@v4.7.2
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: scummvm/build-emscripten # The folder the action should deploy.

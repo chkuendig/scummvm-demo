@@ -29,7 +29,9 @@ if [[ -d "$icons_dir" ]]; then
     echo "Adding files from icons repository "
     cd "$icons_dir"
     python3 gen-set.py
-    echo "add icons"
+    echo "remove gui-icons.dat"
+    rm -f  "${scummvm_dir}/build-emscripten/data/gui-icons.dat" && 
+    echo "add gui-icons dir"
     mkdir -p "${scummvm_dir}/build-emscripten/data/gui-icons"
     cp -r "$icons_dir/icons" "${scummvm_dir}/build-emscripten/data/gui-icons/"
     echo "add xml"
