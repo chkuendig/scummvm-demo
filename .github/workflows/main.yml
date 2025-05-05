@@ -31,6 +31,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
+      - name: Patch Cloud URL 🩹
+        run: |
+          grep -rl --include \*.cpp 'cloud.scummvm.org' scummvm/ | xargs sed -i 's/cloud.scummvm.org/scummvm-cloud.kuendig.io/g'  
       - name: Define some cache keys 🗝️
         run: |
           echo "${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS}" > config_vars.txt
@@ -191,8 +194,10 @@ jobs:
           working_dir: "scummvm-cloud"
       - name: Create .env file 💾 # encode with echo "$(cat scummvm-cloud/public/.env)"  | base64 -w 0
         run: printf "${{ secrets.CLOUD_ENV }}" | base64 -d > scummvm-cloud/public/.env
+      - name: Patch Cloud URL 🩹
+        run: grep -rl --include \*.php 'cloud.scummvm.org' scummvm-cloud/ | xargs sed -i 's/cloud.scummvm.org/scummvm-cloud.kuendig.io/g'  
       - name: Create .htaccess file 💾 
-        run: printf "RewriteEngine On\nRewriteRule ^(.*)$ ./public/$1 [L]" > scummvm-cloud/.htaccess
+        run: printf 'RewriteEngine On\nRewriteRule ^(.*)$ ./public/$1 [L]\n' > scummvm-cloud/.htaccess
       - name: Upload to Hostinger ☁️
         uses: appleboy/scp-action@v0.1.7
         with:
