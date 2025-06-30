@@ -17,7 +17,6 @@ permissions:
   contents: write
 
 env:
-  EMSDK_VERSION: "4.0.1"
   SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --enable-all-engines --disable-engine=hpl1  --default-dynamic --enable-cloud"
   SCUMMVM_CONFIGURE_LIBS: "--enable-png --enable-ogg --enable-vorbis --enable-gif --enable-mpeg2 --enable-retrowave  --enable-freetype2 --enable-jpeg --enable-theoradec --enable-mad --enable-zlib --enable-fluidlite"
   DOWNLOAD_GAMES: "ft,testbed,playground3d,comi,grim,driller,warlock,monkey4,feeble,myst,lsl7,lure,myst,phantasmagoria,riven,tlj,sword2,sinistersix,sanitarium"
