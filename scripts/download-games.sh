@@ -32,8 +32,10 @@ mkdir -p "${scummvm_dir}/build-emscripten/data/games/"
 
 echo ^\(${_bundle_games// /|}\)$
 if [[ "playground3d" =~ $(echo ^\(${_bundle_games// /|}\)$) ]]; then
-    mkdir -p "${scummvm_dir}/build-emscripten/data/games/playground3d"
-    touch  "${scummvm_dir}/build-emscripten/data/games/playground3d/PLAYGROUND3D"
+    rm -rf "${scummvm_dir}/build-emscripten/data/games/playground3d"
+    cd "${scummvm_dir}/dists/engine-data"
+    ./create-playground3d-data.sh
+    mv playground3d "${scummvm_dir}/build-emscripten/data/games/playground3d"
 fi
 
 if [[ "testbed" =~ $(echo ^\(${_bundle_games// /|}\)$) ]]; then
