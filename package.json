@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "node-static": "^0.7.11",
+    "puppeteer": "^24.15.0"
+  }
+}
