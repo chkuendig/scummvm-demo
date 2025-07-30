@@ -7,6 +7,8 @@
 	<engine id="ags" name="AGS" alt_name="Adventure Game Studio" enabled="TRUE"/>
 	<engine id="asylum" name="Asylum" alt_name="Sanitarium" enabled="TRUE"/>
 	<engine id="avalanche" name="Avalanche" alt_name="" enabled="FALSE"/>
+	<engine id="awe" name="Another World" alt_name="" enabled="TRUE"/>
+	<engine id="bagel" name="BAGEL" alt_name="Boffo Adventure Game Engine and Libraries" enabled="TRUE"/>
 	<engine id="bbvs" name="Beavis and Butt-Head in Virtual Stupidity" alt_name="" enabled="TRUE"/>
 	<engine id="bladerunner" name="Blade Runner" alt_name="" enabled="TRUE"/>
 	<engine id="buried" name="The Journeyman Project 2: Buried in Time" alt_name="" enabled="TRUE"/>
@@ -16,9 +18,12 @@
 	<engine id="chewy" name="Chewy: Esc from F5" alt_name="" enabled="TRUE"/>
 	<engine id="cine" name="Cinématique" alt_name="" enabled="TRUE"/>
 	<engine id="composer" name="Magic Composer" alt_name="" enabled="TRUE"/>
+	<engine id="crab" name="CRAB" alt_name="" enabled="TRUE"/>
 	<engine id="cruise" name="CruisE" alt_name="" enabled="TRUE"/>
 	<engine id="cryo" name="Cryo" alt_name="" enabled="FALSE"/>
 	<engine id="cryomni3d" name="Cryomni3D" alt_name="" enabled="TRUE"/>
+	<engine id="darkseed" name="Darkseed" alt_name="" enabled="TRUE"/>
+	<engine id="dgds" name="DGDS" alt_name="Dynamix Game Development System" enabled="TRUE"/>
 	<engine id="director" name="Macromedia Director" alt_name="MacroMind Director" enabled="TRUE"/>
 	<engine id="dm" name="Dungeon Master" alt_name="" enabled="FALSE"/>
 	<engine id="draci" name="Draci" alt_name="Dračí Historie" enabled="TRUE"/>
@@ -30,6 +35,7 @@
 	<engine id="glk" name="Glk" alt_name="" enabled="TRUE"/>
 	<engine id="gnap" name="Gnap" alt_name="" enabled="TRUE"/>
 	<engine id="gob" name="Gob" alt_name="" enabled="TRUE"/>
+	<engine id="got" name="God of Thunder" alt_name="" enabled="TRUE"/>
 	<engine id="griffon" name="The Griffon Legend" alt_name="" enabled="TRUE"/>
 	<engine id="grim" name="GrimE" alt_name="" enabled="TRUE"/>
 	<engine id="groovie" name="Groovie" alt_name="" enabled="TRUE"/>
@@ -45,7 +51,7 @@
 	<engine id="kingdom" name="Kingdom: The Far Reaches" alt_name="" enabled="TRUE"/>
 	<engine id="kyra" name="Kyra" alt_name="" enabled="TRUE"/>
 	<engine id="lab" name="The Labyrinth of Time" alt_name="" enabled="TRUE"/>
-	<engine id="lastexpress" name="The Last Express" alt_name="" enabled="FALSE"/>
+	<engine id="lastexpress" name="The Last Express" alt_name="" enabled="TRUE"/>
 	<engine id="lilliput" name="Lilliput" alt_name="" enabled="FALSE"/>
 	<engine id="lure" name="Lure of the Temptress" alt_name="" enabled="TRUE"/>
 	<engine id="m4" name="M4" alt_name="" enabled="TRUE"/>
@@ -69,6 +75,7 @@
 	<engine id="plumbers" name="Plumbers Don't Wear Ties!" alt_name="" enabled="TRUE"/>
 	<engine id="prince" name="The Prince and the Coward" alt_name="" enabled="TRUE"/>
 	<engine id="private" name="Private Eye" alt_name="" enabled="TRUE"/>
+	<engine id="qdengine" name="QD Engine" alt_name="" enabled="TRUE"/>
 	<engine id="queen" name="Flight of the Amazon Queen" alt_name="" enabled="TRUE"/>
 	<engine id="saga" name="SAGA" alt_name="Scripts for Animated Graphic Adventures" enabled="TRUE"/>
 	<engine id="saga2" name="SAGA2" alt_name="Scripts for Animated Graphic Adventures 2" enabled="TRUE"/>
@@ -76,7 +83,7 @@
 	<engine id="scumm" name="SCUMM" alt_name="Script Creation Utility for Maniac Mansion" enabled="TRUE"/>
 	<engine id="sherlock" name="Sherlock" alt_name="" enabled="TRUE"/>
 	<engine id="sky" name="Sky" alt_name="Beneath a Steel Sky" enabled="TRUE"/>
-	<engine id="sludge" name="SLUDGE" alt_name="Scripting Language for Unhindered Development of a Gaming Environment" enabled="FALSE"/>
+	<engine id="sludge" name="SLUDGE" alt_name="Scripting Language for Unhindered Development of a Gaming Environment" enabled="TRUE"/>
 	<engine id="stark" name="Stark" alt_name="" enabled="TRUE"/>
 	<engine id="startrek" name="Star Trek" alt_name="" enabled="FALSE"/>
 	<engine id="supernova" name="Supernova" alt_name="" enabled="TRUE"/>
@@ -96,6 +103,7 @@
 	<engine id="tsage" name="TsAGE" alt_name="Tsunami Adventure Game Engine" enabled="TRUE"/>
 	<engine id="tucker" name="Tucker" alt_name="" enabled="TRUE"/>
 	<engine id="twine" name="TwinEngine" alt_name="" enabled="TRUE"/>
+	<engine id="twp" name="Thimbleweed Park Engine" alt_name="" enabled="TRUE"/>
 	<engine id="ultima" name="Ultima" alt_name="" enabled="TRUE"/>
 	<engine id="vcruise" name="V-Cruise" alt_name="" enabled="TRUE"/>
 	<engine id="voyeur" name="Voyeur" alt_name="" enabled="TRUE"/>

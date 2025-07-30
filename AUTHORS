@@ -104,6 +104,16 @@ ScummVM Team
        Peter Bozso
        Arnaud Boutonne
 
+    awe:
+       Gregory Montoir
+       Paul Gilbert
+
+    Bagel:
+       Arnaud Boutonne
+       Daniel Albano
+       Eugene Sandulenko
+       Paul Gilbert
+
     BBVS:
        Benjamin Haisch
 
@@ -145,7 +155,7 @@ ScummVM Team
     Composer:
        Alyssa Milburn
 
-    Crab:
+    CRAB:
        Kartik Agarwala
 
     CruisE:
@@ -160,6 +170,14 @@ ScummVM Team
 
     Cryomni3D:
        Philippe Valembois
+
+    Darkseed:
+       Eric Fry
+
+    DGDS:
+       Matthew Duggan
+       Filippos Karapetis
+       Vasco Alexandre da Silva Costa
 
     Director:
        Eugene Sandulenko
@@ -224,6 +242,11 @@ ScummVM Team
        Simon Delamarre
        Sven Hesse
        Eugene Sandulenko
+
+    Got:
+       Paul Gilbert
+       Arnaud Boutonne
+       Coen Rampen
 
     Griffon:
        Eugene Sandulenko
@@ -298,6 +321,7 @@ ScummVM Team
        Eugene Sandulenko
 
     Lastexpress:
+       Andrea Boscarino               - Engine rewrite
        Matthew Hoops                  - (retired)
        Jordi Vilalta Prat
        Julien Templier
@@ -307,6 +331,10 @@ ScummVM Team
 
     Lure:
        Paul Gilbert
+
+    M4:
+       Paul Gilbert
+       Arnaud Boutonne
 
     MacVenture:
        Borja Lorente                  - GSoC student
@@ -319,6 +347,9 @@ ScummVM Team
        Arnaud Boutonne
        Paul Gilbert
        Filippos Karapetis
+
+    Media Station:
+       Nathanael Gentry
 
     MM (Xeen):
        Paul Gilbert
@@ -386,6 +417,10 @@ ScummVM Team
     Private:
        Gustavo Grieco
 
+    QDEngine:
+       Eugene Sandulenko
+       Kunal Tiwari
+
     Queen:
        David Eriksson                 - (retired)
        Gregory Montoir                - (retired)
@@ -431,7 +466,7 @@ ScummVM Team
        Ludvig Strigeus                - (retired)
 
     SCUMM HE:
-       Andrea Boscarino               - Digital audio
+       Andrea Boscarino               - Digital audio, WIZ graphics system
        Jonathan Gray                  - (retired)
        Travis Howell
        Gregory Montoir                - (retired)
@@ -544,6 +579,9 @@ ScummVM Team
        Sebastien Viannay              - (retired)
        Martin Gerhardy
 
+    Thimbleweed Park:
+       Valéry Sablonnière
+
     Ultima:
        Paul Gilbert
        Matthew Duggan
@@ -582,8 +620,10 @@ ScummVM Team
 
     Wintermute:
        Gunnar Birke                   - Wintermute 3D
+       Pawel Kolodziejski             - Wintermute 3D
        Einar Johan T. Somaaen
        Tobia Tesan
+       lolbot-iichan
 
     Z-Vision:
        Adrian Astley
@@ -852,6 +892,7 @@ Other contributions
        Ben Castricum
 
     Finnish:
+       Linus Virtanen
        Toni Saarela
        Timo Mikkolainen
 
@@ -914,6 +955,7 @@ Other contributions
   Game Translations
   -----------------
     CGE:
+       Arnaud Boutonne                - Soltys English translation
        Dan Serban                     - Soltys English translation
        Victor Gonzalez                - Soltys Spanish translation
        Alejandro Gomez de la Munoza   - Soltys Spanish translation
@@ -928,6 +970,8 @@ Other contributions
        Thierry Crozat                 - Improve French translation
 
     Mortevielle:
+       Arnaud Boutonne                - First English translation, improve
+                                        German translation
        Hugo Labrande                  - Improve English translation
        Thierry Crozat                 - Improve English translation
 
@@ -1063,7 +1107,7 @@ Other contributions
      Hugues Valois                  - Game selection menu
      Jordi Vilalta                  - Numerous code and website clean-up
                                       patches
-     Petr Vyhnak                    - The DCL-INFLATE algorithm, many Win32
+     Petr Vyhnak                    - The DCL-IMPLODE algorithm, many Win32
                                       improvements
      Bas Zoetekouw                  - Man pages, debian package management,
                                       CVS maintenance
@@ -1250,4 +1294,7 @@ Special thanks to
 
    Fabrizio Lagorio from Trecision S.p.A., for finding and providing the
    source code of many of their games.
+
+   Ron Davis for releasing the sources and generously giving away the three
+   chapters of God of Thunder.
 

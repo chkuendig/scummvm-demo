@@ -3,21 +3,29 @@
 	<serie id="1213" name="1213"/>
 	<serie id="adi" name="ADI"/>
 	<serie id="adibou" name="Adibou"/>
+	<serie id="advags" name="Adventure"/>
 	<serie id="agifan" name="AGI Fan"/>
 	<serie id="alemmo" name="Al Emmo"/>
 	<serie id="alimardan" name="Alimardan"/>
 	<serie id="apprentice" name="Apprentice"/>
 	<serie id="artmurder" name="Art of Murder"/>
+	<serie id="barnrunner" name="Barn Runner"/>
 	<serie id="barrowhill" name="Barrow Hill"/>
 	<serie id="beavisbutthead" name="Beavis and Butt-Head"/>
 	<serie id="bigthinkers" name="Big Thinkers"/>
+	<serie id="bjordan" name="Ben Jordan"/>
+	<serie id="blackfriday" name="Black Friday"/>
 	<serie id="blackwell" name="Blackwell"/>
 	<serie id="blue" name="Blue's Clues"/>
 	<serie id="brain" name="Dr. Brain"/>
+	<serie id="bwindows" name="Broken Windows"/>
+	<serie id="captdisaster" name="Captain Disaster"/>
 	<serie id="carmen" name="Carmen Sandiego"/>
 	<serie id="carol" name="Carol Reed Mysteries"/>
 	<serie id="chzo" name="The Chzo Mythos"/>
+	<serie id="clotilde" name="Clotilde Soffritti"/>
 	<serie id="conquests" name="Conquests"/>
+	<serie id="cosmos" name="Cosmos Quest"/>
 	<serie id="crusader" name="Crusader"/>
 	<serie id="danewguys" name="Da New Guys"/>
 	<serie id="darkfall" name="Dark Fall"/>
@@ -29,6 +37,7 @@
 	<serie id="elvira" name="Elvira"/>
 	<serie id="enchanter" name="Enchanter"/>
 	<serie id="eob" name="Eye of the Beholder"/>
+	<serie id="fallingdark" name="Falling Dark"/>
 	<serie id="fatman" name="The Adventures of Fatman"/>
 	<serie id="fbear" name="Fatty Bear"/>
 	<serie id="forgottensound" name="Forgotten Sound"/>
@@ -51,14 +60,18 @@
 	<serie id="kyra" name="The Legend of Kyrandia"/>
 	<serie id="laurabow" name="Laura Bow"/>
 	<serie id="lba" name="Little Big Adventure"/>
+	<serie id="littlemice" name="Three Little Mice"/>
 	<serie id="livingbooks" name="Living Books"/>
 	<serie id="lsl" name="Leisure Suit Larry"/>
 	<serie id="magictales" name="Magic Tales"/>
 	<serie id="manhunt" name="Manhunter"/>
 	<serie id="maniac" name="Maniac Mansion"/>
+	<serie id="melrin" name="Melrin"/>
+	<serie id="metrocity" name="METRO CITY"/>
 	<serie id="mi" name="The Secret of Monkey Island"/>
 	<serie id="mixedup" name="Roberta Williams' Mixed-Up"/>
 	<serie id="mm" name="Might and Magic"/>
+	<serie id="murran" name="Murran Chronicles"/>
 	<serie id="mybigsister" name="My Big Sister"/>
 	<serie id="myst" name="Myst"/>
 	<serie id="nancy" name="Nancy Drew"/>
@@ -66,8 +79,10 @@
 	<serie id="ozorwell" name="Oz Orwell"/>
 	<serie id="pajama" name="Pajama Sam"/>
 	<serie id="papas" name="Papa's Daughters"/>
+	<serie id="perfecttides" name="Perfect Tides"/>
 	<serie id="petka" name="Red Comrades"/>
 	<serie id="phantasmagoria" name="Phantasmagoria"/>
+	<serie id="pilotbrothers" name="Pilot Brothers"/>
 	<serie id="pink" name="The Pink Panther"/>
 	<serie id="planetfall" name="Planetfall"/>
 	<serie id="playtoons" name="Playtoons"/>
@@ -77,21 +92,30 @@
 	<serie id="quantum" name="Quantumnauts"/>
 	<serie id="reversion" name="Reversion"/>
 	<serie id="ringworld" name="Ringworld"/>
+	<serie id="robotragedy" name="Robotragedy"/>
 	<serie id="roguestate" name="Rogue State"/>
 	<serie id="sherlock" name="Sherlock Holmes"/>
+	<serie id="sludge" name="SLUDGE Engine"/>
 	<serie id="sierrachristmas" name="Sierra Christmas Cards"/>
 	<serie id="simon" name="Simon the Sorcerer"/>
+	<serie id="sniper" name="Sniper and Spotter"/>
 	<serie id="spyfox" name="Spy Fox"/>
 	<serie id="sq" name="Space Quest"/>
 	<serie id="startrek" name="Star Trek"/>
+	<serie id="superego" name="Superego"/>
 	<serie id="supernova" name="Mission Supernova"/>
 	<serie id="sword" name="Broken Sword"/>
 	<serie id="syberia" name="Syberia"/>
+	<serie id="symploke" name="Symploke"/>
 	<serie id="t7g" name="The 7th Guest"/>
 	<serie id="tanya" name="Tanya Grotter"/>
 	<serie id="tehran" name="Murder in Tehran"/>
 	<serie id="texmurphy" name="Tex Murphy"/>
+	<serie id="tftoz" name="Tales From The Outer Zone"/>
+	<serie id="totaleclipse" name="Total Eclipse"/>
 	<serie id="transylvania" name="Transylvania"/>
 	<serie id="ultima" name="Ultima"/>
+	<serie id="visitor" name="The Visitor"/>
+	<serie id="wwhedon" name="Wendy Whedon"/>
 	<serie id="zork" name="Zork"/>
 </series>
