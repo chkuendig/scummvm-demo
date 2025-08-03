@@ -37,6 +37,7 @@ if [[ -d "$icons_dir" ]]; then
   cp -r "$icons_dir/icons" "${scummvm_dir}/build-emscripten/data/gui-icons/"
   echo "add xml"
   cp -r "$icons_dir/"*.xml "${scummvm_dir}/build-emscripten/data/gui-icons/"
+  rm -f "${scummvm_dir}/build-emscripten/data/gui-icons.dat"
 else
   echo "Icons repository not found"
 fi
