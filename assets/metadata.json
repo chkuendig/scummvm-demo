@@ -1,0 +1,274 @@
+{
+    "afm-1.8": {
+        "description": "Version 1.8",
+        "id": "wage:afm",
+        "platform": "Macintosh"
+    },
+    "amot-1.8": {
+        "description": "Version 1.8",
+        "id": "wage:amot",
+        "platform": "Macintosh"
+    },
+    "atw": {
+        "comment": "wrong folder structure, only subfolder data/ is needed",
+        "company": "JBush Productions"
+    },
+    "aventuradecine-win-demo-de": {},
+    "blueforce-dos-ni-demo-en": {
+        "comment": "Also broken on native: ERROR: Missing file BLUE.RLB!",
+        "skip": true
+    },
+    "cantitoe": {
+        "description": "Freeware",
+        "id": "wage:cantitoe"
+    },
+    "chewy-dos-demo-de": {
+        "comment": "Game not implemented",
+        "skip": true
+    },
+    "cubert": {},
+    "darkseed-dos-demo-en": {},
+    "drakmythcastle": {
+        "company": "James C. Gehrig & Virginia Batcheff",
+        "description": "Freeware",
+        "id": "wage:drakmythcastle",
+        "platform": "Macintosh"
+    },
+    "gotfree": {
+        "description": "Freeware",
+        "id": "got:got"
+    },
+    "grailquest-demo": {
+        "company": "Artworx",
+        "description": "Demo",
+        "id": "wage:grailquest",
+        "platform": "Macintosh"
+    },
+    "interview": {},
+    "kyra3-dos-ni-demo-en": {
+        "comment": "doesn't work in native either - Game Data not found",
+        "skip": true
+    },
+    "lastexpress-trailer-en": {
+        "comment": "not a demo, just a videofile 'The_Last_Express-Trailer.avi'",
+        "skip": true
+    },
+    "lastexpress-win-demo-en": {},
+    "leptonsquest": {
+        "company": "IndieSquish"
+    },
+    "lsl1-demo-pl": {
+        "comment": "doesn't work on native either - Game Data not found (SNDDIR, PICDIR are files instead of folders)",
+        "skip": true
+    },
+    "mazeodoom-win-demo-en": {
+        "comment": "Not in compatibility table, manually added",
+        "id": "bagel:mazeodoom",
+        "skip": false
+    },
+    "meetmediaband": {
+        "comment": "declared Freeware by Marc Canter",
+        "description": "Freeware",
+        "download_url": "https://archive.org/details/meetmediaband",
+        "id": "director:mediaband",
+        "languages": [
+            "en"
+        ]
+    },
+    "minizork": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Infocom",
+        "description": "Demo/Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=1rea34vqnz3mtyq1",
+        "id": "glk:minizork1",
+        "languages": [
+            "en"
+        ],
+        "name": "Mini-Zork"
+    },
+    "mysthous-fr": {
+        "comment": "Game data not found: Has two subfolders, Version A, Version B with different demos",
+        "skip": true
+    },
+    "nsc": {
+        "company": "Upper Orbit Software"
+    },
+    "penumbra-overture-mac": {
+        "description": "Mac Demo",
+        "download_link": "https://www.moddb.com/games/penumbra-overture/downloads/penumbra-overture-demo-mac",
+        "id": "hpl1:penumbraoverture"
+    },
+    "playground3d": {
+        "company": "ScummVM",
+        "description": "The Testing and Playground Environment for 3D Renderers",
+        "id": "playground3d:playground3d",
+        "name": "Playground 3D"
+    },
+    "raysmaze": {
+        "description": "Freeware",
+        "id": "wage:raysmaze",
+        "platform": "Macintosh"
+    },
+    "raysmaze-alt": {
+        "description": "Alternative Version",
+        "id": "wage:raysmaze",
+        "platform": "Macintosh"
+    },
+    "RedNex": {
+        "company": "BMG Interactive",
+        "cover": "https://scummvm-data.kuendig.io/RedNex/cover.png",
+        "description": "MacFormat August 1996 Demo",
+        "download_url": "https://discmaster.textfiles.com/browse/27017/macformat-040.iso/mac/Demos/RedNex",
+        "id": "director:rednex",
+        "languages": [
+            "en"
+        ],
+        "name": "RedNex",
+        "platform": "Macintosh"
+    },
+    "robinsrescue": {},
+    "shivah-demo": {
+        "id": "ags:shivahkosher"
+    },
+    "soltys-demo": {
+        "comment": "Game not implemented",
+        "skip": true
+    },
+    "testbed": {
+        "company": "ScummVM",
+        "description": "The Backend Testing Framework",
+        "id": "testbed:testbed",
+        "name": "Testbed"
+    },
+    "tgttpoacs": {},
+    "theapartment3": {
+        "company": "MacroMind",
+        "description": "Interactive Demo (D3)",
+        "id": "director:theapartment",
+        "languages": [
+            "en"
+        ],
+        "platform": "Macintosh",
+        "skip": false
+    },
+    "tsotc-v6": {
+        "company": "Sebastian Krzyszkowiak"
+    },
+    "twisted-1.6": {
+        "description": "Version 1.6",
+        "id": "wage:twisted",
+        "platform": "Macintosh"
+    },
+    "wage-games-master-1.0": {
+        "comment": "278+ games, only 9 are actually in the metadata (these are listed separately)",
+        "skip": true
+    },
+    "ween-dos-demo-en": {
+        "languages": [
+            "en_US"
+        ]
+    },
+    "zak-fmtowns-indyloom-ni-demo": {
+        "comment": "Not in compatibility table, manually added",
+        "id": "scumm:indyloom",
+        "skip": false
+    },
+    "zak-fmtowns-indyzak-ni-demo": {
+        "comment": "Not in compatibility table, manually added",
+        "id": "scumm:indyzak",
+        "skip": false
+    },
+    "zak-fmtowns-zakloom-ni-demo": {
+        "comment": "Not in compatibility table, manually added",
+        "id": "scumm:zakloom",
+        "skip": false
+    },
+    "zcode-advent": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "William Crowther and Donald Woods",
+        "description": "Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=fft6pu91j85y4acv",
+        "id": "glk:adv350_zcode",
+        "languages": [
+            "en"
+        ],
+        "name": "Colossal Cave Adventure"
+    },
+    "zcode-curses": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Graham Nelson",
+        "description": "Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=plvzam05bmz3enh8",
+        "id": "glk:curses",
+        "languages": [
+            "en"
+        ],
+        "name": "Curses"
+    },
+    "zcode-fantasydimension": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Johan Berntsson",
+        "description": "Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=9gcujue3zpxbhj6k",
+        "id": "glk:pj3_fantadimension",
+        "languages": [
+            "en"
+        ],
+        "name": "The Fantasy Dimension"
+    },
+    "zcode-moonglow": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Dave Bernazzani",
+        "description": "Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=5e9zrkcfgq2moinh",
+        "id": "glk:moonglow",
+        "languages": [
+            "en"
+        ],
+        "name": "Moonglow"
+    },
+    "zcode-sampler1": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Infocom",
+        "description": "Demo/Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=wa8crlfz82pra14i",
+        "id": "glk:infocomsample4zpiw",
+        "languages": [
+            "en"
+        ],
+        "name": "Four-In-One Sampler I"
+    },
+    "zcode-sampler2": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Infocom",
+        "description": "Demo/Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=p00ucaayobrt2paz",
+        "id": "glk:infocomsample3ztl",
+        "languages": [
+            "en"
+        ],
+        "name": "Four-In-One Sampler II"
+    },
+    "zcode-submarine": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Garry Francis",
+        "description": "Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=rw2jsnyoqxsdvyug",
+        "id": "glk:pj3_submarinesabot",
+        "languages": [
+            "en"
+        ],
+        "name": "Submarine Sabotage"
+    },
+    "zcode-tristam": {
+        "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
+        "company": "Hugo Labrande",
+        "description": "Freeware",
+        "download_url": "https://ifdb.org/viewgame?id=6gtq9ahrolz2ry2",
+        "id": "glk:tristamisland",
+        "languages": [
+            "en"
+        ],
+        "name": "Tristam Island"
+    }
+}

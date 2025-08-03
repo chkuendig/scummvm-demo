@@ -1,6 +1,5 @@
-# This is a basic workflow to help you get started with Actions
+name: Build & Deploy to Hostinger 🚀
 
-name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
@@ -12,52 +11,234 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+permissions:
+  contents: write
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+env:
+  SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud"
+  SCUMMVM_CONFIGURE_LIBS: " --enable-a52 --enable-faad --enable-fluidlite --enable-freetype2 --enable-fribidi --enable-gif --enable-gif --enable-jpeg --enable-jpeg --enable-mad --enable-mad --enable-mikmod --enable-mpcdec --enable-mpeg2 --enable-ogg --enable-png --enable-retrowave --enable-theoradec --enable-vorbis --enable-vpx --enable-zlib"
+  EMSDK_VERSION: "4.0.15"
+  DATA_BASEURL: "https://scummvm-data.kuendig.io"
+  
+jobs:
+  build-scummvm:
+    name: Build ScummVM 🔧
+    runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout 🛎️
+      - name: Checkout  🛎️
         uses: actions/checkout@v4
         with:
           submodules: true
-          lfs: true
-      - name: Call configure
+      - name: Patch Cloud URL 🩹
         run: |
-          cd scummvm
-          dists/emscripten/build.sh configure \
-            --enable-release --enable-all-engines --enable-plugins --default-dynamic --enable-png --enable-ogg --enable-vorbis --enable-gif --enable-mpeg2 --enable-freetype2 --enable-jpeg --enable-theoradec --enable-mad --enable-zlib 
-          cd ..
-      - name: Build ScummVM 🔧
+          grep -rl --include \*.cpp 'cloud.scummvm.org' scummvm/ | xargs sed -i 's/cloud.scummvm.org/scummvm-cloud.kuendig.io/g'  
+      - name: Define some cache keys 🗝️
         run: |
-          cd scummvm
-          ./dists/emscripten/build.sh make dist
-          cp build-emscripten/scummvm.html build-emscripten/index.html
-          cp AUTHORS build-emscripten/
-          cp COPYING build-emscripten/
-          cp LICENSES/* build-emscripten/
-          cp COPYRIGHT build-emscripten/
-          cp NEWS* build-emscripten/
-          cp README* build-emscripten/
-          cd ..
-      - name: Update Icons 🖼️
+          echo "${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS}" > config_vars.txt
+          echo "${SCUMMVM_CONFIGURE_LIBS}" > config_lib_vars.txt
+          echo "SCUMMVM_COMMIT=$(git rev-parse @:./scummvm)" >> $GITHUB_ENV
+      - uses: actions/cache@v4 ##todo: we should cache also the object files (and save/update them across runs)
+        name: Cache Emscripten SDK 🔨
+        with:
+          path: scummvm/dists/emscripten/emsdk-* # Cache the Emscripten SDK
+          key: emsdk-${{ env.EMSDK_VERSION }}
+      - uses: actions/cache@v4
+        name: Cache Dependencies 📦
+        id: cache-libs
+        with:
+          path: scummvm/dists/emscripten/libs/build
+          key: scummvm-libs-${{ env.EMSDK_VERSION }}-${{ hashFiles('config_lib_vars.txt') }}
+      - uses: actions/cache@v4
+        name: Cache configure artifacts 📦
+        id: cache-configure
+        with:
+          # we need to cache the configure scripts as well so the timestamps are correct and don't cause a re-configure. 
+          path: |
+            scummvm/configure
+            scummvm/engines.awk
+            scummvm/engines/*/configure.engine 
+            scummvm/config.h 
+            scummvm/config.mk 
+            scummvm/config.log 
+            scummvm/configure.stamp 
+            scummvm/engines/engines.mk 
+            scummvm/engines/detection_table.h 
+            scummvm/engines/plugins_table.h
+          key: scummvm-configure-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
+     
+      - uses: actions/cache@v4 
+        name: Cache Build artifacts 📦
+        id: cache-build
+        with:
+          path: |
+            scummvm/build-emscripten/
+            scummvm/**/lib*.a  
+            scummvm/**/*.o
+          key: build-emscripten-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
+
+      - if: ${{ steps.cache-configure.outputs.cache-hit != 'true' }}
+        name: Configure ScummVM
+        run: cd scummvm && dists/emscripten/build.sh configure ${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS} && cd ..
+      - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+        name: "Building ScummVM"
         run: |
+          find scummvm/dists/emscripten/libs/build
+          echo "Building scummvm-${SCUMMVM_COMMIT}"
+          cd scummvm && dists/emscripten/build.sh make dist
+          cp build-emscripten/scummvm.html build-emscripten/index.html && cp AUTHORS build-emscripten/ && cp COPYING build-emscripten/ && cp LICENSES/* build-emscripten/ && cp COPYRIGHT build-emscripten/ && cp NEWS* build-emscripten/ && cp README* build-emscripten/
+      - name: Save Build
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            scummvm/build-emscripten/
+          key: build-emscripten-${{ github.run_id }}
+  update-icons:
+    name: Update Icons 🎨
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Define  cache keys 🗝️
+        run: |
+          echo "SCUMMVM_ICONS_COMMIT=$(git rev-parse @:./scummvm-icons)" >> $GITHUB_ENV
+          echo "SCUMMVM_ICONS_COMMIT=${SCUMMVM_ICONS_COMMIT}"  
+      - uses: actions/cache@v4
+        id: cache-icons
+        with:
+            path: scummvm/build-emscripten/data/gui-icons
+            key: gui-icons-${{ env.SCUMMVM_ICONS_COMMIT }}-${{ hashFiles('assets/metadata.json') }}
+      - if: ${{ steps.cache-icons.outputs.cache-hit != 'true' }}
+        run: |
+          sed -i 's/scummvm\/scummvm-icons/chkuendig\/scummvm-icons/g' scummvm-icons/gen-set.py
           scripts/update-icons.sh
-      - name: Add Games 🕹️
+          python3 scummvm/dists/emscripten/build-make_http_index.py scummvm/build-emscripten/data/
+  sync-games:
+    name: Sync Games 🎮
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Sync Games 🔄
         run: |
-          npm install . &&
-          scripts/download-games.sh \
-            ft,grim/grim-win-demo1-en.zip,driller,comi/comi-win-large-demo-en.zip,warlock,sky/BASS-Floppy-1.3.zip,drascula/drascula-1.0.zip,monkey4/emi-win-demo-en.zip,feeble,queen/FOTAQ_Floppy.zip,ft,grim/grim-win-demo2-en.zip,lsl7,lure,myst,phantasmagoria,riven,tlj/tlj-demo-en-new.zip,sword2,sinistersix,"https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo1-en.zip",asylum && \
-          cd scummvm && ./dists/emscripten/build.sh dist && cd .. && \
-          scripts/autodetect-games.sh && \
-          cd scummvm && ./dists/emscripten/build.sh dist && cd ..
-      - name: Deploy Demo 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+          scripts/sync-games.sh
+        env:
+          SSH_USER:  ${{ secrets.HOSTINGER_SSH_USERNAME }}
+          SSH_PASSWORD:  ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          SSH_HOST:  ${{ secrets.HOSTINGER_SSH_HOST }}
+          SSH_PORT:  ${{ secrets.HOSTINGER_SSH_PORT }}
+          SSH_PATH:   "/home/${{ secrets.HOSTINGER_SSH_USERNAME }}/domains/scummvm-data.kuendig.io/public_html"
+      - name: Save Games Metadata
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            scummvm/build-emscripten/games.html
+            scummvm/build-emscripten/games.json
+          key: games-metadata-${{ github.run_id }}
+  deploy-cloud:
+    name: Deploy Cloud Backend ☁️
+    runs-on: ubuntu-latest
+    needs: []
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Composer 📦
+        uses: "php-actions/composer@v6"
+        with:
+          php_version: "7.3.33"
+          version: "2.8.5"
+          working_dir: "scummvm-cloud"
+      - name: Create .env file 💾 # encode with echo "$(cat scummvm-cloud/public/.env)"  | base64 -w 0
+        run: printf "${{ secrets.CLOUD_ENV }}" | base64 -d > scummvm-cloud/public/.env
+      - name: Patch Cloud URL 🩹
+        run: grep -rl --include \*.php 'cloud.scummvm.org' scummvm-cloud/ | xargs sed -i 's/cloud.scummvm.org/scummvm-cloud.kuendig.io/g'  
+      - name: Create .htaccess file 💾 
+        run: printf 'RewriteEngine On\nRewriteRule ^(.*)$ ./public/$1 [L]\n' > scummvm-cloud/.htaccess
+      - name: Upload to Hostinger ☁️
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          source: "scummvm-cloud/templates/*,scummvm-cloud/vendor/*,scummvm-cloud/src/*,scummvm-cloud/public/*, scummvm-cloud/.htaccess"
+          target: ~/domains/scummvm-cloud.kuendig.io/public_html
+          rm: true
+          strip_components: 1
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          username: ${{ secrets.HOSTINGER_SSH_USERNAME }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+
+  deploy-demo:
+    name: Deploy Demo Page 🚀
+    runs-on: ubuntu-latest
+    needs:  [update-icons, sync-games, build-scummvm] # [detect-games, update-icons]
+    steps:
+      - name: Checkout  🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Define  cache keys 🗝️
+        run: |
+            echo "SCUMMVM_ICONS_COMMIT=$(git rev-parse @:./scummvm-icons)" >> $GITHUB_ENV
+            echo "${DOWNLOAD_GAMES}" > download_games.txt
+      - name: Restore ScummVM build
+        uses: actions/cache/restore@v4
+        with:
+          path: scummvm/build-emscripten/
+          key: build-emscripten-${{ github.run_id }}
+      - name: Restore icons
+        uses: actions/cache/restore@v4
+        with:
+          path: scummvm/build-emscripten/data/gui-icons
+          key: gui-icons-${{ env.SCUMMVM_ICONS_COMMIT }}-${{ hashFiles('assets/metadata.json') }}
+      - name: Restore Games Metadata
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            scummvm/build-emscripten/games.html
+            scummvm/build-emscripten/games.json
+          key: games-metadata-${{ github.run_id }}
+      # - name: "Restore scummvm.ini"
+      #   uses: actions/cache/restore@v4
+      #   with:
+      #     path: |
+      #       scummvm/build-emscripten/scummvm.ini
+      #       scummvm/build-emscripten/index.json
+      #     key: scummvm-ini-${{ github.run_id }}
+      # - name: "Restore games"
+      #   uses: actions/cache/restore@v4
+      #   with:
+      #     path: scummvm/build-emscripten/data/games
+      #     key: games-${{ hashFiles('download_games.txt') }}
+      - name:  update baseURL
+        run: |
+          jq '.games +=  {"baseUrl":"${{ env.DATA_BASEURL }}"}' scummvm/build-emscripten/data/index.json > scummvm/build-emscripten/data/index.json.tmp && mv scummvm/build-emscripten/data/index.json.tmp scummvm/build-emscripten/data/index.json
+      - run: |
+          echo "AddType 'application/wasm' wasm so" > scummvm/build-emscripten/.htaccess
+      - name: Copy default scummvm.ini
+        run: |
+          cp assets/scummvm.ini scummvm/build-emscripten/scummvm.ini
+      - uses: JamesIves/github-pages-deploy-action@v4.7.2
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: scummvm/build-emscripten # The folder the action should deploy.
+      - name: Upload to Hostinger ☁️
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          source: "scummvm/build-emscripten/*"
+          target: ~/domains/scummvm.kuendig.io/public_html
+          rm: true
+          strip_components: 2
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          username: ${{ secrets.HOSTINGER_SSH_USERNAME }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+      - name: Archive website artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-emscripten
+          path: |
+            scummvm/build-emscripten
