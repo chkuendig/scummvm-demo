@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScummVM Games Library</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #d2691e, #cd853f);
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: #f5deb3;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            border-bottom: 3px solid #654321;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #90EE90;
+        }
+        .header .subtitle {
+            margin: 5px 0 0 0;
+            font-size: 1.1em;
+            color: #f5deb3;
+            font-style: italic;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(245, 222, 179, 0.1);
+            min-height: 100vh;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #8b4513;
+            font-size: 18px;
+            background: rgba(245, 222, 179, 0.8);
+            border-radius: 10px;
+        }
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #8b0000;
+            background: rgba(255, 182, 193, 0.9);
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #cd5c5c;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .game-entry {
+            background: rgba(245, 222, 179, 0.95);
+            border: 2px solid #daa520;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(139, 69, 19, 0.3);
+            transition: all 0.3s ease;
+            padding: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .game-entry:hover {
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+            transform: translateY(-2px);
+        }
+        .game-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #daa520;
+            flex: 1;
+        }
+        .game-icon {
+            width: 50%;
+            height: auto;
+            min-height: 100px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .game-icon.no-icon {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: #f5deb3;
+            font-weight: bold;
+            font-size: 8px;
+            text-align: center;
+            height: 100px;
+        }
+        .game-icon img {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .game-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .game-info {
+            flex: 1;
+        }
+        .game-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #8b4513;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            line-height: 1.2;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .game-publisher {
+            font-size: 10px;
+            color: #a0522d;
+            font-style: italic;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .game-id {
+            display: none;
+        }
+        .game-variants {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .game-variants li {
+            padding: 4px 6px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #daa520;
+            border-radius: 3px;
+            font-size: 9px;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 18px;
+        }
+        .game-variants li:hover {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .variant-path {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 8px;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+        }
+        .variant-path a {
+            color: #8b4513;
+            text-decoration: none;
+        }
+        .variant-path a:hover {
+            color: #a0522d;
+            text-decoration: underline;
+        }
+        .variant-details {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+        .variant-platform, .variant-languages {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+        .variant-platform img, .variant-languages img {
+            width: 10px;
+            height: 10px;
+            object-fit: contain;
+        }
+        .variant-description {
+            color: #a0522d;
+            font-style: italic;
+            font-size: 8px;
+            margin-left: 3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+            min-width: 0;
+        }
+        .stats {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(245, 222, 179, 0.9);
+            border-radius: 10px;
+            border: 2px solid #daa520;
+            font-size: 16px;
+        }
+        .stats strong {
+            color: #8b4513;
+        }
+        .search-box {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #daa520;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #8b4513;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #8b4513;
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+        }
+        .search-box::placeholder {
+            color: #a0522d;
+        }
+        .footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            text-align: center;
+            color: rgba(245, 222, 179, 0.8);
+            border-top: 2px solid rgba(218, 165, 32, 0.5);
+            font-size: 14px;
+        }
+        .footer a {
+            color: #f5deb3;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 ScummVM Games Library</h1>
+        <div class="subtitle">Classic Adventure & Role-Playing Games</div>
+    </div>
+    
+    <div class="container">
+        <div id="loading" class="loading">
+            Loading games data...
+        </div>
+        
+        <div id="error" class="error" style="display: none;">
+            Error loading data. Please make sure all files are accessible.
+        </div>
+        
+        <div id="content" style="display: none;">
+            <input type="text" id="searchBox" class="search-box" placeholder="Search games by title or publisher...">
+            
+            <div id="stats" class="stats"></div>
+            
+            <div id="gamesList" class="games-grid"></div>
+            
+            <div class="footer">
+                Powered by ScummVM • Visit <a href="https://scummvm.org" style="color: #1a4c8c;">scummvm.org</a> for more information
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class GamesLibrary {
+            constructor() {
+                this.gamesData = [];
+                this.gamesMetadata = {};
+                this.companiesMetadata = {};
+                this.groupedGames = {};
+                this.init();
+            }
+
+            async init() {
+                try {
+                    await this.loadData();
+                    this.processData();
+                    this.renderGames();
+                    this.setupSearch();
+                    this.showContent();
+                } catch (error) {
+                    console.error('Error initializing games library:', error);
+                    this.showError();
+                }
+            }
+
+            async loadData() {
+                // Load games.json
+                const gamesResponse = await fetch('./games.json');
+                this.gamesData = await gamesResponse.json();
+
+                // Load games.xml
+                const gamesXmlResponse = await fetch('./scummvm-icons/games.xml');
+                const gamesXmlText = await gamesXmlResponse.text();
+                this.parseGamesXml(gamesXmlText);
+
+                // Load companies.xml
+                const companiesXmlResponse = await fetch('./scummvm-icons/companies.xml');
+                const companiesXmlText = await companiesXmlResponse.text();
+                this.parseCompaniesXml(companiesXmlText);
+            }
+
+            parseGamesXml(xmlText) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xmlText, 'text/xml');
+                const gameElements = doc.getElementsByTagName('game');
+
+                for (let i = 0; i < gameElements.length; i++) {
+                    const game = gameElements[i];
+                    const id = game.getAttribute('id');
+                    const name = game.getAttribute('name');
+                    const companyId = game.getAttribute('company_id');
+                    if (id && name) {
+                        this.gamesMetadata[id] = {
+                            name: name,
+                            companyId: companyId
+                        };
+                    }
+                }
+            }
+
+            parseCompaniesXml(xmlText) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xmlText, 'text/xml');
+                const companyElements = doc.getElementsByTagName('company');
+
+                for (let i = 0; i < companyElements.length; i++) {
+                    const company = companyElements[i];
+                    const id = company.getAttribute('id');
+                    const name = company.getAttribute('name');
+                    if (id && name) {
+                        this.companiesMetadata[id] = name;
+                    }
+                }
+            }
+
+            processData() {
+                // Group games by ID
+                this.gamesData.forEach(entry => {
+                    if (!entry.id) return;
+                    
+                    if (!this.groupedGames[entry.id]) {
+                        this.groupedGames[entry.id] = [];
+                    }
+                    this.groupedGames[entry.id].push(entry);
+                });
+            }
+
+            getGameName(gameId) {
+                const gameIdParts = gameId.split(':');
+                const simpleId = gameIdParts.length > 1 ? gameIdParts[1] : gameId;
+                const gameInfo = this.gamesMetadata[simpleId];
+                return gameInfo ? gameInfo.name : gameId;
+            }
+
+            getGamePublisher(gameId) {
+                const gameIdParts = gameId.split(':');
+                const simpleId = gameIdParts.length > 1 ? gameIdParts[1] : gameId;
+                const gameInfo = this.gamesMetadata[simpleId];
+                if (gameInfo && gameInfo.companyId && this.companiesMetadata[gameInfo.companyId]) {
+                    return this.companiesMetadata[gameInfo.companyId];
+                }
+                return null;
+            }
+
+            getPlatformIcon(platform) {
+                if (!platform || platform === 'Unknown') return null;
+                
+                const platformMap = {
+                    'DOS': 'pc',
+                    'Windows': 'windows',
+                    'Macintosh': 'macintosh',
+                    'Linux': 'linux',
+                    'Amiga': 'amiga',
+                    'Atari ST': 'atari',
+                    'Atari 8-bit': 'atari8',
+                    'Apple II': 'apple2',
+                    'Apple IIgs': '2gs',
+                    'Commodore 64': 'c64',
+                    'PC-98': 'pc98',
+                    'FM Towns': 'fmtowns',
+                    'Amstrad CPC': 'cpc',
+                    'ZX Spectrum': 'zx',
+                    'Acorn 32-bit': 'acorn',
+                    'Amiga CD32': 'amiga',
+                    'Philips CD-i': 'cdi',
+                    'PlayStation': 'playstation',
+                    'PlayStation 2': 'playstation2',
+                    'Pocket PC': 'ppc',
+                    'Android': 'android',
+                    'iOS': 'ios'
+                };
+                
+                const iconName = platformMap[platform] || platform.toLowerCase().replace(/\s+/g, '');
+                return `scummvm-icons/default/icons/platforms/${iconName}.png`;
+            }
+
+            getLanguageIcon(langCode) {
+                if (!langCode || langCode === 'Unknown') return null;
+                
+                const langMap = {
+                    'en': 'us',
+                    'en_GB': 'gb',
+                    'en_US': 'us',
+                    'de': 'de',
+                    'fr': 'fr',
+                    'es': 'es',
+                    'it': 'it',
+                    'nl': 'nl',
+                    'pl': 'pl',
+                    'ru': 'ru',
+                    'ja': 'ja',
+                    'ko': 'ko',
+                    'pt': 'pt',
+                    'ca': 'ca',
+                    'cs': 'cs',
+                    'da': 'da',
+                    'fi': 'fi',
+                    'he': 'he',
+                    'hu': 'hu',
+                    'nb': 'nb',
+                    'sv': 'se',
+                    'tr': 'tr',
+                    'zh': 'cn'
+                };
+                
+                const flagCode = langMap[langCode] || langCode;
+                // Try SVG first, then PNG
+                return `scummvm-icons/default/icons/flags/${flagCode}.svg`;
+            }
+
+            getIconPath(gameId) {
+                const engineGameId = gameId.replace(':', '-');
+                // Try main icons directory first, then default
+                return `scummvm-icons/icons/${engineGameId}.png`;
+            }
+
+            createGameElement(gameId, variants) {
+                const gameName = this.getGameName(gameId);
+                const gamePublisher = this.getGamePublisher(gameId);
+                const iconPath = this.getIconPath(gameId);
+
+                const gameDiv = document.createElement('div');
+                gameDiv.className = 'game-entry';
+                gameDiv.setAttribute('data-game-name', gameName.toLowerCase());
+                gameDiv.setAttribute('data-game-id', gameId.toLowerCase());
+                gameDiv.setAttribute('data-game-publisher', (gamePublisher || '').toLowerCase());
+
+                // Game icon (larger, spans the height)
+                const iconDiv = document.createElement('div');
+                iconDiv.className = 'game-icon';
+                
+                const img = document.createElement('img');
+                img.src = iconPath;
+                img.alt = gameName;
+                img.onerror = () => {
+                    iconDiv.innerHTML = 'GAME';
+                    iconDiv.classList.add('no-icon');
+                };
+                iconDiv.appendChild(img);
+
+                // Game content (header + variants)
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'game-content';
+
+                // Game header with title and publisher
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'game-header';
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'game-info';
+
+                const titleDiv = document.createElement('div');
+                titleDiv.className = 'game-title';
+                titleDiv.textContent = gameName;
+
+                const publisherDiv = document.createElement('div');
+                publisherDiv.className = 'game-publisher';
+                if (gamePublisher) {
+                    publisherDiv.textContent = gamePublisher;
+                } else {
+                    publisherDiv.textContent = 'Unknown Publisher';
+                }
+
+                infoDiv.appendChild(titleDiv);
+                infoDiv.appendChild(publisherDiv);
+                headerDiv.appendChild(infoDiv);
+
+                // Variants list (single line entries)
+                const variantsList = document.createElement('ul');
+                variantsList.className = 'game-variants';
+
+                variants.forEach(variant => {
+                    const li = document.createElement('li');
+                    
+                    // Make the entire entry clickable
+                    const link = document.createElement('a');
+                    
+                    // Build the ScummVM command with language parameter if available
+                    const platform = variant.platform || 'Unknown';
+                    const languages = variant.languages || ['Unknown'];
+                    const description = variant.description || '';
+                    
+                    let scummvmUrl = `scummvm.html#--path=/data/games/${variant.relative_path}`;
+                    
+                    // Add language parameter if we have a specific language (not 'Unknown')
+                    if (languages.length > 0 && languages[0] !== 'Unknown') {
+                        scummvmUrl += ` --language=${languages[0]}`;
+                    }
+                    
+                    scummvmUrl += ` ${gameId}`;
+                    
+                    link.href = scummvmUrl;
+                    link.style.textDecoration = 'none';
+                    link.style.color = 'inherit';
+                    link.style.display = 'flex';
+                    link.style.alignItems = 'center';
+                    link.style.gap = '6px';
+                    link.style.width = '100%';
+                    
+                    // Details with icons and description only
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'variant-details';
+
+                    // Platform icon only
+                    const platformSpan = document.createElement('span');
+                    platformSpan.className = 'variant-platform';
+                    platformSpan.title = platform;
+                    
+                    const platformIcon = this.getPlatformIcon(platform);
+                    if (platformIcon) {
+                        const platformImg = document.createElement('img');
+                        platformImg.src = platformIcon;
+                        platformImg.alt = platform;
+                        platformImg.title = platform;
+                        platformImg.onerror = () => {
+                            platformImg.style.display = 'none';
+                        };
+                        platformSpan.appendChild(platformImg);
+                    }
+
+                    // Language flags only
+                    const languagesSpan = document.createElement('span');
+                    languagesSpan.className = 'variant-languages';
+                    languagesSpan.title = languages.join(', ');
+                    
+                    languages.forEach((lang, index) => {
+                        const langIcon = this.getLanguageIcon(lang);
+                        if (langIcon) {
+                            const langImg = document.createElement('img');
+                            langImg.src = langIcon;
+                            langImg.alt = lang;
+                            langImg.title = lang.toUpperCase();
+                            langImg.style.marginRight = index < languages.length - 1 ? '1px' : '0';
+                            langImg.onerror = () => {
+                                if (langImg.src.endsWith('.svg')) {
+                                    langImg.src = langImg.src.replace('.svg', '.png');
+                                } else {
+                                    langImg.style.display = 'none';
+                                }
+                            };
+                            languagesSpan.appendChild(langImg);
+                        }
+                    });
+
+                    detailsDiv.appendChild(platformSpan);
+                    detailsDiv.appendChild(languagesSpan);
+                    
+                    // Description text
+                    if (description) {
+                        const descSpan = document.createElement('span');
+                        descSpan.className = 'variant-description';
+                        descSpan.textContent = description;
+                        detailsDiv.appendChild(descSpan);
+                    }
+
+                    // Assemble the clickable link: icons + description
+                    link.appendChild(detailsDiv);
+                    li.appendChild(link);
+                    variantsList.appendChild(li);
+                });
+
+                contentDiv.appendChild(headerDiv);
+                contentDiv.appendChild(variantsList);
+
+                gameDiv.appendChild(iconDiv);
+                gameDiv.appendChild(contentDiv);
+
+                return gameDiv;
+            }
+
+            renderGames() {
+                const gamesList = document.getElementById('gamesList');
+                const stats = document.getElementById('stats');
+
+                // Update stats
+                const totalGames = Object.keys(this.groupedGames).length;
+                const totalVariants = this.gamesData.length;
+                stats.innerHTML = `<strong>${totalGames}</strong> unique games with <strong>${totalVariants}</strong> total variants`;
+
+                // Sort games alphabetically by name
+                const sortedGameIds = Object.keys(this.groupedGames).sort((a, b) => {
+                    const nameA = this.getGameName(a).toLowerCase();
+                    const nameB = this.getGameName(b).toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+
+                sortedGameIds.forEach(gameId => {
+                    const variants = this.groupedGames[gameId];
+                    const gameElement = this.createGameElement(gameId, variants);
+                    gamesList.appendChild(gameElement);
+                });
+            }
+
+            setupSearch() {
+                const searchBox = document.getElementById('searchBox');
+                searchBox.addEventListener('input', (e) => {
+                    this.filterGames(e.target.value);
+                });
+            }
+
+            filterGames(searchTerm) {
+                const gameEntries = document.querySelectorAll('.game-entry');
+                const normalizedSearch = searchTerm.toLowerCase();
+
+                gameEntries.forEach(entry => {
+                    const gameName = entry.getAttribute('data-game-name');
+                    const gameId = entry.getAttribute('data-game-id');
+                    const gamePublisher = entry.getAttribute('data-game-publisher');
+                    
+                    if (gameName.includes(normalizedSearch) || 
+                        gameId.includes(normalizedSearch) || 
+                        gamePublisher.includes(normalizedSearch)) {
+                        entry.style.display = 'flex';
+                    } else {
+                        entry.style.display = 'none';
+                    }
+                });
+            }
+
+            showContent() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }
+
+            showError() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Initialize the games library when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new GamesLibrary();
+        });
+    </script>
+</body>
+</html>

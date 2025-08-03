@@ -1,0 +1,11 @@
+{
+    "burger-dos-demo-en": "Game Data not found: doesn't work on case-sensitive filesystems (need to rename everything lowercase to work)",
+    "chewy-dos-demo-de": "Game not implemented",
+    "kyra3-dos-ni-demo-en": "doesn't work in native either - Game Data not found",
+    "lastexpress-trailer-en": "not a demo, just a videofile 'The_Last_Express-Trailer.avi'",
+    "lsl1-demo-pl": "doesn't work on native either - Game Data not found (SNDDIR, PICDIR are files instead of folders)",
+    "mysthous-fr": "Game data not found: Has two subfolders, Version A, Version B with different demos",
+    "riddle-dos-demo-en": "Game Data not found: doesn't work on case-sensitive filesystems (need to rename everything lowercase to work)",
+    "shivah-demo": "target should be ags:shivahkosher, not ags:shivah",
+    "soltys-demo": "Game not implemented"
+}

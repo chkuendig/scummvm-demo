@@ -1,0 +1,4 @@
+# TODO: Allow-Origin should be restricted to the domain of the app
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*" 
+</IfModule>
