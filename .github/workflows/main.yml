@@ -95,6 +95,7 @@ jobs:
           key: build-emscripten-${{ github.run_id }}
   download-games:
     name: Download Games 🎲
+    if: false
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout  🛎️
@@ -118,6 +119,7 @@ jobs:
           npm run refresh-data-index
   detect-games:
     name: Detect Games 🎲
+    if: false
     runs-on: ubuntu-22.04
     needs: [build-scummvm, download-games]
     steps:
@@ -212,7 +214,7 @@ jobs:
   deploy-demo:
     name: Deploy Demo Page 🚀
     runs-on: ubuntu-22.04
-    needs: [detect-games, update-icons]
+    needs:  [update-icons] # [detect-games, update-icons]
     steps:
       - name: Checkout  🛎️
         uses: actions/checkout@v4
