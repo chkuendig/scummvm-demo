@@ -1,0 +1,4627 @@
+[
+  {
+    "relative_path": "amazon-dos-ni-demo-en",
+    "id": "access:amazon",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/access/amazon-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "martian-demo",
+    "id": "access:martian",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/access/martian-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "MYSTHOUS",
+    "id": "adl:hires1",
+    "description": "public domain version (Apple II)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Mystery House/MYSTHOUS.zip"
+  },
+  {
+    "relative_path": "kq4-dos-ni-demo-en",
+    "id": "agi:kq4",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agi/kq4-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "elvira1-amiga-ni-demo-en",
+    "id": "agos:elvira1",
+    "description": "Amiga Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/elvira1-amiga-ni-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "elvira1-atari-ni-demo-en",
+    "id": "agos:elvira1",
+    "description": "Atari ST Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/elvira1-atari-ni-demo-en.zip",
+    "platform": "Atari ST"
+  },
+  {
+    "relative_path": "elvira1-dos-ni-demo-en",
+    "id": "agos:elvira1",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/elvira1-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "feeble-dos-ni-demo-de",
+    "id": "agos:feeble",
+    "description": "DOS German Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/feeble-dos-ni-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "feeble-dos-ni-demo-en",
+    "id": "agos:feeble",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/feeble-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pn-atari-ni-demo-en",
+    "id": "agos:pn",
+    "description": "Atari ST Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/pn-atari-ni-demo-en.zip",
+    "platform": "Atari ST"
+  },
+  {
+    "relative_path": "simon1-acorn-cd-demo-en",
+    "id": "agos:simon1",
+    "description": "Acorn 32-bit CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-acorn-cd-demo-en.zip",
+    "platform": "Acorn 32-bit"
+  },
+  {
+    "relative_path": "simon1-acorn-demo-en",
+    "id": "agos:simon1",
+    "description": "Acorn 32-bit Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-acorn-demo-en.zip",
+    "platform": "Acorn 32-bit"
+  },
+  {
+    "relative_path": "simon1-acorn-ni-demo-en",
+    "id": "agos:simon1",
+    "description": "Acorn 32-bit Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-acorn-ni-demo-en.zip",
+    "platform": "Acorn 32-bit"
+  },
+  {
+    "relative_path": "simon1-amiga-cd32-demo-en",
+    "id": "agos:simon1",
+    "description": "Amiga CD32 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-amiga-cd32-demo-en.zip",
+    "platform": "Amiga CD32"
+  },
+  {
+    "relative_path": "simon1-amiga-floppy-demo-en",
+    "id": "agos:simon1",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-amiga-floppy-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "simon1-dos-cd-demo-en",
+    "id": "agos:simon1",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-dos-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "simon1-dos-cd-demo2-en",
+    "id": "agos:simon1",
+    "description": "DOS Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-dos-cd-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "simon1-dos-floppy-demo-en",
+    "id": "agos:simon1",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-dos-floppy-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "simon2-dos-cd-demo-de",
+    "id": "agos:simon2",
+    "description": "DOS German CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon2-dos-cd-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "simon2-dos-cd-demo-en",
+    "id": "agos:simon2",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon2-dos-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "simon2-dos-cd-ni-demo-de",
+    "id": "agos:simon2",
+    "description": "DOS German CD Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon2-dos-cd-ni-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "waxworks-dos-ni-demo-en",
+    "id": "agos:waxworks",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/agos/waxworks-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "blackwell_legacy-demo",
+    "id": "ags:blackwell1",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/blackwell_legacy-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "blackwell_unbound-demo",
+    "id": "ags:blackwell2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/blackwell_unbound-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "blackwell_convergence-demo",
+    "id": "ags:blackwell3",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/blackwell_convergence-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "blackwell_deception-demo",
+    "id": "ags:blackwell4",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/blackwell_deception-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "blackwell_epiphany-demo",
+    "id": "ags:blackwell5",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/blackwell_epiphany-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "da_new_guys2-demo",
+    "id": "ags:danewguys2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/da_new_guys2-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "gemini_rue-demo",
+    "id": "ags:geminirue",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/gemini_rue-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "golden_wake-demo",
+    "id": "ags:goldenwake",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/golden_wake-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "my_big_sister-demo",
+    "id": "ags:mybigsister",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/my_big_sister-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "primordia-demo",
+    "id": "ags:primordia",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/primordia-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "resonance-demo",
+    "id": "ags:resonance",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/resonance-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "shardlight-demo",
+    "id": "ags:shardlight",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/shardlight-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "shivah-demo",
+    "id": "ags:shivahkosher",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/shivah-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "technobabylon-demo",
+    "id": "ags:technobabylon",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ags/technobabylon-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "aventuradecine-win-demo-de",
+    "id": "alcachofa:aventuradecine",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/alcachofa/aventuradecine-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "asylum-demo",
+    "id": "asylum:asylum",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/asylum/asylum-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "asylum-demo2",
+    "id": "asylum:asylum",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/asylum/asylum-demo2.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "mazeodoom-win-demo-en",
+    "id": "bagel:mazeodoom",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bagel/mazeodoom-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spacebar-win-demo-medium",
+    "id": "bagel:spacebar",
+    "description": "Windows Medium Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bagel/spacebar-win-demo-medium.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spacebar-win-demo-small",
+    "id": "bagel:spacebar",
+    "description": "Windows Small Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bagel/spacebar-win-demo-small.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "bbvs-demo",
+    "id": "bbvs:bbvs",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bbvs/bbvs-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "bbvs-demo-loogie",
+    "id": "bbvs:bbvs",
+    "description": "Windows Loogie Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bbvs/bbvs-demo-loogie.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "bbvs-demo-loogie-2",
+    "id": "bbvs:bbvs",
+    "description": "Windows Loogie Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bbvs/bbvs-demo-loogie-2.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "bladerunner-win-ni-demo-en",
+    "id": "bladerunner:bladerunner",
+    "description": "Windows Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bladerunner/bladerunner-win-ni-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "buried-demo-win-ca",
+    "id": "buried:buried",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/buried/buried-demo-win-ca.zip",
+    "languages": [
+      "ca"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "buried-win-demo-en",
+    "id": "buried:buried",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/buried/buried-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sfinx-demo-pl",
+    "id": "cge2:sfinx",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/cge2/sfinx-demo-pl.zip",
+    "languages": [
+      "pl"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sfinx-en-v1.1",
+    "id": "cge2:sfinx",
+    "description": "English v1.1",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Sfinx/sfinx-en-v1.1.zip"
+  },
+  {
+    "relative_path": "sfinx-pl-v1.1",
+    "id": "cge2:sfinx",
+    "description": "Polish v1.1",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Sfinx/sfinx-pl-v1.1.zip"
+  },
+  {
+    "relative_path": "soltys-en-v1.0",
+    "id": "cge:soltys",
+    "description": "English v1.0",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Soltys/soltys-en-v1.0.zip"
+  },
+  {
+    "relative_path": "soltys-es-v1.0",
+    "id": "cge:soltys",
+    "description": "Spanish v1.0",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Soltys/soltys-es-v1.0.zip"
+  },
+  {
+    "relative_path": "soltys-pl-v1.0",
+    "id": "cge:soltys",
+    "description": "Polish v1.0",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Soltys/soltys-pl-v1.0.zip"
+  },
+  {
+    "relative_path": "fw-amiga-ni-demo-en",
+    "id": "cine:fw",
+    "description": "Amiga Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/cine/fw-amiga-ni-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "os-amiga-ni-demo-en",
+    "id": "cine:os",
+    "description": "Amiga Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/cine/os-amiga-ni-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "os-dos-ni-demo-en",
+    "id": "cine:os",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/cine/os-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "babayaga-demo-mac",
+    "id": "composer:babayaga",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/composer/babayaga-demo-mac.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "babayaga-demo-win",
+    "id": "composer:babayaga",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/composer/babayaga-demo-win.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "littlesamurai-demo-mac",
+    "id": "composer:littlesamurai",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/composer/littlesamurai-demo-mac.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "littlesamurai-demo-win",
+    "id": "composer:littlesamurai",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/composer/littlesamurai-demo-win.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "unrest-demo",
+    "id": "crab:unrest",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/crab/unrest-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "versailles-dos-demo-ni",
+    "id": "cryomni3d:versailles",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/cryomni3d/versailles-dos-demo-ni.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "darkseed-dos-demo-en",
+    "id": "darkseed:darkseed",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/darkseed/darkseed-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "darkseed-dos-demo1-en",
+    "id": "darkseed:darkseed",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/darkseed/darkseed-dos-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "beamish-dos-demo-en",
+    "id": "dgds:beamish",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/dgds/beamish-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "beamish-dos-demo2-en",
+    "id": "dgds:beamish",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/dgds/beamish-dos-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "betterd-demo-mac-ja",
+    "id": "director:betterd",
+    "description": "Macintosh The Better Dead Ratification Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d4/ja/betterd-demo-mac-ja.zip",
+    "languages": [
+      "ja"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "gadget-demo-mac",
+    "id": "director:gadget",
+    "description": "Macintosh Gadget: Invention, Travel & Adventure Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d3/en/gadget-demo-mac.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "gadget-demo-win",
+    "id": "director:gadget",
+    "description": "Windows Gadget: Invention, Travel & Adventure Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d3/en/gadget-demo-win.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "meetmediaband",
+    "id": "director:mediaband",
+    "description": "Freeware",
+    "download_url": "https://archive.org/details/meetmediaband"
+  },
+  {
+    "relative_path": "RedNex",
+    "id": "director:rednex",
+    "description": "MacFormat August 1996 Demo",
+    "download_url": "https://discmaster.textfiles.com/browse/27017/macformat-040.iso/mac/Demos/RedNex",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "theapartment3",
+    "id": "director:theapartment",
+    "description": "Interactive Demo (D3)",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/theapartment3.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "warlock-demo-mac-100",
+    "id": "director:warlock",
+    "description": "Macintosh Spaceship Warlock Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d2/en/warlock-demo-mac-100.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "warlock-demo-mac-111",
+    "id": "director:warlock",
+    "description": "Macintosh Spaceship Warlock Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d2/en/warlock-demo-mac-111.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "warlock-demo-mac-1994",
+    "id": "director:warlock",
+    "description": "Macintosh Spaceship Warlock (1994) Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d3/en/warlock-demo-mac-1994.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "warlock-demo-win",
+    "id": "director:warlock",
+    "description": "Windows Spaceship Warlock Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d3/en/warlock-demo-win.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "warlock-win-demo",
+    "id": "director:warlock",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/warlock-win-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "wrath-demo-win",
+    "id": "director:wrath",
+    "description": "Windows Wrath of the Gods Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/director/d3/en/wrath-demo-win.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "drascula-1.0",
+    "id": "drascula:drascula",
+    "description": "Freeware Version (English)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Drascula_ The Vampire Strikes Back/drascula-1.0.zip"
+  },
+  {
+    "relative_path": "dreamweb-amiga-demo-en",
+    "id": "dreamweb:dreamweb",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/dreamweb/dreamweb-amiga-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "dreamweb-cd-de-1.1",
+    "id": "dreamweb:dreamweb",
+    "description": "Freeware CD DOS Version (German)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-de-1.1.zip"
+  },
+  {
+    "relative_path": "dreamweb-cd-es-1.1",
+    "id": "dreamweb:dreamweb",
+    "description": "Freeware CD DOS Version (Spanish)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-es-1.1.zip"
+  },
+  {
+    "relative_path": "dreamweb-cd-fr-1.1",
+    "id": "dreamweb:dreamweb",
+    "description": "Freeware CD DOS Version (French)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-fr-1.1.zip"
+  },
+  {
+    "relative_path": "dreamweb-cd-it-1.1",
+    "id": "dreamweb:dreamweb",
+    "description": "Freeware CD DOS Version (Italian)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-it-1.1.zip"
+  },
+  {
+    "relative_path": "dreamweb-cd-uk-1.1",
+    "id": "dreamweb:dreamweb",
+    "description": "Freeware CD DOS Version (English UK)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-uk-1.1.zip"
+  },
+  {
+    "relative_path": "dreamweb-cd-us-1.1",
+    "id": "dreamweb:dreamweb",
+    "description": "Freeware CD DOS Version (English US)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-us-1.1.zip"
+  },
+  {
+    "relative_path": "dreamweb-dos-demo-cd-en",
+    "id": "dreamweb:dreamweb",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/dreamweb/dreamweb-dos-demo-cd-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dreamweb-dos-demo-en",
+    "id": "dreamweb:dreamweb",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/dreamweb/dreamweb-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dreamweb-uk-1.1",
+    "id": "dreamweb:dreamweb",
+    "description": "Freeware Floppy DOS Version (English UK)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-uk-1.1.zip"
+  },
+  {
+    "relative_path": "castle-amiga-demo",
+    "id": "freescape:castlemaster",
+    "description": "Amiga Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/castle-amiga-demo.zip",
+    "languages": [
+      "en",
+      "fr",
+      "de"
+    ],
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "castle-dos-demo",
+    "id": "freescape:castlemaster",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/castle-dos-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "darkside-dos-demo",
+    "id": "freescape:darkside",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/darkside-dos-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "darkside-zx-demo",
+    "id": "freescape:darkside",
+    "description": "ZX Spectrum Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/darkside-zx-demo.zip",
+    "platform": "ZX Spectrum"
+  },
+  {
+    "relative_path": "driller-amiga-demo",
+    "id": "freescape:driller",
+    "description": "Amiga Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/driller-amiga-demo.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "driller-atarist-demo",
+    "id": "freescape:driller",
+    "description": "Atari ST Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/driller-atarist-demo.zip",
+    "platform": "Atari ST"
+  },
+  {
+    "relative_path": "driller-dos-demo",
+    "id": "freescape:driller",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/driller-dos-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "totaleclipse-cpc-demo",
+    "id": "freescape:totaleclipse",
+    "description": "Amstrad CPC Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/totaleclipse-cpc-demo.zip",
+    "platform": "Amstrad CPC"
+  },
+  {
+    "relative_path": "totaleclipse-zx-demo-1",
+    "id": "freescape:totaleclipse",
+    "description": "ZX Spectrum Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/totaleclipse-zx-demo-1.zip",
+    "platform": "ZX Spectrum"
+  },
+  {
+    "relative_path": "totaleclipse-zx-demo-2",
+    "id": "freescape:totaleclipse",
+    "description": "ZX Spectrum Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/freescape/totaleclipse-zx-demo-2.zip",
+    "platform": "ZX Spectrum"
+  },
+  {
+    "relative_path": "zcode-advent",
+    "id": "glk:adv350_zcode",
+    "description": "Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=fft6pu91j85y4acv"
+  },
+  {
+    "relative_path": "zcode-curses",
+    "id": "glk:curses",
+    "description": "Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=plvzam05bmz3enh8"
+  },
+  {
+    "relative_path": "zcode-sampler2",
+    "id": "glk:infocomsample3ztl",
+    "description": "Demo/Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=p00ucaayobrt2paz"
+  },
+  {
+    "relative_path": "zcode-sampler1",
+    "id": "glk:infocomsample4zpiw",
+    "description": "Demo/Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=wa8crlfz82pra14i"
+  },
+  {
+    "relative_path": "minizork",
+    "id": "glk:minizork1",
+    "description": "Demo/Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=1rea34vqnz3mtyq1"
+  },
+  {
+    "relative_path": "zcode-moonglow",
+    "id": "glk:moonglow",
+    "description": "Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=5e9zrkcfgq2moinh"
+  },
+  {
+    "relative_path": "zcode-fantasydimension",
+    "id": "glk:pj3_fantadimension",
+    "description": "Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=9gcujue3zpxbhj6k"
+  },
+  {
+    "relative_path": "zcode-submarine",
+    "id": "glk:pj3_submarinesabot",
+    "description": "Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=rw2jsnyoqxsdvyug"
+  },
+  {
+    "relative_path": "zcode-tristam",
+    "id": "glk:tristamisland",
+    "description": "Freeware",
+    "download_url": "https://ifdb.org/viewgame?id=6gtq9ahrolz2ry2"
+  },
+  {
+    "relative_path": "adibou-win-ni-demo-fr",
+    "id": "gob:adibou2",
+    "description": "Windows Unsupported Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/adibou-win-ni-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "adibou2-dos-demo-fr",
+    "id": "gob:adibou2",
+    "description": "DOS French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/adibou2-dos-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob1-amiga_demo_en",
+    "id": "gob:gob1",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob1-amiga_demo_en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "gob1-cdi-demo-fr",
+    "id": "gob:gob1",
+    "description": "Philips CD-i Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob1-cdi-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Philips CD-i"
+  },
+  {
+    "relative_path": "gob1-dos-demo-fr",
+    "id": "gob:gob1",
+    "description": "DOS French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob1-dos-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob1-dos-demo1-en",
+    "id": "gob:gob1",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob1-dos-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob1-dos-demo2-en",
+    "id": "gob:gob1",
+    "description": "DOS Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob1-dos-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob2-amiga-demo1-en",
+    "id": "gob:gob2",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob2-amiga-demo1-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "gob2-amiga-demo2-en",
+    "id": "gob:gob2",
+    "description": "Amiga Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob2-amiga-demo2-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "gob2-dos-demo-en",
+    "id": "gob:gob2",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob2-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob2-dos-ni-demo-en",
+    "id": "gob:gob2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob3-dos-demo-en",
+    "id": "gob:gob3",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob3-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob3-dos-demo1-fr",
+    "id": "gob:gob3",
+    "description": "DOS French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob3-dos-demo1-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob3-dos-demo2-fr",
+    "id": "gob:gob3",
+    "description": "DOS French Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob3-dos-demo2-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gob3-dos-ni-demo-en",
+    "id": "gob:gob3",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob3-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lostintime-dos-ni-demo-en",
+    "id": "gob:lit",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/lostintime-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "urban-win-ni-demo-en",
+    "id": "gob:urban",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/urban-win-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ween-dos-demo-en",
+    "id": "gob:ween",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/ween-dos-demo-en.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ween-dos-demo2-uk",
+    "id": "gob:ween",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/ween-dos-demo2-uk.zip",
+    "languages": [
+      "en_GB"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "woodruff-dos-ni-demo-en",
+    "id": "gob:woodruff",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gob/woodruff-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gotfree",
+    "id": "got:got",
+    "description": "Freeware",
+    "download_url": "https://downloads.scummvm.org/frs/extras/God of Thunder/gotfree.zip"
+  },
+  {
+    "relative_path": "griffon-1.0",
+    "id": "griffon:griffon",
+    "description": "Freeware Version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Griffon Legend/griffon-1.0.zip"
+  },
+  {
+    "relative_path": "grim-win-demo-de",
+    "id": "grim:grim",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/grim-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "grim-win-demo-fr",
+    "id": "grim:grim",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/grim-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "grim-win-demo-it",
+    "id": "grim:grim",
+    "description": "Windows Italian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/grim-win-demo-it.zip",
+    "languages": [
+      "it"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "grim-win-demo-sp",
+    "id": "grim:grim",
+    "description": "Windows Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/grim-win-demo-sp.zip",
+    "languages": [
+      "es"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "grim-win-demo1-en",
+    "id": "grim:grim",
+    "description": "Windows Small Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/grim-win-demo1-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "grim-win-demo2-en",
+    "id": "grim:grim",
+    "description": "Windows Large Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/grim-win-demo2-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "emi-win-demo-de",
+    "id": "grim:monkey4",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/emi-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "emi-win-demo-en",
+    "id": "grim:monkey4",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/emi-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "emi-win-demo-sp",
+    "id": "grim:monkey4",
+    "description": "Windows Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/emi-win-demo-sp.zip",
+    "languages": [
+      "es"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "monkey4-win-cd-demo-en",
+    "id": "grim:monkey4",
+    "description": "Windows CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/monkey4-win-cd-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "monkey4demo-fre",
+    "id": "grim:monkey4",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/grim/monkey4demo-fre.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "11h-dos-cd-demo1-en",
+    "id": "groovie:11h",
+    "description": "DOS Both Interactive and Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/11h-dos-cd-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "11h-dos-cd-demo2-en",
+    "id": "groovie:11h",
+    "description": "DOS Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/11h-dos-cd-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "11h-dos-demo-en",
+    "id": "groovie:11h",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/11h-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "11h-dos-ni-demo-en",
+    "id": "groovie:11h",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/11h-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "clandestiny-dos-cd-demo-en",
+    "id": "groovie:clandestiny",
+    "description": "DOS Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/clandestiny-dos-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "clandestiny-dos-ni-demo-en",
+    "id": "groovie:clandestiny",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/clandestiny-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "clandestiny-mac-ni-demo",
+    "id": "groovie:clandestiny",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/clandestiny-mac-ni-demo.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "t7g-dos-demo-en",
+    "id": "groovie:t7g",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/t7g-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "tlc-win-demo-de",
+    "id": "groovie:tlc",
+    "description": "Windows German Both Interactive and Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/groovie/tlc-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "hdb-demo-linux",
+    "id": "hdb:hdb",
+    "description": "Linux Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hdb/hdb-demo-linux.zip",
+    "platform": "Linux"
+  },
+  {
+    "relative_path": "hdb-demo-ppc",
+    "id": "hdb:hdb",
+    "description": "Pocket PC Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hdb/hdb-demo-ppc.zip",
+    "platform": "Pocket PC"
+  },
+  {
+    "relative_path": "hdb-demo-ppc-alt",
+    "id": "hdb:hdb",
+    "description": "Pocket PC Handango Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hdb/hdb-demo-ppc-alt.zip",
+    "platform": "Pocket PC"
+  },
+  {
+    "relative_path": "hdb-demo-win",
+    "id": "hdb:hdb",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hdb/hdb-demo-win.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "hopkins-linux-en",
+    "id": "hopkins:hopkins",
+    "description": "Linux Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hopkins/hopkins-linux-en.zip",
+    "platform": "Linux"
+  },
+  {
+    "relative_path": "hopkins-win95-en",
+    "id": "hopkins:hopkins",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hopkins/hopkins-win95-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "hopkins-win95-pl",
+    "id": "hopkins:hopkins",
+    "description": "Windows Polish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hopkins/hopkins-win95-pl.zip",
+    "languages": [
+      "pl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "penumbra-overture-mac",
+    "id": "hpl1:penumbraoverture",
+    "description": "Mac Demo"
+  },
+  {
+    "relative_path": "hugo1-dos-1.1-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V1.1 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-1.1-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-1.2-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V1.2 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-1.2-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-1.3-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V1.3 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-1.3-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-1.5-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V1.5 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-1.5-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-1.6-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V1.6 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-1.6-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-1.8-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V1.8 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-1.8-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-1.9-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V1.9 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-1.9-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-2.0-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V2,0 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-2.0-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo1-dos-2.1-demo-en",
+    "id": "hugo:hugo1",
+    "description": "DOS V2.1 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo1-dos-2.1-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo2-dos-1.0-demo-en",
+    "id": "hugo:hugo2",
+    "description": "DOS V1.0 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo2-dos-1.0-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo2-dos-1.2-demo-en",
+    "id": "hugo:hugo2",
+    "description": "DOS V1.2 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo2-dos-1.2-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo2-dos-2.1-demo-en",
+    "id": "hugo:hugo2",
+    "description": "DOS V2.1 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo2-dos-2.1-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo3-dos-1.0-demo-en",
+    "id": "hugo:hugo3",
+    "description": "DOS V1.0 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo3-dos-1.0-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo3-dos-1.1-demo-en",
+    "id": "hugo:hugo3",
+    "description": "DOS V1.1 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo3-dos-1.1-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo3-dos-2.0-demo-en",
+    "id": "hugo:hugo3",
+    "description": "DOS V2.0 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo3-dos-2.0-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hugo3-dos-2.1-demo-en",
+    "id": "hugo:hugo3",
+    "description": "DOS V2.1 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hugo/hugo3-dos-2.1-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sinistersix-dos-demo-en",
+    "id": "hypno:sinistersix",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/sinistersix-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "wetlands-dos-demo1-en",
+    "id": "hypno:wetlands",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "wetlands-dos-demo2-en",
+    "id": "hypno:wetlands",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "wetlands-dos-demo3-en",
+    "id": "hypno:wetlands",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo3-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "wetlands-dos-demo4-en",
+    "id": "hypno:wetlands",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo4-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "wetlands-dos-demo5-en",
+    "id": "hypno:wetlands",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-demo5-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "wetlands-dos-ni-demo1-en",
+    "id": "hypno:wetlands",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-ni-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "wetlands-dos-ni-demo2-en",
+    "id": "hypno:wetlands",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/hypno/wetlands-dos-ni-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "icb-eng-demo",
+    "id": "icb:icb",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/icb/icb-eng-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "icb-win-demo-us",
+    "id": "icb:icb",
+    "description": "Windows English US Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/icb/icb-win-demo-us.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "duckman-demo",
+    "id": "illusions:duckman",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/illusions/duckman-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "kingdom-demo",
+    "id": "kingdom:kingdom",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kingdom/kingdom-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "eob2-dos-ni-demo-en",
+    "id": "kyra:eob2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/eob2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kyra1-dos-cd-ni-demo-en",
+    "id": "kyra:kyra1",
+    "description": "DOS CD Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/kyra1-dos-cd-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kyra1-dos-ni-demo-en",
+    "id": "kyra:kyra1",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/kyra1-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kyra2-dos-cd-demo-en",
+    "id": "kyra:kyra2",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/kyra2-dos-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kyra2-dos-ni-demo1-en",
+    "id": "kyra:kyra2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/kyra2-dos-ni-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kyra2-dos-ni-demo2-en",
+    "id": "kyra:kyra2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/kyra2-dos-ni-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lol-dos-cd-demo-en",
+    "id": "kyra:lol",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/lol-dos-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lol-dos-intro-ni-demo-en",
+    "id": "kyra:lol",
+    "description": "DOS Non-Interactive Intro Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/lol-dos-intro-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lol-dos-ni-demo-en",
+    "id": "kyra:lol",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/kyra/lol-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lastexpress-win-demo-en",
+    "id": "lastexpress:lastexpress",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/lastexpress/lastexpress-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "lure-1.1",
+    "id": "lure:lure",
+    "description": "Freeware Version (English)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Lure of the Temptress/lure-1.1.zip"
+  },
+  {
+    "relative_path": "lure-de-1.1",
+    "id": "lure:lure",
+    "description": "Freeware Version (German)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Lure of the Temptress/lure-de-1.1.zip"
+  },
+  {
+    "relative_path": "lure-es-1.1",
+    "id": "lure:lure",
+    "description": "Freeware Version (Spanish)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Lure of the Temptress/lure-es-1.1.zip"
+  },
+  {
+    "relative_path": "lure-fr-1.1",
+    "id": "lure:lure",
+    "description": "Freeware Version (French)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Lure of the Temptress/lure-fr-1.1.zip"
+  },
+  {
+    "relative_path": "lure-it-1.1",
+    "id": "lure:lure",
+    "description": "Freeware Version (Italian)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Lure of the Temptress/lure-it-1.1.zip"
+  },
+  {
+    "relative_path": "lure-st-demo-en",
+    "id": "lure:lure",
+    "description": "Atari ST Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/lure/lure-st-demo-en.zip",
+    "platform": "Atari ST"
+  },
+  {
+    "relative_path": "burger-dos-demo-en",
+    "id": "m4:burger",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/m4/burger-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "burger-dos-ni-demo-en",
+    "id": "m4:burger",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/m4/burger-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "riddle-dos-demo-en",
+    "id": "m4:riddle",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/m4/riddle-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "rtz-dos-cd-demo1-en",
+    "id": "made:rtz",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/made/rtz-dos-cd-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "rtz-dos-cd-demo2-en",
+    "id": "made:rtz",
+    "description": "DOS CD Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/made/rtz-dos-cd-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "rtz-dos-ni-demo-en",
+    "id": "made:rtz",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/made/rtz-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "rtz-mac-demo-en",
+    "id": "made:rtz",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/made/rtz-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "rex-dos-demo-en",
+    "id": "mads:nebular",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mads/rex-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "cloudsofxeen-dos-demo-en-ni",
+    "id": "mm:cloudsofxeen",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/xeen/cloudsofxeen-dos-demo-en-ni.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "darksideofxeen-dos-demo-en-ni",
+    "id": "mm:darksideofxeen",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/xeen/darksideofxeen-dos-demo-en-ni.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "worldofxeen-dos-demo-en-ni",
+    "id": "mm:worldofxeen",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/xeen/worldofxeen-dos-demo-en-ni.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "arthur-mac-demo-en",
+    "id": "mohawk:arthur",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/arthur-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "arthur-mac-demo-en-es",
+    "id": "mohawk:arthur",
+    "description": "Macintosh English/Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/arthur-mac-demo-en-es.zip",
+    "languages": [
+      "en",
+      "es"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "arthur-mac-demo2-en",
+    "id": "mohawk:arthur",
+    "description": "Macintosh Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/arthur-mac-demo2-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "arthur-win-demo-en",
+    "id": "mohawk:arthur",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/arthur-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "arthur-win-demo-en-v1.1",
+    "id": "mohawk:arthur",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/arthur-win-demo-en-v1.1.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "arthurbday-mac-demo-en",
+    "id": "mohawk:arthurbday",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/arthurbday-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "arthurbday-win-demo-en",
+    "id": "mohawk:arthurbday",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/arthurbday-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "daniel-win-demo",
+    "id": "mohawk:daniel",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/daniel-win-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "grandma-mac-demo-en",
+    "id": "mohawk:grandma",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/grandma-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "grandma-mac-demo-en-es-jp",
+    "id": "mohawk:grandma",
+    "description": "Macintosh English/Japanese/Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/grandma-mac-demo-en-es-jp.zip",
+    "languages": [
+      "en",
+      "es",
+      "ja"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "grandma-mac-demo2-en",
+    "id": "mohawk:grandma",
+    "description": "Macintosh Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/grandma-mac-demo2-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "grandma-win-demo-en",
+    "id": "mohawk:grandma",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/grandma-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "grandma-win-demo-en-v1.1",
+    "id": "mohawk:grandma",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/grandma-win-demo-en-v1.1.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "greeneggs-win-demo-en",
+    "id": "mohawk:greeneggs",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/greeneggs-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "harryhh-win-demo-en-es",
+    "id": "mohawk:harryhh",
+    "description": "Windows English/Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/harryhh-win-demo-en-es.zip",
+    "languages": [
+      "en",
+      "es"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "myst-win-cd-demo-en",
+    "id": "mohawk:myst",
+    "description": "Windows CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/myst-win-cd-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "myst-win-demo-en",
+    "id": "mohawk:myst",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/myst-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "newkid-demo-mac-en",
+    "id": "mohawk:newkid",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/newkid-demo-mac-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "newkid-win-demo-en",
+    "id": "mohawk:newkid",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/newkid-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "newkid-win-demo-en-v1.1",
+    "id": "mohawk:newkid",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/newkid-win-demo-en-v1.1.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "riven-win-demo-en",
+    "id": "mohawk:riven",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/riven-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "ruff-mac-demo-en",
+    "id": "mohawk:ruff",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/ruff-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "ruff-win-demo-en",
+    "id": "mohawk:ruff",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/ruff-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tortoise-mac-demo-en",
+    "id": "mohawk:tortoise",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/tortoise-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "tortoise-win-demo-en",
+    "id": "mohawk:tortoise",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/tortoise-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tortoise-win-demo-en-fr-de",
+    "id": "mohawk:tortoise",
+    "description": "Windows English/French/German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/tortoise-win-demo-en-fr-de.zip",
+    "languages": [
+      "en",
+      "fr",
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tortoise-win-demo-en-v1.1",
+    "id": "mohawk:tortoise",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/tortoise-win-demo-en-v1.1.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "obsidian-mac-demo",
+    "id": "mtropolis:obsidian",
+    "description": "Macintosh Demo w/Cinematic Trailer, SegaSoft CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mtropolis/obsidian-mac-demo.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "obsidian-win-demo",
+    "id": "mtropolis:obsidian",
+    "description": "Windows Demo, 26th October 1996, PC Gamer 2.12 (Jan '97) Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mtropolis/obsidian-win-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "obsidian-win-demo2",
+    "id": "mtropolis:obsidian",
+    "description": "Windows Demo, 22nd October 1996 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mtropolis/obsidian-win-demo2.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "obsidian-win-demo3",
+    "id": "mtropolis:obsidian",
+    "description": "Windows Demo w/Cinematic Trailer, 4th October 1996, Ocean/Infogrames Show Case December 1997 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mtropolis/obsidian-win-demo3.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "obsidian-win-demo4",
+    "id": "mtropolis:obsidian",
+    "description": "Windows Demo w/Cinematic Trailer, 3rd October 1996 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mtropolis/obsidian-win-demo4.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "neverhood-demo-big-en",
+    "id": "neverhood:neverhood",
+    "description": "Windows Large Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/neverhood/neverhood-demo-big-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "neverhood-win-demo-en",
+    "id": "neverhood:neverhood",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/neverhood/neverhood-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "neverhood-win-demo2-en",
+    "id": "neverhood:neverhood",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/neverhood/neverhood-win-demo2-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "neverhood-win-lite-demo-en",
+    "id": "neverhood:neverhood",
+    "description": "Windows Small Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/neverhood/neverhood-win-lite-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "fullpipe-97-demo-ru",
+    "id": "ngi:fullpipe",
+    "description": "Windows 1997 Demo Release, non-working Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ngi/fullpipe-97-demo-ru.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "fullpipe-demo-de",
+    "id": "ngi:fullpipe",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/fullpipe/fullpipe-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "fullpipe-demo-ru",
+    "id": "ngi:fullpipe",
+    "description": "Windows Russian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/fullpipe/fullpipe-demo-ru.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "nippon-1.0",
+    "id": "parallaction:nippon",
+    "description": "Freeware DOS Version (English/French/German/Italian)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Nippon Safes/nippon-1.0.zip"
+  },
+  {
+    "relative_path": "nippon-alt-1.0",
+    "id": "parallaction:nippon",
+    "description": "Freeware DOS Alternative Version (English/French/German/Italian). French is patched.",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Nippon Safes/nippon-alt-1.0.zip"
+  },
+  {
+    "relative_path": "nippon-amiga-1.0",
+    "id": "parallaction:nippon",
+    "description": "Freeware Amiga Version (English/French/German)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Nippon Safes/nippon-amiga-1.0.zip"
+  },
+  {
+    "relative_path": "nippon-amiga-demo-en",
+    "id": "parallaction:nippon",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/parallaction/nippon-amiga-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "nippon-amiga-disks-1.0",
+    "id": "parallaction:nippon",
+    "description": "Disk Images of Freeware Amiga Version (English/French/German)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Nippon Safes/nippon-amiga-disks-1.0.zip"
+  },
+  {
+    "relative_path": "nippon-amiga-it-1.0",
+    "id": "parallaction:nippon",
+    "description": "Freeware Amiga Version (Italian)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Nippon Safes/nippon-amiga-it-1.0.zip"
+  },
+  {
+    "relative_path": "pegasus-dvd-mac-demo-en",
+    "id": "pegasus:pegasus",
+    "description": "Macintosh DVD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/pegasus/pegasus-dvd-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "pegasus-dvd-win-demo-en",
+    "id": "pegasus:pegasus",
+    "description": "Windows DVD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/pegasus/pegasus-dvd-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pegasus-mac-97-demo-en",
+    "id": "pegasus:pegasus",
+    "description": "Macintosh Mac 1997 release Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/pegasus/pegasus-mac-97-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "pegasus-mac-demo-en",
+    "id": "pegasus:pegasus",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/pegasus/pegasus-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "pegasus-mac-demo-en-nonmac-format",
+    "id": "pegasus:pegasus",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/pegasus/pegasus-mac-demo-en-nonmac-format.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "petka1-ru-demo",
+    "id": "petka:petka1",
+    "description": "Windows Russian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/petka/petka1-ru-demo.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "playground3d",
+    "id": "playground3d:playground3d",
+    "description": "The Testing and Playground Environment for 3D Renderers"
+  },
+  {
+    "relative_path": "private-eye-demo-de",
+    "id": "private:private-eye",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/private/private-eye-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "private-eye-demo-en",
+    "id": "private:private-eye",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/private/private-eye-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "private-eye-demo-es",
+    "id": "private:private-eye",
+    "description": "Windows Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/private/private-eye-demo-es.zip",
+    "languages": [
+      "es"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "private-eye-demo-fr",
+    "id": "private:private-eye",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/private/private-eye-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "private-eye-demo-uk",
+    "id": "private:private-eye",
+    "description": "Windows UK Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/private/private-eye-demo-uk.zip",
+    "languages": [
+      "en_GB"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "private-eye-mac-demo-us",
+    "id": "private:private-eye",
+    "description": "Macintosh US Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/private/private-eye-mac-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "private-eye-win-demo-us",
+    "id": "private:private-eye",
+    "description": "Windows US Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/private/private-eye-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "3mice1-demo",
+    "id": "qdengine:3mice1",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/qdengine/3mice1-demo.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "3mice2-demo1",
+    "id": "qdengine:3mice2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/qdengine/3mice2-demo1.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "3mice2-demo2",
+    "id": "qdengine:3mice2",
+    "description": "Windows Original with unplayable and cropped cutscene Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/qdengine/3mice2-demo2.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "3mice2-demo2-fixed",
+    "id": "qdengine:3mice2",
+    "description": "Windows Reencoded cutscene Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/qdengine/3mice2-demo2-fixed.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "mng-demo",
+    "id": "qdengine:mng",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/qdengine/mng-demo.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "FOTAQ_Floppy",
+    "id": "queen:queen",
+    "description": "Freeware Floppy Version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_Floppy.zip"
+  },
+  {
+    "relative_path": "FOTAQ_Fr_Floppy",
+    "id": "queen:queen",
+    "description": "Freeware Floppy Version (French)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_Fr_Floppy.zip"
+  },
+  {
+    "relative_path": "FOTAQ_Fr_Talkie_1.0",
+    "id": "queen:queen",
+    "description": "Freeware CD Version (French voices and subtitles, ogg compressed sfx/speech)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_Fr_Talkie_1.0.zip"
+  },
+  {
+    "relative_path": "FOTAQ_Ger_talkie-1.0",
+    "id": "queen:queen",
+    "description": "Freeware CD Version (German voices and subtitles, ogg compressed sfx/speech)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_Ger_talkie-1.0.zip"
+  },
+  {
+    "relative_path": "FOTAQ_Heb_talkie",
+    "id": "queen:queen",
+    "description": "Freeware CD Version (Hebrew subtitles, English voices, ogg compressed sfx/speech)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_Heb_talkie.zip"
+  },
+  {
+    "relative_path": "FOTAQ_It_Talkie_1.0",
+    "id": "queen:queen",
+    "description": "Freeware CD Version (Italian subtitles, English voices, ogg compressed sfx/speech)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_It_Talkie_1.0.zip"
+  },
+  {
+    "relative_path": "FOTAQ_Talkie-original",
+    "id": "queen:queen",
+    "description": "Freeware CD Version (unmodified original)",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_Talkie-original.zip"
+  },
+  {
+    "relative_path": "queen-amiga-demo-en",
+    "id": "queen:queen",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-amiga-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "queen-amiga-demo2-en",
+    "id": "queen:queen",
+    "description": "Amiga Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-amiga-demo2-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "queen-amiga-interview-en",
+    "id": "queen:queen",
+    "description": "Amiga Interview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-amiga-interview-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "queen-dos-demo-en",
+    "id": "queen:queen",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "queen-dos-demo-en-alt",
+    "id": "queen:queen",
+    "description": "DOS Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-dos-demo-en-alt.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "queen-dos-interview-en",
+    "id": "queen:queen",
+    "description": "DOS Interview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-dos-interview-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "queen-dos-interview-ru",
+    "id": "queen:queen",
+    "description": "DOS Russian Interview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-dos-interview-ru.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "queen-dos-pcgames-demo-en",
+    "id": "queen:queen",
+    "description": "DOS PCGAMES Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/queen/queen-dos-pcgames-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ihnm-dos-demo-en",
+    "id": "saga:ihnm",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ihnm-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ite-amiga-aga-demo-de",
+    "id": "saga:ite",
+    "description": "Amiga AGA Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-amiga-aga-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "ite-amiga-ecs-demo-de",
+    "id": "saga:ite",
+    "description": "Amiga ECS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-amiga-ecs-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "ite-dos-ni-demo-en",
+    "id": "saga:ite",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ite-linux-trial-demo-en",
+    "id": "saga:ite",
+    "description": "Linux Trial Version Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-linux-trial-demo-en.zip",
+    "platform": "Linux"
+  },
+  {
+    "relative_path": "ite-mac-trial-demo-en",
+    "id": "saga:ite",
+    "description": "Macintosh Trial Version Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-mac-trial-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "ite-win-new-demo-en",
+    "id": "saga:ite",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-win-new-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "ite-win-old-demo-en",
+    "id": "saga:ite",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-win-old-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "ite-win-trial-demo-en",
+    "id": "saga:ite",
+    "description": "Windows Trial Version Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/saga/ite-win-trial-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "astrochicken-dos-demo-en",
+    "id": "sci:astrochicken",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/astrochicken-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "camelot-dos-ni-demo-en",
+    "id": "sci:camelot",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/camelot-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "castlebrain-dos-ni-demo-en",
+    "id": "sci:castlebrain",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/castlebrain-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ecoquest-dos-ni-demo-en",
+    "id": "sci:ecoquest",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/ecoquest-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ecoquest2-dos-ni-demo-en",
+    "id": "sci:ecoquest2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/ecoquest2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "fairytales-dos-ni-demo-en",
+    "id": "sci:fairytales",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/fairytales-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "freddypharkas-dos-demo1-en",
+    "id": "sci:freddypharkas",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/freddypharkas-dos-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "freddypharkas-dos-demo2-en",
+    "id": "sci:freddypharkas",
+    "description": "DOS Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/freddypharkas-dos-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "freddypharkas-win-cd-demo-en",
+    "id": "sci:freddypharkas",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/freddypharkas-win-cd-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "gk1-dos-demo-en",
+    "id": "sci:gk1",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/gk1-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "gk2-win-ni-demo-en",
+    "id": "sci:gk2",
+    "description": "Windows Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/gk2-win-ni-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "hoyle3-dos-ni-demo-en",
+    "id": "sci:hoyle3",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/hoyle3-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hoyle4-dos-ni-demo-en",
+    "id": "sci:hoyle4",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/hoyle4-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "hoyle5-win-demo-en",
+    "id": "sci:hoyle5",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/hoyle5-win-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "iceman-dos-ni-demo-en",
+    "id": "sci:iceman",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/iceman-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "islandbrain-dos-ni-demo-en",
+    "id": "sci:islandbrain",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/islandbrain-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kq1sci-dos-ni-demo-en",
+    "id": "sci:kq1sci",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/kq1sci-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kq4sci-dos-ni-demo-en",
+    "id": "sci:kq4sci",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/kq4sci-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kq6-dos-ni-demo-en",
+    "id": "sci:kq6",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/kq6-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "kq7-dos-win-ni-demo-en",
+    "id": "sci:kq7",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/kq7-dos-win-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "laurabow-dos-ni-demo-en",
+    "id": "sci:laurabow",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/laurabow-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "laurabow2-dos-ni-demo-en",
+    "id": "sci:laurabow2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/laurabow2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lighthouse-win-demo-en",
+    "id": "sci:lighthouse",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lighthouse-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "lighthouse-win-demo2-en",
+    "id": "sci:lighthouse",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lighthouse-win-demo2-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "lighthouse-win-ni-demo-en",
+    "id": "sci:lighthouse",
+    "description": "Windows Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lighthouse-win-ni-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "longbow-dos-ni-demo-en",
+    "id": "sci:longbow",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/longbow-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lsl1sci-dos-ni-demo-en",
+    "id": "sci:lsl1sci",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lsl1sci-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lsl2-dos-ni-demo-en",
+    "id": "sci:lsl2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lsl2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lsl3-dos-ni-demo-en",
+    "id": "sci:lsl3",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lsl3-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lsl5-dos-ni-demo-en",
+    "id": "sci:lsl5",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lsl5-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lsl6-dos-ni-demo-en",
+    "id": "sci:lsl6",
+    "description": "DOS Non-Engine Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/Non-Engine/lsl6-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lsl7-dos-demo-en",
+    "id": "sci:lsl7",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/lsl7-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "mothergoose-win-demo-en",
+    "id": "sci:mothergoose",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/mothergoose-win-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pepper-dos-demo-en",
+    "id": "sci:pepper",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pepper-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pepper-dos-ni-demo-en",
+    "id": "sci:pepper",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pepper-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pepper-dos-win-demo-en",
+    "id": "sci:pepper",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pepper-dos-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "phantasmagoria-dos-win-demo-en",
+    "id": "sci:phantasmagoria",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/phantasmagoria-dos-win-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "phantasmagoria-dos-win-demo1-en",
+    "id": "sci:phantasmagoria",
+    "description": "DOS Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/phantasmagoria-dos-win-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pq2-dos-ni-demo-en",
+    "id": "sci:pq2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pq2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pq3-dos-ni-demo-en",
+    "id": "sci:pq3",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pq3-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pq4-dos-ni-demo-en",
+    "id": "sci:pq4",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pq4-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "pqswat-win-demo-en",
+    "id": "sci:pqswat",
+    "description": "Windows Unsupported Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pqswat-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "qfg1-dos-ni-demo-en",
+    "id": "sci:qfg1",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/qfg1-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "qfg1vga-dos-ni-demo-en",
+    "id": "sci:qfg1vga",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/qfg1vga-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "qfg2-dos-ni-demo-en",
+    "id": "sci:qfg2",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/qfg2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "qfg3-dos-ni-demo-en",
+    "id": "sci:qfg3",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/qfg3-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "qfg4-dos-ni-demo-en",
+    "id": "sci:qfg4",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/qfg4-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "rama-dos-win-ni-demo-en",
+    "id": "sci:rama",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/rama-dos-win-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "shivers-win-cd-demo-en",
+    "id": "sci:shivers",
+    "description": "Windows CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/shivers-win-cd-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "shivers-win-demo-en",
+    "id": "sci:shivers",
+    "description": "Windows Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/shivers-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "shivers-win-demo2-en",
+    "id": "sci:shivers",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/shivers-win-demo2-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "slater-dos-demo.en",
+    "id": "sci:slater",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/slater-dos-demo.en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sq1sci-dos-ni-demo-en",
+    "id": "sci:sq1sci",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/sq1sci-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sq3-dos-ni-demo-en",
+    "id": "sci:sq3",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/sq3-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sq5-dos-ni-demo-en",
+    "id": "sci:sq5",
+    "description": "DOS Non-Engine Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/Non-Engine/sq5-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sq6-dos-demo-en",
+    "id": "sci:sq6",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/sq6-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sq6-win-demo1-en",
+    "id": "sci:sq6",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/sq6-win-demo1-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sq6-win-demo2-en",
+    "id": "sci:sq6",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/sq6-win-demo2-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "torin-dos-win-demo-en",
+    "id": "sci:torin",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sci/torin-dos-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "airport-mac-demo-us",
+    "id": "scumm:airport",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/airport-mac-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "airport-win-demo-nl",
+    "id": "scumm:airport",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/airport-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "airport-win-demo-us",
+    "id": "scumm:airport",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/airport-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "airport-win-updated-demo1-us",
+    "id": "scumm:airport",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/airport-win-updated-demo1-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "airport-win-updated-demo2-us",
+    "id": "scumm:airport",
+    "description": "Windows Updated Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/airport-win-updated-demo2-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "arttime-win-demo-us",
+    "id": "scumm:arttime",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/arttime-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "atlantis-dos-demo1-en",
+    "id": "scumm:atlantis",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-dos-demo1-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "atlantis-dos-demo2-en",
+    "id": "scumm:atlantis",
+    "description": "DOS Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-dos-demo2-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "atlantis-dos-demo3-en",
+    "id": "scumm:atlantis",
+    "description": "DOS Alternative 2 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-dos-demo3-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "atlantis-dos-ni-demo-en",
+    "id": "scumm:atlantis",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "atlantis-fmtowns-ni-demo-jp",
+    "id": "scumm:atlantis",
+    "description": "FM Towns Japanese Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-fmtowns-ni-demo-jp.zip",
+    "languages": [
+      "ja"
+    ],
+    "platform": "FM Towns"
+  },
+  {
+    "relative_path": "atlantis-mac-demo",
+    "id": "scumm:atlantis",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-mac-demo.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "baseball-win-preview1-us",
+    "id": "scumm:baseball",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/baseball-win-preview1-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "baseball-win-preview2-us",
+    "id": "scumm:baseball",
+    "description": "Windows Alternative Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/baseball-win-preview2-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "baseball2001-win-demo-us",
+    "id": "scumm:baseball2001",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/baseball2001-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "BluesABCTime-win-demo1-us",
+    "id": "scumm:bluesabctime",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/BluesABCTime-win-demo1-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "BluesABCTime-win-demo2-us",
+    "id": "scumm:bluesabctime",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/BluesABCTime-win-demo2-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "BluesABCTime-win-preview-us",
+    "id": "scumm:bluesabctime",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/BluesABCTime-win-preview-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "BluesBirthday-win-demo1-us",
+    "id": "scumm:bluesbirthday",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/BluesBirthday-win-demo1-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "BluesBirthday-win-demo2-us",
+    "id": "scumm:bluesbirthday",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/BluesBirthday-win-demo2-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "BluesBirthday-win-preview-us",
+    "id": "scumm:bluesbirthday",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/BluesBirthday-win-preview-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "brstorm-dos-demo-us",
+    "id": "scumm:brstorm",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/brstorm-dos-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "comi-win-large-demo-en",
+    "id": "scumm:comi",
+    "description": "Windows Large Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/comi-win-large-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "comi-win-small-demo-en",
+    "id": "scumm:comi",
+    "description": "Windows Small Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/comi-win-small-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "dig-dos-demo-en",
+    "id": "scumm:dig",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/dig-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dig-mac-demo-en",
+    "id": "scumm:dig",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/dig-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "farm-win-demo-nl",
+    "id": "scumm:farm",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/farm-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "farm-win-demo-us",
+    "id": "scumm:farm",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/farm-win-demo-us.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "farm-win-updated-demo-us",
+    "id": "scumm:farm",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/farm-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "fbear-dos-demo-us",
+    "id": "scumm:fbear",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/fbear-dos-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "fbear-mac-demo-us",
+    "id": "scumm:fbear",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/fbear-mac-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "fbear-win-demo-us",
+    "id": "scumm:fbear",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/fbear-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "football-win-demo-us",
+    "id": "scumm:football",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/football-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi-mac-demo_us",
+    "id": "scumm:freddi",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi-mac-demo_us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "freddi-win-demo-de",
+    "id": "scumm:freddi",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi-win-demo-fr",
+    "id": "scumm:freddi",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi-win-demo-nl",
+    "id": "scumm:freddi",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi-win-demo-us",
+    "id": "scumm:freddi",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi-win-updated-demo-us",
+    "id": "scumm:freddi",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi2-win-demo-nl",
+    "id": "scumm:freddi2",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi2-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi2-win-demo-us",
+    "id": "scumm:freddi2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi2-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi2-win-updated-demo-us",
+    "id": "scumm:freddi2",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi2-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi3-win-demo-fr",
+    "id": "scumm:freddi3",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi3-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi3-win-demo-hb",
+    "id": "scumm:freddi3",
+    "description": "Windows Hebrew Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi3-win-demo-hb.zip",
+    "languages": [
+      "he"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi3-win-demo-nl",
+    "id": "scumm:freddi3",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi3-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi3-win-demo-us",
+    "id": "scumm:freddi3",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi3-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo-de",
+    "id": "scumm:freddi4",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo-it",
+    "id": "scumm:freddi4",
+    "description": "Windows Italian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo-it.zip",
+    "languages": [
+      "it"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo-uk",
+    "id": "scumm:freddi4",
+    "description": "Windows UK Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo-uk.zip",
+    "languages": [
+      "en_GB"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo-us",
+    "id": "scumm:freddi4",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo.fr",
+    "id": "scumm:freddi4",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo.fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo1-nl",
+    "id": "scumm:freddi4",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo1-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo2-nl",
+    "id": "scumm:freddi4",
+    "description": "Windows Dutch Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo2-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-demo3-nl",
+    "id": "scumm:freddi4",
+    "description": "Windows Dutch Alternative 2 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo3-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddi4-win-updated-demo-us",
+    "id": "scumm:freddi4",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddicove-win-demo-nl",
+    "id": "scumm:freddicove",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddicove-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "freddicove-win-demo-us",
+    "id": "scumm:freddicove",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddicove-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "ft-dos-demo-en",
+    "id": "scumm:ft",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/ft-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ft-mac-demo-en",
+    "id": "scumm:ft",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/ft-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "ft-mac-ni-demo-en",
+    "id": "scumm:ft",
+    "description": "Macintosh Trailer Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/ft-mac-ni-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "indy3-ega-ni-demo-en",
+    "id": "scumm:indy3",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/indy3-ega-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "zak-fmtowns-indyloom-ni-demo",
+    "id": "scumm:indyloom",
+    "description": "FM Towns Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/zak-fmtowns-indyloom-ni-demo.zip",
+    "platform": "FM Towns"
+  },
+  {
+    "relative_path": "zak-fmtowns-indyzak-ni-demo",
+    "id": "scumm:indyzak",
+    "description": "FM Towns Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/zak-fmtowns-indyzak-ni-demo.zip",
+    "platform": "FM Towns"
+  },
+  {
+    "relative_path": "loom-dos-long-demo-en",
+    "id": "scumm:loom",
+    "description": "DOS Long Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/loom-dos-long-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "loom-dos-short-demo-en",
+    "id": "scumm:loom",
+    "description": "DOS Short Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/loom-dos-short-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lost-win-demo-us",
+    "id": "scumm:lost",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/lost-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "maniac-c64-demo-en",
+    "id": "scumm:maniac",
+    "description": "Commodore 64 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/maniac-c64-demo-en.zip",
+    "platform": "Commodore 64"
+  },
+  {
+    "relative_path": "maniac-dos-v1-ni-demo-en",
+    "id": "scumm:maniac",
+    "description": "DOS V1 Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/maniac-dos-v1-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "maniac-dos-v2-ni-demo-en",
+    "id": "scumm:maniac",
+    "description": "DOS V2 Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/maniac-dos-v2-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "monkey1-amiga-demo-en",
+    "id": "scumm:monkey",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/monkey1-amiga-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "monkey1-dos-ega-demo-de",
+    "id": "scumm:monkey",
+    "description": "DOS German EGA Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/monkey1-dos-ega-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "monkey1-dos-ega-demo-en",
+    "id": "scumm:monkey",
+    "description": "DOS EGA Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/monkey1-dos-ega-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "mi2-dos-ni-slideshow-demo-en",
+    "id": "scumm:monkey2",
+    "description": "DOS Non-Engine (Slideshow) Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/Non-Engine/mi2-dos-ni-slideshow-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "monkey2-dos-ni-demo-en",
+    "id": "scumm:monkey2",
+    "description": "DOS Unsupported Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/monkey2-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "moonbase-win-demo-us",
+    "id": "scumm:moonbase",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/moonbase-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama-win-demo-fr",
+    "id": "scumm:pajama",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama-win-demo-us",
+    "id": "scumm:pajama",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama-win-updated-demo-us",
+    "id": "scumm:pajama",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama2-win-demo-hb",
+    "id": "scumm:pajama2",
+    "description": "Windows Hebrew Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama2-win-demo-hb.zip",
+    "languages": [
+      "he"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama2-win-demo-nl",
+    "id": "scumm:pajama2",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama2-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama2-win-demo-us",
+    "id": "scumm:pajama2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama2-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama3-win-demo-de",
+    "id": "scumm:pajama3",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama3-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama3-win-demo-fr",
+    "id": "scumm:pajama3",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama3-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama3-win-demo-it",
+    "id": "scumm:pajama3",
+    "description": "Windows Italian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama3-win-demo-it.zip",
+    "languages": [
+      "it"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama3-win-demo-nl",
+    "id": "scumm:pajama3",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama3-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama3-win-demo-uk",
+    "id": "scumm:pajama3",
+    "description": "Windows UK Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama3-win-demo-uk.zip",
+    "languages": [
+      "en_GB"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama3-win-demo-us",
+    "id": "scumm:pajama3",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama3-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama3-win-updated-demo-us",
+    "id": "scumm:pajama3",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama3-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pass-dos-en",
+    "id": "scumm:pass",
+    "description": "DOS EGA Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/pass-dos-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "puttcircus-win-demo-fr",
+    "id": "scumm:puttcircus",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttcircus-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttcircus-win-demo-hb",
+    "id": "scumm:puttcircus",
+    "description": "Windows Hebrew Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttcircus-win-demo-hb.zip",
+    "languages": [
+      "he"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttcircus-win-demo-us",
+    "id": "scumm:puttcircus",
+    "description": "Windows US Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttcircus-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttmoon-dos-demo-us",
+    "id": "scumm:puttmoon",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttmoon-dos-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "puttmoon-mac-demo-us",
+    "id": "scumm:puttmoon",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttmoon-mac-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "puttmoon-win-demo-us",
+    "id": "scumm:puttmoon",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttmoon-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttputt-dos-demo-us",
+    "id": "scumm:puttputt",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttputt-dos-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "puttputt-mac-demo-us",
+    "id": "scumm:puttputt",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttputt-mac-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "puttputt-win-demo-us",
+    "id": "scumm:puttputt",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttputt-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-demo-de",
+    "id": "scumm:puttrace",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-demo-fr",
+    "id": "scumm:puttrace",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-demo-it",
+    "id": "scumm:puttrace",
+    "description": "Windows Italian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-demo-it.zip",
+    "languages": [
+      "it"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-demo-nl",
+    "id": "scumm:puttrace",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-demo-uk",
+    "id": "scumm:puttrace",
+    "description": "Windows UK Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-demo-uk.zip",
+    "languages": [
+      "en_GB"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-demo-us",
+    "id": "scumm:puttrace",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-preview-us",
+    "id": "scumm:puttrace",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-preview-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttrace-win-updated-demo-nl",
+    "id": "scumm:puttrace",
+    "description": "Windows Dutch Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttrace-win-updated-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "putttime-win-demo-de",
+    "id": "scumm:putttime",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/putttime-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "putttime-win-demo-fr",
+    "id": "scumm:putttime",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/putttime-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "putttime-win-demo-nl",
+    "id": "scumm:putttime",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/putttime-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "putttime-win-demo-us",
+    "id": "scumm:putttime",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/putttime-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "putttime-win-updated-demo-us",
+    "id": "scumm:putttime",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/putttime-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttzoo-mac-demo-us",
+    "id": "scumm:puttzoo",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttzoo-mac-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "puttzoo-win-demo-de",
+    "id": "scumm:puttzoo",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttzoo-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttzoo-win-demo-fr",
+    "id": "scumm:puttzoo",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttzoo-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttzoo-win-demo-nl",
+    "id": "scumm:puttzoo",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttzoo-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttzoo-win-demo-us",
+    "id": "scumm:puttzoo",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttzoo-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "puttzoo-win-updated-demo-us",
+    "id": "scumm:puttzoo",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/puttzoo-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "readtime-win-demo-us",
+    "id": "scumm:readtime",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/readtime-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "samnmax-dos-cd-demo-en",
+    "id": "scumm:samnmax",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-dos-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "samnmax-dos-demo-de",
+    "id": "scumm:samnmax",
+    "description": "DOS German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-dos-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "samnmax-dos-demo-en",
+    "id": "scumm:samnmax",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "samnmax-dos-ni-demo-en",
+    "id": "scumm:samnmax",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "samnmax-dos-wip-demo-en",
+    "id": "scumm:samnmax",
+    "description": "DOS WIP Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-dos-wip-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "samnmax-mac-demo-en",
+    "id": "scumm:samnmax",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "spyfox-win-demo-fr",
+    "id": "scumm:spyfox",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox-win-demo-nl",
+    "id": "scumm:spyfox",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox-win-demo1-us",
+    "id": "scumm:spyfox",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox-win-demo1-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox-win-demo2-us",
+    "id": "scumm:spyfox",
+    "description": "Windows Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox-win-demo2-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox-win-updated-demo-us",
+    "id": "scumm:spyfox",
+    "description": "Windows Updated Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox-win-updated-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox2-win-demo-de",
+    "id": "scumm:spyfox2",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox2-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox2-win-demo-fr",
+    "id": "scumm:spyfox2",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox2-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox2-win-demo-it",
+    "id": "scumm:spyfox2",
+    "description": "Windows Italian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox2-win-demo-it.zip",
+    "languages": [
+      "it"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox2-win-demo-nl",
+    "id": "scumm:spyfox2",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox2-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox2-win-demo-uk",
+    "id": "scumm:spyfox2",
+    "description": "Windows UK Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox2-win-demo-uk.zip",
+    "languages": [
+      "en_GB"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox2-win-demo-us",
+    "id": "scumm:spyfox2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox2-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyfox2-win-preview-us",
+    "id": "scumm:spyfox2",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox2-win-preview-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyozon-win-demo-fr",
+    "id": "scumm:spyozon",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyozon-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyozon-win-demo-us",
+    "id": "scumm:spyozon",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyozon-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "spyozon-win-preview-us",
+    "id": "scumm:spyozon",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyozon-win-preview-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "dott-dos-ni-demo-de",
+    "id": "scumm:tentacle",
+    "description": "DOS German Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/dott-dos-ni-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dott-dos-ni-demo-en",
+    "id": "scumm:tentacle",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/dott-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dott-dos-ni-demo-fr",
+    "id": "scumm:tentacle",
+    "description": "DOS French Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/dott-dos-ni-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dott-mac-ni-demo-en",
+    "id": "scumm:tentacle",
+    "description": "Macintosh Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/dott-mac-ni-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "thinker1-win-demo-us",
+    "id": "scumm:thinker1",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/thinker1-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "thinkerk-win-demo-us",
+    "id": "scumm:thinkerk",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/thinkerk-win-demo-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "zak-atari-ni-demo",
+    "id": "scumm:zak",
+    "description": "Atari ST Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/zak-atari-ni-demo.zip",
+    "platform": "Atari ST"
+  },
+  {
+    "relative_path": "zak-fmtowns-zakloom-ni-demo",
+    "id": "scumm:zakloom",
+    "description": "FM Towns Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/zak-fmtowns-zakloom-ni-demo.zip",
+    "platform": "FM Towns"
+  },
+  {
+    "relative_path": "scalpel-dos-demo-en",
+    "id": "sherlock:scalpel",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sherlock/scalpel-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "scalpel-dos-ni-demo-en",
+    "id": "sherlock:scalpel",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sherlock/scalpel-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "bass-cd-1.2",
+    "id": "sky:sky",
+    "description": "Freeware CD Version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Beneath a Steel Sky/bass-cd-1.2.zip"
+  },
+  {
+    "relative_path": "BASS-Floppy-1.3",
+    "id": "sky:sky",
+    "description": "Freeware Floppy Version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Beneath a Steel Sky/BASS-Floppy-1.3.zip"
+  },
+  {
+    "relative_path": "sky-amiga-demo-en",
+    "id": "sky:sky",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sky/sky-amiga-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "sky-dos-ni-anm-demo-en",
+    "id": "sky:sky",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sky/sky-dos-ni-anm-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sky-dos-v0109-demo-en",
+    "id": "sky:sky",
+    "description": "DOS v0109 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sky/sky-dos-v0109-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sky-dos-v0267-demo-en",
+    "id": "sky:sky",
+    "description": "DOS v0267 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sky/sky-dos-v0267-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sky-dos-v0272-demo-de",
+    "id": "sky:sky",
+    "description": "DOS German v0272 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sky/sky-dos-v0272-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "sky-dos-v0365-cd-demo-en",
+    "id": "sky:sky",
+    "description": "DOS v0365 CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sky/sky-dos-v0365-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "atw",
+    "id": "sludge:atw",
+    "description": "SLUDGE engine game. Version v0.1",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/atw.zip"
+  },
+  {
+    "relative_path": "cubert",
+    "id": "sludge:cubert",
+    "description": "SLUDGE engine game. Version Dec 15, 2005",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/cubert.zip"
+  },
+  {
+    "relative_path": "cubert-04",
+    "id": "sludge:cubert",
+    "description": "SLUDGE engine game. Version Mar 9, 2004",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/cubert-04.zip"
+  },
+  {
+    "relative_path": "cubert-1.1",
+    "id": "sludge:cubert",
+    "description": "SLUDGE engine game. Version v1.1, August 4, 2002",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/cubert-1.1.zip"
+  },
+  {
+    "relative_path": "cubert-1.1-1",
+    "id": "sludge:cubert",
+    "description": "SLUDGE engine game. Version v1.1, June 11, 2003",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/cubert-1.1-1.zip"
+  },
+  {
+    "relative_path": "cubert-1.2",
+    "id": "sludge:cubert",
+    "description": "SLUDGE engine game. Version v1.2, August 16, 2002",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/cubert-1.2.zip"
+  },
+  {
+    "relative_path": "cubert-1.25",
+    "id": "sludge:cubert",
+    "description": "SLUDGE engine game. Version v1.25, September 5, 2002",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/cubert-1.25.zip"
+  },
+  {
+    "relative_path": "frasse-1.03",
+    "id": "sludge:frasse",
+    "description": "SLUDGE engine game. Version v1.03",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/frasse-1.03.zip"
+  },
+  {
+    "relative_path": "frasse-1.04",
+    "id": "sludge:frasse",
+    "description": "SLUDGE engine game. Version v1.04",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/frasse-1.04.zip"
+  },
+  {
+    "relative_path": "frasse-2.02",
+    "id": "sludge:frasse",
+    "description": "SLUDGE engine game. Version v2.02",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/frasse-2.02.zip"
+  },
+  {
+    "relative_path": "frasse-2.03",
+    "id": "sludge:frasse",
+    "description": "SLUDGE engine game. Version v2.03",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/frasse-2.03.zip"
+  },
+  {
+    "relative_path": "interview",
+    "id": "sludge:interview",
+    "description": "SLUDGE engine game.",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/interview.zip"
+  },
+  {
+    "relative_path": "leptonsquest",
+    "id": "sludge:leptonsquest",
+    "description": "SLUDGE engine game. Windows version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/leptonsquest.zip"
+  },
+  {
+    "relative_path": "leptonsquest-linux",
+    "id": "sludge:leptonsquest",
+    "description": "SLUDGE engine game. Linux version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/leptonsquest-linux.zip"
+  },
+  {
+    "relative_path": "leptonsquest-mac",
+    "id": "sludge:leptonsquest",
+    "description": "SLUDGE engine game. Mac version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/leptonsquest-mac.zip"
+  },
+  {
+    "relative_path": "life",
+    "id": "sludge:life",
+    "description": "SLUDGE engine game.",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/life.zip"
+  },
+  {
+    "relative_path": "lifeflashesby",
+    "id": "sludge:life",
+    "description": "SLUDGE engine game. SLG version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/lifeflashesby.zip"
+  },
+  {
+    "relative_path": "mandy-1.2",
+    "id": "sludge:mandy",
+    "description": "SLUDGE engine game. English, Slovak, v1.2",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/mandy-1.2.zip"
+  },
+  {
+    "relative_path": "mandy-1.3",
+    "id": "sludge:mandy",
+    "description": "SLUDGE engine game. English, Italian, Slovak, v1.3",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/mandy-1.3.zip"
+  },
+  {
+    "relative_path": "mandy-1.4",
+    "id": "sludge:mandy",
+    "description": "SLUDGE engine game. English, Italian, Polish, Slovak, v1.4",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/mandy-1.4.zip"
+  },
+  {
+    "relative_path": "nsc",
+    "id": "sludge:nsc",
+    "description": "SLUDGE engine game. Version v1.03",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/nsc.zip"
+  },
+  {
+    "relative_path": "ooo",
+    "id": "sludge:outoforder",
+    "description": "SLUDGE engine game. Windows version, June 5, 2003",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/ooo.zip"
+  },
+  {
+    "relative_path": "outoforder",
+    "id": "sludge:outoforder",
+    "description": "SLUDGE engine game. Linux version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/outoforder.zip"
+  },
+  {
+    "relative_path": "robinsrescue",
+    "id": "sludge:robinsrescue",
+    "description": "SLUDGE engine game. SLG version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/robinsrescue.zip"
+  },
+  {
+    "relative_path": "robinsrescue-alt",
+    "id": "sludge:robinsrescue",
+    "description": "SLUDGE engine game. Alternative Version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/robinsrescue-alt.zip"
+  },
+  {
+    "relative_path": "robinsrescue-linux",
+    "id": "sludge:robinsrescue",
+    "description": "SLUDGE engine game. Linux version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/robinsrescue-linux.zip"
+  },
+  {
+    "relative_path": "tgttpoacs",
+    "id": "sludge:tgttpoacs",
+    "description": "SLUDGE engine game.",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/tgttpoacs.zip"
+  },
+  {
+    "relative_path": "tsotc-v6",
+    "id": "sludge:tsotc",
+    "description": "SLUDGE engine game. Version v6",
+    "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/tsotc-v6.zip"
+  },
+  {
+    "relative_path": "tlj-demo-en",
+    "id": "stark:tlj",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/stark/tlj-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tlj-demo-en-early",
+    "id": "stark:tlj",
+    "description": "Windows Early Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/stark/tlj-demo-en-early.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tlj-demo-en-new",
+    "id": "stark:tlj",
+    "description": "Windows New Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/stark/tlj-demo-en-new.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tlj-demo-fr",
+    "id": "stark:tlj",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/stark/tlj-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tlj-demo-nor-new",
+    "id": "stark:tlj",
+    "description": "Windows Norwegian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/stark/tlj-demo-nor-new.zip",
+    "languages": [
+      "no"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "tlj-demo-swe",
+    "id": "stark:tlj",
+    "description": "Windows Swedish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/stark/tlj-demo-swe.zip",
+    "languages": [
+      "sv"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sword1-mac-demo-en",
+    "id": "sword1:sword1",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword1/sword1-mac-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "sword1-psx-demo-en",
+    "id": "sword1:sword1",
+    "description": "PlayStation Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword1/sword1-psx-demo-en.zip",
+    "platform": "PlayStation"
+  },
+  {
+    "relative_path": "sword1-win-demo-en",
+    "id": "sword1:sword1",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword1/sword1-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sword1-win-demo-es",
+    "id": "sword1:sword1",
+    "description": "Windows Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword1/sword1-win-demo-es.zip",
+    "languages": [
+      "es"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sword1-win-preview-en",
+    "id": "sword1:sword1",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword1/sword1-win-preview-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sword25-v1.0",
+    "id": "sword25:sword25",
+    "description": "Freeware Version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Broken Sword 2.5/sword25-v1.0.zip"
+  },
+  {
+    "relative_path": "sword2-psx-demo-en",
+    "id": "sword2:sword2",
+    "description": "PlayStation Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword2/sword2-psx-demo-en.zip",
+    "platform": "PlayStation"
+  },
+  {
+    "relative_path": "sword2-win-demo-en",
+    "id": "sword2:sword2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword2/sword2-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sword2-win-demo-es",
+    "id": "sword2:sword2",
+    "description": "Windows Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/sword2/sword2-win-demo-es.zip",
+    "languages": [
+      "es"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "teen-dos-union-demo-en",
+    "id": "teenagent:teenagent",
+    "description": "DOS Union Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/teen/teen-dos-union-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "teen-dos-wiztech-demo-en",
+    "id": "teenagent:teenagent",
+    "description": "DOS WizTech Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/teen/teen-dos-wiztech-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "testbed",
+    "id": "testbed:testbed",
+    "description": "The Backend Testing Framework"
+  },
+  {
+    "relative_path": "dw-dos-cd-demo-en",
+    "id": "tinsel:dw",
+    "description": "DOS CD Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw-dos-cd-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dw-dos-floppy-demo-en",
+    "id": "tinsel:dw",
+    "description": "DOS Floppy Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw-dos-floppy-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dw-mac-cd-demo-en",
+    "id": "tinsel:dw",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw-mac-cd-demo-en.zip",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "dw-psx-demo-en",
+    "id": "tinsel:dw",
+    "description": "PlayStation Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw-psx-demo-en.zip",
+    "platform": "PlayStation"
+  },
+  {
+    "relative_path": "dw2-dos-demo-en",
+    "id": "tinsel:dw2",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw2-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dw2-psx-demo-en",
+    "id": "tinsel:dw2",
+    "description": "PlayStation Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw2-psx-demo-en.zip",
+    "platform": "PlayStation"
+  },
+  {
+    "relative_path": "dw2-win-demo-2-en",
+    "id": "tinsel:dw2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw2-win-demo-2-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "dw2-win-demo-en",
+    "id": "tinsel:dw2",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw2-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "toltecs-demo",
+    "id": "toltecs:toltecs",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/toltecs/toltecs-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "toltecs-demo-de",
+    "id": "toltecs:toltecs",
+    "description": "DOS German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/toltecs/toltecs-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "tony-demo",
+    "id": "tony:tony",
+    "description": "Windows Extracted Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tony/tony-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "toon-demo",
+    "id": "toon:toon",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/toon/toon-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "toon-dos-demo-de",
+    "id": "toon:toon",
+    "description": "DOS German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/toon/toon-dos-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "tot-dos-demo-es",
+    "id": "tot:tot",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tot/tot-dos-demo-es.zip",
+    "languages": [
+      "es"
+    ],
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "touche-dos-demo-en",
+    "id": "touche:touche",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/touche/touche-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "nl-win-demo-de",
+    "id": "trecision:nl",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/trecision/nl-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "nl-win-demo-en",
+    "id": "trecision:nl",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/trecision/nl-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "ringworld-demo-alt",
+    "id": "tsage:ringworld",
+    "description": "DOS Alternative Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tsage/ringworld-demo-alt.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "ringworld-dos-ni-demo-en",
+    "id": "tsage:ringworld",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tsage/ringworld-dos-ni-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "returntoringworld-dos-demo-en",
+    "id": "tsage:ringworld2",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tsage/returntoringworld-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "tucker-dos-demo",
+    "id": "tucker:tucker",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tucker/tucker-dos-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "tucker-dos-ni-demo",
+    "id": "tucker:tucker",
+    "description": "DOS Non-Interactive Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/tucker/tucker-dos-ni-demo.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lba-demo-mult",
+    "id": "twine:lba",
+    "description": "DOS Multilanguage Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/twine/lba-demo-mult.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "remorse-dos-demo-en",
+    "id": "ultima:remorse",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/ultima/remorse-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "voyeur-dos-demo-en",
+    "id": "voyeur:voyeur",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/voyeur/voyeur-dos-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "afm-1.8",
+    "id": "wage:afm",
+    "description": "Version 1.8",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "amot-1.8",
+    "id": "wage:amot",
+    "description": "Version 1.8",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "cantitoe",
+    "id": "wage:cantitoe",
+    "description": "Freeware"
+  },
+  {
+    "relative_path": "drakmythcastle",
+    "id": "wage:drakmythcastle",
+    "description": "Freeware",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "grailquest-demo",
+    "id": "wage:grailquest",
+    "description": "Demo",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "raysmaze",
+    "id": "wage:raysmaze",
+    "description": "Freeware",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "raysmaze-alt",
+    "id": "wage:raysmaze",
+    "description": "Alternative Version",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "twisted-1.6",
+    "id": "wage:twisted",
+    "description": "Version 1.6",
+    "platform": "Macintosh"
+  },
+  {
+    "relative_path": "helga_deep_in_trouble-demo",
+    "id": "wintermute:helga",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/helga_deep_in_trouble-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "ritter-demo-de",
+    "id": "wintermute:ritter",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/ritter-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  }
+]

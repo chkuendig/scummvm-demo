@@ -1,7 +1,7 @@
 For a more comprehensive changelog of the latest experimental code, see:
         https://github.com/scummvm/scummvm/commits/
 
-#### 2.10.0 (XXXX-XX-XX)
+#### 3.0.0 (XXXX-XX-XX)
 
  New games:
    - Added support for Dark Seed.
@@ -24,12 +24,23 @@ For a more comprehensive changelog of the latest experimental code, see:
      The Secret of Tremendous Corporation, Robin's Rescue and
      others, 12 titles so far.
    - Added support for Adibou 2: Nature & Sciences.
+   - Added support for WAGE-based game. More than 160 titles so far.
+   - Added support for Penumbra: Overture.
+   - Added support for Tex Murphy: Martian Memorandum
+   - Added support for Mort&Phil: A Movie Adventure (Special Edition).
+   - Added support for Trick or Treat
 
  Access:
    - Added keymapper support.
+   - Fixed foodstep sounds.
 
  ADL:
    - Added Text-to-Speech support.
+
+ AGI:
+   - Added Text-to-Speech support.
+   - Fixed Mickey's Space Adventure sound on PS3, Wii, and other big-endian
+     ports.
 
  Buried:
    - Added keymapper support.
@@ -46,29 +57,55 @@ For a more comprehensive changelog of the latest experimental code, see:
  Drascula:
    - Fixed displaying accented characters.
    - Added Text-to-Speech support.
+   - Added keymapper support.
 
  EFH:
    - Fixed giving and dropping unequippable items.
    - Fixed being unable to replace 3rd party member.
    - Fixed quitting in status menu.
+   - Added Text-to-Speech support.
+   - Added keymapper support.
 
  Freescape:
    - Added roll rotation to Driller and Dark Side.
+
+ Gob:
+   - Added Text-to-Speech support.
+
+ Hugo:
+   - Added Text-to-Speech support.
+   - Fixed closing the top menu.
+
+ Hypno:
+   - Added keymapper support.
 
  Kyra:
    - Reduce CPU usage in the LoL main menu.
    - Reduce CPU usage in EoB 1 and 2.
 
+ Lab:
+   - Added keymapper support.
+
  Lure:
    - Added Russian version support to lure.dat.
 
+ MADE:
+   - Added Text-to-Speech support.
+
  MM:
    - Fixed protection from elements spell.
+   - Added Text-to-Speech support.
+
+ Mohawk:
+   - Fixed popping noise in speech in some game releases (bug in the original).
 
  NANCY:
    - Added support for ScummVM's save/load screens.
    - Fixed a crash while reading files from the Zip disk in Secret of the
      Scarlet Hand.
+
+ Neverhood:
+   - Added keymapper support.
 
  NGI:
    - Added keymapper support.
@@ -79,8 +116,21 @@ For a more comprehensive changelog of the latest experimental code, see:
  Parallaction:
    - Added Text-to-Speech support.
 
+ Petka:
+   - Added keymapper support.
+
+ Pink:
+   - Added keymapper support.
+
  Prince:
    - Added Text-to-Speech support.
+   - Added keymapper support.
+
+ Private:
+   - Added keymapper support.
+
+ Queen:
+   - Added keymapper support.
 
  SCI:
    - Fixed the palette in SLATER Mac.
@@ -96,13 +146,26 @@ For a more comprehensive changelog of the latest experimental code, see:
      remastered version of Day of the Tentacle.
    - Added speech support in the SE versions of MI1 and MI2.
    - Improved graphics support for Macintosh DOTT, Sam & Max, The Dig, Full
-     Throttle, Maniac Mansion, and the PowerPC version of Fate of Atlantis.
+     Throttle, and the PowerPC version of Fate of Atlantis.
    - Added an option to render Sega CD MI1 with the "Shadow Mode" palette
      which was originally used for that release. (It's unclear whether that
      much darker rendering was used on purpose, or unintentionally.)
+   - Added Text-to-Speech support.
+   - Added support for Catalan fan translations of Maniac Mansion, Indy3,
+     Monkey1 and Indy4.
    - Fixed game detection for the Macintosh version of MI1 from the first
      first LucasArts Mac CD Game Pack. Previously you had to make sure to
      only copy the data fork, not the (empty) resource fork.
+   - Fixed various crashes when loading some old/special saves.
+   - Fixed a bug with background layers, which could cause some small
+     glitches in The Dig.
+   - Fixed an edge case when decoding SMUSH videos. This would cause some
+     gray artifacts/pixels to appear in the ending video of The Dig.
+   - Fixed minor visual issues in Backyard Baseball (1997) and Pajama Sam 3.
+   - Fixed missing graphical effects in Spy Fox in Cheese Chase.
+
+ Sherlock:
+   - Added keymapper support.
 
  Supernova:
    - Added keymapper support.
@@ -115,11 +178,15 @@ For a more comprehensive changelog of the latest experimental code, see:
      New teenagent.dat file is generated.
    - Added keymapper support.
    - Added Text-to-Speech support.
+   - Added support for Polish CD version with voice-over.
 
  Tetraedge:
    - Added keymapper support.
 
  Titanic:
+   - Added keymapper support.
+
+ Toltecs:
    - Added keymapper support.
 
  TwinE:
@@ -134,6 +201,7 @@ For a more comprehensive changelog of the latest experimental code, see:
 
  Wintermute:
    - 3D renderer enabled by default for 2D games.
+   - Added Text-to-Speech support.
 
 #### 2.9.1 "Slappin da BASS" (2025-05-25)
 

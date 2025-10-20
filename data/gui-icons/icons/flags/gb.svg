@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+
+<!-- /Creative Commons Public Domain -->
+
+<!--
+
+
+-->
+
+<svg
+   id="svg1"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   viewBox="0 0 900 600"
+   sodipodi:version="0.32"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:docname="altrogb.svg"
+   version="1.1"
+   width="900"
+   height="600"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs13" />
+  <sodipodi:namedview
+     id="base"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-height="1017"
+     inkscape:zoom="0.544"
+     showgrid="false"
+     inkscape:current-layer="svg1"
+     inkscape:cx="418.19853"
+     inkscape:cy="385.11029"
+     inkscape:window-width="1920"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:snap-page="true"
+     inkscape:window-maximized="1" />
+  <g
+     id="g578"
+     transform="scale(15,19.999933)">
+    <rect
+       id="rect124"
+       style="fill:#000066;stroke-width:1pt"
+       height="30"
+       width="60"
+       y="0"
+       x="0" />
+    <g
+       id="g584">
+      <path
+         id="path146"
+         style="fill:#ffffff;stroke-width:1pt"
+         d="m 0,0 v 3.3541 l 53.292,26.646 H 60 v -3.354 L 6.708,1e-4 H 0 Z M 60,0 V 3.354 L 6.708,30 H 0 V 26.646 L 53.292,0 Z" />
+      <path
+         id="path136"
+         style="fill:#ffffff;stroke-width:1pt"
+         d="M 25,0 V 30 H 35 V 0 Z M 0,10 V 20 H 60 V 10 Z" />
+      <path
+         id="path141"
+         style="fill:#cc0000;stroke-width:1pt"
+         d="m 0,12 v 6 H 60 V 12 Z M 27,0 v 30 h 6 V 0 Z" />
+      <path
+         id="path150"
+         style="fill:#cc0000;stroke-width:1pt"
+         d="M 0,30 20,20 h 4.472 l -20,10 z M 0,0 20,10 H 15.528 L 0,2.2361 Z m 35.528,10 20,-10 H 60 L 40,10 Z M 60,30 40,20 h 4.472 L 60,27.764 Z" />
+    </g>
+  </g>
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:date>2008-07-12T12:27:21</dc:date>
+        <dc:description />
+        <dc:source>https://openclipart.org/detail/17754/flag-of-the-united-kingdom-by-tobias</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>tobias</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>country</rdf:li>
+            <rdf:li>europe</rdf:li>
+            <rdf:li>european union</rdf:li>
+            <rdf:li>flag</rdf:li>
+            <rdf:li>nation</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>united nations member</rdf:li>
+            <rdf:li>unitedkingdom</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

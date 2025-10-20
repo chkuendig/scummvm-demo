@@ -1,1 +1,0 @@
-SIER.EXE .\resource.cfg 

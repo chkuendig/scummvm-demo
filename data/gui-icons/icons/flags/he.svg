@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="900"
+   height="600"
+   viewBox="0 0 300 200"
+   version="1.1"
+   id="svg13"
+   sodipodi:docname="he.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview15"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     width="900px"
+     inkscape:snap-page="true"
+     inkscape:zoom="0.80151515"
+     inkscape:cx="363.6862"
+     inkscape:cy="228.9414"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg13" />
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient1319"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop1317" />
+    </linearGradient>
+    <path
+       id="a"
+       stroke="#0038b8"
+       stroke-width="5.5"
+       fill-opacity="0"
+       d="M 0,-29.141 -25.237,14.571 H 25.237 Z" />
+  </defs>
+  <path
+     fill="#ffffff"
+     d="M 0,0 H 300 V 200 H 0 Z"
+     id="path5"
+     style="stroke-width:1.30558" />
+  <path
+     fill="#0038b8"
+     d="M 0,18.75 H 300 V 50 H 0 Z M 0,150 h 300 v 31.25 H 0 Z"
+     id="path7"
+     style="stroke-width:1.30558" />
+  <path
+     id="use9-9"
+     stroke="#0038b8"
+     stroke-width="6.875"
+     fill-opacity="0"
+     d="m 150,63.57375 -31.54625,54.64 h 63.0925 z" />
+  <path
+     id="use11-7"
+     stroke="#0038b8"
+     stroke-width="6.875"
+     fill-opacity="0"
+     d="m 150,136.42625 31.54625,-54.64 h -63.0925 z" />
+</svg>

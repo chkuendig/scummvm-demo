@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="900"
+   height="600"
+   viewBox="-60 -40 240 160"
+   version="1.1"
+   id="svg15"
+   sodipodi:docname="taiwan.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs19" />
+  <sodipodi:namedview
+     id="namedview17"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.1755556"
+     inkscape:cx="449.57467"
+     inkscape:cy="299.85822"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg15" />
+  <rect
+     x="-60"
+     y="-40"
+     width="100%"
+     height="100%"
+     fill="#fe0000"
+     id="rect2" />
+  <rect
+     x="-60"
+     y="-40"
+     width="50%"
+     height="50%"
+     fill="#000095"
+     id="rect4" />
+  <path
+     id="a"
+     d="M8 0L0 30-8 0l8-30M0 8l30-8L0-8l-30 8"
+     fill="#fff" />
+  <path
+     id="use7-1"
+     d="M 6.9282032,4 -15,25.980762 -6.9282032,-4 15,-25.980762 M -4,6.9282032 25.980762,15 4,-6.9282032 -25.980762,-15"
+     fill="#ffffff" />
+  <path
+     id="use9-1"
+     d="M 4,6.9282032 -25.980762,15 -4,-6.9282032 25.980762,-15 M -6.9282032,4 15,25.980762 6.9282032,-4 -15,-25.980762"
+     fill="#ffffff" />
+  <circle
+     r="17"
+     fill="#000095"
+     id="circle11" />
+  <circle
+     r="15"
+     fill="#fff"
+     id="circle13" />
+</svg>
