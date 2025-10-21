@@ -1,0 +1,4023 @@
+/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */html {
+  line-height:1.15;
+  -webkit-text-size-adjust:100%
+}
+body {
+  margin:0
+}
+h1 {
+  font-size:2em;
+  margin:.67em 0
+}
+hr {
+  -webkit-box-sizing:content-box;
+  box-sizing:content-box;
+  height:0;
+  overflow:visible
+}
+pre {
+  font-family:monospace,monospace;
+  font-size:1em
+}
+a {
+  background-color:rgba(0,0,0,0)
+}
+abbr[title] {
+  border-bottom:none;
+  text-decoration:underline;
+  -webkit-text-decoration:underline dotted;
+  text-decoration:underline dotted
+}
+b,
+strong {
+  font-weight:bolder
+}
+code,
+kbd,
+samp {
+  font-family:monospace,monospace;
+  font-size:1em
+}
+small {
+  font-size:80%
+}
+sub,
+sup {
+  font-size:75%;
+  line-height:0;
+  position:relative;
+  vertical-align:baseline
+}
+sub {
+  bottom:-0.25em
+}
+sup {
+  top:-0.5em
+}
+img {
+  border-style:none
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family:inherit;
+  font-size:100%;
+  line-height:1.15;
+  margin:0
+}
+button,
+input {
+  overflow:visible
+}
+button,
+select {
+  text-transform:none
+}
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance:button
+}
+button::-moz-focus-inner,
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
+  border-style:none;
+  padding:0
+}
+button:-moz-focusring,
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
+  outline:1px dotted ButtonText
+}
+fieldset {
+  padding:.35em .75em .625em
+}
+legend {
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  color:inherit;
+  display:table;
+  max-width:100%;
+  padding:0;
+  white-space:normal
+}
+progress {
+  vertical-align:baseline
+}
+textarea {
+  overflow:auto
+}
+[type=checkbox],
+[type=radio] {
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  padding:0
+}
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  height:auto
+}
+[type=search] {
+  -webkit-appearance:textfield;
+  outline-offset:-2px
+}
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance:none
+}
+::-webkit-file-upload-button {
+  -webkit-appearance:button;
+  font:inherit
+}
+details {
+  display:block
+}
+summary {
+  display:list-item
+}
+template {
+  display:none
+}
+[hidden] {
+  display:none
+}
+body {
+  background-repeat:repeat-x;
+  font-family:verdana,tahoma,arial,helvetica,sans-serif;
+  font-size:14px;
+  line-height:1.357em;
+  margin:8px 8px 24px 8px
+}
+.theme-scumm body {
+  background:#c60
+}
+.theme-residual body {
+  background:#69c
+}
+.theme-retro body {
+  background:#69c
+}
+@media(max-width: 640px) {
+  body {
+    margin:0
+  }
+}
+.no-scroll {
+  overflow-y:hidden
+}
+.theme-scumm a {
+  color:#821d06
+}
+.theme-residual a {
+  color:#821d06
+}
+.theme-retro a {
+  color:#821d06
+}
+a:hover {
+  text-decoration:none
+}
+.theme-scumm a:hover {
+  color:#e4330b
+}
+.theme-residual a:hover {
+  color:#e4330b
+}
+.theme-retro a:hover {
+  color:#e4330b
+}
+.hidden {
+  display:none
+}
+.visible {
+  display:block
+}
+.bottom-link {
+  padding-left:15px;
+  padding-right:15px;
+  font-weight:bold
+}
+.banners a,
+.banners form {
+  margin:8px;
+  float:left;
+  display:block
+}
+#intro_header {
+  font-size:.9em;
+  line-height:1.2213em
+}
+#donate-header {
+  float:right
+}
+.container {
+  border-radius:0 0 8px 8px
+}
+.theme-scumm .container {
+  background:#fbf1ce
+}
+.theme-residual .container {
+  background:#fbf1ce
+}
+.theme-retro .container {
+  background:#fbf1ce
+}
+@media(max-width: 640px) {
+  .container {
+    border-radius:0
+  }
+}
+span.sprite {
+  display:inline-block;
+  vertical-align:middle;
+  -webkit-filter:drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+  filter:drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5))
+}
+.subhead {
+  font-weight:bold;
+  line-height:300%;
+  padding-left:5px;
+  text-align:left;
+  margin:0px 15px
+}
+.theme-scumm .subhead {
+  color:#a82709;
+  border-bottom:2px dotted #a82709
+}
+.theme-residual .subhead {
+  color:#a82709;
+  border-bottom:2px dotted #a82709
+}
+.theme-retro .subhead {
+  color:#a82709;
+  border-bottom:2px dotted #a82709
+}
+.subhead-content {
+  margin:0;
+  padding:10px 20px
+}
+.float_right {
+  float:right
+}
+.float_left {
+  float:left
+}
+nav {
+  width:165px;
+  position:relative;
+  z-index:0;
+  font-size:.9em;
+  direction:ltr
+}
+nav dl {
+  border-radius:8px;
+  z-index:20;
+  margin:8px 0 16px
+}
+.theme-scumm nav dl {
+  background:#a82709
+}
+.theme-residual nav dl {
+  background:#398b4c
+}
+.theme-retro nav dl {
+  background:#6f43a4
+}
+nav dl::after {
+  content:"";
+  display:block;
+  position:relative;
+  bottom:-3px;
+  left:4px;
+  right:10px;
+  width:151px;
+  height:6px;
+  z-index:-1;
+  border-radius:0 0 0 8px
+}
+.theme-scumm nav dl::after {
+  background-color:#e4ba9b
+}
+.theme-residual nav dl::after {
+  background-color:#e4ba9b
+}
+.theme-retro nav dl::after {
+  background-color:#e4ba9b
+}
+nav dl:last-child {
+  margin-bottom:0
+}
+nav .bullet {
+  background:url("/images/bullet2.svg");
+  background-size:contain;
+  background-position:1px 2px;
+  background-repeat:no-repeat;
+  padding-left:28px
+}
+@media(max-width: 640px) {
+  nav .bullet {
+    display:none
+  }
+}
+nav a {
+  text-decoration:none
+}
+.theme-scumm nav a {
+  color:#fff
+}
+.theme-residual nav a {
+  color:#fff
+}
+.theme-retro nav a {
+  color:#fff
+}
+nav dl dd::first-letter {
+  font-weight:700
+}
+nav a:hover {
+  text-decoration:underline
+}
+.theme-scumm nav a:hover {
+  color:#fff
+}
+.theme-residual nav a:hover {
+  color:#fff
+}
+.theme-retro nav a:hover {
+  color:#fff
+}
+nav dl dt {
+  font-weight:700;
+  border-radius:8px 8px 0 0;
+  background-clip:padding-box;
+  height:34px;
+  padding-left:24px;
+  padding-right:24px;
+  text-align:left;
+  line-height:34px;
+  margin-bottom:4px
+}
+.theme-scumm nav dl dt {
+  background:#821d06;
+  color:#dd0
+}
+.theme-residual nav dl dt {
+  background:#43a25c;
+  color:#dd0
+}
+.theme-retro nav dl dt {
+  background:-webkit-gradient(linear, left top, left bottom, from(rgb(115, 15, 107)), color-stop(71%, rgb(163, 26, 156)));
+  background:linear-gradient(to bottom, rgb(115, 15, 107) 0%, rgb(163, 26, 156) 71%);
+  color:#dd0
+}
+nav dl dd {
+  margin:0;
+  padding:4px 0 6px;
+  padding-right:12px;
+  padding-left:30px;
+  text-indent:-25px;
+  line-height:14px
+}
+.menu-bottom .banners {
+  height:600px
+}
+.menu-bottom .monkey {
+  -ms-interpolation-mode:nearest-neighbor;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:pixelated;
+  width:54px;
+  height:58px
+}
+@media(max-width: 640px) {
+  nav {
+    position:fixed;
+    width:100%;
+    right:-100%;
+    top:0;
+    z-index:90;
+    padding:0;
+    height:100%;
+    overflow-y:auto;
+    line-height:50px;
+    font-size:1.2em
+  }
+  .theme-scumm nav {
+    background:#a82709
+  }
+  .theme-residual nav {
+    background:#398b4c
+  }
+  .theme-retro nav {
+    background:#6f43a4
+  }
+  nav a {
+    line-height:50px;
+    font-size:1.2em
+  }
+  nav dl {
+    border-radius:0;
+    -webkit-box-shadow:unset;
+    box-shadow:unset;
+    margin:0;
+    padding-bottom:1px
+  }
+  nav dl dt {
+    line-height:50px;
+    font-size:1.2em;
+    height:58px;
+    line-height:58px;
+    padding:4px 8px 4px 19px;
+    text-indent:unset
+  }
+  nav dl dd {
+    height:58px;
+    line-height:58px;
+    padding:4px 8px 4px 19px;
+    text-indent:unset
+  }
+  nav dl dt {
+    border-radius:0;
+    -webkit-box-shadow:unset;
+    box-shadow:unset;
+    margin:0;
+    padding-bottom:1px;
+    padding-left:19px;
+    cursor:pointer
+  }
+  .theme-scumm nav dl dt {
+    color:#fff
+  }
+  .theme-residual nav dl dt {
+    color:#fff
+  }
+  .theme-retro nav dl dt {
+    color:#fff
+  }
+  nav dl dd {
+    padding-right:0;
+    display:none
+  }
+  nav a {
+    background:0;
+    padding-left:0;
+    display:block;
+    width:100%;
+    height:100%
+  }
+  nav a:hover {
+    text-decoration:none
+  }
+  .header-right {
+    display:none
+  }
+  .theme-scumm nav dl dd:hover {
+    background:#821d06
+  }
+  .theme-residual nav dl dd:hover {
+    background:#43a25c
+  }
+  .theme-retro nav dl dd:hover {
+    background:-webkit-gradient(linear, left top, left bottom, from(rgb(115, 15, 107)), color-stop(71%, rgb(163, 26, 156)));
+    background:linear-gradient(to bottom, rgb(115, 15, 107) 0%, rgb(163, 26, 156) 71%)
+  }
+  nav dl::after {
+    height:0
+  }
+}
+.menu-trigger,
+.nav-trigger {
+  display:none
+}
+@media(max-width: 640px) {
+  nav label {
+    display:block;
+    width:100%;
+    cursor:pointer
+  }
+}
+label[for=nav-trigger] {
+  display:none;
+  position:absolute;
+  right:8px;
+  top:15px;
+  z-index:2;
+  height:30px;
+  width:30px;
+  cursor:pointer;
+  background-image:url("/images/nav-trigger.svg");
+  background-size:contain
+}
+@media(max-width: 640px) {
+  label[for=nav-trigger] {
+    display:block;
+    z-index:91;
+    overflow-y:unset
+  }
+}
+.nav-trigger:checked~label[for=nav-trigger] {
+  position:fixed
+}
+.nav-trigger+label {
+  -webkit-transition:right .2s ease-in-out;
+  transition:right .2s ease-in-out
+}
+.site-wrap,
+header,
+nav {
+  -webkit-transition:right .2s ease-in-out;
+  transition:right .2s ease-in-out
+}
+.nav-trigger:checked~.site-wrap nav {
+  right:0
+}
+.menu-trigger:checked~dd {
+  display:block
+}
+footer {
+  color:rgba(0,0,0,.5);
+  padding:15px 0;
+  position:relative
+}
+footer a {
+  color:rgba(0,0,0,.5)
+}
+footer a:hover {
+  color:rgba(0,0,0,.5);
+  text-decoration:none
+}
+@media(max-width: 640px) {
+  footer {
+    padding:0 8px;
+    background:#fbf1ce
+  }
+}
+.tentacle {
+  height:auto;
+  width:100%;
+  margin:0 auto;
+  max-width:160px;
+  position:absolute;
+  bottom:-60px
+}
+.theme-scumm .tentacle {
+  -webkit-filter:drop-shadow(-3px 5px 1px rgb(204, 102, 0));
+  filter:drop-shadow(-3px 5px 1px rgb(204, 102, 0))
+}
+.theme-residual .tentacle {
+  -webkit-filter:drop-shadow(-3px 5px 1px #6699cc);
+  filter:drop-shadow(-3px 5px 1px #6699cc)
+}
+.theme-retro .tentacle {
+  -webkit-filter:drop-shadow(-3px 5px 1px #6699cc);
+  filter:drop-shadow(-3px 5px 1px #6699cc)
+}
+.site-header {
+  position:relative;
+  z-index:10
+}
+.site-header .top {
+  height:91px;
+  position:relative
+}
+@media(max-width: 640px) {
+  .site-header .top {
+    height:58px
+  }
+}
+.site-header .bottom {
+  height:29px;
+  border-radius:8px 8px 0 0;
+  z-index:100
+}
+.theme-scumm .site-header .bottom {
+  background:#f6e08a
+}
+.theme-residual .site-header .bottom {
+  background:#b5d7bd
+}
+.theme-retro .site-header .bottom {
+  background:-webkit-gradient(linear, left top, left bottom, from(rgb(115, 15, 107)), color-stop(71%, rgb(163, 26, 156)));
+  background:linear-gradient(to bottom, rgb(115, 15, 107) 0%, rgb(163, 26, 156) 71%)
+}
+.site-header .heroes {
+  position:absolute;
+  right:-8px;
+  bottom:0;
+  z-index:90;
+  max-width:58%
+}
+.site-header .scummvm {
+  font-family:Trebuchet MS,sans-serif;
+  line-height:19px;
+  white-space:nowrap;
+  margin-right:5px;
+  margin-top:5px;
+  text-align:justify;
+  letter-spacing:1.5px;
+  font-size:15px;
+  font-size:1.4vw
+}
+@media(max-width: 714.2857142857px) {
+  .site-header .scummvm {
+    font-size:10px
+  }
+}
+@media(min-width: 1071.4285714286px) {
+  .site-header .scummvm {
+    font-size:15px
+  }
+}
+.theme-scumm .site-header .scummvm {
+  color:#000
+}
+.theme-residual .site-header .scummvm {
+  color:#000
+}
+.theme-retro .site-header .scummvm {
+  color:#fff
+}
+.site-header .logo {
+  position:relative;
+  z-index:110
+}
+.site-header .logo img {
+  position:absolute;
+  max-width:280px
+}
+.site-header .logo img.foreground {
+  -webkit-filter:drop-shadow(1px 1px 2px rgb(0, 0, 0));
+  filter:drop-shadow(1px 1px 2px rgb(0, 0, 0));
+  bottom:-120px
+}
+@media(max-width: 640px) {
+  .site-header .logo img.foreground {
+    max-width:150px;
+    bottom:-52px;
+    margin-left:8px
+  }
+}
+.site-header .logo img.background {
+  opacity:.2;
+  bottom:-90px;
+  left:12px;
+  -webkit-filter:grayscale(100%);
+  filter:grayscale(100%)
+}
+.site-wrap {
+  max-width:1440px;
+  position:relative;
+  margin:0 auto;
+  padding:0 50px
+}
+@media(max-width: 640px) {
+  .site-wrap {
+    padding:0;
+    margin:0
+  }
+}
+.col-4-5 {
+  width:calc(100% - 155px)
+}
+.col-1-5 {
+  width:150px;
+  position:relative
+}
+.col-1-3 {
+  width:33.33%
+}
+.col-1-4 {
+  width:25%
+}
+.col-2-3 {
+  width:66.66%
+}
+.col-1-2 {
+  width:50%
+}
+.col-1-1 {
+  width:100%
+}
+[class*=col-] {
+  float:left;
+  padding-right:12px
+}
+[class*=col-]:last-child {
+  margin-right:0%
+}
+.row:after {
+  content:"";
+  display:table;
+  clear:both
+}
+* {
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box
+}
+*:after,
+*:before {
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box
+}
+@media(max-width: 640px) {
+  .col-1-2 {
+    clear:left
+  }
+  [class*=col-] {
+    padding-right:0
+  }
+  .hide-small {
+    display:none
+  }
+  .col-sm-1 {
+    width:100%
+  }
+}
+@media(max-width: 768px) {
+  .hide-medium {
+    display:none
+  }
+  .col-md-3 {
+    width:33%
+  }
+  .col-md-2 {
+    width:50%
+  }
+  .col-md-1 {
+    width:100%
+  }
+}
+.box {
+  margin:8px;
+  direction:ltr
+}
+.theme-scumm .box {
+  border:1px solid silver
+}
+.theme-residual .box {
+  border:1px solid silver
+}
+.theme-retro .box {
+  border:1px solid silver
+}
+.box>.head {
+  min-height:24px;
+  font-weight:bold;
+  padding:4px;
+  width:100%
+}
+.theme-scumm .box>.head {
+  background:#a82709;
+  color:#fff
+}
+.theme-residual .box>.head {
+  background:#45a63d -webkit-gradient(linear, left top, left bottom, from(#a7caa4), to(#45a63d));
+  background:#45a63d linear-gradient(to bottom, #a7caa4 0%, #45a63d 100%);
+  color:#fff
+}
+.theme-retro .box>.head {
+  background:-webkit-gradient(linear, left top, left bottom, from(rgb(115, 15, 107)), color-stop(71%, rgb(163, 26, 156)));
+  background:linear-gradient(to bottom, rgb(115, 15, 107) 0%, rgb(163, 26, 156) 71%);
+  color:#fff
+}
+.box>.head a {
+  text-decoration:none
+}
+.theme-scumm .box>.head a {
+  color:#fff
+}
+.theme-residual .box>.head a {
+  color:#fff
+}
+.theme-retro .box>.head a {
+  color:#fff
+}
+.box>.content {
+  padding:8px
+}
+.theme-scumm .box>.content {
+  background:#e0e0e0
+}
+.theme-residual .box>.content {
+  background:#e0e0e0
+}
+.theme-retro .box>.content {
+  background:#e0e0e0
+}
+.box .intro {
+  padding:4px 8px 4px 5px
+}
+.theme-scumm .box .intro {
+  background:silver
+}
+.theme-residual .box .intro {
+  background:silver
+}
+.theme-retro .box .intro {
+  background:silver
+}
+.box .intro [class*=col-] {
+  float:left
+}
+.round-box {
+  margin:8px;
+  direction:ltr
+}
+.round-box>.header {
+  height:28px;
+  border-radius:8px 8px 0 0;
+  padding-left:18px;
+  font:bold large/1.4 "Trebuchet MS",Verdana,Tahoma,Sans-Serif
+}
+.theme-scumm .round-box>.header {
+  background:#f6e08a;
+  border-left:1px solid #e4ba9b;
+  border-right:1px solid #e4ba9b;
+  border-top:1px solid #e4ba9b;
+  color:#821d06;
+  text-shadow:3px 0 1px rgba(0,0,0,0)
+}
+.theme-residual .round-box>.header {
+  background:#b5d7bd -webkit-gradient(linear, left bottom, left top, from(#f2f2f2), color-stop(35%, #e5e5e5), to(#b5d7bd));
+  background:#b5d7bd linear-gradient(to top, #f2f2f2 0%, #e5e5e5 35%, #b5d7bd 100%);
+  border-left:1px solid #43a25c;
+  border-right:1px solid #43a25c;
+  border-top:1px solid #43a25c;
+  color:#821d06;
+  text-shadow:3px 0 1px rgba(0,0,0,0)
+}
+.theme-retro .round-box>.header {
+  background:#6f43a4;
+  border-left:1px solid #e4ba9b;
+  border-right:1px solid #e4ba9b;
+  border-top:1px solid #e4ba9b;
+  color:#dd0;
+  text-shadow:3px 0 1px unset
+}
+.round-box>.content {
+  border-radius:8px;
+  margin:0;
+  padding:8px;
+  overflow:hidden
+}
+.theme-scumm .round-box>.content {
+  background:#fff;
+  border:1px solid #e4ba9b
+}
+.theme-residual .round-box>.content {
+  background:#fff;
+  border:1px solid #43a25c
+}
+.theme-retro .round-box>.content {
+  background:#fff;
+  border:1px solid #e4ba9b
+}
+.round-box>.content.text {
+  padding-left:16px
+}
+.theme-scumm .round-box>.content:first-child {
+  background:#fbf1ce
+}
+.theme-residual .round-box>.content:first-child {
+  background:#fbf1ce
+}
+.theme-retro .round-box>.content:first-child {
+  background:#fbf1ce
+}
+.round-box>.content [class*=col-] {
+  float:left
+}
+.round-box>.header~.content {
+  border-radius:0 0 8px 8px;
+  border-top:0
+}
+.navigation {
+  padding:.5em 1.65em
+}
+.navigation a {
+  text-decoration:none;
+  padding:5px
+}
+.theme-scumm .navigation a {
+  color:#406a04
+}
+.theme-residual .navigation a {
+  color:#406a04
+}
+.theme-retro .navigation a {
+  color:#406a04
+}
+.navigation ul {
+  padding-left:2em
+}
+.navigation li {
+  list-style-type:"➣";
+  margin:.5em auto
+}
+.theme-scumm .navigation li {
+  color:#fbf1ce
+}
+.theme-residual .navigation li {
+  color:#fbf1ce
+}
+.theme-retro .navigation li {
+  color:#fbf1ce
+}
+.intro .text li {
+  margin:.5em auto
+}
+.cookie-consent {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#000;
+  color:#fff;
+  min-height:40px;
+  vertical-align:middle;
+  padding:20px 20px
+}
+.cookie-consent .middle {
+  text-align:center;
+  width:100%
+}
+.cookie-consent a {
+  color:#fff;
+  font-size:.8em;
+  margin:5px;
+  cursor:pointer;
+  white-space:nowrap
+}
+.cookie-consent a.accept {
+  background-color:#a82709;
+  border:1px solid #a82709;
+  border-radius:4px;
+  padding:4px
+}
+.cookie-consent a:hover {
+  text-decoration:underline
+}
+.card {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -ms-flex-direction:column;
+  flex-direction:column;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  -webkit-box-pack:center;
+  -ms-flex-pack:center;
+  justify-content:center;
+  margin:5px;
+  padding:10px;
+  -webkit-box-shadow:0 4px 8px 0 rgba(0,0,0,.2);
+  box-shadow:0 4px 8px 0 rgba(0,0,0,.2);
+  -webkit-transition:.2s;
+  transition:.2s;
+  background:#fff
+}
+.card:hover {
+  -webkit-box-shadow:0 4px 16px 0 rgba(0,0,0,.2);
+  box-shadow:0 4px 16px 0 rgba(0,0,0,.2)
+}
+.card .image {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-flex:1;
+  -ms-flex:1;
+  flex:1;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center
+}
+.card .image img {
+  max-width:100%;
+  height:auto;
+  max-height:250px
+}
+.card .caption {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  height:10%;
+  max-width:250px
+}
+.card.sponsor {
+  min-height:300px
+}
+article .news-date {
+  font-weight:normal
+}
+article .news-author {
+  color:#999;
+  font-style:italic;
+  margin:0px 0px -8px 0px;
+  position:relative;
+  text-align:right;
+  top:-8px
+}
+article img {
+  float:right;
+  margin:0 10px 10px 10px;
+  max-width:100%
+}
+.chart-wrapper span {
+  border:0;
+  border-spacing:0;
+  padding:5px;
+  width:95%;
+  display:block;
+  font-weight:bold;
+  margin:0 auto;
+  text-align:center
+}
+.theme-scumm .chart-wrapper span {
+  background:#a82709;
+  color:#fff
+}
+.theme-residual .chart-wrapper span {
+  background:#398b4c;
+  color:#fff
+}
+.theme-retro .chart-wrapper span {
+  background:#6f43a4;
+  color:#fff
+}
+.chart {
+  border:0;
+  border-spacing:0;
+  margin:0px auto 1em;
+  padding:0;
+  width:95%
+}
+.chart caption {
+  font-weight:bold;
+  margin:0 auto;
+  padding:5px
+}
+.theme-scumm .chart caption {
+  background:#a82709;
+  color:#fff
+}
+.theme-residual .chart caption {
+  background:#398b4c;
+  color:#fff
+}
+.theme-retro .chart caption {
+  background:#6f43a4;
+  color:#fff
+}
+.chart a {
+  text-decoration:none
+}
+.theme-scumm .chart a:hover {
+  color:#e4330b
+}
+.theme-residual .chart a:hover {
+  color:#e4330b
+}
+.theme-retro .chart a:hover {
+  color:#e4330b
+}
+.chart tr,
+.chart th,
+.chart td {
+  margin:0;
+  padding:2px
+}
+.chart th,
+.chart td {
+  padding:5px
+}
+.theme-scumm .chart th,
+.theme-scumm .chart td {
+  border:1px solid silver
+}
+.theme-residual .chart th,
+.theme-residual .chart td {
+  border:1px solid silver
+}
+.theme-retro .chart th,
+.theme-retro .chart td {
+  border:1px solid silver
+}
+.chart th {
+  font-weight:normal;
+  text-align:center
+}
+.chart td.details {
+  padding:1em 3em
+}
+.theme-scumm .chart tr.color0 {
+  background-color:#e0e0e0
+}
+.theme-residual .chart tr.color0 {
+  background-color:#e0e0e0
+}
+.theme-retro .chart tr.color0 {
+  background-color:#e0e0e0
+}
+.theme-scumm .chart tr.color2 {
+  background-color:#fff
+}
+.theme-residual .chart tr.color2 {
+  background-color:#fff
+}
+.theme-retro .chart tr.color2 {
+  background-color:#fff
+}
+.theme-scumm .chart thead {
+  background-color:#999
+}
+.theme-residual .chart thead {
+  background-color:#999
+}
+.theme-retro .chart thead {
+  background-color:#999
+}
+.gameDemos tr {
+  padding:0
+}
+.gameDemos tr.collapse {
+  display:none
+}
+.gameDemos tr.sub td a {
+  margin-left:1em
+}
+.gameDemos th {
+  padding:5px
+}
+.gameDemos td {
+  padding:5px
+}
+.gameDemos td img.downloadImage {
+  vertical-align:middle;
+  width:22px;
+  height:22px
+}
+.gameDemos td img.noSubcat {
+  vertical-align:middle;
+  width:14px;
+  height:14px
+}
+.gameDemos td img.subcatToggle {
+  vertical-align:middle;
+  width:14px;
+  height:14px;
+  cursor:pointer
+}
+.gameDemos .gameTarget {
+  width:15%
+}
+.gameDemos i.expand {
+  margin:5px;
+  position:relative;
+  width:12px;
+  height:12px;
+  cursor:pointer;
+  float:right
+}
+.gameDemos i.expand:before,
+.gameDemos i.expand:after {
+  content:"";
+  position:absolute;
+  background-color:#0c3;
+  -webkit-transition:-webkit-transform .25s ease-out;
+  transition:-webkit-transform .25s ease-out;
+  transition:transform .25s ease-out;
+  transition:transform .25s ease-out, -webkit-transform .25s ease-out
+}
+.gameDemos i.expand:before {
+  top:0;
+  left:50%;
+  width:4px;
+  height:100%;
+  margin-left:-2px
+}
+.gameDemos i.expand:after {
+  top:50%;
+  left:0;
+  width:100%;
+  height:4px;
+  margin-top:-2px
+}
+.gameDemos i.expand.close:before {
+  -webkit-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg)
+}
+.gameDemos i.expand.close:after {
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
+.colorKeyTable td {
+  text-align:center;
+  padding:5px
+}
+.gameScummVmId {
+  width:20%;
+  text-align:center
+}
+.gameSupportLevel {
+  width:15%;
+  text-align:center
+}
+.pctU {
+  background-color:#7ff
+}
+.pct0 {
+  background-color:#ff5252
+}
+.pct25 {
+  background-color:#ff8f4d
+}
+.pct50 {
+  background-color:#ffd147
+}
+.pct75 {
+  background-color:#e7ff42
+}
+.pct100 {
+  background-color:#9eff3d
+}
+p.credits {
+  margin-left:2em;
+  margin-right:2em
+}
+table.credits {
+  margin-left:2em;
+  margin-right:2em;
+  margin-bottom:1em
+}
+table.credits caption {
+  font-weight:bold;
+  margin-left:-2em;
+  text-align:left
+}
+.credits .name {
+  padding:2px;
+  width:13em
+}
+.credits .alias {
+  text-align:left;
+  width:10em;
+  color:#777;
+  font-style:italic
+}
+ul.downloads li.file {
+  list-style-type:none;
+  padding:3px
+}
+ul.downloads span.download-extras {
+  font-size:x-small
+}
+.theme-scumm ul.downloads span.download-extras {
+  color:#406a04
+}
+.theme-residual ul.downloads span.download-extras {
+  color:#406a04
+}
+.theme-retro ul.downloads span.download-extras {
+  color:#406a04
+}
+ul.downloads li.link {
+  margin-left:1.5em
+}
+#downloadContainer {
+  position:relative;
+  width:100%;
+  max-width:600px;
+  min-height:110px
+}
+@media(max-width: 640px) {
+  #downloadContainer {
+    text-align:center
+  }
+}
+#downloadContainer #downloadButton {
+  min-height:53px;
+  float:left;
+  width:100%;
+  padding:15px;
+  border-radius:8px;
+  -webkit-box-shadow:0 0 10px #000;
+  box-shadow:0 0 10px #000;
+  text-decoration:none
+}
+.theme-scumm #downloadContainer #downloadButton {
+  color:#fff;
+  border:1px solid #fff;
+  background:#821d06 -webkit-gradient(linear, left top, left bottom, from(#f8795d), to(rgb(130, 29, 6)));
+  background:#821d06 linear-gradient(to bottom, #f8795d 0%, rgb(130, 29, 6) 100%)
+}
+.theme-residual #downloadContainer #downloadButton {
+  color:#fff;
+  border:1px solid #fff;
+  background:#398b4c -webkit-gradient(linear, left top, left bottom, from(#b1dfbc), to(#398b4c));
+  background:#398b4c linear-gradient(to bottom, #b1dfbc 0%, #398b4c 100%)
+}
+.theme-retro #downloadContainer #downloadButton {
+  color:#fff;
+  border:1px solid #fff;
+  background:#6f43a4 -webkit-gradient(linear, left top, left bottom, from(#d8cae9), to(#6f43a4));
+  background:#6f43a4 linear-gradient(to bottom, #d8cae9 0%, #6f43a4 100%)
+}
+#downloadContainer #downloadButton img {
+  display:block;
+  float:left;
+  margin:0 auto
+}
+@media(max-width: 640px) {
+  #downloadContainer #downloadButton img {
+    float:none
+  }
+}
+.theme-scumm #downloadContainer #downloadButton:hover {
+  background:#f8795d -webkit-gradient(linear, left top, left bottom, from(#faa18d), color-stop(35%, #f8795d), to(rgb(130, 29, 6)));
+  background:#f8795d linear-gradient(to bottom, #faa18d 0%, #f8795d 35%, rgb(130, 29, 6) 100%)
+}
+.theme-residual #downloadContainer #downloadButton:hover {
+  background:#b1dfbc -webkit-gradient(linear, left top, left bottom, from(#d5eedb), color-stop(35%, #b1dfbc), to(#398b4c));
+  background:#b1dfbc linear-gradient(to bottom, #d5eedb 0%, #b1dfbc 35%, #398b4c 100%)
+}
+.theme-retro #downloadContainer #downloadButton:hover {
+  background:#d8cae9 -webkit-gradient(linear, left top, left bottom, from(#f3eef8), color-stop(35%, #d8cae9), to(#6f43a4));
+  background:#d8cae9 linear-gradient(to bottom, #f3eef8 0%, #d8cae9 35%, #6f43a4 100%)
+}
+#downloadContainer #downloadButton .downloadText {
+  font-size:2em;
+  line-height:1.3em;
+  padding-bottom:6px;
+  display:block
+}
+ul.downloads {
+  margin:0;
+  padding:0
+}
+.sha256-toggle {
+  text-decoration:underline;
+  cursor:pointer
+}
+.linklist {
+  margin-left:3em
+}
+.linklist .linkentry {
+  margin-bottom:1em
+}
+.linklist .linkentry .linkhead {
+  font-weight:bold
+}
+.linklist .linkentry .linkbody {
+  padding:5px 5px 5px 3em
+}
+.random-screenshot {
+  width:100%
+}
+.scr-content {
+  padding-left:20px
+}
+.gallery {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-orient:horizontal;
+  -webkit-box-direction:normal;
+  -ms-flex-direction:row;
+  flex-direction:row;
+  -ms-flex-wrap:wrap;
+  flex-wrap:wrap;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  -webkit-box-pack:center;
+  -ms-flex-pack:center;
+  justify-content:center;
+  text-align:center;
+  margin-top:1em;
+  margin-bottom:1em
+}
+.sprite-games-zork,
+.sprite-games-zak,
+.sprite-games-wrath,
+.sprite-games-woodruff,
+.sprite-games-whispersofamachine,
+.sprite-games-wetlands,
+.sprite-games-ween,
+.sprite-games-waxworks,
+.sprite-games-warlock,
+.sprite-games-wage,
+.sprite-games-voyeur,
+.sprite-games-versailles,
+.sprite-games-vampirediaries,
+.sprite-games-urban,
+.sprite-games-unavowed,
+.sprite-games-ultima,
+.sprite-games-twp,
+.sprite-games-twc,
+.sprite-games-tucker,
+.sprite-games-troll,
+.sprite-games-transylvania,
+.sprite-games-touche,
+.sprite-games-totaleclipse,
+.sprite-games-torin,
+.sprite-games-toon,
+.sprite-games-tony,
+.sprite-games-toltecs,
+.sprite-games-tlj,
+.sprite-games-tlc,
+.sprite-games-titanic,
+.sprite-games-teenagent,
+.sprite-games-technobabylon,
+.sprite-games-t7g,
+.sprite-games-syberia,
+.sprite-games-sword25,
+.sprite-games-sword,
+.sprite-games-supernova,
+.sprite-games-strangeland,
+.sprite-games-sq,
+.sprite-games-sq-sci,
+.sprite-games-spyfox,
+.sprite-games-spacebar,
+.sprite-games-soltys,
+.sprite-games-soldierboyz,
+.sprite-games-sludge,
+.sprite-games-slater,
+.sprite-games-sky,
+.sprite-games-sinistersix,
+.sprite-games-simon,
+.sprite-games-shveik,
+.sprite-games-shivers,
+.sprite-games-shivahkosher,
+.sprite-games-sherlock,
+.sprite-games-shardlight,
+.sprite-games-sfinx,
+.sprite-games-schizm,
+.sprite-games-samnmax,
+.sprite-games-rybalka,
+.sprite-games-rosewater,
+.sprite-games-rosemary,
+.sprite-games-rodney,
+.sprite-games-ritter,
+.sprite-games-rise,
+.sprite-games-ringworld,
+.sprite-games-resonance,
+.sprite-games-redbow,
+.sprite-games-reah,
+.sprite-games-rama,
+.sprite-games-queen,
+.sprite-games-qfg,
+.sprite-games-puttputt,
+.sprite-games-private-eye,
+.sprite-games-prince,
+.sprite-games-primordia,
+.sprite-games-pq,
+.sprite-games-pq-sci,
+.sprite-games-pn,
+.sprite-games-plumbers,
+.sprite-games-playtoons,
+.sprite-games-pink,
+.sprite-games-pilotbrothers,
+.sprite-games-phantasmagoria,
+.sprite-games-petka,
+.sprite-games-pepper,
+.sprite-games-pajama,
+.sprite-games-os,
+.sprite-games-ootopos,
+.sprite-games-oldskies,
+.sprite-games-ogg,
+.sprite-games-obsidian,
+.sprite-games-nupogodi3,
+.sprite-games-nl,
+.sprite-games-nippon,
+.sprite-games-neverhood,
+.sprite-games-nebular,
+.sprite-games-nancy,
+.sprite-games-mysthous,
+.sprite-games-myst3,
+.sprite-games-myst,
+.sprite-games-mybigsister,
+.sprite-games-mumg,
+.sprite-games-mti,
+.sprite-games-mp3,
+.sprite-games-mortevielle,
+.sprite-games-moonbase,
+.sprite-games-mng,
+.sprite-games-mm,
+.sprite-games-mixedup,
+.sprite-games-mi,
+.sprite-games-maski,
+.sprite-games-maniacmansiondeluxe,
+.sprite-games-maniac,
+.sprite-games-manhunt,
+.sprite-games-manhole,
+.sprite-games-majestic,
+.sprite-games-magictales,
+.sprite-games-lzone,
+.sprite-games-lure,
+.sprite-games-lsl,
+.sprite-games-lsl-sci,
+.sprite-games-loom,
+.sprite-games-lol,
+.sprite-games-livingbooks,
+.sprite-games-littlered,
+.sprite-games-littlemice,
+.sprite-games-lit,
+.sprite-games-lighthouse,
+.sprite-games-lgop2,
+.sprite-games-lba,
+.sprite-games-laurabow,
+.sprite-games-lastexpress,
+.sprite-games-lab,
+.sprite-games-kyra,
+.sprite-games-kq,
+.sprite-games-kq-sci,
+.sprite-games-kingdom,
+.sprite-games-kathyrain,
+.sprite-games-karliknos,
+.sprite-games-juniorsports,
+.sprite-games-juniorfield,
+.sprite-games-journeyman,
+.sprite-games-jones,
+.sprite-games-jit,
+.sprite-games-ite,
+.sprite-games-indy,
+.sprite-games-ihnm,
+.sprite-games-iceman,
+.sprite-games-hugo,
+.sprite-games-hoyle,
+.sprite-games-hopkins,
+.sprite-games-hires,
+.sprite-games-helga,
+.sprite-games-hdb,
+.sprite-games-grim,
+.sprite-games-griffon,
+.sprite-games-gregory,
+.sprite-games-got,
+.sprite-games-goldrush,
+.sprite-games-goldenwake,
+.sprite-games-gob,
+.sprite-games-gnap,
+.sprite-games-gk,
+.sprite-games-geminirue,
+.sprite-games-geisha,
+.sprite-games-gadget,
+.sprite-games-fw,
+.sprite-games-fullpipe,
+.sprite-games-fta2,
+.sprite-games-ft,
+.sprite-games-freddypharkas,
+.sprite-games-freddi,
+.sprite-games-footballgame,
+.sprite-games-flac,
+.sprite-games-feeble,
+.sprite-games-fbear,
+.sprite-games-fascination,
+.sprite-games-excavationhb,
+.sprite-games-escapemansion,
+.sprite-games-eob,
+.sprite-games-elvira,
+.sprite-games-efh,
+.sprite-games-ecoquest,
+.sprite-games-dw,
+.sprite-games-duckman,
+.sprite-games-driller,
+.sprite-games-dreamweb,
+.sprite-games-dreamswitchhouse,
+.sprite-games-drascula,
+.sprite-games-dragons,
+.sprite-games-draci,
+.sprite-games-dogncat2,
+.sprite-games-dogncat,
+.sprite-games-disney,
+.sprite-games-dirtysplit,
+.sprite-games-dig,
+.sprite-games-deadcity,
+.sprite-games-darkside,
+.sprite-games-darkseed,
+.sprite-games-darkeye,
+.sprite-games-darby,
+.sprite-games-crusader,
+.sprite-games-cruise,
+.sprite-games-crousti,
+.sprite-games-conquests,
+.sprite-games-clandestiny,
+.sprite-games-chivalry,
+.sprite-games-china,
+.sprite-games-chewy,
+.sprite-games-castlemaster,
+.sprite-games-burger,
+.sprite-games-brain,
+.sprite-games-blueforce,
+.sprite-games-blue,
+.sprite-games-blank,
+.sprite-games-bladerunner,
+.sprite-games-bladerunner-final,
+.sprite-games-blackwell,
+.sprite-games-bigthinkers,
+.sprite-games-bickadoodle,
+.sprite-games-beavisbutthead,
+.sprite-games-beamish,
+.sprite-games-bc,
+.sprite-games-bargon,
+.sprite-games-asylum,
+.sprite-games-ashinaredwitch,
+.sprite-games-anotherworld,
+.sprite-games-amazon,
+.sprite-games-alice,
+.sprite-games-adibou,
+.sprite-games-5ma,
+.sprite-games-5ld,
+.sprite-games-sumatra {
+  background-image:url("../..//images/games.png");
+  background-repeat:no-repeat
+}
+.sprite-games-zork {
+  background-position:0 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-zak {
+  background-position:-32px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-wrath {
+  background-position:0 -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-woodruff {
+  background-position:-32px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-whispersofamachine {
+  background-position:-64px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-wetlands {
+  background-position:-64px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ween {
+  background-position:0 -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-waxworks {
+  background-position:-32px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-warlock {
+  background-position:-64px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-wage {
+  background-position:-96px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-voyeur {
+  background-position:-96px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-versailles {
+  background-position:-96px -64px;
+  width:30px;
+  height:32px
+}
+.sprite-games-vampirediaries {
+  background-position:0 -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-urban {
+  background-position:-32px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-unavowed {
+  background-position:-64px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ultima {
+  background-position:-96px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-twp {
+  background-position:-128px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-twc {
+  background-position:-128px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-tucker {
+  background-position:-128px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-troll {
+  background-position:-128px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-transylvania {
+  background-position:0 -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-touche {
+  background-position:-32px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-totaleclipse {
+  background-position:-64px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-torin {
+  background-position:-96px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-toon {
+  background-position:-128px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-tony {
+  background-position:-160px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-toltecs {
+  background-position:-160px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-tlj {
+  background-position:-160px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-tlc {
+  background-position:-160px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-titanic {
+  background-position:-160px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-teenagent {
+  background-position:0 -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-technobabylon {
+  background-position:-32px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-t7g {
+  background-position:-64px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-syberia {
+  background-position:-96px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sword25 {
+  background-position:-128px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sword {
+  background-position:-160px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-supernova {
+  background-position:-192px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-strangeland {
+  background-position:-192px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sq {
+  background-position:-192px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sq-sci {
+  background-position:-192px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-spyfox {
+  background-position:-192px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-spacebar {
+  background-position:-192px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-soltys {
+  background-position:0 -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-soldierboyz {
+  background-position:-32px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sludge {
+  background-position:-64px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-slater {
+  background-position:-96px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sky {
+  background-position:-128px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sinistersix {
+  background-position:-160px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-simon {
+  background-position:-192px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-shveik {
+  background-position:-224px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-shivers {
+  background-position:-224px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-shivahkosher {
+  background-position:-224px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sherlock {
+  background-position:-224px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-shardlight {
+  background-position:-224px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sfinx {
+  background-position:-224px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-schizm {
+  background-position:-224px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-samnmax {
+  background-position:0 -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-rybalka {
+  background-position:-32px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-rosewater {
+  background-position:-64px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-rosemary {
+  background-position:-96px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-rodney {
+  background-position:-128px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ritter {
+  background-position:-160px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-rise {
+  background-position:-192px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ringworld {
+  background-position:-224px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-resonance {
+  background-position:-256px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-redbow {
+  background-position:-256px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-reah {
+  background-position:-256px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-rama {
+  background-position:-256px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-queen {
+  background-position:-256px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-qfg {
+  background-position:-256px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-puttputt {
+  background-position:-256px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-private-eye {
+  background-position:-256px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-prince {
+  background-position:0 -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-primordia {
+  background-position:-32px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-pq {
+  background-position:-64px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-pq-sci {
+  background-position:-96px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-pn {
+  background-position:-128px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-plumbers {
+  background-position:-160px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-playtoons {
+  background-position:-192px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-pink {
+  background-position:-224px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-pilotbrothers {
+  background-position:-256px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-phantasmagoria {
+  background-position:-288px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-petka {
+  background-position:-288px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-pepper {
+  background-position:-288px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-pajama {
+  background-position:-288px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-os {
+  background-position:-288px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ootopos {
+  background-position:-288px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-oldskies {
+  background-position:-288px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ogg {
+  background-position:-288px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-obsidian {
+  background-position:-288px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-nupogodi3 {
+  background-position:0 -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-nl {
+  background-position:-32px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-nippon {
+  background-position:-64px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-neverhood {
+  background-position:-96px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-nebular {
+  background-position:-128px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-nancy {
+  background-position:-160px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mysthous {
+  background-position:-192px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-myst3 {
+  background-position:-224px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-myst {
+  background-position:-256px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mybigsister {
+  background-position:-288px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mumg {
+  background-position:-320px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-mti {
+  background-position:-320px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mp3 {
+  background-position:-320px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mortevielle {
+  background-position:-320px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-moonbase {
+  background-position:-320px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mng {
+  background-position:-320px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mm {
+  background-position:-320px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mixedup {
+  background-position:-320px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-mi {
+  background-position:-320px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-maski {
+  background-position:-320px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-maniacmansiondeluxe {
+  background-position:0 -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-maniac {
+  background-position:-32px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-manhunt {
+  background-position:-64px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-manhole {
+  background-position:-96px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-majestic {
+  background-position:-128px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-magictales {
+  background-position:-160px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lzone {
+  background-position:-192px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lure {
+  background-position:-224px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lsl {
+  background-position:-256px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lsl-sci {
+  background-position:-288px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-loom {
+  background-position:-320px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lol {
+  background-position:-352px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-livingbooks {
+  background-position:-352px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-littlered {
+  background-position:-352px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-littlemice {
+  background-position:-352px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lit {
+  background-position:-352px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lighthouse {
+  background-position:-352px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lgop2 {
+  background-position:-352px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lba {
+  background-position:-352px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-laurabow {
+  background-position:-352px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lastexpress {
+  background-position:-352px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-lab {
+  background-position:-352px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-kyra {
+  background-position:0 -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-kq {
+  background-position:-32px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-kq-sci {
+  background-position:-64px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-kingdom {
+  background-position:-96px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-kathyrain {
+  background-position:-128px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-karliknos {
+  background-position:-160px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-juniorsports {
+  background-position:-192px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-juniorfield {
+  background-position:-224px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-journeyman {
+  background-position:-256px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-jones {
+  background-position:-288px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-jit {
+  background-position:-320px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ite {
+  background-position:-352px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-indy {
+  background-position:-384px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-ihnm {
+  background-position:-384px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-iceman {
+  background-position:-384px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-hugo {
+  background-position:-384px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-hoyle {
+  background-position:-384px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-hopkins {
+  background-position:-384px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-hires {
+  background-position:-384px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-helga {
+  background-position:-384px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-hdb {
+  background-position:-384px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-grim {
+  background-position:-384px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-griffon {
+  background-position:-384px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-gregory {
+  background-position:-384px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-got {
+  background-position:0 -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-goldrush {
+  background-position:-32px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-goldenwake {
+  background-position:-64px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-gob {
+  background-position:-96px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-gnap {
+  background-position:-128px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-gk {
+  background-position:-160px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-geminirue {
+  background-position:-192px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-geisha {
+  background-position:-224px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-gadget {
+  background-position:-256px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-fw {
+  background-position:-288px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-fullpipe {
+  background-position:-320px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-fta2 {
+  background-position:-352px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ft {
+  background-position:-384px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-freddypharkas {
+  background-position:-416px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-freddi {
+  background-position:-416px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-footballgame {
+  background-position:-416px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-flac {
+  background-position:-416px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-feeble {
+  background-position:-416px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-fbear {
+  background-position:-416px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-fascination {
+  background-position:-416px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-excavationhb {
+  background-position:-416px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-escapemansion {
+  background-position:-416px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-eob {
+  background-position:-416px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-elvira {
+  background-position:-416px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-efh {
+  background-position:-416px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ecoquest {
+  background-position:-416px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dw {
+  background-position:0 -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-duckman {
+  background-position:-32px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-driller {
+  background-position:-64px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dreamweb {
+  background-position:-96px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dreamswitchhouse {
+  background-position:-128px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-drascula {
+  background-position:-160px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dragons {
+  background-position:-192px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-draci {
+  background-position:-224px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dogncat2 {
+  background-position:-256px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dogncat {
+  background-position:-288px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-disney {
+  background-position:-320px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dirtysplit {
+  background-position:-352px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-dig {
+  background-position:-384px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-deadcity {
+  background-position:-416px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-darkside {
+  background-position:-448px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-darkseed {
+  background-position:-448px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-darkeye {
+  background-position:-448px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-darby {
+  background-position:-448px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-crusader {
+  background-position:-448px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-cruise {
+  background-position:-448px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-crousti {
+  background-position:-448px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-games-conquests {
+  background-position:-448px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-games-clandestiny {
+  background-position:-448px -256px;
+  width:32px;
+  height:32px
+}
+.sprite-games-chivalry {
+  background-position:-448px -288px;
+  width:32px;
+  height:32px
+}
+.sprite-games-china {
+  background-position:-448px -320px;
+  width:32px;
+  height:32px
+}
+.sprite-games-chewy {
+  background-position:-448px -352px;
+  width:32px;
+  height:32px
+}
+.sprite-games-castlemaster {
+  background-position:-448px -384px;
+  width:32px;
+  height:32px
+}
+.sprite-games-burger {
+  background-position:-448px -416px;
+  width:32px;
+  height:32px
+}
+.sprite-games-brain {
+  background-position:0 -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-blueforce {
+  background-position:-32px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-blue {
+  background-position:-64px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-blank {
+  background-position:-96px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-bladerunner {
+  background-position:-128px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-bladerunner-final {
+  background-position:-160px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-blackwell {
+  background-position:-192px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-bigthinkers {
+  background-position:-224px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-bickadoodle {
+  background-position:-256px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-beavisbutthead {
+  background-position:-288px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-beamish {
+  background-position:-320px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-bc {
+  background-position:-352px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-bargon {
+  background-position:-384px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-asylum {
+  background-position:-416px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-ashinaredwitch {
+  background-position:-448px -448px;
+  width:32px;
+  height:32px
+}
+.sprite-games-anotherworld {
+  background-position:-480px 0;
+  width:32px;
+  height:32px
+}
+.sprite-games-amazon {
+  background-position:-480px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-games-alice {
+  background-position:-480px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-games-adibou {
+  background-position:-480px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-games-5ma {
+  background-position:-480px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-games-5ld {
+  background-position:-480px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-games-sumatra {
+  background-position:-480px -192px;
+  width:30px;
+  height:30px
+}
+@media screen and (-webkit-min-device-pixel-ratio: 1),screen and (min-device-pixel-ratio: 1),screen and (min-resolution: 1dppx) {
+  .sprite-games-zork,
+  .sprite-games-zak,
+  .sprite-games-wrath,
+  .sprite-games-woodruff,
+  .sprite-games-whispersofamachine,
+  .sprite-games-wetlands,
+  .sprite-games-ween,
+  .sprite-games-waxworks,
+  .sprite-games-warlock,
+  .sprite-games-wage,
+  .sprite-games-voyeur,
+  .sprite-games-versailles,
+  .sprite-games-vampirediaries,
+  .sprite-games-urban,
+  .sprite-games-unavowed,
+  .sprite-games-ultima,
+  .sprite-games-twp,
+  .sprite-games-twc,
+  .sprite-games-tucker,
+  .sprite-games-troll,
+  .sprite-games-transylvania,
+  .sprite-games-touche,
+  .sprite-games-totaleclipse,
+  .sprite-games-torin,
+  .sprite-games-toon,
+  .sprite-games-tony,
+  .sprite-games-toltecs,
+  .sprite-games-tlj,
+  .sprite-games-tlc,
+  .sprite-games-titanic,
+  .sprite-games-teenagent,
+  .sprite-games-technobabylon,
+  .sprite-games-t7g,
+  .sprite-games-syberia,
+  .sprite-games-sword25,
+  .sprite-games-sword,
+  .sprite-games-supernova,
+  .sprite-games-strangeland,
+  .sprite-games-sq,
+  .sprite-games-sq-sci,
+  .sprite-games-spyfox,
+  .sprite-games-spacebar,
+  .sprite-games-soltys,
+  .sprite-games-soldierboyz,
+  .sprite-games-sludge,
+  .sprite-games-slater,
+  .sprite-games-sky,
+  .sprite-games-sinistersix,
+  .sprite-games-simon,
+  .sprite-games-shveik,
+  .sprite-games-shivers,
+  .sprite-games-shivahkosher,
+  .sprite-games-sherlock,
+  .sprite-games-shardlight,
+  .sprite-games-sfinx,
+  .sprite-games-schizm,
+  .sprite-games-samnmax,
+  .sprite-games-rybalka,
+  .sprite-games-rosewater,
+  .sprite-games-rosemary,
+  .sprite-games-rodney,
+  .sprite-games-ritter,
+  .sprite-games-rise,
+  .sprite-games-ringworld,
+  .sprite-games-resonance,
+  .sprite-games-redbow,
+  .sprite-games-reah,
+  .sprite-games-rama,
+  .sprite-games-queen,
+  .sprite-games-qfg,
+  .sprite-games-puttputt,
+  .sprite-games-private-eye,
+  .sprite-games-prince,
+  .sprite-games-primordia,
+  .sprite-games-pq,
+  .sprite-games-pq-sci,
+  .sprite-games-pn,
+  .sprite-games-plumbers,
+  .sprite-games-playtoons,
+  .sprite-games-pink,
+  .sprite-games-pilotbrothers,
+  .sprite-games-phantasmagoria,
+  .sprite-games-petka,
+  .sprite-games-pepper,
+  .sprite-games-pajama,
+  .sprite-games-os,
+  .sprite-games-ootopos,
+  .sprite-games-oldskies,
+  .sprite-games-ogg,
+  .sprite-games-obsidian,
+  .sprite-games-nupogodi3,
+  .sprite-games-nl,
+  .sprite-games-nippon,
+  .sprite-games-neverhood,
+  .sprite-games-nebular,
+  .sprite-games-nancy,
+  .sprite-games-mysthous,
+  .sprite-games-myst3,
+  .sprite-games-myst,
+  .sprite-games-mybigsister,
+  .sprite-games-mumg,
+  .sprite-games-mti,
+  .sprite-games-mp3,
+  .sprite-games-mortevielle,
+  .sprite-games-moonbase,
+  .sprite-games-mng,
+  .sprite-games-mm,
+  .sprite-games-mixedup,
+  .sprite-games-mi,
+  .sprite-games-maski,
+  .sprite-games-maniacmansiondeluxe,
+  .sprite-games-maniac,
+  .sprite-games-manhunt,
+  .sprite-games-manhole,
+  .sprite-games-majestic,
+  .sprite-games-magictales,
+  .sprite-games-lzone,
+  .sprite-games-lure,
+  .sprite-games-lsl,
+  .sprite-games-lsl-sci,
+  .sprite-games-loom,
+  .sprite-games-lol,
+  .sprite-games-livingbooks,
+  .sprite-games-littlered,
+  .sprite-games-littlemice,
+  .sprite-games-lit,
+  .sprite-games-lighthouse,
+  .sprite-games-lgop2,
+  .sprite-games-lba,
+  .sprite-games-laurabow,
+  .sprite-games-lastexpress,
+  .sprite-games-lab,
+  .sprite-games-kyra,
+  .sprite-games-kq,
+  .sprite-games-kq-sci,
+  .sprite-games-kingdom,
+  .sprite-games-kathyrain,
+  .sprite-games-karliknos,
+  .sprite-games-juniorsports,
+  .sprite-games-juniorfield,
+  .sprite-games-journeyman,
+  .sprite-games-jones,
+  .sprite-games-jit,
+  .sprite-games-ite,
+  .sprite-games-indy,
+  .sprite-games-ihnm,
+  .sprite-games-iceman,
+  .sprite-games-hugo,
+  .sprite-games-hoyle,
+  .sprite-games-hopkins,
+  .sprite-games-hires,
+  .sprite-games-helga,
+  .sprite-games-hdb,
+  .sprite-games-grim,
+  .sprite-games-griffon,
+  .sprite-games-gregory,
+  .sprite-games-got,
+  .sprite-games-goldrush,
+  .sprite-games-goldenwake,
+  .sprite-games-gob,
+  .sprite-games-gnap,
+  .sprite-games-gk,
+  .sprite-games-geminirue,
+  .sprite-games-geisha,
+  .sprite-games-gadget,
+  .sprite-games-fw,
+  .sprite-games-fullpipe,
+  .sprite-games-fta2,
+  .sprite-games-ft,
+  .sprite-games-freddypharkas,
+  .sprite-games-freddi,
+  .sprite-games-footballgame,
+  .sprite-games-flac,
+  .sprite-games-feeble,
+  .sprite-games-fbear,
+  .sprite-games-fascination,
+  .sprite-games-excavationhb,
+  .sprite-games-escapemansion,
+  .sprite-games-eob,
+  .sprite-games-elvira,
+  .sprite-games-efh,
+  .sprite-games-ecoquest,
+  .sprite-games-dw,
+  .sprite-games-duckman,
+  .sprite-games-driller,
+  .sprite-games-dreamweb,
+  .sprite-games-dreamswitchhouse,
+  .sprite-games-drascula,
+  .sprite-games-dragons,
+  .sprite-games-draci,
+  .sprite-games-dogncat2,
+  .sprite-games-dogncat,
+  .sprite-games-disney,
+  .sprite-games-dirtysplit,
+  .sprite-games-dig,
+  .sprite-games-deadcity,
+  .sprite-games-darkside,
+  .sprite-games-darkseed,
+  .sprite-games-darkeye,
+  .sprite-games-darby,
+  .sprite-games-crusader,
+  .sprite-games-cruise,
+  .sprite-games-crousti,
+  .sprite-games-conquests,
+  .sprite-games-clandestiny,
+  .sprite-games-chivalry,
+  .sprite-games-china,
+  .sprite-games-chewy,
+  .sprite-games-castlemaster,
+  .sprite-games-burger,
+  .sprite-games-brain,
+  .sprite-games-blueforce,
+  .sprite-games-blue,
+  .sprite-games-blank,
+  .sprite-games-bladerunner,
+  .sprite-games-bladerunner-final,
+  .sprite-games-blackwell,
+  .sprite-games-bigthinkers,
+  .sprite-games-bickadoodle,
+  .sprite-games-beavisbutthead,
+  .sprite-games-beamish,
+  .sprite-games-bc,
+  .sprite-games-bargon,
+  .sprite-games-asylum,
+  .sprite-games-ashinaredwitch,
+  .sprite-games-anotherworld,
+  .sprite-games-amazon,
+  .sprite-games-alice,
+  .sprite-games-adibou,
+  .sprite-games-5ma,
+  .sprite-games-5ld,
+  .sprite-games-sumatra {
+    background-image:url("../..//images/games.png");
+    background-size:512px 480px
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2),screen and (min-device-pixel-ratio: 2),screen and (min-resolution: 2dppx) {
+  .sprite-games-zork,
+  .sprite-games-zak,
+  .sprite-games-wrath,
+  .sprite-games-woodruff,
+  .sprite-games-whispersofamachine,
+  .sprite-games-wetlands,
+  .sprite-games-ween,
+  .sprite-games-waxworks,
+  .sprite-games-warlock,
+  .sprite-games-wage,
+  .sprite-games-voyeur,
+  .sprite-games-versailles,
+  .sprite-games-vampirediaries,
+  .sprite-games-urban,
+  .sprite-games-unavowed,
+  .sprite-games-ultima,
+  .sprite-games-twp,
+  .sprite-games-twc,
+  .sprite-games-tucker,
+  .sprite-games-troll,
+  .sprite-games-transylvania,
+  .sprite-games-touche,
+  .sprite-games-totaleclipse,
+  .sprite-games-torin,
+  .sprite-games-toon,
+  .sprite-games-tony,
+  .sprite-games-toltecs,
+  .sprite-games-tlj,
+  .sprite-games-tlc,
+  .sprite-games-titanic,
+  .sprite-games-teenagent,
+  .sprite-games-technobabylon,
+  .sprite-games-t7g,
+  .sprite-games-syberia,
+  .sprite-games-sword25,
+  .sprite-games-sword,
+  .sprite-games-supernova,
+  .sprite-games-strangeland,
+  .sprite-games-sq,
+  .sprite-games-sq-sci,
+  .sprite-games-spyfox,
+  .sprite-games-spacebar,
+  .sprite-games-soltys,
+  .sprite-games-soldierboyz,
+  .sprite-games-sludge,
+  .sprite-games-slater,
+  .sprite-games-sky,
+  .sprite-games-sinistersix,
+  .sprite-games-simon,
+  .sprite-games-shveik,
+  .sprite-games-shivers,
+  .sprite-games-shivahkosher,
+  .sprite-games-sherlock,
+  .sprite-games-shardlight,
+  .sprite-games-sfinx,
+  .sprite-games-schizm,
+  .sprite-games-samnmax,
+  .sprite-games-rybalka,
+  .sprite-games-rosewater,
+  .sprite-games-rosemary,
+  .sprite-games-rodney,
+  .sprite-games-ritter,
+  .sprite-games-rise,
+  .sprite-games-ringworld,
+  .sprite-games-resonance,
+  .sprite-games-redbow,
+  .sprite-games-reah,
+  .sprite-games-rama,
+  .sprite-games-queen,
+  .sprite-games-qfg,
+  .sprite-games-puttputt,
+  .sprite-games-private-eye,
+  .sprite-games-prince,
+  .sprite-games-primordia,
+  .sprite-games-pq,
+  .sprite-games-pq-sci,
+  .sprite-games-pn,
+  .sprite-games-plumbers,
+  .sprite-games-playtoons,
+  .sprite-games-pink,
+  .sprite-games-pilotbrothers,
+  .sprite-games-phantasmagoria,
+  .sprite-games-petka,
+  .sprite-games-pepper,
+  .sprite-games-pajama,
+  .sprite-games-os,
+  .sprite-games-ootopos,
+  .sprite-games-oldskies,
+  .sprite-games-ogg,
+  .sprite-games-obsidian,
+  .sprite-games-nupogodi3,
+  .sprite-games-nl,
+  .sprite-games-nippon,
+  .sprite-games-neverhood,
+  .sprite-games-nebular,
+  .sprite-games-nancy,
+  .sprite-games-mysthous,
+  .sprite-games-myst3,
+  .sprite-games-myst,
+  .sprite-games-mybigsister,
+  .sprite-games-mumg,
+  .sprite-games-mti,
+  .sprite-games-mp3,
+  .sprite-games-mortevielle,
+  .sprite-games-moonbase,
+  .sprite-games-mng,
+  .sprite-games-mm,
+  .sprite-games-mixedup,
+  .sprite-games-mi,
+  .sprite-games-maski,
+  .sprite-games-maniacmansiondeluxe,
+  .sprite-games-maniac,
+  .sprite-games-manhunt,
+  .sprite-games-manhole,
+  .sprite-games-majestic,
+  .sprite-games-magictales,
+  .sprite-games-lzone,
+  .sprite-games-lure,
+  .sprite-games-lsl,
+  .sprite-games-lsl-sci,
+  .sprite-games-loom,
+  .sprite-games-lol,
+  .sprite-games-livingbooks,
+  .sprite-games-littlered,
+  .sprite-games-littlemice,
+  .sprite-games-lit,
+  .sprite-games-lighthouse,
+  .sprite-games-lgop2,
+  .sprite-games-lba,
+  .sprite-games-laurabow,
+  .sprite-games-lastexpress,
+  .sprite-games-lab,
+  .sprite-games-kyra,
+  .sprite-games-kq,
+  .sprite-games-kq-sci,
+  .sprite-games-kingdom,
+  .sprite-games-kathyrain,
+  .sprite-games-karliknos,
+  .sprite-games-juniorsports,
+  .sprite-games-juniorfield,
+  .sprite-games-journeyman,
+  .sprite-games-jones,
+  .sprite-games-jit,
+  .sprite-games-ite,
+  .sprite-games-indy,
+  .sprite-games-ihnm,
+  .sprite-games-iceman,
+  .sprite-games-hugo,
+  .sprite-games-hoyle,
+  .sprite-games-hopkins,
+  .sprite-games-hires,
+  .sprite-games-helga,
+  .sprite-games-hdb,
+  .sprite-games-grim,
+  .sprite-games-griffon,
+  .sprite-games-gregory,
+  .sprite-games-got,
+  .sprite-games-goldrush,
+  .sprite-games-goldenwake,
+  .sprite-games-gob,
+  .sprite-games-gnap,
+  .sprite-games-gk,
+  .sprite-games-geminirue,
+  .sprite-games-geisha,
+  .sprite-games-gadget,
+  .sprite-games-fw,
+  .sprite-games-fullpipe,
+  .sprite-games-fta2,
+  .sprite-games-ft,
+  .sprite-games-freddypharkas,
+  .sprite-games-freddi,
+  .sprite-games-footballgame,
+  .sprite-games-flac,
+  .sprite-games-feeble,
+  .sprite-games-fbear,
+  .sprite-games-fascination,
+  .sprite-games-excavationhb,
+  .sprite-games-escapemansion,
+  .sprite-games-eob,
+  .sprite-games-elvira,
+  .sprite-games-efh,
+  .sprite-games-ecoquest,
+  .sprite-games-dw,
+  .sprite-games-duckman,
+  .sprite-games-driller,
+  .sprite-games-dreamweb,
+  .sprite-games-dreamswitchhouse,
+  .sprite-games-drascula,
+  .sprite-games-dragons,
+  .sprite-games-draci,
+  .sprite-games-dogncat2,
+  .sprite-games-dogncat,
+  .sprite-games-disney,
+  .sprite-games-dirtysplit,
+  .sprite-games-dig,
+  .sprite-games-deadcity,
+  .sprite-games-darkside,
+  .sprite-games-darkseed,
+  .sprite-games-darkeye,
+  .sprite-games-darby,
+  .sprite-games-crusader,
+  .sprite-games-cruise,
+  .sprite-games-crousti,
+  .sprite-games-conquests,
+  .sprite-games-clandestiny,
+  .sprite-games-chivalry,
+  .sprite-games-china,
+  .sprite-games-chewy,
+  .sprite-games-castlemaster,
+  .sprite-games-burger,
+  .sprite-games-brain,
+  .sprite-games-blueforce,
+  .sprite-games-blue,
+  .sprite-games-blank,
+  .sprite-games-bladerunner,
+  .sprite-games-bladerunner-final,
+  .sprite-games-blackwell,
+  .sprite-games-bigthinkers,
+  .sprite-games-bickadoodle,
+  .sprite-games-beavisbutthead,
+  .sprite-games-beamish,
+  .sprite-games-bc,
+  .sprite-games-bargon,
+  .sprite-games-asylum,
+  .sprite-games-ashinaredwitch,
+  .sprite-games-anotherworld,
+  .sprite-games-amazon,
+  .sprite-games-alice,
+  .sprite-games-adibou,
+  .sprite-games-5ma,
+  .sprite-games-5ld,
+  .sprite-games-sumatra {
+    background-image:url("../..//images/games@2x.png");
+    background-size:512px 480px
+  }
+}
+.sprite-platforms-x11,
+.sprite-platforms-winxp,
+.sprite-platforms-windows,
+.sprite-platforms-wince,
+.sprite-platforms-win95,
+.sprite-platforms-wii,
+.sprite-platforms-webos,
+.sprite-platforms-unix,
+.sprite-platforms-ubuntu,
+.sprite-platforms-tizen,
+.sprite-platforms-symbian,
+.sprite-platforms-switch,
+.sprite-platforms-solaris,
+.sprite-platforms-snap,
+.sprite-platforms-slackware,
+.sprite-platforms-samsungtv,
+.sprite-platforms-riscos,
+.sprite-platforms-raspberry,
+.sprite-platforms-psp2,
+.sprite-platforms-psp,
+.sprite-platforms-ps3,
+.sprite-platforms-ps2,
+.sprite-platforms-palmos,
+.sprite-platforms-ouya,
+.sprite-platforms-os2,
+.sprite-platforms-opie,
+.sprite-platforms-openpandora,
+.sprite-platforms-n64,
+.sprite-platforms-morphos,
+.sprite-platforms-miyoo,
+.sprite-platforms-mandriva,
+.sprite-platforms-maemo,
+.sprite-platforms-macostiger,
+.sprite-platforms-macosppc,
+.sprite-platforms-macos9,
+.sprite-platforms-macos,
+.sprite-platforms-linuxmoto,
+.sprite-platforms-kolibrios,
+.sprite-platforms-irix,
+.sprite-platforms-iphone,
+.sprite-platforms-haiku,
+.sprite-platforms-gp32,
+.sprite-platforms-gp2xwiz,
+.sprite-platforms-gp2x,
+.sprite-platforms-gcw0,
+.sprite-platforms-gc,
+.sprite-platforms-freemint,
+.sprite-platforms-flatpak,
+.sprite-platforms-firebee,
+.sprite-platforms-fedora,
+.sprite-platforms-ds,
+.sprite-platforms-dingux,
+.sprite-platforms-debian,
+.sprite-platforms-dc,
+.sprite-platforms-cpp,
+.sprite-platforms-caanoo,
+.sprite-platforms-buildbot,
+.sprite-platforms-beos,
+.sprite-platforms-bada,
+.sprite-platforms-atari-lite,
+.sprite-platforms-atari-full,
+.sprite-platforms-appletv,
+.sprite-platforms-android,
+.sprite-platforms-amiga,
+.sprite-platforms-3ds {
+  background-image:url("../..//images/platforms.png");
+  background-repeat:no-repeat
+}
+.sprite-platforms-x11 {
+  background-position:0 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-winxp {
+  background-position:-32px 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-windows {
+  background-position:0 -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-wince {
+  background-position:-32px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-win95 {
+  background-position:-64px 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-wii {
+  background-position:-64px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-webos {
+  background-position:0 -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-unix {
+  background-position:-32px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-ubuntu {
+  background-position:-64px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-tizen {
+  background-position:-96px 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-symbian {
+  background-position:-96px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-switch {
+  background-position:-96px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-solaris {
+  background-position:0 -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-snap {
+  background-position:-32px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-slackware {
+  background-position:-64px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-samsungtv {
+  background-position:-96px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-riscos {
+  background-position:-128px 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-raspberry {
+  background-position:-128px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-psp2 {
+  background-position:-128px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-psp {
+  background-position:-128px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-ps3 {
+  background-position:0 -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-ps2 {
+  background-position:-32px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-palmos {
+  background-position:-64px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-ouya {
+  background-position:-96px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-os2 {
+  background-position:-128px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-opie {
+  background-position:-160px 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-openpandora {
+  background-position:-160px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-n64 {
+  background-position:-160px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-morphos {
+  background-position:-160px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-miyoo {
+  background-position:-160px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-mandriva {
+  background-position:0 -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-maemo {
+  background-position:-32px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-macostiger {
+  background-position:-64px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-macosppc {
+  background-position:-96px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-macos9 {
+  background-position:-128px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-macos {
+  background-position:-160px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-linuxmoto {
+  background-position:-192px 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-kolibrios {
+  background-position:-192px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-irix {
+  background-position:-192px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-iphone {
+  background-position:-192px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-haiku {
+  background-position:-192px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-gp32 {
+  background-position:-192px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-gp2xwiz {
+  background-position:0 -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-gp2x {
+  background-position:-32px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-gcw0 {
+  background-position:-64px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-gc {
+  background-position:-96px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-freemint {
+  background-position:-128px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-flatpak {
+  background-position:-160px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-firebee {
+  background-position:-192px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-fedora {
+  background-position:-224px 0;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-ds {
+  background-position:-224px -32px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-dingux {
+  background-position:-224px -64px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-debian {
+  background-position:-224px -96px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-dc {
+  background-position:-224px -128px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-cpp {
+  background-position:-224px -160px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-caanoo {
+  background-position:-224px -192px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-buildbot {
+  background-position:0 -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-beos {
+  background-position:-32px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-bada {
+  background-position:-64px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-atari-lite {
+  background-position:-96px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-atari-full {
+  background-position:-128px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-appletv {
+  background-position:-160px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-android {
+  background-position:-192px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-amiga {
+  background-position:-224px -224px;
+  width:32px;
+  height:32px
+}
+.sprite-platforms-3ds {
+  background-position:-256px 0;
+  width:32px;
+  height:32px
+}
+@media screen and (-webkit-min-device-pixel-ratio: 1),screen and (min-device-pixel-ratio: 1),screen and (min-resolution: 1dppx) {
+  .sprite-platforms-x11,
+  .sprite-platforms-winxp,
+  .sprite-platforms-windows,
+  .sprite-platforms-wince,
+  .sprite-platforms-win95,
+  .sprite-platforms-wii,
+  .sprite-platforms-webos,
+  .sprite-platforms-unix,
+  .sprite-platforms-ubuntu,
+  .sprite-platforms-tizen,
+  .sprite-platforms-symbian,
+  .sprite-platforms-switch,
+  .sprite-platforms-solaris,
+  .sprite-platforms-snap,
+  .sprite-platforms-slackware,
+  .sprite-platforms-samsungtv,
+  .sprite-platforms-riscos,
+  .sprite-platforms-raspberry,
+  .sprite-platforms-psp2,
+  .sprite-platforms-psp,
+  .sprite-platforms-ps3,
+  .sprite-platforms-ps2,
+  .sprite-platforms-palmos,
+  .sprite-platforms-ouya,
+  .sprite-platforms-os2,
+  .sprite-platforms-opie,
+  .sprite-platforms-openpandora,
+  .sprite-platforms-n64,
+  .sprite-platforms-morphos,
+  .sprite-platforms-miyoo,
+  .sprite-platforms-mandriva,
+  .sprite-platforms-maemo,
+  .sprite-platforms-macostiger,
+  .sprite-platforms-macosppc,
+  .sprite-platforms-macos9,
+  .sprite-platforms-macos,
+  .sprite-platforms-linuxmoto,
+  .sprite-platforms-kolibrios,
+  .sprite-platforms-irix,
+  .sprite-platforms-iphone,
+  .sprite-platforms-haiku,
+  .sprite-platforms-gp32,
+  .sprite-platforms-gp2xwiz,
+  .sprite-platforms-gp2x,
+  .sprite-platforms-gcw0,
+  .sprite-platforms-gc,
+  .sprite-platforms-freemint,
+  .sprite-platforms-flatpak,
+  .sprite-platforms-firebee,
+  .sprite-platforms-fedora,
+  .sprite-platforms-ds,
+  .sprite-platforms-dingux,
+  .sprite-platforms-debian,
+  .sprite-platforms-dc,
+  .sprite-platforms-cpp,
+  .sprite-platforms-caanoo,
+  .sprite-platforms-buildbot,
+  .sprite-platforms-beos,
+  .sprite-platforms-bada,
+  .sprite-platforms-atari-lite,
+  .sprite-platforms-atari-full,
+  .sprite-platforms-appletv,
+  .sprite-platforms-android,
+  .sprite-platforms-amiga,
+  .sprite-platforms-3ds {
+    background-image:url("../..//images/platforms.png");
+    background-size:288px 256px
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2),screen and (min-device-pixel-ratio: 2),screen and (min-resolution: 2dppx) {
+  .sprite-platforms-x11,
+  .sprite-platforms-winxp,
+  .sprite-platforms-windows,
+  .sprite-platforms-wince,
+  .sprite-platforms-win95,
+  .sprite-platforms-wii,
+  .sprite-platforms-webos,
+  .sprite-platforms-unix,
+  .sprite-platforms-ubuntu,
+  .sprite-platforms-tizen,
+  .sprite-platforms-symbian,
+  .sprite-platforms-switch,
+  .sprite-platforms-solaris,
+  .sprite-platforms-snap,
+  .sprite-platforms-slackware,
+  .sprite-platforms-samsungtv,
+  .sprite-platforms-riscos,
+  .sprite-platforms-raspberry,
+  .sprite-platforms-psp2,
+  .sprite-platforms-psp,
+  .sprite-platforms-ps3,
+  .sprite-platforms-ps2,
+  .sprite-platforms-palmos,
+  .sprite-platforms-ouya,
+  .sprite-platforms-os2,
+  .sprite-platforms-opie,
+  .sprite-platforms-openpandora,
+  .sprite-platforms-n64,
+  .sprite-platforms-morphos,
+  .sprite-platforms-miyoo,
+  .sprite-platforms-mandriva,
+  .sprite-platforms-maemo,
+  .sprite-platforms-macostiger,
+  .sprite-platforms-macosppc,
+  .sprite-platforms-macos9,
+  .sprite-platforms-macos,
+  .sprite-platforms-linuxmoto,
+  .sprite-platforms-kolibrios,
+  .sprite-platforms-irix,
+  .sprite-platforms-iphone,
+  .sprite-platforms-haiku,
+  .sprite-platforms-gp32,
+  .sprite-platforms-gp2xwiz,
+  .sprite-platforms-gp2x,
+  .sprite-platforms-gcw0,
+  .sprite-platforms-gc,
+  .sprite-platforms-freemint,
+  .sprite-platforms-flatpak,
+  .sprite-platforms-firebee,
+  .sprite-platforms-fedora,
+  .sprite-platforms-ds,
+  .sprite-platforms-dingux,
+  .sprite-platforms-debian,
+  .sprite-platforms-dc,
+  .sprite-platforms-cpp,
+  .sprite-platforms-caanoo,
+  .sprite-platforms-buildbot,
+  .sprite-platforms-beos,
+  .sprite-platforms-bada,
+  .sprite-platforms-atari-lite,
+  .sprite-platforms-atari-full,
+  .sprite-platforms-appletv,
+  .sprite-platforms-android,
+  .sprite-platforms-amiga,
+  .sprite-platforms-3ds {
+    background-image:url("../..//images/platforms@2x.png");
+    background-size:288px 256px
+  }
+}
+/*!
+ * baguetteBox.js
+ * @author  feimosi
+ * @version 1.11.1
+ * @url https://github.com/feimosi/baguetteBox.js
+ * Customized by ScummVM: https://github.com/scummvm/scummvm-web/pull/218
+ */#baguetteBox-overlay {
+  display:none;
+  opacity:0;
+  position:fixed;
+  overflow:hidden;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1000000;
+  background-color:#222;
+  background-color:rgba(0,0,0,.8);
+  -webkit-transition:opacity .5s ease;
+  transition:opacity .5s ease
+}
+#baguetteBox-overlay.visible {
+  opacity:1
+}
+#baguetteBox-overlay .full-image {
+  display:inline-block;
+  position:relative;
+  width:100%;
+  height:100%;
+  text-align:center
+}
+#baguetteBox-overlay .full-image figure {
+  display:inline-block;
+  margin:0;
+  vertical-align:middle;
+  -webkit-box-shadow:0 0 8px rgba(0,0,0,.6);
+  box-shadow:0 0 8px rgba(0,0,0,.6)
+}
+#baguetteBox-overlay .full-image img {
+  display:inline-block;
+  width:auto;
+  height:auto;
+  max-height:100%;
+  max-width:100%
+}
+#baguetteBox-overlay .full-image figcaption {
+  display:block;
+  width:100%;
+  text-align:center;
+  line-height:1.8;
+  white-space:normal;
+  color:#ccc;
+  background-color:#000;
+  background-color:rgba(0,0,0,.6);
+  font-family:sans-serif
+}
+#baguetteBox-overlay .full-image:before {
+  content:"";
+  display:inline-block;
+  height:50%;
+  width:1px;
+  margin-right:-1px
+}
+#baguetteBox-slider {
+  position:absolute;
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  white-space:nowrap;
+  -webkit-transition:left .4s ease,-webkit-transform .4s ease;
+  transition:left .4s ease,-webkit-transform .4s ease;
+  transition:left .4s ease,transform .4s ease;
+  transition:left .4s ease,transform .4s ease,-webkit-transform .4s ease
+}
+#baguetteBox-slider.bounce-from-right {
+  -webkit-animation:bounceFromRight .4s ease-out;
+  animation:bounceFromRight .4s ease-out
+}
+#baguetteBox-slider.bounce-from-left {
+  -webkit-animation:bounceFromLeft .4s ease-out;
+  animation:bounceFromLeft .4s ease-out
+}
+@-webkit-keyframes bounceFromRight {
+  0%,
+  100% {
+    margin-left:0
+  }
+  50% {
+    margin-left:-30px
+  }
+}
+@keyframes bounceFromRight {
+  0%,
+  100% {
+    margin-left:0
+  }
+  50% {
+    margin-left:-30px
+  }
+}
+@-webkit-keyframes bounceFromLeft {
+  0%,
+  100% {
+    margin-left:0
+  }
+  50% {
+    margin-left:30px
+  }
+}
+@keyframes bounceFromLeft {
+  0%,
+  100% {
+    margin-left:0
+  }
+  50% {
+    margin-left:30px
+  }
+}
+.baguetteBox-button#next-button,
+.baguetteBox-button#previous-button {
+  top:50%;
+  top:calc(50% - 30px);
+  width:44px;
+  height:60px
+}
+.baguetteBox-button {
+  position:absolute;
+  cursor:pointer;
+  outline:0;
+  padding:0;
+  margin:0;
+  border:0;
+  border-radius:15%;
+  background-color:#323232;
+  background-color:rgba(50,50,50,.5);
+  color:#ddd;
+  font:1.6em sans-serif;
+  -webkit-transition:background-color .4s ease;
+  transition:background-color .4s ease
+}
+.baguetteBox-button:focus,
+.baguetteBox-button:hover {
+  background-color:rgba(50,50,50,.9)
+}
+.baguetteBox-button#next-button {
+  right:2%
+}
+.baguetteBox-button#previous-button {
+  left:2%
+}
+.baguetteBox-button#close-button {
+  top:20px;
+  right:2%;
+  right:calc(2% + 6px);
+  width:30px;
+  height:30px
+}
+.baguetteBox-button svg {
+  position:absolute;
+  left:0;
+  top:0
+}
+.baguetteBox-spinner {
+  width:40px;
+  height:40px;
+  display:inline-block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-top:-20px;
+  margin-left:-20px
+}
+.baguetteBox-double-bounce1,
+.baguetteBox-double-bounce2 {
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background-color:#fff;
+  opacity:.6;
+  position:absolute;
+  top:0;
+  left:0;
+  -webkit-animation:bounce 2s infinite ease-in-out;
+  animation:bounce 2s infinite ease-in-out
+}
+.baguetteBox-double-bounce2 {
+  -webkit-animation-delay:-1s;
+  animation-delay:-1s
+}
+@-webkit-keyframes bounce {
+  0%,
+  100% {
+    -webkit-transform:scale(0);
+    transform:scale(0)
+  }
+  50% {
+    -webkit-transform:scale(1);
+    transform:scale(1)
+  }
+}
+@keyframes bounce {
+  0%,
+  100% {
+    -webkit-transform:scale(0);
+    transform:scale(0)
+  }
+  50% {
+    -webkit-transform:scale(1);
+    transform:scale(1)
+  }
+}

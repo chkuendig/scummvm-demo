@@ -31,7 +31,7 @@ jobs:
           submodules: true
       - name: Patch Cloud URL 🩹
         run: |
-          grep -rl --include \*.cpp 'cloud.scummvm.org' scummvm/ | xargs sed -i 's/cloud.scummvm.org/scummvm-cloud.kuendig.io/g'  
+          grep -rl --include \*.cpp --include \*.js 'cloud.scummvm.org' scummvm/ | xargs sed -i 's/cloud.scummvm.org/scummvm-cloud.kuendig.io/g'  
       - name: Define some cache keys 🗝️
         run: |
           echo "${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS}" > config_vars.txt
@@ -135,7 +135,6 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            scummvm/build-emscripten/games.html
             scummvm/build-emscripten/games.json
           key: games-metadata-${{ github.run_id }}
   deploy-cloud:
@@ -198,7 +197,6 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            scummvm/build-emscripten/games.html
             scummvm/build-emscripten/games.json
           key: games-metadata-${{ github.run_id }}
       # - name: "Restore scummvm.ini"
@@ -221,6 +219,11 @@ jobs:
       - name: Copy default scummvm.ini
         run: |
           cp assets/scummvm.ini scummvm/build-emscripten/scummvm.ini
+      - name: Copy games listing assets
+        run: |
+          cp assets/games.* scummvm/build-emscripten/
+          cp assets/main.css scummvm/build-emscripten/main.css
+          cp assets/*.png scummvm/build-emscripten/
       - uses: JamesIves/github-pages-deploy-action@v4.7.2
         with:
           branch: gh-pages # The branch the action should deploy to.
