@@ -28,7 +28,6 @@ python3 scripts/sync-games.py $@
 
 # copy everything
 mkdir -p scummvm/build-emscripten/ 
-cp  assets/games.html scummvm/build-emscripten/
 
 python3 scripts/sync-games-gen-json.py  $@
 cp  games.json scummvm/build-emscripten/

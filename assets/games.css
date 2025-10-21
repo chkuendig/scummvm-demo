@@ -1,0 +1,337 @@
+:root {
+	color-scheme: light;
+}
+
+body {
+	margin: 0;
+	font-family: "Verdana", Tahoma, Arial, Helvetica, sans-serif;
+	line-height: 1.5;
+	color: #2d1b0c;
+}
+
+body.theme-scumm {
+	background: #d97a18;
+}
+
+h1 {
+	font: bold large/1.4 "Trebuchet MS",Verdana,Tahoma,Sans-Serif;
+	color: #821d06;
+}
+
+.loading {
+	text-align: center;
+	padding: 48px;
+	color: #821d06;
+	font-size: 18px;
+	background: rgba(255, 255, 255, 0.85);
+	border-radius: 12px;
+	border: 1px solid rgba(228, 186, 155, 0.6);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.error {
+	text-align: center;
+	padding: 48px;
+	color: #6d0707;
+	background: rgba(255, 231, 231, 0.95);
+	border-radius: 12px;
+	margin: 24px 0;
+	border: 1px solid rgba(205, 92, 92, 0.6);
+	box-shadow: 0 6px 18px rgba(205, 92, 92, 0.18);
+}
+
+.games-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 12px;
+	margin-top: 20px;
+}
+
+.game-entry {
+	background: #fff;
+	border: 1px solid #e4ba9b;
+	border-radius: 10px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+	transition: all 0.3s ease;
+	padding: 12px;
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	text-decoration: none;
+	color: inherit;
+	position: relative;
+}
+
+.game-entry:hover {
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+	transform: translateY(-2px);
+}
+
+.game-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #daa520;
+	flex: 1;
+}
+
+.game-icon {
+	width: 50%;
+	height: auto;
+	min-height: 100px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.game-icon.no-icon {
+	background: linear-gradient(135deg, #8b4513, #a0522d);
+	color: #f5deb3;
+	font-weight: bold;
+	font-size: 8px;
+	text-align: center;
+	height: 100px;
+}
+
+.game-icon img {
+	width: 100%;
+	height: auto;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.game-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.game-info {
+	flex: 1;
+}
+
+.game-title {
+	font-size: 14px;
+	font-weight: bold;
+	color: #a82709;
+	margin-bottom: 2px;
+	text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+	line-height: 1.2;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+.game-publisher {
+	font-size: 10px;
+	color: #a0522d;
+	font-style: italic;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.game-id {
+	display: none;
+}
+
+.variant-details {
+	margin-top: 8px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.variant-platform,
+.variant-languages {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.variant-platform img,
+.variant-languages img {
+	width: 10px;
+	height: 10px;
+	object-fit: contain;
+}
+
+.variant-description {
+	flex: 1 1 100%;
+	color: #6e3d10;
+	font-style: italic;
+	font-size: 10px;
+}
+
+.filter-controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.filter-controls .search-box {
+	flex: 1 1 180px;
+	max-width: 220px;
+}
+
+.search-box {
+	padding: 10px 14px;
+	border: 1px solid rgba(228, 186, 155, 0.8);
+	border-radius: 10px;
+	font-size: 14px;
+	background: #fff;
+	color: #5b380b;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.search-box:focus {
+	outline: none;
+	border-color: #a82709;
+	box-shadow: 0 0 0 3px rgba(168, 39, 9, 0.25);
+}
+
+.search-box::placeholder {
+	color: rgba(91, 56, 11, 0.65);
+}
+
+.filter-select {
+	flex: 1 1 180px;
+	min-width: 160px;
+	padding: 9px 12px;
+	border-radius: 10px;
+	border: 1px solid rgba(228, 186, 155, 0.8);
+	background: #fff;
+	color: #5b380b;
+	font-size: 13px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filter-select:focus {
+	outline: none;
+	border-color: #a82709;
+	box-shadow: 0 0 0 3px rgba(168, 39, 9, 0.25);
+}
+
+.feature-cards-container {
+	margin: 24px 0;
+	overflow-x: auto;
+}
+
+.feature-cards {
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.feature-card {
+	flex: 1 1 200px;
+	min-width: 200px;
+	background: rgba(255, 255, 255, 0.85);
+	border: 1px solid rgba(228, 186, 155, 0.6);
+	border-radius: 12px;
+	padding: 16px;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.feature-card h3 {
+	margin-top: 0;
+	color: #a82709;
+}
+
+.feature-card p {
+	margin-bottom: 0;
+	color: #5b380b;
+}
+
+.sort-buttons {
+	display: flex;
+	flex: 1 1 180px;
+	justify-content: flex-end;
+	gap: 8px;
+	min-width: 180px;
+}
+
+.sort-button {
+	padding: 9px 12px;
+	border-radius: 10px;
+	border: 1px solid rgba(228, 186, 155, 0.8);
+	background: #fff;
+	color: #5b380b;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	transition: box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.sort-button:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+	background: rgba(255, 249, 225, 0.95);
+}
+
+.sort-button:focus {
+	outline: none;
+	border-color: #a82709;
+	box-shadow: 0 0 0 3px rgba(168, 39, 9, 0.25);
+}
+
+.sort-button.active {
+	background: linear-gradient(180deg, #fce3b3 0%, #f9d488 100%);
+	border-color: rgba(168, 39, 9, 0.35);
+	color: #821d06;
+	box-shadow: 0 6px 16px rgba(130, 29, 6, 0.18);
+}
+
+@media (max-width: 640px) {
+	.filter-controls {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.filter-controls .search-box,
+	.filter-select,
+	.sort-buttons {
+		flex: 1 1 100%;
+		max-width: none;
+		min-width: 0;
+	}
+
+	.sort-buttons {
+		justify-content: flex-start;
+	}
+}
+
+.empty-state {
+	grid-column: 1 / -1;
+	text-align: center;
+	padding: 32px 24px;
+	background: rgba(255, 255, 255, 0.85);
+	border: 1px dashed rgba(228, 186, 155, 0.9);
+	border-radius: 12px;
+	color: #5b380b;
+	font-style: italic;
+}
+
+.footer {
+	margin-top: 40px;
+	padding: 20px 0;
+	text-align: center;
+	color: rgba(45, 27, 12, 0.75);
+	border-top: 1px solid rgba(228, 186, 155, 0.6);
+	font-size: 14px;
+}
+
+.footer a {
+	color: #a82709;
+}

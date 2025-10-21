@@ -1,9 +1,9 @@
 [submodule "scummvm"]
 	path = scummvm
-	url = https://github.com/scummvm/scummvm
+	url = https://github.com/chkuendig/scummvm
 [submodule "scummvm-icons"]
 	path = scummvm-icons
-url=https://github.com/chkuendig/scummvm-icons/
+	url = https://github.com/chkuendig/scummvm-icons/
 [submodule "scummvm-cloud"]
 	path = scummvm-cloud
 	url = https://github.com/chkuendig/scummvm-cloud
