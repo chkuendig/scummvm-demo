@@ -708,7 +708,7 @@ class GamesLibrary {
 		};
 
 		const iconName = platformMap[platform] || platform.toLowerCase().replace(/[^a-z0-9]+/g, '');
-		return `../scummvm-icons/default/icons/platforms/${iconName}.png`;
+		return `data/gui-icons/icons/platforms/${iconName}.png`;
 	}
 
 	getLanguageIcon(langCode) {
@@ -741,7 +741,7 @@ class GamesLibrary {
 		};
 
 		const flagCode = langMap[langCode] || langCode;
-		return `../scummvm-icons/default/icons/flags/${flagCode}.svg`;
+		return `data/gui-icons/icons/flags/${flagCode}.svg`;
 	}
 
 	formatPublisherText(record) {

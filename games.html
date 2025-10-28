@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScummVM Games Library</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="games.css">
-    </head>
-    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -68,14 +59,6 @@
                                     <h3>Flexible Controls</h3>
                                     <p>Play with mouse, keyboard, or gamepad—whatever suits the moment.</p>
                                 </div>
-                                <div class="feature-card">
-                                    <h3>Flexible Controls</h3>
-                                    <p>Play with mouse, keyboard, or gamepad—whatever suits the moment.</p>
-                                </div>
-                                <div class="feature-card">
-                                    <h3>Flexible Controls</h3>
-                                    <p>Play with mouse, keyboard, or gamepad—whatever suits the moment.</p>
-                                </div>
                             </div>
                         </div>
                        
@@ -116,41 +99,3 @@
         <script src="games.js" defer></script>
     </body>
     </html>
-                <div id="error" class="error" style="display: none;">
-                    Error loading data. Please make sure all files are accessible.
-                </div>
-
-                <div id="content" style="display: none;">
-                    <div class="filter-controls">
-                            <script src="games.js" defer></script>
-                }
-                if (this.dom.content) {
-                    this.dom.content.style.display = 'block';
-                }
-            }
-
-            showError() {
-                if (this.dom.loading) {
-                    this.dom.loading.style.display = 'none';
-                }
-                if (this.dom.error) {
-                    this.dom.error.style.display = 'block';
-                }
-                if (this.dom.content) {
-                    this.dom.content.style.display = 'none';
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroImage = document.querySelector('.heroes');
-            if (heroImage) {
-                const randomIndex = Math.floor(Math.random() * 7);
-                heroImage.src = `heroes${randomIndex}.png`;
-            }
-
-            new GamesLibrary();
-        });
-    </script>
-</body>
-</html>
