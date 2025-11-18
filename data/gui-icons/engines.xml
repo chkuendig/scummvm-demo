@@ -2,6 +2,7 @@
 <engines>
 	<engine id="access" name="Access" alt_name="" enabled="TRUE"/>
 	<engine id="adl" name="ADL" alt_name="Adventure Development Language" enabled="TRUE"/>
+	<engine id="agds" name="AGDS" alt_name="Advanced Graphic Development System" enabled="FALSE"/>
 	<engine id="agi" name="AGI" alt_name="Adventure Game Interpreter" enabled="TRUE"/>
 	<engine id="agos" name="AGOS" alt_name="Adventure Graphic Operating System" enabled="TRUE"/>
 	<engine id="ags" name="AGS" alt_name="Adventure Game Studio" enabled="TRUE"/>

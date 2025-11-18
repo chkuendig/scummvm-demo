@@ -777,10 +777,168 @@ class GamesLibrary {
 		}
 		if (this.dom.error) {
 			this.dom.error.style.display = 'block';
+	}
+	if (this.dom.content) {
+		this.dom.content.style.display = 'none';
+	}
+}
+}
+
+// Feature Modal Handler
+class FeatureModal {
+	constructor() {
+		this.modal = document.getElementById('feature-modal');
+		this.overlay = document.getElementById('feature-modal-overlay');
+		this.closeBtn = document.getElementById('feature-modal-close');
+		this.heading = document.getElementById('feature-modal-heading');
+		this.mediaContainer = document.getElementById('feature-modal-media-container');
+		this.mediaSelector = document.getElementById('feature-modal-media-selector');
+		this.text = document.querySelector('#feature-modal-text p');
+		this.currentFeature = null;
+
+		this.featureData = {
+			sound: {
+				title: 'Sound',
+				description: 'MIDI Emulation (soundfont included), Roland MT32/CM32L supported (requires a dumped ROM) as well as OPL emulation (MAME, DOSBox and Nuked), but you can also bring your own Retrowave OPL3 (requires browser with WebSerial support), or your own MIDI devices (through WebMIDI). Text to speech is able to use system voices via the Web Speech API.',
+				media: [
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=Ooxlus_r_eE', label: 'Roland MT32 Emulation' },
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=W8vBQb8xZ2Q', label: 'Retrowave OPL3' },
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=R2k_6szG_M4', label: 'MIDI Device Connectivity' },
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=AJ7b4OYOZik&t=17s', label: 'Text to Speech' }
+				]
+			},
+			graphics: {
+				title: 'Graphics',
+				description: 'WebGL - incl. shader filters from libretro, GRIM and other 3D engines or engines relying on OpenGL (Thimbleweed Park, Myst, Riven, etc).',
+				media: [
+					{ type: 'image', url: 'https://christian.kuendig.info/posts/2024-01-scummvm-part3/scummvm-ft-demo-00003.png', label: 'Shader Support' }
+				]
+			},
+			storage: {
+				title: 'Storage',
+				description: 'Drag & Drop your local games into the launcher, access many freeware and demo versions directly from this server, or use the Full Cloud support - play games directly from Dropbox, Google Drive, Box or OneDrive and synchronize save games via ScummVM Cloud. Files (logs, screenshots etc.) can directly be exported.',
+				media: [
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=kYechxc5tvE&t=16s', label: 'Cloud Support' },
+					{ type: 'video', url: 'https://christian.kuendig.info/posts/2024-01-scummvm-part3/screenshots.mp4', label: 'Export Screenshots' },
+					{ type: 'video', url: 'https://christian.kuendig.info/posts/2024-01-scummvm-part3/openlog.mp4', label: 'Export Logfiles' }
+				]
+			},
+			controls: {
+				title: 'Flexible Controls',
+				description: 'Play with mouse, keyboard, touchscreen mobile or even a gamepad—whatever (if the Gamepad API is available) suits the moment.',
+				media: []
+			}
+		};
+
+		this.init();
+	}
+
+	init() {
+		// Add click handlers to feature cards
+		const featureCards = document.querySelectorAll('.feature-card');
+		featureCards.forEach(card => {
+			card.addEventListener('click', (e) => {
+				const feature = e.currentTarget.dataset.feature;
+				if (feature && this.featureData[feature]) {
+					this.show(feature);
+				}
+			});
+		});
+
+		// Close modal handlers
+		this.closeBtn.addEventListener('click', () => this.hide());
+		this.overlay.addEventListener('click', () => this.hide());
+		
+		// ESC key to close
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+				this.hide();
+			}
+		});
+	}
+
+	getYouTubeEmbedUrl(url) {
+		const videoIdMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+		if (videoIdMatch) {
+			const videoId = videoIdMatch[1];
+			const timeMatch = url.match(/[?&]t=(\d+)/);
+			const startTime = timeMatch ? `&start=${timeMatch[1]}` : '';
+			// Use youtube-nocookie.com for privacy and add privacy-preserving parameters
+			return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&enablejsapi=0${startTime}`;
 		}
-		if (this.dom.content) {
-			this.dom.content.style.display = 'none';
+		return null;
+	}
+
+	renderMedia(mediaItem) {
+		this.mediaContainer.innerHTML = '';
+
+		if (mediaItem.type === 'youtube') {
+			const embedUrl = this.getYouTubeEmbedUrl(mediaItem.url);
+			if (embedUrl) {
+				const iframe = document.createElement('iframe');
+				iframe.src = embedUrl;
+				iframe.frameBorder = '0';
+				iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+				iframe.allowFullscreen = true;
+				this.mediaContainer.appendChild(iframe);
+			}
+		} else if (mediaItem.type === 'video') {
+			const video = document.createElement('video');
+			video.src = mediaItem.url;
+			video.controls = true;
+			video.autoplay = true;
+			video.loop = true;
+			this.mediaContainer.appendChild(video);
+		} else if (mediaItem.type === 'image') {
+			const img = document.createElement('img');
+			img.src = mediaItem.url;
+			img.alt = mediaItem.label;
+			this.mediaContainer.appendChild(img);
 		}
+	}
+
+	createMediaSelector(media) {
+		this.mediaSelector.innerHTML = '';
+		
+		if (media.length > 1) {
+			media.forEach((item, index) => {
+				const button = document.createElement('button');
+				button.textContent = item.label;
+				button.classList.toggle('active', index === 0);
+				button.addEventListener('click', () => {
+					this.mediaSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+					button.classList.add('active');
+					this.renderMedia(item);
+				});
+				this.mediaSelector.appendChild(button);
+			});
+		}
+	}
+
+	show(feature) {
+		const data = this.featureData[feature];
+		this.currentFeature = feature;
+		this.heading.textContent = data.title;
+		this.text.textContent = data.description;
+
+		if (data.media && data.media.length > 0) {
+			this.renderMedia(data.media[0]);
+			this.createMediaSelector(data.media);
+		} else {
+			this.mediaContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">No media available</div>';
+			this.mediaSelector.innerHTML = '';
+		}
+
+		this.modal.classList.add('active');
+		document.body.style.overflow = 'hidden';
+	}
+
+	hide() {
+		this.modal.classList.remove('active');
+		document.body.style.overflow = '';
+		// Stop any playing videos
+		const videos = this.mediaContainer.querySelectorAll('video');
+		videos.forEach(video => video.pause());
 	}
 }
 
@@ -792,4 +950,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	new GamesLibrary();
+	new FeatureModal();
 });

@@ -39,37 +39,50 @@
                             <a id="downloadButton" href="scummvm.html">
                                 <img src="scummvm.png" alt="Download ScummVM icon">
                                 <div class="downloadText">Launch ScummVM</div>
-                                <div id="downloadDetails">Version 3.0.0pre</div>
+                                <div id="downloadDetails">Version 3.1.0git</div>
                             </a>
                         </div>
 
                         <h1>Features</h1>
                         <p>ScummVM supports almost all functionality available in the native application (see the <a href="https://docs.scummvm.org/" target="_blank" rel="noopener">official documentation</a> for the full list). A few web-specific highlights:</p>
-                       <!---
-                       TODO: What to list here:
-Graphics:
-                       WebGL - incl. shader filters from libraretro, GRIM and other 3d engines or engines reliyng on OpenGL (Timbleweed Park, Myst, Riven, etc)
-    Audio:
-                      TTS via Web Speech API
-                      WebMIDI for MIDI devices in addition to emulation (fluidlite)
-                      AdLib: WebSerial for Retrowave in addition to MAME, DOSBox and Nuked emulation,
-    Others: 
-                      Gamepad API for joystick support
-                      file download of screenshots and logs
-                      Directly play from Cloud (Dropbox, Google Drive, Box, OneDrive)
-                       --> <div class="feature-cards-container">
+      
+                        <div class="feature-cards-container">
                             <div class="feature-cards">
-                                <div class="feature-card">
-                                    <h3>Instant Play</h3>
-                                    <p>Launch curated classics without installing anything locally.</p>
+                                <div class="feature-card" data-feature="sound">
+                                    <h3>Sound</h3>
+                                    <p>Full audio support with MIDI emulation, MT32/OPL, hardware devices, and text-to-speech.</p>
                                 </div>
-                                <div class="feature-card">
-                                    <h3>Cloud Saves</h3>
-                                    <p>Play games from your own library and synchronize save games on Dropbox, Google Drive, Box or OneDrive.</p>
+                                <div class="feature-card" data-feature="graphics">
+                                    <h3>Graphics</h3>
+                                    <p>WebGL rendering with shader filters, supporting both 2D and 3D game engines.</p>
                                 </div>
-                                <div class="feature-card">
+                                <div class="feature-card" data-feature="storage">
+                                    <h3>Storage</h3>
+                                    <p>Local drag & drop, server-hosted demos, and full cloud storage integration with save sync.</p>
+                                </div>
+                                <div class="feature-card" data-feature="controls">
                                     <h3>Flexible Controls</h3>
-                                    <p>Play with mouse, keyboard, or gamepad—whatever suits the moment.</p>
+                                    <p>Play with mouse, keyboard, touchscreen, or gamepad—whatever suits the moment.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feature Detail Modal -->
+                        <div id="feature-modal">
+                            <div id="feature-modal-overlay"></div>
+                            <div id="feature-modal-content-wrapper">
+                                <div id="feature-modal-title">
+                                    <h3 id="feature-modal-heading"></h3>
+                                    <button id="feature-modal-close" aria-label="Close">&times;</button>
+                                </div>
+                                <div id="feature-modal-content">
+                                    <div id="feature-modal-media">
+                                        <div id="feature-modal-media-container"></div>
+                                        <div id="feature-modal-media-selector"></div>
+                                    </div>
+                                    <div id="feature-modal-text">
+                                        <p></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
