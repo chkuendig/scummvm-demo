@@ -4608,11 +4608,10 @@
     "platform": "Macintosh"
   },
   {
-    "relative_path": "helga_deep_in_trouble-demo",
+    "relative_path": "helga_deep_in_trouble",
     "id": "wintermute:helga",
-    "description": "Windows Demo",
-    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/helga_deep_in_trouble-demo.zip",
-    "platform": "Windows"
+    "description": "English and Czech Version",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Wintermute/helga_deep_in_trouble.zip"
   },
   {
     "relative_path": "ritter-demo-de",
