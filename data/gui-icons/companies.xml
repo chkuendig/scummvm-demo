@@ -83,6 +83,9 @@
 	<company id="alcachofa" name="Alcachofa Soft" alt_name=""/>
 	
 	
+	<company id="alg" name="American Laser Games" alt_name=""/>
+	
+	
 	<company id="aloalo" name="Aloalo International" alt_name=""/>
 	
 	
@@ -128,7 +131,10 @@
 	<company id="artsectorone" name="ArtSector One" alt_name=""/>
 	
 	
-	<company id="artworx" name="Artworx" alt_name=""/>
+	<company id="artworx" name="Artworx Software" alt_name=""/>
+	
+	
+	<company id="artworx2" name="Artworx" alt_name=""/>
 	<company id="arxel" name="Arxel Tribe" alt_name=""/>
 	
 	
@@ -329,6 +335,9 @@
 	
 	
 	<company id="davebernazzani" name="Dave Bernazzani" alt_name=""/>
+	<company id="ddm" name="Digital Dreams Multimedia" alt_name=""/>
+	
+	
 	<company id="deadcode" name="Dead:Code Software" alt_name=""/>
 	
 	
@@ -458,9 +467,6 @@
 	<company id="fermin" name="Videojuegos Fermín" alt_name=""/>
 	
 	
-	<company id="fictionalgames" name="Fictional Games AB" alt_name=""/>
-	
-	
 	<company id="firstlight" name="Firstlight" alt_name=""/>
 	
 	
@@ -491,6 +497,9 @@
 	<company id="fractal" name="Fractal Mind" alt_name=""/>
 	
 	
+	<company id="frictionalgames" name="Frictional Games AB" alt_name=""/>
+	
+	
 	<company id="frostlind" name="Frostlind Games" alt_name=""/>
 	
 	
@@ -504,6 +513,9 @@
 	
 	
 	<company id="funhouse" name="Funhouse Design" alt_name=""/>
+	
+	
+	<company id="gamos" name="Gamos Ltd." alt_name=""/>
 	
 	
 	<company id="garryfrancis" name="Garry Francis" alt_name=""/>

@@ -6,6 +6,7 @@
 	<engine id="agi" name="AGI" alt_name="Adventure Game Interpreter" enabled="TRUE"/>
 	<engine id="agos" name="AGOS" alt_name="Adventure Graphic Operating System" enabled="TRUE"/>
 	<engine id="ags" name="AGS" alt_name="Adventure Game Studio" enabled="TRUE"/>
+	<engine id="alg" name="ALG" alt_name="American Laser Games" enabled="TRUE"/>
 	<engine id="asylum" name="Asylum" alt_name="Sanitarium" enabled="TRUE"/>
 	<engine id="alcachofa" name="Alcachofa" alt_name="" enabled="TRUE"/>
 	<engine id="avalanche" name="Avalanche" alt_name="" enabled="FALSE"/>
@@ -13,6 +14,7 @@
 	<engine id="bagel" name="BAGEL" alt_name="Boffo Adventure Game Engine and Libraries" enabled="TRUE"/>
 	<engine id="bbvs" name="Beavis and Butt-Head in Virtual Stupidity" alt_name="" enabled="TRUE"/>
 	<engine id="bladerunner" name="Blade Runner" alt_name="" enabled="TRUE"/>
+	<engine id="bolt" name="BOLT" alt_name="Funhouse Engine" enabled="TRUE"/>
 	<engine id="buried" name="The Journeyman Project 2: Buried in Time" alt_name="" enabled="TRUE"/>
 	<engine id="cge" name="CGE" alt_name="Common Game Engine" enabled="TRUE"/>
 	<engine id="cge2" name="CGE2" alt_name="Common Game Engine 2" enabled="TRUE"/>
@@ -34,6 +36,7 @@
 	<engine id="dreamweb" name="DreamWeb" alt_name="" enabled="TRUE"/>
 	<engine id="efh" name="Escape From Hell" alt_name="" enabled="TRUE"/>
 	<engine id="freescape" name="Freescape" alt_name="" enabled="TRUE"/>
+	<engine id="gamos" name="Gamos" alt_name="" enabled="TRUE"/>
 	<engine id="glk" name="Glk" alt_name="" enabled="TRUE"/>
 	<engine id="gnap" name="Gnap" alt_name="" enabled="TRUE"/>
 	<engine id="gob" name="Gob" alt_name="" enabled="TRUE"/>
@@ -71,7 +74,9 @@
 	<engine id="ngi" name="NGI" alt_name="Nikita Game Interface" enabled="TRUE"/>
 	<engine id="parallaction" name="Parallaction" alt_name="" enabled="TRUE"/>
 	<engine id="pegasus" name="The Journeyman Project: Pegasus Prime" alt_name="" enabled="TRUE"/>
+	<engine id="pelrock" name="Alfred Pelrock" alt_name="" enabled="TRUE"/>
 	<engine id="petka" name="Red Comrades" alt_name="" enabled="TRUE"/>
+	<engine id="phoenixvr" name="Phoenix VR" alt_name="" enabled="TRUE"/>
 	<engine id="pink" name="Pink Panther" alt_name="" enabled="TRUE"/>
 	<engine id="playground3d" name="Playground 3D" alt_name="" enabled="FALSE"/>
 	<engine id="plumbers" name="Plumbers Don't Wear Ties!" alt_name="" enabled="TRUE"/>

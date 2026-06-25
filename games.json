@@ -14,6 +14,20 @@
     "platform": "DOS"
   },
   {
+    "relative_path": "noctropolis-demo1",
+    "id": "access:noctropolis",
+    "description": "Windows September 24 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/access/noctropolis-demo1.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "noctropolis-demo2",
+    "id": "access:noctropolis",
+    "description": "Windows September 26 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/access/noctropolis-demo2.zip",
+    "platform": "Windows"
+  },
+  {
     "relative_path": "MYSTHOUS",
     "id": "adl:hires1",
     "description": "public domain version (Apple II)",
@@ -270,6 +284,34 @@
     "platform": "Windows"
   },
   {
+    "relative_path": "cpatrol-dos-demo-en",
+    "id": "alg:cpatrol",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/alg/cpatrol-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "dwars-dos-demo-en",
+    "id": "alg:dwars",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/alg/dwars-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "lbhunter-dos-demo-en",
+    "id": "alg:lbhunter",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/alg/lbhunter-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "spirates-dos-demo-en",
+    "id": "alg:spirates",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/alg/spirates-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
     "relative_path": "asylum-demo",
     "id": "asylum:asylum",
     "description": "Windows Demo",
@@ -330,6 +372,16 @@
     "id": "bladerunner:bladerunner",
     "description": "Windows Non-Interactive Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/bladerunner/bladerunner-win-ni-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "carnival-demo-it",
+    "id": "bolt:carnival",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/bolt/carnival-demo-it.zip",
+    "languages": [
+      "it"
+    ],
     "platform": "Windows"
   },
   {
@@ -712,6 +764,78 @@
     "description": "ZX Spectrum Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/freescape/totaleclipse-zx-demo-2.zip",
     "platform": "ZX Spectrum"
+  },
+  {
+    "relative_path": "flop-win-demo-en-16",
+    "id": "gamos:flop",
+    "description": "Windows English v1.43 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/flop-win-demo-en-16.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "flop-win-demo-en-18",
+    "id": "gamos:flop",
+    "description": "Windows English v1.51 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/flop-win-demo-en-18.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "flop-win-demo-ru",
+    "id": "gamos:flop",
+    "description": "Windows Russian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/flop-win-demo-ru.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "netwalk-win-demo-en",
+    "id": "gamos:netwalk",
+    "description": "Windows English Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/netwalk-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pilots1-win-demo-en-16",
+    "id": "gamos:pilots1",
+    "description": "Windows English v1.47 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/pilots1-win-demo-en-16.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pilots1-win-demo-en-18",
+    "id": "gamos:pilots1",
+    "description": "Windows English v1.50 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/pilots1-win-demo-en-18.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pilots1-win-demo-ru",
+    "id": "gamos:pilots1",
+    "description": "Windows Russian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/pilots1-win-demo-ru.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "wild-win-demo-en",
+    "id": "gamos:wild",
+    "description": "Windows English Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/wild-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "wild-win-demo-ru",
+    "id": "gamos:wild",
+    "description": "Windows Russian Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/gamos/wild-win-demo-ru.zip",
+    "languages": [
+      "ru"
+    ],
+    "platform": "Windows"
   },
   {
     "relative_path": "zcode-advent",
@@ -2692,6 +2816,16 @@
     "platform": "Windows"
   },
   {
+    "relative_path": "atlantis-dos-demo-jp",
+    "id": "scumm:atlantis",
+    "description": "DOS Japanese Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-dos-demo-jp.zip",
+    "languages": [
+      "ja"
+    ],
+    "platform": "DOS"
+  },
+  {
     "relative_path": "atlantis-dos-demo1-en",
     "id": "scumm:atlantis",
     "description": "DOS Demo",
@@ -2835,6 +2969,53 @@
       "en_US"
     ],
     "platform": "DOS"
+  },
+  {
+    "relative_path": "catalog-win-demo-en",
+    "id": "scumm:catalog",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/catalog-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "catalog-win-preview-de",
+    "id": "scumm:catalog",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/catalog-win-preview-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "catalog-win-preview-fr",
+    "id": "scumm:catalog",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/catalog-win-preview-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "catalog-win-preview-uk",
+    "id": "scumm:catalog",
+    "description": "Windows UK Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/catalog-win-preview-uk.zip",
+    "languages": [
+      "en_GB"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "catalog-win-preview-us",
+    "id": "scumm:catalog",
+    "description": "Windows US Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/catalog-win-preview-us.zip",
+    "languages": [
+      "en_US"
+    ],
+    "platform": "Windows"
   },
   {
     "relative_path": "comi-win-large-demo-en",
@@ -3022,6 +3203,16 @@
     "platform": "Windows"
   },
   {
+    "relative_path": "freddi3-win-demo-de",
+    "id": "scumm:freddi3",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi3-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
     "relative_path": "freddi3-win-demo-fr",
     "id": "scumm:freddi3",
     "description": "Windows French Demo",
@@ -3072,6 +3263,16 @@
     "platform": "Windows"
   },
   {
+    "relative_path": "freddi4-win-demo-fr",
+    "id": "scumm:freddi4",
+    "description": "Windows French Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo-fr.zip",
+    "languages": [
+      "fr"
+    ],
+    "platform": "Windows"
+  },
+  {
     "relative_path": "freddi4-win-demo-it",
     "id": "scumm:freddi4",
     "description": "Windows Italian Demo",
@@ -3098,16 +3299,6 @@
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo-us.zip",
     "languages": [
       "en_US"
-    ],
-    "platform": "Windows"
-  },
-  {
-    "relative_path": "freddi4-win-demo.fr",
-    "id": "scumm:freddi4",
-    "description": "Windows French Demo",
-    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/freddi4-win-demo.fr.zip",
-    "languages": [
-      "fr"
     ],
     "platform": "Windows"
   },
@@ -3317,6 +3508,16 @@
     "platform": "Windows"
   },
   {
+    "relative_path": "pajama-win-demo-nl",
+    "id": "scumm:pajama",
+    "description": "Windows Dutch Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama-win-demo-nl.zip",
+    "languages": [
+      "nl"
+    ],
+    "platform": "Windows"
+  },
+  {
     "relative_path": "pajama-win-demo-us",
     "id": "scumm:pajama",
     "description": "Windows Demo",
@@ -3333,6 +3534,16 @@
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama-win-updated-demo-us.zip",
     "languages": [
       "en_US"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "pajama2-win-demo-de",
+    "id": "scumm:pajama2",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/pajama2-win-demo-de.zip",
+    "languages": [
+      "de"
     ],
     "platform": "Windows"
   },
@@ -3777,6 +3988,16 @@
     "description": "Macintosh Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-mac-demo-en.zip",
     "platform": "Macintosh"
+  },
+  {
+    "relative_path": "spyfox-win-demo-de",
+    "id": "scumm:spyfox",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/he/spyfox-win-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
   },
   {
     "relative_path": "spyfox-win-demo-fr",

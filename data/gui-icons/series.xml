@@ -26,12 +26,14 @@
 	<serie id="clotilde" name="Clotilde Soffritti"/>
 	<serie id="conquests" name="Conquests"/>
 	<serie id="cosmos" name="Cosmos Quest"/>
+	<serie id="cpatrol" name="Crime Patrol"/>
 	<serie id="crusader" name="Crusader"/>
 	<serie id="danewguys" name="Da New Guys"/>
 	<serie id="darkfall" name="Dark Fall"/>
 	<serie id="deja_vu" name="Deja Vu"/>
 	<serie id="deviltrilogy" name="Devil Came Through Here Trilogy"/>
 	<serie id="disney" name="Disney AGI"/>
+	<serie id="dogncat" name="Dog-n-cat"/>
 	<serie id="dw" name="Discworld"/>
 	<serie id="ecoquest" name="EcoQuest"/>
 	<serie id="elvira" name="Elvira"/>
@@ -63,6 +65,7 @@
 	<serie id="littlemice" name="Three Little Mice"/>
 	<serie id="livingbooks" name="Living Books"/>
 	<serie id="lsl" name="Leisure Suit Larry"/>
+	<serie id="maddog" name="Mad Dog McCree"/>
 	<serie id="magictales" name="Magic Tales"/>
 	<serie id="manhunt" name="Manhunter"/>
 	<serie id="maniac" name="Maniac Mansion"/>
@@ -91,6 +94,7 @@
 	<serie id="puttputt" name="Putt-Putt"/>
 	<serie id="qfg" name="Quest for Glory"/>
 	<serie id="quantum" name="Quantumnauts"/>
+	<serie id="raysmaze" name="Ray's Maze"/>
 	<serie id="reversion" name="Reversion"/>
 	<serie id="ringworld" name="Ringworld"/>
 	<serie id="robotragedy" name="Robotragedy"/>
@@ -117,6 +121,7 @@
 	<serie id="transylvania" name="Transylvania"/>
 	<serie id="ultima" name="Ultima"/>
 	<serie id="visitor" name="The Visitor"/>
+	<serie id="wage" name="WAGE Engine"/>
 	<serie id="wwhedon" name="Wendy Whedon"/>
 	<serie id="zork" name="Zork"/>
 </series>
