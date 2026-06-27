@@ -6,6 +6,7 @@
   "wintermute.zip": 4520,
   "mort.dat": 76302,
   "teenagent.dat": 403315,
+  "gamepad.svg": 12999,
   "classicmacfonts.dat": 626103,
   "supernova.dat": 523211,
   "myst3.dat": 358287,
@@ -20,6 +21,7 @@
   "Roland_SC-55.sf2": 3283278,
   "ultima8.dat": 238149,
   "drascula.dat": 259625,
+  "vkeybd_default.zip": 184946,
   "games": {
     "baseUrl": "https://scummvm-data.kuendig.io"
   },
@@ -36,6 +38,7 @@
   "scummremastered.zip": 96612,
   "queen.tbl": 1100505,
   "scummclassic.zip": 16342,
+  "vkeybd_small.zip": 86470,
   "macgui.dat": 65656,
   "encoding.dat": 179670,
   "lure.dat": 768832,
