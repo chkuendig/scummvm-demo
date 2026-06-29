@@ -1,0 +1,56 @@
+/* ScummVM - Graphic Adventure Engine
+ *
+ * ScummVM is the legal property of its developers, whose names
+ * are too numerous to list here. Please refer to the COPYRIGHT
+ * file distributed with this source distribution.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+// HPL1 shader compatibility preamble — prepended by CGProgram.cpp on the
+// GLES2 path before every user-authored .vertex and .fragment file.
+//
+// Polyfills the desktop-GL sampler / texture functions HPL1's shaders were
+// written against. Also declares the shader-side alpha-test uniform that
+// the renderer uses in lieu of glAlphaFunc on GLES2.
+#if defined(GL_ES)
+  #define sampler1D sampler2D
+  #define sampler3D sampler2D
+  #define sampler2DRect sampler2D
+  uniform vec2 _hpl1_invFramebufferSize;
+  // Shader-side replacement for glAlphaFunc — kept at 0 (off) by
+  // default; cLowLevelGraphicsGLES::SetAlphaTestFunc() pushes the
+  // threshold when alpha test is enabled and 0 when it isn't, and
+  // the fragment shader's trailing `if (outColor.a < _hpl1_alphaRef)
+  // discard;` (injected by injectAlphaTest) does the cull.
+  uniform float _hpl1_alphaRef;
+  // Combiner emulation: cLowLevelGraphicsGLES::SetTextureEnv +
+  // SetTextureConstantColor stash combiner state here so the fragment
+  // can replicate the fixed-function alpha override (and any future
+  // single-uniform combiner state) — see hpl1_Simple.fragment.
+  uniform float _hpl1_alphaOverride;
+  uniform vec4 _hpl1_constantColor;
+  #define texture1D(s, c) texture2D(s, vec2((c), 0.5))
+  #define texture3D(s, c) texture2D(s, (c).xy)
+  // The Rect texture is sized to the framebuffer; convert raw pixel
+  // coordinates to normalized UVs using the framebuffer size uniform.
+  #define texture2DRect(s, c) texture2D(s, (c) * _hpl1_invFramebufferSize)
+  mat3 _hpl1_transpose(mat3 m) {
+    return mat3(m[0][0], m[1][0], m[2][0],
+                m[0][1], m[1][1], m[2][1],
+                m[0][2], m[1][2], m[2][2]);
+  }
+  #define transpose _hpl1_transpose
+#endif

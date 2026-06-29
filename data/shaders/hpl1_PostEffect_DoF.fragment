@@ -18,19 +18,25 @@ uniform sampler2D tex1; //blurMap
 uniform vec3 planes;
 uniform float maxBlur;
 uniform vec2 screenSize;
+// When > 0.5 the per-pixel depth blur computation is skipped and `maxBlur`
+// is used directly. cRendererPostEffects sets this for the skybox-region
+// pass — that pass wants a uniform blur over the entire quad.
+uniform float skyMode;
 
 void main()
 {
-	float blur = 0.0;
-
-	if(vDepth < planes.y) {
-		blur = (planes.y - vDepth) / (planes.y - planes.x);
+	float blur;
+	if (skyMode > 0.5) {
+		blur = maxBlur;
+	} else {
+		if (vDepth < planes.y) {
+			blur = (planes.y - vDepth) / (planes.y - planes.x);
+		} else {
+			blur = (vDepth - planes.y) / (planes.z - planes.y);
+		}
+		blur = clamp(blur, 0.0, maxBlur);
 	}
-	else {
-		blur = (vDepth - planes.y) / (planes.z - planes.y);
-	}
 
-	blur = clamp(blur, 0.0, maxBlur);
-
-	outColor = texture2DRect(tex0,gl_FragCoord.xy) * (1.0-blur) + texture(tex1,gl_FragCoord.xy/screenSize) *blur;
+	outColor = texture2DRect(tex0, gl_FragCoord.xy) * (1.0 - blur)
+			 + texture(tex1, gl_FragCoord.xy / screenSize) * blur;
 }

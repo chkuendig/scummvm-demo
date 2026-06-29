@@ -28,5 +28,5 @@ void main()
 	vec4 lightVec = (2.0*textureCube(tex2,vLightDir)-vec4(1.0));
 
 	outColor.xyz = texture(tex0, vUv).xyz * vLightColor.xyz * attenuation * dot(lightVec.xyz,bumpVec.xyz);
-	outColor.w = 0;
+	outColor.w = 0.0;
 }

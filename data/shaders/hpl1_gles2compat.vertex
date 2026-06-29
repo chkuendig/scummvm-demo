@@ -1,0 +1,43 @@
+/* ScummVM - Graphic Adventure Engine
+ *
+ * ScummVM is the legal property of its developers, whose names
+ * are too numerous to list here. Please refer to the COPYRIGHT
+ * file distributed with this source distribution.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+// HPL1 vertex-shader compatibility preamble — prepended by CGProgram.cpp
+// on the GLES2 path before each user-authored .vertex file. Replaces the
+// fixed-function `gl_Vertex`/`gl_Color`/etc. names with explicit attribute
+// declarations that map to cLowLevelGraphicsGLES's vertex layout.
+#define gl_Vertex _hpl1_pos
+#define gl_Color _hpl1_color
+#define gl_Normal _hpl1_normal
+#define gl_MultiTexCoord0 _hpl1_uv
+#define gl_MultiTexCoord1 _hpl1_tangent
+#if defined(GL_ES) || __VERSION__ < 130
+  attribute vec4 _hpl1_pos;
+  attribute vec4 _hpl1_color;
+  attribute vec3 _hpl1_normal;
+  attribute vec4 _hpl1_uv;
+  attribute vec4 _hpl1_tangent;
+#else
+  in vec4 _hpl1_pos;
+  in vec4 _hpl1_color;
+  in vec3 _hpl1_normal;
+  in vec4 _hpl1_uv;
+  in vec4 _hpl1_tangent;
+#endif

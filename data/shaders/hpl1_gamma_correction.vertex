@@ -1,11 +1,12 @@
-// hpl1_gamma_correction.fragment
+precision highp float;
 
-vec4 position = gl_Vertex;
-vec2 uv = gl_MultiTexCoord0.xy;
+attribute vec4 a_position;
+attribute vec2 a_uv;
 
-out vec2 vUv;
+varying vec2 v_uv;
 
-void main() {
-    gl_Position = position;
-    vUv = uv;
+void main()
+{
+	gl_Position = a_position;
+	v_uv = a_uv;
 }

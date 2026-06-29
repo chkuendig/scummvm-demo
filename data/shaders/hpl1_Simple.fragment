@@ -1,0 +1,39 @@
+/* ScummVM - Graphic Adventure Engine
+ *
+ * ScummVM is the legal property of its developers, whose names
+ * are too numerous to list here. Please refer to the COPYRIGHT
+ * file distributed with this source distribution.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+precision highp float;
+
+varying vec2 v_uv;
+varying vec4 v_color;
+
+uniform sampler2D diffuseMap;
+
+// _hpl1_alphaOverride / _hpl1_constantColor are declared in the
+// hpl1_gles2compat.fragment preamble that CGProgram prepends to every
+// fragment shader on GLES2. Default is 0/(1,1,1,1) — texture alpha
+// passes through unchanged.
+void main()
+{
+	vec4 tex = texture2D(diffuseMap, v_uv);
+	gl_FragColor = tex * v_color;
+	if (_hpl1_alphaOverride > 0.5)
+		gl_FragColor.a = _hpl1_constantColor.a;
+}
