@@ -1,1 +1,231 @@
-<!doctypehtml><html lang=en-us><head><meta charset=utf-8><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta content="width=device-width,initial-scale=1,viewport-fit=cover"name=viewport><link href=manifest.json rel=manifest><link href=scummvm-192.png rel=apple-touch-icon><title>ScummVM</title><style>body{margin:0;padding:none;background-color:#000}.emscripten{padding-right:0;margin-left:auto;margin-right:auto;display:block}textarea.emscripten{font-family:monospace;width:80%}div.emscripten{text-align:center}div.emscripten_border{border:1px solid #000;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}canvas.emscripten{border:0 none;background:url("logo.svg");background-position:center;background-repeat:no-repeat;background-color:#c60;position:absolute;top:0;left:0;margin:0;width:100%;height:100%;overflow:hidden;display:block}@media (orientation:landscape){canvas.emscripten{background-size:auto 33%}}@media (orientation:portrait){canvas.emscripten{background-size:80% auto}}#download-modal{background-color:#f9f2d2;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.4);display:none;font-family:Arial,sans-serif;left:50%;max-width:90%;overflow:hidden;position:absolute;bottom:10%;transform:translate(-50%,0);width:400px;z-index:10}#download-modal-title{background-color:#e9cc7a;border-bottom:1px solid #dfb661;margin:0;padding:8px 16px;text-align:center}#download-modal-content{padding:16px}#download-modal h3{color:#333;font-size:13px;font-weight:700;margin:0}#download-modal p{color:#333;font-size:12px;font-weight:700;margin:8px 0}#download-modal-progress{background-color:#f4e5ad;border-radius:4px;border-top:1px solid #686557;height:20px;margin:12px 0;overflow:hidden;position:relative;width:100%}#download-modal-progress-fill{background-color:#821d06;border-radius:3px;height:100%;width:0%}</style><script src="https://js.sentry-cdn.com/9732c5774e694f79d94bd5c290d48a72.min.js" crossorigin="anonymous"></script></head><body><div id=download-modal><div id=download-modal-title><h3></h3></div><div id=download-modal-content><div id=download-modal-progress><div id=download-modal-progress-fill></div></div><p id=download-modal-progress-text>Downloaded 0 KB / 0 MB</p><p id=download-modal-speed-text>Download speed: 0 MB/s</p></div></div><div class=emscripten_border><canvas class=emscripten id=canvas oncontextmenu=event.preventDefault() tabindex=-1></canvas></div><hr><textarea class=emscripten id=output rows=8></textarea><script>var Module={preRun:[],postRun:[],print:function(){var e=document.getElementById("output");return e&&(e.value=""),function(t){arguments.length>1&&(t=Array.prototype.slice.call(arguments).join(" ")),console.log(t),e&&(e.value+=t+"\n",e.scrollTop=e.scrollHeight)}}(),printErr:function(e){arguments.length>1&&(e=Array.prototype.slice.call(arguments).join(" ")),console.error(e)},canvas:function(){var e=document.getElementById("canvas");return e.addEventListener("webglcontextlost",(function(e){alert("WebGL context lost. You will need to reload the page."),e.preventDefault()}),!1),e}(),setStatus:function(e){Module.setStatus.last||(Module.setStatus.last="",document.getElementById("download-modal-progress-fill").style.transition="width 0.5s ease"),document.getElementById("download-modal").style.display="block",e!==Module.setStatus.last&&(Module.setStatus.last=e,e&&e.length>0?document.getElementById("download-modal-title").firstChild.innerHTML=e:(document.getElementById("download-modal").style.display="none",document.getElementById("download-modal-progress-fill").style.transition="none",document.getElementById("download-modal-progress-fill").style.width="0%"))},onRuntimeInitialized:function(){"function"==typeof httpHideProgressBar&&httpHideProgressBar()},totalDependencies:0,monitorRunDependencies:function(e){this.totalDependencies=Math.max(this.totalDependencies,e),Module.setStatus(e?"Preparing... ("+(this.totalDependencies-e)+"/"+this.totalDependencies+")":"All downloads complete.")}};window.onerror=function(e){alert("Exception thrown, see JavaScript console"),console.log(e)}</script><script async src=scummvm.js?v=8618e8c201e3></script></body></html>
+<!doctype html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name=viewport>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="scummvm-192.png">
+  <title>ScummVM</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: none;
+      background-color: #000;
+    }
+
+    .emscripten {
+      padding-right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
+    textarea.emscripten {
+      font-family: monospace;
+      width: 80%;
+    }
+
+    div.emscripten {
+      text-align: center;
+    }
+
+    div.emscripten_border {
+      border: 1px solid black;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+    canvas.emscripten {
+      border: 0px none;
+      background: url("logo.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #cc6600;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      margin: 0px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: block;
+    }
+
+    @media (orientation: landscape) {
+      canvas.emscripten {
+        background-size: auto 33%;
+      }
+    }
+
+    @media (orientation: portrait) {
+      canvas.emscripten {
+        background-size: 80% auto;
+      }
+    }
+
+
+    #download-modal {
+      background-color: #F9F2D2;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      display: none;
+      font-family: Arial, sans-serif;
+      left: 50%;
+      max-width: 90%;
+      overflow: hidden;
+      position: absolute;
+      bottom: 10%;
+      transform: translate(-50%, 0);
+      width: 400px;
+      z-index: 10;
+    }
+
+    #download-modal-title {
+      background-color: #E9CC7A;
+      border-bottom: 1px solid #DFB661;
+      margin: 0;
+      padding: 8px 16px;
+      text-align: center;
+    }
+
+    #download-modal-content {
+      padding: 16px;
+    }
+
+    #download-modal h3 {
+      color: #333;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 0 0 0px 0;
+    }
+
+    #download-modal p {
+      color: #333;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    #download-modal-progress {
+      background-color: #F4E5AD;
+      border-radius: 4px;
+      border-top: 1px solid #686557;
+      height: 20px;
+      margin: 12px 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    #download-modal-progress-fill {
+      background-color: #821D06;
+      border-radius: 3px;
+      height: 100%;
+      width: 0%;
+    }
+  </style>
+<script>window.__SENTRY_CFG__={dsn:'https://9732c5774e694f79d94bd5c290d48a72@o180772.ingest.us.sentry.io/4511642918912000',release:'33f99359bef3',environment:'production'};</script><script src="sentry.bundle.js"></script></head>
+
+<body>
+  <div id="download-modal">
+    <div id="download-modal-title">
+      <h3></h3>
+    </div>
+    <div id="download-modal-content">
+      <div id="download-modal-progress">
+        <div id="download-modal-progress-fill"></div>
+      </div>
+
+      <p id="download-modal-progress-text">Downloaded 0 KB / 0 MB</p>
+      <p id="download-modal-speed-text">Download speed: 0 MB/s</p>
+    </div>
+  </div>
+
+  <div class=emscripten_border>
+    <canvas class=emscripten id=canvas oncontextmenu=event.preventDefault() tabindex=-1></canvas>
+  </div>
+
+  <hr>
+  <textarea class="emscripten" id="output" rows="8"></textarea>
+
+  <script type='text/javascript'>
+
+    var Module = {
+      preRun: [],
+      postRun: [],
+      print: (function () {
+        var element = document.getElementById('output');
+        if (element) element.value = ''; // clear browser cache
+        return function (text) {
+          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          // These replacements are necessary if you render to raw HTML
+          //text = text.replace(/&/g, "&amp;");
+          //text = text.replace(/</g, "&lt;");
+          //text = text.replace(/>/g, "&gt;");
+          //text = text.replace('\n', '<br>', 'g');
+          console.log(text);
+          if (element) {
+            element.value += text + "\n";
+            element.scrollTop = element.scrollHeight; // focus on bottom
+          }
+        };
+      })(),
+      printErr: function (text) {
+        if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+        console.error(text);
+      },
+      canvas: (function () {
+        var canvas = document.getElementById('canvas');
+
+        // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+        // application robust, you may want to override this behavior before shipping!
+        // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
+        canvas.addEventListener("webglcontextlost", function (e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
+
+        return canvas;
+      })(),
+      setStatus: function (text) {
+        if (!Module.setStatus.last) {
+          Module.setStatus.last = '';
+          document.getElementById('download-modal-progress-fill').style.transition = 'width 0.5s ease';
+        }
+        document.getElementById('download-modal').style.display = 'block';
+        if (text === Module.setStatus.last) { return; }
+        Module.setStatus.last = text;
+        if (text && text.length > 0) {
+          document.getElementById('download-modal-title').firstChild.innerHTML = text;
+        } else {
+          document.getElementById('download-modal').style.display = 'none';
+          // Remove transition for instant reset
+          document.getElementById('download-modal-progress-fill').style.transition = 'none';
+          document.getElementById('download-modal-progress-fill').style.width = '0%';
+        }
+      },
+      onRuntimeInitialized: function () {
+        // The wasm has finished downloading, compiling and instantiating; the
+        // loading modal was held at 100% ("Starting ScummVM...") across that
+        // gap by the fetch hook in custom_shell-pre.js. Hide it now.
+        if (typeof httpHideProgressBar === "function") {
+          httpHideProgressBar();
+        }
+      },
+      totalDependencies: 0,
+      monitorRunDependencies: function (left) {
+        this.totalDependencies = Math.max(this.totalDependencies, left);
+        Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+      }
+    };
+    window.onerror = function (event) {
+      alert('Exception thrown, see JavaScript console');
+      console.log(event);
+    };
+
+  </script>
+
+  <script async type="text/javascript" src="scummvm.js?v=33f99359bef3"></script>
+</body>
+
+</html>
