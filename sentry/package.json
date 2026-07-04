@@ -1,0 +1,15 @@
+{
+  "name": "scummvm-demo-sentry",
+  "private": true,
+  "description": "Bundled Sentry browser SDK + wasm integration for the demo. Build: npm run build.",
+  "scripts": {
+    "build": "esbuild sentry-init.js --bundle --minify --format=iife --target=es2019 --sourcemap --outfile=sentry.bundle.js"
+  },
+  "dependencies": {
+    "@sentry/browser": "^10.63.0",
+    "@sentry/wasm": "^10.63.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

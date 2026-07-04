@@ -17,8 +17,16 @@ permissions:
 env:
   SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud"
   SCUMMVM_CONFIGURE_LIBS: " --enable-a52 --enable-faad --enable-fluidlite --enable-freetype2 --enable-fribidi --enable-gif --enable-gif --enable-jpeg --enable-jpeg --enable-mad --enable-mad --enable-mikmod --enable-mpcdec --enable-mpeg2 --enable-ogg --enable-png --enable-retrowave --enable-theoradec --enable-vorbis --enable-vpx --enable-zlib"
-  EMSDK_VERSION: "4.0.15"
+  EMSDK_VERSION: "6.0.2"
   DATA_BASEURL: "https://scummvm-data.kuendig.io"
+  # Extra link flags for Sentry wasm symbolication + catchable OOM. configure
+  # honors env LDFLAGS (seeds both the executable and plugin links), so no
+  # scummvm/configure edit is needed. -Wl,--build-id is REQUIRED (emcc 4.0.15
+  # does not emit a wasm build_id on its own; verified offline). -gseparate-dwarf
+  # keeps the shipped wasm lean while producing <name>.debug.wasm sidecars to
+  # upload. -sABORTING_MALLOC=1 makes OOM abort catchably (ALLOW_MEMORY_GROWTH
+  # otherwise flips its default to 0).
+  EXTRA_LDFLAGS: "-gseparate-dwarf -Wl,--build-id -sABORTING_MALLOC=1"
   
 jobs:
   build-scummvm:
@@ -34,7 +42,7 @@ jobs:
           grep -rl --include \*.cpp --include \*.js 'cloud.scummvm.org' scummvm/ | xargs sed -i 's/cloud.scummvm.org/scummvm-cloud.kuendig.io/g'  
       - name: Define some cache keys 🗝️
         run: |
-          echo "${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS}" > config_vars.txt
+          echo "${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS} ${EXTRA_LDFLAGS}" > config_vars.txt
           echo "${SCUMMVM_CONFIGURE_LIBS}" > config_lib_vars.txt
           echo "SCUMMVM_COMMIT=$(git rev-parse @:./scummvm)" >> $GITHUB_ENV
       - uses: actions/cache@v4 ##todo: we should cache also the object files (and save/update them across runs)
@@ -78,6 +86,11 @@ jobs:
 
       - if: ${{ steps.cache-configure.outputs.cache-hit != 'true' }}
         name: Configure ScummVM
+        # LDFLAGS is honored by scummvm/configure (seeds executable + plugin
+        # links) so we get -gseparate-dwarf/-Wl,--build-id/-sABORTING_MALLOC
+        # without editing configure. Libs are cached separately and unaffected.
+        env:
+          LDFLAGS: ${{ env.EXTRA_LDFLAGS }}
         run: cd scummvm && dists/emscripten/build.sh configure ${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS} && cd ..
       - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
         name: "Building ScummVM"
@@ -86,6 +99,31 @@ jobs:
           echo "Building scummvm-${SCUMMVM_COMMIT}"
           cd scummvm && dists/emscripten/build.sh make dist
           cp build-emscripten/scummvm.html build-emscripten/index.html && cp AUTHORS build-emscripten/ && cp COPYING build-emscripten/ && cp LICENSES/* build-emscripten/ && cp COPYRIGHT build-emscripten/ && cp NEWS* build-emscripten/ && cp README* build-emscripten/
+      - name: Upload debug info to Sentry 🔎
+        # Uploads the -gseparate-dwarf sidecars (main module + every plugin,
+        # each carrying a matching build_id) so Sentry can symbolicate wasm
+        # frames. Only runs on a fresh build (the sidecars only exist then) and
+        # is a no-op without the token. Release id = the wasm hash (same value
+        # the deploy stamps onto scummvm.js and passes to the client SDK).
+        if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
+        run: |
+          if [ -z "$SENTRY_AUTH_TOKEN" ]; then echo "no SENTRY_AUTH_TOKEN; skipping"; exit 0; fi
+          mapfile -t DBG < <(find scummvm -name '*.debug.wasm')
+          if [ ${#DBG[@]} -eq 0 ]; then echo "no *.debug.wasm found (cached build?); skipping"; exit 0; fi
+          curl -sSL -o ./sentry-cli "https://github.com/getsentry/sentry-cli/releases/latest/download/sentry-cli-Linux-x86_64" && chmod +x ./sentry-cli
+          REL=$(sha1sum scummvm/build-emscripten/scummvm.wasm | cut -c1-12)
+          echo "Sentry release $REL, uploading ${#DBG[@]} debug files"
+          ./sentry-cli releases new "$REL" || true
+          ./sentry-cli debug-files upload "${DBG[@]}" || true
+          # JS source maps so JS-level frames symbolicate too: the emscripten
+          # glue (scummvm.js, not minified) + our minified Sentry bundle + its map.
+          ./sentry-cli sourcemaps upload --release "$REL" --url-prefix '~' \
+            scummvm/build-emscripten/scummvm.js sentry/sentry.bundle.js sentry/sentry.bundle.js.map || true
+          ./sentry-cli releases finalize "$REL" || true
       - name: Save Build
         uses: actions/cache/save@v4
         with:
@@ -214,8 +252,36 @@ jobs:
       - name:  update baseURL
         run: |
           jq '.games +=  {"baseUrl":"${{ env.DATA_BASEURL }}"}' scummvm/build-emscripten/data/index.json > scummvm/build-emscripten/data/index.json.tmp && mv scummvm/build-emscripten/data/index.json.tmp scummvm/build-emscripten/data/index.json
-      - run: |
-          echo "AddType 'application/wasm' wasm so" > scummvm/build-emscripten/.htaccess
+      - name: Cache-bust scummvm.js URL with the wasm hash
+        # Moved here from scummvm's emscripten.mk: stamp scummvm.js?v=<wasm hash>
+        # so a returning visitor can't pair a fresh wasm with stale cached js
+        # (WebAssembly LinkError). The Sentry step below reads this ?v= as the release.
+        run: |
+          VER=$(sha1sum scummvm/build-emscripten/scummvm.wasm | cut -c1-12)
+          echo "cache-bust: scummvm.js?v=$VER"
+          for f in scummvm/build-emscripten/scummvm.html scummvm/build-emscripten/index.html; do
+            [ -f "$f" ] && sed -i "s|src=scummvm.js>|src=scummvm.js?v=$VER>|; s|src=\"scummvm.js\"|src=\"scummvm.js?v=$VER\"|" "$f"
+          done
+      - name: Write .htaccess (wasm MIME + no-cache app-shell)
+        # Authored fully here. Previously scummvm shipped an .htaccess but this
+        # step overwrote it with only the MIME type; now it carries both the
+        # wasm MIME and the no-cache headers (fallback to the URL stamp above).
+        run: |
+          {
+            echo "AddType application/wasm wasm so"
+            echo '<IfModule mod_headers.c>'
+            echo '  <FilesMatch "\.(html|js|wasm|so)$">'
+            echo '    Header unset Cache-Control'
+            echo '    Header always set Cache-Control "no-cache, must-revalidate"'
+            echo '  </FilesMatch>'
+            echo '</IfModule>'
+            echo '<IfModule mod_expires.c>'
+            echo '  ExpiresActive On'
+            echo '  ExpiresByType text/javascript "access plus 0 seconds"'
+            echo '  ExpiresByType application/javascript "access plus 0 seconds"'
+            echo '  ExpiresByType application/wasm "access plus 0 seconds"'
+            echo '</IfModule>'
+          } > scummvm/build-emscripten/.htaccess
       - name: Copy default scummvm.ini
         run: |
           cp assets/scummvm.ini scummvm/build-emscripten/scummvm.ini
@@ -224,6 +290,25 @@ jobs:
           cp assets/games.* scummvm/build-emscripten/
           cp assets/main.css scummvm/build-emscripten/main.css
           cp assets/*.png scummvm/build-emscripten/
+      - name: Inject Sentry error tracking 🛡️
+        # Injects the bundled @sentry/browser + @sentry/wasm SDK (sentry/sentry.bundle.js,
+        # committed in this repo). The wasm integration - required to symbolicate wasm
+        # stack frames against the debug files uploaded by the build job - is NOT in the
+        # CDN Loader, so we ship our own bundle. Config is passed via window.__SENTRY_CFG__;
+        # release = the wasm-hash already stamped onto the scummvm.js URL, so events line up
+        # with the uploaded debug files. No-op if SENTRY_DSN is unset.
+        env:
+          SENTRY_DSN: ${{ vars.SENTRY_DSN }}
+          SENTRY_ENVIRONMENT: ${{ vars.SENTRY_ENVIRONMENT }}
+        run: |
+          if [ -z "$SENTRY_DSN" ]; then echo "SENTRY_DSN not set; skipping Sentry injection"; exit 0; fi
+          cp sentry/sentry.bundle.js scummvm/build-emscripten/
+          REL=$(grep -oE 'scummvm\.js\?v=[a-f0-9]+' scummvm/build-emscripten/scummvm.html | head -1 | sed 's/.*v=//')
+          cfg="<script>window.__SENTRY_CFG__={dsn:'${SENTRY_DSN}',release:'${REL}',environment:'${SENTRY_ENVIRONMENT:-production}'};</script>"
+          snippet="${cfg}<script src=\"sentry.bundle.js\"></script>"
+          for f in scummvm/build-emscripten/index.html scummvm/build-emscripten/scummvm.html; do
+            [ -f "$f" ] && sed -i "s#</head>#${snippet}</head>#" "$f" && echo "Injected Sentry into $f (release ${REL:-none})"
+          done
       - uses: JamesIves/github-pages-deploy-action@v4.7.2
         with:
           branch: gh-pages # The branch the action should deploy to.
@@ -231,7 +316,7 @@ jobs:
       - name: Upload to Hostinger ☁️
         uses: appleboy/scp-action@v0.1.7
         with:
-          source: "scummvm/build-emscripten/*"
+          source: "scummvm/build-emscripten/*,scummvm/build-emscripten/.htaccess"
           target: ~/domains/scummvm.kuendig.io/public_html
           rm: true
           strip_components: 2

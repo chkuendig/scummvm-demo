@@ -177,6 +177,10 @@ class GameDownloader:
             else:
                 cmd.extend(["-p", str(self.scp_port)])
 
+        # Force IPv4: GitHub Actions runners have no outbound IPv6, so if the
+        # host has an AAAA record OpenSSH tries IPv6 first and hangs on the TCP
+        # connect until it times out (~3 min). Fail fast on IPv4 instead.
+        cmd.extend(["-4", "-o", "ConnectTimeout=20"])
         cmd.extend(["-o", "ControlMaster=auto", "-o", f"ControlPath={control_path}", "-o", "ControlPersist=600"])
 
         if ssh_password:
@@ -196,7 +200,7 @@ class GameDownloader:
             else:
                 cmd.extend(["-p", str(self.scp_port)])
 
-        cmd.extend(["-o", f"ControlPath={control_path}"])
+        cmd.extend(["-4", "-o", f"ControlPath={control_path}"])
         return cmd
 
     def open_connection(self) -> None:

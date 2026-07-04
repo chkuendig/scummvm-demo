@@ -2,3 +2,11 @@ node_modules/
 games.json
 screenshots/
 scripts/__pycache__
+
+# Local secrets for tooling (Sentry etc.) - never commit. See .env.example.
+.env
+.env.local
+*.debug.wasm
+
+# Sentry client bundle deps (the built sentry.bundle.js IS committed)
+sentry/node_modules/
