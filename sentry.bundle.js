@@ -502,3 +502,4 @@ or you can use record.mirror to access the mirror instance during recording.`,Ey
 @sentry/core/build/esm/utils/env.js:
   (*! __SENTRY_SDK_SOURCE__ *)
 */
+//# sourceMappingURL=sentry.bundle.js.map
