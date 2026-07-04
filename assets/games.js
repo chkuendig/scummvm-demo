@@ -794,6 +794,8 @@ class FeatureModal {
 		this.mediaContainer = document.getElementById('feature-modal-media-container');
 		this.mediaSelector = document.getElementById('feature-modal-media-selector');
 		this.text = document.querySelector('#feature-modal-text p');
+		this.prevBtn = document.getElementById('feature-modal-prev');
+		this.nextBtn = document.getElementById('feature-modal-next');
 		this.currentFeature = null;
 
 		this.featureData = {
@@ -830,31 +832,64 @@ class FeatureModal {
 			}
 		};
 
+		// Order used for looping prev/next navigation in the modal.
+		this.featureOrder = Object.keys(this.featureData);
+
 		this.init();
 	}
 
 	init() {
-		// Add click handlers to feature cards
+		// Make the feature cards behave like buttons so they can be reached and
+		// opened with the keyboard, not just the mouse.
 		const featureCards = document.querySelectorAll('.feature-card');
 		featureCards.forEach(card => {
-			card.addEventListener('click', (e) => {
-				const feature = e.currentTarget.dataset.feature;
+			card.setAttribute('role', 'button');
+			card.setAttribute('tabindex', '0');
+			const open = () => {
+				const feature = card.dataset.feature;
 				if (feature && this.featureData[feature]) {
 					this.show(feature);
+				}
+			};
+			card.addEventListener('click', open);
+			card.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					open();
 				}
 			});
 		});
 
+		// Loop through the features while the modal is open.
+		this.prevBtn.addEventListener('click', () => this.navigate(-1));
+		this.nextBtn.addEventListener('click', () => this.navigate(1));
+
 		// Close modal handlers
 		this.closeBtn.addEventListener('click', () => this.hide());
 		this.overlay.addEventListener('click', () => this.hide());
-		
-		// ESC key to close
+
+		// Keyboard while open: Esc closes, Left/Right cycle features (wrap around).
 		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+			if (!this.modal.classList.contains('active')) {
+				return;
+			}
+			if (e.key === 'Escape') {
 				this.hide();
+			} else if (e.key === 'ArrowLeft') {
+				this.navigate(-1);
+			} else if (e.key === 'ArrowRight') {
+				this.navigate(1);
 			}
 		});
+	}
+
+	navigate(delta) {
+		const order = this.featureOrder;
+		const i = order.indexOf(this.currentFeature);
+		if (i === -1) {
+			return;
+		}
+		this.show(order[(i + delta + order.length) % order.length]);
 	}
 
 	getYouTubeEmbedUrl(url) {
