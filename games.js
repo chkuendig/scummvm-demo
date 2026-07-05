@@ -207,9 +207,39 @@ class GamesLibrary {
 		if (!variants || variants.length === 0) {
 			return null;
 		}
-		return variants.find(variant => variant.cover) ||
-			variants.find(variant => variant.description) ||
-			variants[0];
+		// Prefer an English variant. Most English demos carry no explicit
+		// `languages` field (the language lives in the relative_path suffix), so
+		// they would otherwise lose to an alphabetically-earlier localized one -
+		// e.g. DOTT has de/en/fr and would show the German demo. Pick the first
+		// explicitly-English variant, else the first that isn't explicitly
+		// localized, else fall back to the first with a description.
+		const withDesc = variants.filter(variant => variant.description);
+		const pool = withDesc.length ? withDesc : variants;
+		return pool.find(variant => this.isEnglishVariant(variant)) ||
+			pool.find(variant => !this.isNonEnglishVariant(variant)) ||
+			pool[0];
+	}
+
+	variantLanguageSuffix(variant) {
+		return ((variant && variant.relative_path) || '').toLowerCase().split('-').pop();
+	}
+
+	isEnglishVariant(variant) {
+		const langs = Array.isArray(variant && variant.languages) ? variant.languages : [];
+		if (langs.length) {
+			return langs.some(lang => /^en/i.test(lang));
+		}
+		return ['en', 'us', 'uk'].includes(this.variantLanguageSuffix(variant));
+	}
+
+	isNonEnglishVariant(variant) {
+		const langs = Array.isArray(variant && variant.languages) ? variant.languages : [];
+		if (langs.length) {
+			return !langs.some(lang => /^en/i.test(lang));
+		}
+		const nonEnglish = ['de', 'fr', 'nl', 'ru', 'es', 'it', 'ja', 'jp', 'pl', 'he',
+			'ca', 'no', 'sv', 'pt', 'br', 'cz', 'hu', 'fi', 'da', 'dk', 'ko', 'kr', 'zh', 'cn', 'gr', 'tr', 'ro'];
+		return nonEnglish.includes(this.variantLanguageSuffix(variant));
 	}
 
 	enrichGameInfo(gameId, variant) {
@@ -794,6 +824,8 @@ class FeatureModal {
 		this.mediaContainer = document.getElementById('feature-modal-media-container');
 		this.mediaSelector = document.getElementById('feature-modal-media-selector');
 		this.text = document.querySelector('#feature-modal-text p');
+		this.prevBtn = document.getElementById('feature-modal-prev');
+		this.nextBtn = document.getElementById('feature-modal-next');
 		this.currentFeature = null;
 
 		this.featureData = {
@@ -830,31 +862,64 @@ class FeatureModal {
 			}
 		};
 
+		// Order used for looping prev/next navigation in the modal.
+		this.featureOrder = Object.keys(this.featureData);
+
 		this.init();
 	}
 
 	init() {
-		// Add click handlers to feature cards
+		// Make the feature cards behave like buttons so they can be reached and
+		// opened with the keyboard, not just the mouse.
 		const featureCards = document.querySelectorAll('.feature-card');
 		featureCards.forEach(card => {
-			card.addEventListener('click', (e) => {
-				const feature = e.currentTarget.dataset.feature;
+			card.setAttribute('role', 'button');
+			card.setAttribute('tabindex', '0');
+			const open = () => {
+				const feature = card.dataset.feature;
 				if (feature && this.featureData[feature]) {
 					this.show(feature);
+				}
+			};
+			card.addEventListener('click', open);
+			card.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					open();
 				}
 			});
 		});
 
+		// Loop through the features while the modal is open.
+		this.prevBtn.addEventListener('click', () => this.navigate(-1));
+		this.nextBtn.addEventListener('click', () => this.navigate(1));
+
 		// Close modal handlers
 		this.closeBtn.addEventListener('click', () => this.hide());
 		this.overlay.addEventListener('click', () => this.hide());
-		
-		// ESC key to close
+
+		// Keyboard while open: Esc closes, Left/Right cycle features (wrap around).
 		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+			if (!this.modal.classList.contains('active')) {
+				return;
+			}
+			if (e.key === 'Escape') {
 				this.hide();
+			} else if (e.key === 'ArrowLeft') {
+				this.navigate(-1);
+			} else if (e.key === 'ArrowRight') {
+				this.navigate(1);
 			}
 		});
+	}
+
+	navigate(delta) {
+		const order = this.featureOrder;
+		const i = order.indexOf(this.currentFeature);
+		if (i === -1) {
+			return;
+		}
+		this.show(order[(i + delta + order.length) % order.length]);
 	}
 
 	getYouTubeEmbedUrl(url) {

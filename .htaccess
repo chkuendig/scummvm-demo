@@ -1,1 +1,13 @@
-AddType 'application/wasm' wasm so
+AddType application/wasm wasm so
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|wasm|so)$">
+    Header unset Cache-Control
+    Header always set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/javascript "access plus 0 seconds"
+  ExpiresByType application/javascript "access plus 0 seconds"
+  ExpiresByType application/wasm "access plus 0 seconds"
+</IfModule>

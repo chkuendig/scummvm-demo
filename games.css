@@ -415,6 +415,32 @@ h1 {
 #feature-modal-close:hover {
 	transform: scale(1.2);
 }
+#feature-modal-nav {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+#feature-modal-prev,
+#feature-modal-next {
+	background: none;
+	border: none;
+	font-size: 30px;
+	font-weight: bold;
+	color: #821D06;
+	cursor: pointer;
+	padding: 0;
+	width: 30px;
+	height: 32px;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.2s ease;
+}
+#feature-modal-prev:hover,
+#feature-modal-next:hover {
+	transform: scale(1.35);
+}
 
 #feature-modal-content {
 	padding: 24px;

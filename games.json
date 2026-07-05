@@ -892,16 +892,6 @@
     "download_url": "https://ifdb.org/viewgame?id=6gtq9ahrolz2ry2"
   },
   {
-    "relative_path": "adibou-win-ni-demo-fr",
-    "id": "gob:adibou2",
-    "description": "Windows Unsupported Demo",
-    "download_url": "https://downloads.scummvm.org/frs/demos/gob/adibou-win-ni-demo-fr.zip",
-    "languages": [
-      "fr"
-    ],
-    "platform": "Windows"
-  },
-  {
     "relative_path": "adibou2-dos-demo-fr",
     "id": "gob:adibou2",
     "description": "DOS French Demo",
@@ -1939,16 +1929,6 @@
     "platform": "Windows"
   },
   {
-    "relative_path": "fullpipe-97-demo-ru",
-    "id": "ngi:fullpipe",
-    "description": "Windows 1997 Demo Release, non-working Demo",
-    "download_url": "https://downloads.scummvm.org/frs/demos/ngi/fullpipe-97-demo-ru.zip",
-    "languages": [
-      "ru"
-    ],
-    "platform": "Windows"
-  },
-  {
     "relative_path": "fullpipe-demo-de",
     "id": "ngi:fullpipe",
     "description": "Windows German Demo",
@@ -2628,13 +2608,6 @@
     "description": "DOS Non-Interactive Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/sci/pq4-dos-ni-demo-en.zip",
     "platform": "DOS"
-  },
-  {
-    "relative_path": "pqswat-win-demo-en",
-    "id": "sci:pqswat",
-    "description": "Windows Unsupported Demo",
-    "download_url": "https://downloads.scummvm.org/frs/demos/sci/pqswat-win-demo-en.zip",
-    "platform": "Windows"
   },
   {
     "relative_path": "qfg1-dos-ni-demo-en",
@@ -3478,13 +3451,6 @@
     "id": "scumm:monkey2",
     "description": "DOS Non-Engine (Slideshow) Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/Non-Engine/mi2-dos-ni-slideshow-demo-en.zip",
-    "platform": "DOS"
-  },
-  {
-    "relative_path": "monkey2-dos-ni-demo-en",
-    "id": "scumm:monkey2",
-    "description": "DOS Unsupported Demo",
-    "download_url": "https://downloads.scummvm.org/frs/demos/scumm/monkey2-dos-ni-demo-en.zip",
     "platform": "DOS"
   },
   {
