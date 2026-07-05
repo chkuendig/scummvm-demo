@@ -270,5 +270,21 @@
             "en"
         ],
         "name": "Tristam Island"
+    },
+    "adibou-win-ni-demo-fr": {
+        "comment": "Unsupported demo (gob) - does not run",
+        "skip": true
+    },
+    "fullpipe-97-demo-ru": {
+        "comment": "Non-working 1997 demo release",
+        "skip": true
+    },
+    "pqswat-win-demo-en": {
+        "comment": "Unsupported demo (sci) - does not run",
+        "skip": true
+    },
+    "monkey2-dos-ni-demo-en": {
+        "comment": "Unsupported demo - does not run",
+        "skip": true
     }
 }

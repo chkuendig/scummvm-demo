@@ -207,9 +207,39 @@ class GamesLibrary {
 		if (!variants || variants.length === 0) {
 			return null;
 		}
-		return variants.find(variant => variant.cover) ||
-			variants.find(variant => variant.description) ||
-			variants[0];
+		// Prefer an English variant. Most English demos carry no explicit
+		// `languages` field (the language lives in the relative_path suffix), so
+		// they would otherwise lose to an alphabetically-earlier localized one -
+		// e.g. DOTT has de/en/fr and would show the German demo. Pick the first
+		// explicitly-English variant, else the first that isn't explicitly
+		// localized, else fall back to the first with a description.
+		const withDesc = variants.filter(variant => variant.description);
+		const pool = withDesc.length ? withDesc : variants;
+		return pool.find(variant => this.isEnglishVariant(variant)) ||
+			pool.find(variant => !this.isNonEnglishVariant(variant)) ||
+			pool[0];
+	}
+
+	variantLanguageSuffix(variant) {
+		return ((variant && variant.relative_path) || '').toLowerCase().split('-').pop();
+	}
+
+	isEnglishVariant(variant) {
+		const langs = Array.isArray(variant && variant.languages) ? variant.languages : [];
+		if (langs.length) {
+			return langs.some(lang => /^en/i.test(lang));
+		}
+		return ['en', 'us', 'uk'].includes(this.variantLanguageSuffix(variant));
+	}
+
+	isNonEnglishVariant(variant) {
+		const langs = Array.isArray(variant && variant.languages) ? variant.languages : [];
+		if (langs.length) {
+			return !langs.some(lang => /^en/i.test(lang));
+		}
+		const nonEnglish = ['de', 'fr', 'nl', 'ru', 'es', 'it', 'ja', 'jp', 'pl', 'he',
+			'ca', 'no', 'sv', 'pt', 'br', 'cz', 'hu', 'fi', 'da', 'dk', 'ko', 'kr', 'zh', 'cn', 'gr', 'tr', 'ro'];
+		return nonEnglish.includes(this.variantLanguageSuffix(variant));
 	}
 
 	enrichGameInfo(gameId, variant) {
