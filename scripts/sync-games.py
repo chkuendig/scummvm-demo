@@ -287,6 +287,23 @@ class GameDownloader:
             raise RuntimeError(f"Failed to connect to remote server: {stderr_output}")
         raise RuntimeError(f"Remote command failed: {stderr_output}")
 
+    def remove_from_remote(self, folder_name: str) -> bool:
+        """Delete a game folder from the remote data host (un-sync a skipped game)."""
+        if not self.scp_server or not self.scp_path:
+            return False
+        # Safety: refuse anything that could escape the games directory.
+        if not folder_name or folder_name.startswith("/") or ".." in folder_name.split("/"):
+            self._print(f"Refusing to remove unsafe remote path: {folder_name!r}")
+            return False
+        ssh_cmd = self._build_controlpath_ssh_command()
+        ssh_cmd.extend([self.scp_server, f'rm -rf "{self.scp_path}/{folder_name}"'])
+        result = subprocess.run(ssh_cmd, check=False, env=os.environ.copy(), timeout=60)
+        if result.returncode == 0:
+            self._print(f"Removed skipped game from remote server: {folder_name}")
+            return True
+        self._print(f"Warning: could not remove {folder_name} from remote (exit {result.returncode})")
+        return False
+
     # --- File transfer helpers ------------------------------------------
 
     def download_file(self, url: str, filename: str) -> Path:
@@ -464,6 +481,19 @@ class GameDownloader:
 
         remote_folders_remaining = set(remote_folders_snapshot)
         remote_folders_for_validation = set(remote_folders_snapshot)
+
+        # Un-sync skipped games: entries marked skip=true (should_include_in_json
+        # is False) whose data still lingers on the host from a previous sync.
+        # The sync only ever uploaded, so a newly-skipped game would otherwise
+        # stay on the server and fail gen-json's "should not be included in JSON"
+        # validation. Remove them so they leave both games.json and the host.
+        if not requested_ids and self.scp_server and self.scp_path:
+            for relative_path, entry in self.catalog.items():
+                if entry.should_include_in_json:
+                    continue
+                if relative_path in remote_folders_snapshot and self.remove_from_remote(relative_path):
+                    remote_folders_remaining.discard(relative_path)
+                    remote_folders_for_validation.discard(relative_path)
 
         transfer_count = 0
         for relative_path in targets:
