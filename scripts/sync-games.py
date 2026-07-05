@@ -7,6 +7,7 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 import urllib.parse
 import urllib.request
 import zipfile
@@ -208,8 +209,24 @@ class GameDownloader:
         ssh_pos = next((i for i, arg in enumerate(ssh_cmd) if arg in {"ssh", "scp"}), 0)
         ssh_cmd.insert(ssh_pos + 1, "-MNf")
         ssh_cmd.append(f"{self.scp_server}")
-        subprocess.run(ssh_cmd, check=True, env=env)
-        self._temp_print("Opened SSH connection")
+        # sync-games runs in parallel with the scp-action deploys to the SAME
+        # shared Hostinger host, which caps concurrent SSH sessions - so the
+        # master connection intermittently times out (while scp-action wins the
+        # race). Retry with backoff instead of failing the whole deploy.
+        attempts = 6
+        for attempt in range(1, attempts + 1):
+            result = subprocess.run(ssh_cmd, env=env)
+            if result.returncode == 0:
+                self._temp_print("Opened SSH connection")
+                return
+            if attempt < attempts:
+                delay = min(60, 10 * attempt)
+                self._print(
+                    f"SSH connect failed (exit {result.returncode}); "
+                    f"retry {attempt}/{attempts - 1} in {delay}s"
+                )
+                time.sleep(delay)
+        raise RuntimeError(f"Could not open SSH connection after {attempts} attempts")
 
     def close_connection(self) -> None:
         control_path = "/tmp/scummvm-ssh-%r@%h:%p"
