@@ -53,7 +53,11 @@
         "comment": "not a demo, just a videofile 'The_Last_Express-Trailer.avi'",
         "skip": true
     },
-    "lastexpress-win-demo-en": {},
+    "lastexpress-win-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
     "leptonsquest": {
         "company": "IndieSquish"
     },
@@ -84,7 +88,10 @@
         "languages": [
             "en"
         ],
-        "name": "Mini-Zork"
+        "name": "Mini-Zork",
+        "featured": {
+            "kind": "demo"
+        }
     },
     "mysthous-fr": {
         "comment": "Game data not found: Has two subfolders, Version A, Version B with different demos",
@@ -195,7 +202,10 @@
         "languages": [
             "en"
         ],
-        "name": "Colossal Cave Adventure"
+        "name": "Colossal Cave Adventure",
+        "featured": {
+            "kind": "complete"
+        }
     },
     "zcode-curses": {
         "comment": "Recommended from https://www.ioccc.org/2024/mills/index.html",
@@ -386,6 +396,61 @@
         }
     },
     "sword1-win-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "neverhood-win-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "ihnm-dos-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "t7g-dos-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "scalpel-dos-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "rex-dos-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "dreamweb-cd-us-1.1": {
+        "featured": {
+            "kind": "complete"
+        }
+    },
+    "remorse-dos-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "returntoringworld-dos-demo-en": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "blackwell_legacy-demo": {
+        "featured": {
+            "kind": "demo"
+        }
+    },
+    "ooo": {
+        "featured": {
+            "kind": "complete"
+        }
+    },
+    "warlock-demo-win": {
         "featured": {
             "kind": "demo"
         }
