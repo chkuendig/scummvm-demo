@@ -96,7 +96,11 @@
     "penumbra-overture-mac": {
         "description": "Mac Demo",
         "download_link": "https://www.moddb.com/games/penumbra-overture/downloads/penumbra-overture-demo-mac",
-        "id": "hpl1:penumbraoverture"
+        "id": "hpl1:penumbraoverture",
+        "featured": {
+            "blurb": "Full 3D horror adventure — the complete first episode",
+            "kind": "complete"
+        }
     },
     "playground3d": {
         "company": "ScummVM",
@@ -286,5 +290,125 @@
     "monkey2-dos-ni-demo-en": {
         "comment": "Unsupported demo - does not run",
         "skip": true
+    },
+    "bass-cd-1.2": {
+        "featured": {
+            "blurb": "The freeware cyberpunk classic",
+            "kind": "complete"
+        }
+    },
+    "FOTAQ_Floppy": {
+        "featured": {
+            "blurb": "Jungle adventure comedy — complete and free",
+            "kind": "complete"
+        }
+    },
+    "lure-1.1": {
+        "featured": {
+            "blurb": "Revolution's first adventure — complete and free",
+            "kind": "complete"
+        }
+    },
+    "drascula-1.0": {
+        "featured": {
+            "blurb": "Vampire parody adventure — complete and free",
+            "kind": "complete"
+        }
+    },
+    "sword25-v1.0": {
+        "featured": {
+            "blurb": "The fan-made Broken Sword sequel — complete and free",
+            "kind": "complete"
+        }
+    },
+    "samnmax-dos-cd-demo-en": {
+        "featured": {
+            "blurb": "Hit the road with the Freelance Police",
+            "kind": "demo"
+        }
+    },
+    "ft-dos-demo-en": {
+        "featured": {
+            "blurb": "Ride hard on Ben's hog",
+            "kind": "demo"
+        }
+    },
+    "atlantis-dos-demo1-en": {
+        "featured": {
+            "blurb": "Indy's greatest adventure",
+            "kind": "demo"
+        }
+    },
+    "monkey1-amiga-demo-en": {
+        "featured": {
+            "blurb": "Where it all began",
+            "kind": "demo"
+        }
+    },
+    "freddypharkas-win-cd-demo-en": {
+        "featured": {
+            "blurb": "Frontier pharmacist mayhem",
+            "kind": "demo"
+        }
+    },
+    "simon1-acorn-cd-demo-en": {
+        "featured": {
+            "blurb": "The sarcastic sorcerer's apprentice",
+            "kind": "demo"
+        }
+    },
+    "simon2-dos-cd-demo-en": {
+        "featured": {
+            "blurb": "Simon returns, snarkier than ever",
+            "kind": "demo"
+        }
+    },
+    "sword2-win-demo-en": {
+        "featured": {
+            "blurb": "George and Nico return",
+            "kind": "demo"
+        }
+    },
+    "dw-dos-cd-demo-en": {
+        "featured": {
+            "blurb": "Terry Pratchett's Discworld",
+            "kind": "demo"
+        }
+    },
+    "rtz-dos-cd-demo1-en": {
+        "featured": {
+            "blurb": "Return to the Great Underground Empire",
+            "kind": "demo"
+        }
+    },
+    "myst-win-cd-demo-en": {
+        "featured": {
+            "blurb": "The island that defined a genre",
+            "kind": "demo"
+        }
+    },
+    "grim-win-demo1-en": {
+        "featured": {
+            "blurb": "Land of the dead, film noir style",
+            "kind": "demo"
+        }
+    },
+    "gob1-dos-demo1-en": {
+        "featured": {
+            "blurb": "Puzzle antics with the Goblins",
+            "kind": "demo"
+        }
+    },
+    "lba-demo-mult": {
+        "featured": {
+            "blurb": "Twinsen's action adventure",
+            "kind": "demo"
+        }
+    },
+    "sword1-win-demo-en": {
+        "featured": {
+            "blurb": "The original Paris conspiracy",
+            "kind": "demo"
+        }
     }
 }

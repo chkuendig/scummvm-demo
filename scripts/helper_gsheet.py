@@ -56,7 +56,7 @@ SHEET_IDS = {
     "platforms": "1061029686",
 }
 
-ALLOWED_FIELDS = {"id", "relative_path", "description", "download_url", "languages", "platform"}
+ALLOWED_FIELDS = {"id", "relative_path", "description", "download_url", "languages", "platform", "featured"}
 LANGUAGE_COLUMNS = ["lang", "language", "language1", "language2", "language3"]
 _SOURCE_PRIORITY = {"game_demos": 3, "director_demos": 2, "game_downloads": 1}
 
