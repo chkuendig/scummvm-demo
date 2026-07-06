@@ -555,13 +555,13 @@ class GamesLibrary {
 			const h3 = document.createElement('h3');
 			h3.textContent = record.name;
 			const blurb = document.createElement('p');
-			blurb.textContent = meta.blurb || '';
+			blurb.textContent = v.description || '';
 			const chips = document.createElement('div');
 			chips.className = 'variant-details';
 			if (meta.kind) {
 				const kind = document.createElement('span');
 				kind.className = 'fcard-kind' + (meta.kind === 'complete' ? ' complete' : '');
-				kind.textContent = meta.kind === 'complete' ? 'Complete game' : 'Demo';
+				kind.textContent = meta.kind === 'complete' ? 'Freeware' : 'Demo';
 				chips.appendChild(kind);
 			}
 			const platformIcon = this.getPlatformIcon(v.platform);
