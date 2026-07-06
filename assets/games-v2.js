@@ -558,12 +558,6 @@ class GamesLibrary {
 			blurb.textContent = v.description || '';
 			const chips = document.createElement('div');
 			chips.className = 'variant-details';
-			if (meta.kind) {
-				const kind = document.createElement('span');
-				kind.className = 'fcard-kind' + (meta.kind === 'complete' ? ' complete' : '');
-				kind.textContent = meta.kind === 'complete' ? 'Freeware' : 'Demo';
-				chips.appendChild(kind);
-			}
 			const platformIcon = this.getPlatformIcon(v.platform);
 			if (platformIcon) {
 				const span = document.createElement('span');
