@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ScummVM Games Library</title>
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="games-v2.css">
+    </head>
+    <body class="theme-scumm">
+        <div class="site-wrap">
+            <header class="site-header">
+                <div class="logo">
+                    <img class="background hide-small" src="maniac-half.png" alt="Maniac Mansion kids">
+                    <a href="https://scummvm.org/">
+                        <img class="foreground" src="scummvm_logo.png" alt="ScummVM Logo">
+                    </a>
+                </div>
+                <div class="row top">
+                    <div class="col-1-1">
+                        <img class="heroes hide-small" id="heroesImg" src="heroes2.png" alt="Game characters">
+                    </div>
+                </div>
+                <div class="row bottom hide-small">
+                    <div class="col-1-1">
+                        <span class="scummvm float_right">Script Creation Utility for Maniac Mansion Virtual Machine</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container row">
+                <div class="col-1-1">
+                    <div class="content" style="margin: 8px;">
+                        <h1>ScummVM for the Web</h1>
+                        <p>ScummVM is a program which allows you to run certain classic graphical adventure and role-playing games. ScummVM is a complete rewrite of these games' executables and is not an emulator. ScummVM replaces the executables shipped with the games, allowing you to play them on systems for which they were never designed. One such system is the web browser, and this demo site lets you try a selection of games directly in your browser using ScummVM!</p>
+                        <p>You can play some of the games already added when launching ScummVM, or you can connect to your cloud storage (Dropbox, Google Drive, Box, and OneDrive) and even play commercial games you bought while synchronizing saved games across devices. For more information, visit the <a href="https://www.scummvm.org/" target="_blank" rel="noopener">main ScummVM website</a>.</p>
+
+                        <div id="downloadContainer" style="max-width: 400px; margin: 20px auto;">
+                            <a id="downloadButton" href="scummvm.html">
+                                <img src="scummvm.png" alt="Download ScummVM icon">
+                                <div class="downloadText">Launch ScummVM</div>
+                                <div id="downloadDetails">Version 3.1.0git</div>
+                            </a>
+                        </div>
+
+                        <h1>Features</h1>
+                        <p>ScummVM supports almost all functionality available in the native application (see the <a href="https://docs.scummvm.org/" target="_blank" rel="noopener">official documentation</a> for the full list). A few web-specific highlights:</p>
+      
+                        <div class="feature-cards-container">
+                            <div class="feature-cards">
+                                <div class="feature-card" data-feature="sound">
+                                    <h3>Sound</h3>
+                                    <p>Full audio support with MIDI emulation, MT32/OPL, hardware devices, and text-to-speech.</p>
+                                </div>
+                                <div class="feature-card" data-feature="graphics">
+                                    <h3>Graphics</h3>
+                                    <p>WebGL rendering with shader filters, supporting both 2D and 3D game engines.</p>
+                                </div>
+                                <div class="feature-card" data-feature="storage">
+                                    <h3>Storage</h3>
+                                    <p>Local drag & drop, server-hosted demos, and full cloud storage integration with save sync.</p>
+                                </div>
+                                <div class="feature-card" data-feature="controls">
+                                    <h3>Flexible Controls</h3>
+                                    <p>Play with mouse, keyboard, touchscreen, or gamepad—whatever suits the moment.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feature Detail Modal -->
+                        <div id="feature-modal">
+                            <div id="feature-modal-overlay"></div>
+                            <div id="feature-modal-content-wrapper">
+                                <div id="feature-modal-title">
+                                    <div id="feature-modal-nav">
+                                        <button id="feature-modal-prev" aria-label="Previous feature">&lsaquo;</button>
+                                        <h3 id="feature-modal-heading"></h3>
+                                        <button id="feature-modal-next" aria-label="Next feature">&rsaquo;</button>
+                                    </div>
+                                    <button id="feature-modal-close" aria-label="Close">&times;</button>
+                                </div>
+                                <div id="feature-modal-content">
+                                    <div id="feature-modal-media">
+                                        <div id="feature-modal-media-container"></div>
+                                        <div id="feature-modal-media-selector"></div>
+                                    </div>
+                                    <div id="feature-modal-text">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                        <h1>Games Showcase</h1>
+                        <p>A hand-picked selection of complete freeware games and classic demos, playable instantly in your browser. The full library lives at <a href="https://scummvm.kuendig.io/games.html">the ScummVM demos site</a>.</p>
+
+                        <div id="loading" class="loading">Loading games data...</div>
+
+                        <div id="error" class="error" style="display: none;">Error loading data. Please make sure all files are accessible.</div>
+
+                        <div id="content" style="display: none;">
+                        <h2 class="v2-sec" id="featuredSection">Featured <small>hand-picked games, A&ndash;Z &mdash; one click to play</small></h2>
+                        <div id="featuredGrid" class="featured-grid"></div>
+
+                            <div class="footer">
+                                Powered by ScummVM • Visit <a href="https://www.scummvm.org">scummvm.org</a> for more information
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>window.GAMES_PAGE_MODE = "limited";
+document.addEventListener('DOMContentLoaded', function () {
+  var h = document.getElementById('heroesImg');
+  if (h) h.src = 'heroes' + (1 + Math.floor(Math.random() * 5)) + '.png';
+});</script>
+        <script src="games-v2.js" defer></script>
+    </body>
+    </html>

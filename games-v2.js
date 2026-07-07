@@ -1,0 +1,1147 @@
+class GamesLibrary {
+	constructor() {
+		this.gamesData = [];
+		this.gamesMetadata = {};
+		this.companiesMetadata = {};
+		this.enginesMetadata = {};
+		this.iconIndex = {};
+		this.groupedGames = {};
+		this.gameRecords = [];
+		this.companyOptions = new Map();
+		this.engineOptions = new Map();
+		this.filters = {
+			search: '',
+			company: 'all',
+			engine: 'all'
+		};
+		this.currentSort = 'alpha';
+		this.sortDirection = 'asc';
+
+		this.dom = {
+			loading: document.getElementById('loading'),
+			error: document.getElementById('error'),
+			content: document.getElementById('content'),
+			gamesList: document.getElementById('gamesList'),
+			searchBox: document.getElementById('searchBox'),
+			companyFilter: document.getElementById('companyFilter'),
+			engineFilter: document.getElementById('engineFilter'),
+			sortButtons: document.querySelectorAll('.sort-button')
+		};
+
+		this.init();
+	}
+
+	async init() {
+		try {
+			await this.loadData();
+			this.processData();
+			this.mode = window.GAMES_PAGE_MODE || 'full';
+			this.renderFeatured();
+			if (this.mode === 'limited') {
+				this.showContent();
+				return;
+			}
+			this.populateFilterOptions();
+			this.setupControls();
+			this.updateDisplay();
+			this.showContent();
+		} catch (error) {
+			console.error('Error initializing games library:', error);
+			this.showError();
+		}
+	}
+
+	async loadData() {
+		const gamesResponse = await fetch('./games.json');
+		this.gamesData = await gamesResponse.json();
+
+		// Featured curation ships with the page (metadata.json); merge it in
+		// client-side so the page works regardless of whether the games.json
+		// generator has passed the flags through yet.
+		try {
+			const metaResponse = await fetch('./metadata.json');
+			if (metaResponse.ok) {
+				const pageMeta = await metaResponse.json();
+				this.gamesData.forEach(entry => {
+					const m = pageMeta[entry.relative_path];
+					if (m && m.featured && !entry.featured) entry.featured = m.featured;
+				});
+			}
+		} catch (e) { /* optional enrichment only */ }
+
+		const indexResponse = await fetch('data/gui-icons/icons/index.json');
+		this.iconIndex = await indexResponse.json();
+
+		const gamesXmlResponse = await fetch('data/gui-icons/games.xml');
+		const gamesXmlText = await gamesXmlResponse.text();
+		this.parseGamesXml(gamesXmlText);
+
+		const companiesXmlResponse = await fetch('data/gui-icons/companies.xml');
+		const companiesXmlText = await companiesXmlResponse.text();
+		this.parseCompaniesXml(companiesXmlText);
+
+		const enginesXmlResponse = await fetch('data/gui-icons/engines.xml');
+		const enginesXmlText = await enginesXmlResponse.text();
+		this.parseEnginesXml(enginesXmlText);
+	}
+
+	parseGamesXml(xmlText) {
+		if (!xmlText) return;
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(xmlText, 'text/xml');
+		const gameElements = doc.getElementsByTagName('game');
+
+		for (let i = 0; i < gameElements.length; i++) {
+			const game = gameElements[i];
+			const id = game.getAttribute('id');
+			if (!id) continue;
+
+			const engineId = game.getAttribute('engine_id') || null;
+			const metadata = {
+				name: game.getAttribute('name') || '',
+				companyId: game.getAttribute('company_id') || null,
+				engineId,
+				year: this.parseYear(game.getAttribute('year'))
+			};
+
+			this.storeGameMetadata(id, engineId, metadata);
+		}
+	}
+
+	storeGameMetadata(gameId, engineId, metadata) {
+		if (engineId) {
+			const compositeKey = `${engineId}:${gameId}`;
+			this.gamesMetadata[compositeKey] = metadata;
+		}
+
+		if (!Object.prototype.hasOwnProperty.call(this.gamesMetadata, gameId)) {
+			this.gamesMetadata[gameId] = metadata;
+		}
+	}
+
+	parseYear(value) {
+		const parsed = parseInt(value, 10);
+		return Number.isFinite(parsed) ? parsed : null;
+	}
+
+	parseCompaniesXml(xmlText) {
+		if (!xmlText) return;
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(xmlText, 'text/xml');
+		const companyElements = doc.getElementsByTagName('company');
+
+		for (let i = 0; i < companyElements.length; i++) {
+			const company = companyElements[i];
+			const id = company.getAttribute('id');
+			if (!id) continue;
+			this.companiesMetadata[id] = {
+				name: company.getAttribute('name') || '',
+				altName: company.getAttribute('alt_name') || ''
+			};
+		}
+	}
+
+	parseEnginesXml(xmlText) {
+		if (!xmlText) return;
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(xmlText, 'text/xml');
+		const engineElements = doc.getElementsByTagName('engine');
+
+		for (let i = 0; i < engineElements.length; i++) {
+			const engine = engineElements[i];
+			const id = engine.getAttribute('id');
+			if (!id) continue;
+			this.enginesMetadata[id] = {
+				name: engine.getAttribute('name') || '',
+				altName: engine.getAttribute('alt_name') || ''
+			};
+		}
+	}
+
+	processData() {
+		this.groupGames();
+		this.gameRecords = [];
+		this.companyOptions.clear();
+		this.engineOptions.clear();
+
+		Object.entries(this.groupedGames).forEach(([gameId, variants]) => {
+			if (!variants || variants.length === 0) {
+				return;
+			}
+
+			const primaryVariant = this.selectPrimaryVariant(variants);
+			if (!primaryVariant) {
+				return;
+			}
+
+			const gameInfo = this.enrichGameInfo(gameId, primaryVariant);
+			const iconPath = this.getIconPath(gameId);
+			const launchUrl = this.buildLaunchUrl(gameId, primaryVariant);
+			const languages = Array.isArray(primaryVariant.languages) ? primaryVariant.languages : [];
+			const description = primaryVariant.description || '';
+			const platform = primaryVariant.platform || 'Unknown';
+
+			const record = {
+				gameId,
+				gameIdLower: gameId.toLowerCase(),
+				name: gameInfo.name,
+				nameLower: gameInfo.name.toLowerCase(),
+				companyId: gameInfo.companyId,
+				companyName: gameInfo.companyName,
+				companyLower: (gameInfo.companyName || '').toLowerCase(),
+				engineId: gameInfo.engineId,
+				engineName: gameInfo.engineName,
+				year: gameInfo.year,
+				variant: primaryVariant,
+				variantsAll: variants,
+				featuredVariant: variants.find(v => v && v.featured) || null,
+				launchUrl,
+				iconPath,
+				languages,
+				platform,
+				description,
+				descriptionLower: description.toLowerCase()
+			};
+
+			this.gameRecords.push(record);
+
+			if (record.companyId && record.companyName) {
+				this.companyOptions.set(record.companyId, record.companyName);
+			}
+			if (record.engineId && record.engineName) {
+				this.engineOptions.set(record.engineId, record.engineName);
+			}
+		});
+	}
+
+	groupGames() {
+		this.groupedGames = {};
+		this.gamesData.forEach(entry => {
+			if (!entry.id) return;
+			if (!this.groupedGames[entry.id]) {
+				this.groupedGames[entry.id] = [];
+			}
+			this.groupedGames[entry.id].push(entry);
+		});
+	}
+
+	selectPrimaryVariant(variants) {
+		if (!variants || variants.length === 0) {
+			return null;
+		}
+		// Prefer an English variant. Most English demos carry no explicit
+		// `languages` field (the language lives in the relative_path suffix), so
+		// they would otherwise lose to an alphabetically-earlier localized one -
+		// e.g. DOTT has de/en/fr and would show the German demo. Pick the first
+		// explicitly-English variant, else the first that isn't explicitly
+		// localized, else fall back to the first with a description.
+		const withDesc = variants.filter(variant => variant.description);
+		const pool = withDesc.length ? withDesc : variants;
+		return pool.find(variant => this.isEnglishVariant(variant)) ||
+			pool.find(variant => !this.isNonEnglishVariant(variant)) ||
+			pool[0];
+	}
+
+	variantLanguageSuffix(variant) {
+		return ((variant && variant.relative_path) || '').toLowerCase().split('-').pop();
+	}
+
+	isEnglishVariant(variant) {
+		const langs = Array.isArray(variant && variant.languages) ? variant.languages : [];
+		if (langs.length) {
+			return langs.some(lang => /^en/i.test(lang));
+		}
+		return ['en', 'us', 'uk'].includes(this.variantLanguageSuffix(variant));
+	}
+
+	isNonEnglishVariant(variant) {
+		const langs = Array.isArray(variant && variant.languages) ? variant.languages : [];
+		if (langs.length) {
+			return !langs.some(lang => /^en/i.test(lang));
+		}
+		const nonEnglish = ['de', 'fr', 'nl', 'ru', 'es', 'it', 'ja', 'jp', 'pl', 'he',
+			'ca', 'no', 'sv', 'pt', 'br', 'cz', 'hu', 'fi', 'da', 'dk', 'ko', 'kr', 'zh', 'cn', 'gr', 'tr', 'ro'];
+		return nonEnglish.includes(this.variantLanguageSuffix(variant));
+	}
+
+	enrichGameInfo(gameId, variant) {
+		const metadata = this.getGameMetadata(gameId) || {};
+		const simpleId = this.extractSimpleId(gameId);
+
+		const nameCandidate = metadata.name || variant.name;
+		const name = nameCandidate || this.formatGameId(simpleId);
+
+		const companyId = metadata.companyId || null;
+		let companyName = companyId ? this.getCompanyName(companyId) : null;
+		if (!companyName && variant.company) {
+			companyName = variant.company;
+		}
+
+		const engineId = metadata.engineId || null;
+		const engineName = engineId ? this.getEngineName(engineId) : null;
+
+		return {
+			name,
+			companyId,
+			companyName,
+			engineId,
+			engineName,
+			year: metadata.year
+		};
+	}
+
+	getGameMetadata(gameId) {
+		if (!gameId) {
+			return null;
+		}
+
+		if (Object.prototype.hasOwnProperty.call(this.gamesMetadata, gameId)) {
+			return this.gamesMetadata[gameId];
+		}
+
+		const simpleId = this.extractSimpleId(gameId);
+		if (simpleId !== gameId && Object.prototype.hasOwnProperty.call(this.gamesMetadata, simpleId)) {
+			return this.gamesMetadata[simpleId];
+		}
+
+		return null;
+	}
+
+	extractSimpleId(gameId) {
+		const segments = gameId.split(':');
+		return segments.length > 1 ? segments[1] : segments[0];
+	}
+
+	formatGameId(rawId) {
+		if (!rawId) return '';
+		return rawId
+			.replace(/[_-]/g, ' ')
+			.replace(/\s+/g, ' ')
+			.trim()
+			.replace(/\b\w/g, char => char.toUpperCase());
+	}
+
+	getCompanyName(companyId) {
+		const entry = this.companiesMetadata[companyId];
+		if (!entry) return null;
+		return entry.name || entry.altName || null;
+	}
+
+	getEngineName(engineId) {
+		const entry = this.enginesMetadata[engineId];
+		if (!entry) return null;
+		return entry.name || entry.altName || null;
+	}
+
+	buildLaunchUrl(gameId, variant) {
+		if (!variant) return '#';
+		const params = [`--path=/data/games/${variant.relative_path}`];
+
+		if (variant.languages && variant.languages.length > 0) {
+			const primaryLang = variant.languages[0];
+			if (primaryLang && primaryLang !== 'Unknown') {
+				const shortLang = primaryLang.includes('_') ? primaryLang.split('_').pop() : primaryLang;
+				params.push(`--language=${shortLang.toLowerCase()}`);
+			}
+		}
+
+		return `scummvm.html#${params.join(' ')} ${gameId}`;
+	}
+
+	populateFilterOptions() {
+		this.populateSelect(this.dom.companyFilter, this.companyOptions);
+		this.populateSelect(this.dom.engineFilter, this.engineOptions);
+	}
+
+	populateSelect(selectElement, optionsMap) {
+		if (!selectElement) return;
+		while (selectElement.options.length > 1) {
+			selectElement.remove(1);
+		}
+		const options = Array.from(optionsMap.entries()).sort((a, b) => a[1].localeCompare(b[1]));
+		options.forEach(([value, label]) => {
+			const option = document.createElement('option');
+			option.value = value;
+			option.textContent = label;
+			selectElement.appendChild(option);
+		});
+	}
+
+	getIconPath(gameId) {
+		const engineGameId = gameId.replace(':', '-');
+		const iconFileName = `${engineGameId}.png`;
+
+		if (this.iconIndex && Object.prototype.hasOwnProperty.call(this.iconIndex, iconFileName)) {
+			return `data/gui-icons/icons/${iconFileName}`;
+		}
+
+		return null;
+	}
+
+	setupControls() {
+		if (this.dom.searchBox) {
+			this.dom.searchBox.addEventListener('input', event => {
+				this.filters.search = event.target.value.trim().toLowerCase();
+				this.updateDisplay();
+			});
+		}
+
+		if (this.dom.companyFilter) {
+			this.dom.companyFilter.addEventListener('change', event => {
+				const value = event.target.value;
+				this.filters.company = value;
+				if (value !== 'all' && this.dom.engineFilter) {
+					this.filters.engine = 'all';
+					this.dom.engineFilter.value = 'all';
+				}
+				this.updateDisplay();
+			});
+		}
+
+		if (this.dom.engineFilter) {
+			this.dom.engineFilter.addEventListener('change', event => {
+				const value = event.target.value;
+				this.filters.engine = value;
+				if (value !== 'all' && this.dom.companyFilter) {
+					this.filters.company = 'all';
+					this.dom.companyFilter.value = 'all';
+				}
+				this.updateDisplay();
+			});
+		}
+
+		if (this.dom.sortButtons && this.dom.sortButtons.length > 0) {
+			this.dom.sortButtons.forEach(button => {
+				if (!button.dataset.label) {
+					button.dataset.label = button.textContent.trim();
+				}
+				if (!button.dataset.defaultDirection) {
+					button.dataset.defaultDirection = 'asc';
+				}
+
+				button.addEventListener('click', () => {
+					const sortKey = button.getAttribute('data-sort');
+					if (this.currentSort === sortKey) {
+						this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+					} else {
+						this.currentSort = sortKey;
+						this.sortDirection = this.getDefaultSortDirection(sortKey);
+					}
+					this.updateSortButtonState();
+					this.updateDisplay();
+				});
+			});
+			this.updateSortButtonState();
+		}
+	}
+
+	updateSortButtonState() {
+		if (!this.dom.sortButtons) return;
+		this.dom.sortButtons.forEach(button => {
+			const isActive = button.getAttribute('data-sort') === this.currentSort;
+			const baseLabel = button.dataset.label || button.textContent.trim();
+			let label = baseLabel;
+
+			if (isActive) {
+				button.classList.add('active');
+				button.setAttribute('aria-pressed', 'true');
+				const arrow = this.sortDirection === 'asc' ? '▲' : '▼';
+				label = `${baseLabel} ${arrow}`;
+			} else {
+				button.classList.remove('active');
+				button.setAttribute('aria-pressed', 'false');
+			}
+
+			button.textContent = label;
+		});
+	}
+
+	getDefaultSortDirection(sortKey) {
+		if (!this.dom.sortButtons) {
+			return 'asc';
+		}
+
+		const buttons = Array.from(this.dom.sortButtons);
+		const match = buttons.find(btn => btn.getAttribute('data-sort') === sortKey);
+		if (match && match.dataset.defaultDirection) {
+			return match.dataset.defaultDirection === 'desc' ? 'desc' : 'asc';
+		}
+
+		return 'asc';
+	}
+
+	updateDisplay() {
+		const filteredRecords = this.getFilteredRecords();
+		const sortedRecords = this.sortRecords(filteredRecords);
+		this.renderGames(sortedRecords);
+	}
+
+	getFilteredRecords() {
+		const searchTerm = this.filters.search;
+		const companyFilter = this.filters.company;
+		const engineFilter = this.filters.engine;
+
+		return this.gameRecords.filter(record => {
+			const matchesSearch = !searchTerm ||
+				record.nameLower.includes(searchTerm) ||
+				record.companyLower.includes(searchTerm) ||
+				record.gameIdLower.includes(searchTerm) ||
+				record.descriptionLower.includes(searchTerm);
+
+			if (!matchesSearch) {
+				return false;
+			}
+
+			const matchesCompany = companyFilter === 'all' || record.companyId === companyFilter;
+			if (!matchesCompany) {
+				return false;
+			}
+
+			const matchesEngine = engineFilter === 'all' || record.engineId === engineFilter;
+			if (!matchesEngine) {
+				return false;
+			}
+
+			return true;
+		});
+	}
+
+	sortRecords(records) {
+		const sorted = [...records];
+		const direction = this.sortDirection === 'asc' ? 1 : -1;
+
+		if (this.currentSort === 'year') {
+			const fallback = this.sortDirection === 'asc' ? Number.MAX_SAFE_INTEGER : Number.MIN_SAFE_INTEGER;
+			sorted.sort((a, b) => {
+				const yearA = Number.isFinite(a.year) ? a.year : fallback;
+				const yearB = Number.isFinite(b.year) ? b.year : fallback;
+				const diff = yearA - yearB;
+				if (diff !== 0) {
+					return diff * direction;
+				}
+				return a.nameLower.localeCompare(b.nameLower) * direction;
+			});
+		} else {
+			sorted.sort((a, b) => a.nameLower.localeCompare(b.nameLower) * direction);
+		}
+		return sorted;
+	}
+
+	variantLabel(variant) {
+		const langs = Array.isArray(variant.languages) && variant.languages.length
+			? variant.languages.join('/').toUpperCase()
+			: (this.isEnglishVariant(variant) ? 'EN' : this.variantLanguageSuffix(variant).toUpperCase());
+		return [variant.platform, langs, variant.description || variant.relative_path]
+			.filter(Boolean).join(' \u00b7 ');
+	}
+
+	renderFeatured() {
+		const grid = document.getElementById('featuredGrid');
+		if (!grid) return;
+		const feats = this.gameRecords
+			.filter(r => r.featuredVariant)
+			.sort((a, b) => a.name.localeCompare(b.name));
+		if (!feats.length) {
+			const sec = document.getElementById('featuredSection');
+			if (sec) sec.style.display = 'none';
+			return;
+		}
+		grid.innerHTML = '';
+		feats.forEach(record => {
+			const v = record.featuredVariant;
+			const meta = v.featured || {};
+			const link = document.createElement('a');
+			link.className = 'fcard';
+			link.href = this.buildLaunchUrl(record.gameId, v);
+
+			const iconDiv = document.createElement('div');
+			iconDiv.className = 'game-icon fcard-icon';
+			if (record.iconPath) {
+				const img = document.createElement('img');
+				img.setAttribute('data-src', record.iconPath);
+				img.alt = '';
+				img.loading = 'lazy';
+				iconDiv.appendChild(img);
+			}
+
+			const fx = document.createElement('div');
+			fx.className = 'fcard-text';
+			const h3 = document.createElement('h3');
+			h3.textContent = record.name;
+			const blurb = document.createElement('p');
+			blurb.textContent = v.description || '';
+			const chips = document.createElement('div');
+			chips.className = 'variant-details';
+			const platformIcon = this.getPlatformIcon(v.platform);
+			if (platformIcon) {
+				const span = document.createElement('span');
+				span.className = 'variant-platform';
+				const img = document.createElement('img');
+				img.src = platformIcon; img.alt = v.platform || ''; img.title = v.platform || '';
+				img.onerror = () => { img.style.display = 'none'; };
+				span.appendChild(img);
+				chips.appendChild(span);
+			}
+			const langs = Array.isArray(v.languages) && v.languages.length ? v.languages
+				: (this.isEnglishVariant(v) ? ['en'] : [this.variantLanguageSuffix(v)]);
+			const langSpan = document.createElement('span');
+			langSpan.className = 'variant-languages';
+			langs.slice(0, 3).forEach(code => {
+				const iconPath = this.getLanguageIcon(code);
+				if (!iconPath) return;
+				const img = document.createElement('img');
+				img.src = iconPath; img.alt = code; img.title = code;
+				img.onerror = () => { img.style.display = 'none'; };
+				langSpan.appendChild(img);
+			});
+			if (langSpan.children.length) chips.appendChild(langSpan);
+
+			fx.appendChild(h3);
+			if (blurb.textContent) fx.appendChild(blurb);
+			fx.appendChild(chips);
+
+			const play = document.createElement('span');
+			play.className = 'fcard-play';
+			play.textContent = '\u25b6 Play';
+
+			link.appendChild(iconDiv);
+			link.appendChild(fx);
+			link.appendChild(play);
+			grid.appendChild(link);
+		});
+		this.setupLazyIconLoading();
+	}
+
+	renderGames(records) {
+		if (!this.dom.gamesList) return;
+
+		this.dom.gamesList.innerHTML = '';
+
+		if (records.length === 0) {
+			const empty = document.createElement('div');
+			empty.className = 'empty-state';
+			empty.textContent = 'No games match the current filters.';
+			this.dom.gamesList.appendChild(empty);
+			return;
+		}
+
+		const fragment = document.createDocumentFragment();
+		records.forEach(record => {
+			fragment.appendChild(this.createGameElement(record));
+		});
+		this.dom.gamesList.appendChild(fragment);
+
+		this.setupLazyIconLoading();
+	}
+
+	createGameElement(record) {
+		const link = document.createElement('a');
+		link.className = 'game-entry';
+		link.href = record.launchUrl;
+		link.setAttribute('data-game-name', record.nameLower);
+		link.setAttribute('data-game-id', record.gameIdLower);
+		link.setAttribute('data-game-publisher', record.companyLower);
+		if (record.companyId) {
+			link.setAttribute('data-company-id', record.companyId);
+		}
+		if (record.engineId) {
+			link.setAttribute('data-engine-id', record.engineId);
+		}
+
+		const iconDiv = document.createElement('div');
+		iconDiv.className = 'game-icon';
+
+		const img = document.createElement('img');
+		let iconPath = record.iconPath ? record.iconPath : null;
+
+		if (iconPath) {
+			img.setAttribute('data-src', iconPath);
+			img.alt = record.name;
+			img.loading = 'lazy';
+			iconDiv.appendChild(img);
+		} else {
+			iconDiv.innerHTML = 'GAME';
+			iconDiv.classList.add('no-icon');
+			iconDiv.textContent = 'GAME';
+		}
+
+		const contentDiv = document.createElement('div');
+		contentDiv.className = 'game-content';
+
+		const headerDiv = document.createElement('div');
+		headerDiv.className = 'game-header';
+
+		const infoDiv = document.createElement('div');
+		infoDiv.className = 'game-info';
+
+		const titleDiv = document.createElement('div');
+		titleDiv.className = 'game-title';
+		titleDiv.textContent = record.name;
+
+		const publisherDiv = document.createElement('div');
+		publisherDiv.className = 'game-publisher';
+		publisherDiv.textContent = this.formatPublisherText(record);
+
+		infoDiv.appendChild(titleDiv);
+		infoDiv.appendChild(publisherDiv);
+		headerDiv.appendChild(infoDiv);
+
+		const detailsDiv = document.createElement('div');
+		detailsDiv.className = 'variant-details';
+
+		if (record.platform && record.platform !== 'Unknown') {
+			const platformSpan = document.createElement('span');
+			platformSpan.className = 'variant-platform';
+			platformSpan.title = record.platform;
+			const platformIcon = this.getPlatformIcon(record.platform);
+			if (platformIcon) {
+				const platformImg = document.createElement('img');
+				platformImg.src = platformIcon;
+				platformImg.alt = record.platform;
+				platformImg.title = record.platform;
+				platformImg.onerror = () => {
+					platformImg.style.display = 'none';
+				};
+				platformSpan.appendChild(platformImg);
+			} else {
+				const platformText = document.createElement('span');
+				platformText.textContent = record.platform;
+				platformSpan.appendChild(platformText);
+			}
+			detailsDiv.appendChild(platformSpan);
+		}
+
+		if (record.languages.length > 0) {
+			const languagesSpan = document.createElement('span');
+			languagesSpan.className = 'variant-languages';
+			languagesSpan.title = record.languages.join(', ');
+
+			let hasLanguageIcon = false;
+
+			record.languages.forEach(lang => {
+				const langIcon = this.getLanguageIcon(lang);
+				if (!langIcon) {
+					return;
+				}
+				const langImg = document.createElement('img');
+				langImg.src = langIcon;
+				langImg.alt = lang;
+				langImg.title = lang.toUpperCase();
+				langImg.onerror = () => {
+					if (langImg.src.endsWith('.svg')) {
+						langImg.src = langImg.src.replace('.svg', '.png');
+					} else {
+						langImg.style.display = 'none';
+					}
+				};
+				languagesSpan.appendChild(langImg);
+				hasLanguageIcon = true;
+			});
+
+			if (hasLanguageIcon) {
+				detailsDiv.appendChild(languagesSpan);
+			} else if (record.languages.some(lang => lang && lang !== 'Unknown')) {
+				languagesSpan.textContent = record.languages.join(', ');
+				detailsDiv.appendChild(languagesSpan);
+			}
+		}
+
+		if (record.description) {
+			const descriptionSpan = document.createElement('span');
+			descriptionSpan.className = 'variant-description';
+			descriptionSpan.textContent = record.description;
+			detailsDiv.appendChild(descriptionSpan);
+		}
+
+		contentDiv.appendChild(headerDiv);
+		if (detailsDiv.children.length > 0) {
+			contentDiv.appendChild(detailsDiv);
+		}
+
+		link.appendChild(iconDiv);
+		link.appendChild(contentDiv);
+
+		if (Array.isArray(record.variantsAll) && record.variantsAll.length > 1) {
+			const select = document.createElement('select');
+			select.className = 'variant-select';
+			select.setAttribute('aria-label', record.name + ' \u2014 choose version');
+			record.variantsAll.forEach((v, idx) => {
+				const opt = document.createElement('option');
+				opt.value = String(idx);
+				opt.textContent = this.variantLabel(v);
+				if (v === record.variant) opt.selected = true;
+				select.appendChild(opt);
+			});
+			select.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); });
+			select.addEventListener('change', e => {
+				e.stopPropagation();
+				const chosen = record.variantsAll[parseInt(select.value, 10)];
+				if (chosen) link.href = this.buildLaunchUrl(record.gameId, chosen);
+			});
+			contentDiv.appendChild(select);
+		}
+
+		return link;
+	}
+
+	setupLazyIconLoading() {
+		const lazyImages = document.querySelectorAll('.game-icon img[data-src], .fcard img[data-src]');
+		if (lazyImages.length === 0) {
+			return;
+		}
+
+		const loadImage = img => {
+			const src = img.getAttribute('data-src');
+			if (!src) return;
+			const fallback = img.dataset.fallback;
+			img.onerror = () => {
+				if (fallback && !img.dataset.fallbackUsed) {
+					img.dataset.fallbackUsed = 'true';
+					img.src = fallback;
+				} else {
+					const wrapper = img.closest('.game-icon');
+					if (wrapper) {
+						wrapper.classList.add('no-icon');
+						wrapper.textContent = 'GAME';
+					}
+					img.remove();
+				}
+			};
+			img.src = src;
+			img.removeAttribute('data-src');
+		};
+
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver((entries, obs) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						loadImage(entry.target);
+						obs.unobserve(entry.target);
+					}
+				});
+			}, { rootMargin: '120px' });
+
+			lazyImages.forEach(img => observer.observe(img));
+		} else {
+			lazyImages.forEach(loadImage);
+		}
+	}
+
+	getPlatformIcon(platform) {
+		if (!platform) {
+			return null;
+		}
+
+		const platformMap = {
+			'DOS': 'pc',
+			'Windows': 'windows',
+			'Macintosh': 'macintosh',
+			'Linux': 'linux',
+			'Amiga': 'amiga',
+			'Amiga CD32': 'amiga',
+			'Atari ST': 'atari',
+			'Atari 8-bit': 'atari8',
+			'Apple II': 'apple2',
+			'Apple IIgs': '2gs',
+			'Commodore 64': 'c64',
+			'PC-98': 'pc98',
+			'FM Towns': 'fmtowns',
+			'Amstrad CPC': 'cpc',
+			'ZX Spectrum': 'zx',
+			'Acorn 32-bit': 'acorn',
+			'Philips CD-i': 'cdi',
+			'PlayStation': 'playstation',
+			'PlayStation 2': 'playstation2',
+			'Pocket PC': 'ppc',
+			'Android': 'android',
+			'iOS': 'ios',
+			'3DO': '3do',
+			'Sega Saturn': 'saturn',
+			'Sega Mega Drive': 'megadrive',
+			'Nintendo NES': 'nes',
+			'Nintendo Wii': 'wii',
+			'Xbox': 'xbox',
+			'OS/2': 'os2',
+			'TI-99/4A': 'ti994'
+		};
+
+		const iconName = platformMap[platform] || platform.toLowerCase().replace(/[^a-z0-9]+/g, '');
+		return `data/gui-icons/icons/platforms/${iconName}.png`;
+	}
+
+	getLanguageIcon(langCode) {
+		if (!langCode || langCode === 'Unknown') return null;
+
+		const langMap = {
+			'en': 'us',
+			'en_GB': 'gb',
+			'en_US': 'us',
+			'de': 'de',
+			'fr': 'fr',
+			'es': 'es',
+			'it': 'it',
+			'nl': 'nl',
+			'pl': 'pl',
+			'ru': 'ru',
+			'ja': 'ja',
+			'ko': 'ko',
+			'pt': 'pt',
+			'ca': 'ca',
+			'cs': 'cs',
+			'da': 'da',
+			'fi': 'fi',
+			'he': 'he',
+			'hu': 'hu',
+			'nb': 'nb',
+			'sv': 'se',
+			'tr': 'tr',
+			'zh': 'cn'
+		};
+
+		const flagCode = langMap[langCode] || langCode;
+		return `data/gui-icons/icons/flags/${flagCode}.svg`;
+	}
+
+	formatPublisherText(record) {
+		const hasCompany = Boolean(record.companyName);
+		const hasYear = Number.isFinite(record.year);
+		if (hasCompany && hasYear) {
+			return `${record.companyName}, ${record.year}`;
+		}
+		if (hasCompany) {
+			return record.companyName;
+		}
+		if (hasYear) {
+			return String(record.year);
+		}
+		return 'Unknown Publisher';
+	}
+
+	showContent() {
+		if (this.dom.loading) {
+			this.dom.loading.style.display = 'none';
+		}
+		if (this.dom.error) {
+			this.dom.error.style.display = 'none';
+		}
+		if (this.dom.content) {
+			this.dom.content.style.display = 'block';
+		}
+	}
+
+	showError() {
+		if (this.dom.loading) {
+			this.dom.loading.style.display = 'none';
+		}
+		if (this.dom.error) {
+			this.dom.error.style.display = 'block';
+	}
+	if (this.dom.content) {
+		this.dom.content.style.display = 'none';
+	}
+}
+}
+
+// Feature Modal Handler
+class FeatureModal {
+	constructor() {
+		this.modal = document.getElementById('feature-modal');
+		this.overlay = document.getElementById('feature-modal-overlay');
+		this.closeBtn = document.getElementById('feature-modal-close');
+		this.heading = document.getElementById('feature-modal-heading');
+		this.mediaContainer = document.getElementById('feature-modal-media-container');
+		this.mediaSelector = document.getElementById('feature-modal-media-selector');
+		this.text = document.querySelector('#feature-modal-text p');
+		this.prevBtn = document.getElementById('feature-modal-prev');
+		this.nextBtn = document.getElementById('feature-modal-next');
+		this.currentFeature = null;
+
+		this.featureData = {
+			sound: {
+				title: 'Sound',
+				description: 'MIDI Emulation (soundfont included), Roland MT32/CM32L supported (requires a dumped ROM) as well as OPL emulation (MAME, DOSBox and Nuked), but you can also bring your own Retrowave OPL3 (requires browser with WebSerial support), or your own MIDI devices (through WebMIDI). Text to speech is able to use system voices via the Web Speech API.',
+				media: [
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=Ooxlus_r_eE', label: 'Roland MT32 Emulation' },
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=W8vBQb8xZ2Q', label: 'Retrowave OPL3' },
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=R2k_6szG_M4', label: 'MIDI Device Connectivity' },
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=AJ7b4OYOZik&t=17s', label: 'Text to Speech' }
+				]
+			},
+			graphics: {
+				title: 'Graphics',
+				description: 'WebGL - incl. shader filters from libretro, GRIM and other 3D engines or engines relying on OpenGL (Thimbleweed Park, Myst, Riven, etc).',
+				media: [
+					{ type: 'image', url: 'https://christian.kuendig.info/posts/2024-01-scummvm-part3/scummvm-ft-demo-00003.png', label: 'Shader Support' }
+				]
+			},
+			storage: {
+				title: 'Storage',
+				description: 'Drag & Drop your local games into the launcher, access many freeware and demo versions directly from this server, or use the Full Cloud support - play games directly from Dropbox, Google Drive, Box or OneDrive and synchronize save games via ScummVM Cloud. Files (logs, screenshots etc.) can directly be exported.',
+				media: [
+					{ type: 'youtube', url: 'https://www.youtube.com/watch?v=kYechxc5tvE&t=16s', label: 'Cloud Support' },
+					{ type: 'video', url: 'https://christian.kuendig.info/posts/2024-01-scummvm-part3/screenshots.mp4', label: 'Export Screenshots' },
+					{ type: 'video', url: 'https://christian.kuendig.info/posts/2024-01-scummvm-part3/openlog.mp4', label: 'Export Logfiles' }
+				]
+			},
+			controls: {
+				title: 'Flexible Controls',
+				description: 'Play with mouse, keyboard, touchscreen mobile or even a gamepad—whatever (if the Gamepad API is available) suits the moment.',
+				media: []
+			}
+		};
+
+		// Order used for looping prev/next navigation in the modal.
+		this.featureOrder = Object.keys(this.featureData);
+
+		this.init();
+	}
+
+	init() {
+		// Make the feature cards behave like buttons so they can be reached and
+		// opened with the keyboard, not just the mouse.
+		const featureCards = document.querySelectorAll('.feature-card');
+		featureCards.forEach(card => {
+			card.setAttribute('role', 'button');
+			card.setAttribute('tabindex', '0');
+			const open = () => {
+				const feature = card.dataset.feature;
+				if (feature && this.featureData[feature]) {
+					this.show(feature);
+				}
+			};
+			card.addEventListener('click', open);
+			card.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					open();
+				}
+			});
+		});
+
+		// Loop through the features while the modal is open.
+		this.prevBtn.addEventListener('click', () => this.navigate(-1));
+		this.nextBtn.addEventListener('click', () => this.navigate(1));
+
+		// Close modal handlers
+		this.closeBtn.addEventListener('click', () => this.hide());
+		this.overlay.addEventListener('click', () => this.hide());
+
+		// Keyboard while open: Esc closes, Left/Right cycle features (wrap around).
+		document.addEventListener('keydown', (e) => {
+			if (!this.modal.classList.contains('active')) {
+				return;
+			}
+			if (e.key === 'Escape') {
+				this.hide();
+			} else if (e.key === 'ArrowLeft') {
+				this.navigate(-1);
+			} else if (e.key === 'ArrowRight') {
+				this.navigate(1);
+			}
+		});
+	}
+
+	navigate(delta) {
+		const order = this.featureOrder;
+		const i = order.indexOf(this.currentFeature);
+		if (i === -1) {
+			return;
+		}
+		this.show(order[(i + delta + order.length) % order.length]);
+	}
+
+	getYouTubeEmbedUrl(url) {
+		const videoIdMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+		if (videoIdMatch) {
+			const videoId = videoIdMatch[1];
+			const timeMatch = url.match(/[?&]t=(\d+)/);
+			const startTime = timeMatch ? `&start=${timeMatch[1]}` : '';
+			// Use youtube-nocookie.com for privacy and add privacy-preserving parameters
+			return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&enablejsapi=0${startTime}`;
+		}
+		return null;
+	}
+
+	renderMedia(mediaItem) {
+		this.mediaContainer.innerHTML = '';
+
+		if (mediaItem.type === 'youtube') {
+			const embedUrl = this.getYouTubeEmbedUrl(mediaItem.url);
+			if (embedUrl) {
+				const iframe = document.createElement('iframe');
+				iframe.src = embedUrl;
+				iframe.frameBorder = '0';
+				iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+				iframe.allowFullscreen = true;
+				this.mediaContainer.appendChild(iframe);
+			}
+		} else if (mediaItem.type === 'video') {
+			const video = document.createElement('video');
+			video.src = mediaItem.url;
+			video.controls = true;
+			video.autoplay = true;
+			video.loop = true;
+			this.mediaContainer.appendChild(video);
+		} else if (mediaItem.type === 'image') {
+			const img = document.createElement('img');
+			img.src = mediaItem.url;
+			img.alt = mediaItem.label;
+			this.mediaContainer.appendChild(img);
+		}
+	}
+
+	createMediaSelector(media) {
+		this.mediaSelector.innerHTML = '';
+		
+		if (media.length > 1) {
+			media.forEach((item, index) => {
+				const button = document.createElement('button');
+				button.textContent = item.label;
+				button.classList.toggle('active', index === 0);
+				button.addEventListener('click', () => {
+					this.mediaSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+					button.classList.add('active');
+					this.renderMedia(item);
+				});
+				this.mediaSelector.appendChild(button);
+			});
+		}
+	}
+
+	show(feature) {
+		const data = this.featureData[feature];
+		this.currentFeature = feature;
+		this.heading.textContent = data.title;
+		this.text.textContent = data.description;
+
+		if (data.media && data.media.length > 0) {
+			this.renderMedia(data.media[0]);
+			this.createMediaSelector(data.media);
+		} else {
+			this.mediaContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;font-size:14px;">No media available</div>';
+			this.mediaSelector.innerHTML = '';
+		}
+
+		this.modal.classList.add('active');
+		document.body.style.overflow = 'hidden';
+	}
+
+	hide() {
+		this.modal.classList.remove('active');
+		document.body.style.overflow = '';
+		// Stop any playing videos
+		const videos = this.mediaContainer.querySelectorAll('video');
+		videos.forEach(video => video.pause());
+	}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	const heroImage = document.querySelector('.heroes');
+	if (heroImage) {
+		const randomIndex = Math.floor(Math.random() * 7);
+		heroImage.src = `heroes${randomIndex}.png`;
+	}
+
+	new GamesLibrary();
+	new FeatureModal();
+});
