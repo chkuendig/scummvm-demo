@@ -45,6 +45,7 @@ def list_remote_folders(ssh_helper: SSHHelper, server: str, base_path: str) -> S
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate games.json from remote demos and metadata")
     parser.add_argument("--output", default="games.json", help="Path to write the generated games.json")
+    parser.add_argument("--featured-only", action="store_true", help="Restrict games.json to entries with featured metadata (limited/scummvm.org deployment)")
     parser.add_argument("--metadata", default=str(Path(__file__).parent.parent / "assets" / "metadata.json"), help="Path to metadata.json")
     parser.add_argument("--scp-server", help="SCP/SSH server in user@host format")
     parser.add_argument("--scp-path", help="Remote path containing demo folders")
@@ -97,6 +98,8 @@ def main() -> int:
         if entry_data is None:
             print(f"\033[91mValidation error: {folder} missing in demo catalog\033[0m", file=sys.stderr)
             has_errors = True
+            continue
+        if args.featured_only and not (entry_data.metadata and entry_data.metadata.get("featured")):
             continue
         if not entry_data.should_include_in_json:
             print(f"\033[91mValidation error: {folder} should not be included in JSON \033[0m", file=sys.stderr)

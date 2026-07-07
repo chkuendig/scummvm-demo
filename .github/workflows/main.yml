@@ -197,6 +197,8 @@ jobs:
       - name: Create .htaccess file 💾 
         run: printf 'RewriteEngine On\nRewriteRule ^(.*)$ ./public/$1 [L]\n' > scummvm-cloud/.htaccess
       - name: Upload to Hostinger ☁️
+        id: scpscummvmcloud
+        continue-on-error: true
         uses: appleboy/scp-action@v0.1.7
         with:
           source: "scummvm-cloud/templates/*,scummvm-cloud/vendor/*,scummvm-cloud/src/*,scummvm-cloud/public/*, scummvm-cloud/.htaccess"
@@ -213,6 +215,28 @@ jobs:
     runs-on: ubuntu-latest
     needs:  [update-icons, sync-games, build-scummvm] # [detect-games, update-icons]
     steps:
+      - name: Upload to Hostinger (retry) ☁️
+        if: steps.scpscummvmcloud.outcome == 'failure'
+        id: scpscummvmcloudretry
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          source: "scummvm-cloud/templates/*,scummvm-cloud/vendor/*,scummvm-cloud/src/*,scummvm-cloud/public/*, scummvm-cloud/.htaccess"
+          target: ~/domains/scummvm-cloud.kuendig.io/public_html
+          rm: true
+          strip_components: 1
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          username: ${{ secrets.HOSTINGER_SSH_USERNAME }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+
+  deploy-demo:
+    name: Deploy Demo Page 🚀
+    runs-on: ubuntu-latest
+    needs:  [update-icons, sync-games, build-scummvm] # [detect-games, update-icons]
+    steps:
+      - name: Fail if both upload attempts failed
+        if: steps.scpscummvmcloud.outcome == 'failure' && steps.scpscummvmcloudretry.outcome == 'failure'
+        run: exit 1
       - name: Checkout  🛎️
         uses: actions/checkout@v4
         with:
@@ -316,6 +340,8 @@ jobs:
           branch: gh-pages # The branch the action should deploy to.
           folder: scummvm/build-emscripten # The folder the action should deploy.
       - name: Upload to Hostinger ☁️
+        id: scpscummvmkuend
+        continue-on-error: true
         uses: appleboy/scp-action@v0.1.7
         with:
           source: "scummvm/build-emscripten/*,scummvm/build-emscripten/.htaccess"
@@ -326,6 +352,22 @@ jobs:
           port: ${{ secrets.HOSTINGER_SSH_PORT }}
           username: ${{ secrets.HOSTINGER_SSH_USERNAME }}
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+      - name: Upload to Hostinger (retry) ☁️
+        if: steps.scpscummvmkuend.outcome == 'failure'
+        id: scpscummvmkuendretry
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          source: "scummvm/build-emscripten/*,scummvm/build-emscripten/.htaccess"
+          target: ~/domains/scummvm.kuendig.io/public_html
+          rm: true
+          strip_components: 2
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          username: ${{ secrets.HOSTINGER_SSH_USERNAME }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+      - name: Fail if both upload attempts failed
+        if: steps.scpscummvmkuend.outcome == 'failure' && steps.scpscummvmkuendretry.outcome == 'failure'
+        run: exit 1
       - name: Archive website artifacts
         uses: actions/upload-artifact@v4
         with:

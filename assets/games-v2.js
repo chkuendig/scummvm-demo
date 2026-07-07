@@ -531,8 +531,11 @@ class GamesLibrary {
 		const langs = Array.isArray(variant.languages) && variant.languages.length
 			? variant.languages.join('/').toUpperCase()
 			: (this.isEnglishVariant(variant) ? 'EN' : this.variantLanguageSuffix(variant).toUpperCase());
-		return [variant.platform, langs, variant.description || variant.relative_path]
-			.filter(Boolean).join(' \u00b7 ');
+		let desc = variant.description || variant.relative_path;
+		if (variant.platform && desc.toLowerCase().startsWith(String(variant.platform).toLowerCase() + ' ')) {
+			desc = desc.slice(String(variant.platform).length + 1);
+		}
+		return [variant.platform, langs, desc].filter(Boolean).join(' \u00b7 ');
 	}
 
 	renderFeatured() {

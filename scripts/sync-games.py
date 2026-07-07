@@ -468,8 +468,13 @@ class GameDownloader:
 
     # --- Processing ------------------------------------------------------
 
-    def download_and_process_games(self, requested_ids: Sequence[str], max_transfers: Optional[int] = None) -> None:
+    def download_and_process_games(self, requested_ids: Sequence[str], max_transfers: Optional[int] = None, featured_only: bool = False) -> None:
         targets = self.resolve_requested_targets(requested_ids)
+        if featured_only:
+            # Limited/scummvm.org deployment: only sync the curated featured set.
+            targets = [rp for rp in targets
+                       if (e := self.catalog.get(rp)) and e.metadata and e.metadata.get('featured')]
+            self._print(f"--featured-only: restricted to {len(targets)} featured games")
         self.processed_games_metadata = []
 
         try:
@@ -487,7 +492,9 @@ class GameDownloader:
         # The sync only ever uploaded, so a newly-skipped game would otherwise
         # stay on the server and fail gen-json's "should not be included in JSON"
         # validation. Remove them so they leave both games.json and the host.
-        if not requested_ids and self.scp_server and self.scp_path:
+        # Never run the removal pass in featured-only mode: against the full
+        # host it would treat every non-featured game as removable.
+        if not requested_ids and not featured_only and self.scp_server and self.scp_path:
             for relative_path, entry in self.catalog.items():
                 if entry.should_include_in_json:
                     continue
@@ -610,6 +617,7 @@ Environment Variables:
     parser.add_argument('--scp-path', help='Remote path for uploading games')
     parser.add_argument('--scp-port', type=int, help='SSH/SCP port (default: 22)')
     parser.add_argument('--max-transfers', type=int, help='Maximum number of games to transfer (excluding skipped ones)')
+    parser.add_argument('--featured-only', action='store_true', help='Sync only games whose metadata carries featured (limited/scummvm.org deployment). Disables the server-side removal pass.')
     
     args = parser.parse_args()
     
@@ -630,7 +638,7 @@ Environment Variables:
     try:
         metadata_path = Path(__file__).parent.parent / "assets" / "metadata.json"
         downloader.refresh_catalog(metadata_path)
-        downloader.download_and_process_games(game_ids, args.max_transfers)
+        downloader.download_and_process_games(game_ids, args.max_transfers, featured_only=args.featured_only)
     except KeyboardInterrupt:
         print("\nInterrupted by user")
         sys.exit(1)

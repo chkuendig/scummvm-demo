@@ -550,7 +550,11 @@ def create_json_entry(entry: CombinedEntry) -> Dict[str, object]:
     
     if entry.game_id:
         result["id"] = entry.game_id
-    
+
+    # Featured curation flag (used by games-full/limited pages)
+    if entry.metadata and entry.metadata.get("featured"):
+        result["featured"] = entry.metadata["featured"]
+
     # Build description from metadata or sheet data
     description = None
     if entry.metadata and entry.metadata.get("description"):
