@@ -88,6 +88,9 @@
   {
     "relative_path": "simon1-acorn-cd-demo-en",
     "id": "agos:simon1",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Acorn 32-bit CD Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon1-acorn-cd-demo-en.zip",
     "platform": "Acorn 32-bit"
@@ -154,6 +157,9 @@
   {
     "relative_path": "simon2-dos-cd-demo-en",
     "id": "agos:simon2",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS CD Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/agos/simon2-dos-cd-demo-en.zip",
     "platform": "DOS"
@@ -178,6 +184,9 @@
   {
     "relative_path": "blackwell_legacy-demo",
     "id": "ags:blackwell1",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/ags/blackwell_legacy-demo.zip",
     "platform": "Windows"
@@ -603,6 +612,9 @@
   {
     "relative_path": "warlock-demo-win",
     "id": "director:warlock",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Spaceship Warlock Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/director/d3/en/warlock-demo-win.zip",
     "platform": "Windows"
@@ -624,6 +636,9 @@
   {
     "relative_path": "drascula-1.0",
     "id": "drascula:drascula",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Freeware Version (English)",
     "download_url": "https://downloads.scummvm.org/frs/extras/Drascula_ The Vampire Strikes Back/drascula-1.0.zip"
   },
@@ -667,6 +682,9 @@
   {
     "relative_path": "dreamweb-cd-us-1.1",
     "id": "dreamweb:dreamweb",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Freeware CD DOS Version (English US)",
     "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-us-1.1.zip"
   },
@@ -840,6 +858,9 @@
   {
     "relative_path": "zcode-advent",
     "id": "glk:adv350_zcode",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Freeware",
     "download_url": "https://ifdb.org/viewgame?id=fft6pu91j85y4acv"
   },
@@ -864,6 +885,9 @@
   {
     "relative_path": "minizork",
     "id": "glk:minizork1",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Demo/Freeware",
     "download_url": "https://ifdb.org/viewgame?id=1rea34vqnz3mtyq1"
   },
@@ -931,6 +955,9 @@
   {
     "relative_path": "gob1-dos-demo1-en",
     "id": "gob:gob1",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/gob/gob1-dos-demo1-en.zip",
     "platform": "DOS"
@@ -1100,6 +1127,9 @@
   {
     "relative_path": "grim-win-demo1-en",
     "id": "grim:grim",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Small Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/grim/grim-win-demo1-en.zip",
     "platform": "Windows"
@@ -1207,6 +1237,9 @@
   {
     "relative_path": "t7g-dos-demo-en",
     "id": "groovie:t7g",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/groovie/t7g-dos-demo-en.zip",
     "platform": "DOS"
@@ -1276,6 +1309,9 @@
   {
     "relative_path": "penumbra-overture-mac",
     "id": "hpl1:penumbraoverture",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Mac Demo"
   },
   {
@@ -1540,6 +1576,9 @@
   {
     "relative_path": "lastexpress-win-demo-en",
     "id": "lastexpress:lastexpress",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/lastexpress/lastexpress-win-demo-en.zip",
     "platform": "Windows"
@@ -1547,6 +1586,9 @@
   {
     "relative_path": "lure-1.1",
     "id": "lure:lure",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Freeware Version (English)",
     "download_url": "https://downloads.scummvm.org/frs/extras/Lure of the Temptress/lure-1.1.zip"
   },
@@ -1605,6 +1647,9 @@
   {
     "relative_path": "rtz-dos-cd-demo1-en",
     "id": "made:rtz",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS CD Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/made/rtz-dos-cd-demo1-en.zip",
     "platform": "DOS"
@@ -1633,6 +1678,9 @@
   {
     "relative_path": "rex-dos-demo-en",
     "id": "mads:nebular",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/mads/rex-dos-demo-en.zip",
     "platform": "DOS"
@@ -1779,6 +1827,9 @@
   {
     "relative_path": "myst-win-cd-demo-en",
     "id": "mohawk:myst",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows CD Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/mohawk/myst-win-cd-demo-en.zip",
     "platform": "Windows"
@@ -1910,6 +1961,9 @@
   {
     "relative_path": "neverhood-win-demo-en",
     "id": "neverhood:neverhood",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/neverhood/neverhood-win-demo-en.zip",
     "platform": "Windows"
@@ -2155,6 +2209,9 @@
   {
     "relative_path": "FOTAQ_Floppy",
     "id": "queen:queen",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Freeware Floppy Version",
     "download_url": "https://downloads.scummvm.org/frs/extras/Flight of the Amazon Queen/FOTAQ_Floppy.zip"
   },
@@ -2256,6 +2313,9 @@
   {
     "relative_path": "ihnm-dos-demo-en",
     "id": "saga:ihnm",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/saga/ihnm-dos-demo-en.zip",
     "platform": "DOS"
@@ -2381,6 +2441,9 @@
   {
     "relative_path": "freddypharkas-win-cd-demo-en",
     "id": "sci:freddypharkas",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/sci/freddypharkas-win-cd-demo-en.zip",
     "platform": "Windows"
@@ -2801,6 +2864,9 @@
   {
     "relative_path": "atlantis-dos-demo1-en",
     "id": "scumm:atlantis",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/atlantis-dos-demo1-en.zip",
     "platform": "DOS"
@@ -3338,6 +3404,9 @@
   {
     "relative_path": "ft-dos-demo-en",
     "id": "scumm:ft",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/ft-dos-demo-en.zip",
     "platform": "DOS"
@@ -3425,6 +3494,9 @@
   {
     "relative_path": "monkey1-amiga-demo-en",
     "id": "scumm:monkey",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Amiga Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/monkey1-amiga-demo-en.zip",
     "platform": "Amiga"
@@ -3913,6 +3985,9 @@
   {
     "relative_path": "samnmax-dos-cd-demo-en",
     "id": "scumm:samnmax",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS CD Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/scumm/samnmax-dos-cd-demo-en.zip",
     "platform": "DOS"
@@ -4186,6 +4261,9 @@
   {
     "relative_path": "scalpel-dos-demo-en",
     "id": "sherlock:scalpel",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/sherlock/scalpel-dos-demo-en.zip",
     "platform": "DOS"
@@ -4200,6 +4278,9 @@
   {
     "relative_path": "bass-cd-1.2",
     "id": "sky:sky",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Freeware CD Version",
     "download_url": "https://downloads.scummvm.org/frs/extras/Beneath a Steel Sky/bass-cd-1.2.zip"
   },
@@ -4383,6 +4464,9 @@
   {
     "relative_path": "ooo",
     "id": "sludge:outoforder",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "SLUDGE engine game. Windows version, June 5, 2003",
     "download_url": "https://downloads.scummvm.org/frs/extras/SLUDGE/ooo.zip"
   },
@@ -4490,6 +4574,9 @@
   {
     "relative_path": "sword1-win-demo-en",
     "id": "sword1:sword1",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/sword1/sword1-win-demo-en.zip",
     "platform": "Windows"
@@ -4514,6 +4601,9 @@
   {
     "relative_path": "sword25-v1.0",
     "id": "sword25:sword25",
+    "featured": {
+      "kind": "complete"
+    },
     "description": "Freeware Version",
     "download_url": "https://downloads.scummvm.org/frs/extras/Broken Sword 2.5/sword25-v1.0.zip"
   },
@@ -4527,6 +4617,9 @@
   {
     "relative_path": "sword2-win-demo-en",
     "id": "sword2:sword2",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "Windows Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/sword2/sword2-win-demo-en.zip",
     "platform": "Windows"
@@ -4563,6 +4656,9 @@
   {
     "relative_path": "dw-dos-cd-demo-en",
     "id": "tinsel:dw",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS CD Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/tinsel/dw-dos-cd-demo-en.zip",
     "platform": "DOS"
@@ -4708,6 +4804,9 @@
   {
     "relative_path": "returntoringworld-dos-demo-en",
     "id": "tsage:ringworld2",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/tsage/returntoringworld-dos-demo-en.zip",
     "platform": "DOS"
@@ -4729,6 +4828,9 @@
   {
     "relative_path": "lba-demo-mult",
     "id": "twine:lba",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Multilanguage Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/twine/lba-demo-mult.zip",
     "platform": "DOS"
@@ -4736,6 +4838,9 @@
   {
     "relative_path": "remorse-dos-demo-en",
     "id": "ultima:remorse",
+    "featured": {
+      "kind": "demo"
+    },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/ultima/remorse-dos-demo-en.zip",
     "platform": "DOS"
