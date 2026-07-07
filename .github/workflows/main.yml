@@ -288,6 +288,8 @@ jobs:
       - name: Copy games listing assets
         run: |
           cp assets/games.* scummvm/build-emscripten/
+          cp assets/games-*.html assets/games-v2.* scummvm/build-emscripten/
+          cp assets/metadata.json scummvm/build-emscripten/metadata.json
           cp assets/main.css scummvm/build-emscripten/main.css
           cp assets/*.png scummvm/build-emscripten/
       - name: Inject Sentry error tracking 🛡️

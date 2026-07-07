@@ -55,6 +55,20 @@ class GamesLibrary {
 		const gamesResponse = await fetch('./games.json');
 		this.gamesData = await gamesResponse.json();
 
+		// Featured curation ships with the page (metadata.json); merge it in
+		// client-side so the page works regardless of whether the games.json
+		// generator has passed the flags through yet.
+		try {
+			const metaResponse = await fetch('./metadata.json');
+			if (metaResponse.ok) {
+				const pageMeta = await metaResponse.json();
+				this.gamesData.forEach(entry => {
+					const m = pageMeta[entry.relative_path];
+					if (m && m.featured && !entry.featured) entry.featured = m.featured;
+				});
+			}
+		} catch (e) { /* optional enrichment only */ }
+
 		const indexResponse = await fetch('data/gui-icons/icons/index.json');
 		this.iconIndex = await indexResponse.json();
 
