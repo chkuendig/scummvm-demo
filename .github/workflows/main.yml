@@ -210,11 +210,6 @@ jobs:
           username: ${{ secrets.HOSTINGER_SSH_USERNAME }}
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
 
-  deploy-demo:
-    name: Deploy Demo Page 🚀
-    runs-on: ubuntu-latest
-    needs:  [update-icons, sync-games, build-scummvm] # [detect-games, update-icons]
-    steps:
       - name: Upload to Hostinger (retry) ☁️
         if: steps.scpscummvmcloud.outcome == 'failure'
         id: scpscummvmcloudretry
@@ -228,15 +223,15 @@ jobs:
           port: ${{ secrets.HOSTINGER_SSH_PORT }}
           username: ${{ secrets.HOSTINGER_SSH_USERNAME }}
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+      - name: Fail if both upload attempts failed
+        if: steps.scpscummvmcloud.outcome == 'failure' && steps.scpscummvmcloudretry.outcome == 'failure'
+        run: exit 1
 
   deploy-demo:
     name: Deploy Demo Page 🚀
     runs-on: ubuntu-latest
     needs:  [update-icons, sync-games, build-scummvm] # [detect-games, update-icons]
     steps:
-      - name: Fail if both upload attempts failed
-        if: steps.scpscummvmcloud.outcome == 'failure' && steps.scpscummvmcloudretry.outcome == 'failure'
-        run: exit 1
       - name: Checkout  🛎️
         uses: actions/checkout@v4
         with:
