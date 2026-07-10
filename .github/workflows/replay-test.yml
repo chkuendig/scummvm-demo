@@ -64,9 +64,11 @@ jobs:
         if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
         run: cd scummvm && dists/emscripten/build.sh make dist
 
-      - name: Point game data at the CDN 🌐
+      - name: Point game data at the CDN (via same-origin proxy) 🌐
+        # serve.js proxies /__cdn/* to DATA_BASEURL - the CDN's CORS headers are
+        # flaky from CI egress, so the page must only make same-origin requests.
         run: |
-          jq '.games = {"baseUrl": env.DATA_BASEURL}' scummvm/build-emscripten/data/index.json \
+          jq '.games = {"baseUrl": "http://127.0.0.1:8232/__cdn"}' scummvm/build-emscripten/data/index.json \
             > /tmp/index.json && mv /tmp/index.json scummvm/build-emscripten/data/index.json
 
       - name: Install Playwright 🎭
