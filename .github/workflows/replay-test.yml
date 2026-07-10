@@ -1,0 +1,82 @@
+name: Event-Recorder Replay Test 🎬
+
+# Replays a golden gameplay recording (tests/replay/ftdemo.r00) against a
+# fresh --enable-eventrecorder build and asserts the recorder's built-in
+# framebuffer-MD5 checks pass. Catches regressions in engine determinism,
+# the emscripten timer/event plumbing, and the recorder itself.
+#
+# Deliberately a separate workflow: the deploy build does NOT enable the
+# event recorder, so this job maintains its own (cached) recorder build.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1" # weekly, Monday 05:17 UTC
+
+env:
+  SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder"
+  SCUMMVM_CONFIGURE_LIBS: " --enable-a52 --enable-faad --enable-fluidlite --enable-freetype2 --enable-fribidi --enable-gif --enable-gif --enable-jpeg --enable-jpeg --enable-mad --enable-mad --enable-mikmod --enable-mpcdec --enable-mpeg2 --enable-ogg --enable-png --enable-retrowave --enable-theoradec --enable-vorbis --enable-vpx --enable-zlib"
+  EMSDK_VERSION: "6.0.2"
+  DATA_BASEURL: "https://scummvm-data.kuendig.io"
+
+jobs:
+  replay:
+    name: Build recorder build & replay 🎬
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Define cache keys 🗝️
+        run: |
+          echo "${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS}" > config_vars.txt
+          echo "${SCUMMVM_CONFIGURE_LIBS}" > config_lib_vars.txt
+          echo "SCUMMVM_COMMIT=$(git -C scummvm rev-parse HEAD)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        with:
+          path: scummvm/dists/emscripten/emsdk-*
+          key: emsdk-${{ env.EMSDK_VERSION }}
+
+      - uses: actions/cache@v4
+        with:
+          path: scummvm/dists/emscripten/libs/build
+          key: scummvm-libs-${{ env.EMSDK_VERSION }}-${{ hashFiles('config_lib_vars.txt') }}
+
+      - uses: actions/cache@v4
+        id: cache-build
+        with:
+          path: |
+            scummvm/build-emscripten
+            scummvm/scummvm.wasm
+            scummvm/scummvm.js
+            scummvm/scummvm.html
+          key: replay-build-${{ env.SCUMMVM_COMMIT }}-${{ hashFiles('config_vars.txt') }}
+
+      - name: Configure ScummVM (recorder build) ⚙️
+        if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+        run: cd scummvm && dists/emscripten/build.sh configure ${SCUMMVM_CONFIGURE} ${SCUMMVM_CONFIGURE_LIBS}
+
+      - name: Build ScummVM 🏗️
+        if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+        run: cd scummvm && dists/emscripten/build.sh make dist
+
+      - name: Point game data at the CDN 🌐
+        run: |
+          jq '.games = {"baseUrl": env.DATA_BASEURL}' scummvm/build-emscripten/data/index.json \
+            > /tmp/index.json && mv /tmp/index.json scummvm/build-emscripten/data/index.json
+
+      - name: Install Playwright 🎭
+        run: |
+          npm init -y >/dev/null
+          npm install playwright >/dev/null
+          npx playwright install --with-deps chromium
+
+      - name: Replay the golden recording 🎬
+        run: |
+          ROOT=scummvm/build-emscripten node tests/replay/serve.js &
+          sleep 2
+          node tests/replay/replay-test.js
