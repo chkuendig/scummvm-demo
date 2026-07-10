@@ -8,6 +8,10 @@ For a more comprehensive changelog of the latest experimental code, see:
    - Implemented ImGui-based interface for the Event Recorder.
    - Fixed bug with inability to specify game overrides for MIDI and MT-32
      devices.
+   - Switched Nuked-OPL3 AdLib emulator to Nuked-OPL3-fast fork.
+
+ Bagel:
+   - Fix saving options for Hodj n' Podj's Th Gesng Gme.
 
  GLK:
    - Fixed saved font selections not being applied correctly in some games.
@@ -23,10 +27,16 @@ For a more comprehensive changelog of the latest experimental code, see:
    - Fix M&M1 spelling mistakes.
    - Improved M&M1 Enhanced mouse support, character generation, and general in-game UI.
 
-NANCY:
+ NANCY:
    - Generic flags are no longer cleared when saving or auto-saving. Clearing
      them introduced issues when auto-saving was done in some scenes.
    - Loading from the GMM is now possible before starting a new scene.
+
+ SCUMM:
+   - Improved cursor scale in early Windows HE games.
+
+ SLUDGE:
+   - Added detection for Shape-Shift Escape.
 
  Atari port:
    - Added integration with nFM library.
