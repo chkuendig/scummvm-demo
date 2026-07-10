@@ -80,3 +80,11 @@ jobs:
           ROOT=scummvm/build-emscripten node tests/replay/serve.js &
           sleep 2
           node tests/replay/replay-test.js
+
+      - name: Upload failure screenshot 📸
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: replay-final
+          path: replay-final.png
+          if-no-files-found: ignore

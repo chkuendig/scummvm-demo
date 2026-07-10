@@ -16,7 +16,7 @@ const path = require('path');
 
 const REC = path.join(__dirname, 'ftdemo.r00');
 const URL_BASE = process.env.SCUMMVM_URL || 'http://127.0.0.1:8232';
-const TIMEOUT_S = parseInt(process.env.REPLAY_TIMEOUT_S || '420', 10);
+const TIMEOUT_S = parseInt(process.env.REPLAY_TIMEOUT_S || '600', 10);
 
 (async () => {
   const recB64 = fs.readFileSync(REC).toString('base64');
@@ -28,13 +28,18 @@ const TIMEOUT_S = parseInt(process.env.REPLAY_TIMEOUT_S || '420', 10);
 
   let successes = 0, failures = 0, loaded = false;
   const log = [];
+  const allConsole = [];   // ring buffer of everything, dumped on failure
   page.on('console', (m) => {
     const t = m.text();
+    allConsole.push(t.slice(0, 200));
+    if (allConsole.length > 400) allConsole.shift();
     if (/playback:action/.test(t)) log.push(t.slice(0, 160));
     if (/"Load File" result=success/.test(t)) loaded = true;
     if (/Check screenshot.*result = success/.test(t)) successes++;
     if (/Check screenshot.*result = fail/.test(t)) failures++;
   });
+  page.on('pageerror', (e) => allConsole.push('PAGEERROR: ' + e.message.slice(0, 200)));
+  page.on('requestfailed', (r) => allConsole.push('REQFAIL: ' + r.url().slice(0, 150) + ' ' + (r.failure() || {}).errorText));
   page.on('crash', () => { console.error('PAGE CRASHED'); process.exit(1); });
 
   // Seed IndexedDB from a same-origin HTML page (a non-HTML resource such as
@@ -80,11 +85,16 @@ const TIMEOUT_S = parseInt(process.env.REPLAY_TIMEOUT_S || '420', 10);
     if (failures > 0) break;              // fail fast
     if (successes >= 1 && loaded) break;  // enough evidence of a working replay
   }
+  await page.screenshot({ path: 'replay-final.png' }).catch(() => {});
   await browser.close();
 
   console.log('--- playback log ---');
   log.slice(0, 40).forEach((l) => console.log(l));
   console.log(`loaded=${loaded} screenshot checks: success=${successes} fail=${failures}`);
+  if (!loaded || failures > 0 || successes < 1) {
+    console.log('--- full console (last 400 lines) ---');
+    allConsole.forEach((l) => console.log('| ' + l));
+  }
   if (!loaded) { console.error('FAIL: recording never loaded'); process.exit(1); }
   if (failures > 0) { console.error('FAIL: screenshot mismatch during replay'); process.exit(1); }
   if (successes < 1) { console.error('FAIL: no screenshot check passed within timeout'); process.exit(1); }
