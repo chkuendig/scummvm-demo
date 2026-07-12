@@ -103,8 +103,8 @@ jobs:
         # Uploads the -gseparate-dwarf sidecars (main module + every plugin,
         # each carrying a matching build_id) so Sentry can symbolicate wasm
         # frames. Only runs on a fresh build (the sidecars only exist then) and
-        # is a no-op without the token. Release id = the wasm hash (same value
-        # the deploy stamps onto scummvm.js and passes to the client SDK).
+        # is a no-op without the token. Release id = first 12 hex of the wasm
+        # sha1 (the deploy job computes the same value for the client SDK).
         if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
@@ -271,20 +271,13 @@ jobs:
       - name:  update baseURL
         run: |
           jq '.games +=  {"baseUrl":"${{ env.DATA_BASEURL }}"}' scummvm/build-emscripten/data/index.json > scummvm/build-emscripten/data/index.json.tmp && mv scummvm/build-emscripten/data/index.json.tmp scummvm/build-emscripten/data/index.json
-      - name: Cache-bust scummvm.js URL with the wasm hash
-        # Moved here from scummvm's emscripten.mk: stamp scummvm.js?v=<wasm hash>
-        # so a returning visitor can't pair a fresh wasm with stale cached js
-        # (WebAssembly LinkError). The Sentry step below reads this ?v= as the release.
-        run: |
-          VER=$(sha1sum scummvm/build-emscripten/scummvm.wasm | cut -c1-12)
-          echo "cache-bust: scummvm.js?v=$VER"
-          for f in scummvm/build-emscripten/scummvm.html scummvm/build-emscripten/index.html; do
-            [ -f "$f" ] && sed -i "s|src=scummvm.js>|src=scummvm.js?v=$VER>|; s|src=\"scummvm.js\"|src=\"scummvm.js?v=$VER\"|" "$f"
-          done
       - name: Write .htaccess (wasm MIME + no-cache app-shell)
         # Authored fully here. Previously scummvm shipped an .htaccess but this
         # step overwrote it with only the MIME type; now it carries both the
-        # wasm MIME and the no-cache headers (fallback to the URL stamp above).
+        # wasm MIME and the no-cache headers, which are the sole mechanism
+        # keeping cached js and fresh wasm from pairing up (the old ?v= URL
+        # stamp is gone; if Hostinger ever stops honoring .htaccess again,
+        # stale-js+new-wasm LinkErrors are the symptom to look for).
         run: |
           {
             echo "AddType application/wasm wasm so"
@@ -324,7 +317,9 @@ jobs:
         run: |
           if [ -z "$SENTRY_DSN" ]; then echo "SENTRY_DSN not set; skipping Sentry injection"; exit 0; fi
           cp sentry/sentry.bundle.js scummvm/build-emscripten/
-          REL=$(grep -oE 'scummvm\.js\?v=[a-f0-9]+' scummvm/build-emscripten/scummvm.html | head -1 | sed 's/.*v=//')
+          # Release id = first 12 hex of the wasm sha1; must match the debug-file
+          # upload step in the build job, which computes the same expression.
+          REL=$(sha1sum scummvm/build-emscripten/scummvm.wasm | cut -c1-12)
           cfg="<script>window.__SENTRY_CFG__={dsn:'${SENTRY_DSN}',release:'${REL}',environment:'${SENTRY_ENVIRONMENT:-production}'};</script>"
           snippet="${cfg}<script src=\"sentry.bundle.js\"></script>"
           for f in scummvm/build-emscripten/index.html scummvm/build-emscripten/scummvm.html; do
