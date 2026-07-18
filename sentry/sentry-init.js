@@ -17,7 +17,16 @@ if (cfg.dsn) {
     integrations: [wasmIntegration()],
     // Emscripten aborts (e.g. OOM "Cannot enlarge memory") throw and are caught
     // by Sentry's default global handlers; attach memory context to every event.
-    beforeSend(event) {
+    beforeSend(event, hint) {
+      try {
+        // Emscripten unwinds the stack on a normal exit() by *throwing* an
+        // ExitStatus object ({name, message, status}); Sentry's global handler
+        // would report every clean shutdown (e.g. dismissing a ScummVM error
+        // dialog) as "Object captured as exception". Not an error - drop it.
+        const ex = hint && hint.originalException;
+        if (ex && (ex.name === "ExitStatus" || (typeof ex.status === "number" && typeof ex.message === "string" && /Program terminated|exit\(/.test(ex.message))))
+          return null;
+      } catch (e) { /* fall through to send */ }
       try {
         const mem = {};
         const heap = (typeof HEAPU8 !== "undefined" && HEAPU8) || (typeof window !== "undefined" && window.HEAPU8);
