@@ -138,6 +138,40 @@ the "hold on the render frame" instinct.
 3. **Do not pursue threads.** The COOP/COEP tax breaks the CDN and OAuth flows
    by design.
 
+## Follow-up: "fake rAF main loop" + decoupled rendering
+
+Idea: register an `emscripten_request_animation_frame` /
+`emscripten_set_main_loop` "fake loop" that does the actual GL present + input
+processing; engines only *push* frames into the render backend (decoupled from
+presentation), so the blocking `updateScreen`/present leaves the engine stack.
+
+Why it does **not** remove ASYNCIFY: `emscripten_request_animation_frame` and
+`_emscripten_push_main_loop_blocker` take `em_callback_func` — they are
+*consumers* of control, not takers. JS/wasm is single-threaded and
+run-to-completion: the browser can only invoke a rAF callback once the wasm
+stack has **returned** to the event loop. While an engine's blocking
+`while (!quit)` runs, no rAF fires, no input dispatches, no paint happens. If
+`updateScreen` becomes a cheap buffer copy and `delayMillis` stops calling
+`emscripten_sleep`, the engine loop simply spins forever and the tab freezes —
+the fake loop never runs. Decoupling moves the *present* out of the engine
+stack; it does not remove the *yield*, which still happens at `delayMillis`
+and still needs ASYNCIFY (or JSPI, or a thread) to unwind. `set_main_loop`
+with `simulate_infinite_loop=true` also escapes `main` by stack-unwinding, so
+it doesn't dodge it either; a main-loop *blocker* is the inverse of the goal
+(it pauses the rAF loop to run a one-shot step). The only way this removes
+ASYNCIFY is combined with "one bounded engine tick per rAF" — i.e. option D,
+infeasible at 125 engines.
+
+Why it's still worth doing (complementary to ASYNCIFY, not a replacement):
+1. **Robustness** — present on a clean/empty stack in the rAF callback instead
+   of mid-suspend with GL state half-mutated; plausibly the root class of
+   several re-entry bugs (the `silence_callback` GL trap, recorder stalls).
+2. **Smoothness** — double-buffered producer/consumer decouples engine tick
+   rate from refresh; input at vsync cadence; can drive the ASYNCIFY *resume*
+   from rAF instead of `setTimeout(0)`.
+3. **Forward-compatible** — this decoupled shape is exactly what a JSPI or
+   thread world wants, so it de-risks the eventual `-sASYNCIFY → -sJSPI` swap.
+
 ## Adversarial / falsification notes
 
 - "Own the abstraction → invert control for free" is the tempting wrong turn.
