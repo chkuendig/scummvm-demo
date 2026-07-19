@@ -172,6 +172,53 @@ Why it's still worth doing (complementary to ASYNCIFY, not a replacement):
 3. **Forward-compatible** — this decoupled shape is exactly what a JSPI or
    thread world wants, so it de-risks the eventual `-sASYNCIFY → -sJSPI` swap.
 
+## Update: what if cross-origin isolation is acceptable? (threads reconsidered)
+
+Premise corrections:
+- "Stay same host" does not by itself avoid COOP/COEP — you still *set*
+  `COOP: same-origin` + `COEP: require-corp` to get `crossOriginIsolated`
+  (which unlocks SharedArrayBuffer → threads). Same-host only spares your own
+  assets from needing CORP headers.
+- The CDN is not actually a blocker: under COEP, cross-origin subresources
+  just need `Cross-Origin-Resource-Policy: cross-origin` (or CORS), and we
+  control the CDN (Hostinger/nginx) — a one-line header. We removed COEP
+  earlier because the header was missing, not because it's impossible.
+- OAuth is the real friction: `COOP: same-origin` severs `window.opener`.
+  Fix with redirect-based OAuth (no popup) or a separate non-isolated auth
+  page. Solvable, some work.
+
+Decisive fact (2026): **iOS Safari 15.2+ supports SharedArrayBuffer under
+cross-origin isolation.** So option C (pthreads / PROXY_TO_PTHREAD) is
+genuinely viable on all our targets, not just Chrome — the earlier "reject"
+was too strong once the CDN-CORP and OAuth-redirect fixes are on the table.
+
+Is it worth it, given it's viable? Adversarially, still second choice:
+- **Pros:** removes ASYNCIFY entirely (no size/speed penalty, no re-entry bug
+  class, no ASYNCIFY_IMPORTS); engine on a worker with a genuinely-blocking
+  delayMillis; main thread stays responsive; wants exactly the decoupled
+  render shape above; and unlike JSPI it works on Safari *today*.
+- **Cons / risk, concentrated on iOS (our most fragile platform):**
+  - Compounds with dynamic linking — MAIN_MODULE + 125 SIDE_MODULE plugins all
+    become `-pthread`/shared-memory; threads × dynamic linking is emscripten's
+    thorniest corner, atop a link setup already parked at MAIN_MODULE=2.
+  - iOS memory ceiling — shared memory constrains `memory.grow` and iOS
+    reserves against MAXIMUM_MEMORY; we're already at the 640 MB edge, so
+    threads could *lower* the effective ceiling on the OOM-prone platform.
+  - SDL3 emscripten threaded/OffscreenCanvas maturity unproven; PROXY_TO_PTHREAD
+    proxies main-thread-only GL/audio calls.
+  - Upstream appetite — a threaded backend forks the port's established
+    ASYNCIFY model.
+- **Why JSPI still wins the tie:** JSPI is a link-flag swap on the same
+  single-threaded architecture — no COOP/COEP, no CDN CORP header, no OAuth
+  redesign, no threads-×-dynamic-linking. Threads' only edge is "Safari now."
+
+Decision = a timeline bet: if JSPI-on-Safari is ~1-2 years out (Phase 4 +
+assigned implementer, late 2025), wait for it; if it stalls indefinitely and
+the iOS memory/linking risk is acceptable, threads are the "works everywhere
+now" path. Either way, the decoupled-render refactor is the shared no-regret
+enabling step and also improves the current ASYNCIFY build — do it regardless;
+treat threads as "break glass if JSPI stalls," not the plan of record.
+
 ## Adversarial / falsification notes
 
 - "Own the abstraction → invert control for free" is the tempting wrong turn.
