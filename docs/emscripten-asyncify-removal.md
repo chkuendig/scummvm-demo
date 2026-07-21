@@ -218,6 +218,8 @@ the iOS memory/linking risk is acceptable, threads are the "works everywhere
 now" path. Either way, the decoupled-render refactor is the shared no-regret
 enabling step and also improves the current ASYNCIFY build — do it regardless;
 treat threads as "break glass if JSPI stalls," not the plan of record.
+The detailed thread realization of the decoupled render+input split is in
+`emscripten-threaded-render.md`.
 
 ## Adversarial / falsification notes
 
