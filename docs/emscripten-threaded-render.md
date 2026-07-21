@@ -6,7 +6,43 @@ for the threads path). Assumes cross-origin isolation is acceptable (COOP
 `same-origin` + COEP `require-corp`; CDN sends `Cross-Origin-Resource-Policy:
 cross-origin`; cloud OAuth moved to a redirect flow).
 
-## The cut line (why it's clean in ScummVM)
+## Try PROXY_TO_PTHREAD first (low-effort; removes ASYNCIFY without decoupling)
+
+Before the hand-rolled split below, spike emscripten's built-in
+`-sPROXY_TO_PTHREAD`: it runs `main()` and the whole blocking engine loop on a
+spawned pthread, with the browser main thread as the proxy/UI thread.
+Emscripten auto-proxies the main-thread-only calls (GL, DOM, SDL events,
+audio) back to the UI thread — or with `-sOFFSCREENCANVAS_SUPPORT` the GL runs
+directly on the worker (no per-call proxying).
+
+- The worker's `SDL_Delay` becomes a **real blocking sleep** → **drop
+  `-sASYNCIFY` entirely.** That's the whole win, essentially for a build-flag
+  change (`-pthread -sPROXY_TO_PTHREAD [-sOFFSCREENCANVAS_SUPPORT]`), near-zero
+  ScummVM code.
+- **Dynamic linking works with pthreads:** emscripten 6.0.2 propagates
+  already-loaded side modules to each spawned thread (`sharedModules` in
+  `runtime_pthread.js`), so MAIN_MODULE + 125 SIDE_MODULE plugins are not a
+  blocker (verify: plugins are loaded before the engine thread starts).
+- **Fixes the `silence_callback` crash for free** — that bug was ASYNCIFY
+  re-entry corruption; with ASYNCIFY gone there is no asyncify state to corrupt.
+
+What PROXY_TO_PTHREAD does **not** give you:
+- It removes ASYNCIFY but does **not** decouple the render.
+  `updateScreen → SDL_GL_SwapWindow` still fires at the *engine's* cadence
+  (just on/proxied-from the worker), not a main-thread rAF — so no
+  cursor-tracks-pointer latency win and no automatic black-bar coordinate fix.
+  Those need the shared-surface producer/consumer below.
+- It keeps you on SDL3's emscripten threaded GL/event/audio paths, whose
+  maturity is uncertain (the port is still flagged experimental).
+
+**So the layering is:** (1) spike PROXY_TO_PTHREAD to remove ASYNCIFY cheaply;
+(2) build the hand-rolled decoupled split below only if GL proxying is too slow
+*and* OffscreenCanvas isn't enough, or SDL3-pthreads proves too immature, or
+you specifically want the render-decoupling wins. The split can also sit *on
+top of* PROXY_TO_PTHREAD (engine on the proxied pthread; a custom main-thread
+rAF presenter reads the shared surface).
+
+## The cut line (why the hand-rolled decoupling is clean in ScummVM)
 
 Two facts from the source make a producer/consumer split natural:
 
@@ -140,11 +176,13 @@ Pure JS + WebGL (or a thin main-thread wasm entry), driven by `rAF`:
 ## Build mechanics
 
 - `-pthread` main + plugins; shared Memory; COOP/COEP served.
-- Topology: `main()` on a worker via `PROXY_TO_PTHREAD` **but do not use its GL
-  auto-proxying** — the worker never calls GL. The browser main thread runs the
-  presenter: create the WebGL context there, run the rAF loop and DOM listeners
-  there, reading/writing the shared channels. (Equivalently: a thin main-thread
-  bootstrap creates the context + presenter, then `pthread_create`s the engine.)
+- Topology: `main()` on a worker via `PROXY_TO_PTHREAD`. For the hand-rolled
+  split the worker never calls GL — the browser main thread runs the presenter
+  (creates the WebGL context, runs the rAF loop + DOM listeners, reads/writes
+  the shared channels). For the plain PROXY_TO_PTHREAD spike, skip the presenter
+  and let emscripten proxy GL/events (or `-sOFFSCREENCANVAS_SUPPORT` for GL on
+  the worker) — that alone removes ASYNCIFY; layer the presenter on later for
+  the decoupling wins.
 - Keep everything funnelled through `OSystem` so the *engine* is identical to
   every other platform — this is a new backend, not an engine change.
 
