@@ -34,7 +34,9 @@
 	<serie id="deviltrilogy" name="Devil Came Through Here Trilogy"/>
 	<serie id="disney" name="Disney AGI"/>
 	<serie id="dogncat" name="Dog-n-cat"/>
+	<serie id="dracula" name="Dracula Resurrection"/>
 	<serie id="dw" name="Discworld"/>
+	<serie id="eem" name="Eagle Eye Mysteries"/>
 	<serie id="ecoquest" name="EcoQuest"/>
 	<serie id="elvira" name="Elvira"/>
 	<serie id="enchanter" name="Enchanter"/>
@@ -95,6 +97,7 @@
 	<serie id="qfg" name="Quest for Glory"/>
 	<serie id="quantum" name="Quantumnauts"/>
 	<serie id="raysmaze" name="Ray's Maze"/>
+	<serie id="rebel" name="Rebel Assault"/>
 	<serie id="reversion" name="Reversion"/>
 	<serie id="ringworld" name="Ringworld"/>
 	<serie id="robotragedy" name="Robotragedy"/>

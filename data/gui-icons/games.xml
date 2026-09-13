@@ -38,6 +38,9 @@
 	<game id="7daysaskeptic" name="7 Days A Skeptic" engine_id="ags" company_id="fullyramblomatic" year="2004" moby_id="14228" steam_id="" gog_id="" zoom_id="" additional_stores="- [Developer's Website](http://www.fullyramblomatic.com/7days/)" datafiles="AGS/Games" wikipedia_page="" series_id="chzo"/>
 	
 	
+	<game id="8squares" name="Eight Squares in The Garden" engine_id="wintermute" company_id="fireside7games" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="abracadabra" name="Once Upon A Time: Abracadabra" engine_id="gob" company_id="coktel" year="1991" moby_id="31462" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
@@ -152,6 +155,9 @@
 	<game id="almostblue" name="Almost Blue" engine_id="ags" company_id="emptyworld" year="2019" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://emptyworld-games.itch.io/)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="alone" name="Alone, Under Strange Night" engine_id="wintermute" company_id="fskstudios" year="2008" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="alphapolaris" name="Alpha Polaris" engine_id="wintermute" company_id="turmoil" year="2011" moby_id="53007" steam_id="405780" gog_id="" zoom_id="" additional_stores="" datafiles="Alpha_Polaris" wikipedia_page="Alpha_Polaris" series_id=""/>
 	
 	
@@ -162,6 +168,9 @@
 	
 	
 	<game id="amber" name="AMBER: Journeys Beyond" engine_id="director" company_id="hueforest" year="1996" moby_id="2430" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Amber:_Journeys_Beyond" series_id=""/>
+	
+	
+	<game id="amerzone" name="Amerzone: The Explorer's Legacy" engine_id="phoenixvr" company_id="microids" year="1999" moby_id="3973" steam_id="" gog_id="amerzone_the_explorer_legacy" zoom_id="amerzone-the-explorers-legacy" additional_stores="" datafiles="Amerzone" wikipedia_page="Amerzone" series_id=""/>
 	
 	
 	<game id="amongthorns" name="Among Thorns" engine_id="ags" company_id="mattfrith" year="2016" moby_id="77210" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://mattfrith.itch.io/among-thorns)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
@@ -254,6 +263,9 @@
 	<game id="awakener" name="Awakener" engine_id="ags" company_id="bchandler" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="awakening" name="Awakening: Burning Ashes" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="azazelxmas" name="Azazel's Christmas Fable" engine_id="ags" company_id="gmuhlbock" year="2022" moby_id="204335" steam_id="2163620" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
@@ -266,10 +278,19 @@
 	<game id="balloon" name="Putt-Putt and Pep's Balloon-O-Rama" engine_id="scumm" company_id="he" year="1996" moby_id="12433" steam_id="284000" gog_id="" zoom_id="" additional_stores="" datafiles="Putt-Putt_and_Pep%27s_Balloon-O-Rama" wikipedia_page="Putt-Putt_and_Pep%27s_Balloon-o-Rama" series_id="puttputt"/>
 	
 	
+	<game id="balones" name="Mortadelo y Filemón: Balones y Patadones" engine_id="alcachofa" company_id="alcachofa" year="2003" moby_id="14409" steam_id="2654930" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_La_Banda_de_Corvino" wikipedia_page="Mortadelo_y_Filemón:_La_Banda_de_Corvino" series_id=""/>
+	
+	
 	<game id="bambou" name="Playtoons Limited Edition - Bambou le sauveur de la jungle" engine_id="gob" company_id="coktel" year="1997" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Playtoons_Limited_Edition_-_Bambou_le_Sauveur_de_la_Jungle" wikipedia_page="" series_id="playtoons"/>
 	
 	
 	<game id="barahir" name="Barahir's Adventure: Askar's Castle" engine_id="ags" company_id="brocanty" year="2020" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://brocantygames.itch.io/)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="barbapoca1" name="El Engaño de Barbapoca: Capítulo 1 - Esta Pizza Está de Muerte" engine_id="wintermute" company_id="lajaraventuras" year="2010" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="barbapoca2" name="El Engaño de Barbapoca: Capítulo 2 - Competencia Fantasmal" engine_id="wintermute" company_id="lajaraventuras" year="2013" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="bargon" name="Bargon Attack" engine_id="gob" company_id="coktel" year="1992" moby_id="13178" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Bargon_Attack" wikipedia_page="Bargon_Attack" series_id=""/>
@@ -449,6 +470,9 @@
 	<game id="bohemianyard" name="Bohemian Yard" engine_id="ags" company_id="bjovian" year="2019" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="bookmania" name="Bookmania" engine_id="wintermute" company_id="offstudio" year="2011" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="bookofgron" name="Book of Gron Part One" engine_id="wintermute" company_id="maximyz" year="2010" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Book_of_Gron_Part_One" wikipedia_page="" series_id=""/>
 	
 	
@@ -593,6 +617,12 @@
 	<game id="chaluul" name="Chaluul's Curse Remake" engine_id="ags" company_id="brocanty" year="2023" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://brocantygames.itch.io/)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="chamber" name="Chamber of the Sci-Mutant Priestess" engine_id="chamber" company_id="ere" year="1989" moby_id="562" steam_id="768480" gog_id="" zoom_id="" additional_stores="" datafiles="Chamber_of_the_Sci-Mutant_Priestess" wikipedia_page="Kult:_The_Temple_of_Flying_Saucers" series_id=""/>
+	
+	
+	<game id="chaos" name="Chaos" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="charnelhousetrilogy" name="The Charnel House Trilogy" engine_id="ags" company_id="owlcave" year="2015" moby_id="77266" steam_id="288930" gog_id="" zoom_id="" additional_stores="- [FireFlower Games Store](https://fireflowergames.com/products/the-charnel-house-trilogy/)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
@@ -665,6 +695,9 @@
 	<game id="cnick-sq" name="Crazy Nick's Software Picks: Roger Wilco's Spaced Out Game Pack" engine_id="sci" company_id="sierra" year="1992" moby_id="95475" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id="sq"/>
 	
 	
+	<game id="colapso" name="Colapso: Episode 1" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="colorsoncanvas" name="Colors on Canvas" engine_id="wintermute" company_id="mpcernea" year="2015" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Colors_on_Canvas" wikipedia_page="" series_id=""/>
 	
 	
@@ -690,6 +723,9 @@
 	
 	
 	<game id="corruption" name="Corruption" engine_id="glk" company_id="magnetic" year="1988" moby_id="1029" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Corruption" wikipedia_page="Corruption_(1988_video_game)" series_id=""/>
+	
+	
+	<game id="corvino" name="Mortadelo y Filemón: La Banda de Corvino" engine_id="alcachofa" company_id="alcachofa" year="2003" moby_id="132093" steam_id="1017490" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_La_Banda_de_Corvino" wikipedia_page="Mortadelo_y_Filemón:_La_Banda_de_Corvino" series_id=""/>
 	
 	
 	<game id="cosmosquest1" name="Cosmos Quest I" engine_id="ags" company_id="goa" year="2006" moby_id="30634" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://cosmosquest.itch.io/)" datafiles="AGS/Games" wikipedia_page="" series_id="cosmos"/>
@@ -772,6 +808,9 @@
 	
 	
 	<game id="darksideofxeen" name="Might and Magic: Darkside of Xeen" engine_id="mm" company_id="nwc" year="1993" moby_id="3424" steam_id="" gog_id="might_and_magic_6_limited_edition" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Might_and_Magic_V:_Darkside_of_Xeen" series_id="mm"/>
+	
+	
+	<game id="darksummer" name="Twilight: Dark Summer" engine_id="wintermute" company_id="rskent" year="2019" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="ddp" name="Donald Duck's Playground" engine_id="agi" company_id="sierra" year="1984" moby_id="3491" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Donald_Duck%27s_Playground" wikipedia_page="Donald_Duck%27s_Playground" series_id="disney"/>
@@ -861,6 +900,12 @@
 	<game id="draci" name="Dragon History" engine_id="draci" company_id="nosense" year="1995" moby_id="44689" steam_id="" gog_id="" zoom_id="" additional_stores="- [Developer's Website](http://www.ucw.cz/draci-historie/index-en.html#download)" datafiles="Dragon_History" wikipedia_page="Dračí_Historie" series_id=""/>
 	
 	
+	<game id="dracula1" name="Dracula: Resurrection" engine_id="phoenixvr" company_id="indexplus" year="1999" moby_id="1862" steam_id="" gog_id="dracula_trilogy" zoom_id="dracula-1-resurrection" additional_stores="" datafiles="Dracula:_Resurrection" wikipedia_page="Dracula:_Resurrection" series_id="dracula"/>
+	
+	
+	<game id="dracula2" name="Dracula 2: The Last Sanctuary" engine_id="phoenixvr" company_id="wanadoo" year="2000" moby_id="3374" steam_id="" gog_id="dracula_trilogy" zoom_id="dracula-2-the-last-sanctuary" additional_stores="" datafiles="Dracula_2:_The_Last_Sanctuary" wikipedia_page="Dracula_2:_The_Last_Sanctuary" series_id="dracula"/>
+	
+	
 	<game id="dragons" name="Blazing Dragons" engine_id="dragons" company_id="crystaldynamics" year="1996" moby_id="8513" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Blazing_Dragons" wikipedia_page="Blazing_Dragons_(video_game)" series_id=""/>
 	
 	
@@ -883,6 +928,9 @@
 	
 	
 	<game id="dreaming" name="Des Reves Elastiques Avec Mille Insectes Nommes Georges" engine_id="wintermute" company_id="squinky" year="2008" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Des_Rêves_Élastiques_Avec_Mille_Insectes_Nommés_Georges" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="dreams" name="Dreams" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="dreamscape" name="Dreamscape" engine_id="wintermute" company_id="blekinge" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Dreamscape" wikipedia_page="" series_id=""/>
@@ -939,6 +987,12 @@
 	<game id="ecoquest2" name="EcoQuest II: Lost Secret of the Rainforest" engine_id="sci" company_id="sierra" year="1993" moby_id="619" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="EcoQuest_II" wikipedia_page="Lost_Secret_of_the_Rainforest" series_id="ecoquest"/>
 	
 	
+	<game id="eem1" name="Eagle Eye Mysteries" engine_id="eem" company_id="stormfront" year="1993" moby_id="14171" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Eagle_Eye_Mysteries" wikipedia_page="Eagle_Eye_Mysteries" series_id="eem"/>
+	
+	
+	<game id="eem2" name="Eagle Eye Mysteries In London" engine_id="eem" company_id="stormfront" year="1994" moby_id="19256" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Eagle_Eye_Mysteries_in_London" wikipedia_page="Eagle_Eye_Mysteries" series_id="eem"/>
+	
+	
 	<game id="efh" name="Escape From Hell" engine_id="efh" company_id="ea" year="1990" moby_id="1321" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Escape_from_Hell " wikipedia_page="" series_id=""/>
 	
 	
@@ -979,6 +1033,9 @@
 	
 	
 	<game id="escapemansion" name="Escape from the Mansion" engine_id="wintermute" company_id="negator2vc" year="2012" moby_id="227515" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="escarabajo" name="Mortadelo y Filemón: El escarabajo de Cleopatra" engine_id="alcachofa" company_id="alcachofa" year="2001" moby_id="15302" steam_id="2654950" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_La_Sexta_Secta" wikipedia_page="Mortadelo_y_Filemón:_La_Sexta_Secta" series_id=""/>
 	
 	
 	<game id="everydaygray" name="Everyday Grey" engine_id="wintermute" company_id="krumbukt" year="2011" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Everyday_Grey" wikipedia_page="" series_id=""/>
@@ -1062,6 +1119,9 @@
 	<game id="footballgame" name="Football Game" engine_id="ags" company_id="cloakdagger" year="2018" moby_id="136966" steam_id="654550" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://shaun9991.itch.io/footballgame)" datafiles="Football_Game" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="forest" name="Once Upon a Forest" engine_id="mads" company_id="sanctuary" year="1995" moby_id="49941" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Once_Upon_a_Forest" series_id=""/>
+	
+	
 	<game id="forgottensound1" name="Forgotten Sound 1 - Revelation" engine_id="wintermute" company_id="rskent" year="2018" moby_id="122590" steam_id="779840" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id="forgottensound"/>
 	
 	
@@ -1084,6 +1144,9 @@
 	
 	
 	<game id="frasse" name="Frasse and the Peas of Kejick" engine_id="sludge" company_id="trumgottist" year="2006" moby_id="33462" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Frasse_And_The_Peas_Of_Kejick" wikipedia_page="" series_id="sludge"/>
+	
+	
+	<game id="fred" name="Fred" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="freddi" name="Freddi Fish and the Case of the Missing Kelp Seeds" engine_id="scumm" company_id="he" year="1994" moby_id="1199" steam_id="283940" gog_id="" zoom_id="" additional_stores="" datafiles="Freddi_Fish_1:_The_Case_of_the_Missing_Kelp_Seeds" wikipedia_page="Freddi_Fish_and_the_Case_of_the_Missing_Kelp_Seeds" series_id="freddi"/>
@@ -1263,6 +1326,9 @@
 	<game id="gurktrouble" name="Gurk in Trouble - A Yip Quest Story" engine_id="ags" company_id="ramorama" year="2024" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://ramoramainteractive.itch.io/gurk-in-trouble-a-yip-quest-story)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="guttenburg" name="The Guttenburg Project" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="hadesch" name="Hades Challenge" engine_id="hadesch" company_id="disney" year="1998" moby_id="26769" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Hades_Challenge" wikipedia_page="Hercules_(franchise)#Hades_Challenge" series_id=""/>
 	
 	
@@ -1437,6 +1503,9 @@
 	<game id="id4p9" name="iD4 Mission Disk 9 - FA-18 Fighter Jet" engine_id="director" company_id="trendmasters" year="1996" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id="id4"/>
 	
 	
+	<game id="idiotstale" name="The Idiot's Tale" engine_id="wintermute" company_id="megalithic" year="2018" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="igor" name="Igor: Objective Uikokahonia" engine_id="igor" company_id="optik" year="1994" moby_id="2170" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Igor:_Objective_Uikokahonia" series_id=""/>
 	
 	
@@ -1447,6 +1516,9 @@
 	
 	
 	<game id="imoking" name="Magic Tales: Imo &amp; the King" engine_id="composer" company_id="animationmagic" year="1995" moby_id="124456" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Magic_Tales" series_id="magictales"/>
+	
+	
+	<game id="imustkill" name="I Must Kill...: Fresh Meat " engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="inca" name="Inca" engine_id="gob" company_id="coktel" year="1992" moby_id="4198" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
@@ -1514,6 +1586,9 @@
 	<game id="jamesperis" name="James Peris: No License Nor Control" engine_id="wintermute" company_id="pavo" year="2012" moby_id="227509" steam_id="1243010" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="jamesperis2" name="James Peris 2: The Fountain of Eternal Drunkenness" engine_id="wintermute" company_id="pavo" year="2022" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="japanart07" name="Japan Art Today 07: Takashi Murakami - A Romantic Evening" engine_id="director" company_id="aloalo" year="1993" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
@@ -1565,10 +1640,16 @@
 	<game id="kathyrain" name="Kathy Rain" engine_id="ags" company_id="clifftop" year="2016" moby_id="79519" steam_id="370910" gog_id="kathy_rain" zoom_id="" additional_stores="" datafiles="Kathy_Rain" wikipedia_page="Kathy_Rain" series_id=""/>
 	
 	
+	<game id="keshaskazok" name="Kesha in the World of Fairy Tales" engine_id="wintermute" company_id="origames" year="2006" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="killyourself" name="Kill Yourself" engine_id="ags" company_id="gugames" year="2020" moby_id="186594" steam_id="1251910" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://gugames.itch.io/kill-yourself)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="kingdom" name="Kingdom: The Far Reaches" engine_id="kingdom" company_id="virtual" year="1995" moby_id="4788" steam_id="" gog_id="kingdom_the_far_reaches" zoom_id="" additional_stores="" datafiles="Kingdom:_The_Far_Reaches" wikipedia_page="Thayer%27s_Quest" series_id=""/>
+	
+	
+	<game id="klaymen1" name="Klaymen Episodes" engine_id="wintermute" company_id="mif2000" year="2008" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="klepa" name="Klepa: Symbolic Rivets" engine_id="qdengine" company_id="kdlab" year="2007" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Klepa:_Symbolic_Rivets" wikipedia_page="" series_id=""/>
@@ -1697,6 +1778,9 @@
 	<game id="level9" name="Level 9 Interactive Fiction games" engine_id="glk" company_id="glk" year="" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="leyendabiblio" name="La Leyenda de la Biblioteca" engine_id="wintermute" company_id="jwk" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="lgop" name="Leather Goddesses of Phobos" engine_id="glk" company_id="infocom" year="1986" moby_id="31" steam_id="" gog_id="" zoom_id="" additional_stores="- [Interactive Fiction Database](https://ifdb.org/viewgame?id=3p9fdt4fxr2goctw#dlIcon0)" datafiles="" wikipedia_page="Leather_Goddesses_of_Phobos" series_id=""/>
 	
 	
@@ -1758,6 +1842,9 @@
 	
 	
 	<game id="lost" name="Pajama Sam's Lost &amp; Found" engine_id="scumm" company_id="he" year="1998" moby_id="19377" steam_id="292860" gog_id="pajama_sam_vol_1" zoom_id="" additional_stores="" datafiles="Pajama_Sam%27s_Lost_%26_Found" wikipedia_page="" series_id="pajama"/>
+	
+	
+	<game id="lostbride" name="The Tale of The Lost Bride and A Hidden Treasure" engine_id="wintermute" company_id="lazygames" year="2011" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="losteden" name="Lost Eden" engine_id="cryo" company_id="cryo" year="1995" moby_id="1054" steam_id="579980" gog_id="lost_eden" zoom_id="" additional_stores="" datafiles="Lost_Eden" wikipedia_page="Lost_Eden" series_id=""/>
@@ -1830,6 +1917,9 @@
 	
 	
 	<game id="makingofmyst" name="The Making of Myst" engine_id="mohawk" company_id="cyan" year="1993" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Myst" series_id="myst"/>
+	
+	
+	<game id="mamelucos" name="Mortadelo y Filemón: Mamelucos a la Romana" engine_id="alcachofa" company_id="alcachofa" year="2003" moby_id="23630" steam_id="2654970" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_La_Banda_de_Corvino" wikipedia_page="Mortadelo_y_Filemón:_La_Banda_de_Corvino" series_id=""/>
 	
 	
 	<game id="manboy" name="Man Boy vs. Doctor Sock" engine_id="ags" company_id="bchandler" year="2008" moby_id="35020" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
@@ -1929,6 +2019,9 @@
 	<game id="mirage" name="Mirage" engine_id="wintermute" company_id="blekinge" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Mirage" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="miskatonic1" name="Miskatonic - Part One: The Inhuman Stain" engine_id="wintermute" company_id="jackslawed" year="2011" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="mixedup" name="Mixed-Up Mother Goose" engine_id="agi" company_id="sierra" year="1987" moby_id="758" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Mixed-Up_Mother_Goose" wikipedia_page="Mixed-Up_Mother_Goose" series_id="mixedup"/>
 	
 	
@@ -1960,6 +2053,9 @@
 	<game id="mortevielle" name="Mortville Manor" engine_id="mortevielle" company_id="lankhor" year="1986" moby_id="2504" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Mortville_Manor" wikipedia_page="Mortville_Manor" series_id=""/>
 	
 	
+	<game id="moscu" name="Mortadelo y Filemón: Operación Moscú" engine_id="alcachofa" company_id="alcachofa" year="2001" moby_id="15349" steam_id="1114340" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_La_Sexta_Secta" wikipedia_page="Mortadelo_y_Filemón:_La_Sexta_Secta" series_id=""/>
+	
+	
 	<game id="mothergoose" name="Mixed-Up Mother Goose" engine_id="sci" company_id="sierra" year="1987" moby_id="758" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Mixed-Up_Mother_Goose" wikipedia_page="Mixed-Up_Mother_Goose" series_id="mixedup"/>
 	
 	
@@ -1988,6 +2084,9 @@
 	
 	
 	<game id="mudlarks" name="Mudlarks" engine_id="ags" company_id="cloakdagger" year="2014" moby_id="112305" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://shaun9991.itch.io/mudlarks)" datafiles="Mudlarks" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="mukhtar" name="Mukhtar and his Team" engine_id="wintermute" company_id="creativedream" year="2012" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="murderinawheel" name="Murder in a Wheel" engine_id="ags" company_id="rthonen" year="2007" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
@@ -2023,6 +2122,9 @@
 	<game id="myst3" name="Myst III: Exile" engine_id="myst3" company_id="presto" year="2001" moby_id="3520" steam_id="925930" gog_id="myst_3_exile" zoom_id="" additional_stores="" datafiles="Myst_III:_Exile" wikipedia_page="Myst_III:_Exile" series_id="myst"/>
 	
 	
+	<game id="mystictriddle" name="Mystic Triddle" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="mystme" name="Myst: Masterpiece Edition" engine_id="mohawk" company_id="cyan" year="1999" moby_id="1253" steam_id="63660" gog_id="myst_masterpiece_edition" zoom_id="" additional_stores="" datafiles="Myst" wikipedia_page="Myst" series_id="myst"/>
 	
 	
@@ -2033,6 +2135,12 @@
 	
 	
 	<game id="nancy1" name="Nancy Drew: Secrets Can Kill" engine_id="nancy" company_id="herinteractive" year="1998" moby_id="4907" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Nancy_Drew:_Secrets_Can_Kill" wikipedia_page="Nancy_Drew:_Secrets_Can_Kill" series_id="nancy"/>
+	
+	
+	<game id="nancy10" name="Nancy Drew: The Secret of Shadow Ranch" engine_id="nancy" company_id="herinteractive" year="2004" moby_id="14155" steam_id="572740" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/more-nancy-drew/trailers/nancy-drew-the-secret-of-shadow-ranch/)" datafiles="Nancy_Drew:_The_Secret_of_Shadow_Ranch" wikipedia_page="Nancy_Drew:_The_Secret_of_Shadow_Ranch" series_id="nancy"/>
+	
+	
+	<game id="nancy11" name="Nancy Drew: Curse of Blackmoor Manor" engine_id="nancy" company_id="herinteractive" year="2004" moby_id="15138" steam_id="31830" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/shop-games/nancy-drew-curse-of-blackmoor-manor/)" datafiles="Nancy_Drew:_Curse_of_Blackmoor_Manor" wikipedia_page="Nancy_Drew:_Curse_of_Blackmoor_Manor" series_id="nancy"/>
 	
 	
 	<game id="nancy2" name="Nancy Drew: Stay Tuned for Danger" engine_id="nancy" company_id="herinteractive" year="1999" moby_id="2425" steam_id="" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/shop-games/nancy-drew-stay-tuned-for-danger/)" datafiles="Nancy_Drew:_Stay_Tuned_for_Danger" wikipedia_page="Nancy_Drew:_Stay_Tuned_for_Danger" series_id="nancy"/>
@@ -2089,6 +2197,9 @@
 	<game id="newkid" name="The New Kid on the Block" engine_id="mohawk" company_id="livingbooks" year="1993" moby_id="62289" steam_id="" gog_id="" zoom_id="the-new-kid-on-the-block" additional_stores="" datafiles="The_New_Kid_on_the_Block" wikipedia_page="Living_Books" series_id="livingbooks"/>
 	
 	
+	<game id="nightinthefog" name="Night in the Fog" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="nightmareframes" name="Nightmare Frames" engine_id="ags" company_id="postmodern" year="2022" moby_id="186431" steam_id="1650590" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://postmodernadventures.itch.io/nightmare-frames)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
@@ -2116,6 +2227,9 @@
 	<game id="noir" name="Discworld Noir" engine_id="tinsel" company_id="perfect" year="1999" moby_id="1411" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Discworld_Noir" series_id="dw"/>
 	
 	
+	<game id="nosebound" name="Nose Bound - Episode 1" engine_id="wintermute" company_id="quarantine" year="2024" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="nsc" name="Nathan's Second Chance" engine_id="sludge" company_id="unknown" year="2005" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Nathan%27s_Second_Chance" wikipedia_page="" series_id="sludge"/>
 	
 	
@@ -2123,6 +2237,9 @@
 	
 	
 	<game id="obsidian" name="Obsidian" engine_id="mtropolis" company_id="rocketscience" year="1997" moby_id="1564" steam_id="2471130" gog_id="" zoom_id="obsidian" additional_stores="" datafiles="Obsidian" wikipedia_page="Obsidian_(1997_video_game)" series_id=""/>
+	
+	
+	<game id="octave" name="Octave" engine_id="wintermute" company_id="anate" year="2010" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="odissea" name="Odissea - An Almost True Story" engine_id="ags" company_id="midian" year="2011" moby_id="61346" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://midiandesign.itch.io/midiandesignbundle)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
@@ -2153,6 +2270,9 @@
 	
 	
 	<game id="openquest" name="Open Quest" engine_id="wintermute" company_id="jennybee" year="2007" moby_id="31793" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="OpenQuest" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="operacionbomba" name="Operación: Bomba" engine_id="wintermute" company_id="javierhermandez" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="orly" name="Orly's Draw-A-Story" engine_id="mohawk" company_id="broderbund" year="1997" moby_id="140066" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Orly's_Draw-A-Story" series_id=""/>
@@ -2195,6 +2315,9 @@
 	
 	
 	<game id="palladion" name="Palladion" engine_id="wintermute" company_id="unknown" year="2008" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="pangea" name="Pangea 1/2" engine_id="wintermute" company_id="lleans" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="papasdaughters1" name="Papa's Daughters" engine_id="wintermute" company_id="herocraft" year="2011" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Papa%27s_Daughters" wikipedia_page="" series_id="papas"/>
@@ -2240,6 +2363,9 @@
 	
 	
 	<game id="personalrocket" name="Personal Rocket" engine_id="ags" company_id="orbis" year="2022" moby_id="179504" steam_id="1497290" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="petka02" name="Red Comrades 0.2: Operation F." engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="petka1" name="Red Comrades 1: Save the Galaxy" engine_id="petka" company_id="skif" year="1999" moby_id="1854" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Red_Comrades_Save_the_Galaxy" series_id="petka"/>
@@ -2363,6 +2489,9 @@
 	
 	
 	<game id="pqswat" name="Police Quest: SWAT" engine_id="sci" company_id="sierra" year="1995" moby_id="150" steam_id="" gog_id="police_quest_swat_1_2" zoom_id="" additional_stores="" datafiles="Police_Quest:_SWAT" wikipedia_page="Police_Quest:_SWAT" series_id="pq"/>
+	
+	
+	<game id="preciouspills" name="Precious Pills, Blasting Bacon and Mowing Minds" engine_id="wintermute" company_id="jesperolson" year="2012" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="primordia" name="Primordia" engine_id="ags" company_id="wormwood" year="2012" moby_id="59392" steam_id="227000" gog_id="primordia" zoom_id="" additional_stores="- [Developer's Website](https://www.wadjeteyegames.com/games/primordia/)" datafiles="Primordia" wikipedia_page="Primordia_(video_game)" series_id=""/>
@@ -2494,6 +2623,12 @@
 	<game id="rebeccacarlson1" name="Rebecca Carlson Mystery 01 - Silent Footsteps" engine_id="wintermute" company_id="frostlind" year="2018" moby_id="114499" steam_id="780740" gog_id="" zoom_id="" additional_stores="- [Developer's Website](http://frostlindgames.com/index.html)" datafiles="Silent_Footsteps" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="rebel1" name="Star Wars: Rebel Assault" engine_id="scumm" company_id="lucasarts" year="1993" moby_id="272" steam_id="456540" gog_id="star_wars_rebel_assault_1_2" zoom_id="" additional_stores="" datafiles="Star_Wars:_Rebel_Assault" wikipedia_page="Star_Wars:_Rebel_Assault" series_id="rebel"/>
+	
+	
+	<game id="rebel2" name="Star Wars: Rebel Assault II - The Hidden Empire" engine_id="scumm" company_id="lucasarts" year="1995" moby_id="677" steam_id="456540" gog_id="star_wars_rebel_assault_1_2" zoom_id="" additional_stores="" datafiles="Star_Wars:_Rebel_Assault_II_-_The_Hidden_Empire" wikipedia_page="Star_Wars:_Rebel_Assault_II:_The_Hidden_Empire" series_id="rebel"/>
+	
+	
 	<game id="redbow" name="Red Bow" engine_id="ags" company_id="stranga" year="2020" moby_id="140170" steam_id="710600" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://stranga.itch.io/redbow)" datafiles="Red_Bow" wikipedia_page="" series_id=""/>
 	
 	
@@ -2546,6 +2681,9 @@
 	<game id="rnrneverdies" name="Rock 'n' Roll Will Never Die!" engine_id="ags" company_id="instantmillion" year="2022" moby_id="227505" steam_id="1644080" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://bestgames.itch.io/rock-n-roll-will-never-die)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="roadsantiago" name="The Road to Santiago" engine_id="wintermute" company_id="javierhermandez" year="2008" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="robin" name="The Adventures of Robin Hood" engine_id="lilliput" company_id="millennium" year="1991" moby_id="2918" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="The_Adventures_of_Robin_Hood_(video_game)" series_id=""/>
 	
 	
@@ -2574,6 +2712,9 @@
 	
 	
 	<game id="rosewater" name="Rosewater" engine_id="ags" company_id="grundislav" year="2025" moby_id="239639" steam_id="1226670" gog_id="rosewater" zoom_id="" additional_stores="" datafiles="Rosewater" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="royalmahjong" name="Royal Mahjong: King's Journey" engine_id="wintermute" company_id="creobit" year="2022" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="rtz" name="Return to Zork" engine_id="made" company_id="activision" year="1993" moby_id="1219" steam_id="585240" gog_id="return_to_zork" zoom_id="" additional_stores="" datafiles="Return_to_Zork" wikipedia_page="Return_to_Zork" series_id="zork"/>
@@ -2633,6 +2774,9 @@
 	<game id="scrapmanager" name="S.A.M. - Scrap Allocation Manager" engine_id="ags" company_id="twotales" year="2018" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="secta" name="Mortadelo y Filemón: La Sexta Secta" engine_id="alcachofa" company_id="alcachofa" year="2001" moby_id="" steam_id="2654960" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_La_Sexta_Secta" wikipedia_page="Mortadelo_y_Filemón:_La_Sexta_Secta" series_id=""/>
+	
+	
 	<game id="securanote" name="Securanote" engine_id="wintermute" company_id="skaldic" year="2013" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Securanote" wikipedia_page="" series_id=""/>
 	
 	
@@ -2654,6 +2798,9 @@
 	<game id="shadowgate" name="Shadowgate" engine_id="macventure" company_id="icom" year="1987" moby_id="1070" steam_id="343800" gog_id="" zoom_id="" additional_stores="" datafiles="Shadowgate" wikipedia_page="Shadowgate" series_id=""/>
 	
 	
+	<game id="shadowofnebula" name="Shadow Of Nebula" engine_id="wintermute" company_id="damian" year="2016" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="shardlight" name="Shardlight" engine_id="ags" company_id="wadjet" year="2016" moby_id="80887" steam_id="336130" gog_id="shardlight" zoom_id="" additional_stores="- [Developer's Website](https://www.wadjeteyegames.com/games/shardlight/)" datafiles="Shardlight" wikipedia_page="Shardlight" series_id=""/>
 	
 	
@@ -2661,6 +2808,9 @@
 	
 	
 	<game id="sheila" name="Sheila Rae, the Brave" engine_id="mohawk" company_id="livingbooks" year="1996" moby_id="17900" steam_id="" gog_id="" zoom_id="sheila-rae-the-brave" additional_stores="" datafiles="Sheila_Rae,_the_Brave" wikipedia_page="Living_Books" series_id="livingbooks"/>
+	
+	
+	<game id="shelter" name="Shelter" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="sherlock-logo" name="The Lost Files of Sherlock Holmes" engine_id="tsage" company_id="mythos" year="1992" moby_id="3441" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="The_Lost_Files_of_Sherlock_Holmes" series_id="sherlock"/>
@@ -2702,6 +2852,9 @@
 	<game id="sinistersix" name="Marvel Comics Spider-Man: The Sinister Six" engine_id="hypno" company_id="brooklyn" year="1996" moby_id="34907" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Marvel_Comics_Spider-Man:_The_Sinister_Six" wikipedia_page="Spider-Man_in_video_games#Spider-Man:_The_Sinister_Six" series_id=""/>
 	
 	
+	<game id="sis" name="Treasure of the Silver Lake" engine_id="macs2" company_id="linel" year="1993" moby_id="5810" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Der_Schatz_im_Silbersee" wikipedia_page="Treasure_of_Silver_Lake" series_id=""/>
+	
+	
 	<game id="skumring" name="Skumring" engine_id="ags" company_id="8bit" year="2013" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
@@ -2739,6 +2892,12 @@
 	
 	
 	<game id="socks" name="Pajama Sam's Sock Works" engine_id="scumm" company_id="he" year="1997" moby_id="20989" steam_id="292840" gog_id="pajama_sam_vol_2" zoom_id="" additional_stores="" datafiles="Pajama_Sam%27s_Sock_Works" wikipedia_page="" series_id="pajama"/>
+	
+	
+	<game id="sof1" name="A Stroke of Fate: Operation Valkyrie" engine_id="wintermute" company_id="spline" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="sof2" name="A Stroke of Fate: Operation Bunker" engine_id="wintermute" company_id="spline" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="sofiasdebt" name="Sofia's Debt" engine_id="wintermute" company_id="artistic" year="2004" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Sofia%27s_Debt" wikipedia_page="" series_id=""/>
@@ -2879,6 +3038,9 @@
 	<game id="stormwater" name="Stormwater" engine_id="ags" company_id="cremation" year="2023" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://thinking-of-cremation.itch.io)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="strangechange" name="Strange Change" engine_id="wintermute" company_id="fireside7games" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="strangeland" name="Strangeland" engine_id="ags" company_id="wormwood" year="2021" moby_id="165274" steam_id="1369520" gog_id="strangeland" zoom_id="" additional_stores="- [Developer's Website](https://www.wadjeteyegames.com/games/strangeland/)" datafiles="Strangeland" wikipedia_page="" series_id=""/>
 	
 	
@@ -2894,6 +3056,9 @@
 	<game id="sumatra" name="Sumatra: Fate of Yandi" engine_id="ags" company_id="cloakdagger" year="2019" moby_id="126872" steam_id="610900" gog_id="sumatra_fate_of_yandi" zoom_id="" additional_stores="- [Itch.io](https://shaun9991.itch.io/sumatra-fate-of-yandi)" datafiles="Sumatra:_Fate_of_Yandi" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="sunny" name="Sunny" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="sunrise" name="Sunrise: The Game" engine_id="wintermute" company_id="tmlediton" year="2008" moby_id="44658" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
@@ -2907,6 +3072,12 @@
 	
 	
 	<game id="superjazzman" name="Super Jazz Man" engine_id="ags" company_id="herculean" year="2006" moby_id="25679" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="susanrose1" name="Susan Rose: Mysterious Child" engine_id="wintermute" company_id="creativedream" year="2009" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="susanrose2" name="Susan Rose: Delicate Murder" engine_id="wintermute" company_id="creativedream" year="2010" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="swampy" name="Simon the Sorcerer's Puzzle Pack: Swampy Adventures" engine_id="agos" company_id="adventuresoft" year="1998" moby_id="4427" steam_id="" gog_id="" zoom_id="" additional_stores="- [Developer's Website](http://www.adventuresoft.com/acatalog/Simon_the_Sorcerer_games.html)" datafiles="Simon_the_Sorcerer_Puzzle_Pack" wikipedia_page="Simon_the_Sorcerer_(series)#Simon_the_Sorcerer's_Puzzle_Pack" series_id="simon"/>
@@ -3011,10 +3182,16 @@
 	<game id="tentacle" name="Maniac Mansion: Day of the Tentacle" engine_id="scumm" company_id="lucasarts" year="1993" moby_id="719" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Day_of_the_Tentacle" wikipedia_page="Day_of_the_Tentacle" series_id="maniac"/>
 	
 	
+	<game id="terror" name="Mortadelo y Filemón: Terror, Espanto y Pavor" engine_id="alcachofa" company_id="alcachofa" year="2000" moby_id="" steam_id="2654980" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_Una_Aventura_de_Cine" wikipedia_page="Mortadelo_y_Filemón:_Una_Aventura_de_Cine" series_id=""/>
+	
+	
 	<game id="terrorofthevampire" name="Terror of the Vampire!" engine_id="ags" company_id="scavenger" year="2017" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="testbed" name="Testbed" engine_id="testbed" company_id="scummvm" year="" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="tetriks" name="TeTRIks" engine_id="wintermute" company_id="nihilis" year="2004" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="tetris" name="AGI Tetris" engine_id="agi" company_id="fan" year="2004" moby_id="69895" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id="agifan"/>
@@ -3158,6 +3335,9 @@
 	<game id="tlj" name="The Longest Journey" engine_id="stark" company_id="funcom" year="1999" moby_id="1439" steam_id="6310" gog_id="the_longest_journey" zoom_id="" additional_stores="" datafiles="The_Longest_Journey" wikipedia_page="The_Longest_Journey" series_id=""/>
 	
 	
+	<game id="todaymama" name="Today, Mama!" engine_id="wintermute" company_id="skymill" year="2008" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="toltecs" name="3 Skulls of the Toltecs" engine_id="toltecs" company_id="revistronic" year="1996" moby_id="3286" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="3_Skulls_of_the_Toltecs" wikipedia_page="3_Skulls_of_the_Toltecs" series_id=""/>
 	
 	
@@ -3285,6 +3465,9 @@
 	<game id="vampirediaries" name="The Vampire Diaries" engine_id="nancy" company_id="herinteractive" year="1996" moby_id="24234" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="The_Vampire_Diaries" wikipedia_page="The_Vampire_Diaries_(novel_series)#Video_game" series_id=""/>
 	
 	
+	<game id="vaqueros" name="Mortadelo y Filemón: Dos vaqueros chapuceros" engine_id="alcachofa" company_id="alcachofa" year="2000" moby_id="153762" steam_id="2654940" gog_id="" zoom_id="" additional_stores="" datafiles="Mortadelo_y_Filemón:_Una_Aventura_de_Cine" wikipedia_page="Mortadelo_y_Filemón:_Una_Aventura_de_Cine" series_id=""/>
+	
+	
 	<game id="versailles" name="Versailles 1685" engine_id="cryomni3d" company_id="cryo" year="1996" moby_id="6889" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Versailles_1685" wikipedia_page="Versailles_1685" series_id=""/>
 	
 	
@@ -3319,6 +3502,9 @@
 	
 	
 	<game id="waxworks" name="Waxworks" engine_id="agos" company_id="adventuresoft" year="1992" moby_id="1269" steam_id="" gog_id="waxworks" zoom_id="" additional_stores="- [Developer's Website](http://www.adventuresoft.com/acatalog/Other_Adventure_Soft_games.html)" datafiles="Waxworks" wikipedia_page="Waxworks_(1992_video_game)" series_id=""/>
+	
+	
+	<game id="wayoflove" name="The Way Of Love: Sub Zero" engine_id="wintermute" company_id="rskent" year="2017" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="ween" name="Ween: The Prophecy" engine_id="gob" company_id="coktel" year="1992" moby_id="6218" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="The_Prophecy" wikipedia_page="The_Prophecy_(video_game)" series_id=""/>

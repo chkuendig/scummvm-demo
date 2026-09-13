@@ -295,6 +295,9 @@
 	<company id="cremation" name="Thinking of Cremation?" alt_name=""/>
 	
 	
+	<company id="creobit" name="Creobit" alt_name=""/>
+	
+	
 	<company id="croqueta" name="Croqueta Asesina Studios" alt_name=""/>
 	
 	
@@ -323,6 +326,9 @@
 	
 	
 	<company id="daedalic" name="Daedalic Entertainment" alt_name=""/>
+	
+	
+	<company id="damian" name="Damian" alt_name=""/>
 	
 	
 	<company id="danvzare" name="DanVzare" alt_name=""/>
@@ -467,6 +473,9 @@
 	<company id="fermin" name="Videojuegos Fermín" alt_name=""/>
 	
 	
+	<company id="fireside7games" name="Fireside 7 Games" alt_name=""/>
+	
+	
 	<company id="firstlight" name="Firstlight" alt_name=""/>
 	
 	
@@ -501,6 +510,9 @@
 	
 	
 	<company id="frostlind" name="Frostlind Games" alt_name=""/>
+	
+	
+	<company id="fskstudios" name="FSk Studios" alt_name=""/>
 	
 	
 	<company id="ftl" name="FTL Games" alt_name=""/>
@@ -626,6 +638,9 @@
 	<company id="incentive" name="Incentive Software" alt_name=""/>
 	
 	
+	<company id="indexplus" name="Index+" alt_name=""/>
+	
+	
 	<company id="indiesquish" name="IndieSquish" alt_name=""/>
 	
 	
@@ -668,7 +683,13 @@
 	<company id="iulyanov" name="Ivan Ulyanov" alt_name=""/>
 	
 	
+	<company id="jackslawed" name="Jackslawed" alt_name=""/>
+	
+	
 	<company id="jamescgehrigvirginiabatcheff" name="James C. Gehrig &amp; Virginia Batcheff" alt_name=""/>
+	<company id="javierhermandez" name="Javier Hernández" alt_name=""/>
+	
+	
 	<company id="jbclerfayt" name="Jean-Baptiste de Clerfayt" alt_name=""/>
 	
 	
@@ -678,6 +699,9 @@
 	<company id="jennybee" name="Jennifer McMurray" alt_name="JennyBee"/>
 	
 	
+	<company id="jesperolson" name="Jesper Olofsson, Robin Hjelte" alt_name=""/>
+	
+	
 	<company id="jminamata" name="Julia Minamata" alt_name=""/>
 	
 	
@@ -685,6 +709,9 @@
 	
 	
 	<company id="johanberntsson" name="Johan Berntsson" alt_name=""/>
+	<company id="jwk" name="JWK Soft" alt_name=""/>
+	
+	
 	<company id="kdlab" name="K-D Lab" alt_name=""/>
 	
 	
@@ -712,7 +739,13 @@
 	<company id="lacemamba" name="Lace Mamba Global" alt_name=""/>
 	
 	
+	<company id="lajaraventuras" name="La Jara Aventuras" alt_name=""/>
+	
+	
 	<company id="lankhor" name="Lankhor" alt_name=""/>
+	
+	
+	<company id="lazygames" name="Lazy Games" alt_name=""/>
 	
 	
 	<company id="lazysquirrel" name="Lazy Squirrel" alt_name=""/>
@@ -730,6 +763,9 @@
 	<company id="likely" name="Likely Games" alt_name=""/>
 	
 	
+	<company id="linel" name="Linel" alt_name=""/>
+	
+	
 	<company id="linuxgp" name="Linux Game Publishing" alt_name=""/>
 	
 	
@@ -740,6 +776,9 @@
 	
 	
 	<company id="lkavalon" name="L.K. Avalon" alt_name=""/>
+	
+	
+	<company id="lleans" name="Lleans Studio" alt_name=""/>
 	
 	
 	<company id="lngames" name="LN Games" alt_name=""/>
@@ -798,6 +837,9 @@
 	
 	
 	<company id="mdna" name="MDNA Games" alt_name=""/>
+	
+	
+	<company id="megalithic" name="Megalithic Mainframe" alt_name=""/>
 	
 	
 	<company id="merit" name="Merit Studios" alt_name=""/>
@@ -920,6 +962,9 @@
 	<company id="orbis" name="Orbis Tertius Games" alt_name=""/>
 	
 	
+	<company id="origames" name="Origames Studio" alt_name=""/>
+	
+	
 	<company id="origami" name="OrigamiHero Games" alt_name="Fallen Angel"/>
 	
 	
@@ -1002,6 +1047,9 @@
 	
 	
 	<company id="pyrodactyl" name="Pyrodactyl Games" alt_name=""/>
+	
+	
+	<company id="quarantine" name="Quarantine Interactive" alt_name=""/>
 	
 	
 	<company id="raecreation" name="Raecreations Software" alt_name=""/>
@@ -1116,6 +1164,9 @@
 	<company id="skygoblin" name="SkyGoblin" alt_name=""/>
 	
 	
+	<company id="skymill" name="SkyMill" alt_name=""/>
+	
+	
 	<company id="smokingcar" name="Smoking Car Productions" alt_name=""/>
 	
 	
@@ -1137,6 +1188,9 @@
 	<company id="spectrumholo" name="Spectrum HoloByte" alt_name=""/>
 	
 	
+	<company id="spline" name="SPLine" alt_name=""/>
+	
+	
 	<company id="spreadcamp" name="Spreadcamp" alt_name=""/>
 	
 	
@@ -1150,6 +1204,9 @@
 	
 	
 	<company id="stonespring" name="Stone Spring Studios" alt_name=""/>
+	
+	
+	<company id="stormfront" name="Stormfront Studios" alt_name=""/>
 	
 	
 	<company id="stranga" name="Stranga Games" alt_name=""/>

@@ -34,7 +34,9 @@
 	<engine id="dragons" name="Blazing Dragons" alt_name="" enabled="TRUE"/>
 	<engine id="drascula" name="Drascula" alt_name="" enabled="TRUE"/>
 	<engine id="dreamweb" name="DreamWeb" alt_name="" enabled="TRUE"/>
+	<engine id="eem" name="Eagle Eye Mysteries" alt_name="" enabled="FALSE"/>
 	<engine id="efh" name="Escape From Hell" alt_name="" enabled="TRUE"/>
+	<engine id="fool" name="The Fool's Errand" alt_name="" enabled="FALSE"/>
 	<engine id="freescape" name="Freescape" alt_name="" enabled="TRUE"/>
 	<engine id="gamos" name="Gamos" alt_name="" enabled="TRUE"/>
 	<engine id="glk" name="Glk" alt_name="" enabled="TRUE"/>
@@ -60,6 +62,7 @@
 	<engine id="lilliput" name="Lilliput" alt_name="" enabled="FALSE"/>
 	<engine id="lure" name="Lure of the Temptress" alt_name="" enabled="TRUE"/>
 	<engine id="m4" name="M4" alt_name="" enabled="TRUE"/>
+	<engine id="macs2" name="GMACS II Interpreter V1.00" alt_name="Modular Adventure Control System" enabled="FALSE"/>
 	<engine id="macventure" name="MacVenture" alt_name="" enabled="FALSE"/>
 	<engine id="made" name="MADE" alt_name="Multimedia Applications Development Environment" enabled="TRUE"/>
 	<engine id="mads" name="MADS" alt_name="MicroProse Adventure Development System" enabled="TRUE"/>

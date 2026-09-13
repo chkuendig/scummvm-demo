@@ -36,4 +36,3 @@ void main()
 	v_uv = a_uv;
 	v_color = a_color;
 }
-

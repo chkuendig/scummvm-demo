@@ -1676,6 +1676,13 @@
     "platform": "Macintosh"
   },
   {
+    "relative_path": "dragon-dos-demo-en",
+    "id": "mads:dragonsphere",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mads/dragon-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
     "relative_path": "rex-dos-demo-en",
     "id": "mads:nebular",
     "featured": {
@@ -1683,6 +1690,13 @@
     },
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/mads/rex-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "phantom-dos-demo-en",
+    "id": "mads:phantom",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mads/phantom-dos-demo-en.zip",
     "platform": "DOS"
   },
   {
@@ -4900,10 +4914,240 @@
     "platform": "Macintosh"
   },
   {
+    "relative_path": "informer_alavi-demo-beta",
+    "id": "wintermute:alavi",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/informer_alavi-demo-beta.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "alpha_polaris-demo-de",
+    "id": "wintermute:alphapolaris",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/alpha_polaris-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "alpha_polaris-demo-en",
+    "id": "wintermute:alphapolaris",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/alpha_polaris-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "alpha_polaris-demo-pl",
+    "id": "wintermute:alphapolaris",
+    "description": "Windows Polish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/alpha_polaris-demo-pl.zip",
+    "languages": [
+      "pl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "art_of_murder-de-demo",
+    "id": "wintermute:artofmurder1",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/art_of_murder-de-demo.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "art_of_murder-pl-demo",
+    "id": "wintermute:artofmurder1",
+    "description": "Windows Polish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/art_of_murder-pl-demo.zip",
+    "languages": [
+      "pl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "carol_reed5-en-demo",
+    "id": "wintermute:carolreed5",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/carol_reed5-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "colors_on_canvas-demo-en",
+    "id": "wintermute:colorsoncanvas",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/colors_on_canvas-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "conspiracao_dumont-demo",
+    "id": "wintermute:conspiracao",
+    "description": "Windows Portuguese Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/conspiracao_dumont-demo.zip",
+    "languages": [
+      "pt"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "face_noir-demo-en",
+    "id": "wintermute:facenoir",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/face_noir-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "face_noir-demo-pl",
+    "id": "wintermute:facenoir",
+    "description": "Windows Polish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/face_noir-demo-pl.zip",
+    "languages": [
+      "pl"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "framed-demo-beta-en",
+    "id": "wintermute:framed",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/framed-demo-beta-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "ghost_in_the_sheet-en-demo",
+    "id": "wintermute:ghostsheet",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/ghost_in_the_sheet-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
     "relative_path": "helga_deep_in_trouble",
     "id": "wintermute:helga",
     "description": "English and Czech Version",
     "download_url": "https://downloads.scummvm.org/frs/extras/Wintermute/helga_deep_in_trouble.zip"
+  },
+  {
+    "relative_path": "james_peris1-en-old-demo",
+    "id": "wintermute:jamesperis",
+    "description": "Windows Old Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/james_peris1-en-old-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "james_peris1-spanish-old-demo",
+    "id": "wintermute:jamesperis",
+    "description": "Windows Old Spanish Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/james_peris1-spanish-old-demo.zip",
+    "languages": [
+      "es"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "julia-en-demo",
+    "id": "wintermute:julia",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/julia-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "julia_greenlight-en-demo",
+    "id": "wintermute:julia",
+    "description": "Windows Preview Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/julia_greenlight-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "kulivocko-cz-demo",
+    "id": "wintermute:kulivocko",
+    "description": "Windows Czech Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/kulivocko-cz-demo.zip",
+    "languages": [
+      "cz"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "project_lonely_robot-demo-beta",
+    "id": "wintermute:lonelyrobot",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/project_lonely_robot-demo-beta.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "machu_mayu-en-demo",
+    "id": "wintermute:machumayu",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/machu_mayu-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "night_train-en-demo",
+    "id": "wintermute:nighttrain",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/night_train-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "one-en-demo",
+    "id": "wintermute:one",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/one-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "palladion-demo-de",
+    "id": "wintermute:palladion",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/palladion-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "project_doom-demo-beta-en",
+    "id": "wintermute:projectdoom",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/project_doom-demo-beta-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "project_joe-demo-en",
+    "id": "wintermute:projectjoe",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/project_joe-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "silent_footsteps-en-demo",
+    "id": "wintermute:rebeccacarlson1",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/silent_footsteps-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "on_the_tracks_of_dinosaurs-demo-en",
+    "id": "wintermute:reptilesquest",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/on_the_tracks_of_dinosaurs-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "rhiannon-demo-c1",
+    "id": "wintermute:rhiannon",
+    "description": "Windows Chapter 1 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/rhiannon-demo-c1.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "rhiannon-demo-c5",
+    "id": "wintermute:rhiannon",
+    "description": "Windows Chapter 5 Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/rhiannon-demo-c5.zip",
+    "platform": "Windows"
   },
   {
     "relative_path": "ritter-demo-de",
@@ -4913,6 +5157,44 @@
     "languages": [
       "de"
     ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "satan_and_sons-demo-en",
+    "id": "wintermute:satanandsons",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/satan_and_sons-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "space_invaders-en-demo",
+    "id": "wintermute:spaceinvaders",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/space_invaders-en-demo.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "space_madness-demo-en",
+    "id": "wintermute:spacemadness",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/space_madness-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "sunrise_the_game-demo-de",
+    "id": "wintermute:sunrise",
+    "description": "Windows German Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/sunrise_the_game-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "trader_of_stories-demo-en",
+    "id": "wintermute:tradestory",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/wintermute/trader_of_stories-demo-en.zip",
     "platform": "Windows"
   }
 ]

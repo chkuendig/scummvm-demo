@@ -3,12 +3,55 @@ For a more comprehensive changelog of the latest experimental code, see:
 
 #### 2026.4.0 (2026-10-XX)
 
+ New games:
+   - Added support for Mortadelo y Filemón: Una Aventura de Cine Edición Original.
+   - Added support for Mortadelo y Filemón: Dos vaqueros chapuceros.
+   - Added support for Mortadelo y Filemón: Terror, Espanto y Pavor.
+   - Added support for Mortadelo y Filemón: La Sexta Secta.
+   - Added support for Mortadelo y Filemón: Operación Moscú.
+   - Added support for Mortadelo y Filemón: El Escarabajo de Cleopatra.
+   - Added support for Mortadelo y Filemón: La Banda de Corvino.
+   - Added support for Mortadelo y Filemón: Balones y Patadones.
+   - Added support for Mortadelo y Filemón: Mamelucos a la Romana.
+   - Added support for Dracula: Resurrection.
+   - Added support for Dracula 2: The Last Sanctuary.
+   - Added support for Nancy Drew: The Secret of Shadow Ranch.
+   - Added support for Nancy Drew: Curse of Blackmoor Manor.
+   - Added support for Chamber of the Sci-Mutant Priestess.
+   - Added support for Star Wars: Rebel Assault.
+   - Added support for Star Wars: Rebel Assault II: The Hidden Empire.
+   - Added support for Dragonsphere.
+   - Added support for Return of the Phantom.
+   - Added support for Once Upon a Forest.
+   - Added support for Alpha Polaris.
+   - Added support for Art of Murder: FBI Confidential.
+   - Added support for Barrow Hill - The Dark Path.
+   - Added support for Dark Fall: Lost Souls.
+   - Added support for Devil In The Capital.
+   - Added support for Dirty Split.
+   - Added support for Face Noir.
+   - Added support for Ghost in the Sheet.
+   - Added support for Hamlet.
+   - Added support for The Lost Crown - A Ghost-Hunting Adventure.
+   - Added support for Murder In Tehran's Alleys 2016.
+   - Added support for Murder In Tehran's Alleys 1933.
+   - Added support for Reversion series.
+   - Added support for Rhiannon: Curse of the Four Branches.
+   - Added support for Shadows on the Vatican series.
+   - Added support for other Wintermute engine games, over 140 titles.
+
  General:
    - Optimised mixing and rate converters, for better performance.
    - Implemented ImGui-based interface for the Event Recorder.
    - Fixed bug with inability to specify game overrides for MIDI and MT-32
      devices.
    - Switched Nuked-OPL3 AdLib emulator to Nuked-OPL3-fast fork.
+
+ Asylum:
+   - Fixed missing or incorrect walking sounds in some scenes.
+
+ AWE:
+   - Fix sound code crash in OpenBSD.
 
  Bagel:
    - Fix saving options for Hodj n' Podj's Th Gesng Gme.
@@ -20,23 +63,62 @@ For a more comprehensive changelog of the latest experimental code, see:
  Freescape:
    - Added support for loading ZX Spectrum games directly from TAP/TZX tape images.
 
+ Hopkins:
+   - Added the missing underwater base 3D first-person shooter.
+
+ Kyra:
+   - Added support for Korean fan-translation of kyra1 (added in 2026.3.0).
+   - Restored non-Korean kyra1 games which got broken ("You're missing the 'KYRA.DAT'
+     engine data file or it got corrupted..." message).
+   - Added an optional automap overlay for Eye of the Beholder 1 and 2.
+
+ Lure:
+   - Improved character pathfinding.
+   - Fix being unable to talk to characters after a one-sided conversation.
+
+ M4:
+   - Numerous Riddle of Master Lu fixes for crashes, missing functionality, and game bugs.
+   - Fixed original game bug where conversations with Wolf could freeze the game.
+   - Added original game cheat codes for bypassing the maze.
+   - Added translation of message log entries
+
  MM:
    - Fix multiple M&M1 classic combat crashes.
    - Implement M&M1 classic PC speaker sound.
    - Fix stale view close handling causing crash.
    - Fix M&M1 spelling mistakes.
    - Improved M&M1 Enhanced mouse support, character generation, and general in-game UI.
+   - Fixed cutscene subtitle rendering.
+   - Added Xeen French translation.
+   - Fix Pharaoh voice line repeating in Dark Side of Xeen intro.
 
  NANCY:
    - Generic flags are no longer cleared when saving or auto-saving. Clearing
      them introduced issues when auto-saving was done in some scenes.
    - Loading from the GMM is now possible before starting a new scene.
+   - It's now possible to skip cutscenes and dialog lines with escape.
+   - Mouse wheel functionality has been added to several UI widgets.
+   - Fixed issues with the memory puzzle in Nancy9.
+   - Fixed issues with the "I can't" item sound.
+   - Answers entered in password kind of puzzles are now more forgiving (e.g.
+     "Xoc" and "Lady Xoc" are now both acceptable answers).
 
  SCUMM:
    - Improved cursor scale in early Windows HE games.
 
+ Sherlock:
+   - Vertical movement delta fix for Rose Tattoo.
+
  SLUDGE:
    - Added detection for Shape-Shift Escape.
+
+ TsAGE:
+   - Added General MIDI and MT-32 support to the games
+   - Improved Sound Blaster sample playback
+   - Sound is properly paused when the engine is paused
+
+ Voyeur:
+   - Match original first person movement with mouse when looking at mansion
 
  Atari port:
    - Added integration with nFM library.

@@ -148,6 +148,7 @@ ScummVM Team
        Paul Gilbert
 
     Chamber:
+       Ion Andrei Cristian
        Retro-Junk;
        Eugene Sandulenko
 
@@ -163,6 +164,9 @@ ScummVM Team
        Gregory Montoir                - (retired)
        Kari Salminen
        Eugene Sandulenko
+
+    Colony:
+       Gustavo Grieco
 
     Composer:
        Alyssa Milburn
@@ -228,8 +232,14 @@ ScummVM Team
        Vladimir Menshakov
        Willem Jan Palenstijn
 
+    EEM:
+       Gustavo Grieco
+
     Efh:
        Arnaud Boutonne
+
+    Fool:
+       Scott Percival
 
     Freescape:
        Chris Allen                    - Sound engine programming
@@ -286,6 +296,9 @@ ScummVM Team
 
     Hades Challenge:
        Vladimir Serbinenko/Google
+
+    Harvester:
+       Alex Bevilacqua
 
     HDB:
        Eugene Sandulenko
@@ -352,7 +365,12 @@ ScummVM Team
        Paul Gilbert
        Arnaud Boutonne
 
+    Macs2:
+       Florian Mehm
+       Martin Gerhardy
+
     MacVenture:
+       Ion Andrei Cristian            - GSoC student
        Borja Lorente                  - GSoC student
 
     MADE:
@@ -425,6 +443,8 @@ ScummVM Team
     PhoenixVR:
        Vladimir Menshakov
        Hermann Noll                   - Help with 3D VR projections
+       Scorp                          - Dracula 1/2 and Messenger support,
+                                        Engine improvements
 
     Pink:
        Andrei Prykhodko
@@ -480,6 +500,7 @@ ScummVM Team
        Andrea Boscarino               - Digital iMUSE, SMUSH audio, GUI
        James Brown                    - (retired)
        Jonathan Gray                  - (retired)
+       Gustavo Grieco                 - Rebel Assault I & II
        Vincent Hamm                   - (retired)
        Max Horn                       - (retired)
        Travis Howell
@@ -1397,4 +1418,7 @@ Special thanks to
 
    Ron Davis for releasing the sources and generously giving away the three
    chapters of God of Thunder.
+
+   David A. Smith for releasing the source code of The Colony, which our
+   engine is based on.
 
