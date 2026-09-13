@@ -1,0 +1,1222 @@
+{
+  "schemaVersion": 1,
+  "created": "2026-09-13",
+  "repository": "/home/christian/projects/scummvm-demo/scummvm",
+  "source": {
+    "scummvmCommit": "c663ad7ab10ad669c8b6d9941f1f3814ba4c2486",
+    "upstreamBase": "45544790bbe41e0da080aa7af99fa547711b5c73",
+    "demoCommit": "e95a2d90fb1890856ba6338df035499c6f048d99",
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/29839172807",
+    "archiveCommit": "ccafc76bb8653da0987450599425b0f8d0fa125f",
+    "website": "https://scummvm.kuendig.io/scummvm.html",
+    "htmlSha256": "2ab613330c16c07ee7913684025665aabbcdc6e501b4839c1dd1b6498901eb36",
+    "sentryRelease": "194fa8f51e44"
+  },
+  "upstreamBase": "2085bcb368c19bc90f0190efcd56b9d58cd7fb5a",
+  "branches": [
+    {
+      "order": 1,
+      "name": "upstream/emscripten-runtime",
+      "head": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "reviewBase": "upstream/master",
+      "base": "2085bcb368c19bc90f0190efcd56b9d58cd7fb5a",
+      "commits": 33,
+      "files": 45,
+      "diff": "45 files changed, 3303 insertions(+), 766 deletions(-)",
+      "ownCommits": [
+        "7e51fdffc15d37dd581824432444e33f1112ffa9",
+        "9825dc22838a8328c37eb1fcba37b09c9e1517ca",
+        "c32685ceda526fcee3cfc4d8bb2528df1ec55bcc",
+        "8aa6a263c6847f332da217ae80618664eab2cc7e",
+        "9839365252cd563aab43e2dd8fbf027fe91b1ff9",
+        "0f7e65c09f841f972b4644c085a600f558996be9",
+        "0115d42ad2467ccc5d3e5004de89d934001564a6",
+        "ff71cdf08346e2d0e5f6e99ffd0f6970b2ccc329",
+        "00ec336f6e0014ab6b514d03858d7a6aff296a27",
+        "7ed1db471c3fe196bc81ebce1028474121654907",
+        "ad8b66768c1f3367a64cda04f116216a5e8911af",
+        "de9b14f010509f98088fd9914411d236d1875baf",
+        "91ca7b9b49f08c87d563eda2a823ed303997a8e8",
+        "957b2a1865533896e6a1740e6d717223923b6255",
+        "e87902d2f5090718ccfecf5cb95bee5efc899d6c",
+        "a0d6df19c0023c5da9c9c60d7bd75308bc455625",
+        "4e25f2944d750368b3094601dc939f85fc0e41f0",
+        "a16373501c3cb4ed793e0d84cdb21603fca322a6",
+        "ba294ec380249365284c3ea55853f623ad0a8221",
+        "5a087906e95f62ed265ac39930e8c832eb9c7fe0",
+        "b57010f91bde36e7ab4c70a7eddd36e853674ee3",
+        "f242c930845ba928bed7dd039f0461480f8377e1",
+        "edc00ade4c24b8d8ddb004647372ac6c6c0a0a0c",
+        "dab12398502b30b5022a68de0ab8934ee0a2d9b7",
+        "7bcf7a1d1184d661e83bc5dfc5d24ba9a0d48c9e",
+        "8d8a29930fec95c40a0dfc1b7e871772f78ee7d5",
+        "36a9f758a377da01a54041a46289ef4aa6054e3d",
+        "1df77c8078cd93e188d76d6603d80e6cd0a24443",
+        "11472e1ffa85dee22b6c169abeb8cc04daaae929",
+        "bda1aa97c7c2173433690baea4bf80ef4a8dccc6",
+        "4e79bcf7c71a91fbb1ef313db543e1869d9d428d",
+        "41509e6f5e67dbd0cd7394c35e8174e1396a3bdf",
+        "0c5737e1460024ad2a824161f71381d6db4f2f61"
+      ]
+    },
+    {
+      "order": 2,
+      "name": "upstream/cloud-streaming",
+      "head": "6f7a61cae05f7f67ad1c1e9261e051ddfa92882e",
+      "reviewBase": "upstream/emscripten-runtime",
+      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "commits": 6,
+      "files": 23,
+      "diff": "23 files changed, 422 insertions(+), 210 deletions(-)",
+      "ownCommits": [
+        "796183ee6f3ac05735e3b6a144080c9a5d2e1593",
+        "e9c95c89d8239355139cb3a2d08faeb37740b0e1",
+        "5315f72cd24a592377b084121b60fb78200a2b01",
+        "884ccceb00cf54d803b6b68cd64e79ecd04d9e3a",
+        "df31bcb6d43a8af7ec33fed13afd8ba54bb239a0",
+        "6f7a61cae05f7f67ad1c1e9261e051ddfa92882e"
+      ]
+    },
+    {
+      "order": 3,
+      "name": "upstream/touch-controls",
+      "head": "dcea6b202d67f3d9eeef91a4fc732c7865d9120e",
+      "reviewBase": "upstream/emscripten-runtime",
+      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "commits": 5,
+      "files": 46,
+      "diff": "46 files changed, 2575 insertions(+), 217 deletions(-)",
+      "ownCommits": [
+        "988114f72db31a09a645b9a40089d5e2b5837bf2",
+        "dcc41c452a0e7b8298263a00e30db75bdb1df617",
+        "d6dc20a91b516ab68f57a8c61bcaffc8892b0748",
+        "e8f3b9b6ff39713750a918d9174287587ebdf713",
+        "dcea6b202d67f3d9eeef91a4fc732c7865d9120e"
+      ]
+    },
+    {
+      "order": 4,
+      "name": "upstream/hpl1-webgl",
+      "head": "48cf630343b745ce058d9ef9bec27336a73283bd",
+      "reviewBase": "upstream/emscripten-runtime",
+      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "commits": 9,
+      "files": 41,
+      "diff": "41 files changed, 3451 insertions(+), 192 deletions(-)",
+      "ownCommits": [
+        "81fc4aaa6db76d9294d4313505d48b43f4d90823",
+        "e231a85c074c776f586c56e9a5c0255c8185823e",
+        "bef4c2144b60864e5ce8a02ef300fff47e6e1267",
+        "27f222306b498f276c04ffdf1a2ccf463c85c9eb",
+        "590c508864defd421fda99fbf07b402d5240a981",
+        "0aafa58f7a0a3f5dc7ded4bbf2ad6c8644d523d3",
+        "6ed6c8ac94aeabdc73d8572d623e895dff62c3bf",
+        "e736deefc2e4454b2aeba0a482103e110fa91f36",
+        "48cf630343b745ce058d9ef9bec27336a73283bd"
+      ]
+    },
+    {
+      "order": 5,
+      "name": "upstream/emscripten-recorder",
+      "head": "519426fdff1ac9294169e7480efd3a564174bd0a",
+      "reviewBase": "upstream/emscripten-runtime",
+      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "commits": 5,
+      "files": 13,
+      "diff": "13 files changed, 237 insertions(+), 11 deletions(-)",
+      "ownCommits": [
+        "9afa530bda413c3c0c2eb9e6d168de500521f711",
+        "d3a2ebf13b6b4c0c422f2ff792d97bcfbf1b48ad",
+        "3baa288bcd05b613730784cd4842a669697d95a0",
+        "b9684cfc1396a26a5465ce45ea609edd46e2fb21",
+        "519426fdff1ac9294169e7480efd3a564174bd0a"
+      ]
+    }
+  ],
+  "sourceCommits": [
+    {
+      "sourceCommit": "c8f59745e29cd995790e925db22bef31d8bb6555",
+      "subject": "CLOUD: Add support for partial downloads using range requests",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "backends/networking/http/sessionrequest.cpp",
+            "backends/networking/http/sessionrequest.h"
+          ]
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "paths": [
+            "backends/cloud/box/boxstorage.cpp",
+            "backends/cloud/box/boxstorage.h",
+            "backends/cloud/downloadrequest.cpp",
+            "backends/cloud/downloadrequest.h",
+            "backends/cloud/dropbox/dropboxstorage.cpp",
+            "backends/cloud/dropbox/dropboxstorage.h",
+            "backends/cloud/googledrive/googledrivestorage.cpp",
+            "backends/cloud/googledrive/googledrivestorage.h",
+            "backends/cloud/id/idstorage.h",
+            "backends/cloud/onedrive/onedrivestorage.cpp",
+            "backends/cloud/onedrive/onedrivestorage.h",
+            "backends/cloud/storage.cpp",
+            "backends/cloud/storage.h"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "29afd2c72c8d3976a23f0c8c4442869330a811c8",
+      "subject": "CLOUD: Cache OneDrive download URLs to speed up range requests",
+      "parts": [
+        {
+          "branch": "upstream/cloud-streaming",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "c247db7c93510fbebd9802b937836a68271c591b",
+      "subject": "CLOUD: Fail gracefully when access token can't be refreshed",
+      "parts": [
+        {
+          "branch": "upstream/cloud-streaming",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "fef028e0724448b050807e47e79157bb388b13f8",
+      "subject": "CLOUD: Move access token getter to BaseStorage parent class",
+      "parts": [
+        {
+          "branch": "upstream/cloud-streaming",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "e83e5ffd4ac33f6a3de56e14e4de6d6517ae1d56",
+      "subject": "CLOUD: EMSCRIPTEN: Fix Box token refresher (can’t read http response code due to CORS restrictions)",
+      "parts": [
+        {
+          "branch": "upstream/cloud-streaming",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "22f4ede88104ec67e988c8874b39e6a067c3e840",
+      "subject": "CLOUD: EMSCRIPTEN: Only process activation messages when coming from the right host (some Oauth flows send messages which can trigger an error)",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "8172967ea2b1e5f52117fc544b26edaae7c3de26",
+      "subject": "EMSCRIPTEN: Rewrite network-backed virtual filesystems using range requests and and addding a progress indicator",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "backends/fs/emscripten/emscripten-fs-factory.cpp",
+            "backends/fs/emscripten/emscripten-fs-factory.h",
+            "backends/fs/emscripten/emscripten-fs-factory.js",
+            "backends/fs/emscripten/http-fs.cpp",
+            "backends/fs/emscripten/http-fs.h",
+            "backends/fs/emscripten/http-readstream.cpp",
+            "backends/fs/emscripten/http-readstream.h",
+            "backends/fs/emscripten/virtual-fs.cpp",
+            "backends/fs/emscripten/virtual-fs.h",
+            "backends/fs/emscripten/virtual-readstream.cpp",
+            "backends/fs/emscripten/virtual-readstream.h",
+            "backends/module.mk",
+            "backends/platform/sdl/emscripten/emscripten.cpp",
+            "configure"
+          ],
+          "selection": "Generic VFS, HTTP streaming, settings initialization, network build setup; excludes the cloud adapter hooks."
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "paths": [
+            "backends/fs/emscripten/cloud-fs.cpp",
+            "backends/fs/emscripten/cloud-fs.h",
+            "backends/fs/emscripten/cloud-readstream.cpp",
+            "backends/fs/emscripten/cloud-readstream.h",
+            "gui/options.cpp",
+            "backends/fs/emscripten/emscripten-fs-factory.cpp",
+            "backends/module.mk"
+          ],
+          "selection": "Cloud filesystem and reader; invalidateFoldersCache call; cloud-readstream.o registration; browser cloud-download UI."
+        }
+      ]
+    },
+    {
+      "sourceCommit": "e1b0dbd1070273c28c55ae30526094d001fe1c77",
+      "subject": "OPENGL: Preserve drawing-buffer alpha in transparency blends",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "b4b361bfa53b73e8146cc5e98a609cdb41022acd",
+      "subject": "EMSCRIPTEN: Use separate Javascript library implementing C functions instead of inline javascript using the EM_JS and EM_ASNYC_JS macros",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "307ed0eeb42452334acbeaee9f548be5238c2283",
+      "subject": "EMSCRIPTEN: Reload page when fragment identifier in url changes",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "8059b30b3600f34760af48620807fd4480c3bda5",
+      "subject": "EMSCRIPTEN: Add a progress bar to the initial wasm download",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "aec59a5a7921c9d7abefc6e0c558706c313a7171",
+      "subject": "JANITORIAL: Fix warnings",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "3ae60ca9d1c192a830f72d1318a75124dd6fa5ea",
+      "subject": "EMSCRIPTEN: BUILD: Update EMSDK and minor cleanups",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "67b90b715238d503801eac58693a512349562aa7",
+      "subject": "EMSCRIPTEN: BUILD: Add missing CJK fonts package",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "2fed20b549f68aa7e9109b85129758cc088c41a9",
+      "subject": "EMSCRIPTEN: BUILD: Update to newer RetroWave version to ensure every file ends with a trailing newline",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "28bc75e0e2312ec47d8bfffedd97bab2d25fc70e",
+      "subject": "EMSCRIPTEN: BUILD: Fix broken faad2 url",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "4f0a339c0b78f66e14da60c3d032ac7a19cd2360",
+      "subject": "BACKENDS: EMSCRIPTEN: Replace broken SDL Drag & Drop with a custom virtual filesystem",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "0a45d8a6ca253e25ec239a19c59307cfe3b508f2",
+      "subject": "BACKENDS: EMSCRIPTEN: Support Roland ROM import via Drag & Drop",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "dea9483cd72cab3a653db062d61f60d04c2dc318",
+      "subject": "SDL: EMSCRIPTEN: set correct preprocessor define for SDL renderer when building with ImGui",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "d5b438238846ab0442b8db1f58f6f288f3786e53",
+      "subject": "SDL: EMSCRIPTEN: Fallback if running without OpenGL capabilities",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "551c1a53fa6130de67722205c9d2d0e866b6c113",
+      "subject": "GRAPHICS: EMSCRIPTEN: Default to WebGL2/GLES3 for better shader compatibility (similar to what iOS already does)",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "725bc07a9de3d1cbfe66c33cb808ab3aea2e8ccc",
+      "subject": "GRAPHICS: EMSCRIPTEN: Force windows size in OpenGLSdlGraphicsManager::loadVideoMode to current window size",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "c0372f104fd76552165393ddbf2c67e457f0c08f",
+      "subject": "GUI: Standardize on-screen touch options",
+      "parts": [
+        {
+          "branch": "upstream/touch-controls",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "0b64e00b487b9430d15e04787e7bbc15c0f5a975",
+      "subject": "IOS7: Harmonize touch modes with the shared Control tab",
+      "parts": [
+        {
+          "branch": "upstream/touch-controls",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "8257456955600669b158f8a35dd7a3d36d419a85",
+      "subject": "BACKENDS: SDL: On-screen touch toggle for the OpenGL backend",
+      "parts": [
+        {
+          "branch": "upstream/touch-controls",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "8bd816195664bd289957ebaa236b68793d52945e",
+      "subject": "BACKENDS: SDL: On-screen gamepad for the OpenGL backend",
+      "parts": [
+        {
+          "branch": "upstream/touch-controls",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "e6a55a293dfbffccd87f390c060fd678343780da",
+      "subject": "HPL1: EMSCRIPTEN: build setup for the WebGL2/GLES2 renderer",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "configure"
+          ]
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "devtools/create_project/xcode.cpp",
+            "dists/scummvm.rc"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "3a7c2a1dc6bf33b28574c7600ca2beb41df5fbd6",
+      "subject": "HPL1: adapt shaders for GLSL ES 1.00 (WebGL2)",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "6c269311aa136fc11676cbad9a4af8215aec7d60",
+      "subject": "HPL1: WebGL2/GLES2 renderer pipeline for the Emscripten target",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "89d500d05e1a8af01954139097b965dbdbedfb38",
+      "subject": "HPL1: fix Y extent in Bitmap2D::fillRect",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "d1d26369b49068f936ffecc11a4a590fe2594313",
+      "subject": "HPL1: Add gamepad keymap bindings",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "09b229fb7293d672015b038244e9fb09fea216b4",
+      "subject": "BACKENDS: EMSCRIPTEN: Download print-outs via the browser",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "d0b2fde0476005f9be7d6c5317f91e8ea5fe45b1",
+      "subject": "HPL1: Keyboard/controller focus navigation for the main and load menus",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "47c59d5c66b99e34427d90b5671714b595287819",
+      "subject": "HPL1: Fix use-after-free starting a game from the menu via controller",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "88fae648b618c12cdca6585a6854cfe260005f5a",
+      "subject": "BACKENDS: EMSCRIPTEN: Say 'Loading' rather than 'Downloading' in the VFS progress bar",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "38ac93fe7d453204d4f754303dcffdcf3e84f461",
+      "subject": "HPL1: Gate GL_CHECK error checks behind OPENGL_DEBUG (skip glGetError on web)",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "9d834315f40d23c0c4589f284a94aba43bb09703",
+      "subject": "BACKENDS: EMSCRIPTEN: Cap wasm memory (MAXIMUM_MEMORY=512MB, STACK_SIZE=8MB)",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "dc4a2b7ac5984e672328ee0fa28fc0d8ea132bbe",
+      "subject": "BACKENDS: EMSCRIPTEN: Update to Emscripten 6.0.2",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "9e06762fe8390f859f684bb5e462beaf23a79f5f",
+      "subject": "BACKENDS: EMSCRIPTEN: Export _raise in the dynamic-plugin build",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "d65cb9af0279c3603c74801e5328a564484e55d9",
+      "subject": "BACKENDS: EMSCRIPTEN: Request persistent storage for IDBFS settings/saves",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "49f15e7d38d73f32c434f188faa31c0d916bd010",
+      "subject": "BACKENDS: EMSCRIPTEN: Keep loading modal up at 100% during wasm init",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "3cb16ba50890a575aee81ffb0a4f0d13720775c4",
+      "subject": "BACKENDS: EMSCRIPTEN: Fix RetroWave lib build under Emscripten 6.0.2",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "7b1feb1055acdcf24157a6b422de71e8b57519f8",
+      "subject": "BACKENDS: EMSCRIPTEN: Update libtheora 1.1.1 -> 1.2.0",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "7ac1b71d72a3797b332448c4445cb11cb6477e13",
+      "subject": "BACKENDS: EMSCRIPTEN: Narrow plugin ASYNCIFY_IMPORTS from [\"*\"] to derived suspend set",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "e30aeb5fbee68f5d4cacb000a726473c5dafc80e",
+      "subject": "HPL1: Default-focus the OK button on the first-start gamma screen",
+      "parts": [
+        {
+          "branch": "upstream/hpl1-webgl",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "079a16b58292dc8599f140298c3e49f43a7bcd97",
+      "subject": "BACKENDS: EMSCRIPTEN: Raise MAXIMUM_MEMORY 512MB -> 640MB",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "60f7f716c148d25844fb94d28df8b4c0e68b8b6a",
+      "subject": "BACKENDS: EMSCRIPTEN: Only narrow plugin ASYNCIFY_IMPORTS for release builds",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "6bd21d3e9525cef479f026fcfda74fc2d123e6f5",
+      "subject": "COMMON: Propagate finalize() through buffered and recorder write streams",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-recorder",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "fa76b2197f44966dcd06a3c6211a710b2487b034",
+      "subject": "BACKENDS: EMSCRIPTEN: Make the event recorder work on the web port",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-recorder",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "8dd2a7ae33d84b46a5afcdcff001921df3ebb2fa",
+      "subject": "GUI: Make the recorder panel and export button usable on letterboxed screens",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-recorder",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "3b6856a341ecef163302904c727d983a64199be4",
+      "subject": "SDL: Make the manual touch-mode toggle stick for the session",
+      "parts": [
+        {
+          "branch": "upstream/touch-controls",
+          "paths": [
+            "backends/platform/sdl/sdl.cpp",
+            "backends/platform/sdl/sdl.h",
+            "gui/options.cpp"
+          ]
+        },
+        {
+          "branch": "upstream/emscripten-recorder",
+          "paths": [
+            "gui/EventRecorder.cpp",
+            "gui/onscreendialog.cpp"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "c1bf7f8397ceede3f8fcbf48109ecfd52ab1e15d",
+      "subject": "BACKENDS: EMSCRIPTEN: Bound the HTTP VFS chunk cache with LRU eviction",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "c663ad7ab10ad669c8b6d9941f1f3814ba4c2486",
+      "subject": "BACKENDS: EMSCRIPTEN: Guard SDL3 silence_callback against asyncify re-entry",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "paths": [
+            "*"
+          ]
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "syntax": {
+      "shellScripts": 2,
+      "javascriptFiles": 8,
+      "inlineHtmlScripts": 1,
+      "asyncifyImports": 2151
+    },
+    "expectedMergeTree": "74ccf95d11447cce59552c1905a2d1c3a928f7b6",
+    "expectedMergeDifferences": [
+      "backends/cloud/basestorage.cpp",
+      "backends/cloud/box/boxtokenrefresher.cpp",
+      "backends/cloud/dropbox/dropboxstorage.cpp",
+      "backends/cloud/id/idstorage.h",
+      "backends/cloud/onedrive/onedrivestorage.cpp",
+      "backends/cloud/onedrive/onedrivestorage.h",
+      "backends/events/emscriptensdl/emscriptensdl-events.h",
+      "backends/fs/emscripten/cloud-readstream.cpp",
+      "backends/fs/emscripten/cloud-readstream.h",
+      "backends/graphics/openglsdl/openglsdl-graphics.cpp",
+      "backends/platform/sdl/emscripten/emscripten.cpp",
+      "backends/platform/sdl/emscripten/emscripten.js",
+      "backends/text-to-speech/emscripten/emscripten-text-to-speech.js",
+      "dists/emscripten/custom_shell-pre.js",
+      "engines/hpl1/engine/impl/shaders/hpl1_Simple.vertex",
+      "engines/saga/detection_tables.h",
+      "engines/saga/resource.cpp",
+      "gui/ThemeEngine.h",
+      "gui/launcher.cpp",
+      "gui/themes/residualvm.zip",
+      "gui/themes/residualvm/THEMERC",
+      "gui/themes/scummclassic.zip",
+      "gui/themes/scummclassic/THEMERC",
+      "gui/themes/scummmodern.zip",
+      "gui/themes/scummmodern/THEMERC",
+      "gui/themes/scummremastered.zip",
+      "gui/themes/scummremastered/THEMERC"
+    ],
+    "integrationTree": "4fc45798a88238f6159ad61dc8b1758ff3f4863d",
+    "allBranchesMergeCleanly": true,
+    "allDiffChecksPass": true,
+    "rawIntegration": "59e074b67ffec467082f56769a977de67863bb54",
+    "rawBranches": {
+      "touch-controls": "2960f1c678c79809daaa48084478fa9ee3f4ce29",
+      "hpl1-webgl": "f3f5ba95ab056552b4c11d3b356b5ec3c881e6be",
+      "emscripten-recorder": "0f4d204760587255f3cf136792d5f46a3969ec3f",
+      "emscripten-runtime": "1dadd2e34d8967909b7734705778249b088ad7b5"
+    },
+    "integration": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+    "freshBuildRun": false,
+    "themes": {
+      "archives": 4,
+      "sourceEntries": 144,
+      "format": "SCUMMVM_STX0.9.25",
+      "defaultIncludeRegeneratesIdentically": true
+    },
+    "sourceTree": "f1166cb02bd93af5f4a1543a78f047e64225e561",
+    "rawIntegrationTree": "4d4906fcca507f421256d21fbaaa51612d232032",
+    "rawExcludedPaths": [
+      "engines/saga/detection_tables.h",
+      "engines/saga/resource.cpp"
+    ],
+    "allCommitDiffChecksPass": true,
+    "runtimeAndCloudTogetherMatchPreviousRuntime": true,
+    "previousRuntimeTree": "790e69382714aa319cc786d22af25df68562ae39",
+    "cppChecks": {
+      "compiler": "Cached Emscripten 6.0.2 Clang 23",
+      "mode": "-fsyntax-only",
+      "configuration": "Existing generated deployment config.h, USE_CLOUD enabled",
+      "fullBuild": false,
+      "translationUnits": [
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/fs/emscripten/emscripten-fs-factory.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/fs/emscripten/cloud-fs.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/fs/emscripten/http-fs.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/fs/emscripten/http-readstream.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/fs/emscripten/virtual-fs.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/fs/emscripten/virtual-readstream.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/networking/http/sessionrequest.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/emscripten-runtime",
+          "file": "backends/platform/sdl/emscripten/emscripten.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/basestorage.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/box/boxstorage.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/box/boxtokenrefresher.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/dropbox/dropboxstorage.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/googledrive/googledrivestorage.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/onedrive/onedrivestorage.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/downloadrequest.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/storage.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/cloud/id/idstorage.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/fs/emscripten/cloud-fs.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/fs/emscripten/cloud-readstream.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "backends/fs/emscripten/emscripten-fs-factory.cpp",
+          "exitCode": 0
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "file": "gui/options.cpp",
+          "exitCode": 0
+        }
+      ]
+    },
+    "attribution": {
+      "policy": "https://github.com/scummvm/scummvm/blob/master/AI-GUIDELINES.md",
+      "policyBlob": "cbbeb5706da0b552131e05adede31dc13dd1cbea",
+      "commitsAudited": 57,
+      "convertedAiCoauthorTrailers": 12,
+      "aiCoauthorTrailers": 0,
+      "humanAuthorsPreserved": true,
+      "currentAssistance": "Codex:GPT-6",
+      "recordedHistoricalAssistance": [
+        "Claude:Opus-4.8",
+        "Claude:Fable-5"
+      ],
+      "historicalLabelsSource": "Preserved model labels from existing commit metadata; unrecorded historical models were not inferred.",
+      "scope": "Current assistance covers branch preparation, splitting, rebase conflict resolution, and attribution corrections."
+    },
+    "preDemoRefresh": {
+      "upstreamBase": "de8c01b4604f16ae9973607f1fd6a7f6ce310da2",
+      "integration": "6f12194fd2dcca63e6bdd827eda67b2b6dff4415",
+      "integrationTree": "3af8d06793809d83e002912c9724130e403879c7",
+      "cppChecks": {
+        "compiler": "Cached Emscripten 6.0.2 Clang 23",
+        "mode": "-fsyntax-only",
+        "configuration": "Existing generated deployment config.h, USE_CLOUD enabled",
+        "fullBuild": false,
+        "translationUnits": [
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/fs/emscripten/emscripten-fs-factory.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/fs/emscripten/cloud-fs.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/fs/emscripten/http-fs.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/fs/emscripten/http-readstream.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/fs/emscripten/virtual-fs.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/fs/emscripten/virtual-readstream.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/networking/http/sessionrequest.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/emscripten-runtime",
+            "file": "backends/platform/sdl/emscripten/emscripten.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/basestorage.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/box/boxstorage.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/box/boxtokenrefresher.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/dropbox/dropboxstorage.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/googledrive/googledrivestorage.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/onedrive/onedrivestorage.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/downloadrequest.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/storage.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/cloud/id/idstorage.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/fs/emscripten/cloud-fs.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/fs/emscripten/cloud-readstream.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "backends/fs/emscripten/emscripten-fs-factory.cpp",
+            "exitCode": 0
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "file": "gui/options.cpp",
+            "exitCode": 0
+          }
+        ]
+      }
+    },
+    "refresh": {
+      "date": "2026-09-13",
+      "upstreamCommitsAdded": 56,
+      "rebasePreservedContent": true,
+      "rebasedCommits": 57,
+      "recorderConfigure": {
+        "commit": "519426fdff1ac9294169e7480efd3a564174bd0a",
+        "shellSyntax": true,
+        "importSelectionCases": 4
+      },
+      "allBranchesAreIntegrationAncestors": true,
+      "commitAttributionAudit": {
+        "commits": 58,
+        "humanAuthorsPreserved": true,
+        "aiCoauthors": 0
+      }
+    }
+  },
+  "publication": {
+    "pushed": true,
+    "pushedBranches": [
+      {
+        "name": "upstream/emscripten-runtime",
+        "repository": "chkuendig/scummvm",
+        "head": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/2085bcb368c19bc90f0190efcd56b9d58cd7fb5a...upstream/emscripten-runtime"
+      },
+      {
+        "name": "upstream/cloud-streaming",
+        "repository": "chkuendig/scummvm",
+        "head": "6f7a61cae05f7f67ad1c1e9261e051ddfa92882e",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/0c5737e1460024ad2a824161f71381d6db4f2f61...upstream/cloud-streaming"
+      }
+    ],
+    "synchronizedWithLocalBranches": true,
+    "pullRequestsOpened": false,
+    "integrationBranch": {
+      "name": "demo/upstream-integration",
+      "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+      "repository": "chkuendig/scummvm",
+      "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
+    }
+  },
+  "excludedSourceCommits": [
+    {
+      "sourceCommit": "bf69a4ab6da0a9daea66964952ddf0bbae514e2d",
+      "subject": "SAGA: IHNM - make the internal patch.re_ optional and drop it from EN detection",
+      "superseded": {
+        "paths": [
+          "engines/saga/detection_tables.h"
+        ],
+        "upstreamCommit": "e03be5eb96ee2afacfa6db56d4a57462c24080dc",
+        "reason": "Upstream already removed the internal patch requirement for IHNM re-releases; preserve upstream detection entries."
+      },
+      "reason": "Dropped from the upstream branch set at user request. The detection change is already upstream; the residual resource guard is intentionally excluded.",
+      "excludedPaths": [
+        "engines/saga/resource.cpp"
+      ]
+    }
+  ],
+  "previousPreparedHeads": {
+    "upstream/emscripten-runtime": "041a165e0f1c5a2d38260eb408aaa3d6a2c116ed",
+    "upstream/cloud-streaming": "abd470f95dc217d3088ca5dfeb078b3d636eec78",
+    "upstream/touch-controls": "7a4661e1c186b3f1d6c9c939780dd0fbecced1e6",
+    "upstream/hpl1-webgl": "d178abfe99ef0b96a9456c5d201d769bc4c5db0c",
+    "upstream/emscripten-recorder": "c82bd02c422a682a3a9b9a09462d0c74077f617d"
+  },
+  "demoIntegration": {
+    "branch": "demo/upstream-integration",
+    "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+    "upstreamBase": "2085bcb368c19bc90f0190efcd56b9d58cd7fb5a",
+    "eventRecorder": true,
+    "website": "https://scummvm.kuendig.io/scummvm.html",
+    "buildInfo": "https://scummvm.kuendig.io/build-info.json",
+    "status": "prepared; deployment follows the demo main branch push"
+  }
+}

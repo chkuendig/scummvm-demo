@@ -5,8 +5,8 @@ name: Event-Recorder Replay Test 🎬
 # framebuffer-MD5 checks pass. Catches regressions in engine determinism,
 # the emscripten timer/event plumbing, and the recorder itself.
 #
-# Deliberately a separate workflow: the deploy build does NOT enable the
-# event recorder, so this job maintains its own (cached) recorder build.
+# This scheduled regression check maintains its own cached build. The demo
+# also enables the event recorder while testing the upstream branch set.
 
 on:
   workflow_dispatch:
