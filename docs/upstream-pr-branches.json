@@ -881,7 +881,7 @@
       "emscripten-runtime": "1dadd2e34d8967909b7734705778249b088ad7b5"
     },
     "integration": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
-    "freshBuildRun": false,
+    "freshBuildRun": true,
     "themes": {
       "archives": 4,
       "sourceEntries": 144,
@@ -1159,6 +1159,177 @@
         "humanAuthorsPreserved": true,
         "aiCoauthors": 0
       }
+    },
+    "fullBuild": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069",
+      "status": "success",
+      "deployed": true,
+      "scummvmCommit": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+      "demoCommit": "8ae0924e7d1bca98074baca146e0479b452846d1",
+      "emsdkVersion": "6.0.2",
+      "configure": "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder"
+    },
+    "combinedCppChecks": {
+      "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+      "mode": "-fsyntax-only",
+      "compiler": "Cached Emscripten 6.0.2 Clang 23",
+      "configuration": "Existing config.h with ENABLE_EVENTRECORDER enabled",
+      "translationUnits": [
+        {
+          "file": "backends/events/sdl/sdl-common-events.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/events/sdl/sdl3-events.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/graphics/openglsdl/openglsdl-graphics.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/graphics/surfacesdl/surfacesdl-graphics.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/platform/sdl/emscripten/emscripten.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/platform/sdl/sdl.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/platform/sdl/touchcontrols.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "gui/options.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/game/low_level_game_setup.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/graphics/BillBoard.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/graphics/Material_Additive.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/graphics/Material_Alpha.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/graphics/Material_Modulative.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/graphics/Material_ModulativeX2.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/graphics/RendererPostEffects.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/graphics/bitmap2D.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/impl/CGProgram.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/impl/LowLevelGraphicsGLES.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/impl/LowLevelGraphicsSDL.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/impl/OcclusionQueryOGL.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/impl/SDLTexture.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/impl/VertexBufferOGL.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/engine/impl/VertexBufferVBO.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/metaengine.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/penumbra-overture/MainMenu.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "engines/hpl1/penumbra-overture/MapHandler.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/fs/emscripten/http-readstream.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "backends/networking/http/connectionmanager.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "common/recorderfile.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "common/stream.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "gui/EventRecorder.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "gui/onscreendialog.cpp",
+          "exitCode": 0
+        },
+        {
+          "file": "gui/recorderdialog.cpp",
+          "exitCode": 0
+        }
+      ]
+    },
+    "liveBrowser": {
+      "date": "2026-09-13",
+      "browser": "Headless Chromium 1234 with SwiftShader",
+      "provenanceMatchesManifest": true,
+      "launcherRendered": true,
+      "pageErrors": 0,
+      "requestFailures": 0,
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "screenshotInspected": true,
+      "replay": {
+        "status": "timeout",
+        "timeoutSeconds": 600,
+        "recordingLoaded": true,
+        "screenshotChecksPassed": 0,
+        "screenshotChecksFailed": 0,
+        "observed": "Playback stalled while the loading bar showed FT.000 at 0%. FT.000 range data and VIDEO/index.json had returned HTTP 206/200. No Cloudflare challenge was observed.",
+        "limitation": "Host became heavily loaded during the run; stall cause is not yet established."
+      }
     }
   },
   "publication": {
@@ -1217,6 +1388,8 @@
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "prepared; deployment follows the demo main branch push"
+    "status": "deployed; live revision and launcher verified; recorder replay timed out",
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069",
+    "demoCommit": "8ae0924e7d1bca98074baca146e0479b452846d1"
   }
 }

@@ -107,7 +107,11 @@ The demo catalogue, assets, hosting workflows, Sentry integration, cloud-service
 - Before the latest upstream refresh, twenty-one C++ translation units passed Emscripten Clang syntax/type checks using the existing generated deployment configuration with `USE_CLOUD` enabled. Checks cover the runtime's existing cloud backend and new HTTP reader, then the new cloud provider APIs, adapter, factory, and options dialog.
 - Shell and JavaScript syntax checks passed. The earlier checks of eight JavaScript files, inline shell JavaScript, Asyncify JSON, four theme bundles, and the embedded default theme remain applicable to their unchanged final contents.
 
-The recorder import-selection check passed all four release/debug and recorder-on/off combinations. The C++ checks use `-fsyntax-only`; no full Wasm link, iOS build, or gameplay test has been run for these branches. Before upstream submission, complete the relevant build and gameplay validation and regenerate/validate the release Asyncify import list against the final build configuration.
+The recorder import-selection check passed all four release/debug and recorder-on/off combinations. After the refresh, 33 additional C++ translation units covering touch, HPL1, and recording passed Emscripten syntax/type checks with the recorder enabled.
+
+The [full Emscripten build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069) passed with `--enable-all-engines --enable-cloud --enable-eventrecorder`. Live `build-info.json` matches demo commit `8ae0924e7d1bca98074baca146e0479b452846d1`, integration `915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c`, upstream `2085bcb368c`, and all five branch tips. Headless Chromium initialized the runtime and rendered the launcher at 1280×720 with no JavaScript errors or failed network requests; the screenshot was inspected.
+
+No iOS build, cloud-account gameplay test, or physical touch/controller test has been run for these branches. Before upstream submission, complete the relevant platform/gameplay validation and regenerate/validate the narrowed release Asyncify import list for configurations that use it. Recorder builds use the full import list.
 
 ## Combined demo testing
 
@@ -125,4 +129,4 @@ Suggested browser checks:
 
 For later refreshes, rebase runtime onto upstream master first, then rebase each sibling from the old runtime tip onto the new one. Rebuild the integration branch by merging cloud, touch, HPL1, and recorder into runtime; update this manifest and the demo gitlink together. Keep the integration branch out of upstream PRs.
 
-The existing golden replay job timed out before this refresh because the recording never loaded. A fresh successful deployment is build evidence, not a claim that that replay test or every browser check above has passed.
+The existing CI replay job previously failed before loading the recording because Cloudflare challenged its game-data requests. A fresh replay against this live integration **loaded the recording successfully**, and the FT directory, `FT.000` range, and `VIDEO/index.json` requests returned HTTP 200/206. It then stalled with the loading bar showing `FT.000` at 0% and timed out after ten minutes: zero framebuffer checks passed and zero mismatches were reported. This is an incomplete replay, not a passing result. The shared host became heavily loaded during the run; the stall cause is not yet established. The failure evidence has been passed to the dedicated event recorder workspace.
