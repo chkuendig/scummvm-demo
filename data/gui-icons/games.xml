@@ -1110,6 +1110,9 @@
 	<game id="flowproblem" name="Flow Problem" engine_id="ags" company_id="teamdisaster" year="2024" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://captaind.itch.io/flow-problem)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="foolserrand" name="The Fool's Errand" engine_id="fool" company_id="milescomputing" year="1987" moby_id="1383" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="The_Fool%27s_Errand" wikipedia_page="The_Fool%27s_Errand" series_id=""/>
+	
+	
 	<game id="football" name="Backyard Football" engine_id="scumm" company_id="he" year="2002" moby_id="20991" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Backyard_Football" wikipedia_page="Backyard_Football" series_id="juniorsports"/>
 	
 	
@@ -1348,6 +1351,9 @@
 	
 	
 	<game id="harryhh" name="Harry and the Haunted House" engine_id="mohawk" company_id="livingbooks" year="1994" moby_id="4723" steam_id="" gog_id="" zoom_id="harry-and-the-haunted-house" additional_stores="" datafiles="" wikipedia_page="Living_Books" series_id="livingbooks"/>
+	
+	
+	<game id="harvester" name="Harvester" engine_id="harvester" company_id="virgin" year="1996" moby_id="324" steam_id="287020" gog_id="harvester" zoom_id="harvester" additional_stores="" datafiles="Harvester" wikipedia_page="Harvester_(video_game)" series_id=""/>
 	
 	
 	<game id="hauntingcliffhouse" name="Haunting At Cliffhouse" engine_id="ags" company_id="cpondillo" year="2012" moby_id="" steam_id="1575290" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="Haunting_at_Cliffhouse" series_id=""/>
@@ -2141,6 +2147,18 @@
 	
 	
 	<game id="nancy11" name="Nancy Drew: Curse of Blackmoor Manor" engine_id="nancy" company_id="herinteractive" year="2004" moby_id="15138" steam_id="31830" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/shop-games/nancy-drew-curse-of-blackmoor-manor/)" datafiles="Nancy_Drew:_Curse_of_Blackmoor_Manor" wikipedia_page="Nancy_Drew:_Curse_of_Blackmoor_Manor" series_id="nancy"/>
+	
+	
+	<game id="nancy12" name="Nancy Drew: Secret of the Old Clock" engine_id="nancy" company_id="herinteractive" year="2005" moby_id="18402" steam_id="31880" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/shop-games/nancy-drew-secret-of-the-old-clock/)" datafiles="Nancy_Drew:_Secret_of_the_Old_Clock" wikipedia_page="Nancy_Drew:_Secret_of_the_Old_Clock" series_id="nancy"/>
+	
+	
+	<game id="nancy13" name="Nancy Drew: Last Train to Blue Moon Canyon" engine_id="nancy" company_id="herinteractive" year="2005" moby_id="19217" steam_id="31810" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/shop-games/nancy-drew-last-train-to-blue-moon-canyon/)" datafiles="Nancy_Drew:_Last_Train_to_Blue_Moon_Canyon" wikipedia_page="Nancy_Drew:_Last_Train_to_Blue_Moon_Canyon" series_id="nancy"/>
+	
+	
+	<game id="nancy14" name="Nancy Drew: Danger by Design" engine_id="nancy" company_id="herinteractive" year="2006" moby_id="23291" steam_id="31800" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/more-nancy-drew/trailers/nancy-drew-danger-by-design/)" datafiles="Nancy_Drew:_Danger_by_Design" wikipedia_page="Nancy_Drew:_Danger_by_Design" series_id="nancy"/>
+	
+	
+	<game id="nancy15" name="Nancy Drew: The Creature of Kapu Cave" engine_id="nancy" company_id="herinteractive" year="2006" moby_id="24485" steam_id="31900" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/shop-games/nancy-drew-the-creature-of-kapu-cave/)" datafiles="Nancy_Drew:_The_Creature_of_Kapu_Cave" wikipedia_page="Nancy_Drew:_The_Creature_of_Kapu_Cave" series_id="nancy"/>
 	
 	
 	<game id="nancy2" name="Nancy Drew: Stay Tuned for Danger" engine_id="nancy" company_id="herinteractive" year="1999" moby_id="2425" steam_id="" gog_id="" zoom_id="" additional_stores="- [Developer's Website](https://www.herinteractive.com/shop-games/nancy-drew-stay-tuned-for-danger/)" datafiles="Nancy_Drew:_Stay_Tuned_for_Danger" wikipedia_page="Nancy_Drew:_Stay_Tuned_for_Danger" series_id="nancy"/>

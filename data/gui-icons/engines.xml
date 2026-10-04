@@ -18,9 +18,10 @@
 	<engine id="buried" name="The Journeyman Project 2: Buried in Time" alt_name="" enabled="TRUE"/>
 	<engine id="cge" name="CGE" alt_name="Common Game Engine" enabled="TRUE"/>
 	<engine id="cge2" name="CGE2" alt_name="Common Game Engine 2" enabled="TRUE"/>
-	<engine id="chamber" name="Chamber" alt_name="" enabled="FALSE"/>
+	<engine id="chamber" name="Chamber" alt_name="" enabled="TRUE"/>
 	<engine id="chewy" name="Chewy: Esc from F5" alt_name="" enabled="TRUE"/>
 	<engine id="cine" name="Cinématique" alt_name="" enabled="TRUE"/>
+	<engine id="comfy" name="Comfy" alt_name="" enabled="FALSE"/>
 	<engine id="composer" name="Magic Composer" alt_name="" enabled="TRUE"/>
 	<engine id="crab" name="CRAB" alt_name="" enabled="TRUE"/>
 	<engine id="cruise" name="CruisE" alt_name="" enabled="TRUE"/>
@@ -34,9 +35,9 @@
 	<engine id="dragons" name="Blazing Dragons" alt_name="" enabled="TRUE"/>
 	<engine id="drascula" name="Drascula" alt_name="" enabled="TRUE"/>
 	<engine id="dreamweb" name="DreamWeb" alt_name="" enabled="TRUE"/>
-	<engine id="eem" name="Eagle Eye Mysteries" alt_name="" enabled="FALSE"/>
+	<engine id="eem" name="Eagle Eye Mysteries" alt_name="" enabled="TRUE"/>
 	<engine id="efh" name="Escape From Hell" alt_name="" enabled="TRUE"/>
-	<engine id="fool" name="The Fool's Errand" alt_name="" enabled="FALSE"/>
+	<engine id="fool" name="The Fool's Errand" alt_name="" enabled="TRUE"/>
 	<engine id="freescape" name="Freescape" alt_name="" enabled="TRUE"/>
 	<engine id="gamos" name="Gamos" alt_name="" enabled="TRUE"/>
 	<engine id="glk" name="Glk" alt_name="" enabled="TRUE"/>
@@ -47,6 +48,7 @@
 	<engine id="grim" name="GrimE" alt_name="" enabled="TRUE"/>
 	<engine id="groovie" name="Groovie" alt_name="" enabled="TRUE"/>
 	<engine id="hadesch" name="Hades' Challenge" alt_name="" enabled="TRUE"/>
+	<engine id="harvester" name="Harvester" alt_name="" enabled="TRUE"/>
 	<engine id="hdb" name="Hyperspace Delivery Boy!" alt_name="" enabled="TRUE"/>
 	<engine id="hopkins" name="Hopkins FBI" alt_name="" enabled="TRUE"/>
 	<engine id="hpl1" name="HPL 1" alt_name="" enabled="TRUE"/>
@@ -62,8 +64,8 @@
 	<engine id="lilliput" name="Lilliput" alt_name="" enabled="FALSE"/>
 	<engine id="lure" name="Lure of the Temptress" alt_name="" enabled="TRUE"/>
 	<engine id="m4" name="M4" alt_name="" enabled="TRUE"/>
-	<engine id="macs2" name="GMACS II Interpreter V1.00" alt_name="Modular Adventure Control System" enabled="FALSE"/>
-	<engine id="macventure" name="MacVenture" alt_name="" enabled="FALSE"/>
+	<engine id="macs2" name="GMACS II Interpreter V1.00" alt_name="Modular Adventure Control System" enabled="TRUE"/>
+	<engine id="macventure" name="MacVenture" alt_name="" enabled="TRUE"/>
 	<engine id="made" name="MADE" alt_name="Multimedia Applications Development Environment" enabled="TRUE"/>
 	<engine id="mads" name="MADS" alt_name="MicroProse Adventure Development System" enabled="TRUE"/>
 	<engine id="mm" name="Might and Magic" alt_name="" enabled="TRUE"/>

@@ -30935,78 +30935,78 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  8646556: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
- 8646612: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
- 8646926: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
- 8647141: () => { Module['SDL3'].camera = {}; },  
- 8647173: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
- 8647232: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
- 8649538: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
- 8649789: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
- 8650167: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
- 8650254: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
- 8650431: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
- 8650623: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
- 8650754: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
- 8650901: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
- 8651135: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
- 8651714: () => { return Module['SDL3'].audioContext.sampleRate; },  
- 8651765: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
- 8653606: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
- 8654922: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
- 8656078: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
- 8656611: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
- 8657238: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8657665: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8657749: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
- 8658110: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
- 8659102: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
- 8659268: () => { return document.hasFocus(); },  
- 8659300: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
- 8659482: () => { return document.body.clientWidth; },  
- 8659520: () => { return document.body.clientHeight; },  
- 8659559: () => { return window.innerWidth; },  
- 8659589: () => { return window.innerHeight; },  
- 8659620: () => { return window.outerWidth; },  
- 8659650: () => { return window.outerHeight; },  
- 8659681: () => { return window.pageXOffset; },  
- 8659712: () => { return window.pageYOffset; },  
- 8659743: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
- 8661131: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
- 8663498: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
- 8664328: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
- 8665062: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
- 8665811: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
- 8666499: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
- 8667157: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
- 8667240: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
- 8667309: () => { return Module['SDL3']['mouse_x']; },  
- 8667347: () => { return Module['SDL3']['mouse_y']; },  
- 8667385: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
- 8667433: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
- 8667642: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
- 8667895: () => { return window.innerWidth; },  
- 8667925: () => { return window.innerHeight; },  
- 8667956: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
- 8668065: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
- 8668558: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
- 8668632: () => { return window.innerWidth; },  
- 8668662: () => { return window.innerHeight; },  
- 8668693: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
- 8669391: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
- 8669950: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
- 8670272: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
- 8670813: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
- 8671822: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
- 8671960: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
- 8672142: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
- 8672199: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
- 8672374: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
- 8672710: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
- 8673418: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
- 8673759: ($0) => { window.open(UTF8ToString($0), "_blank") },  
- 8673799: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
- 8673847: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
+  8658908: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
+ 8658964: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
+ 8659278: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
+ 8659493: () => { Module['SDL3'].camera = {}; },  
+ 8659525: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
+ 8659584: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
+ 8661890: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
+ 8662141: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
+ 8662519: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
+ 8662606: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
+ 8662783: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
+ 8662975: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
+ 8663106: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
+ 8663253: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
+ 8663487: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
+ 8664066: () => { return Module['SDL3'].audioContext.sampleRate; },  
+ 8664117: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
+ 8665958: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
+ 8667274: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
+ 8668430: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
+ 8668963: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
+ 8669590: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8670017: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8670101: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
+ 8670462: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
+ 8671454: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
+ 8671620: () => { return document.hasFocus(); },  
+ 8671652: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
+ 8671834: () => { return document.body.clientWidth; },  
+ 8671872: () => { return document.body.clientHeight; },  
+ 8671911: () => { return window.innerWidth; },  
+ 8671941: () => { return window.innerHeight; },  
+ 8671972: () => { return window.outerWidth; },  
+ 8672002: () => { return window.outerHeight; },  
+ 8672033: () => { return window.pageXOffset; },  
+ 8672064: () => { return window.pageYOffset; },  
+ 8672095: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
+ 8673483: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
+ 8675850: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
+ 8676680: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
+ 8677414: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
+ 8678163: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
+ 8678851: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
+ 8679509: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
+ 8679592: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
+ 8679661: () => { return Module['SDL3']['mouse_x']; },  
+ 8679699: () => { return Module['SDL3']['mouse_y']; },  
+ 8679737: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
+ 8679785: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
+ 8679994: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
+ 8680247: () => { return window.innerWidth; },  
+ 8680277: () => { return window.innerHeight; },  
+ 8680308: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
+ 8680417: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
+ 8680910: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
+ 8680984: () => { return window.innerWidth; },  
+ 8681014: () => { return window.innerHeight; },  
+ 8681045: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
+ 8681743: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
+ 8682302: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
+ 8682624: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
+ 8683165: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
+ 8684174: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
+ 8684312: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
+ 8684494: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
+ 8684551: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
+ 8684726: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
+ 8685062: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
+ 8685770: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
+ 8686111: ($0) => { window.open(UTF8ToString($0), "_blank") },  
+ 8686151: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
+ 8686199: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
 };
 function __asyncjs__webserial_write(__buf,__nbyte) { return Asyncify.handleAsync(async () => { const port = globalThis['retrowave_port']; if ('retrowave_writer' in globalThis === false) { console.log("Getting Writer"); globalThis['retrowave_writer'] = port.writable.getWriter(); } data = new DataView(HEAPU8.buffer, __buf, __nbyte); await globalThis['retrowave_writer'].write(data); return __nbyte; }); }
 __asyncjs__webserial_write.sig = 'iii';
@@ -31596,6 +31596,13 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common5ArrayIhE7emplaceIJRKhEEEvPS3_DpOT_,
   __ZN9Freescape18ZxRecordingDecoder6decodeERKN6Common5ArrayIhEE,
   __ZN9Freescape18ZxRecordingDecoder6finishEv,
+  __ZN9Freescape21unpackZxSpectrumBlockERN6Common5ArrayIhEE,
+  __ZN6Common5ArrayIhE6resizeEj,
+  __ZN6Common5ArrayIhE6assignEPKhS3_,
+  __ZN9Freescape18openZxSpectrumFileERKN6Common4PathE,
+  __ZN6Common4File4openERKNS_4PathE,
+  __ZN6Common4File4readEPvj,
+  __ZN6Common10ReadStream10readStreamEj,
   __ZN6Common17parseSpectrumTapeERNS_18SeekableReadStreamERNS_5ArrayINS_17SpectrumTapeBlockEEE,
   __ZN6Common5ArrayIN9Freescape10ZxTapeFileEE7emplaceIJRKS2_EEEvPS5_DpOT_,
   __ZNK6Common6String9hasPrefixERKS0_,
@@ -31706,7 +31713,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common5ArrayI19PlainGameDescriptorE7emplaceIJRKS1_EEEvPS4_DpOT_,
   __ZN3Glk6Adrift16AdriftMetaEngine19getDetectionEntriesEv,
   __ZN3Glk5Blorb11hasBlorbExtERKN6Common6StringE,
-  __ZN6Common4File4readEPvj,
   __ZN3Glk5Blorb7isBlorbERN6Common18SeekableReadStreamEj,
   __ZN3Glk6Adrift16AdriftMetaEngine17detectGameVersionEPKh,
   __ZN3Glk6AdvSys16AdvSysMetaEngine19getDetectionEntriesEv,
@@ -31763,7 +31769,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common10ObjectPoolINS_7HashMapINS_4PathENS1_INS_6StringEbNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEENS2_15IgnoreCase_HashENS2_18IgnoreCase_EqualToEE4NodeELm10EE11deleteChunkEPSA_,
   __ZN3Glk5BlorbC2ERKN6Common4PathENS_15InterpreterTypeE,
   __ZN3Glk5Blorb4loadEv,
-  __ZN6Common4File4openERKNS_4PathE,
   __ZN3Glk5Blorb8readRIdxERN6Common18SeekableReadStreamERNS1_5ArrayINS_10ChunkEntryEEE,
   __ZN6Common5ArrayIN3Glk10ChunkEntryEE7emplaceIJRKS2_EEEvPS5_DpOT_,
   __ZN3Glk5BlorbC2ERKN6Common6FSNodeENS_15InterpreterTypeE,
@@ -31771,7 +31776,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK3Glk5Blorb11listMembersERN6Common4ListINS1_9SharedPtrINS1_13ArchiveMemberEEEEE,
   __ZN6Common20GenericArchiveMemberC1ERKNS_4PathERKNS_7ArchiveE,
   __ZNK3Glk5Blorb9getMemberERKN6Common4PathE,
-  __ZN6Common10ReadStream10readStreamEj,
   __ZN3Glk5Blorb7isBlorbERKN6Common4PathEj,
   __ZN3Glk5Blorb17getBlorbFilenamesERKN6Common4PathERNS1_5ArrayIS2_EENS_15InterpreterTypeERKNS1_6StringE,
   __ZNK6Common10BaseStringIcE8containsEc,
@@ -34325,6 +34329,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI14OnScreenDialog15setReplayedTimeEj,
   __ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE,
   __ZN6Common12PlaybackFile12getNextEventEv,
+  __ZN3GUI13EventRecorder16postPlaybackQuitEv,
   __ZN16NullMixerManager6updateEh,
   __ZN3GUI13EventRecorder16updateSubsystemsEv,
   __ZN3GUI13EventRecorder19processScreenUpdateEv,
@@ -34337,8 +34342,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI13EventRecorder14switchFastModeEv,
   __ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb,
   __ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE,
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_,
   __ZN6Common12RandomSource15generateNewSeedEv,
+  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_,
   __ZN6Common15EventDispatcher11clearEventsEv,
   __ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb,
   __ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE,
@@ -34351,6 +34356,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE,
   __ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE,
   __ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription,
+  __ZN3GUI13EventRecorder10notifyPollEv,
+  __ZThn8_N3GUI13EventRecorder10notifyPollEv,
   __ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE,
   __ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE,
   __ZN3GUI14OnScreenDialog11isMouseOverEv,
@@ -34401,7 +34408,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui3EndEv,
   __ZN5ImGui11PopStyleVarEi,
   __ZNK3GUI13EventRecorder12allowMappingEv,
-  __ZN6Common13EventObserver10notifyPollEv,
   __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj,
   __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj,
   __ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_,
@@ -36160,6 +36166,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN19DefaultEventManager12getKeymapperEv,
   __ZN19DefaultEventManager11notifyEventERKN6Common5EventE,
   __ZThn28_N19DefaultEventManager11notifyEventERKN6Common5EventE,
+  __ZN6Common13EventObserver10notifyPollEv,
   __ZN6Common21ArtificialEventSourceD0Ev,
   __ZN6Common21ArtificialEventSource9pollEventERNS_5EventE,
   __ZNK6Common21ArtificialEventSource12allowMappingEv,
@@ -41105,6 +41112,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common5ArrayIN5Video21SubtitleRenderingPartEE7emplaceIJS2_EEEvPKS2_DpOT_,
   __ZNK5Video9Subtitles13clearSubtitleEv,
   __ZNK5Video9Subtitles21updateSubtitleOverlayEv,
+  __ZNK5Video9Subtitles16drawSubtitleTextERKN8Graphics4FontERKN6Common9U32StringEiii,
   __ZNK5Video9Subtitles18shouldShowSubtitleEv,
   __ZN6Common7HashMapIiPKN8Graphics4FontENS_4HashIiEENS_7EqualToIiEEE13expandStorageEj,
   __ZN5Video9SubtitlesC1Ev,
@@ -41158,6 +41166,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5Video12VideoDecoder18addStreamFileTrackERKN6Common4PathE,
   __ZN5Video12VideoDecoder20StreamFileAudioTrackC1EN5Audio5Mixer9SoundTypeE,
   __ZN5Video12VideoDecoder13setAudioTrackEi,
+  __ZN5Video12VideoDecoder17getAudioTrackMuteEi,
+  __ZN5Video12VideoDecoder17setAudioTrackMuteEib,
   __ZNK5Video12VideoDecoder18getAudioTrackCountEv,
   __ZN5Video12VideoDecoder10setEndTimeERKN5Audio9TimestampE,
   __ZN5Video12VideoDecoder15startAudioLimitERKN5Audio9TimestampE,
@@ -42293,10 +42303,13 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5Image14CDToonsDecoderD0Ev,
   __ZN5Image14CDToonsDecoderD1Ev,
   __ZN5Image14CDToonsDecoder11decodeFrameERN6Common18SeekableReadStreamE,
-  __ZN6Common5ArrayIN5Image13CDToonsActionEE7emplaceIJRKS2_EEEvPS5_DpOT_,
+  __ZN6Common5ArrayIN5Image14CDToonsDecoder13CDToonsActionEE7emplaceIJRKS3_EEEvPS6_DpOT_,
   __ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEE24lookupAndCreateIfMissingERKt,
+  __ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_,
   __ZN6Common5ArrayIN5Image11CDToonsDiffEE7emplaceIJRKS2_EEEvPS5_DpOT_,
-  __ZN5Image14CDToonsDecoder11renderBlockEPhjiijj,
+  __ZN5Image14CDToonsDecoder11renderBlockERN8Graphics7SurfaceEPhjiijjPKN6Common4RectE,
+  __ZNK8Graphics7Surface7getRectEv,
+  __ZN5Image14CDToonsDecoder13renderActionsERKN6Common5ArrayINS0_13CDToonsActionEEEjjRN8Graphics7SurfaceEPKNS1_4RectE,
   __ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEEixERKt,
   __ZN5Image14CDToonsDecoder10setPaletteEPh,
   __ZNK5Image14CDToonsDecoder14getPixelFormatEv,
@@ -42705,6 +42718,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK8Graphics7DosFont12getCharWidthEj,
   __ZNK8Graphics7DosFont8drawCharEPNS_7SurfaceEjiij,
   __ZN8Graphics7DosFontD0Ev,
+  __ZNK8Graphics7DosFont8drawCharEPNS_14ManagedSurfaceEjiij,
   __ZN8Graphics7DosFontC1Ev,
   __ZN8Graphics8FreeType14Alloc_CallbackEP13FT_MemoryRec_l,
   __ZN8Graphics8FreeType13Free_CallbackEP13FT_MemoryRec_Pv,
@@ -43509,7 +43523,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN8Graphics16MacWindowManager15setDesktopColorEhhh,
   __ZN8Graphics16MacWindowManager12removeMarkedEv,
   __ZN8Graphics16MacWindowManager16adjustDimensionsERKN6Common4RectES4_RiS5_,
-  __ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_,
   __ZN8Graphics16MacWindowManager20removeFromWindowListEPNS_13BaseMacWindowE,
   __ZNK8Graphics16MacWindowManager13getCursorTypeEv,
   __ZN8Graphics16MacWindowManager15removeFromStackEPNS_13BaseMacWindowE,
@@ -43803,7 +43816,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN8Graphics8FontPC98D0Ev,
   __ZN8Graphics7Surface13drawThickLineEiiiiiij,
   __ZN8Graphics7Surface15drawPolygonScanEPKiS2_iRKN6Common4RectEj,
-  __ZNK8Graphics7Surface7getRectEv,
   __ZNK8Graphics7Surface10getSubAreaERKN6Common4RectE,
   __ZN8Graphics7Surface24copyRectToSurfaceWithKeyERKS0_iiRKN6Common4RectEj,
   __ZN6Common8memset32EPjjm,
@@ -48097,6 +48109,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5Audio18RateConverter_ImplILb0ELb0ELb0EE18interpolateConvertILt65535ELt65535EsLNS_7MixModeE1EEEiRNS_11AudioStreamEPT1_jtt,
   __ZN3SID6Config6createENS0_7SidTypeE,
   __ZN5Resid3SIDC1EN3SID6Config7SidTypeE,
+  __ZN3SID6Config12parseSidTypeERKN6Common6StringE,
   __ZN3SID3SIDC2Ev,
   __ZN3SID3SIDD2Ev,
   __ZN3SID3SIDD1Ev,
@@ -54538,6 +54551,360 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _fribidi_get_joining_type_name,
   _fribidi_shape_mirroring,
   _fribidi_get_bracket,
+  _png_error,
+  _png_sig_cmp,
+  _png_zalloc,
+  _png_warning,
+  _png_malloc_warn,
+  _png_zfree,
+  _png_free,
+  _png_reset_crc,
+  _png_calculate_crc,
+  _png_user_version_check,
+  _png_safecat,
+  _png_create_png_struct,
+  _png_set_mem_fn,
+  _png_malloc_base,
+  _png_destroy_info_struct,
+  _png_free_data,
+  _png_info_init_3,
+  _png_data_freer,
+  _png_init_io,
+  _png_save_int_32,
+  _png_save_uint_32,
+  _png_convert_to_rfc1123_buffer,
+  _png_format_number,
+  _png_convert_to_rfc1123,
+  _png_get_copyright,
+  _png_get_libpng_ver,
+  _png_get_header_ver,
+  _png_get_header_version,
+  _png_build_grayscale_palette,
+  _png_handle_as_unknown,
+  _png_chunk_unknown_handling,
+  _png_reset_zstream,
+  _png_access_version_number,
+  _png_zstream_error,
+  _png_xy_from_XYZ,
+  _png_muldiv,
+  _png_XYZ_from_xy,
+  _png_reciprocal,
+  _png_icc_check_length,
+  _png_chunk_benign_error,
+  _png_icc_check_header,
+  _png_icc_check_tag_table,
+  _png_set_rgb_coefficients,
+  _png_check_IHDR,
+  _png_check_fp_number,
+  _png_check_fp_string,
+  _png_ascii_from_fp,
+  _png_ascii_from_fixed,
+  _png_fixed,
+  _png_fixed_error,
+  _png_fixed_ITU,
+  _png_gamma_significant,
+  _png_reciprocal2,
+  _png_gamma_8bit_correct,
+  _png_gamma_16bit_correct,
+  _png_gamma_correct,
+  _png_destroy_gamma_table,
+  _png_build_gamma_table,
+  _png_malloc,
+  _png_calloc,
+  _png_set_option,
+  _png_image_free,
+  _png_image_error,
+  _png_longjmp,
+  _png_warning_parameter,
+  _png_warning_parameter_unsigned,
+  _png_warning_parameter_signed,
+  _png_formatted_warning,
+  _png_benign_error,
+  _png_chunk_error,
+  _png_chunk_warning,
+  _png_app_warning,
+  _png_app_error,
+  _png_chunk_report,
+  _png_set_longjmp_fn,
+  _png_free_jmpbuf,
+  _png_get_error_ptr,
+  _png_safe_error,
+  _png_safe_warning,
+  _png_safe_execute,
+  _png_get_rowbytes,
+  _png_get_rows,
+  _png_get_image_width,
+  _png_get_image_height,
+  _png_get_bit_depth,
+  _png_get_color_type,
+  _png_get_filter_type,
+  _png_get_interlace_type,
+  _png_get_compression_type,
+  _png_get_x_pixels_per_meter,
+  _png_get_y_pixels_per_meter,
+  _png_get_pixels_per_meter,
+  _png_get_pixel_aspect_ratio,
+  _png_get_pixel_aspect_ratio_fixed,
+  _png_get_x_offset_microns,
+  _png_get_y_offset_microns,
+  _png_get_x_offset_pixels,
+  _png_get_y_offset_pixels,
+  _png_get_pixels_per_inch,
+  _png_get_x_pixels_per_inch,
+  _png_get_y_pixels_per_inch,
+  _png_get_x_offset_inches_fixed,
+  _png_get_y_offset_inches_fixed,
+  _png_get_x_offset_inches,
+  _png_get_y_offset_inches,
+  _png_get_pHYs_dpi,
+  _png_get_channels,
+  _png_get_signature,
+  _png_get_bKGD,
+  _png_get_cHRM,
+  _png_get_cHRM_XYZ,
+  _png_get_cHRM_XYZ_fixed,
+  _png_get_cHRM_fixed,
+  _png_get_gAMA_fixed,
+  _png_get_gAMA,
+  _png_get_sRGB,
+  _png_get_iCCP,
+  _png_get_sPLT,
+  _png_get_cICP,
+  _png_get_cLLI_fixed,
+  _png_get_cLLI,
+  _png_get_mDCV_fixed,
+  _png_get_mDCV,
+  _png_get_eXIf,
+  _png_get_eXIf_1,
+  _png_get_hIST,
+  _png_get_oFFs,
+  _png_get_pCAL,
+  _png_get_sCAL_fixed,
+  _png_get_sCAL,
+  _png_get_sCAL_s,
+  _png_get_pHYs,
+  _png_get_sBIT,
+  _png_get_text,
+  _png_get_tIME,
+  _png_get_unknown_chunks,
+  _png_get_rgb_to_gray_status,
+  _png_get_user_chunk_ptr,
+  _png_get_compression_buffer_size,
+  _png_get_user_width_max,
+  _png_get_user_height_max,
+  _png_get_chunk_cache_max,
+  _png_get_chunk_malloc_max,
+  _png_get_io_state,
+  _png_get_io_chunk_type,
+  _png_get_palette_max,
+  _png_destroy_png_struct,
+  _png_malloc_array,
+  _png_realloc_array,
+  _png_malloc_default,
+  _png_free_default,
+  _png_get_mem_ptr,
+  _png_process_data,
+  _png_push_read_chunk,
+  _png_push_read_IDAT,
+  _png_push_read_sig,
+  _png_push_restore_buffer,
+  _png_process_some_data,
+  _png_process_data_pause,
+  _png_push_save_buffer,
+  _png_process_data_skip,
+  _png_read_chunk_header,
+  _png_handle_chunk,
+  _png_handle_unknown,
+  _png_get_uint_31,
+  _png_crc_read,
+  _png_process_IDAT_data,
+  _png_crc_finish,
+  _png_push_fill_buffer,
+  _png_push_have_end,
+  _png_push_have_info,
+  _png_zlib_inflate,
+  _png_push_process_row,
+  _png_read_filter_row,
+  _png_do_read_transformations,
+  _png_do_read_interlace,
+  _png_read_push_finish_row,
+  _png_push_have_row,
+  _png_progressive_combine_row,
+  _png_combine_row,
+  _png_set_progressive_read_fn,
+  _png_get_progressive_ptr,
+  _png_create_read_struct_2,
+  _png_read_sig,
+  _png_read_start_row,
+  _png_read_transform_info,
+  _png_start_read_image,
+  _png_read_finish_row,
+  _png_read_IDAT_data,
+  _png_read_rows,
+  _png_read_finish_IDAT,
+  _png_set_read_status_fn,
+  _png_read_png,
+  _png_set_scale_16,
+  _png_set_strip_alpha,
+  _png_set_packswap,
+  _png_set_invert_mono,
+  _png_set_shift,
+  _png_set_bgr,
+  _png_set_swap_alpha,
+  _png_set_swap,
+  _png_set_invert_alpha,
+  _png_set_expand_16,
+  _png_image_begin_read_from_stdio,
+  _png_set_benign_errors,
+  _png_image_begin_read_from_file,
+  _png_image_begin_read_from_memory,
+  _png_image_finish_read,
+  _png_set_background_fixed,
+  _png_set_rgb_to_gray_fixed,
+  _png_resolve_file_gamma,
+  _png_set_tRNS_to_alpha,
+  _png_set_alpha_mode_fixed,
+  _png_set_keep_unknown_chunks,
+  _png_set_add_alpha,
+  _png_read_data,
+  _png_default_read_data,
+  _png_set_background,
+  _png_set_alpha_mode,
+  _png_set_quantize,
+  _png_set_gamma_fixed,
+  _png_set_gamma,
+  _png_set_palette_to_rgb,
+  _png_set_expand_gray_1_2_4_to_8,
+  _png_set_rgb_to_gray,
+  _png_set_read_user_transform_fn,
+  _png_init_read_transformations,
+  _png_do_strip_channel,
+  _png_do_invert,
+  _png_do_check_palette_indexes,
+  _png_do_bgr,
+  _png_do_packswap,
+  _png_do_swap,
+  _png_get_uint_32,
+  _png_get_int_32,
+  _png_get_uint_16,
+  _png_set_unknown_chunks,
+  _inflateReset2,
+  _png_set_bKGD,
+  _png_set_cHRM_fixed,
+  _png_set_cICP,
+  _png_set_cLLI_fixed,
+  _png_set_eXIf_1,
+  _png_set_gAMA_fixed,
+  _png_set_hIST,
+  _png_set_text_2,
+  _png_set_mDCV_fixed,
+  _png_set_oFFs,
+  _png_set_pCAL,
+  _png_set_pHYs,
+  _png_set_sBIT,
+  _png_set_sCAL_s,
+  _png_set_sPLT,
+  _png_set_sRGB,
+  _png_set_tIME,
+  _png_set_tRNS,
+  _png_set_cHRM_XYZ_fixed,
+  _png_set_cHRM,
+  _png_set_cHRM_XYZ,
+  _png_set_cLLI,
+  _png_set_mDCV,
+  _png_set_eXIf,
+  _png_set_gAMA,
+  _png_set_sCAL,
+  _png_set_sCAL_fixed,
+  _png_set_sRGB_gAMA_and_cHRM,
+  _png_set_iCCP,
+  _png_set_text,
+  _png_set_unknown_chunk_location,
+  _png_permit_mng_features,
+  _png_set_read_user_chunk_fn,
+  _png_set_compression_buffer_size,
+  _png_free_buffer_list,
+  _png_set_invalid,
+  _png_set_user_limits,
+  _png_set_chunk_cache_max,
+  _png_set_chunk_malloc_max,
+  _png_set_check_for_invalid_index,
+  _png_check_keyword,
+  _png_set_filler,
+  _png_set_user_transform_info,
+  _png_get_user_transform_ptr,
+  _png_get_current_row_number,
+  _png_get_current_pass_number,
+  _png_write_data,
+  _png_default_write_data,
+  _png_flush,
+  _png_default_flush,
+  _png_write_info_before_PLTE,
+  _png_write_sig,
+  _png_write_IHDR,
+  _png_write_sBIT,
+  _png_write_cLLI_fixed,
+  _png_write_mDCV_fixed,
+  _png_write_cICP,
+  _png_write_iCCP,
+  _png_write_sRGB,
+  _png_write_gAMA_fixed,
+  _png_write_cHRM_fixed,
+  _png_write_chunk,
+  _png_write_info,
+  _png_write_PLTE,
+  _png_write_tRNS,
+  _png_write_bKGD,
+  _png_write_eXIf,
+  _png_write_hIST,
+  _png_write_oFFs,
+  _png_write_pCAL,
+  _png_write_sCAL_s,
+  _png_write_pHYs,
+  _png_write_tIME,
+  _png_write_sPLT,
+  _png_write_iTXt,
+  _png_write_zTXt,
+  _png_write_tEXt,
+  _png_write_end,
+  _png_write_IEND,
+  _png_convert_from_struct_tm,
+  _png_convert_from_time_t,
+  _png_create_write_struct_2,
+  _png_write_rows,
+  _png_write_row,
+  _png_write_start_row,
+  _png_write_finish_row,
+  _png_do_write_interlace,
+  _png_do_write_transformations,
+  _png_write_find_filter,
+  _png_write_image,
+  _png_set_flush,
+  _png_write_flush,
+  _png_compress_IDAT,
+  _png_set_filter,
+  _png_set_filter_heuristics,
+  _png_set_filter_heuristics_fixed,
+  _png_set_compression_level,
+  _png_set_compression_mem_level,
+  _png_set_compression_strategy,
+  _png_set_compression_window_bits,
+  _png_set_compression_method,
+  _png_set_text_compression_level,
+  _png_set_text_compression_mem_level,
+  _png_set_text_compression_strategy,
+  _png_set_text_compression_window_bits,
+  _png_set_text_compression_method,
+  _png_set_write_status_fn,
+  _png_set_write_user_transform_fn,
+  _png_image_write_to_memory,
+  _png_image_write_to_stdio,
+  _png_image_write_to_file,
+  _png_save_uint_16,
+  _png_write_chunk_start,
+  _png_write_chunk_data,
+  _png_write_chunk_end,
+  _deflateReset,
   _SDL_ExitProcess,
   _SDL_SetAppMetadata,
   _SDL_SetError,
@@ -56345,360 +56712,244 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _SDL_SW_QueryYUVTexturePixels,
   _SDL_SW_UnlockYUVTexture,
   _rgb24_yuv420_std,
-  _png_error,
-  _png_sig_cmp,
-  _png_zalloc,
-  _png_warning,
-  _png_malloc_warn,
-  _png_zfree,
-  _png_free,
-  _png_reset_crc,
-  _png_calculate_crc,
-  _png_user_version_check,
-  _png_safecat,
-  _png_create_png_struct,
-  _png_set_mem_fn,
-  _png_malloc_base,
-  _png_destroy_info_struct,
-  _png_free_data,
-  _png_info_init_3,
-  _png_data_freer,
-  _png_init_io,
-  _png_save_int_32,
-  _png_save_uint_32,
-  _png_convert_to_rfc1123_buffer,
-  _png_format_number,
-  _png_convert_to_rfc1123,
-  _png_get_copyright,
-  _png_get_libpng_ver,
-  _png_get_header_ver,
-  _png_get_header_version,
-  _png_build_grayscale_palette,
-  _png_handle_as_unknown,
-  _png_chunk_unknown_handling,
-  _png_reset_zstream,
-  _png_access_version_number,
-  _png_zstream_error,
-  _png_xy_from_XYZ,
-  _png_muldiv,
-  _png_XYZ_from_xy,
-  _png_reciprocal,
-  _png_icc_check_length,
-  _png_chunk_benign_error,
-  _png_icc_check_header,
-  _png_icc_check_tag_table,
-  _png_set_rgb_coefficients,
-  _png_check_IHDR,
-  _png_check_fp_number,
-  _png_check_fp_string,
-  _png_ascii_from_fp,
-  _png_ascii_from_fixed,
-  _png_fixed,
-  _png_fixed_error,
-  _png_fixed_ITU,
-  _png_gamma_significant,
-  _png_reciprocal2,
-  _png_gamma_8bit_correct,
-  _png_gamma_16bit_correct,
-  _png_gamma_correct,
-  _png_destroy_gamma_table,
-  _png_build_gamma_table,
-  _png_malloc,
-  _png_calloc,
-  _png_set_option,
-  _png_image_free,
-  _png_image_error,
-  _png_longjmp,
-  _png_warning_parameter,
-  _png_warning_parameter_unsigned,
-  _png_warning_parameter_signed,
-  _png_formatted_warning,
-  _png_benign_error,
-  _png_chunk_error,
-  _png_chunk_warning,
-  _png_app_warning,
-  _png_app_error,
-  _png_chunk_report,
-  _png_set_longjmp_fn,
-  _png_free_jmpbuf,
-  _png_get_error_ptr,
-  _png_safe_error,
-  _png_safe_warning,
-  _png_safe_execute,
-  _png_get_rowbytes,
-  _png_get_rows,
-  _png_get_image_width,
-  _png_get_image_height,
-  _png_get_bit_depth,
-  _png_get_color_type,
-  _png_get_filter_type,
-  _png_get_interlace_type,
-  _png_get_compression_type,
-  _png_get_x_pixels_per_meter,
-  _png_get_y_pixels_per_meter,
-  _png_get_pixels_per_meter,
-  _png_get_pixel_aspect_ratio,
-  _png_get_pixel_aspect_ratio_fixed,
-  _png_get_x_offset_microns,
-  _png_get_y_offset_microns,
-  _png_get_x_offset_pixels,
-  _png_get_y_offset_pixels,
-  _png_get_pixels_per_inch,
-  _png_get_x_pixels_per_inch,
-  _png_get_y_pixels_per_inch,
-  _png_get_x_offset_inches_fixed,
-  _png_get_y_offset_inches_fixed,
-  _png_get_x_offset_inches,
-  _png_get_y_offset_inches,
-  _png_get_pHYs_dpi,
-  _png_get_channels,
-  _png_get_signature,
-  _png_get_bKGD,
-  _png_get_cHRM,
-  _png_get_cHRM_XYZ,
-  _png_get_cHRM_XYZ_fixed,
-  _png_get_cHRM_fixed,
-  _png_get_gAMA_fixed,
-  _png_get_gAMA,
-  _png_get_sRGB,
-  _png_get_iCCP,
-  _png_get_sPLT,
-  _png_get_cICP,
-  _png_get_cLLI_fixed,
-  _png_get_cLLI,
-  _png_get_mDCV_fixed,
-  _png_get_mDCV,
-  _png_get_eXIf,
-  _png_get_eXIf_1,
-  _png_get_hIST,
-  _png_get_oFFs,
-  _png_get_pCAL,
-  _png_get_sCAL_fixed,
-  _png_get_sCAL,
-  _png_get_sCAL_s,
-  _png_get_pHYs,
-  _png_get_sBIT,
-  _png_get_text,
-  _png_get_tIME,
-  _png_get_unknown_chunks,
-  _png_get_rgb_to_gray_status,
-  _png_get_user_chunk_ptr,
-  _png_get_compression_buffer_size,
-  _png_get_user_width_max,
-  _png_get_user_height_max,
-  _png_get_chunk_cache_max,
-  _png_get_chunk_malloc_max,
-  _png_get_io_state,
-  _png_get_io_chunk_type,
-  _png_get_palette_max,
-  _png_destroy_png_struct,
-  _png_malloc_array,
-  _png_realloc_array,
-  _png_malloc_default,
-  _png_free_default,
-  _png_get_mem_ptr,
-  _png_process_data,
-  _png_push_read_chunk,
-  _png_push_read_IDAT,
-  _png_push_read_sig,
-  _png_push_restore_buffer,
-  _png_process_some_data,
-  _png_process_data_pause,
-  _png_push_save_buffer,
-  _png_process_data_skip,
-  _png_read_chunk_header,
-  _png_handle_chunk,
-  _png_handle_unknown,
-  _png_get_uint_31,
-  _png_crc_read,
-  _png_process_IDAT_data,
-  _png_crc_finish,
-  _png_push_fill_buffer,
-  _png_push_have_end,
-  _png_push_have_info,
-  _png_zlib_inflate,
-  _png_push_process_row,
-  _png_read_filter_row,
-  _png_do_read_transformations,
-  _png_do_read_interlace,
-  _png_read_push_finish_row,
-  _png_push_have_row,
-  _png_progressive_combine_row,
-  _png_combine_row,
-  _png_set_progressive_read_fn,
-  _png_get_progressive_ptr,
-  _png_create_read_struct_2,
-  _png_read_sig,
-  _png_read_start_row,
-  _png_read_transform_info,
-  _png_start_read_image,
-  _png_read_finish_row,
-  _png_read_IDAT_data,
-  _png_read_rows,
-  _png_read_finish_IDAT,
-  _png_set_read_status_fn,
-  _png_read_png,
-  _png_set_scale_16,
-  _png_set_strip_alpha,
-  _png_set_packswap,
-  _png_set_invert_mono,
-  _png_set_shift,
-  _png_set_bgr,
-  _png_set_swap_alpha,
-  _png_set_swap,
-  _png_set_invert_alpha,
-  _png_set_expand_16,
-  _png_image_begin_read_from_stdio,
-  _png_set_benign_errors,
-  _png_image_begin_read_from_file,
-  _png_image_begin_read_from_memory,
-  _png_image_finish_read,
-  _png_set_background_fixed,
-  _png_set_rgb_to_gray_fixed,
-  _png_resolve_file_gamma,
-  _png_set_tRNS_to_alpha,
-  _png_set_alpha_mode_fixed,
-  _png_set_keep_unknown_chunks,
-  _png_set_add_alpha,
-  _png_read_data,
-  _png_default_read_data,
-  _png_set_background,
-  _png_set_alpha_mode,
-  _png_set_quantize,
-  _png_set_gamma_fixed,
-  _png_set_gamma,
-  _png_set_palette_to_rgb,
-  _png_set_expand_gray_1_2_4_to_8,
-  _png_set_rgb_to_gray,
-  _png_set_read_user_transform_fn,
-  _png_init_read_transformations,
-  _png_do_strip_channel,
-  _png_do_invert,
-  _png_do_check_palette_indexes,
-  _png_do_bgr,
-  _png_do_packswap,
-  _png_do_swap,
-  _png_get_uint_32,
-  _png_get_int_32,
-  _png_get_uint_16,
-  _png_set_unknown_chunks,
-  _inflateReset2,
-  _png_set_bKGD,
-  _png_set_cHRM_fixed,
-  _png_set_cICP,
-  _png_set_cLLI_fixed,
-  _png_set_eXIf_1,
-  _png_set_gAMA_fixed,
-  _png_set_hIST,
-  _png_set_text_2,
-  _png_set_mDCV_fixed,
-  _png_set_oFFs,
-  _png_set_pCAL,
-  _png_set_pHYs,
-  _png_set_sBIT,
-  _png_set_sCAL_s,
-  _png_set_sPLT,
-  _png_set_sRGB,
-  _png_set_tIME,
-  _png_set_tRNS,
-  _png_set_cHRM_XYZ_fixed,
-  _png_set_cHRM,
-  _png_set_cHRM_XYZ,
-  _png_set_cLLI,
-  _png_set_mDCV,
-  _png_set_eXIf,
-  _png_set_gAMA,
-  _png_set_sCAL,
-  _png_set_sCAL_fixed,
-  _png_set_sRGB_gAMA_and_cHRM,
-  _png_set_iCCP,
-  _png_set_text,
-  _png_set_unknown_chunk_location,
-  _png_permit_mng_features,
-  _png_set_read_user_chunk_fn,
-  _png_set_compression_buffer_size,
-  _png_free_buffer_list,
-  _png_set_invalid,
-  _png_set_user_limits,
-  _png_set_chunk_cache_max,
-  _png_set_chunk_malloc_max,
-  _png_set_check_for_invalid_index,
-  _png_check_keyword,
-  _png_set_filler,
-  _png_set_user_transform_info,
-  _png_get_user_transform_ptr,
-  _png_get_current_row_number,
-  _png_get_current_pass_number,
-  _png_write_data,
-  _png_default_write_data,
-  _png_flush,
-  _png_default_flush,
-  _png_write_info_before_PLTE,
-  _png_write_sig,
-  _png_write_IHDR,
-  _png_write_sBIT,
-  _png_write_cLLI_fixed,
-  _png_write_mDCV_fixed,
-  _png_write_cICP,
-  _png_write_iCCP,
-  _png_write_sRGB,
-  _png_write_gAMA_fixed,
-  _png_write_cHRM_fixed,
-  _png_write_chunk,
-  _png_write_info,
-  _png_write_PLTE,
-  _png_write_tRNS,
-  _png_write_bKGD,
-  _png_write_eXIf,
-  _png_write_hIST,
-  _png_write_oFFs,
-  _png_write_pCAL,
-  _png_write_sCAL_s,
-  _png_write_pHYs,
-  _png_write_tIME,
-  _png_write_sPLT,
-  _png_write_iTXt,
-  _png_write_zTXt,
-  _png_write_tEXt,
-  _png_write_end,
-  _png_write_IEND,
-  _png_convert_from_struct_tm,
-  _png_convert_from_time_t,
-  _png_create_write_struct_2,
-  _png_write_rows,
-  _png_write_row,
-  _png_write_start_row,
-  _png_write_finish_row,
-  _png_do_write_interlace,
-  _png_do_write_transformations,
-  _png_write_find_filter,
-  _png_write_image,
-  _png_set_flush,
-  _png_write_flush,
-  _png_compress_IDAT,
-  _png_set_filter,
-  _png_set_filter_heuristics,
-  _png_set_filter_heuristics_fixed,
-  _png_set_compression_level,
-  _png_set_compression_mem_level,
-  _png_set_compression_strategy,
-  _png_set_compression_window_bits,
-  _png_set_compression_method,
-  _png_set_text_compression_level,
-  _png_set_text_compression_mem_level,
-  _png_set_text_compression_strategy,
-  _png_set_text_compression_window_bits,
-  _png_set_text_compression_method,
-  _png_set_write_status_fn,
-  _png_set_write_user_transform_fn,
-  _png_image_write_to_memory,
-  _png_image_write_to_stdio,
-  _png_image_write_to_file,
-  _png_save_uint_16,
-  _png_write_chunk_start,
-  _png_write_chunk_data,
-  _png_write_chunk_end,
-  _deflateReset,
+  _jpeg_CreateCompress,
+  _jinit_memory_mgr,
+  _jpeg_destroy_compress,
+  _jpeg_destroy,
+  _jpeg_abort_compress,
+  _jpeg_abort,
+  _jpeg_suppress_tables,
+  _jpeg_finish_compress,
+  _jpeg_write_marker,
+  _jpeg_write_m_header,
+  _jpeg_write_m_byte,
+  _jpeg_write_tables,
+  _jinit_marker_writer,
+  _jpeg_start_compress,
+  _jinit_compress_master,
+  _jpeg_write_scanlines,
+  _jpeg_write_raw_data,
+  _jinit_arith_encoder,
+  _jinit_c_coef_controller,
+  _jround_up,
+  _jinit_color_converter,
+  _jinit_forward_dct,
+  _jpeg_fdct_1x1,
+  _jpeg_fdct_3x3,
+  _jpeg_fdct_4x4,
+  _jpeg_fdct_5x5,
+  _jpeg_fdct_6x6,
+  _jpeg_fdct_7x7,
+  _jpeg_fdct_10x10,
+  _jpeg_fdct_11x11,
+  _jpeg_fdct_12x12,
+  _jpeg_fdct_13x13,
+  _jpeg_fdct_14x14,
+  _jpeg_fdct_15x15,
+  _jpeg_fdct_16x16,
+  _jpeg_fdct_16x8,
+  _jpeg_fdct_14x7,
+  _jpeg_fdct_12x6,
+  _jpeg_fdct_10x5,
+  _jpeg_fdct_8x4,
+  _jpeg_fdct_6x3,
+  _jpeg_fdct_4x2,
+  _jpeg_fdct_2x1,
+  _jpeg_fdct_8x16,
+  _jpeg_fdct_7x14,
+  _jpeg_fdct_6x12,
+  _jpeg_fdct_5x10,
+  _jpeg_fdct_4x8,
+  _jpeg_fdct_3x6,
+  _jpeg_fdct_2x4,
+  _jpeg_fdct_1x2,
+  _jpeg_fdct_islow,
+  _jpeg_fdct_2x2,
+  _jpeg_fdct_float,
+  _jpeg_fdct_ifast,
+  _jpeg_fdct_9x9,
+  _jinit_huff_encoder,
+  _jpeg_alloc_huff_table,
+  _jpeg_std_huff_table,
+  _jpeg_calc_jpeg_dimensions,
+  _jdiv_round_up,
+  _jinit_c_master_control,
+  _jinit_downsampler,
+  _jinit_c_prep_controller,
+  _jinit_c_main_controller,
+  _jpeg_alloc_quant_table,
+  _jpeg_add_quant_table,
+  _jpeg_default_qtables,
+  _jpeg_set_linear_quality,
+  _jpeg_quality_scaling,
+  _jpeg_set_quality,
+  _jpeg_set_defaults,
+  _jpeg_default_colorspace,
+  _jpeg_set_colorspace,
+  _jpeg_simple_progression,
+  _jcopy_sample_rows,
+  _jpeg_write_coefficients,
+  _jpeg_copy_critical_parameters,
+  _jinit_marker_reader,
+  _jinit_input_controller,
+  _jpeg_abort_decompress,
+  _jpeg_consume_input,
+  _jpeg_input_complete,
+  _jpeg_has_multiple_scans,
+  _jinit_master_decompress,
+  _jpeg_read_raw_data,
+  _jpeg_start_output,
+  _jpeg_finish_output,
+  _jinit_arith_decoder,
+  _jpeg_stdio_dest,
+  _jpeg_mem_dest,
+  _jpeg_stdio_src,
+  _jpeg_mem_src,
+  _jinit_d_coef_controller,
+  _jcopy_block_row,
+  _jinit_color_deconverter,
+  _jinit_inverse_dct,
+  _jpeg_idct_1x1,
+  _jpeg_idct_3x3,
+  _jpeg_idct_4x4,
+  _jpeg_idct_5x5,
+  _jpeg_idct_6x6,
+  _jpeg_idct_7x7,
+  _jpeg_idct_10x10,
+  _jpeg_idct_11x11,
+  _jpeg_idct_12x12,
+  _jpeg_idct_13x13,
+  _jpeg_idct_14x14,
+  _jpeg_idct_15x15,
+  _jpeg_idct_16x16,
+  _jpeg_idct_16x8,
+  _jpeg_idct_14x7,
+  _jpeg_idct_12x6,
+  _jpeg_idct_10x5,
+  _jpeg_idct_8x4,
+  _jpeg_idct_6x3,
+  _jpeg_idct_4x2,
+  _jpeg_idct_2x1,
+  _jpeg_idct_8x16,
+  _jpeg_idct_7x14,
+  _jpeg_idct_6x12,
+  _jpeg_idct_5x10,
+  _jpeg_idct_4x8,
+  _jpeg_idct_3x6,
+  _jpeg_idct_2x4,
+  _jpeg_idct_1x2,
+  _jpeg_idct_islow,
+  _jpeg_idct_ifast,
+  _jpeg_idct_2x2,
+  _jpeg_idct_float,
+  _jpeg_idct_9x9,
+  _jinit_huff_decoder,
+  _jpeg_core_output_dimensions,
+  _jinit_d_main_controller,
+  _jpeg_save_markers,
+  _jpeg_set_marker_processor,
+  _jpeg_calc_output_dimensions,
+  _jpeg_new_colormap,
+  _jinit_1pass_quantizer,
+  _jinit_2pass_quantizer,
+  _jinit_merged_upsampler,
+  _jinit_upsampler,
+  _jinit_d_post_controller,
+  _jpeg_read_coefficients,
+  _jpeg_mem_init,
+  _jpeg_get_small,
+  _jpeg_mem_term,
+  _jpeg_get_large,
+  _jpeg_mem_available,
+  _jpeg_open_backing_store,
+  _jpeg_free_large,
+  _jpeg_free_small,
+  _jinit_read_bmp,
+  _getc,
+  _read_color_map,
+  _jinit_read_gif,
+  _jinit_read_ppm,
+  _read_quant_tables,
+  _read_scan_script,
+  _ungetc,
+  _set_quality_ratings,
+  _set_quant_slots,
+  _set_sample_factors,
+  _jinit_read_targa,
+  _jtransform_parse_crop_spec,
+  _jtransform_request_workspace,
+  _jtransform_perfect_transform,
+  _jtransform_adjust_parameters,
+  _jtransform_execute_transform,
+  _jcopy_markers_setup,
+  _jcopy_markers_execute,
+  _jinit_write_bmp,
+  _putc,
+  _jinit_write_gif,
+  _jinit_write_ppm,
+  _jinit_write_targa,
+  _DGifOpenFileName,
+  _open,
+  _DGifOpenFileHandle,
+  _fdopen,
+  _DGifGetScreenDesc,
+  _GifFreeMapObject,
+  _GifMakeMapObject,
+  _DGifGetGifVersion,
+  _DGifGetRecordType,
+  _DGifGetImageHeader,
+  _DGifGetImageDesc,
+  _openbsd_reallocarray,
+  _DGifGetLine,
+  _DGifGetCodeNext,
+  _DGifGetPixel,
+  _DGifGetExtension,
+  _DGifGetExtensionNext,
+  _DGifSavedExtensionToGCB,
+  _GifFreeSavedImages,
+  _GifFreeExtensions,
+  _DGifGetCode,
+  _DGifGetLZCodes,
+  _GifAddExtensionBlock,
+  _EGifOpenFileName,
+  _EGifOpenFileHandle,
+  __InitHashTable,
+  _EGifOpen,
+  _EGifGetGifVersion,
+  _EGifSetGifVersion,
+  _EGifPutScreenDesc,
+  _EGifPutImageDesc,
+  __ClearHashTable,
+  _EGifPutLine,
+  __ExistsHashTable,
+  __InsertHashTable,
+  _EGifPutPixel,
+  _EGifPutComment,
+  _EGifPutExtension,
+  _EGifPutExtensionLeader,
+  _EGifPutExtensionBlock,
+  _EGifPutExtensionTrailer,
+  _EGifGCBToExtension,
+  _EGifGCBToSavedExtension,
+  _EGifPutCode,
+  _EGifPutCodeNext,
+  _EGifCloseFile,
+  _EGifSpew,
+  _GAGetArgs,
+  _GAPrintErrMsg,
+  _GAPrintHowTo,
+  _GifDrawText8x8,
+  _GifDrawBox,
+  _GifDrawRectangle,
+  _GifDrawBoxedText8x8,
+  _GifBitSize,
+  _GifUnionColorMap,
+  _GifApplyTranslation,
+  _FreeLastSavedImage,
+  _GifMakeSavedImage,
+  _GifQprintf,
+  _PrintGifError,
+  _GifQuantizeBuffer,
   _af_shaper_get_cluster,
   _FT_Get_Advance,
   _FT_MulDiv,
@@ -56892,7 +57143,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _FT_Glyph_StrokeBorder,
   _FT_GlyphSlot_Slant,
   _FT_GlyphSlot_AdjustWeight,
-  _open,
   _mmap,
   _munmap,
   _FT_Get_PS_Font_Info,
@@ -56903,243 +57153,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _ps_hints_apply,
   _TT_RunIns,
   _TT_New_Context,
-  _jpeg_CreateCompress,
-  _jinit_memory_mgr,
-  _jpeg_destroy_compress,
-  _jpeg_destroy,
-  _jpeg_abort_compress,
-  _jpeg_abort,
-  _jpeg_suppress_tables,
-  _jpeg_finish_compress,
-  _jpeg_write_marker,
-  _jpeg_write_m_header,
-  _jpeg_write_m_byte,
-  _jpeg_write_tables,
-  _jinit_marker_writer,
-  _jpeg_start_compress,
-  _jinit_compress_master,
-  _jpeg_write_scanlines,
-  _jpeg_write_raw_data,
-  _jinit_arith_encoder,
-  _jinit_c_coef_controller,
-  _jround_up,
-  _jinit_color_converter,
-  _jinit_forward_dct,
-  _jpeg_fdct_1x1,
-  _jpeg_fdct_3x3,
-  _jpeg_fdct_4x4,
-  _jpeg_fdct_5x5,
-  _jpeg_fdct_6x6,
-  _jpeg_fdct_7x7,
-  _jpeg_fdct_10x10,
-  _jpeg_fdct_11x11,
-  _jpeg_fdct_12x12,
-  _jpeg_fdct_13x13,
-  _jpeg_fdct_14x14,
-  _jpeg_fdct_15x15,
-  _jpeg_fdct_16x16,
-  _jpeg_fdct_16x8,
-  _jpeg_fdct_14x7,
-  _jpeg_fdct_12x6,
-  _jpeg_fdct_10x5,
-  _jpeg_fdct_8x4,
-  _jpeg_fdct_6x3,
-  _jpeg_fdct_4x2,
-  _jpeg_fdct_2x1,
-  _jpeg_fdct_8x16,
-  _jpeg_fdct_7x14,
-  _jpeg_fdct_6x12,
-  _jpeg_fdct_5x10,
-  _jpeg_fdct_4x8,
-  _jpeg_fdct_3x6,
-  _jpeg_fdct_2x4,
-  _jpeg_fdct_1x2,
-  _jpeg_fdct_islow,
-  _jpeg_fdct_2x2,
-  _jpeg_fdct_float,
-  _jpeg_fdct_ifast,
-  _jpeg_fdct_9x9,
-  _jinit_huff_encoder,
-  _jpeg_alloc_huff_table,
-  _jpeg_std_huff_table,
-  _jpeg_calc_jpeg_dimensions,
-  _jdiv_round_up,
-  _jinit_c_master_control,
-  _jinit_downsampler,
-  _jinit_c_prep_controller,
-  _jinit_c_main_controller,
-  _jpeg_alloc_quant_table,
-  _jpeg_add_quant_table,
-  _jpeg_default_qtables,
-  _jpeg_set_linear_quality,
-  _jpeg_quality_scaling,
-  _jpeg_set_quality,
-  _jpeg_set_defaults,
-  _jpeg_default_colorspace,
-  _jpeg_set_colorspace,
-  _jpeg_simple_progression,
-  _jcopy_sample_rows,
-  _jpeg_write_coefficients,
-  _jpeg_copy_critical_parameters,
-  _jinit_marker_reader,
-  _jinit_input_controller,
-  _jpeg_abort_decompress,
-  _jpeg_consume_input,
-  _jpeg_input_complete,
-  _jpeg_has_multiple_scans,
-  _jinit_master_decompress,
-  _jpeg_read_raw_data,
-  _jpeg_start_output,
-  _jpeg_finish_output,
-  _jinit_arith_decoder,
-  _jpeg_stdio_dest,
-  _jpeg_mem_dest,
-  _jpeg_stdio_src,
-  _jpeg_mem_src,
-  _jinit_d_coef_controller,
-  _jcopy_block_row,
-  _jinit_color_deconverter,
-  _jinit_inverse_dct,
-  _jpeg_idct_1x1,
-  _jpeg_idct_3x3,
-  _jpeg_idct_4x4,
-  _jpeg_idct_5x5,
-  _jpeg_idct_6x6,
-  _jpeg_idct_7x7,
-  _jpeg_idct_10x10,
-  _jpeg_idct_11x11,
-  _jpeg_idct_12x12,
-  _jpeg_idct_13x13,
-  _jpeg_idct_14x14,
-  _jpeg_idct_15x15,
-  _jpeg_idct_16x16,
-  _jpeg_idct_16x8,
-  _jpeg_idct_14x7,
-  _jpeg_idct_12x6,
-  _jpeg_idct_10x5,
-  _jpeg_idct_8x4,
-  _jpeg_idct_6x3,
-  _jpeg_idct_4x2,
-  _jpeg_idct_2x1,
-  _jpeg_idct_8x16,
-  _jpeg_idct_7x14,
-  _jpeg_idct_6x12,
-  _jpeg_idct_5x10,
-  _jpeg_idct_4x8,
-  _jpeg_idct_3x6,
-  _jpeg_idct_2x4,
-  _jpeg_idct_1x2,
-  _jpeg_idct_islow,
-  _jpeg_idct_ifast,
-  _jpeg_idct_2x2,
-  _jpeg_idct_float,
-  _jpeg_idct_9x9,
-  _jinit_huff_decoder,
-  _jpeg_core_output_dimensions,
-  _jinit_d_main_controller,
-  _jpeg_save_markers,
-  _jpeg_set_marker_processor,
-  _jpeg_calc_output_dimensions,
-  _jpeg_new_colormap,
-  _jinit_1pass_quantizer,
-  _jinit_2pass_quantizer,
-  _jinit_merged_upsampler,
-  _jinit_upsampler,
-  _jinit_d_post_controller,
-  _jpeg_read_coefficients,
-  _jpeg_mem_init,
-  _jpeg_get_small,
-  _jpeg_mem_term,
-  _jpeg_get_large,
-  _jpeg_mem_available,
-  _jpeg_open_backing_store,
-  _jpeg_free_large,
-  _jpeg_free_small,
-  _jinit_read_bmp,
-  _getc,
-  _read_color_map,
-  _jinit_read_gif,
-  _jinit_read_ppm,
-  _read_quant_tables,
-  _read_scan_script,
-  _ungetc,
-  _set_quality_ratings,
-  _set_quant_slots,
-  _set_sample_factors,
-  _jinit_read_targa,
-  _jtransform_parse_crop_spec,
-  _jtransform_request_workspace,
-  _jtransform_perfect_transform,
-  _jtransform_adjust_parameters,
-  _jtransform_execute_transform,
-  _jcopy_markers_setup,
-  _jcopy_markers_execute,
-  _jinit_write_bmp,
-  _putc,
-  _jinit_write_gif,
-  _jinit_write_ppm,
-  _jinit_write_targa,
-  _DGifOpenFileName,
-  _DGifOpenFileHandle,
-  _fdopen,
-  _DGifGetScreenDesc,
-  _GifFreeMapObject,
-  _GifMakeMapObject,
-  _DGifGetGifVersion,
-  _DGifGetRecordType,
-  _DGifGetImageHeader,
-  _DGifGetImageDesc,
-  _openbsd_reallocarray,
-  _DGifGetLine,
-  _DGifGetCodeNext,
-  _DGifGetPixel,
-  _DGifGetExtension,
-  _DGifGetExtensionNext,
-  _DGifSavedExtensionToGCB,
-  _GifFreeSavedImages,
-  _GifFreeExtensions,
-  _DGifGetCode,
-  _DGifGetLZCodes,
-  _GifAddExtensionBlock,
-  _EGifOpenFileName,
-  _EGifOpenFileHandle,
-  __InitHashTable,
-  _EGifOpen,
-  _EGifGetGifVersion,
-  _EGifSetGifVersion,
-  _EGifPutScreenDesc,
-  _EGifPutImageDesc,
-  __ClearHashTable,
-  _EGifPutLine,
-  __ExistsHashTable,
-  __InsertHashTable,
-  _EGifPutPixel,
-  _EGifPutComment,
-  _EGifPutExtension,
-  _EGifPutExtensionLeader,
-  _EGifPutExtensionBlock,
-  _EGifPutExtensionTrailer,
-  _EGifGCBToExtension,
-  _EGifGCBToSavedExtension,
-  _EGifPutCode,
-  _EGifPutCodeNext,
-  _EGifCloseFile,
-  _EGifSpew,
-  _GAGetArgs,
-  _GAPrintErrMsg,
-  _GAPrintHowTo,
-  _GifDrawText8x8,
-  _GifDrawBox,
-  _GifDrawRectangle,
-  _GifDrawBoxedText8x8,
-  _GifBitSize,
-  _GifUnionColorMap,
-  _GifApplyTranslation,
-  _FreeLastSavedImage,
-  _GifMakeSavedImage,
-  _GifQprintf,
-  _PrintGifError,
-  _GifQuantizeBuffer,
   _adler32_z,
   _adler32,
   _adler32_combine,
@@ -66805,6 +66818,9 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _fribidi_version_info,
   _mandatory_liga_table,
   _console_liga_table,
+  _png_sRGB_table,
+  _png_sRGB_base,
+  _png_sRGB_delta,
   _SDL_expand_byte,
   _EMSCRIPTENAUDIO_bootstrap,
   _DISKAUDIO_bootstrap,
@@ -66828,9 +66844,17 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _GPU_RenderDriver,
   _SW_RenderDriver,
   _appindicator_names,
-  _png_sRGB_table,
-  _png_sRGB_base,
-  _png_sRGB_delta,
+  _jpeg_aritab,
+  _jpeg_natural_order,
+  _jpeg_natural_order2,
+  _jpeg_natural_order3,
+  _jpeg_natural_order4,
+  _jpeg_natural_order5,
+  _jpeg_natural_order6,
+  _jpeg_natural_order7,
+  _jpeg_std_message_table,
+  _GifAsciiTable8x8,
+  _GifNoisyPrint,
   _af_adlm_dflt_style_class,
   _af_cjk_writing_system_class,
   _af_dummy_writing_system_class,
@@ -67162,17 +67186,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _tt_cmap14_class_rec,
   _ft_grays_raster,
   _tt_default_graphics_state,
-  _jpeg_aritab,
-  _jpeg_natural_order,
-  _jpeg_natural_order2,
-  _jpeg_natural_order3,
-  _jpeg_natural_order4,
-  _jpeg_natural_order5,
-  _jpeg_natural_order6,
-  _jpeg_natural_order7,
-  _jpeg_std_message_table,
-  _GifAsciiTable8x8,
-  _GifNoisyPrint,
   _z_errmsg,
   __length_code,
   __dist_code,
@@ -68624,6 +68637,13 @@ function assignWasmExports(wasmExports) {
   __ZN6Common5ArrayIhE7emplaceIJRKhEEEvPS3_DpOT_ = Module['__ZN6Common5ArrayIhE7emplaceIJRKhEEEvPS3_DpOT_'] = wasmExports['_ZN6Common5ArrayIhE7emplaceIJRKhEEEvPS3_DpOT_'];
   __ZN9Freescape18ZxRecordingDecoder6decodeERKN6Common5ArrayIhEE = Module['__ZN9Freescape18ZxRecordingDecoder6decodeERKN6Common5ArrayIhEE'] = wasmExports['_ZN9Freescape18ZxRecordingDecoder6decodeERKN6Common5ArrayIhEE'];
   __ZN9Freescape18ZxRecordingDecoder6finishEv = Module['__ZN9Freescape18ZxRecordingDecoder6finishEv'] = wasmExports['_ZN9Freescape18ZxRecordingDecoder6finishEv'];
+  __ZN9Freescape21unpackZxSpectrumBlockERN6Common5ArrayIhEE = Module['__ZN9Freescape21unpackZxSpectrumBlockERN6Common5ArrayIhEE'] = wasmExports['_ZN9Freescape21unpackZxSpectrumBlockERN6Common5ArrayIhEE'];
+  __ZN6Common5ArrayIhE6resizeEj = Module['__ZN6Common5ArrayIhE6resizeEj'] = wasmExports['_ZN6Common5ArrayIhE6resizeEj'];
+  __ZN6Common5ArrayIhE6assignEPKhS3_ = Module['__ZN6Common5ArrayIhE6assignEPKhS3_'] = wasmExports['_ZN6Common5ArrayIhE6assignEPKhS3_'];
+  __ZN9Freescape18openZxSpectrumFileERKN6Common4PathE = Module['__ZN9Freescape18openZxSpectrumFileERKN6Common4PathE'] = wasmExports['_ZN9Freescape18openZxSpectrumFileERKN6Common4PathE'];
+  __ZN6Common4File4openERKNS_4PathE = Module['__ZN6Common4File4openERKNS_4PathE'] = wasmExports['_ZN6Common4File4openERKNS_4PathE'];
+  __ZN6Common4File4readEPvj = Module['__ZN6Common4File4readEPvj'] = wasmExports['_ZN6Common4File4readEPvj'];
+  __ZN6Common10ReadStream10readStreamEj = Module['__ZN6Common10ReadStream10readStreamEj'] = wasmExports['_ZN6Common10ReadStream10readStreamEj'];
   __ZN6Common17parseSpectrumTapeERNS_18SeekableReadStreamERNS_5ArrayINS_17SpectrumTapeBlockEEE = Module['__ZN6Common17parseSpectrumTapeERNS_18SeekableReadStreamERNS_5ArrayINS_17SpectrumTapeBlockEEE'] = wasmExports['_ZN6Common17parseSpectrumTapeERNS_18SeekableReadStreamERNS_5ArrayINS_17SpectrumTapeBlockEEE'];
   __ZN6Common5ArrayIN9Freescape10ZxTapeFileEE7emplaceIJRKS2_EEEvPS5_DpOT_ = Module['__ZN6Common5ArrayIN9Freescape10ZxTapeFileEE7emplaceIJRKS2_EEEvPS5_DpOT_'] = wasmExports['_ZN6Common5ArrayIN9Freescape10ZxTapeFileEE7emplaceIJRKS2_EEEvPS5_DpOT_'];
   __ZNK6Common6String9hasPrefixERKS0_ = Module['__ZNK6Common6String9hasPrefixERKS0_'] = wasmExports['_ZNK6Common6String9hasPrefixERKS0_'];
@@ -68734,7 +68754,6 @@ function assignWasmExports(wasmExports) {
   __ZN6Common5ArrayI19PlainGameDescriptorE7emplaceIJRKS1_EEEvPS4_DpOT_ = Module['__ZN6Common5ArrayI19PlainGameDescriptorE7emplaceIJRKS1_EEEvPS4_DpOT_'] = wasmExports['_ZN6Common5ArrayI19PlainGameDescriptorE7emplaceIJRKS1_EEEvPS4_DpOT_'];
   __ZN3Glk6Adrift16AdriftMetaEngine19getDetectionEntriesEv = Module['__ZN3Glk6Adrift16AdriftMetaEngine19getDetectionEntriesEv'] = wasmExports['_ZN3Glk6Adrift16AdriftMetaEngine19getDetectionEntriesEv'];
   __ZN3Glk5Blorb11hasBlorbExtERKN6Common6StringE = Module['__ZN3Glk5Blorb11hasBlorbExtERKN6Common6StringE'] = wasmExports['_ZN3Glk5Blorb11hasBlorbExtERKN6Common6StringE'];
-  __ZN6Common4File4readEPvj = Module['__ZN6Common4File4readEPvj'] = wasmExports['_ZN6Common4File4readEPvj'];
   __ZN3Glk5Blorb7isBlorbERN6Common18SeekableReadStreamEj = Module['__ZN3Glk5Blorb7isBlorbERN6Common18SeekableReadStreamEj'] = wasmExports['_ZN3Glk5Blorb7isBlorbERN6Common18SeekableReadStreamEj'];
   __ZN3Glk6Adrift16AdriftMetaEngine17detectGameVersionEPKh = Module['__ZN3Glk6Adrift16AdriftMetaEngine17detectGameVersionEPKh'] = wasmExports['_ZN3Glk6Adrift16AdriftMetaEngine17detectGameVersionEPKh'];
   __ZN3Glk6AdvSys16AdvSysMetaEngine19getDetectionEntriesEv = Module['__ZN3Glk6AdvSys16AdvSysMetaEngine19getDetectionEntriesEv'] = wasmExports['_ZN3Glk6AdvSys16AdvSysMetaEngine19getDetectionEntriesEv'];
@@ -68791,7 +68810,6 @@ function assignWasmExports(wasmExports) {
   __ZN6Common10ObjectPoolINS_7HashMapINS_4PathENS1_INS_6StringEbNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEENS2_15IgnoreCase_HashENS2_18IgnoreCase_EqualToEE4NodeELm10EE11deleteChunkEPSA_ = Module['__ZN6Common10ObjectPoolINS_7HashMapINS_4PathENS1_INS_6StringEbNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEENS2_15IgnoreCase_HashENS2_18IgnoreCase_EqualToEE4NodeELm10EE11deleteChunkEPSA_'] = wasmExports['_ZN6Common10ObjectPoolINS_7HashMapINS_4PathENS1_INS_6StringEbNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEENS2_15IgnoreCase_HashENS2_18IgnoreCase_EqualToEE4NodeELm10EE11deleteChunkEPSA_'];
   __ZN3Glk5BlorbC2ERKN6Common4PathENS_15InterpreterTypeE = Module['__ZN3Glk5BlorbC2ERKN6Common4PathENS_15InterpreterTypeE'] = wasmExports['_ZN3Glk5BlorbC2ERKN6Common4PathENS_15InterpreterTypeE'];
   __ZN3Glk5Blorb4loadEv = Module['__ZN3Glk5Blorb4loadEv'] = wasmExports['_ZN3Glk5Blorb4loadEv'];
-  __ZN6Common4File4openERKNS_4PathE = Module['__ZN6Common4File4openERKNS_4PathE'] = wasmExports['_ZN6Common4File4openERKNS_4PathE'];
   __ZN3Glk5Blorb8readRIdxERN6Common18SeekableReadStreamERNS1_5ArrayINS_10ChunkEntryEEE = Module['__ZN3Glk5Blorb8readRIdxERN6Common18SeekableReadStreamERNS1_5ArrayINS_10ChunkEntryEEE'] = wasmExports['_ZN3Glk5Blorb8readRIdxERN6Common18SeekableReadStreamERNS1_5ArrayINS_10ChunkEntryEEE'];
   __ZN6Common5ArrayIN3Glk10ChunkEntryEE7emplaceIJRKS2_EEEvPS5_DpOT_ = Module['__ZN6Common5ArrayIN3Glk10ChunkEntryEE7emplaceIJRKS2_EEEvPS5_DpOT_'] = wasmExports['_ZN6Common5ArrayIN3Glk10ChunkEntryEE7emplaceIJRKS2_EEEvPS5_DpOT_'];
   __ZN3Glk5BlorbC2ERKN6Common6FSNodeENS_15InterpreterTypeE = Module['__ZN3Glk5BlorbC2ERKN6Common6FSNodeENS_15InterpreterTypeE'] = wasmExports['_ZN3Glk5BlorbC2ERKN6Common6FSNodeENS_15InterpreterTypeE'];
@@ -68799,7 +68817,6 @@ function assignWasmExports(wasmExports) {
   __ZNK3Glk5Blorb11listMembersERN6Common4ListINS1_9SharedPtrINS1_13ArchiveMemberEEEEE = Module['__ZNK3Glk5Blorb11listMembersERN6Common4ListINS1_9SharedPtrINS1_13ArchiveMemberEEEEE'] = wasmExports['_ZNK3Glk5Blorb11listMembersERN6Common4ListINS1_9SharedPtrINS1_13ArchiveMemberEEEEE'];
   __ZN6Common20GenericArchiveMemberC1ERKNS_4PathERKNS_7ArchiveE = Module['__ZN6Common20GenericArchiveMemberC1ERKNS_4PathERKNS_7ArchiveE'] = wasmExports['_ZN6Common20GenericArchiveMemberC1ERKNS_4PathERKNS_7ArchiveE'];
   __ZNK3Glk5Blorb9getMemberERKN6Common4PathE = Module['__ZNK3Glk5Blorb9getMemberERKN6Common4PathE'] = wasmExports['_ZNK3Glk5Blorb9getMemberERKN6Common4PathE'];
-  __ZN6Common10ReadStream10readStreamEj = Module['__ZN6Common10ReadStream10readStreamEj'] = wasmExports['_ZN6Common10ReadStream10readStreamEj'];
   __ZN3Glk5Blorb7isBlorbERKN6Common4PathEj = Module['__ZN3Glk5Blorb7isBlorbERKN6Common4PathEj'] = wasmExports['_ZN3Glk5Blorb7isBlorbERKN6Common4PathEj'];
   __ZN3Glk5Blorb17getBlorbFilenamesERKN6Common4PathERNS1_5ArrayIS2_EENS_15InterpreterTypeERKNS1_6StringE = Module['__ZN3Glk5Blorb17getBlorbFilenamesERKN6Common4PathERNS1_5ArrayIS2_EENS_15InterpreterTypeERKNS1_6StringE'] = wasmExports['_ZN3Glk5Blorb17getBlorbFilenamesERKN6Common4PathERNS1_5ArrayIS2_EENS_15InterpreterTypeERKNS1_6StringE'];
   __ZNK6Common10BaseStringIcE8containsEc = Module['__ZNK6Common10BaseStringIcE8containsEc'] = wasmExports['_ZNK6Common10BaseStringIcE8containsEc'];
@@ -71353,6 +71370,7 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI14OnScreenDialog15setReplayedTimeEj = Module['__ZN3GUI14OnScreenDialog15setReplayedTimeEj'] = wasmExports['_ZN3GUI14OnScreenDialog15setReplayedTimeEj'];
   __ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE = Module['__ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE'] = wasmExports['_ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE'];
   __ZN6Common12PlaybackFile12getNextEventEv = Module['__ZN6Common12PlaybackFile12getNextEventEv'] = wasmExports['_ZN6Common12PlaybackFile12getNextEventEv'];
+  __ZN3GUI13EventRecorder16postPlaybackQuitEv = Module['__ZN3GUI13EventRecorder16postPlaybackQuitEv'] = wasmExports['_ZN3GUI13EventRecorder16postPlaybackQuitEv'];
   __ZN16NullMixerManager6updateEh = Module['__ZN16NullMixerManager6updateEh'] = wasmExports['_ZN16NullMixerManager6updateEh'];
   __ZN3GUI13EventRecorder16updateSubsystemsEv = Module['__ZN3GUI13EventRecorder16updateSubsystemsEv'] = wasmExports['_ZN3GUI13EventRecorder16updateSubsystemsEv'];
   __ZN3GUI13EventRecorder19processScreenUpdateEv = Module['__ZN3GUI13EventRecorder19processScreenUpdateEv'] = wasmExports['_ZN3GUI13EventRecorder19processScreenUpdateEv'];
@@ -71365,8 +71383,8 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI13EventRecorder14switchFastModeEv = Module['__ZN3GUI13EventRecorder14switchFastModeEv'] = wasmExports['_ZN3GUI13EventRecorder14switchFastModeEv'];
   __ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb = Module['__ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb'] = wasmExports['_ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb'];
   __ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE = Module['__ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE'];
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_ = Module['__ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_'] = wasmExports['_ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_'];
   __ZN6Common12RandomSource15generateNewSeedEv = Module['__ZN6Common12RandomSource15generateNewSeedEv'] = wasmExports['_ZN6Common12RandomSource15generateNewSeedEv'];
+  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_ = Module['__ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_'] = wasmExports['_ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_'];
   __ZN6Common15EventDispatcher11clearEventsEv = Module['__ZN6Common15EventDispatcher11clearEventsEv'] = wasmExports['_ZN6Common15EventDispatcher11clearEventsEv'];
   __ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb = Module['__ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb'] = wasmExports['_ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb'];
   __ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE = Module['__ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE'];
@@ -71379,6 +71397,8 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE = Module['__ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE'] = wasmExports['_ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE'];
   __ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE = Module['__ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE'] = wasmExports['_ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE'];
   __ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription = Module['__ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription'] = wasmExports['_ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription'];
+  __ZN3GUI13EventRecorder10notifyPollEv = Module['__ZN3GUI13EventRecorder10notifyPollEv'] = wasmExports['_ZN3GUI13EventRecorder10notifyPollEv'];
+  __ZThn8_N3GUI13EventRecorder10notifyPollEv = Module['__ZThn8_N3GUI13EventRecorder10notifyPollEv'] = wasmExports['_ZThn8_N3GUI13EventRecorder10notifyPollEv'];
   __ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE = Module['__ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE'] = wasmExports['_ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE'];
   __ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE = Module['__ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE'] = wasmExports['_ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE'];
   __ZN3GUI14OnScreenDialog11isMouseOverEv = Module['__ZN3GUI14OnScreenDialog11isMouseOverEv'] = wasmExports['_ZN3GUI14OnScreenDialog11isMouseOverEv'];
@@ -71429,7 +71449,6 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui3EndEv = Module['__ZN5ImGui3EndEv'] = wasmExports['_ZN5ImGui3EndEv'];
   __ZN5ImGui11PopStyleVarEi = Module['__ZN5ImGui11PopStyleVarEi'] = wasmExports['_ZN5ImGui11PopStyleVarEi'];
   __ZNK3GUI13EventRecorder12allowMappingEv = Module['__ZNK3GUI13EventRecorder12allowMappingEv'] = wasmExports['_ZNK3GUI13EventRecorder12allowMappingEv'];
-  __ZN6Common13EventObserver10notifyPollEv = Module['__ZN6Common13EventObserver10notifyPollEv'] = wasmExports['_ZN6Common13EventObserver10notifyPollEv'];
   __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj = Module['__ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'];
   __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj = Module['__ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj'];
   __ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_ = Module['__ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_'] = wasmExports['_ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_'];
@@ -73188,6 +73207,7 @@ function assignWasmExports(wasmExports) {
   __ZN19DefaultEventManager12getKeymapperEv = Module['__ZN19DefaultEventManager12getKeymapperEv'] = wasmExports['_ZN19DefaultEventManager12getKeymapperEv'];
   __ZN19DefaultEventManager11notifyEventERKN6Common5EventE = Module['__ZN19DefaultEventManager11notifyEventERKN6Common5EventE'] = wasmExports['_ZN19DefaultEventManager11notifyEventERKN6Common5EventE'];
   __ZThn28_N19DefaultEventManager11notifyEventERKN6Common5EventE = Module['__ZThn28_N19DefaultEventManager11notifyEventERKN6Common5EventE'] = wasmExports['_ZThn28_N19DefaultEventManager11notifyEventERKN6Common5EventE'];
+  __ZN6Common13EventObserver10notifyPollEv = Module['__ZN6Common13EventObserver10notifyPollEv'] = wasmExports['_ZN6Common13EventObserver10notifyPollEv'];
   __ZN6Common21ArtificialEventSourceD0Ev = Module['__ZN6Common21ArtificialEventSourceD0Ev'] = wasmExports['_ZN6Common21ArtificialEventSourceD0Ev'];
   __ZN6Common21ArtificialEventSource9pollEventERNS_5EventE = Module['__ZN6Common21ArtificialEventSource9pollEventERNS_5EventE'] = wasmExports['_ZN6Common21ArtificialEventSource9pollEventERNS_5EventE'];
   __ZNK6Common21ArtificialEventSource12allowMappingEv = Module['__ZNK6Common21ArtificialEventSource12allowMappingEv'] = wasmExports['_ZNK6Common21ArtificialEventSource12allowMappingEv'];
@@ -78133,6 +78153,7 @@ function assignWasmExports(wasmExports) {
   __ZN6Common5ArrayIN5Video21SubtitleRenderingPartEE7emplaceIJS2_EEEvPKS2_DpOT_ = Module['__ZN6Common5ArrayIN5Video21SubtitleRenderingPartEE7emplaceIJS2_EEEvPKS2_DpOT_'] = wasmExports['_ZN6Common5ArrayIN5Video21SubtitleRenderingPartEE7emplaceIJS2_EEEvPKS2_DpOT_'];
   __ZNK5Video9Subtitles13clearSubtitleEv = Module['__ZNK5Video9Subtitles13clearSubtitleEv'] = wasmExports['_ZNK5Video9Subtitles13clearSubtitleEv'];
   __ZNK5Video9Subtitles21updateSubtitleOverlayEv = Module['__ZNK5Video9Subtitles21updateSubtitleOverlayEv'] = wasmExports['_ZNK5Video9Subtitles21updateSubtitleOverlayEv'];
+  __ZNK5Video9Subtitles16drawSubtitleTextERKN8Graphics4FontERKN6Common9U32StringEiii = Module['__ZNK5Video9Subtitles16drawSubtitleTextERKN8Graphics4FontERKN6Common9U32StringEiii'] = wasmExports['_ZNK5Video9Subtitles16drawSubtitleTextERKN8Graphics4FontERKN6Common9U32StringEiii'];
   __ZNK5Video9Subtitles18shouldShowSubtitleEv = Module['__ZNK5Video9Subtitles18shouldShowSubtitleEv'] = wasmExports['_ZNK5Video9Subtitles18shouldShowSubtitleEv'];
   __ZN6Common7HashMapIiPKN8Graphics4FontENS_4HashIiEENS_7EqualToIiEEE13expandStorageEj = Module['__ZN6Common7HashMapIiPKN8Graphics4FontENS_4HashIiEENS_7EqualToIiEEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapIiPKN8Graphics4FontENS_4HashIiEENS_7EqualToIiEEE13expandStorageEj'];
   __ZN5Video9SubtitlesC1Ev = Module['__ZN5Video9SubtitlesC1Ev'] = wasmExports['_ZN5Video9SubtitlesC1Ev'];
@@ -78186,6 +78207,8 @@ function assignWasmExports(wasmExports) {
   __ZN5Video12VideoDecoder18addStreamFileTrackERKN6Common4PathE = Module['__ZN5Video12VideoDecoder18addStreamFileTrackERKN6Common4PathE'] = wasmExports['_ZN5Video12VideoDecoder18addStreamFileTrackERKN6Common4PathE'];
   __ZN5Video12VideoDecoder20StreamFileAudioTrackC1EN5Audio5Mixer9SoundTypeE = Module['__ZN5Video12VideoDecoder20StreamFileAudioTrackC1EN5Audio5Mixer9SoundTypeE'] = wasmExports['_ZN5Video12VideoDecoder20StreamFileAudioTrackC1EN5Audio5Mixer9SoundTypeE'];
   __ZN5Video12VideoDecoder13setAudioTrackEi = Module['__ZN5Video12VideoDecoder13setAudioTrackEi'] = wasmExports['_ZN5Video12VideoDecoder13setAudioTrackEi'];
+  __ZN5Video12VideoDecoder17getAudioTrackMuteEi = Module['__ZN5Video12VideoDecoder17getAudioTrackMuteEi'] = wasmExports['_ZN5Video12VideoDecoder17getAudioTrackMuteEi'];
+  __ZN5Video12VideoDecoder17setAudioTrackMuteEib = Module['__ZN5Video12VideoDecoder17setAudioTrackMuteEib'] = wasmExports['_ZN5Video12VideoDecoder17setAudioTrackMuteEib'];
   __ZNK5Video12VideoDecoder18getAudioTrackCountEv = Module['__ZNK5Video12VideoDecoder18getAudioTrackCountEv'] = wasmExports['_ZNK5Video12VideoDecoder18getAudioTrackCountEv'];
   __ZN5Video12VideoDecoder10setEndTimeERKN5Audio9TimestampE = Module['__ZN5Video12VideoDecoder10setEndTimeERKN5Audio9TimestampE'] = wasmExports['_ZN5Video12VideoDecoder10setEndTimeERKN5Audio9TimestampE'];
   __ZN5Video12VideoDecoder15startAudioLimitERKN5Audio9TimestampE = Module['__ZN5Video12VideoDecoder15startAudioLimitERKN5Audio9TimestampE'] = wasmExports['_ZN5Video12VideoDecoder15startAudioLimitERKN5Audio9TimestampE'];
@@ -79321,10 +79344,13 @@ function assignWasmExports(wasmExports) {
   __ZN5Image14CDToonsDecoderD0Ev = Module['__ZN5Image14CDToonsDecoderD0Ev'] = wasmExports['_ZN5Image14CDToonsDecoderD0Ev'];
   __ZN5Image14CDToonsDecoderD1Ev = Module['__ZN5Image14CDToonsDecoderD1Ev'] = wasmExports['_ZN5Image14CDToonsDecoderD1Ev'];
   __ZN5Image14CDToonsDecoder11decodeFrameERN6Common18SeekableReadStreamE = Module['__ZN5Image14CDToonsDecoder11decodeFrameERN6Common18SeekableReadStreamE'] = wasmExports['_ZN5Image14CDToonsDecoder11decodeFrameERN6Common18SeekableReadStreamE'];
-  __ZN6Common5ArrayIN5Image13CDToonsActionEE7emplaceIJRKS2_EEEvPS5_DpOT_ = Module['__ZN6Common5ArrayIN5Image13CDToonsActionEE7emplaceIJRKS2_EEEvPS5_DpOT_'] = wasmExports['_ZN6Common5ArrayIN5Image13CDToonsActionEE7emplaceIJRKS2_EEEvPS5_DpOT_'];
+  __ZN6Common5ArrayIN5Image14CDToonsDecoder13CDToonsActionEE7emplaceIJRKS3_EEEvPS6_DpOT_ = Module['__ZN6Common5ArrayIN5Image14CDToonsDecoder13CDToonsActionEE7emplaceIJRKS3_EEEvPS6_DpOT_'] = wasmExports['_ZN6Common5ArrayIN5Image14CDToonsDecoder13CDToonsActionEE7emplaceIJRKS3_EEEvPS6_DpOT_'];
   __ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEE24lookupAndCreateIfMissingERKt = Module['__ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEE24lookupAndCreateIfMissingERKt'] = wasmExports['_ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEE24lookupAndCreateIfMissingERKt'];
+  __ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_ = Module['__ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_'] = wasmExports['_ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_'];
   __ZN6Common5ArrayIN5Image11CDToonsDiffEE7emplaceIJRKS2_EEEvPS5_DpOT_ = Module['__ZN6Common5ArrayIN5Image11CDToonsDiffEE7emplaceIJRKS2_EEEvPS5_DpOT_'] = wasmExports['_ZN6Common5ArrayIN5Image11CDToonsDiffEE7emplaceIJRKS2_EEEvPS5_DpOT_'];
-  __ZN5Image14CDToonsDecoder11renderBlockEPhjiijj = Module['__ZN5Image14CDToonsDecoder11renderBlockEPhjiijj'] = wasmExports['_ZN5Image14CDToonsDecoder11renderBlockEPhjiijj'];
+  __ZN5Image14CDToonsDecoder11renderBlockERN8Graphics7SurfaceEPhjiijjPKN6Common4RectE = Module['__ZN5Image14CDToonsDecoder11renderBlockERN8Graphics7SurfaceEPhjiijjPKN6Common4RectE'] = wasmExports['_ZN5Image14CDToonsDecoder11renderBlockERN8Graphics7SurfaceEPhjiijjPKN6Common4RectE'];
+  __ZNK8Graphics7Surface7getRectEv = Module['__ZNK8Graphics7Surface7getRectEv'] = wasmExports['_ZNK8Graphics7Surface7getRectEv'];
+  __ZN5Image14CDToonsDecoder13renderActionsERKN6Common5ArrayINS0_13CDToonsActionEEEjjRN8Graphics7SurfaceEPKNS1_4RectE = Module['__ZN5Image14CDToonsDecoder13renderActionsERKN6Common5ArrayINS0_13CDToonsActionEEEjjRN8Graphics7SurfaceEPKNS1_4RectE'] = wasmExports['_ZN5Image14CDToonsDecoder13renderActionsERKN6Common5ArrayINS0_13CDToonsActionEEEjjRN8Graphics7SurfaceEPKNS1_4RectE'];
   __ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEEixERKt = Module['__ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEEixERKt'] = wasmExports['_ZN6Common7HashMapItN5Image12CDToonsBlockENS_4HashItEENS_7EqualToItEEEixERKt'];
   __ZN5Image14CDToonsDecoder10setPaletteEPh = Module['__ZN5Image14CDToonsDecoder10setPaletteEPh'] = wasmExports['_ZN5Image14CDToonsDecoder10setPaletteEPh'];
   __ZNK5Image14CDToonsDecoder14getPixelFormatEv = Module['__ZNK5Image14CDToonsDecoder14getPixelFormatEv'] = wasmExports['_ZNK5Image14CDToonsDecoder14getPixelFormatEv'];
@@ -79733,6 +79759,7 @@ function assignWasmExports(wasmExports) {
   __ZNK8Graphics7DosFont12getCharWidthEj = Module['__ZNK8Graphics7DosFont12getCharWidthEj'] = wasmExports['_ZNK8Graphics7DosFont12getCharWidthEj'];
   __ZNK8Graphics7DosFont8drawCharEPNS_7SurfaceEjiij = Module['__ZNK8Graphics7DosFont8drawCharEPNS_7SurfaceEjiij'] = wasmExports['_ZNK8Graphics7DosFont8drawCharEPNS_7SurfaceEjiij'];
   __ZN8Graphics7DosFontD0Ev = Module['__ZN8Graphics7DosFontD0Ev'] = wasmExports['_ZN8Graphics7DosFontD0Ev'];
+  __ZNK8Graphics7DosFont8drawCharEPNS_14ManagedSurfaceEjiij = Module['__ZNK8Graphics7DosFont8drawCharEPNS_14ManagedSurfaceEjiij'] = wasmExports['_ZNK8Graphics7DosFont8drawCharEPNS_14ManagedSurfaceEjiij'];
   __ZN8Graphics7DosFontC1Ev = Module['__ZN8Graphics7DosFontC1Ev'] = wasmExports['_ZN8Graphics7DosFontC1Ev'];
   __ZN8Graphics8FreeType14Alloc_CallbackEP13FT_MemoryRec_l = Module['__ZN8Graphics8FreeType14Alloc_CallbackEP13FT_MemoryRec_l'] = wasmExports['_ZN8Graphics8FreeType14Alloc_CallbackEP13FT_MemoryRec_l'];
   __ZN8Graphics8FreeType13Free_CallbackEP13FT_MemoryRec_Pv = Module['__ZN8Graphics8FreeType13Free_CallbackEP13FT_MemoryRec_Pv'] = wasmExports['_ZN8Graphics8FreeType13Free_CallbackEP13FT_MemoryRec_Pv'];
@@ -80537,7 +80564,6 @@ function assignWasmExports(wasmExports) {
   __ZN8Graphics16MacWindowManager15setDesktopColorEhhh = Module['__ZN8Graphics16MacWindowManager15setDesktopColorEhhh'] = wasmExports['_ZN8Graphics16MacWindowManager15setDesktopColorEhhh'];
   __ZN8Graphics16MacWindowManager12removeMarkedEv = Module['__ZN8Graphics16MacWindowManager12removeMarkedEv'] = wasmExports['_ZN8Graphics16MacWindowManager12removeMarkedEv'];
   __ZN8Graphics16MacWindowManager16adjustDimensionsERKN6Common4RectES4_RiS5_ = Module['__ZN8Graphics16MacWindowManager16adjustDimensionsERKN6Common4RectES4_RiS5_'] = wasmExports['_ZN8Graphics16MacWindowManager16adjustDimensionsERKN6Common4RectES4_RiS5_'];
-  __ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_ = Module['__ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_'] = wasmExports['_ZN6Common5ArrayINS_4RectEE7emplaceIJRKS1_EEEvPS4_DpOT_'];
   __ZN8Graphics16MacWindowManager20removeFromWindowListEPNS_13BaseMacWindowE = Module['__ZN8Graphics16MacWindowManager20removeFromWindowListEPNS_13BaseMacWindowE'] = wasmExports['_ZN8Graphics16MacWindowManager20removeFromWindowListEPNS_13BaseMacWindowE'];
   __ZNK8Graphics16MacWindowManager13getCursorTypeEv = Module['__ZNK8Graphics16MacWindowManager13getCursorTypeEv'] = wasmExports['_ZNK8Graphics16MacWindowManager13getCursorTypeEv'];
   __ZN8Graphics16MacWindowManager15removeFromStackEPNS_13BaseMacWindowE = Module['__ZN8Graphics16MacWindowManager15removeFromStackEPNS_13BaseMacWindowE'] = wasmExports['_ZN8Graphics16MacWindowManager15removeFromStackEPNS_13BaseMacWindowE'];
@@ -80831,7 +80857,6 @@ function assignWasmExports(wasmExports) {
   __ZN8Graphics8FontPC98D0Ev = Module['__ZN8Graphics8FontPC98D0Ev'] = wasmExports['_ZN8Graphics8FontPC98D0Ev'];
   __ZN8Graphics7Surface13drawThickLineEiiiiiij = Module['__ZN8Graphics7Surface13drawThickLineEiiiiiij'] = wasmExports['_ZN8Graphics7Surface13drawThickLineEiiiiiij'];
   __ZN8Graphics7Surface15drawPolygonScanEPKiS2_iRKN6Common4RectEj = Module['__ZN8Graphics7Surface15drawPolygonScanEPKiS2_iRKN6Common4RectEj'] = wasmExports['_ZN8Graphics7Surface15drawPolygonScanEPKiS2_iRKN6Common4RectEj'];
-  __ZNK8Graphics7Surface7getRectEv = Module['__ZNK8Graphics7Surface7getRectEv'] = wasmExports['_ZNK8Graphics7Surface7getRectEv'];
   __ZNK8Graphics7Surface10getSubAreaERKN6Common4RectE = Module['__ZNK8Graphics7Surface10getSubAreaERKN6Common4RectE'] = wasmExports['_ZNK8Graphics7Surface10getSubAreaERKN6Common4RectE'];
   __ZN8Graphics7Surface24copyRectToSurfaceWithKeyERKS0_iiRKN6Common4RectEj = Module['__ZN8Graphics7Surface24copyRectToSurfaceWithKeyERKS0_iiRKN6Common4RectEj'] = wasmExports['_ZN8Graphics7Surface24copyRectToSurfaceWithKeyERKS0_iiRKN6Common4RectEj'];
   __ZN6Common8memset32EPjjm = Module['__ZN6Common8memset32EPjjm'] = wasmExports['_ZN6Common8memset32EPjjm'];
@@ -85125,6 +85150,7 @@ function assignWasmExports(wasmExports) {
   __ZN5Audio18RateConverter_ImplILb0ELb0ELb0EE18interpolateConvertILt65535ELt65535EsLNS_7MixModeE1EEEiRNS_11AudioStreamEPT1_jtt = Module['__ZN5Audio18RateConverter_ImplILb0ELb0ELb0EE18interpolateConvertILt65535ELt65535EsLNS_7MixModeE1EEEiRNS_11AudioStreamEPT1_jtt'] = wasmExports['_ZN5Audio18RateConverter_ImplILb0ELb0ELb0EE18interpolateConvertILt65535ELt65535EsLNS_7MixModeE1EEEiRNS_11AudioStreamEPT1_jtt'];
   __ZN3SID6Config6createENS0_7SidTypeE = Module['__ZN3SID6Config6createENS0_7SidTypeE'] = wasmExports['_ZN3SID6Config6createENS0_7SidTypeE'];
   __ZN5Resid3SIDC1EN3SID6Config7SidTypeE = Module['__ZN5Resid3SIDC1EN3SID6Config7SidTypeE'] = wasmExports['_ZN5Resid3SIDC1EN3SID6Config7SidTypeE'];
+  __ZN3SID6Config12parseSidTypeERKN6Common6StringE = Module['__ZN3SID6Config12parseSidTypeERKN6Common6StringE'] = wasmExports['_ZN3SID6Config12parseSidTypeERKN6Common6StringE'];
   __ZN3SID3SIDC2Ev = Module['__ZN3SID3SIDC2Ev'] = wasmExports['_ZN3SID3SIDC2Ev'];
   __ZN3SID3SIDD2Ev = Module['__ZN3SID3SIDD2Ev'] = wasmExports['_ZN3SID3SIDD2Ev'];
   __ZN3SID3SIDD1Ev = Module['__ZN3SID3SIDD1Ev'] = wasmExports['_ZN3SID3SIDD1Ev'];
@@ -91566,6 +91592,360 @@ function assignWasmExports(wasmExports) {
   _fribidi_get_joining_type_name = Module['_fribidi_get_joining_type_name'] = wasmExports['fribidi_get_joining_type_name'];
   _fribidi_shape_mirroring = Module['_fribidi_shape_mirroring'] = wasmExports['fribidi_shape_mirroring'];
   _fribidi_get_bracket = Module['_fribidi_get_bracket'] = wasmExports['fribidi_get_bracket'];
+  _png_error = Module['_png_error'] = wasmExports['png_error'];
+  _png_sig_cmp = Module['_png_sig_cmp'] = wasmExports['png_sig_cmp'];
+  _png_zalloc = Module['_png_zalloc'] = wasmExports['png_zalloc'];
+  _png_warning = Module['_png_warning'] = wasmExports['png_warning'];
+  _png_malloc_warn = Module['_png_malloc_warn'] = wasmExports['png_malloc_warn'];
+  _png_zfree = Module['_png_zfree'] = wasmExports['png_zfree'];
+  _png_free = Module['_png_free'] = wasmExports['png_free'];
+  _png_reset_crc = Module['_png_reset_crc'] = wasmExports['png_reset_crc'];
+  _png_calculate_crc = Module['_png_calculate_crc'] = wasmExports['png_calculate_crc'];
+  _png_user_version_check = Module['_png_user_version_check'] = wasmExports['png_user_version_check'];
+  _png_safecat = Module['_png_safecat'] = wasmExports['png_safecat'];
+  _png_create_png_struct = Module['_png_create_png_struct'] = wasmExports['png_create_png_struct'];
+  _png_set_mem_fn = Module['_png_set_mem_fn'] = wasmExports['png_set_mem_fn'];
+  _png_malloc_base = Module['_png_malloc_base'] = wasmExports['png_malloc_base'];
+  _png_destroy_info_struct = Module['_png_destroy_info_struct'] = wasmExports['png_destroy_info_struct'];
+  _png_free_data = Module['_png_free_data'] = wasmExports['png_free_data'];
+  _png_info_init_3 = Module['_png_info_init_3'] = wasmExports['png_info_init_3'];
+  _png_data_freer = Module['_png_data_freer'] = wasmExports['png_data_freer'];
+  _png_init_io = Module['_png_init_io'] = wasmExports['png_init_io'];
+  _png_save_int_32 = Module['_png_save_int_32'] = wasmExports['png_save_int_32'];
+  _png_save_uint_32 = Module['_png_save_uint_32'] = wasmExports['png_save_uint_32'];
+  _png_convert_to_rfc1123_buffer = Module['_png_convert_to_rfc1123_buffer'] = wasmExports['png_convert_to_rfc1123_buffer'];
+  _png_format_number = Module['_png_format_number'] = wasmExports['png_format_number'];
+  _png_convert_to_rfc1123 = Module['_png_convert_to_rfc1123'] = wasmExports['png_convert_to_rfc1123'];
+  _png_get_copyright = Module['_png_get_copyright'] = wasmExports['png_get_copyright'];
+  _png_get_libpng_ver = Module['_png_get_libpng_ver'] = wasmExports['png_get_libpng_ver'];
+  _png_get_header_ver = Module['_png_get_header_ver'] = wasmExports['png_get_header_ver'];
+  _png_get_header_version = Module['_png_get_header_version'] = wasmExports['png_get_header_version'];
+  _png_build_grayscale_palette = Module['_png_build_grayscale_palette'] = wasmExports['png_build_grayscale_palette'];
+  _png_handle_as_unknown = Module['_png_handle_as_unknown'] = wasmExports['png_handle_as_unknown'];
+  _png_chunk_unknown_handling = Module['_png_chunk_unknown_handling'] = wasmExports['png_chunk_unknown_handling'];
+  _png_reset_zstream = Module['_png_reset_zstream'] = wasmExports['png_reset_zstream'];
+  _png_access_version_number = Module['_png_access_version_number'] = wasmExports['png_access_version_number'];
+  _png_zstream_error = Module['_png_zstream_error'] = wasmExports['png_zstream_error'];
+  _png_xy_from_XYZ = Module['_png_xy_from_XYZ'] = wasmExports['png_xy_from_XYZ'];
+  _png_muldiv = Module['_png_muldiv'] = wasmExports['png_muldiv'];
+  _png_XYZ_from_xy = Module['_png_XYZ_from_xy'] = wasmExports['png_XYZ_from_xy'];
+  _png_reciprocal = Module['_png_reciprocal'] = wasmExports['png_reciprocal'];
+  _png_icc_check_length = Module['_png_icc_check_length'] = wasmExports['png_icc_check_length'];
+  _png_chunk_benign_error = Module['_png_chunk_benign_error'] = wasmExports['png_chunk_benign_error'];
+  _png_icc_check_header = Module['_png_icc_check_header'] = wasmExports['png_icc_check_header'];
+  _png_icc_check_tag_table = Module['_png_icc_check_tag_table'] = wasmExports['png_icc_check_tag_table'];
+  _png_set_rgb_coefficients = Module['_png_set_rgb_coefficients'] = wasmExports['png_set_rgb_coefficients'];
+  _png_check_IHDR = Module['_png_check_IHDR'] = wasmExports['png_check_IHDR'];
+  _png_check_fp_number = Module['_png_check_fp_number'] = wasmExports['png_check_fp_number'];
+  _png_check_fp_string = Module['_png_check_fp_string'] = wasmExports['png_check_fp_string'];
+  _png_ascii_from_fp = Module['_png_ascii_from_fp'] = wasmExports['png_ascii_from_fp'];
+  _png_ascii_from_fixed = Module['_png_ascii_from_fixed'] = wasmExports['png_ascii_from_fixed'];
+  _png_fixed = Module['_png_fixed'] = wasmExports['png_fixed'];
+  _png_fixed_error = Module['_png_fixed_error'] = wasmExports['png_fixed_error'];
+  _png_fixed_ITU = Module['_png_fixed_ITU'] = wasmExports['png_fixed_ITU'];
+  _png_gamma_significant = Module['_png_gamma_significant'] = wasmExports['png_gamma_significant'];
+  _png_reciprocal2 = Module['_png_reciprocal2'] = wasmExports['png_reciprocal2'];
+  _png_gamma_8bit_correct = Module['_png_gamma_8bit_correct'] = wasmExports['png_gamma_8bit_correct'];
+  _png_gamma_16bit_correct = Module['_png_gamma_16bit_correct'] = wasmExports['png_gamma_16bit_correct'];
+  _png_gamma_correct = Module['_png_gamma_correct'] = wasmExports['png_gamma_correct'];
+  _png_destroy_gamma_table = Module['_png_destroy_gamma_table'] = wasmExports['png_destroy_gamma_table'];
+  _png_build_gamma_table = Module['_png_build_gamma_table'] = wasmExports['png_build_gamma_table'];
+  _png_malloc = Module['_png_malloc'] = wasmExports['png_malloc'];
+  _png_calloc = Module['_png_calloc'] = wasmExports['png_calloc'];
+  _png_set_option = Module['_png_set_option'] = wasmExports['png_set_option'];
+  _png_image_free = Module['_png_image_free'] = wasmExports['png_image_free'];
+  _png_image_error = Module['_png_image_error'] = wasmExports['png_image_error'];
+  _png_longjmp = Module['_png_longjmp'] = wasmExports['png_longjmp'];
+  _png_warning_parameter = Module['_png_warning_parameter'] = wasmExports['png_warning_parameter'];
+  _png_warning_parameter_unsigned = Module['_png_warning_parameter_unsigned'] = wasmExports['png_warning_parameter_unsigned'];
+  _png_warning_parameter_signed = Module['_png_warning_parameter_signed'] = wasmExports['png_warning_parameter_signed'];
+  _png_formatted_warning = Module['_png_formatted_warning'] = wasmExports['png_formatted_warning'];
+  _png_benign_error = Module['_png_benign_error'] = wasmExports['png_benign_error'];
+  _png_chunk_error = Module['_png_chunk_error'] = wasmExports['png_chunk_error'];
+  _png_chunk_warning = Module['_png_chunk_warning'] = wasmExports['png_chunk_warning'];
+  _png_app_warning = Module['_png_app_warning'] = wasmExports['png_app_warning'];
+  _png_app_error = Module['_png_app_error'] = wasmExports['png_app_error'];
+  _png_chunk_report = Module['_png_chunk_report'] = wasmExports['png_chunk_report'];
+  _png_set_longjmp_fn = Module['_png_set_longjmp_fn'] = wasmExports['png_set_longjmp_fn'];
+  _png_free_jmpbuf = Module['_png_free_jmpbuf'] = wasmExports['png_free_jmpbuf'];
+  _png_get_error_ptr = Module['_png_get_error_ptr'] = wasmExports['png_get_error_ptr'];
+  _png_safe_error = Module['_png_safe_error'] = wasmExports['png_safe_error'];
+  _png_safe_warning = Module['_png_safe_warning'] = wasmExports['png_safe_warning'];
+  _png_safe_execute = Module['_png_safe_execute'] = wasmExports['png_safe_execute'];
+  _png_get_rowbytes = Module['_png_get_rowbytes'] = wasmExports['png_get_rowbytes'];
+  _png_get_rows = Module['_png_get_rows'] = wasmExports['png_get_rows'];
+  _png_get_image_width = Module['_png_get_image_width'] = wasmExports['png_get_image_width'];
+  _png_get_image_height = Module['_png_get_image_height'] = wasmExports['png_get_image_height'];
+  _png_get_bit_depth = Module['_png_get_bit_depth'] = wasmExports['png_get_bit_depth'];
+  _png_get_color_type = Module['_png_get_color_type'] = wasmExports['png_get_color_type'];
+  _png_get_filter_type = Module['_png_get_filter_type'] = wasmExports['png_get_filter_type'];
+  _png_get_interlace_type = Module['_png_get_interlace_type'] = wasmExports['png_get_interlace_type'];
+  _png_get_compression_type = Module['_png_get_compression_type'] = wasmExports['png_get_compression_type'];
+  _png_get_x_pixels_per_meter = Module['_png_get_x_pixels_per_meter'] = wasmExports['png_get_x_pixels_per_meter'];
+  _png_get_y_pixels_per_meter = Module['_png_get_y_pixels_per_meter'] = wasmExports['png_get_y_pixels_per_meter'];
+  _png_get_pixels_per_meter = Module['_png_get_pixels_per_meter'] = wasmExports['png_get_pixels_per_meter'];
+  _png_get_pixel_aspect_ratio = Module['_png_get_pixel_aspect_ratio'] = wasmExports['png_get_pixel_aspect_ratio'];
+  _png_get_pixel_aspect_ratio_fixed = Module['_png_get_pixel_aspect_ratio_fixed'] = wasmExports['png_get_pixel_aspect_ratio_fixed'];
+  _png_get_x_offset_microns = Module['_png_get_x_offset_microns'] = wasmExports['png_get_x_offset_microns'];
+  _png_get_y_offset_microns = Module['_png_get_y_offset_microns'] = wasmExports['png_get_y_offset_microns'];
+  _png_get_x_offset_pixels = Module['_png_get_x_offset_pixels'] = wasmExports['png_get_x_offset_pixels'];
+  _png_get_y_offset_pixels = Module['_png_get_y_offset_pixels'] = wasmExports['png_get_y_offset_pixels'];
+  _png_get_pixels_per_inch = Module['_png_get_pixels_per_inch'] = wasmExports['png_get_pixels_per_inch'];
+  _png_get_x_pixels_per_inch = Module['_png_get_x_pixels_per_inch'] = wasmExports['png_get_x_pixels_per_inch'];
+  _png_get_y_pixels_per_inch = Module['_png_get_y_pixels_per_inch'] = wasmExports['png_get_y_pixels_per_inch'];
+  _png_get_x_offset_inches_fixed = Module['_png_get_x_offset_inches_fixed'] = wasmExports['png_get_x_offset_inches_fixed'];
+  _png_get_y_offset_inches_fixed = Module['_png_get_y_offset_inches_fixed'] = wasmExports['png_get_y_offset_inches_fixed'];
+  _png_get_x_offset_inches = Module['_png_get_x_offset_inches'] = wasmExports['png_get_x_offset_inches'];
+  _png_get_y_offset_inches = Module['_png_get_y_offset_inches'] = wasmExports['png_get_y_offset_inches'];
+  _png_get_pHYs_dpi = Module['_png_get_pHYs_dpi'] = wasmExports['png_get_pHYs_dpi'];
+  _png_get_channels = Module['_png_get_channels'] = wasmExports['png_get_channels'];
+  _png_get_signature = Module['_png_get_signature'] = wasmExports['png_get_signature'];
+  _png_get_bKGD = Module['_png_get_bKGD'] = wasmExports['png_get_bKGD'];
+  _png_get_cHRM = Module['_png_get_cHRM'] = wasmExports['png_get_cHRM'];
+  _png_get_cHRM_XYZ = Module['_png_get_cHRM_XYZ'] = wasmExports['png_get_cHRM_XYZ'];
+  _png_get_cHRM_XYZ_fixed = Module['_png_get_cHRM_XYZ_fixed'] = wasmExports['png_get_cHRM_XYZ_fixed'];
+  _png_get_cHRM_fixed = Module['_png_get_cHRM_fixed'] = wasmExports['png_get_cHRM_fixed'];
+  _png_get_gAMA_fixed = Module['_png_get_gAMA_fixed'] = wasmExports['png_get_gAMA_fixed'];
+  _png_get_gAMA = Module['_png_get_gAMA'] = wasmExports['png_get_gAMA'];
+  _png_get_sRGB = Module['_png_get_sRGB'] = wasmExports['png_get_sRGB'];
+  _png_get_iCCP = Module['_png_get_iCCP'] = wasmExports['png_get_iCCP'];
+  _png_get_sPLT = Module['_png_get_sPLT'] = wasmExports['png_get_sPLT'];
+  _png_get_cICP = Module['_png_get_cICP'] = wasmExports['png_get_cICP'];
+  _png_get_cLLI_fixed = Module['_png_get_cLLI_fixed'] = wasmExports['png_get_cLLI_fixed'];
+  _png_get_cLLI = Module['_png_get_cLLI'] = wasmExports['png_get_cLLI'];
+  _png_get_mDCV_fixed = Module['_png_get_mDCV_fixed'] = wasmExports['png_get_mDCV_fixed'];
+  _png_get_mDCV = Module['_png_get_mDCV'] = wasmExports['png_get_mDCV'];
+  _png_get_eXIf = Module['_png_get_eXIf'] = wasmExports['png_get_eXIf'];
+  _png_get_eXIf_1 = Module['_png_get_eXIf_1'] = wasmExports['png_get_eXIf_1'];
+  _png_get_hIST = Module['_png_get_hIST'] = wasmExports['png_get_hIST'];
+  _png_get_oFFs = Module['_png_get_oFFs'] = wasmExports['png_get_oFFs'];
+  _png_get_pCAL = Module['_png_get_pCAL'] = wasmExports['png_get_pCAL'];
+  _png_get_sCAL_fixed = Module['_png_get_sCAL_fixed'] = wasmExports['png_get_sCAL_fixed'];
+  _png_get_sCAL = Module['_png_get_sCAL'] = wasmExports['png_get_sCAL'];
+  _png_get_sCAL_s = Module['_png_get_sCAL_s'] = wasmExports['png_get_sCAL_s'];
+  _png_get_pHYs = Module['_png_get_pHYs'] = wasmExports['png_get_pHYs'];
+  _png_get_sBIT = Module['_png_get_sBIT'] = wasmExports['png_get_sBIT'];
+  _png_get_text = Module['_png_get_text'] = wasmExports['png_get_text'];
+  _png_get_tIME = Module['_png_get_tIME'] = wasmExports['png_get_tIME'];
+  _png_get_unknown_chunks = Module['_png_get_unknown_chunks'] = wasmExports['png_get_unknown_chunks'];
+  _png_get_rgb_to_gray_status = Module['_png_get_rgb_to_gray_status'] = wasmExports['png_get_rgb_to_gray_status'];
+  _png_get_user_chunk_ptr = Module['_png_get_user_chunk_ptr'] = wasmExports['png_get_user_chunk_ptr'];
+  _png_get_compression_buffer_size = Module['_png_get_compression_buffer_size'] = wasmExports['png_get_compression_buffer_size'];
+  _png_get_user_width_max = Module['_png_get_user_width_max'] = wasmExports['png_get_user_width_max'];
+  _png_get_user_height_max = Module['_png_get_user_height_max'] = wasmExports['png_get_user_height_max'];
+  _png_get_chunk_cache_max = Module['_png_get_chunk_cache_max'] = wasmExports['png_get_chunk_cache_max'];
+  _png_get_chunk_malloc_max = Module['_png_get_chunk_malloc_max'] = wasmExports['png_get_chunk_malloc_max'];
+  _png_get_io_state = Module['_png_get_io_state'] = wasmExports['png_get_io_state'];
+  _png_get_io_chunk_type = Module['_png_get_io_chunk_type'] = wasmExports['png_get_io_chunk_type'];
+  _png_get_palette_max = Module['_png_get_palette_max'] = wasmExports['png_get_palette_max'];
+  _png_destroy_png_struct = Module['_png_destroy_png_struct'] = wasmExports['png_destroy_png_struct'];
+  _png_malloc_array = Module['_png_malloc_array'] = wasmExports['png_malloc_array'];
+  _png_realloc_array = Module['_png_realloc_array'] = wasmExports['png_realloc_array'];
+  _png_malloc_default = Module['_png_malloc_default'] = wasmExports['png_malloc_default'];
+  _png_free_default = Module['_png_free_default'] = wasmExports['png_free_default'];
+  _png_get_mem_ptr = Module['_png_get_mem_ptr'] = wasmExports['png_get_mem_ptr'];
+  _png_process_data = Module['_png_process_data'] = wasmExports['png_process_data'];
+  _png_push_read_chunk = Module['_png_push_read_chunk'] = wasmExports['png_push_read_chunk'];
+  _png_push_read_IDAT = Module['_png_push_read_IDAT'] = wasmExports['png_push_read_IDAT'];
+  _png_push_read_sig = Module['_png_push_read_sig'] = wasmExports['png_push_read_sig'];
+  _png_push_restore_buffer = Module['_png_push_restore_buffer'] = wasmExports['png_push_restore_buffer'];
+  _png_process_some_data = Module['_png_process_some_data'] = wasmExports['png_process_some_data'];
+  _png_process_data_pause = Module['_png_process_data_pause'] = wasmExports['png_process_data_pause'];
+  _png_push_save_buffer = Module['_png_push_save_buffer'] = wasmExports['png_push_save_buffer'];
+  _png_process_data_skip = Module['_png_process_data_skip'] = wasmExports['png_process_data_skip'];
+  _png_read_chunk_header = Module['_png_read_chunk_header'] = wasmExports['png_read_chunk_header'];
+  _png_handle_chunk = Module['_png_handle_chunk'] = wasmExports['png_handle_chunk'];
+  _png_handle_unknown = Module['_png_handle_unknown'] = wasmExports['png_handle_unknown'];
+  _png_get_uint_31 = Module['_png_get_uint_31'] = wasmExports['png_get_uint_31'];
+  _png_crc_read = Module['_png_crc_read'] = wasmExports['png_crc_read'];
+  _png_process_IDAT_data = Module['_png_process_IDAT_data'] = wasmExports['png_process_IDAT_data'];
+  _png_crc_finish = Module['_png_crc_finish'] = wasmExports['png_crc_finish'];
+  _png_push_fill_buffer = Module['_png_push_fill_buffer'] = wasmExports['png_push_fill_buffer'];
+  _png_push_have_end = Module['_png_push_have_end'] = wasmExports['png_push_have_end'];
+  _png_push_have_info = Module['_png_push_have_info'] = wasmExports['png_push_have_info'];
+  _png_zlib_inflate = Module['_png_zlib_inflate'] = wasmExports['png_zlib_inflate'];
+  _png_push_process_row = Module['_png_push_process_row'] = wasmExports['png_push_process_row'];
+  _png_read_filter_row = Module['_png_read_filter_row'] = wasmExports['png_read_filter_row'];
+  _png_do_read_transformations = Module['_png_do_read_transformations'] = wasmExports['png_do_read_transformations'];
+  _png_do_read_interlace = Module['_png_do_read_interlace'] = wasmExports['png_do_read_interlace'];
+  _png_read_push_finish_row = Module['_png_read_push_finish_row'] = wasmExports['png_read_push_finish_row'];
+  _png_push_have_row = Module['_png_push_have_row'] = wasmExports['png_push_have_row'];
+  _png_progressive_combine_row = Module['_png_progressive_combine_row'] = wasmExports['png_progressive_combine_row'];
+  _png_combine_row = Module['_png_combine_row'] = wasmExports['png_combine_row'];
+  _png_set_progressive_read_fn = Module['_png_set_progressive_read_fn'] = wasmExports['png_set_progressive_read_fn'];
+  _png_get_progressive_ptr = Module['_png_get_progressive_ptr'] = wasmExports['png_get_progressive_ptr'];
+  _png_create_read_struct_2 = Module['_png_create_read_struct_2'] = wasmExports['png_create_read_struct_2'];
+  _png_read_sig = Module['_png_read_sig'] = wasmExports['png_read_sig'];
+  _png_read_start_row = Module['_png_read_start_row'] = wasmExports['png_read_start_row'];
+  _png_read_transform_info = Module['_png_read_transform_info'] = wasmExports['png_read_transform_info'];
+  _png_start_read_image = Module['_png_start_read_image'] = wasmExports['png_start_read_image'];
+  _png_read_finish_row = Module['_png_read_finish_row'] = wasmExports['png_read_finish_row'];
+  _png_read_IDAT_data = Module['_png_read_IDAT_data'] = wasmExports['png_read_IDAT_data'];
+  _png_read_rows = Module['_png_read_rows'] = wasmExports['png_read_rows'];
+  _png_read_finish_IDAT = Module['_png_read_finish_IDAT'] = wasmExports['png_read_finish_IDAT'];
+  _png_set_read_status_fn = Module['_png_set_read_status_fn'] = wasmExports['png_set_read_status_fn'];
+  _png_read_png = Module['_png_read_png'] = wasmExports['png_read_png'];
+  _png_set_scale_16 = Module['_png_set_scale_16'] = wasmExports['png_set_scale_16'];
+  _png_set_strip_alpha = Module['_png_set_strip_alpha'] = wasmExports['png_set_strip_alpha'];
+  _png_set_packswap = Module['_png_set_packswap'] = wasmExports['png_set_packswap'];
+  _png_set_invert_mono = Module['_png_set_invert_mono'] = wasmExports['png_set_invert_mono'];
+  _png_set_shift = Module['_png_set_shift'] = wasmExports['png_set_shift'];
+  _png_set_bgr = Module['_png_set_bgr'] = wasmExports['png_set_bgr'];
+  _png_set_swap_alpha = Module['_png_set_swap_alpha'] = wasmExports['png_set_swap_alpha'];
+  _png_set_swap = Module['_png_set_swap'] = wasmExports['png_set_swap'];
+  _png_set_invert_alpha = Module['_png_set_invert_alpha'] = wasmExports['png_set_invert_alpha'];
+  _png_set_expand_16 = Module['_png_set_expand_16'] = wasmExports['png_set_expand_16'];
+  _png_image_begin_read_from_stdio = Module['_png_image_begin_read_from_stdio'] = wasmExports['png_image_begin_read_from_stdio'];
+  _png_set_benign_errors = Module['_png_set_benign_errors'] = wasmExports['png_set_benign_errors'];
+  _png_image_begin_read_from_file = Module['_png_image_begin_read_from_file'] = wasmExports['png_image_begin_read_from_file'];
+  _png_image_begin_read_from_memory = Module['_png_image_begin_read_from_memory'] = wasmExports['png_image_begin_read_from_memory'];
+  _png_image_finish_read = Module['_png_image_finish_read'] = wasmExports['png_image_finish_read'];
+  _png_set_background_fixed = Module['_png_set_background_fixed'] = wasmExports['png_set_background_fixed'];
+  _png_set_rgb_to_gray_fixed = Module['_png_set_rgb_to_gray_fixed'] = wasmExports['png_set_rgb_to_gray_fixed'];
+  _png_resolve_file_gamma = Module['_png_resolve_file_gamma'] = wasmExports['png_resolve_file_gamma'];
+  _png_set_tRNS_to_alpha = Module['_png_set_tRNS_to_alpha'] = wasmExports['png_set_tRNS_to_alpha'];
+  _png_set_alpha_mode_fixed = Module['_png_set_alpha_mode_fixed'] = wasmExports['png_set_alpha_mode_fixed'];
+  _png_set_keep_unknown_chunks = Module['_png_set_keep_unknown_chunks'] = wasmExports['png_set_keep_unknown_chunks'];
+  _png_set_add_alpha = Module['_png_set_add_alpha'] = wasmExports['png_set_add_alpha'];
+  _png_read_data = Module['_png_read_data'] = wasmExports['png_read_data'];
+  _png_default_read_data = Module['_png_default_read_data'] = wasmExports['png_default_read_data'];
+  _png_set_background = Module['_png_set_background'] = wasmExports['png_set_background'];
+  _png_set_alpha_mode = Module['_png_set_alpha_mode'] = wasmExports['png_set_alpha_mode'];
+  _png_set_quantize = Module['_png_set_quantize'] = wasmExports['png_set_quantize'];
+  _png_set_gamma_fixed = Module['_png_set_gamma_fixed'] = wasmExports['png_set_gamma_fixed'];
+  _png_set_gamma = Module['_png_set_gamma'] = wasmExports['png_set_gamma'];
+  _png_set_palette_to_rgb = Module['_png_set_palette_to_rgb'] = wasmExports['png_set_palette_to_rgb'];
+  _png_set_expand_gray_1_2_4_to_8 = Module['_png_set_expand_gray_1_2_4_to_8'] = wasmExports['png_set_expand_gray_1_2_4_to_8'];
+  _png_set_rgb_to_gray = Module['_png_set_rgb_to_gray'] = wasmExports['png_set_rgb_to_gray'];
+  _png_set_read_user_transform_fn = Module['_png_set_read_user_transform_fn'] = wasmExports['png_set_read_user_transform_fn'];
+  _png_init_read_transformations = Module['_png_init_read_transformations'] = wasmExports['png_init_read_transformations'];
+  _png_do_strip_channel = Module['_png_do_strip_channel'] = wasmExports['png_do_strip_channel'];
+  _png_do_invert = Module['_png_do_invert'] = wasmExports['png_do_invert'];
+  _png_do_check_palette_indexes = Module['_png_do_check_palette_indexes'] = wasmExports['png_do_check_palette_indexes'];
+  _png_do_bgr = Module['_png_do_bgr'] = wasmExports['png_do_bgr'];
+  _png_do_packswap = Module['_png_do_packswap'] = wasmExports['png_do_packswap'];
+  _png_do_swap = Module['_png_do_swap'] = wasmExports['png_do_swap'];
+  _png_get_uint_32 = Module['_png_get_uint_32'] = wasmExports['png_get_uint_32'];
+  _png_get_int_32 = Module['_png_get_int_32'] = wasmExports['png_get_int_32'];
+  _png_get_uint_16 = Module['_png_get_uint_16'] = wasmExports['png_get_uint_16'];
+  _png_set_unknown_chunks = Module['_png_set_unknown_chunks'] = wasmExports['png_set_unknown_chunks'];
+  _inflateReset2 = Module['_inflateReset2'] = wasmExports['inflateReset2'];
+  _png_set_bKGD = Module['_png_set_bKGD'] = wasmExports['png_set_bKGD'];
+  _png_set_cHRM_fixed = Module['_png_set_cHRM_fixed'] = wasmExports['png_set_cHRM_fixed'];
+  _png_set_cICP = Module['_png_set_cICP'] = wasmExports['png_set_cICP'];
+  _png_set_cLLI_fixed = Module['_png_set_cLLI_fixed'] = wasmExports['png_set_cLLI_fixed'];
+  _png_set_eXIf_1 = Module['_png_set_eXIf_1'] = wasmExports['png_set_eXIf_1'];
+  _png_set_gAMA_fixed = Module['_png_set_gAMA_fixed'] = wasmExports['png_set_gAMA_fixed'];
+  _png_set_hIST = Module['_png_set_hIST'] = wasmExports['png_set_hIST'];
+  _png_set_text_2 = Module['_png_set_text_2'] = wasmExports['png_set_text_2'];
+  _png_set_mDCV_fixed = Module['_png_set_mDCV_fixed'] = wasmExports['png_set_mDCV_fixed'];
+  _png_set_oFFs = Module['_png_set_oFFs'] = wasmExports['png_set_oFFs'];
+  _png_set_pCAL = Module['_png_set_pCAL'] = wasmExports['png_set_pCAL'];
+  _png_set_pHYs = Module['_png_set_pHYs'] = wasmExports['png_set_pHYs'];
+  _png_set_sBIT = Module['_png_set_sBIT'] = wasmExports['png_set_sBIT'];
+  _png_set_sCAL_s = Module['_png_set_sCAL_s'] = wasmExports['png_set_sCAL_s'];
+  _png_set_sPLT = Module['_png_set_sPLT'] = wasmExports['png_set_sPLT'];
+  _png_set_sRGB = Module['_png_set_sRGB'] = wasmExports['png_set_sRGB'];
+  _png_set_tIME = Module['_png_set_tIME'] = wasmExports['png_set_tIME'];
+  _png_set_tRNS = Module['_png_set_tRNS'] = wasmExports['png_set_tRNS'];
+  _png_set_cHRM_XYZ_fixed = Module['_png_set_cHRM_XYZ_fixed'] = wasmExports['png_set_cHRM_XYZ_fixed'];
+  _png_set_cHRM = Module['_png_set_cHRM'] = wasmExports['png_set_cHRM'];
+  _png_set_cHRM_XYZ = Module['_png_set_cHRM_XYZ'] = wasmExports['png_set_cHRM_XYZ'];
+  _png_set_cLLI = Module['_png_set_cLLI'] = wasmExports['png_set_cLLI'];
+  _png_set_mDCV = Module['_png_set_mDCV'] = wasmExports['png_set_mDCV'];
+  _png_set_eXIf = Module['_png_set_eXIf'] = wasmExports['png_set_eXIf'];
+  _png_set_gAMA = Module['_png_set_gAMA'] = wasmExports['png_set_gAMA'];
+  _png_set_sCAL = Module['_png_set_sCAL'] = wasmExports['png_set_sCAL'];
+  _png_set_sCAL_fixed = Module['_png_set_sCAL_fixed'] = wasmExports['png_set_sCAL_fixed'];
+  _png_set_sRGB_gAMA_and_cHRM = Module['_png_set_sRGB_gAMA_and_cHRM'] = wasmExports['png_set_sRGB_gAMA_and_cHRM'];
+  _png_set_iCCP = Module['_png_set_iCCP'] = wasmExports['png_set_iCCP'];
+  _png_set_text = Module['_png_set_text'] = wasmExports['png_set_text'];
+  _png_set_unknown_chunk_location = Module['_png_set_unknown_chunk_location'] = wasmExports['png_set_unknown_chunk_location'];
+  _png_permit_mng_features = Module['_png_permit_mng_features'] = wasmExports['png_permit_mng_features'];
+  _png_set_read_user_chunk_fn = Module['_png_set_read_user_chunk_fn'] = wasmExports['png_set_read_user_chunk_fn'];
+  _png_set_compression_buffer_size = Module['_png_set_compression_buffer_size'] = wasmExports['png_set_compression_buffer_size'];
+  _png_free_buffer_list = Module['_png_free_buffer_list'] = wasmExports['png_free_buffer_list'];
+  _png_set_invalid = Module['_png_set_invalid'] = wasmExports['png_set_invalid'];
+  _png_set_user_limits = Module['_png_set_user_limits'] = wasmExports['png_set_user_limits'];
+  _png_set_chunk_cache_max = Module['_png_set_chunk_cache_max'] = wasmExports['png_set_chunk_cache_max'];
+  _png_set_chunk_malloc_max = Module['_png_set_chunk_malloc_max'] = wasmExports['png_set_chunk_malloc_max'];
+  _png_set_check_for_invalid_index = Module['_png_set_check_for_invalid_index'] = wasmExports['png_set_check_for_invalid_index'];
+  _png_check_keyword = Module['_png_check_keyword'] = wasmExports['png_check_keyword'];
+  _png_set_filler = Module['_png_set_filler'] = wasmExports['png_set_filler'];
+  _png_set_user_transform_info = Module['_png_set_user_transform_info'] = wasmExports['png_set_user_transform_info'];
+  _png_get_user_transform_ptr = Module['_png_get_user_transform_ptr'] = wasmExports['png_get_user_transform_ptr'];
+  _png_get_current_row_number = Module['_png_get_current_row_number'] = wasmExports['png_get_current_row_number'];
+  _png_get_current_pass_number = Module['_png_get_current_pass_number'] = wasmExports['png_get_current_pass_number'];
+  _png_write_data = Module['_png_write_data'] = wasmExports['png_write_data'];
+  _png_default_write_data = Module['_png_default_write_data'] = wasmExports['png_default_write_data'];
+  _png_flush = Module['_png_flush'] = wasmExports['png_flush'];
+  _png_default_flush = Module['_png_default_flush'] = wasmExports['png_default_flush'];
+  _png_write_info_before_PLTE = Module['_png_write_info_before_PLTE'] = wasmExports['png_write_info_before_PLTE'];
+  _png_write_sig = Module['_png_write_sig'] = wasmExports['png_write_sig'];
+  _png_write_IHDR = Module['_png_write_IHDR'] = wasmExports['png_write_IHDR'];
+  _png_write_sBIT = Module['_png_write_sBIT'] = wasmExports['png_write_sBIT'];
+  _png_write_cLLI_fixed = Module['_png_write_cLLI_fixed'] = wasmExports['png_write_cLLI_fixed'];
+  _png_write_mDCV_fixed = Module['_png_write_mDCV_fixed'] = wasmExports['png_write_mDCV_fixed'];
+  _png_write_cICP = Module['_png_write_cICP'] = wasmExports['png_write_cICP'];
+  _png_write_iCCP = Module['_png_write_iCCP'] = wasmExports['png_write_iCCP'];
+  _png_write_sRGB = Module['_png_write_sRGB'] = wasmExports['png_write_sRGB'];
+  _png_write_gAMA_fixed = Module['_png_write_gAMA_fixed'] = wasmExports['png_write_gAMA_fixed'];
+  _png_write_cHRM_fixed = Module['_png_write_cHRM_fixed'] = wasmExports['png_write_cHRM_fixed'];
+  _png_write_chunk = Module['_png_write_chunk'] = wasmExports['png_write_chunk'];
+  _png_write_info = Module['_png_write_info'] = wasmExports['png_write_info'];
+  _png_write_PLTE = Module['_png_write_PLTE'] = wasmExports['png_write_PLTE'];
+  _png_write_tRNS = Module['_png_write_tRNS'] = wasmExports['png_write_tRNS'];
+  _png_write_bKGD = Module['_png_write_bKGD'] = wasmExports['png_write_bKGD'];
+  _png_write_eXIf = Module['_png_write_eXIf'] = wasmExports['png_write_eXIf'];
+  _png_write_hIST = Module['_png_write_hIST'] = wasmExports['png_write_hIST'];
+  _png_write_oFFs = Module['_png_write_oFFs'] = wasmExports['png_write_oFFs'];
+  _png_write_pCAL = Module['_png_write_pCAL'] = wasmExports['png_write_pCAL'];
+  _png_write_sCAL_s = Module['_png_write_sCAL_s'] = wasmExports['png_write_sCAL_s'];
+  _png_write_pHYs = Module['_png_write_pHYs'] = wasmExports['png_write_pHYs'];
+  _png_write_tIME = Module['_png_write_tIME'] = wasmExports['png_write_tIME'];
+  _png_write_sPLT = Module['_png_write_sPLT'] = wasmExports['png_write_sPLT'];
+  _png_write_iTXt = Module['_png_write_iTXt'] = wasmExports['png_write_iTXt'];
+  _png_write_zTXt = Module['_png_write_zTXt'] = wasmExports['png_write_zTXt'];
+  _png_write_tEXt = Module['_png_write_tEXt'] = wasmExports['png_write_tEXt'];
+  _png_write_end = Module['_png_write_end'] = wasmExports['png_write_end'];
+  _png_write_IEND = Module['_png_write_IEND'] = wasmExports['png_write_IEND'];
+  _png_convert_from_struct_tm = Module['_png_convert_from_struct_tm'] = wasmExports['png_convert_from_struct_tm'];
+  _png_convert_from_time_t = Module['_png_convert_from_time_t'] = wasmExports['png_convert_from_time_t'];
+  _png_create_write_struct_2 = Module['_png_create_write_struct_2'] = wasmExports['png_create_write_struct_2'];
+  _png_write_rows = Module['_png_write_rows'] = wasmExports['png_write_rows'];
+  _png_write_row = Module['_png_write_row'] = wasmExports['png_write_row'];
+  _png_write_start_row = Module['_png_write_start_row'] = wasmExports['png_write_start_row'];
+  _png_write_finish_row = Module['_png_write_finish_row'] = wasmExports['png_write_finish_row'];
+  _png_do_write_interlace = Module['_png_do_write_interlace'] = wasmExports['png_do_write_interlace'];
+  _png_do_write_transformations = Module['_png_do_write_transformations'] = wasmExports['png_do_write_transformations'];
+  _png_write_find_filter = Module['_png_write_find_filter'] = wasmExports['png_write_find_filter'];
+  _png_write_image = Module['_png_write_image'] = wasmExports['png_write_image'];
+  _png_set_flush = Module['_png_set_flush'] = wasmExports['png_set_flush'];
+  _png_write_flush = Module['_png_write_flush'] = wasmExports['png_write_flush'];
+  _png_compress_IDAT = Module['_png_compress_IDAT'] = wasmExports['png_compress_IDAT'];
+  _png_set_filter = Module['_png_set_filter'] = wasmExports['png_set_filter'];
+  _png_set_filter_heuristics = Module['_png_set_filter_heuristics'] = wasmExports['png_set_filter_heuristics'];
+  _png_set_filter_heuristics_fixed = Module['_png_set_filter_heuristics_fixed'] = wasmExports['png_set_filter_heuristics_fixed'];
+  _png_set_compression_level = Module['_png_set_compression_level'] = wasmExports['png_set_compression_level'];
+  _png_set_compression_mem_level = Module['_png_set_compression_mem_level'] = wasmExports['png_set_compression_mem_level'];
+  _png_set_compression_strategy = Module['_png_set_compression_strategy'] = wasmExports['png_set_compression_strategy'];
+  _png_set_compression_window_bits = Module['_png_set_compression_window_bits'] = wasmExports['png_set_compression_window_bits'];
+  _png_set_compression_method = Module['_png_set_compression_method'] = wasmExports['png_set_compression_method'];
+  _png_set_text_compression_level = Module['_png_set_text_compression_level'] = wasmExports['png_set_text_compression_level'];
+  _png_set_text_compression_mem_level = Module['_png_set_text_compression_mem_level'] = wasmExports['png_set_text_compression_mem_level'];
+  _png_set_text_compression_strategy = Module['_png_set_text_compression_strategy'] = wasmExports['png_set_text_compression_strategy'];
+  _png_set_text_compression_window_bits = Module['_png_set_text_compression_window_bits'] = wasmExports['png_set_text_compression_window_bits'];
+  _png_set_text_compression_method = Module['_png_set_text_compression_method'] = wasmExports['png_set_text_compression_method'];
+  _png_set_write_status_fn = Module['_png_set_write_status_fn'] = wasmExports['png_set_write_status_fn'];
+  _png_set_write_user_transform_fn = Module['_png_set_write_user_transform_fn'] = wasmExports['png_set_write_user_transform_fn'];
+  _png_image_write_to_memory = Module['_png_image_write_to_memory'] = wasmExports['png_image_write_to_memory'];
+  _png_image_write_to_stdio = Module['_png_image_write_to_stdio'] = wasmExports['png_image_write_to_stdio'];
+  _png_image_write_to_file = Module['_png_image_write_to_file'] = wasmExports['png_image_write_to_file'];
+  _png_save_uint_16 = Module['_png_save_uint_16'] = wasmExports['png_save_uint_16'];
+  _png_write_chunk_start = Module['_png_write_chunk_start'] = wasmExports['png_write_chunk_start'];
+  _png_write_chunk_data = Module['_png_write_chunk_data'] = wasmExports['png_write_chunk_data'];
+  _png_write_chunk_end = Module['_png_write_chunk_end'] = wasmExports['png_write_chunk_end'];
+  _deflateReset = Module['_deflateReset'] = wasmExports['deflateReset'];
   _SDL_ExitProcess = Module['_SDL_ExitProcess'] = wasmExports['SDL_ExitProcess'];
   _SDL_SetAppMetadata = Module['_SDL_SetAppMetadata'] = wasmExports['SDL_SetAppMetadata'];
   _SDL_SetError = Module['_SDL_SetError'] = wasmExports['SDL_SetError'];
@@ -93373,360 +93753,244 @@ function assignWasmExports(wasmExports) {
   _SDL_SW_QueryYUVTexturePixels = Module['_SDL_SW_QueryYUVTexturePixels'] = wasmExports['SDL_SW_QueryYUVTexturePixels'];
   _SDL_SW_UnlockYUVTexture = Module['_SDL_SW_UnlockYUVTexture'] = wasmExports['SDL_SW_UnlockYUVTexture'];
   _rgb24_yuv420_std = Module['_rgb24_yuv420_std'] = wasmExports['rgb24_yuv420_std'];
-  _png_error = Module['_png_error'] = wasmExports['png_error'];
-  _png_sig_cmp = Module['_png_sig_cmp'] = wasmExports['png_sig_cmp'];
-  _png_zalloc = Module['_png_zalloc'] = wasmExports['png_zalloc'];
-  _png_warning = Module['_png_warning'] = wasmExports['png_warning'];
-  _png_malloc_warn = Module['_png_malloc_warn'] = wasmExports['png_malloc_warn'];
-  _png_zfree = Module['_png_zfree'] = wasmExports['png_zfree'];
-  _png_free = Module['_png_free'] = wasmExports['png_free'];
-  _png_reset_crc = Module['_png_reset_crc'] = wasmExports['png_reset_crc'];
-  _png_calculate_crc = Module['_png_calculate_crc'] = wasmExports['png_calculate_crc'];
-  _png_user_version_check = Module['_png_user_version_check'] = wasmExports['png_user_version_check'];
-  _png_safecat = Module['_png_safecat'] = wasmExports['png_safecat'];
-  _png_create_png_struct = Module['_png_create_png_struct'] = wasmExports['png_create_png_struct'];
-  _png_set_mem_fn = Module['_png_set_mem_fn'] = wasmExports['png_set_mem_fn'];
-  _png_malloc_base = Module['_png_malloc_base'] = wasmExports['png_malloc_base'];
-  _png_destroy_info_struct = Module['_png_destroy_info_struct'] = wasmExports['png_destroy_info_struct'];
-  _png_free_data = Module['_png_free_data'] = wasmExports['png_free_data'];
-  _png_info_init_3 = Module['_png_info_init_3'] = wasmExports['png_info_init_3'];
-  _png_data_freer = Module['_png_data_freer'] = wasmExports['png_data_freer'];
-  _png_init_io = Module['_png_init_io'] = wasmExports['png_init_io'];
-  _png_save_int_32 = Module['_png_save_int_32'] = wasmExports['png_save_int_32'];
-  _png_save_uint_32 = Module['_png_save_uint_32'] = wasmExports['png_save_uint_32'];
-  _png_convert_to_rfc1123_buffer = Module['_png_convert_to_rfc1123_buffer'] = wasmExports['png_convert_to_rfc1123_buffer'];
-  _png_format_number = Module['_png_format_number'] = wasmExports['png_format_number'];
-  _png_convert_to_rfc1123 = Module['_png_convert_to_rfc1123'] = wasmExports['png_convert_to_rfc1123'];
-  _png_get_copyright = Module['_png_get_copyright'] = wasmExports['png_get_copyright'];
-  _png_get_libpng_ver = Module['_png_get_libpng_ver'] = wasmExports['png_get_libpng_ver'];
-  _png_get_header_ver = Module['_png_get_header_ver'] = wasmExports['png_get_header_ver'];
-  _png_get_header_version = Module['_png_get_header_version'] = wasmExports['png_get_header_version'];
-  _png_build_grayscale_palette = Module['_png_build_grayscale_palette'] = wasmExports['png_build_grayscale_palette'];
-  _png_handle_as_unknown = Module['_png_handle_as_unknown'] = wasmExports['png_handle_as_unknown'];
-  _png_chunk_unknown_handling = Module['_png_chunk_unknown_handling'] = wasmExports['png_chunk_unknown_handling'];
-  _png_reset_zstream = Module['_png_reset_zstream'] = wasmExports['png_reset_zstream'];
-  _png_access_version_number = Module['_png_access_version_number'] = wasmExports['png_access_version_number'];
-  _png_zstream_error = Module['_png_zstream_error'] = wasmExports['png_zstream_error'];
-  _png_xy_from_XYZ = Module['_png_xy_from_XYZ'] = wasmExports['png_xy_from_XYZ'];
-  _png_muldiv = Module['_png_muldiv'] = wasmExports['png_muldiv'];
-  _png_XYZ_from_xy = Module['_png_XYZ_from_xy'] = wasmExports['png_XYZ_from_xy'];
-  _png_reciprocal = Module['_png_reciprocal'] = wasmExports['png_reciprocal'];
-  _png_icc_check_length = Module['_png_icc_check_length'] = wasmExports['png_icc_check_length'];
-  _png_chunk_benign_error = Module['_png_chunk_benign_error'] = wasmExports['png_chunk_benign_error'];
-  _png_icc_check_header = Module['_png_icc_check_header'] = wasmExports['png_icc_check_header'];
-  _png_icc_check_tag_table = Module['_png_icc_check_tag_table'] = wasmExports['png_icc_check_tag_table'];
-  _png_set_rgb_coefficients = Module['_png_set_rgb_coefficients'] = wasmExports['png_set_rgb_coefficients'];
-  _png_check_IHDR = Module['_png_check_IHDR'] = wasmExports['png_check_IHDR'];
-  _png_check_fp_number = Module['_png_check_fp_number'] = wasmExports['png_check_fp_number'];
-  _png_check_fp_string = Module['_png_check_fp_string'] = wasmExports['png_check_fp_string'];
-  _png_ascii_from_fp = Module['_png_ascii_from_fp'] = wasmExports['png_ascii_from_fp'];
-  _png_ascii_from_fixed = Module['_png_ascii_from_fixed'] = wasmExports['png_ascii_from_fixed'];
-  _png_fixed = Module['_png_fixed'] = wasmExports['png_fixed'];
-  _png_fixed_error = Module['_png_fixed_error'] = wasmExports['png_fixed_error'];
-  _png_fixed_ITU = Module['_png_fixed_ITU'] = wasmExports['png_fixed_ITU'];
-  _png_gamma_significant = Module['_png_gamma_significant'] = wasmExports['png_gamma_significant'];
-  _png_reciprocal2 = Module['_png_reciprocal2'] = wasmExports['png_reciprocal2'];
-  _png_gamma_8bit_correct = Module['_png_gamma_8bit_correct'] = wasmExports['png_gamma_8bit_correct'];
-  _png_gamma_16bit_correct = Module['_png_gamma_16bit_correct'] = wasmExports['png_gamma_16bit_correct'];
-  _png_gamma_correct = Module['_png_gamma_correct'] = wasmExports['png_gamma_correct'];
-  _png_destroy_gamma_table = Module['_png_destroy_gamma_table'] = wasmExports['png_destroy_gamma_table'];
-  _png_build_gamma_table = Module['_png_build_gamma_table'] = wasmExports['png_build_gamma_table'];
-  _png_malloc = Module['_png_malloc'] = wasmExports['png_malloc'];
-  _png_calloc = Module['_png_calloc'] = wasmExports['png_calloc'];
-  _png_set_option = Module['_png_set_option'] = wasmExports['png_set_option'];
-  _png_image_free = Module['_png_image_free'] = wasmExports['png_image_free'];
-  _png_image_error = Module['_png_image_error'] = wasmExports['png_image_error'];
-  _png_longjmp = Module['_png_longjmp'] = wasmExports['png_longjmp'];
-  _png_warning_parameter = Module['_png_warning_parameter'] = wasmExports['png_warning_parameter'];
-  _png_warning_parameter_unsigned = Module['_png_warning_parameter_unsigned'] = wasmExports['png_warning_parameter_unsigned'];
-  _png_warning_parameter_signed = Module['_png_warning_parameter_signed'] = wasmExports['png_warning_parameter_signed'];
-  _png_formatted_warning = Module['_png_formatted_warning'] = wasmExports['png_formatted_warning'];
-  _png_benign_error = Module['_png_benign_error'] = wasmExports['png_benign_error'];
-  _png_chunk_error = Module['_png_chunk_error'] = wasmExports['png_chunk_error'];
-  _png_chunk_warning = Module['_png_chunk_warning'] = wasmExports['png_chunk_warning'];
-  _png_app_warning = Module['_png_app_warning'] = wasmExports['png_app_warning'];
-  _png_app_error = Module['_png_app_error'] = wasmExports['png_app_error'];
-  _png_chunk_report = Module['_png_chunk_report'] = wasmExports['png_chunk_report'];
-  _png_set_longjmp_fn = Module['_png_set_longjmp_fn'] = wasmExports['png_set_longjmp_fn'];
-  _png_free_jmpbuf = Module['_png_free_jmpbuf'] = wasmExports['png_free_jmpbuf'];
-  _png_get_error_ptr = Module['_png_get_error_ptr'] = wasmExports['png_get_error_ptr'];
-  _png_safe_error = Module['_png_safe_error'] = wasmExports['png_safe_error'];
-  _png_safe_warning = Module['_png_safe_warning'] = wasmExports['png_safe_warning'];
-  _png_safe_execute = Module['_png_safe_execute'] = wasmExports['png_safe_execute'];
-  _png_get_rowbytes = Module['_png_get_rowbytes'] = wasmExports['png_get_rowbytes'];
-  _png_get_rows = Module['_png_get_rows'] = wasmExports['png_get_rows'];
-  _png_get_image_width = Module['_png_get_image_width'] = wasmExports['png_get_image_width'];
-  _png_get_image_height = Module['_png_get_image_height'] = wasmExports['png_get_image_height'];
-  _png_get_bit_depth = Module['_png_get_bit_depth'] = wasmExports['png_get_bit_depth'];
-  _png_get_color_type = Module['_png_get_color_type'] = wasmExports['png_get_color_type'];
-  _png_get_filter_type = Module['_png_get_filter_type'] = wasmExports['png_get_filter_type'];
-  _png_get_interlace_type = Module['_png_get_interlace_type'] = wasmExports['png_get_interlace_type'];
-  _png_get_compression_type = Module['_png_get_compression_type'] = wasmExports['png_get_compression_type'];
-  _png_get_x_pixels_per_meter = Module['_png_get_x_pixels_per_meter'] = wasmExports['png_get_x_pixels_per_meter'];
-  _png_get_y_pixels_per_meter = Module['_png_get_y_pixels_per_meter'] = wasmExports['png_get_y_pixels_per_meter'];
-  _png_get_pixels_per_meter = Module['_png_get_pixels_per_meter'] = wasmExports['png_get_pixels_per_meter'];
-  _png_get_pixel_aspect_ratio = Module['_png_get_pixel_aspect_ratio'] = wasmExports['png_get_pixel_aspect_ratio'];
-  _png_get_pixel_aspect_ratio_fixed = Module['_png_get_pixel_aspect_ratio_fixed'] = wasmExports['png_get_pixel_aspect_ratio_fixed'];
-  _png_get_x_offset_microns = Module['_png_get_x_offset_microns'] = wasmExports['png_get_x_offset_microns'];
-  _png_get_y_offset_microns = Module['_png_get_y_offset_microns'] = wasmExports['png_get_y_offset_microns'];
-  _png_get_x_offset_pixels = Module['_png_get_x_offset_pixels'] = wasmExports['png_get_x_offset_pixels'];
-  _png_get_y_offset_pixels = Module['_png_get_y_offset_pixels'] = wasmExports['png_get_y_offset_pixels'];
-  _png_get_pixels_per_inch = Module['_png_get_pixels_per_inch'] = wasmExports['png_get_pixels_per_inch'];
-  _png_get_x_pixels_per_inch = Module['_png_get_x_pixels_per_inch'] = wasmExports['png_get_x_pixels_per_inch'];
-  _png_get_y_pixels_per_inch = Module['_png_get_y_pixels_per_inch'] = wasmExports['png_get_y_pixels_per_inch'];
-  _png_get_x_offset_inches_fixed = Module['_png_get_x_offset_inches_fixed'] = wasmExports['png_get_x_offset_inches_fixed'];
-  _png_get_y_offset_inches_fixed = Module['_png_get_y_offset_inches_fixed'] = wasmExports['png_get_y_offset_inches_fixed'];
-  _png_get_x_offset_inches = Module['_png_get_x_offset_inches'] = wasmExports['png_get_x_offset_inches'];
-  _png_get_y_offset_inches = Module['_png_get_y_offset_inches'] = wasmExports['png_get_y_offset_inches'];
-  _png_get_pHYs_dpi = Module['_png_get_pHYs_dpi'] = wasmExports['png_get_pHYs_dpi'];
-  _png_get_channels = Module['_png_get_channels'] = wasmExports['png_get_channels'];
-  _png_get_signature = Module['_png_get_signature'] = wasmExports['png_get_signature'];
-  _png_get_bKGD = Module['_png_get_bKGD'] = wasmExports['png_get_bKGD'];
-  _png_get_cHRM = Module['_png_get_cHRM'] = wasmExports['png_get_cHRM'];
-  _png_get_cHRM_XYZ = Module['_png_get_cHRM_XYZ'] = wasmExports['png_get_cHRM_XYZ'];
-  _png_get_cHRM_XYZ_fixed = Module['_png_get_cHRM_XYZ_fixed'] = wasmExports['png_get_cHRM_XYZ_fixed'];
-  _png_get_cHRM_fixed = Module['_png_get_cHRM_fixed'] = wasmExports['png_get_cHRM_fixed'];
-  _png_get_gAMA_fixed = Module['_png_get_gAMA_fixed'] = wasmExports['png_get_gAMA_fixed'];
-  _png_get_gAMA = Module['_png_get_gAMA'] = wasmExports['png_get_gAMA'];
-  _png_get_sRGB = Module['_png_get_sRGB'] = wasmExports['png_get_sRGB'];
-  _png_get_iCCP = Module['_png_get_iCCP'] = wasmExports['png_get_iCCP'];
-  _png_get_sPLT = Module['_png_get_sPLT'] = wasmExports['png_get_sPLT'];
-  _png_get_cICP = Module['_png_get_cICP'] = wasmExports['png_get_cICP'];
-  _png_get_cLLI_fixed = Module['_png_get_cLLI_fixed'] = wasmExports['png_get_cLLI_fixed'];
-  _png_get_cLLI = Module['_png_get_cLLI'] = wasmExports['png_get_cLLI'];
-  _png_get_mDCV_fixed = Module['_png_get_mDCV_fixed'] = wasmExports['png_get_mDCV_fixed'];
-  _png_get_mDCV = Module['_png_get_mDCV'] = wasmExports['png_get_mDCV'];
-  _png_get_eXIf = Module['_png_get_eXIf'] = wasmExports['png_get_eXIf'];
-  _png_get_eXIf_1 = Module['_png_get_eXIf_1'] = wasmExports['png_get_eXIf_1'];
-  _png_get_hIST = Module['_png_get_hIST'] = wasmExports['png_get_hIST'];
-  _png_get_oFFs = Module['_png_get_oFFs'] = wasmExports['png_get_oFFs'];
-  _png_get_pCAL = Module['_png_get_pCAL'] = wasmExports['png_get_pCAL'];
-  _png_get_sCAL_fixed = Module['_png_get_sCAL_fixed'] = wasmExports['png_get_sCAL_fixed'];
-  _png_get_sCAL = Module['_png_get_sCAL'] = wasmExports['png_get_sCAL'];
-  _png_get_sCAL_s = Module['_png_get_sCAL_s'] = wasmExports['png_get_sCAL_s'];
-  _png_get_pHYs = Module['_png_get_pHYs'] = wasmExports['png_get_pHYs'];
-  _png_get_sBIT = Module['_png_get_sBIT'] = wasmExports['png_get_sBIT'];
-  _png_get_text = Module['_png_get_text'] = wasmExports['png_get_text'];
-  _png_get_tIME = Module['_png_get_tIME'] = wasmExports['png_get_tIME'];
-  _png_get_unknown_chunks = Module['_png_get_unknown_chunks'] = wasmExports['png_get_unknown_chunks'];
-  _png_get_rgb_to_gray_status = Module['_png_get_rgb_to_gray_status'] = wasmExports['png_get_rgb_to_gray_status'];
-  _png_get_user_chunk_ptr = Module['_png_get_user_chunk_ptr'] = wasmExports['png_get_user_chunk_ptr'];
-  _png_get_compression_buffer_size = Module['_png_get_compression_buffer_size'] = wasmExports['png_get_compression_buffer_size'];
-  _png_get_user_width_max = Module['_png_get_user_width_max'] = wasmExports['png_get_user_width_max'];
-  _png_get_user_height_max = Module['_png_get_user_height_max'] = wasmExports['png_get_user_height_max'];
-  _png_get_chunk_cache_max = Module['_png_get_chunk_cache_max'] = wasmExports['png_get_chunk_cache_max'];
-  _png_get_chunk_malloc_max = Module['_png_get_chunk_malloc_max'] = wasmExports['png_get_chunk_malloc_max'];
-  _png_get_io_state = Module['_png_get_io_state'] = wasmExports['png_get_io_state'];
-  _png_get_io_chunk_type = Module['_png_get_io_chunk_type'] = wasmExports['png_get_io_chunk_type'];
-  _png_get_palette_max = Module['_png_get_palette_max'] = wasmExports['png_get_palette_max'];
-  _png_destroy_png_struct = Module['_png_destroy_png_struct'] = wasmExports['png_destroy_png_struct'];
-  _png_malloc_array = Module['_png_malloc_array'] = wasmExports['png_malloc_array'];
-  _png_realloc_array = Module['_png_realloc_array'] = wasmExports['png_realloc_array'];
-  _png_malloc_default = Module['_png_malloc_default'] = wasmExports['png_malloc_default'];
-  _png_free_default = Module['_png_free_default'] = wasmExports['png_free_default'];
-  _png_get_mem_ptr = Module['_png_get_mem_ptr'] = wasmExports['png_get_mem_ptr'];
-  _png_process_data = Module['_png_process_data'] = wasmExports['png_process_data'];
-  _png_push_read_chunk = Module['_png_push_read_chunk'] = wasmExports['png_push_read_chunk'];
-  _png_push_read_IDAT = Module['_png_push_read_IDAT'] = wasmExports['png_push_read_IDAT'];
-  _png_push_read_sig = Module['_png_push_read_sig'] = wasmExports['png_push_read_sig'];
-  _png_push_restore_buffer = Module['_png_push_restore_buffer'] = wasmExports['png_push_restore_buffer'];
-  _png_process_some_data = Module['_png_process_some_data'] = wasmExports['png_process_some_data'];
-  _png_process_data_pause = Module['_png_process_data_pause'] = wasmExports['png_process_data_pause'];
-  _png_push_save_buffer = Module['_png_push_save_buffer'] = wasmExports['png_push_save_buffer'];
-  _png_process_data_skip = Module['_png_process_data_skip'] = wasmExports['png_process_data_skip'];
-  _png_read_chunk_header = Module['_png_read_chunk_header'] = wasmExports['png_read_chunk_header'];
-  _png_handle_chunk = Module['_png_handle_chunk'] = wasmExports['png_handle_chunk'];
-  _png_handle_unknown = Module['_png_handle_unknown'] = wasmExports['png_handle_unknown'];
-  _png_get_uint_31 = Module['_png_get_uint_31'] = wasmExports['png_get_uint_31'];
-  _png_crc_read = Module['_png_crc_read'] = wasmExports['png_crc_read'];
-  _png_process_IDAT_data = Module['_png_process_IDAT_data'] = wasmExports['png_process_IDAT_data'];
-  _png_crc_finish = Module['_png_crc_finish'] = wasmExports['png_crc_finish'];
-  _png_push_fill_buffer = Module['_png_push_fill_buffer'] = wasmExports['png_push_fill_buffer'];
-  _png_push_have_end = Module['_png_push_have_end'] = wasmExports['png_push_have_end'];
-  _png_push_have_info = Module['_png_push_have_info'] = wasmExports['png_push_have_info'];
-  _png_zlib_inflate = Module['_png_zlib_inflate'] = wasmExports['png_zlib_inflate'];
-  _png_push_process_row = Module['_png_push_process_row'] = wasmExports['png_push_process_row'];
-  _png_read_filter_row = Module['_png_read_filter_row'] = wasmExports['png_read_filter_row'];
-  _png_do_read_transformations = Module['_png_do_read_transformations'] = wasmExports['png_do_read_transformations'];
-  _png_do_read_interlace = Module['_png_do_read_interlace'] = wasmExports['png_do_read_interlace'];
-  _png_read_push_finish_row = Module['_png_read_push_finish_row'] = wasmExports['png_read_push_finish_row'];
-  _png_push_have_row = Module['_png_push_have_row'] = wasmExports['png_push_have_row'];
-  _png_progressive_combine_row = Module['_png_progressive_combine_row'] = wasmExports['png_progressive_combine_row'];
-  _png_combine_row = Module['_png_combine_row'] = wasmExports['png_combine_row'];
-  _png_set_progressive_read_fn = Module['_png_set_progressive_read_fn'] = wasmExports['png_set_progressive_read_fn'];
-  _png_get_progressive_ptr = Module['_png_get_progressive_ptr'] = wasmExports['png_get_progressive_ptr'];
-  _png_create_read_struct_2 = Module['_png_create_read_struct_2'] = wasmExports['png_create_read_struct_2'];
-  _png_read_sig = Module['_png_read_sig'] = wasmExports['png_read_sig'];
-  _png_read_start_row = Module['_png_read_start_row'] = wasmExports['png_read_start_row'];
-  _png_read_transform_info = Module['_png_read_transform_info'] = wasmExports['png_read_transform_info'];
-  _png_start_read_image = Module['_png_start_read_image'] = wasmExports['png_start_read_image'];
-  _png_read_finish_row = Module['_png_read_finish_row'] = wasmExports['png_read_finish_row'];
-  _png_read_IDAT_data = Module['_png_read_IDAT_data'] = wasmExports['png_read_IDAT_data'];
-  _png_read_rows = Module['_png_read_rows'] = wasmExports['png_read_rows'];
-  _png_read_finish_IDAT = Module['_png_read_finish_IDAT'] = wasmExports['png_read_finish_IDAT'];
-  _png_set_read_status_fn = Module['_png_set_read_status_fn'] = wasmExports['png_set_read_status_fn'];
-  _png_read_png = Module['_png_read_png'] = wasmExports['png_read_png'];
-  _png_set_scale_16 = Module['_png_set_scale_16'] = wasmExports['png_set_scale_16'];
-  _png_set_strip_alpha = Module['_png_set_strip_alpha'] = wasmExports['png_set_strip_alpha'];
-  _png_set_packswap = Module['_png_set_packswap'] = wasmExports['png_set_packswap'];
-  _png_set_invert_mono = Module['_png_set_invert_mono'] = wasmExports['png_set_invert_mono'];
-  _png_set_shift = Module['_png_set_shift'] = wasmExports['png_set_shift'];
-  _png_set_bgr = Module['_png_set_bgr'] = wasmExports['png_set_bgr'];
-  _png_set_swap_alpha = Module['_png_set_swap_alpha'] = wasmExports['png_set_swap_alpha'];
-  _png_set_swap = Module['_png_set_swap'] = wasmExports['png_set_swap'];
-  _png_set_invert_alpha = Module['_png_set_invert_alpha'] = wasmExports['png_set_invert_alpha'];
-  _png_set_expand_16 = Module['_png_set_expand_16'] = wasmExports['png_set_expand_16'];
-  _png_image_begin_read_from_stdio = Module['_png_image_begin_read_from_stdio'] = wasmExports['png_image_begin_read_from_stdio'];
-  _png_set_benign_errors = Module['_png_set_benign_errors'] = wasmExports['png_set_benign_errors'];
-  _png_image_begin_read_from_file = Module['_png_image_begin_read_from_file'] = wasmExports['png_image_begin_read_from_file'];
-  _png_image_begin_read_from_memory = Module['_png_image_begin_read_from_memory'] = wasmExports['png_image_begin_read_from_memory'];
-  _png_image_finish_read = Module['_png_image_finish_read'] = wasmExports['png_image_finish_read'];
-  _png_set_background_fixed = Module['_png_set_background_fixed'] = wasmExports['png_set_background_fixed'];
-  _png_set_rgb_to_gray_fixed = Module['_png_set_rgb_to_gray_fixed'] = wasmExports['png_set_rgb_to_gray_fixed'];
-  _png_resolve_file_gamma = Module['_png_resolve_file_gamma'] = wasmExports['png_resolve_file_gamma'];
-  _png_set_tRNS_to_alpha = Module['_png_set_tRNS_to_alpha'] = wasmExports['png_set_tRNS_to_alpha'];
-  _png_set_alpha_mode_fixed = Module['_png_set_alpha_mode_fixed'] = wasmExports['png_set_alpha_mode_fixed'];
-  _png_set_keep_unknown_chunks = Module['_png_set_keep_unknown_chunks'] = wasmExports['png_set_keep_unknown_chunks'];
-  _png_set_add_alpha = Module['_png_set_add_alpha'] = wasmExports['png_set_add_alpha'];
-  _png_read_data = Module['_png_read_data'] = wasmExports['png_read_data'];
-  _png_default_read_data = Module['_png_default_read_data'] = wasmExports['png_default_read_data'];
-  _png_set_background = Module['_png_set_background'] = wasmExports['png_set_background'];
-  _png_set_alpha_mode = Module['_png_set_alpha_mode'] = wasmExports['png_set_alpha_mode'];
-  _png_set_quantize = Module['_png_set_quantize'] = wasmExports['png_set_quantize'];
-  _png_set_gamma_fixed = Module['_png_set_gamma_fixed'] = wasmExports['png_set_gamma_fixed'];
-  _png_set_gamma = Module['_png_set_gamma'] = wasmExports['png_set_gamma'];
-  _png_set_palette_to_rgb = Module['_png_set_palette_to_rgb'] = wasmExports['png_set_palette_to_rgb'];
-  _png_set_expand_gray_1_2_4_to_8 = Module['_png_set_expand_gray_1_2_4_to_8'] = wasmExports['png_set_expand_gray_1_2_4_to_8'];
-  _png_set_rgb_to_gray = Module['_png_set_rgb_to_gray'] = wasmExports['png_set_rgb_to_gray'];
-  _png_set_read_user_transform_fn = Module['_png_set_read_user_transform_fn'] = wasmExports['png_set_read_user_transform_fn'];
-  _png_init_read_transformations = Module['_png_init_read_transformations'] = wasmExports['png_init_read_transformations'];
-  _png_do_strip_channel = Module['_png_do_strip_channel'] = wasmExports['png_do_strip_channel'];
-  _png_do_invert = Module['_png_do_invert'] = wasmExports['png_do_invert'];
-  _png_do_check_palette_indexes = Module['_png_do_check_palette_indexes'] = wasmExports['png_do_check_palette_indexes'];
-  _png_do_bgr = Module['_png_do_bgr'] = wasmExports['png_do_bgr'];
-  _png_do_packswap = Module['_png_do_packswap'] = wasmExports['png_do_packswap'];
-  _png_do_swap = Module['_png_do_swap'] = wasmExports['png_do_swap'];
-  _png_get_uint_32 = Module['_png_get_uint_32'] = wasmExports['png_get_uint_32'];
-  _png_get_int_32 = Module['_png_get_int_32'] = wasmExports['png_get_int_32'];
-  _png_get_uint_16 = Module['_png_get_uint_16'] = wasmExports['png_get_uint_16'];
-  _png_set_unknown_chunks = Module['_png_set_unknown_chunks'] = wasmExports['png_set_unknown_chunks'];
-  _inflateReset2 = Module['_inflateReset2'] = wasmExports['inflateReset2'];
-  _png_set_bKGD = Module['_png_set_bKGD'] = wasmExports['png_set_bKGD'];
-  _png_set_cHRM_fixed = Module['_png_set_cHRM_fixed'] = wasmExports['png_set_cHRM_fixed'];
-  _png_set_cICP = Module['_png_set_cICP'] = wasmExports['png_set_cICP'];
-  _png_set_cLLI_fixed = Module['_png_set_cLLI_fixed'] = wasmExports['png_set_cLLI_fixed'];
-  _png_set_eXIf_1 = Module['_png_set_eXIf_1'] = wasmExports['png_set_eXIf_1'];
-  _png_set_gAMA_fixed = Module['_png_set_gAMA_fixed'] = wasmExports['png_set_gAMA_fixed'];
-  _png_set_hIST = Module['_png_set_hIST'] = wasmExports['png_set_hIST'];
-  _png_set_text_2 = Module['_png_set_text_2'] = wasmExports['png_set_text_2'];
-  _png_set_mDCV_fixed = Module['_png_set_mDCV_fixed'] = wasmExports['png_set_mDCV_fixed'];
-  _png_set_oFFs = Module['_png_set_oFFs'] = wasmExports['png_set_oFFs'];
-  _png_set_pCAL = Module['_png_set_pCAL'] = wasmExports['png_set_pCAL'];
-  _png_set_pHYs = Module['_png_set_pHYs'] = wasmExports['png_set_pHYs'];
-  _png_set_sBIT = Module['_png_set_sBIT'] = wasmExports['png_set_sBIT'];
-  _png_set_sCAL_s = Module['_png_set_sCAL_s'] = wasmExports['png_set_sCAL_s'];
-  _png_set_sPLT = Module['_png_set_sPLT'] = wasmExports['png_set_sPLT'];
-  _png_set_sRGB = Module['_png_set_sRGB'] = wasmExports['png_set_sRGB'];
-  _png_set_tIME = Module['_png_set_tIME'] = wasmExports['png_set_tIME'];
-  _png_set_tRNS = Module['_png_set_tRNS'] = wasmExports['png_set_tRNS'];
-  _png_set_cHRM_XYZ_fixed = Module['_png_set_cHRM_XYZ_fixed'] = wasmExports['png_set_cHRM_XYZ_fixed'];
-  _png_set_cHRM = Module['_png_set_cHRM'] = wasmExports['png_set_cHRM'];
-  _png_set_cHRM_XYZ = Module['_png_set_cHRM_XYZ'] = wasmExports['png_set_cHRM_XYZ'];
-  _png_set_cLLI = Module['_png_set_cLLI'] = wasmExports['png_set_cLLI'];
-  _png_set_mDCV = Module['_png_set_mDCV'] = wasmExports['png_set_mDCV'];
-  _png_set_eXIf = Module['_png_set_eXIf'] = wasmExports['png_set_eXIf'];
-  _png_set_gAMA = Module['_png_set_gAMA'] = wasmExports['png_set_gAMA'];
-  _png_set_sCAL = Module['_png_set_sCAL'] = wasmExports['png_set_sCAL'];
-  _png_set_sCAL_fixed = Module['_png_set_sCAL_fixed'] = wasmExports['png_set_sCAL_fixed'];
-  _png_set_sRGB_gAMA_and_cHRM = Module['_png_set_sRGB_gAMA_and_cHRM'] = wasmExports['png_set_sRGB_gAMA_and_cHRM'];
-  _png_set_iCCP = Module['_png_set_iCCP'] = wasmExports['png_set_iCCP'];
-  _png_set_text = Module['_png_set_text'] = wasmExports['png_set_text'];
-  _png_set_unknown_chunk_location = Module['_png_set_unknown_chunk_location'] = wasmExports['png_set_unknown_chunk_location'];
-  _png_permit_mng_features = Module['_png_permit_mng_features'] = wasmExports['png_permit_mng_features'];
-  _png_set_read_user_chunk_fn = Module['_png_set_read_user_chunk_fn'] = wasmExports['png_set_read_user_chunk_fn'];
-  _png_set_compression_buffer_size = Module['_png_set_compression_buffer_size'] = wasmExports['png_set_compression_buffer_size'];
-  _png_free_buffer_list = Module['_png_free_buffer_list'] = wasmExports['png_free_buffer_list'];
-  _png_set_invalid = Module['_png_set_invalid'] = wasmExports['png_set_invalid'];
-  _png_set_user_limits = Module['_png_set_user_limits'] = wasmExports['png_set_user_limits'];
-  _png_set_chunk_cache_max = Module['_png_set_chunk_cache_max'] = wasmExports['png_set_chunk_cache_max'];
-  _png_set_chunk_malloc_max = Module['_png_set_chunk_malloc_max'] = wasmExports['png_set_chunk_malloc_max'];
-  _png_set_check_for_invalid_index = Module['_png_set_check_for_invalid_index'] = wasmExports['png_set_check_for_invalid_index'];
-  _png_check_keyword = Module['_png_check_keyword'] = wasmExports['png_check_keyword'];
-  _png_set_filler = Module['_png_set_filler'] = wasmExports['png_set_filler'];
-  _png_set_user_transform_info = Module['_png_set_user_transform_info'] = wasmExports['png_set_user_transform_info'];
-  _png_get_user_transform_ptr = Module['_png_get_user_transform_ptr'] = wasmExports['png_get_user_transform_ptr'];
-  _png_get_current_row_number = Module['_png_get_current_row_number'] = wasmExports['png_get_current_row_number'];
-  _png_get_current_pass_number = Module['_png_get_current_pass_number'] = wasmExports['png_get_current_pass_number'];
-  _png_write_data = Module['_png_write_data'] = wasmExports['png_write_data'];
-  _png_default_write_data = Module['_png_default_write_data'] = wasmExports['png_default_write_data'];
-  _png_flush = Module['_png_flush'] = wasmExports['png_flush'];
-  _png_default_flush = Module['_png_default_flush'] = wasmExports['png_default_flush'];
-  _png_write_info_before_PLTE = Module['_png_write_info_before_PLTE'] = wasmExports['png_write_info_before_PLTE'];
-  _png_write_sig = Module['_png_write_sig'] = wasmExports['png_write_sig'];
-  _png_write_IHDR = Module['_png_write_IHDR'] = wasmExports['png_write_IHDR'];
-  _png_write_sBIT = Module['_png_write_sBIT'] = wasmExports['png_write_sBIT'];
-  _png_write_cLLI_fixed = Module['_png_write_cLLI_fixed'] = wasmExports['png_write_cLLI_fixed'];
-  _png_write_mDCV_fixed = Module['_png_write_mDCV_fixed'] = wasmExports['png_write_mDCV_fixed'];
-  _png_write_cICP = Module['_png_write_cICP'] = wasmExports['png_write_cICP'];
-  _png_write_iCCP = Module['_png_write_iCCP'] = wasmExports['png_write_iCCP'];
-  _png_write_sRGB = Module['_png_write_sRGB'] = wasmExports['png_write_sRGB'];
-  _png_write_gAMA_fixed = Module['_png_write_gAMA_fixed'] = wasmExports['png_write_gAMA_fixed'];
-  _png_write_cHRM_fixed = Module['_png_write_cHRM_fixed'] = wasmExports['png_write_cHRM_fixed'];
-  _png_write_chunk = Module['_png_write_chunk'] = wasmExports['png_write_chunk'];
-  _png_write_info = Module['_png_write_info'] = wasmExports['png_write_info'];
-  _png_write_PLTE = Module['_png_write_PLTE'] = wasmExports['png_write_PLTE'];
-  _png_write_tRNS = Module['_png_write_tRNS'] = wasmExports['png_write_tRNS'];
-  _png_write_bKGD = Module['_png_write_bKGD'] = wasmExports['png_write_bKGD'];
-  _png_write_eXIf = Module['_png_write_eXIf'] = wasmExports['png_write_eXIf'];
-  _png_write_hIST = Module['_png_write_hIST'] = wasmExports['png_write_hIST'];
-  _png_write_oFFs = Module['_png_write_oFFs'] = wasmExports['png_write_oFFs'];
-  _png_write_pCAL = Module['_png_write_pCAL'] = wasmExports['png_write_pCAL'];
-  _png_write_sCAL_s = Module['_png_write_sCAL_s'] = wasmExports['png_write_sCAL_s'];
-  _png_write_pHYs = Module['_png_write_pHYs'] = wasmExports['png_write_pHYs'];
-  _png_write_tIME = Module['_png_write_tIME'] = wasmExports['png_write_tIME'];
-  _png_write_sPLT = Module['_png_write_sPLT'] = wasmExports['png_write_sPLT'];
-  _png_write_iTXt = Module['_png_write_iTXt'] = wasmExports['png_write_iTXt'];
-  _png_write_zTXt = Module['_png_write_zTXt'] = wasmExports['png_write_zTXt'];
-  _png_write_tEXt = Module['_png_write_tEXt'] = wasmExports['png_write_tEXt'];
-  _png_write_end = Module['_png_write_end'] = wasmExports['png_write_end'];
-  _png_write_IEND = Module['_png_write_IEND'] = wasmExports['png_write_IEND'];
-  _png_convert_from_struct_tm = Module['_png_convert_from_struct_tm'] = wasmExports['png_convert_from_struct_tm'];
-  _png_convert_from_time_t = Module['_png_convert_from_time_t'] = wasmExports['png_convert_from_time_t'];
-  _png_create_write_struct_2 = Module['_png_create_write_struct_2'] = wasmExports['png_create_write_struct_2'];
-  _png_write_rows = Module['_png_write_rows'] = wasmExports['png_write_rows'];
-  _png_write_row = Module['_png_write_row'] = wasmExports['png_write_row'];
-  _png_write_start_row = Module['_png_write_start_row'] = wasmExports['png_write_start_row'];
-  _png_write_finish_row = Module['_png_write_finish_row'] = wasmExports['png_write_finish_row'];
-  _png_do_write_interlace = Module['_png_do_write_interlace'] = wasmExports['png_do_write_interlace'];
-  _png_do_write_transformations = Module['_png_do_write_transformations'] = wasmExports['png_do_write_transformations'];
-  _png_write_find_filter = Module['_png_write_find_filter'] = wasmExports['png_write_find_filter'];
-  _png_write_image = Module['_png_write_image'] = wasmExports['png_write_image'];
-  _png_set_flush = Module['_png_set_flush'] = wasmExports['png_set_flush'];
-  _png_write_flush = Module['_png_write_flush'] = wasmExports['png_write_flush'];
-  _png_compress_IDAT = Module['_png_compress_IDAT'] = wasmExports['png_compress_IDAT'];
-  _png_set_filter = Module['_png_set_filter'] = wasmExports['png_set_filter'];
-  _png_set_filter_heuristics = Module['_png_set_filter_heuristics'] = wasmExports['png_set_filter_heuristics'];
-  _png_set_filter_heuristics_fixed = Module['_png_set_filter_heuristics_fixed'] = wasmExports['png_set_filter_heuristics_fixed'];
-  _png_set_compression_level = Module['_png_set_compression_level'] = wasmExports['png_set_compression_level'];
-  _png_set_compression_mem_level = Module['_png_set_compression_mem_level'] = wasmExports['png_set_compression_mem_level'];
-  _png_set_compression_strategy = Module['_png_set_compression_strategy'] = wasmExports['png_set_compression_strategy'];
-  _png_set_compression_window_bits = Module['_png_set_compression_window_bits'] = wasmExports['png_set_compression_window_bits'];
-  _png_set_compression_method = Module['_png_set_compression_method'] = wasmExports['png_set_compression_method'];
-  _png_set_text_compression_level = Module['_png_set_text_compression_level'] = wasmExports['png_set_text_compression_level'];
-  _png_set_text_compression_mem_level = Module['_png_set_text_compression_mem_level'] = wasmExports['png_set_text_compression_mem_level'];
-  _png_set_text_compression_strategy = Module['_png_set_text_compression_strategy'] = wasmExports['png_set_text_compression_strategy'];
-  _png_set_text_compression_window_bits = Module['_png_set_text_compression_window_bits'] = wasmExports['png_set_text_compression_window_bits'];
-  _png_set_text_compression_method = Module['_png_set_text_compression_method'] = wasmExports['png_set_text_compression_method'];
-  _png_set_write_status_fn = Module['_png_set_write_status_fn'] = wasmExports['png_set_write_status_fn'];
-  _png_set_write_user_transform_fn = Module['_png_set_write_user_transform_fn'] = wasmExports['png_set_write_user_transform_fn'];
-  _png_image_write_to_memory = Module['_png_image_write_to_memory'] = wasmExports['png_image_write_to_memory'];
-  _png_image_write_to_stdio = Module['_png_image_write_to_stdio'] = wasmExports['png_image_write_to_stdio'];
-  _png_image_write_to_file = Module['_png_image_write_to_file'] = wasmExports['png_image_write_to_file'];
-  _png_save_uint_16 = Module['_png_save_uint_16'] = wasmExports['png_save_uint_16'];
-  _png_write_chunk_start = Module['_png_write_chunk_start'] = wasmExports['png_write_chunk_start'];
-  _png_write_chunk_data = Module['_png_write_chunk_data'] = wasmExports['png_write_chunk_data'];
-  _png_write_chunk_end = Module['_png_write_chunk_end'] = wasmExports['png_write_chunk_end'];
-  _deflateReset = Module['_deflateReset'] = wasmExports['deflateReset'];
+  _jpeg_CreateCompress = Module['_jpeg_CreateCompress'] = wasmExports['jpeg_CreateCompress'];
+  _jinit_memory_mgr = Module['_jinit_memory_mgr'] = wasmExports['jinit_memory_mgr'];
+  _jpeg_destroy_compress = Module['_jpeg_destroy_compress'] = wasmExports['jpeg_destroy_compress'];
+  _jpeg_destroy = Module['_jpeg_destroy'] = wasmExports['jpeg_destroy'];
+  _jpeg_abort_compress = Module['_jpeg_abort_compress'] = wasmExports['jpeg_abort_compress'];
+  _jpeg_abort = Module['_jpeg_abort'] = wasmExports['jpeg_abort'];
+  _jpeg_suppress_tables = Module['_jpeg_suppress_tables'] = wasmExports['jpeg_suppress_tables'];
+  _jpeg_finish_compress = Module['_jpeg_finish_compress'] = wasmExports['jpeg_finish_compress'];
+  _jpeg_write_marker = Module['_jpeg_write_marker'] = wasmExports['jpeg_write_marker'];
+  _jpeg_write_m_header = Module['_jpeg_write_m_header'] = wasmExports['jpeg_write_m_header'];
+  _jpeg_write_m_byte = Module['_jpeg_write_m_byte'] = wasmExports['jpeg_write_m_byte'];
+  _jpeg_write_tables = Module['_jpeg_write_tables'] = wasmExports['jpeg_write_tables'];
+  _jinit_marker_writer = Module['_jinit_marker_writer'] = wasmExports['jinit_marker_writer'];
+  _jpeg_start_compress = Module['_jpeg_start_compress'] = wasmExports['jpeg_start_compress'];
+  _jinit_compress_master = Module['_jinit_compress_master'] = wasmExports['jinit_compress_master'];
+  _jpeg_write_scanlines = Module['_jpeg_write_scanlines'] = wasmExports['jpeg_write_scanlines'];
+  _jpeg_write_raw_data = Module['_jpeg_write_raw_data'] = wasmExports['jpeg_write_raw_data'];
+  _jinit_arith_encoder = Module['_jinit_arith_encoder'] = wasmExports['jinit_arith_encoder'];
+  _jinit_c_coef_controller = Module['_jinit_c_coef_controller'] = wasmExports['jinit_c_coef_controller'];
+  _jround_up = Module['_jround_up'] = wasmExports['jround_up'];
+  _jinit_color_converter = Module['_jinit_color_converter'] = wasmExports['jinit_color_converter'];
+  _jinit_forward_dct = Module['_jinit_forward_dct'] = wasmExports['jinit_forward_dct'];
+  _jpeg_fdct_1x1 = Module['_jpeg_fdct_1x1'] = wasmExports['jpeg_fdct_1x1'];
+  _jpeg_fdct_3x3 = Module['_jpeg_fdct_3x3'] = wasmExports['jpeg_fdct_3x3'];
+  _jpeg_fdct_4x4 = Module['_jpeg_fdct_4x4'] = wasmExports['jpeg_fdct_4x4'];
+  _jpeg_fdct_5x5 = Module['_jpeg_fdct_5x5'] = wasmExports['jpeg_fdct_5x5'];
+  _jpeg_fdct_6x6 = Module['_jpeg_fdct_6x6'] = wasmExports['jpeg_fdct_6x6'];
+  _jpeg_fdct_7x7 = Module['_jpeg_fdct_7x7'] = wasmExports['jpeg_fdct_7x7'];
+  _jpeg_fdct_10x10 = Module['_jpeg_fdct_10x10'] = wasmExports['jpeg_fdct_10x10'];
+  _jpeg_fdct_11x11 = Module['_jpeg_fdct_11x11'] = wasmExports['jpeg_fdct_11x11'];
+  _jpeg_fdct_12x12 = Module['_jpeg_fdct_12x12'] = wasmExports['jpeg_fdct_12x12'];
+  _jpeg_fdct_13x13 = Module['_jpeg_fdct_13x13'] = wasmExports['jpeg_fdct_13x13'];
+  _jpeg_fdct_14x14 = Module['_jpeg_fdct_14x14'] = wasmExports['jpeg_fdct_14x14'];
+  _jpeg_fdct_15x15 = Module['_jpeg_fdct_15x15'] = wasmExports['jpeg_fdct_15x15'];
+  _jpeg_fdct_16x16 = Module['_jpeg_fdct_16x16'] = wasmExports['jpeg_fdct_16x16'];
+  _jpeg_fdct_16x8 = Module['_jpeg_fdct_16x8'] = wasmExports['jpeg_fdct_16x8'];
+  _jpeg_fdct_14x7 = Module['_jpeg_fdct_14x7'] = wasmExports['jpeg_fdct_14x7'];
+  _jpeg_fdct_12x6 = Module['_jpeg_fdct_12x6'] = wasmExports['jpeg_fdct_12x6'];
+  _jpeg_fdct_10x5 = Module['_jpeg_fdct_10x5'] = wasmExports['jpeg_fdct_10x5'];
+  _jpeg_fdct_8x4 = Module['_jpeg_fdct_8x4'] = wasmExports['jpeg_fdct_8x4'];
+  _jpeg_fdct_6x3 = Module['_jpeg_fdct_6x3'] = wasmExports['jpeg_fdct_6x3'];
+  _jpeg_fdct_4x2 = Module['_jpeg_fdct_4x2'] = wasmExports['jpeg_fdct_4x2'];
+  _jpeg_fdct_2x1 = Module['_jpeg_fdct_2x1'] = wasmExports['jpeg_fdct_2x1'];
+  _jpeg_fdct_8x16 = Module['_jpeg_fdct_8x16'] = wasmExports['jpeg_fdct_8x16'];
+  _jpeg_fdct_7x14 = Module['_jpeg_fdct_7x14'] = wasmExports['jpeg_fdct_7x14'];
+  _jpeg_fdct_6x12 = Module['_jpeg_fdct_6x12'] = wasmExports['jpeg_fdct_6x12'];
+  _jpeg_fdct_5x10 = Module['_jpeg_fdct_5x10'] = wasmExports['jpeg_fdct_5x10'];
+  _jpeg_fdct_4x8 = Module['_jpeg_fdct_4x8'] = wasmExports['jpeg_fdct_4x8'];
+  _jpeg_fdct_3x6 = Module['_jpeg_fdct_3x6'] = wasmExports['jpeg_fdct_3x6'];
+  _jpeg_fdct_2x4 = Module['_jpeg_fdct_2x4'] = wasmExports['jpeg_fdct_2x4'];
+  _jpeg_fdct_1x2 = Module['_jpeg_fdct_1x2'] = wasmExports['jpeg_fdct_1x2'];
+  _jpeg_fdct_islow = Module['_jpeg_fdct_islow'] = wasmExports['jpeg_fdct_islow'];
+  _jpeg_fdct_2x2 = Module['_jpeg_fdct_2x2'] = wasmExports['jpeg_fdct_2x2'];
+  _jpeg_fdct_float = Module['_jpeg_fdct_float'] = wasmExports['jpeg_fdct_float'];
+  _jpeg_fdct_ifast = Module['_jpeg_fdct_ifast'] = wasmExports['jpeg_fdct_ifast'];
+  _jpeg_fdct_9x9 = Module['_jpeg_fdct_9x9'] = wasmExports['jpeg_fdct_9x9'];
+  _jinit_huff_encoder = Module['_jinit_huff_encoder'] = wasmExports['jinit_huff_encoder'];
+  _jpeg_alloc_huff_table = Module['_jpeg_alloc_huff_table'] = wasmExports['jpeg_alloc_huff_table'];
+  _jpeg_std_huff_table = Module['_jpeg_std_huff_table'] = wasmExports['jpeg_std_huff_table'];
+  _jpeg_calc_jpeg_dimensions = Module['_jpeg_calc_jpeg_dimensions'] = wasmExports['jpeg_calc_jpeg_dimensions'];
+  _jdiv_round_up = Module['_jdiv_round_up'] = wasmExports['jdiv_round_up'];
+  _jinit_c_master_control = Module['_jinit_c_master_control'] = wasmExports['jinit_c_master_control'];
+  _jinit_downsampler = Module['_jinit_downsampler'] = wasmExports['jinit_downsampler'];
+  _jinit_c_prep_controller = Module['_jinit_c_prep_controller'] = wasmExports['jinit_c_prep_controller'];
+  _jinit_c_main_controller = Module['_jinit_c_main_controller'] = wasmExports['jinit_c_main_controller'];
+  _jpeg_alloc_quant_table = Module['_jpeg_alloc_quant_table'] = wasmExports['jpeg_alloc_quant_table'];
+  _jpeg_add_quant_table = Module['_jpeg_add_quant_table'] = wasmExports['jpeg_add_quant_table'];
+  _jpeg_default_qtables = Module['_jpeg_default_qtables'] = wasmExports['jpeg_default_qtables'];
+  _jpeg_set_linear_quality = Module['_jpeg_set_linear_quality'] = wasmExports['jpeg_set_linear_quality'];
+  _jpeg_quality_scaling = Module['_jpeg_quality_scaling'] = wasmExports['jpeg_quality_scaling'];
+  _jpeg_set_quality = Module['_jpeg_set_quality'] = wasmExports['jpeg_set_quality'];
+  _jpeg_set_defaults = Module['_jpeg_set_defaults'] = wasmExports['jpeg_set_defaults'];
+  _jpeg_default_colorspace = Module['_jpeg_default_colorspace'] = wasmExports['jpeg_default_colorspace'];
+  _jpeg_set_colorspace = Module['_jpeg_set_colorspace'] = wasmExports['jpeg_set_colorspace'];
+  _jpeg_simple_progression = Module['_jpeg_simple_progression'] = wasmExports['jpeg_simple_progression'];
+  _jcopy_sample_rows = Module['_jcopy_sample_rows'] = wasmExports['jcopy_sample_rows'];
+  _jpeg_write_coefficients = Module['_jpeg_write_coefficients'] = wasmExports['jpeg_write_coefficients'];
+  _jpeg_copy_critical_parameters = Module['_jpeg_copy_critical_parameters'] = wasmExports['jpeg_copy_critical_parameters'];
+  _jinit_marker_reader = Module['_jinit_marker_reader'] = wasmExports['jinit_marker_reader'];
+  _jinit_input_controller = Module['_jinit_input_controller'] = wasmExports['jinit_input_controller'];
+  _jpeg_abort_decompress = Module['_jpeg_abort_decompress'] = wasmExports['jpeg_abort_decompress'];
+  _jpeg_consume_input = Module['_jpeg_consume_input'] = wasmExports['jpeg_consume_input'];
+  _jpeg_input_complete = Module['_jpeg_input_complete'] = wasmExports['jpeg_input_complete'];
+  _jpeg_has_multiple_scans = Module['_jpeg_has_multiple_scans'] = wasmExports['jpeg_has_multiple_scans'];
+  _jinit_master_decompress = Module['_jinit_master_decompress'] = wasmExports['jinit_master_decompress'];
+  _jpeg_read_raw_data = Module['_jpeg_read_raw_data'] = wasmExports['jpeg_read_raw_data'];
+  _jpeg_start_output = Module['_jpeg_start_output'] = wasmExports['jpeg_start_output'];
+  _jpeg_finish_output = Module['_jpeg_finish_output'] = wasmExports['jpeg_finish_output'];
+  _jinit_arith_decoder = Module['_jinit_arith_decoder'] = wasmExports['jinit_arith_decoder'];
+  _jpeg_stdio_dest = Module['_jpeg_stdio_dest'] = wasmExports['jpeg_stdio_dest'];
+  _jpeg_mem_dest = Module['_jpeg_mem_dest'] = wasmExports['jpeg_mem_dest'];
+  _jpeg_stdio_src = Module['_jpeg_stdio_src'] = wasmExports['jpeg_stdio_src'];
+  _jpeg_mem_src = Module['_jpeg_mem_src'] = wasmExports['jpeg_mem_src'];
+  _jinit_d_coef_controller = Module['_jinit_d_coef_controller'] = wasmExports['jinit_d_coef_controller'];
+  _jcopy_block_row = Module['_jcopy_block_row'] = wasmExports['jcopy_block_row'];
+  _jinit_color_deconverter = Module['_jinit_color_deconverter'] = wasmExports['jinit_color_deconverter'];
+  _jinit_inverse_dct = Module['_jinit_inverse_dct'] = wasmExports['jinit_inverse_dct'];
+  _jpeg_idct_1x1 = Module['_jpeg_idct_1x1'] = wasmExports['jpeg_idct_1x1'];
+  _jpeg_idct_3x3 = Module['_jpeg_idct_3x3'] = wasmExports['jpeg_idct_3x3'];
+  _jpeg_idct_4x4 = Module['_jpeg_idct_4x4'] = wasmExports['jpeg_idct_4x4'];
+  _jpeg_idct_5x5 = Module['_jpeg_idct_5x5'] = wasmExports['jpeg_idct_5x5'];
+  _jpeg_idct_6x6 = Module['_jpeg_idct_6x6'] = wasmExports['jpeg_idct_6x6'];
+  _jpeg_idct_7x7 = Module['_jpeg_idct_7x7'] = wasmExports['jpeg_idct_7x7'];
+  _jpeg_idct_10x10 = Module['_jpeg_idct_10x10'] = wasmExports['jpeg_idct_10x10'];
+  _jpeg_idct_11x11 = Module['_jpeg_idct_11x11'] = wasmExports['jpeg_idct_11x11'];
+  _jpeg_idct_12x12 = Module['_jpeg_idct_12x12'] = wasmExports['jpeg_idct_12x12'];
+  _jpeg_idct_13x13 = Module['_jpeg_idct_13x13'] = wasmExports['jpeg_idct_13x13'];
+  _jpeg_idct_14x14 = Module['_jpeg_idct_14x14'] = wasmExports['jpeg_idct_14x14'];
+  _jpeg_idct_15x15 = Module['_jpeg_idct_15x15'] = wasmExports['jpeg_idct_15x15'];
+  _jpeg_idct_16x16 = Module['_jpeg_idct_16x16'] = wasmExports['jpeg_idct_16x16'];
+  _jpeg_idct_16x8 = Module['_jpeg_idct_16x8'] = wasmExports['jpeg_idct_16x8'];
+  _jpeg_idct_14x7 = Module['_jpeg_idct_14x7'] = wasmExports['jpeg_idct_14x7'];
+  _jpeg_idct_12x6 = Module['_jpeg_idct_12x6'] = wasmExports['jpeg_idct_12x6'];
+  _jpeg_idct_10x5 = Module['_jpeg_idct_10x5'] = wasmExports['jpeg_idct_10x5'];
+  _jpeg_idct_8x4 = Module['_jpeg_idct_8x4'] = wasmExports['jpeg_idct_8x4'];
+  _jpeg_idct_6x3 = Module['_jpeg_idct_6x3'] = wasmExports['jpeg_idct_6x3'];
+  _jpeg_idct_4x2 = Module['_jpeg_idct_4x2'] = wasmExports['jpeg_idct_4x2'];
+  _jpeg_idct_2x1 = Module['_jpeg_idct_2x1'] = wasmExports['jpeg_idct_2x1'];
+  _jpeg_idct_8x16 = Module['_jpeg_idct_8x16'] = wasmExports['jpeg_idct_8x16'];
+  _jpeg_idct_7x14 = Module['_jpeg_idct_7x14'] = wasmExports['jpeg_idct_7x14'];
+  _jpeg_idct_6x12 = Module['_jpeg_idct_6x12'] = wasmExports['jpeg_idct_6x12'];
+  _jpeg_idct_5x10 = Module['_jpeg_idct_5x10'] = wasmExports['jpeg_idct_5x10'];
+  _jpeg_idct_4x8 = Module['_jpeg_idct_4x8'] = wasmExports['jpeg_idct_4x8'];
+  _jpeg_idct_3x6 = Module['_jpeg_idct_3x6'] = wasmExports['jpeg_idct_3x6'];
+  _jpeg_idct_2x4 = Module['_jpeg_idct_2x4'] = wasmExports['jpeg_idct_2x4'];
+  _jpeg_idct_1x2 = Module['_jpeg_idct_1x2'] = wasmExports['jpeg_idct_1x2'];
+  _jpeg_idct_islow = Module['_jpeg_idct_islow'] = wasmExports['jpeg_idct_islow'];
+  _jpeg_idct_ifast = Module['_jpeg_idct_ifast'] = wasmExports['jpeg_idct_ifast'];
+  _jpeg_idct_2x2 = Module['_jpeg_idct_2x2'] = wasmExports['jpeg_idct_2x2'];
+  _jpeg_idct_float = Module['_jpeg_idct_float'] = wasmExports['jpeg_idct_float'];
+  _jpeg_idct_9x9 = Module['_jpeg_idct_9x9'] = wasmExports['jpeg_idct_9x9'];
+  _jinit_huff_decoder = Module['_jinit_huff_decoder'] = wasmExports['jinit_huff_decoder'];
+  _jpeg_core_output_dimensions = Module['_jpeg_core_output_dimensions'] = wasmExports['jpeg_core_output_dimensions'];
+  _jinit_d_main_controller = Module['_jinit_d_main_controller'] = wasmExports['jinit_d_main_controller'];
+  _jpeg_save_markers = Module['_jpeg_save_markers'] = wasmExports['jpeg_save_markers'];
+  _jpeg_set_marker_processor = Module['_jpeg_set_marker_processor'] = wasmExports['jpeg_set_marker_processor'];
+  _jpeg_calc_output_dimensions = Module['_jpeg_calc_output_dimensions'] = wasmExports['jpeg_calc_output_dimensions'];
+  _jpeg_new_colormap = Module['_jpeg_new_colormap'] = wasmExports['jpeg_new_colormap'];
+  _jinit_1pass_quantizer = Module['_jinit_1pass_quantizer'] = wasmExports['jinit_1pass_quantizer'];
+  _jinit_2pass_quantizer = Module['_jinit_2pass_quantizer'] = wasmExports['jinit_2pass_quantizer'];
+  _jinit_merged_upsampler = Module['_jinit_merged_upsampler'] = wasmExports['jinit_merged_upsampler'];
+  _jinit_upsampler = Module['_jinit_upsampler'] = wasmExports['jinit_upsampler'];
+  _jinit_d_post_controller = Module['_jinit_d_post_controller'] = wasmExports['jinit_d_post_controller'];
+  _jpeg_read_coefficients = Module['_jpeg_read_coefficients'] = wasmExports['jpeg_read_coefficients'];
+  _jpeg_mem_init = Module['_jpeg_mem_init'] = wasmExports['jpeg_mem_init'];
+  _jpeg_get_small = Module['_jpeg_get_small'] = wasmExports['jpeg_get_small'];
+  _jpeg_mem_term = Module['_jpeg_mem_term'] = wasmExports['jpeg_mem_term'];
+  _jpeg_get_large = Module['_jpeg_get_large'] = wasmExports['jpeg_get_large'];
+  _jpeg_mem_available = Module['_jpeg_mem_available'] = wasmExports['jpeg_mem_available'];
+  _jpeg_open_backing_store = Module['_jpeg_open_backing_store'] = wasmExports['jpeg_open_backing_store'];
+  _jpeg_free_large = Module['_jpeg_free_large'] = wasmExports['jpeg_free_large'];
+  _jpeg_free_small = Module['_jpeg_free_small'] = wasmExports['jpeg_free_small'];
+  _jinit_read_bmp = Module['_jinit_read_bmp'] = wasmExports['jinit_read_bmp'];
+  _getc = Module['_getc'] = wasmExports['getc'];
+  _read_color_map = Module['_read_color_map'] = wasmExports['read_color_map'];
+  _jinit_read_gif = Module['_jinit_read_gif'] = wasmExports['jinit_read_gif'];
+  _jinit_read_ppm = Module['_jinit_read_ppm'] = wasmExports['jinit_read_ppm'];
+  _read_quant_tables = Module['_read_quant_tables'] = wasmExports['read_quant_tables'];
+  _read_scan_script = Module['_read_scan_script'] = wasmExports['read_scan_script'];
+  _ungetc = Module['_ungetc'] = wasmExports['ungetc'];
+  _set_quality_ratings = Module['_set_quality_ratings'] = wasmExports['set_quality_ratings'];
+  _set_quant_slots = Module['_set_quant_slots'] = wasmExports['set_quant_slots'];
+  _set_sample_factors = Module['_set_sample_factors'] = wasmExports['set_sample_factors'];
+  _jinit_read_targa = Module['_jinit_read_targa'] = wasmExports['jinit_read_targa'];
+  _jtransform_parse_crop_spec = Module['_jtransform_parse_crop_spec'] = wasmExports['jtransform_parse_crop_spec'];
+  _jtransform_request_workspace = Module['_jtransform_request_workspace'] = wasmExports['jtransform_request_workspace'];
+  _jtransform_perfect_transform = Module['_jtransform_perfect_transform'] = wasmExports['jtransform_perfect_transform'];
+  _jtransform_adjust_parameters = Module['_jtransform_adjust_parameters'] = wasmExports['jtransform_adjust_parameters'];
+  _jtransform_execute_transform = Module['_jtransform_execute_transform'] = wasmExports['jtransform_execute_transform'];
+  _jcopy_markers_setup = Module['_jcopy_markers_setup'] = wasmExports['jcopy_markers_setup'];
+  _jcopy_markers_execute = Module['_jcopy_markers_execute'] = wasmExports['jcopy_markers_execute'];
+  _jinit_write_bmp = Module['_jinit_write_bmp'] = wasmExports['jinit_write_bmp'];
+  _putc = Module['_putc'] = wasmExports['putc'];
+  _jinit_write_gif = Module['_jinit_write_gif'] = wasmExports['jinit_write_gif'];
+  _jinit_write_ppm = Module['_jinit_write_ppm'] = wasmExports['jinit_write_ppm'];
+  _jinit_write_targa = Module['_jinit_write_targa'] = wasmExports['jinit_write_targa'];
+  _DGifOpenFileName = Module['_DGifOpenFileName'] = wasmExports['DGifOpenFileName'];
+  _open = Module['_open'] = wasmExports['open'];
+  _DGifOpenFileHandle = Module['_DGifOpenFileHandle'] = wasmExports['DGifOpenFileHandle'];
+  _fdopen = Module['_fdopen'] = wasmExports['fdopen'];
+  _DGifGetScreenDesc = Module['_DGifGetScreenDesc'] = wasmExports['DGifGetScreenDesc'];
+  _GifFreeMapObject = Module['_GifFreeMapObject'] = wasmExports['GifFreeMapObject'];
+  _GifMakeMapObject = Module['_GifMakeMapObject'] = wasmExports['GifMakeMapObject'];
+  _DGifGetGifVersion = Module['_DGifGetGifVersion'] = wasmExports['DGifGetGifVersion'];
+  _DGifGetRecordType = Module['_DGifGetRecordType'] = wasmExports['DGifGetRecordType'];
+  _DGifGetImageHeader = Module['_DGifGetImageHeader'] = wasmExports['DGifGetImageHeader'];
+  _DGifGetImageDesc = Module['_DGifGetImageDesc'] = wasmExports['DGifGetImageDesc'];
+  _openbsd_reallocarray = Module['_openbsd_reallocarray'] = wasmExports['openbsd_reallocarray'];
+  _DGifGetLine = Module['_DGifGetLine'] = wasmExports['DGifGetLine'];
+  _DGifGetCodeNext = Module['_DGifGetCodeNext'] = wasmExports['DGifGetCodeNext'];
+  _DGifGetPixel = Module['_DGifGetPixel'] = wasmExports['DGifGetPixel'];
+  _DGifGetExtension = Module['_DGifGetExtension'] = wasmExports['DGifGetExtension'];
+  _DGifGetExtensionNext = Module['_DGifGetExtensionNext'] = wasmExports['DGifGetExtensionNext'];
+  _DGifSavedExtensionToGCB = Module['_DGifSavedExtensionToGCB'] = wasmExports['DGifSavedExtensionToGCB'];
+  _GifFreeSavedImages = Module['_GifFreeSavedImages'] = wasmExports['GifFreeSavedImages'];
+  _GifFreeExtensions = Module['_GifFreeExtensions'] = wasmExports['GifFreeExtensions'];
+  _DGifGetCode = Module['_DGifGetCode'] = wasmExports['DGifGetCode'];
+  _DGifGetLZCodes = Module['_DGifGetLZCodes'] = wasmExports['DGifGetLZCodes'];
+  _GifAddExtensionBlock = Module['_GifAddExtensionBlock'] = wasmExports['GifAddExtensionBlock'];
+  _EGifOpenFileName = Module['_EGifOpenFileName'] = wasmExports['EGifOpenFileName'];
+  _EGifOpenFileHandle = Module['_EGifOpenFileHandle'] = wasmExports['EGifOpenFileHandle'];
+  __InitHashTable = Module['__InitHashTable'] = wasmExports['_InitHashTable'];
+  _EGifOpen = Module['_EGifOpen'] = wasmExports['EGifOpen'];
+  _EGifGetGifVersion = Module['_EGifGetGifVersion'] = wasmExports['EGifGetGifVersion'];
+  _EGifSetGifVersion = Module['_EGifSetGifVersion'] = wasmExports['EGifSetGifVersion'];
+  _EGifPutScreenDesc = Module['_EGifPutScreenDesc'] = wasmExports['EGifPutScreenDesc'];
+  _EGifPutImageDesc = Module['_EGifPutImageDesc'] = wasmExports['EGifPutImageDesc'];
+  __ClearHashTable = Module['__ClearHashTable'] = wasmExports['_ClearHashTable'];
+  _EGifPutLine = Module['_EGifPutLine'] = wasmExports['EGifPutLine'];
+  __ExistsHashTable = Module['__ExistsHashTable'] = wasmExports['_ExistsHashTable'];
+  __InsertHashTable = Module['__InsertHashTable'] = wasmExports['_InsertHashTable'];
+  _EGifPutPixel = Module['_EGifPutPixel'] = wasmExports['EGifPutPixel'];
+  _EGifPutComment = Module['_EGifPutComment'] = wasmExports['EGifPutComment'];
+  _EGifPutExtension = Module['_EGifPutExtension'] = wasmExports['EGifPutExtension'];
+  _EGifPutExtensionLeader = Module['_EGifPutExtensionLeader'] = wasmExports['EGifPutExtensionLeader'];
+  _EGifPutExtensionBlock = Module['_EGifPutExtensionBlock'] = wasmExports['EGifPutExtensionBlock'];
+  _EGifPutExtensionTrailer = Module['_EGifPutExtensionTrailer'] = wasmExports['EGifPutExtensionTrailer'];
+  _EGifGCBToExtension = Module['_EGifGCBToExtension'] = wasmExports['EGifGCBToExtension'];
+  _EGifGCBToSavedExtension = Module['_EGifGCBToSavedExtension'] = wasmExports['EGifGCBToSavedExtension'];
+  _EGifPutCode = Module['_EGifPutCode'] = wasmExports['EGifPutCode'];
+  _EGifPutCodeNext = Module['_EGifPutCodeNext'] = wasmExports['EGifPutCodeNext'];
+  _EGifCloseFile = Module['_EGifCloseFile'] = wasmExports['EGifCloseFile'];
+  _EGifSpew = Module['_EGifSpew'] = wasmExports['EGifSpew'];
+  _GAGetArgs = Module['_GAGetArgs'] = wasmExports['GAGetArgs'];
+  _GAPrintErrMsg = Module['_GAPrintErrMsg'] = wasmExports['GAPrintErrMsg'];
+  _GAPrintHowTo = Module['_GAPrintHowTo'] = wasmExports['GAPrintHowTo'];
+  _GifDrawText8x8 = Module['_GifDrawText8x8'] = wasmExports['GifDrawText8x8'];
+  _GifDrawBox = Module['_GifDrawBox'] = wasmExports['GifDrawBox'];
+  _GifDrawRectangle = Module['_GifDrawRectangle'] = wasmExports['GifDrawRectangle'];
+  _GifDrawBoxedText8x8 = Module['_GifDrawBoxedText8x8'] = wasmExports['GifDrawBoxedText8x8'];
+  _GifBitSize = Module['_GifBitSize'] = wasmExports['GifBitSize'];
+  _GifUnionColorMap = Module['_GifUnionColorMap'] = wasmExports['GifUnionColorMap'];
+  _GifApplyTranslation = Module['_GifApplyTranslation'] = wasmExports['GifApplyTranslation'];
+  _FreeLastSavedImage = Module['_FreeLastSavedImage'] = wasmExports['FreeLastSavedImage'];
+  _GifMakeSavedImage = Module['_GifMakeSavedImage'] = wasmExports['GifMakeSavedImage'];
+  _GifQprintf = Module['_GifQprintf'] = wasmExports['GifQprintf'];
+  _PrintGifError = Module['_PrintGifError'] = wasmExports['PrintGifError'];
+  _GifQuantizeBuffer = Module['_GifQuantizeBuffer'] = wasmExports['GifQuantizeBuffer'];
   _af_shaper_get_cluster = Module['_af_shaper_get_cluster'] = wasmExports['af_shaper_get_cluster'];
   _FT_Get_Advance = Module['_FT_Get_Advance'] = wasmExports['FT_Get_Advance'];
   _FT_MulDiv = Module['_FT_MulDiv'] = wasmExports['FT_MulDiv'];
@@ -93920,7 +94184,6 @@ function assignWasmExports(wasmExports) {
   _FT_Glyph_StrokeBorder = Module['_FT_Glyph_StrokeBorder'] = wasmExports['FT_Glyph_StrokeBorder'];
   _FT_GlyphSlot_Slant = Module['_FT_GlyphSlot_Slant'] = wasmExports['FT_GlyphSlot_Slant'];
   _FT_GlyphSlot_AdjustWeight = Module['_FT_GlyphSlot_AdjustWeight'] = wasmExports['FT_GlyphSlot_AdjustWeight'];
-  _open = Module['_open'] = wasmExports['open'];
   _mmap = Module['_mmap'] = wasmExports['mmap'];
   _munmap = Module['_munmap'] = wasmExports['munmap'];
   _FT_Get_PS_Font_Info = Module['_FT_Get_PS_Font_Info'] = wasmExports['FT_Get_PS_Font_Info'];
@@ -93931,243 +94194,6 @@ function assignWasmExports(wasmExports) {
   _ps_hints_apply = Module['_ps_hints_apply'] = wasmExports['ps_hints_apply'];
   _TT_RunIns = Module['_TT_RunIns'] = wasmExports['TT_RunIns'];
   _TT_New_Context = Module['_TT_New_Context'] = wasmExports['TT_New_Context'];
-  _jpeg_CreateCompress = Module['_jpeg_CreateCompress'] = wasmExports['jpeg_CreateCompress'];
-  _jinit_memory_mgr = Module['_jinit_memory_mgr'] = wasmExports['jinit_memory_mgr'];
-  _jpeg_destroy_compress = Module['_jpeg_destroy_compress'] = wasmExports['jpeg_destroy_compress'];
-  _jpeg_destroy = Module['_jpeg_destroy'] = wasmExports['jpeg_destroy'];
-  _jpeg_abort_compress = Module['_jpeg_abort_compress'] = wasmExports['jpeg_abort_compress'];
-  _jpeg_abort = Module['_jpeg_abort'] = wasmExports['jpeg_abort'];
-  _jpeg_suppress_tables = Module['_jpeg_suppress_tables'] = wasmExports['jpeg_suppress_tables'];
-  _jpeg_finish_compress = Module['_jpeg_finish_compress'] = wasmExports['jpeg_finish_compress'];
-  _jpeg_write_marker = Module['_jpeg_write_marker'] = wasmExports['jpeg_write_marker'];
-  _jpeg_write_m_header = Module['_jpeg_write_m_header'] = wasmExports['jpeg_write_m_header'];
-  _jpeg_write_m_byte = Module['_jpeg_write_m_byte'] = wasmExports['jpeg_write_m_byte'];
-  _jpeg_write_tables = Module['_jpeg_write_tables'] = wasmExports['jpeg_write_tables'];
-  _jinit_marker_writer = Module['_jinit_marker_writer'] = wasmExports['jinit_marker_writer'];
-  _jpeg_start_compress = Module['_jpeg_start_compress'] = wasmExports['jpeg_start_compress'];
-  _jinit_compress_master = Module['_jinit_compress_master'] = wasmExports['jinit_compress_master'];
-  _jpeg_write_scanlines = Module['_jpeg_write_scanlines'] = wasmExports['jpeg_write_scanlines'];
-  _jpeg_write_raw_data = Module['_jpeg_write_raw_data'] = wasmExports['jpeg_write_raw_data'];
-  _jinit_arith_encoder = Module['_jinit_arith_encoder'] = wasmExports['jinit_arith_encoder'];
-  _jinit_c_coef_controller = Module['_jinit_c_coef_controller'] = wasmExports['jinit_c_coef_controller'];
-  _jround_up = Module['_jround_up'] = wasmExports['jround_up'];
-  _jinit_color_converter = Module['_jinit_color_converter'] = wasmExports['jinit_color_converter'];
-  _jinit_forward_dct = Module['_jinit_forward_dct'] = wasmExports['jinit_forward_dct'];
-  _jpeg_fdct_1x1 = Module['_jpeg_fdct_1x1'] = wasmExports['jpeg_fdct_1x1'];
-  _jpeg_fdct_3x3 = Module['_jpeg_fdct_3x3'] = wasmExports['jpeg_fdct_3x3'];
-  _jpeg_fdct_4x4 = Module['_jpeg_fdct_4x4'] = wasmExports['jpeg_fdct_4x4'];
-  _jpeg_fdct_5x5 = Module['_jpeg_fdct_5x5'] = wasmExports['jpeg_fdct_5x5'];
-  _jpeg_fdct_6x6 = Module['_jpeg_fdct_6x6'] = wasmExports['jpeg_fdct_6x6'];
-  _jpeg_fdct_7x7 = Module['_jpeg_fdct_7x7'] = wasmExports['jpeg_fdct_7x7'];
-  _jpeg_fdct_10x10 = Module['_jpeg_fdct_10x10'] = wasmExports['jpeg_fdct_10x10'];
-  _jpeg_fdct_11x11 = Module['_jpeg_fdct_11x11'] = wasmExports['jpeg_fdct_11x11'];
-  _jpeg_fdct_12x12 = Module['_jpeg_fdct_12x12'] = wasmExports['jpeg_fdct_12x12'];
-  _jpeg_fdct_13x13 = Module['_jpeg_fdct_13x13'] = wasmExports['jpeg_fdct_13x13'];
-  _jpeg_fdct_14x14 = Module['_jpeg_fdct_14x14'] = wasmExports['jpeg_fdct_14x14'];
-  _jpeg_fdct_15x15 = Module['_jpeg_fdct_15x15'] = wasmExports['jpeg_fdct_15x15'];
-  _jpeg_fdct_16x16 = Module['_jpeg_fdct_16x16'] = wasmExports['jpeg_fdct_16x16'];
-  _jpeg_fdct_16x8 = Module['_jpeg_fdct_16x8'] = wasmExports['jpeg_fdct_16x8'];
-  _jpeg_fdct_14x7 = Module['_jpeg_fdct_14x7'] = wasmExports['jpeg_fdct_14x7'];
-  _jpeg_fdct_12x6 = Module['_jpeg_fdct_12x6'] = wasmExports['jpeg_fdct_12x6'];
-  _jpeg_fdct_10x5 = Module['_jpeg_fdct_10x5'] = wasmExports['jpeg_fdct_10x5'];
-  _jpeg_fdct_8x4 = Module['_jpeg_fdct_8x4'] = wasmExports['jpeg_fdct_8x4'];
-  _jpeg_fdct_6x3 = Module['_jpeg_fdct_6x3'] = wasmExports['jpeg_fdct_6x3'];
-  _jpeg_fdct_4x2 = Module['_jpeg_fdct_4x2'] = wasmExports['jpeg_fdct_4x2'];
-  _jpeg_fdct_2x1 = Module['_jpeg_fdct_2x1'] = wasmExports['jpeg_fdct_2x1'];
-  _jpeg_fdct_8x16 = Module['_jpeg_fdct_8x16'] = wasmExports['jpeg_fdct_8x16'];
-  _jpeg_fdct_7x14 = Module['_jpeg_fdct_7x14'] = wasmExports['jpeg_fdct_7x14'];
-  _jpeg_fdct_6x12 = Module['_jpeg_fdct_6x12'] = wasmExports['jpeg_fdct_6x12'];
-  _jpeg_fdct_5x10 = Module['_jpeg_fdct_5x10'] = wasmExports['jpeg_fdct_5x10'];
-  _jpeg_fdct_4x8 = Module['_jpeg_fdct_4x8'] = wasmExports['jpeg_fdct_4x8'];
-  _jpeg_fdct_3x6 = Module['_jpeg_fdct_3x6'] = wasmExports['jpeg_fdct_3x6'];
-  _jpeg_fdct_2x4 = Module['_jpeg_fdct_2x4'] = wasmExports['jpeg_fdct_2x4'];
-  _jpeg_fdct_1x2 = Module['_jpeg_fdct_1x2'] = wasmExports['jpeg_fdct_1x2'];
-  _jpeg_fdct_islow = Module['_jpeg_fdct_islow'] = wasmExports['jpeg_fdct_islow'];
-  _jpeg_fdct_2x2 = Module['_jpeg_fdct_2x2'] = wasmExports['jpeg_fdct_2x2'];
-  _jpeg_fdct_float = Module['_jpeg_fdct_float'] = wasmExports['jpeg_fdct_float'];
-  _jpeg_fdct_ifast = Module['_jpeg_fdct_ifast'] = wasmExports['jpeg_fdct_ifast'];
-  _jpeg_fdct_9x9 = Module['_jpeg_fdct_9x9'] = wasmExports['jpeg_fdct_9x9'];
-  _jinit_huff_encoder = Module['_jinit_huff_encoder'] = wasmExports['jinit_huff_encoder'];
-  _jpeg_alloc_huff_table = Module['_jpeg_alloc_huff_table'] = wasmExports['jpeg_alloc_huff_table'];
-  _jpeg_std_huff_table = Module['_jpeg_std_huff_table'] = wasmExports['jpeg_std_huff_table'];
-  _jpeg_calc_jpeg_dimensions = Module['_jpeg_calc_jpeg_dimensions'] = wasmExports['jpeg_calc_jpeg_dimensions'];
-  _jdiv_round_up = Module['_jdiv_round_up'] = wasmExports['jdiv_round_up'];
-  _jinit_c_master_control = Module['_jinit_c_master_control'] = wasmExports['jinit_c_master_control'];
-  _jinit_downsampler = Module['_jinit_downsampler'] = wasmExports['jinit_downsampler'];
-  _jinit_c_prep_controller = Module['_jinit_c_prep_controller'] = wasmExports['jinit_c_prep_controller'];
-  _jinit_c_main_controller = Module['_jinit_c_main_controller'] = wasmExports['jinit_c_main_controller'];
-  _jpeg_alloc_quant_table = Module['_jpeg_alloc_quant_table'] = wasmExports['jpeg_alloc_quant_table'];
-  _jpeg_add_quant_table = Module['_jpeg_add_quant_table'] = wasmExports['jpeg_add_quant_table'];
-  _jpeg_default_qtables = Module['_jpeg_default_qtables'] = wasmExports['jpeg_default_qtables'];
-  _jpeg_set_linear_quality = Module['_jpeg_set_linear_quality'] = wasmExports['jpeg_set_linear_quality'];
-  _jpeg_quality_scaling = Module['_jpeg_quality_scaling'] = wasmExports['jpeg_quality_scaling'];
-  _jpeg_set_quality = Module['_jpeg_set_quality'] = wasmExports['jpeg_set_quality'];
-  _jpeg_set_defaults = Module['_jpeg_set_defaults'] = wasmExports['jpeg_set_defaults'];
-  _jpeg_default_colorspace = Module['_jpeg_default_colorspace'] = wasmExports['jpeg_default_colorspace'];
-  _jpeg_set_colorspace = Module['_jpeg_set_colorspace'] = wasmExports['jpeg_set_colorspace'];
-  _jpeg_simple_progression = Module['_jpeg_simple_progression'] = wasmExports['jpeg_simple_progression'];
-  _jcopy_sample_rows = Module['_jcopy_sample_rows'] = wasmExports['jcopy_sample_rows'];
-  _jpeg_write_coefficients = Module['_jpeg_write_coefficients'] = wasmExports['jpeg_write_coefficients'];
-  _jpeg_copy_critical_parameters = Module['_jpeg_copy_critical_parameters'] = wasmExports['jpeg_copy_critical_parameters'];
-  _jinit_marker_reader = Module['_jinit_marker_reader'] = wasmExports['jinit_marker_reader'];
-  _jinit_input_controller = Module['_jinit_input_controller'] = wasmExports['jinit_input_controller'];
-  _jpeg_abort_decompress = Module['_jpeg_abort_decompress'] = wasmExports['jpeg_abort_decompress'];
-  _jpeg_consume_input = Module['_jpeg_consume_input'] = wasmExports['jpeg_consume_input'];
-  _jpeg_input_complete = Module['_jpeg_input_complete'] = wasmExports['jpeg_input_complete'];
-  _jpeg_has_multiple_scans = Module['_jpeg_has_multiple_scans'] = wasmExports['jpeg_has_multiple_scans'];
-  _jinit_master_decompress = Module['_jinit_master_decompress'] = wasmExports['jinit_master_decompress'];
-  _jpeg_read_raw_data = Module['_jpeg_read_raw_data'] = wasmExports['jpeg_read_raw_data'];
-  _jpeg_start_output = Module['_jpeg_start_output'] = wasmExports['jpeg_start_output'];
-  _jpeg_finish_output = Module['_jpeg_finish_output'] = wasmExports['jpeg_finish_output'];
-  _jinit_arith_decoder = Module['_jinit_arith_decoder'] = wasmExports['jinit_arith_decoder'];
-  _jpeg_stdio_dest = Module['_jpeg_stdio_dest'] = wasmExports['jpeg_stdio_dest'];
-  _jpeg_mem_dest = Module['_jpeg_mem_dest'] = wasmExports['jpeg_mem_dest'];
-  _jpeg_stdio_src = Module['_jpeg_stdio_src'] = wasmExports['jpeg_stdio_src'];
-  _jpeg_mem_src = Module['_jpeg_mem_src'] = wasmExports['jpeg_mem_src'];
-  _jinit_d_coef_controller = Module['_jinit_d_coef_controller'] = wasmExports['jinit_d_coef_controller'];
-  _jcopy_block_row = Module['_jcopy_block_row'] = wasmExports['jcopy_block_row'];
-  _jinit_color_deconverter = Module['_jinit_color_deconverter'] = wasmExports['jinit_color_deconverter'];
-  _jinit_inverse_dct = Module['_jinit_inverse_dct'] = wasmExports['jinit_inverse_dct'];
-  _jpeg_idct_1x1 = Module['_jpeg_idct_1x1'] = wasmExports['jpeg_idct_1x1'];
-  _jpeg_idct_3x3 = Module['_jpeg_idct_3x3'] = wasmExports['jpeg_idct_3x3'];
-  _jpeg_idct_4x4 = Module['_jpeg_idct_4x4'] = wasmExports['jpeg_idct_4x4'];
-  _jpeg_idct_5x5 = Module['_jpeg_idct_5x5'] = wasmExports['jpeg_idct_5x5'];
-  _jpeg_idct_6x6 = Module['_jpeg_idct_6x6'] = wasmExports['jpeg_idct_6x6'];
-  _jpeg_idct_7x7 = Module['_jpeg_idct_7x7'] = wasmExports['jpeg_idct_7x7'];
-  _jpeg_idct_10x10 = Module['_jpeg_idct_10x10'] = wasmExports['jpeg_idct_10x10'];
-  _jpeg_idct_11x11 = Module['_jpeg_idct_11x11'] = wasmExports['jpeg_idct_11x11'];
-  _jpeg_idct_12x12 = Module['_jpeg_idct_12x12'] = wasmExports['jpeg_idct_12x12'];
-  _jpeg_idct_13x13 = Module['_jpeg_idct_13x13'] = wasmExports['jpeg_idct_13x13'];
-  _jpeg_idct_14x14 = Module['_jpeg_idct_14x14'] = wasmExports['jpeg_idct_14x14'];
-  _jpeg_idct_15x15 = Module['_jpeg_idct_15x15'] = wasmExports['jpeg_idct_15x15'];
-  _jpeg_idct_16x16 = Module['_jpeg_idct_16x16'] = wasmExports['jpeg_idct_16x16'];
-  _jpeg_idct_16x8 = Module['_jpeg_idct_16x8'] = wasmExports['jpeg_idct_16x8'];
-  _jpeg_idct_14x7 = Module['_jpeg_idct_14x7'] = wasmExports['jpeg_idct_14x7'];
-  _jpeg_idct_12x6 = Module['_jpeg_idct_12x6'] = wasmExports['jpeg_idct_12x6'];
-  _jpeg_idct_10x5 = Module['_jpeg_idct_10x5'] = wasmExports['jpeg_idct_10x5'];
-  _jpeg_idct_8x4 = Module['_jpeg_idct_8x4'] = wasmExports['jpeg_idct_8x4'];
-  _jpeg_idct_6x3 = Module['_jpeg_idct_6x3'] = wasmExports['jpeg_idct_6x3'];
-  _jpeg_idct_4x2 = Module['_jpeg_idct_4x2'] = wasmExports['jpeg_idct_4x2'];
-  _jpeg_idct_2x1 = Module['_jpeg_idct_2x1'] = wasmExports['jpeg_idct_2x1'];
-  _jpeg_idct_8x16 = Module['_jpeg_idct_8x16'] = wasmExports['jpeg_idct_8x16'];
-  _jpeg_idct_7x14 = Module['_jpeg_idct_7x14'] = wasmExports['jpeg_idct_7x14'];
-  _jpeg_idct_6x12 = Module['_jpeg_idct_6x12'] = wasmExports['jpeg_idct_6x12'];
-  _jpeg_idct_5x10 = Module['_jpeg_idct_5x10'] = wasmExports['jpeg_idct_5x10'];
-  _jpeg_idct_4x8 = Module['_jpeg_idct_4x8'] = wasmExports['jpeg_idct_4x8'];
-  _jpeg_idct_3x6 = Module['_jpeg_idct_3x6'] = wasmExports['jpeg_idct_3x6'];
-  _jpeg_idct_2x4 = Module['_jpeg_idct_2x4'] = wasmExports['jpeg_idct_2x4'];
-  _jpeg_idct_1x2 = Module['_jpeg_idct_1x2'] = wasmExports['jpeg_idct_1x2'];
-  _jpeg_idct_islow = Module['_jpeg_idct_islow'] = wasmExports['jpeg_idct_islow'];
-  _jpeg_idct_ifast = Module['_jpeg_idct_ifast'] = wasmExports['jpeg_idct_ifast'];
-  _jpeg_idct_2x2 = Module['_jpeg_idct_2x2'] = wasmExports['jpeg_idct_2x2'];
-  _jpeg_idct_float = Module['_jpeg_idct_float'] = wasmExports['jpeg_idct_float'];
-  _jpeg_idct_9x9 = Module['_jpeg_idct_9x9'] = wasmExports['jpeg_idct_9x9'];
-  _jinit_huff_decoder = Module['_jinit_huff_decoder'] = wasmExports['jinit_huff_decoder'];
-  _jpeg_core_output_dimensions = Module['_jpeg_core_output_dimensions'] = wasmExports['jpeg_core_output_dimensions'];
-  _jinit_d_main_controller = Module['_jinit_d_main_controller'] = wasmExports['jinit_d_main_controller'];
-  _jpeg_save_markers = Module['_jpeg_save_markers'] = wasmExports['jpeg_save_markers'];
-  _jpeg_set_marker_processor = Module['_jpeg_set_marker_processor'] = wasmExports['jpeg_set_marker_processor'];
-  _jpeg_calc_output_dimensions = Module['_jpeg_calc_output_dimensions'] = wasmExports['jpeg_calc_output_dimensions'];
-  _jpeg_new_colormap = Module['_jpeg_new_colormap'] = wasmExports['jpeg_new_colormap'];
-  _jinit_1pass_quantizer = Module['_jinit_1pass_quantizer'] = wasmExports['jinit_1pass_quantizer'];
-  _jinit_2pass_quantizer = Module['_jinit_2pass_quantizer'] = wasmExports['jinit_2pass_quantizer'];
-  _jinit_merged_upsampler = Module['_jinit_merged_upsampler'] = wasmExports['jinit_merged_upsampler'];
-  _jinit_upsampler = Module['_jinit_upsampler'] = wasmExports['jinit_upsampler'];
-  _jinit_d_post_controller = Module['_jinit_d_post_controller'] = wasmExports['jinit_d_post_controller'];
-  _jpeg_read_coefficients = Module['_jpeg_read_coefficients'] = wasmExports['jpeg_read_coefficients'];
-  _jpeg_mem_init = Module['_jpeg_mem_init'] = wasmExports['jpeg_mem_init'];
-  _jpeg_get_small = Module['_jpeg_get_small'] = wasmExports['jpeg_get_small'];
-  _jpeg_mem_term = Module['_jpeg_mem_term'] = wasmExports['jpeg_mem_term'];
-  _jpeg_get_large = Module['_jpeg_get_large'] = wasmExports['jpeg_get_large'];
-  _jpeg_mem_available = Module['_jpeg_mem_available'] = wasmExports['jpeg_mem_available'];
-  _jpeg_open_backing_store = Module['_jpeg_open_backing_store'] = wasmExports['jpeg_open_backing_store'];
-  _jpeg_free_large = Module['_jpeg_free_large'] = wasmExports['jpeg_free_large'];
-  _jpeg_free_small = Module['_jpeg_free_small'] = wasmExports['jpeg_free_small'];
-  _jinit_read_bmp = Module['_jinit_read_bmp'] = wasmExports['jinit_read_bmp'];
-  _getc = Module['_getc'] = wasmExports['getc'];
-  _read_color_map = Module['_read_color_map'] = wasmExports['read_color_map'];
-  _jinit_read_gif = Module['_jinit_read_gif'] = wasmExports['jinit_read_gif'];
-  _jinit_read_ppm = Module['_jinit_read_ppm'] = wasmExports['jinit_read_ppm'];
-  _read_quant_tables = Module['_read_quant_tables'] = wasmExports['read_quant_tables'];
-  _read_scan_script = Module['_read_scan_script'] = wasmExports['read_scan_script'];
-  _ungetc = Module['_ungetc'] = wasmExports['ungetc'];
-  _set_quality_ratings = Module['_set_quality_ratings'] = wasmExports['set_quality_ratings'];
-  _set_quant_slots = Module['_set_quant_slots'] = wasmExports['set_quant_slots'];
-  _set_sample_factors = Module['_set_sample_factors'] = wasmExports['set_sample_factors'];
-  _jinit_read_targa = Module['_jinit_read_targa'] = wasmExports['jinit_read_targa'];
-  _jtransform_parse_crop_spec = Module['_jtransform_parse_crop_spec'] = wasmExports['jtransform_parse_crop_spec'];
-  _jtransform_request_workspace = Module['_jtransform_request_workspace'] = wasmExports['jtransform_request_workspace'];
-  _jtransform_perfect_transform = Module['_jtransform_perfect_transform'] = wasmExports['jtransform_perfect_transform'];
-  _jtransform_adjust_parameters = Module['_jtransform_adjust_parameters'] = wasmExports['jtransform_adjust_parameters'];
-  _jtransform_execute_transform = Module['_jtransform_execute_transform'] = wasmExports['jtransform_execute_transform'];
-  _jcopy_markers_setup = Module['_jcopy_markers_setup'] = wasmExports['jcopy_markers_setup'];
-  _jcopy_markers_execute = Module['_jcopy_markers_execute'] = wasmExports['jcopy_markers_execute'];
-  _jinit_write_bmp = Module['_jinit_write_bmp'] = wasmExports['jinit_write_bmp'];
-  _putc = Module['_putc'] = wasmExports['putc'];
-  _jinit_write_gif = Module['_jinit_write_gif'] = wasmExports['jinit_write_gif'];
-  _jinit_write_ppm = Module['_jinit_write_ppm'] = wasmExports['jinit_write_ppm'];
-  _jinit_write_targa = Module['_jinit_write_targa'] = wasmExports['jinit_write_targa'];
-  _DGifOpenFileName = Module['_DGifOpenFileName'] = wasmExports['DGifOpenFileName'];
-  _DGifOpenFileHandle = Module['_DGifOpenFileHandle'] = wasmExports['DGifOpenFileHandle'];
-  _fdopen = Module['_fdopen'] = wasmExports['fdopen'];
-  _DGifGetScreenDesc = Module['_DGifGetScreenDesc'] = wasmExports['DGifGetScreenDesc'];
-  _GifFreeMapObject = Module['_GifFreeMapObject'] = wasmExports['GifFreeMapObject'];
-  _GifMakeMapObject = Module['_GifMakeMapObject'] = wasmExports['GifMakeMapObject'];
-  _DGifGetGifVersion = Module['_DGifGetGifVersion'] = wasmExports['DGifGetGifVersion'];
-  _DGifGetRecordType = Module['_DGifGetRecordType'] = wasmExports['DGifGetRecordType'];
-  _DGifGetImageHeader = Module['_DGifGetImageHeader'] = wasmExports['DGifGetImageHeader'];
-  _DGifGetImageDesc = Module['_DGifGetImageDesc'] = wasmExports['DGifGetImageDesc'];
-  _openbsd_reallocarray = Module['_openbsd_reallocarray'] = wasmExports['openbsd_reallocarray'];
-  _DGifGetLine = Module['_DGifGetLine'] = wasmExports['DGifGetLine'];
-  _DGifGetCodeNext = Module['_DGifGetCodeNext'] = wasmExports['DGifGetCodeNext'];
-  _DGifGetPixel = Module['_DGifGetPixel'] = wasmExports['DGifGetPixel'];
-  _DGifGetExtension = Module['_DGifGetExtension'] = wasmExports['DGifGetExtension'];
-  _DGifGetExtensionNext = Module['_DGifGetExtensionNext'] = wasmExports['DGifGetExtensionNext'];
-  _DGifSavedExtensionToGCB = Module['_DGifSavedExtensionToGCB'] = wasmExports['DGifSavedExtensionToGCB'];
-  _GifFreeSavedImages = Module['_GifFreeSavedImages'] = wasmExports['GifFreeSavedImages'];
-  _GifFreeExtensions = Module['_GifFreeExtensions'] = wasmExports['GifFreeExtensions'];
-  _DGifGetCode = Module['_DGifGetCode'] = wasmExports['DGifGetCode'];
-  _DGifGetLZCodes = Module['_DGifGetLZCodes'] = wasmExports['DGifGetLZCodes'];
-  _GifAddExtensionBlock = Module['_GifAddExtensionBlock'] = wasmExports['GifAddExtensionBlock'];
-  _EGifOpenFileName = Module['_EGifOpenFileName'] = wasmExports['EGifOpenFileName'];
-  _EGifOpenFileHandle = Module['_EGifOpenFileHandle'] = wasmExports['EGifOpenFileHandle'];
-  __InitHashTable = Module['__InitHashTable'] = wasmExports['_InitHashTable'];
-  _EGifOpen = Module['_EGifOpen'] = wasmExports['EGifOpen'];
-  _EGifGetGifVersion = Module['_EGifGetGifVersion'] = wasmExports['EGifGetGifVersion'];
-  _EGifSetGifVersion = Module['_EGifSetGifVersion'] = wasmExports['EGifSetGifVersion'];
-  _EGifPutScreenDesc = Module['_EGifPutScreenDesc'] = wasmExports['EGifPutScreenDesc'];
-  _EGifPutImageDesc = Module['_EGifPutImageDesc'] = wasmExports['EGifPutImageDesc'];
-  __ClearHashTable = Module['__ClearHashTable'] = wasmExports['_ClearHashTable'];
-  _EGifPutLine = Module['_EGifPutLine'] = wasmExports['EGifPutLine'];
-  __ExistsHashTable = Module['__ExistsHashTable'] = wasmExports['_ExistsHashTable'];
-  __InsertHashTable = Module['__InsertHashTable'] = wasmExports['_InsertHashTable'];
-  _EGifPutPixel = Module['_EGifPutPixel'] = wasmExports['EGifPutPixel'];
-  _EGifPutComment = Module['_EGifPutComment'] = wasmExports['EGifPutComment'];
-  _EGifPutExtension = Module['_EGifPutExtension'] = wasmExports['EGifPutExtension'];
-  _EGifPutExtensionLeader = Module['_EGifPutExtensionLeader'] = wasmExports['EGifPutExtensionLeader'];
-  _EGifPutExtensionBlock = Module['_EGifPutExtensionBlock'] = wasmExports['EGifPutExtensionBlock'];
-  _EGifPutExtensionTrailer = Module['_EGifPutExtensionTrailer'] = wasmExports['EGifPutExtensionTrailer'];
-  _EGifGCBToExtension = Module['_EGifGCBToExtension'] = wasmExports['EGifGCBToExtension'];
-  _EGifGCBToSavedExtension = Module['_EGifGCBToSavedExtension'] = wasmExports['EGifGCBToSavedExtension'];
-  _EGifPutCode = Module['_EGifPutCode'] = wasmExports['EGifPutCode'];
-  _EGifPutCodeNext = Module['_EGifPutCodeNext'] = wasmExports['EGifPutCodeNext'];
-  _EGifCloseFile = Module['_EGifCloseFile'] = wasmExports['EGifCloseFile'];
-  _EGifSpew = Module['_EGifSpew'] = wasmExports['EGifSpew'];
-  _GAGetArgs = Module['_GAGetArgs'] = wasmExports['GAGetArgs'];
-  _GAPrintErrMsg = Module['_GAPrintErrMsg'] = wasmExports['GAPrintErrMsg'];
-  _GAPrintHowTo = Module['_GAPrintHowTo'] = wasmExports['GAPrintHowTo'];
-  _GifDrawText8x8 = Module['_GifDrawText8x8'] = wasmExports['GifDrawText8x8'];
-  _GifDrawBox = Module['_GifDrawBox'] = wasmExports['GifDrawBox'];
-  _GifDrawRectangle = Module['_GifDrawRectangle'] = wasmExports['GifDrawRectangle'];
-  _GifDrawBoxedText8x8 = Module['_GifDrawBoxedText8x8'] = wasmExports['GifDrawBoxedText8x8'];
-  _GifBitSize = Module['_GifBitSize'] = wasmExports['GifBitSize'];
-  _GifUnionColorMap = Module['_GifUnionColorMap'] = wasmExports['GifUnionColorMap'];
-  _GifApplyTranslation = Module['_GifApplyTranslation'] = wasmExports['GifApplyTranslation'];
-  _FreeLastSavedImage = Module['_FreeLastSavedImage'] = wasmExports['FreeLastSavedImage'];
-  _GifMakeSavedImage = Module['_GifMakeSavedImage'] = wasmExports['GifMakeSavedImage'];
-  _GifQprintf = Module['_GifQprintf'] = wasmExports['GifQprintf'];
-  _PrintGifError = Module['_PrintGifError'] = wasmExports['PrintGifError'];
-  _GifQuantizeBuffer = Module['_GifQuantizeBuffer'] = wasmExports['GifQuantizeBuffer'];
   _adler32_z = Module['_adler32_z'] = wasmExports['adler32_z'];
   _adler32 = Module['_adler32'] = wasmExports['adler32'];
   _adler32_combine = Module['_adler32_combine'] = wasmExports['adler32_combine'];
@@ -103833,6 +103859,9 @@ function assignWasmExports(wasmExports) {
   _fribidi_version_info = Module['_fribidi_version_info'] = wasmExports['fribidi_version_info'].value;
   _mandatory_liga_table = Module['_mandatory_liga_table'] = wasmExports['mandatory_liga_table'].value;
   _console_liga_table = Module['_console_liga_table'] = wasmExports['console_liga_table'].value;
+  _png_sRGB_table = Module['_png_sRGB_table'] = wasmExports['png_sRGB_table'].value;
+  _png_sRGB_base = Module['_png_sRGB_base'] = wasmExports['png_sRGB_base'].value;
+  _png_sRGB_delta = Module['_png_sRGB_delta'] = wasmExports['png_sRGB_delta'].value;
   _SDL_expand_byte = Module['_SDL_expand_byte'] = wasmExports['SDL_expand_byte'].value;
   _EMSCRIPTENAUDIO_bootstrap = Module['_EMSCRIPTENAUDIO_bootstrap'] = wasmExports['EMSCRIPTENAUDIO_bootstrap'].value;
   _DISKAUDIO_bootstrap = Module['_DISKAUDIO_bootstrap'] = wasmExports['DISKAUDIO_bootstrap'].value;
@@ -103856,9 +103885,17 @@ function assignWasmExports(wasmExports) {
   _GPU_RenderDriver = Module['_GPU_RenderDriver'] = wasmExports['GPU_RenderDriver'].value;
   _SW_RenderDriver = Module['_SW_RenderDriver'] = wasmExports['SW_RenderDriver'].value;
   _appindicator_names = Module['_appindicator_names'] = wasmExports['appindicator_names'].value;
-  _png_sRGB_table = Module['_png_sRGB_table'] = wasmExports['png_sRGB_table'].value;
-  _png_sRGB_base = Module['_png_sRGB_base'] = wasmExports['png_sRGB_base'].value;
-  _png_sRGB_delta = Module['_png_sRGB_delta'] = wasmExports['png_sRGB_delta'].value;
+  _jpeg_aritab = Module['_jpeg_aritab'] = wasmExports['jpeg_aritab'].value;
+  _jpeg_natural_order = Module['_jpeg_natural_order'] = wasmExports['jpeg_natural_order'].value;
+  _jpeg_natural_order2 = Module['_jpeg_natural_order2'] = wasmExports['jpeg_natural_order2'].value;
+  _jpeg_natural_order3 = Module['_jpeg_natural_order3'] = wasmExports['jpeg_natural_order3'].value;
+  _jpeg_natural_order4 = Module['_jpeg_natural_order4'] = wasmExports['jpeg_natural_order4'].value;
+  _jpeg_natural_order5 = Module['_jpeg_natural_order5'] = wasmExports['jpeg_natural_order5'].value;
+  _jpeg_natural_order6 = Module['_jpeg_natural_order6'] = wasmExports['jpeg_natural_order6'].value;
+  _jpeg_natural_order7 = Module['_jpeg_natural_order7'] = wasmExports['jpeg_natural_order7'].value;
+  _jpeg_std_message_table = Module['_jpeg_std_message_table'] = wasmExports['jpeg_std_message_table'].value;
+  _GifAsciiTable8x8 = Module['_GifAsciiTable8x8'] = wasmExports['GifAsciiTable8x8'].value;
+  _GifNoisyPrint = Module['_GifNoisyPrint'] = wasmExports['GifNoisyPrint'].value;
   _af_adlm_dflt_style_class = Module['_af_adlm_dflt_style_class'] = wasmExports['af_adlm_dflt_style_class'].value;
   _af_cjk_writing_system_class = Module['_af_cjk_writing_system_class'] = wasmExports['af_cjk_writing_system_class'].value;
   _af_dummy_writing_system_class = Module['_af_dummy_writing_system_class'] = wasmExports['af_dummy_writing_system_class'].value;
@@ -104190,17 +104227,6 @@ function assignWasmExports(wasmExports) {
   _tt_cmap14_class_rec = Module['_tt_cmap14_class_rec'] = wasmExports['tt_cmap14_class_rec'].value;
   _ft_grays_raster = Module['_ft_grays_raster'] = wasmExports['ft_grays_raster'].value;
   _tt_default_graphics_state = Module['_tt_default_graphics_state'] = wasmExports['tt_default_graphics_state'].value;
-  _jpeg_aritab = Module['_jpeg_aritab'] = wasmExports['jpeg_aritab'].value;
-  _jpeg_natural_order = Module['_jpeg_natural_order'] = wasmExports['jpeg_natural_order'].value;
-  _jpeg_natural_order2 = Module['_jpeg_natural_order2'] = wasmExports['jpeg_natural_order2'].value;
-  _jpeg_natural_order3 = Module['_jpeg_natural_order3'] = wasmExports['jpeg_natural_order3'].value;
-  _jpeg_natural_order4 = Module['_jpeg_natural_order4'] = wasmExports['jpeg_natural_order4'].value;
-  _jpeg_natural_order5 = Module['_jpeg_natural_order5'] = wasmExports['jpeg_natural_order5'].value;
-  _jpeg_natural_order6 = Module['_jpeg_natural_order6'] = wasmExports['jpeg_natural_order6'].value;
-  _jpeg_natural_order7 = Module['_jpeg_natural_order7'] = wasmExports['jpeg_natural_order7'].value;
-  _jpeg_std_message_table = Module['_jpeg_std_message_table'] = wasmExports['jpeg_std_message_table'].value;
-  _GifAsciiTable8x8 = Module['_GifAsciiTable8x8'] = wasmExports['GifAsciiTable8x8'].value;
-  _GifNoisyPrint = Module['_GifNoisyPrint'] = wasmExports['GifNoisyPrint'].value;
   _z_errmsg = Module['_z_errmsg'] = wasmExports['z_errmsg'].value;
   __length_code = Module['__length_code'] = wasmExports['_length_code'].value;
   __dist_code = Module['__dist_code'] = wasmExports['_dist_code'].value;

@@ -411,6 +411,12 @@
     "platform": "Windows"
   },
   {
+    "relative_path": "sfinx-de-v1.1",
+    "id": "cge2:sfinx",
+    "description": "German v1.1",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Sfinx/sfinx-de-v1.1.zip"
+  },
+  {
     "relative_path": "sfinx-demo-pl",
     "id": "cge2:sfinx",
     "description": "DOS Demo",
@@ -431,6 +437,12 @@
     "id": "cge2:sfinx",
     "description": "Polish v1.1",
     "download_url": "https://downloads.scummvm.org/frs/extras/Sfinx/sfinx-pl-v1.1.zip"
+  },
+  {
+    "relative_path": "soltys-de-v1.0",
+    "id": "cge:soltys",
+    "description": "German v1.0",
+    "download_url": "https://downloads.scummvm.org/frs/extras/Soltys/soltys-de-v1.0.zip"
   },
   {
     "relative_path": "soltys-en-v1.0",
@@ -707,6 +719,13 @@
     "id": "dreamweb:dreamweb",
     "description": "Freeware Floppy DOS Version (English UK)",
     "download_url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-uk-1.1.zip"
+  },
+  {
+    "relative_path": "foolserrand-demo10",
+    "id": "fool:foolserrand",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/fool/foolserrand-demo10.zip",
+    "platform": "Macintosh"
   },
   {
     "relative_path": "castle-amiga-demo",
@@ -1643,6 +1662,20 @@
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/m4/riddle-dos-demo-en.zip",
     "platform": "DOS"
+  },
+  {
+    "relative_path": "shadowgate-win-demo-en",
+    "id": "macventure:shadowgate",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/macventure/shadowgate-win-demo-en.zip",
+    "platform": "Windows"
+  },
+  {
+    "relative_path": "uninvited-mac-demo-en",
+    "id": "macventure:uninvited",
+    "description": "Macintosh Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/macventure/uninvited-mac-demo-en.zip",
+    "platform": "Macintosh"
   },
   {
     "relative_path": "rtz-dos-cd-demo1-en",
