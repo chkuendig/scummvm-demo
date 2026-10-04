@@ -1172,8 +1172,14 @@
       }
     },
     "fullBuild": {
-      "status": "pending",
-      "scummvmCommit": "0988f53814b3a94aca02ba8ae85456a68a28d36b"
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37229924452",
+      "status": "success",
+      "deployed": true,
+      "scummvmCommit": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+      "demoCommit": "6cd4d2e01c4268330e7ab903be5ed9f15395a933",
+      "emsdkVersion": "6.0.2",
+      "configure": "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder",
+      "sentryRelease": "f0b8677952e9"
     },
     "combinedCppChecks": {
       "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
@@ -1316,7 +1322,17 @@
       ]
     },
     "liveBrowser": {
-      "status": "pending"
+      "date": "2026-10-04",
+      "provenanceMatchesManifest": true,
+      "assetsServed": [
+        "scummvm.html",
+        "scummvm.js",
+        "scummvm.wasm",
+        "games.html",
+        "data/index.json"
+      ],
+      "status": "not run",
+      "limitation": "No headless browser was available on the refresh host (Chromium lacked system libraries; no Paseo browser host connected)."
     },
     "previousRefresh": {
       "date": "2026-09-13",
@@ -1427,8 +1443,10 @@
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "rebased onto upstream master on 2026-10-04; deployment pending",
+    "status": "deployed 2026-10-04; live revision verified; browser check not run",
     "previousHead": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
-    "previousHeadTag": "demo/integration-2026-09-13"
+    "previousHeadTag": "demo/integration-2026-09-13",
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/37229924452",
+    "demoCommit": "6cd4d2e01c4268330e7ab903be5ed9f15395a933"
   }
 }
