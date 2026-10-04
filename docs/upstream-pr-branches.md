@@ -1,6 +1,6 @@
 # ScummVM upstream branch set
 
-Prepared from deployment source on 2026-09-13; revised to put Emscripten runtime first and cloud streaming second. The five branches are in the **`scummvm/` submodule**, based on upstream master `2085bcb368c19bc90f0190efcd56b9d58cd7fb5a`.
+Prepared from deployment source on 2026-09-13; revised to put Emscripten runtime first and cloud streaming second; rebased onto upstream master on 2026-10-04. The five branches are in the **`scummvm/` submodule**, based on upstream master `454c594583003303b903d4619867b32db8394c72`.
 
 Runtime and cloud have been pushed to `chkuendig/scummvm`; touch, HPL1, and recorder remain local. No PRs have been opened. The demo is now pinned to `demo/upstream-integration`, which combines all five branches. Its deployment build enables the event recorder.
 
@@ -16,7 +16,7 @@ Runtime and cloud have been pushed to `chkuendig/scummvm`; touch, HPL1, and reco
 
 Runtime is the foundation. Branches 2–5 each depend only on runtime and can be reviewed separately after it lands. Cloud streaming does not block touch, HPL1, or recording.
 
-[Runtime diff on GitHub](https://github.com/chkuendig/scummvm/compare/2085bcb368c19bc90f0190efcd56b9d58cd7fb5a...upstream/emscripten-runtime) · [Cloud diff on GitHub](https://github.com/chkuendig/scummvm/compare/0c5737e1460024ad2a824161f71381d6db4f2f61...upstream/cloud-streaming)
+[Runtime diff on GitHub](https://github.com/chkuendig/scummvm/compare/454c594583003303b903d4619867b32db8394c72...upstream/emscripten-runtime) · [Cloud diff on GitHub](https://github.com/chkuendig/scummvm/compare/876d42bb06d15d6358a2406865b55060684fa479...upstream/cloud-streaming)
 
 ## Suggested PR titles and descriptions
 
@@ -54,6 +54,8 @@ The repository's [AI-GUIDELINES.md](../scummvm/AI-GUIDELINES.md) and [published 
 
 All 58 pending commits retain Christian Kündig as author and disclose this branch-preparation assistance with `Assisted-by: Codex:GPT-6`. Twelve historical Claude co-author trailers were converted into `Assisted-by: Claude:Opus-4.8` or `Assisted-by: Claude:Fable-5`, preserving the model labels already recorded in those commits. No unrecorded historical model was inferred. Basic tools such as Git and the compiler are not listed in the trailers.
 
+The 2026-10-04 refresh changed one commit's content and message (the recorder conflict below), so that commit also carries `Assisted-by: Claude:Opus-5.5`.
+
 Every pending commit was checked with Git's trailer parser. There are no AI co-author trailers in the prepared branch set. This metadata records assistance; it does not certify human review or a complete gameplay test.
 
 ## Reviewing and rebasing
@@ -72,10 +74,10 @@ After runtime lands, use its recorded tip as the boundary to move each dependent
 
 ```sh
 git fetch upstream master
-git rebase --onto upstream/master 0c5737e1460024ad2a824161f71381d6db4f2f61 upstream/cloud-streaming
-git rebase --onto upstream/master 0c5737e1460024ad2a824161f71381d6db4f2f61 upstream/touch-controls
-git rebase --onto upstream/master 0c5737e1460024ad2a824161f71381d6db4f2f61 upstream/hpl1-webgl
-git rebase --onto upstream/master 0c5737e1460024ad2a824161f71381d6db4f2f61 upstream/emscripten-recorder
+git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/cloud-streaming
+git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/touch-controls
+git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/hpl1-webgl
+git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/emscripten-recorder
 ```
 
 Use a separate worktree when building or switching branches; the deployment checkout contains local build artifacts.
@@ -101,6 +103,10 @@ The demo catalogue, assets, hosting workflows, Sentry integration, cloud-service
 
 ## Validation
 
+**2026-10-04 refresh.** All five branches were rebased onto upstream master `454c5945830` (287 new upstream commits): runtime directly, the siblings from the old runtime tip onto the new one. Runtime, cloud, touch, and HPL1 applied cleanly. The recorder commit "Make the event recorder work on the web port" conflicted in `gui/EventRecorder.cpp`. Upstream `85e26d3fe1b` ("RECORDER: Fix surface creation with SDL3") had added an equivalent SDL3 `getSurface()` path, so upstream's line was kept and the matching bullet was dropped from the commit message. All 58 commits remain, and every review diff passes `git diff --check`. The rebuilt integration tree is identical to merging upstream master into the previous integration `915ac4310a0`, apart from that resolved hunk. The previous integration is preserved as tag `demo/integration-2026-09-13` on `chkuendig/scummvm`. No local compile was run for this refresh; the CI deployment build is the compile check.
+
+Earlier results:
+
 - The runtime/cloud split preserved the combined source tree. All five branches were then rebased onto upstream `2085bcb368c`; each rebased tree exactly matched merging upstream into its previous tip. The only subsequent source change is the recorder Asyncify configuration fix.
 - All branches merge together without conflicts; each review diff and every individual commit passes `git diff --check`.
 - All 58 commits passed the attribution audit: human authors preserved, recognized `Assisted-by` trailers, and no AI co-authors.
@@ -109,13 +115,13 @@ The demo catalogue, assets, hosting workflows, Sentry integration, cloud-service
 
 The recorder import-selection check passed all four release/debug and recorder-on/off combinations. After the refresh, 33 additional C++ translation units covering touch, HPL1, and recording passed Emscripten syntax/type checks with the recorder enabled.
 
-The [full Emscripten build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069) passed with `--enable-all-engines --enable-cloud --enable-eventrecorder`. Live `build-info.json` matches demo commit `8ae0924e7d1bca98074baca146e0479b452846d1`, integration `915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c`, upstream `2085bcb368c`, and all five branch tips. Headless Chromium initialized the runtime and rendered the launcher at 1280×720 with no JavaScript errors or failed network requests; the screenshot was inspected.
+Before the 2026-10-04 refresh, the [full Emscripten build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069) passed with `--enable-all-engines --enable-cloud --enable-eventrecorder`. Live `build-info.json` matches demo commit `8ae0924e7d1bca98074baca146e0479b452846d1`, integration `915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c`, upstream `2085bcb368c`, and all five branch tips. Headless Chromium initialized the runtime and rendered the launcher at 1280×720 with no JavaScript errors or failed network requests; the screenshot was inspected.
 
 No iOS build, cloud-account gameplay test, or physical touch/controller test has been run for these branches. Before upstream submission, complete the relevant platform/gameplay validation and regenerate/validate the narrowed release Asyncify import list for configurations that use it. Recorder builds use the full import list.
 
 ## Combined demo testing
 
-The ScummVM branch `demo/upstream-integration` at `915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c` contains all five prepared branch tips as ancestors, based on upstream master `2085bcb368c19bc90f0190efcd56b9d58cd7fb5a`. The demo repository pins that exact commit, so the build is reproducible even if the upstream PR branches are rebased again.
+The ScummVM branch `demo/upstream-integration` at `0988f53814b3a94aca02ba8ae85456a68a28d36b` contains all five prepared branch tips as ancestors, based on upstream master `454c594583003303b903d4619867b32db8394c72`. The demo repository pins that exact commit, so the build is reproducible even if the upstream PR branches are rebased again.
 
 Pushing the demo's `main` branch runs the existing Build & Deploy workflow and updates [the demo](https://scummvm.kuendig.io/scummvm.html). The generated [build-info.json](https://scummvm.kuendig.io/build-info.json) identifies the demo commit, ScummVM commit, upstream base, and all five included branch tips. Compare it with this manifest to confirm which build is live.
 

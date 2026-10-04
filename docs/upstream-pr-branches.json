@@ -12,124 +12,124 @@
     "htmlSha256": "2ab613330c16c07ee7913684025665aabbcdc6e501b4839c1dd1b6498901eb36",
     "sentryRelease": "194fa8f51e44"
   },
-  "upstreamBase": "2085bcb368c19bc90f0190efcd56b9d58cd7fb5a",
+  "upstreamBase": "454c594583003303b903d4619867b32db8394c72",
   "branches": [
     {
       "order": 1,
       "name": "upstream/emscripten-runtime",
-      "head": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "head": "876d42bb06d15d6358a2406865b55060684fa479",
       "reviewBase": "upstream/master",
-      "base": "2085bcb368c19bc90f0190efcd56b9d58cd7fb5a",
+      "base": "454c594583003303b903d4619867b32db8394c72",
       "commits": 33,
       "files": 45,
       "diff": "45 files changed, 3303 insertions(+), 766 deletions(-)",
       "ownCommits": [
-        "7e51fdffc15d37dd581824432444e33f1112ffa9",
-        "9825dc22838a8328c37eb1fcba37b09c9e1517ca",
-        "c32685ceda526fcee3cfc4d8bb2528df1ec55bcc",
-        "8aa6a263c6847f332da217ae80618664eab2cc7e",
-        "9839365252cd563aab43e2dd8fbf027fe91b1ff9",
-        "0f7e65c09f841f972b4644c085a600f558996be9",
-        "0115d42ad2467ccc5d3e5004de89d934001564a6",
-        "ff71cdf08346e2d0e5f6e99ffd0f6970b2ccc329",
-        "00ec336f6e0014ab6b514d03858d7a6aff296a27",
-        "7ed1db471c3fe196bc81ebce1028474121654907",
-        "ad8b66768c1f3367a64cda04f116216a5e8911af",
-        "de9b14f010509f98088fd9914411d236d1875baf",
-        "91ca7b9b49f08c87d563eda2a823ed303997a8e8",
-        "957b2a1865533896e6a1740e6d717223923b6255",
-        "e87902d2f5090718ccfecf5cb95bee5efc899d6c",
-        "a0d6df19c0023c5da9c9c60d7bd75308bc455625",
-        "4e25f2944d750368b3094601dc939f85fc0e41f0",
-        "a16373501c3cb4ed793e0d84cdb21603fca322a6",
-        "ba294ec380249365284c3ea55853f623ad0a8221",
-        "5a087906e95f62ed265ac39930e8c832eb9c7fe0",
-        "b57010f91bde36e7ab4c70a7eddd36e853674ee3",
-        "f242c930845ba928bed7dd039f0461480f8377e1",
-        "edc00ade4c24b8d8ddb004647372ac6c6c0a0a0c",
-        "dab12398502b30b5022a68de0ab8934ee0a2d9b7",
-        "7bcf7a1d1184d661e83bc5dfc5d24ba9a0d48c9e",
-        "8d8a29930fec95c40a0dfc1b7e871772f78ee7d5",
-        "36a9f758a377da01a54041a46289ef4aa6054e3d",
-        "1df77c8078cd93e188d76d6603d80e6cd0a24443",
-        "11472e1ffa85dee22b6c169abeb8cc04daaae929",
-        "bda1aa97c7c2173433690baea4bf80ef4a8dccc6",
-        "4e79bcf7c71a91fbb1ef313db543e1869d9d428d",
-        "41509e6f5e67dbd0cd7394c35e8174e1396a3bdf",
-        "0c5737e1460024ad2a824161f71381d6db4f2f61"
+        "05c1bf923338799c17796d6eac747a7bae72bb2b",
+        "ba13eb584aced0d09fd48c4dc791c67dcbb66a11",
+        "6be9e9580e737194c90f9debdd61d30c453570b7",
+        "de3725bc68a036ffd88b9e82b533f9400d836408",
+        "ad439783a60ba89fe4da36abf5291bcb3f2ebe75",
+        "8ffe909a7025c3246c92d8d560ac5ac8a36b7689",
+        "979de4da4237a46ede630e80b0ea7d47f2a40099",
+        "bf6b949591dc52208816266ebc3970b0460ba1b5",
+        "7ffb1e8563b2212377fca850595e81af204f921d",
+        "cb801b583df87f258b889a1351e92fe4f1dc8bde",
+        "7f8af8d3ba299c9c0b9278b2e5ba598966f100c5",
+        "bfc507321b6885c0afe1322cef34e7571c98397f",
+        "bf63bf103203a18fb3fb7b26ef951bfd7ec96d7e",
+        "2f640970df2da20ac6994d3c1b0df182717f6865",
+        "e15b31af17ceebe395f56edbd574872b705ac67d",
+        "41bfdafe1c996897c08393f3a255f97db6fff389",
+        "27ba061812b4fe6db7a4be86620a9f71b7f3ab98",
+        "3623c0cd61d9989dfa15c3f0e627299fde46ae29",
+        "8cd0077960781bcf1200032434abedb9973fdf80",
+        "879ab14f117e379fd462d4a4e7397fd73b37a887",
+        "26b7933b32ab418eae0b83b767427b6bf596b3da",
+        "785651e51802f3bb51dbeb37ca690b1ea51c274a",
+        "8b879acc6acf7727baf21de5a6b7982dd20dba8d",
+        "ae940161bf68e8dfdbf3795bbdc246c2504082b0",
+        "f2fa45cbe4a4a9f23a3fc171d65ff85a9fe0c604",
+        "635240b546dea423a59cd9a4db577680ee418e50",
+        "2fa1bc47a7bd960cb8ef8f901ceb42a26450e5b3",
+        "e7c747ad34dc2bf086baee1769b0849ae21ac903",
+        "9b173fbd64a57e9059a92b81d29329c6273aa677",
+        "1973b16c81fa93e2ea02b480b4bb355d02c7f8d8",
+        "f065f6fca4cba44d4a45250929a05b8f38f782fa",
+        "bc4004558411c6f537a1bf1fedcd515dd7847852",
+        "876d42bb06d15d6358a2406865b55060684fa479"
       ]
     },
     {
       "order": 2,
       "name": "upstream/cloud-streaming",
-      "head": "6f7a61cae05f7f67ad1c1e9261e051ddfa92882e",
+      "head": "dd8ff4ec418518355f0cdd1e7765c1891849c4ae",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "base": "876d42bb06d15d6358a2406865b55060684fa479",
       "commits": 6,
       "files": 23,
       "diff": "23 files changed, 422 insertions(+), 210 deletions(-)",
       "ownCommits": [
-        "796183ee6f3ac05735e3b6a144080c9a5d2e1593",
-        "e9c95c89d8239355139cb3a2d08faeb37740b0e1",
-        "5315f72cd24a592377b084121b60fb78200a2b01",
-        "884ccceb00cf54d803b6b68cd64e79ecd04d9e3a",
-        "df31bcb6d43a8af7ec33fed13afd8ba54bb239a0",
-        "6f7a61cae05f7f67ad1c1e9261e051ddfa92882e"
+        "a864e817c437d9ca22cbcac59937543a94f1d13e",
+        "69f4d52ecec147b92f5356b597ccc7c2025dbdf7",
+        "222e3d2953aa6b60325a83b90c60f9381651f7d0",
+        "2da7054b9c1e438ca130ceddd6e25887c1185499",
+        "bd7bd77ef9cc91bfff24f430bd8b98448f6f5a90",
+        "dd8ff4ec418518355f0cdd1e7765c1891849c4ae"
       ]
     },
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "dcea6b202d67f3d9eeef91a4fc732c7865d9120e",
+      "head": "820e1fc562b3ef62428966734f2860eb6df31196",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "base": "876d42bb06d15d6358a2406865b55060684fa479",
       "commits": 5,
       "files": 46,
       "diff": "46 files changed, 2575 insertions(+), 217 deletions(-)",
       "ownCommits": [
-        "988114f72db31a09a645b9a40089d5e2b5837bf2",
-        "dcc41c452a0e7b8298263a00e30db75bdb1df617",
-        "d6dc20a91b516ab68f57a8c61bcaffc8892b0748",
-        "e8f3b9b6ff39713750a918d9174287587ebdf713",
-        "dcea6b202d67f3d9eeef91a4fc732c7865d9120e"
+        "2f5b1c022c59be8b19aff9843a2e49a2d5c349f0",
+        "010af91a8b04a68d8eba4ef6754469cf41a57260",
+        "78ad669ad15a6d045f7dc0e3394ec938a0eb0fb7",
+        "791e32aca73b4419665a81e71cc6e257a00225e4",
+        "820e1fc562b3ef62428966734f2860eb6df31196"
       ]
     },
     {
       "order": 4,
       "name": "upstream/hpl1-webgl",
-      "head": "48cf630343b745ce058d9ef9bec27336a73283bd",
+      "head": "f9ceaf3c06971671acb6381c61da0fb68211e835",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "base": "876d42bb06d15d6358a2406865b55060684fa479",
       "commits": 9,
       "files": 41,
       "diff": "41 files changed, 3451 insertions(+), 192 deletions(-)",
       "ownCommits": [
-        "81fc4aaa6db76d9294d4313505d48b43f4d90823",
-        "e231a85c074c776f586c56e9a5c0255c8185823e",
-        "bef4c2144b60864e5ce8a02ef300fff47e6e1267",
-        "27f222306b498f276c04ffdf1a2ccf463c85c9eb",
-        "590c508864defd421fda99fbf07b402d5240a981",
-        "0aafa58f7a0a3f5dc7ded4bbf2ad6c8644d523d3",
-        "6ed6c8ac94aeabdc73d8572d623e895dff62c3bf",
-        "e736deefc2e4454b2aeba0a482103e110fa91f36",
-        "48cf630343b745ce058d9ef9bec27336a73283bd"
+        "70d2fd3ce301674d6690f9a6f842ff5b1632499d",
+        "ccdcca46e97122d767d528ad5ce30ec19efccc75",
+        "2bd7cc70a869eb4491267337621ca3303ce58683",
+        "addc3323a3a6294bc4e417b6b9c4f32d12236531",
+        "682c4476571bfc9025a43ff1cdb3008709465beb",
+        "bc51be1852c84fa35603013ea75fed1b3facb734",
+        "8b08ea199e10bdc4aa36f35320d308843ca269f9",
+        "b89aa31d0417e28f7049ea359997ad750307c33d",
+        "f9ceaf3c06971671acb6381c61da0fb68211e835"
       ]
     },
     {
       "order": 5,
       "name": "upstream/emscripten-recorder",
-      "head": "519426fdff1ac9294169e7480efd3a564174bd0a",
+      "head": "0834c49a1708f03e6c1c6dc8e2336d5211cd8f5f",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+      "base": "876d42bb06d15d6358a2406865b55060684fa479",
       "commits": 5,
       "files": 13,
-      "diff": "13 files changed, 237 insertions(+), 11 deletions(-)",
+      "diff": "13 files changed, 232 insertions(+), 11 deletions(-)",
       "ownCommits": [
-        "9afa530bda413c3c0c2eb9e6d168de500521f711",
-        "d3a2ebf13b6b4c0c422f2ff792d97bcfbf1b48ad",
-        "3baa288bcd05b613730784cd4842a669697d95a0",
-        "b9684cfc1396a26a5465ce45ea609edd46e2fb21",
-        "519426fdff1ac9294169e7480efd3a564174bd0a"
+        "70cb3dbe31b8b1448043face917214022cfe101b",
+        "137a4c4fe09530c5454dadb81b1d4b1f4de762ca",
+        "59d0d12a1130ed669abf6cb7d94412e78e945f5a",
+        "5ddaaea23f75e2365d01e3a44e8d069b81242b68",
+        "0834c49a1708f03e6c1c6dc8e2336d5211cd8f5f"
       ]
     }
   ],
@@ -880,7 +880,7 @@
       "emscripten-recorder": "0f4d204760587255f3cf136792d5f46a3969ec3f",
       "emscripten-runtime": "1dadd2e34d8967909b7734705778249b088ad7b5"
     },
-    "integration": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+    "integration": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
     "freshBuildRun": true,
     "themes": {
       "archives": 4,
@@ -1144,30 +1144,36 @@
       }
     },
     "refresh": {
-      "date": "2026-09-13",
-      "upstreamCommitsAdded": 56,
-      "rebasePreservedContent": true,
-      "rebasedCommits": 57,
-      "recorderConfigure": {
-        "commit": "519426fdff1ac9294169e7480efd3a564174bd0a",
-        "shellSyntax": true,
-        "importSelectionCases": 4
-      },
+      "date": "2026-10-04",
+      "previousUpstreamBase": "2085bcb368c19bc90f0190efcd56b9d58cd7fb5a",
+      "upstreamCommitsAdded": 287,
+      "rebasedCommits": 58,
+      "conflicts": [
+        {
+          "file": "gui/EventRecorder.cpp",
+          "commit": "BACKENDS: EMSCRIPTEN: Make the event recorder work on the web port",
+          "resolution": "Upstream 85e26d3fe1b added an equivalent SDL3 getSurface() path; kept upstream's SDL_PIXELFORMAT_RGB565 line and removed that bullet from the commit message."
+        }
+      ],
+      "integrationTreeMatchesOldIntegrationMergedWithUpstream": true,
+      "integrationTreeDifference": "Only the resolved getSurface() conflict in gui/EventRecorder.cpp",
       "allBranchesAreIntegrationAncestors": true,
+      "allDiffChecksPass": true,
       "commitAttributionAudit": {
         "commits": 58,
         "humanAuthorsPreserved": true,
-        "aiCoauthors": 0
+        "aiCoauthors": 0,
+        "addedAssistedBy": {
+          "trailer": "Claude:Opus-5.5",
+          "commits": [
+            "BACKENDS: EMSCRIPTEN: Make the event recorder work on the web port"
+          ]
+        }
       }
     },
     "fullBuild": {
-      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069",
-      "status": "success",
-      "deployed": true,
-      "scummvmCommit": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
-      "demoCommit": "8ae0924e7d1bca98074baca146e0479b452846d1",
-      "emsdkVersion": "6.0.2",
-      "configure": "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder"
+      "status": "pending",
+      "scummvmCommit": "0988f53814b3a94aca02ba8ae85456a68a28d36b"
     },
     "combinedCppChecks": {
       "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
@@ -1310,6 +1316,35 @@
       ]
     },
     "liveBrowser": {
+      "status": "pending"
+    },
+    "previousRefresh": {
+      "date": "2026-09-13",
+      "upstreamCommitsAdded": 56,
+      "rebasePreservedContent": true,
+      "rebasedCommits": 57,
+      "recorderConfigure": {
+        "commit": "519426fdff1ac9294169e7480efd3a564174bd0a",
+        "shellSyntax": true,
+        "importSelectionCases": 4
+      },
+      "allBranchesAreIntegrationAncestors": true,
+      "commitAttributionAudit": {
+        "commits": 58,
+        "humanAuthorsPreserved": true,
+        "aiCoauthors": 0
+      }
+    },
+    "previousFullBuild": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069",
+      "status": "success",
+      "deployed": true,
+      "scummvmCommit": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+      "demoCommit": "8ae0924e7d1bca98074baca146e0479b452846d1",
+      "emsdkVersion": "6.0.2",
+      "configure": "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder"
+    },
+    "previousLiveBrowser": {
       "date": "2026-09-13",
       "browser": "Headless Chromium 1234 with SwiftShader",
       "provenanceMatchesManifest": true,
@@ -1338,23 +1373,27 @@
       {
         "name": "upstream/emscripten-runtime",
         "repository": "chkuendig/scummvm",
-        "head": "0c5737e1460024ad2a824161f71381d6db4f2f61",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/2085bcb368c19bc90f0190efcd56b9d58cd7fb5a...upstream/emscripten-runtime"
+        "head": "876d42bb06d15d6358a2406865b55060684fa479",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/454c594583003303b903d4619867b32db8394c72...upstream/emscripten-runtime"
       },
       {
         "name": "upstream/cloud-streaming",
         "repository": "chkuendig/scummvm",
-        "head": "6f7a61cae05f7f67ad1c1e9261e051ddfa92882e",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/0c5737e1460024ad2a824161f71381d6db4f2f61...upstream/cloud-streaming"
+        "head": "dd8ff4ec418518355f0cdd1e7765c1891849c4ae",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/876d42bb06d15d6358a2406865b55060684fa479...upstream/cloud-streaming"
       }
     ],
     "synchronizedWithLocalBranches": true,
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+      "head": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
+    },
+    "previousIntegrationTag": {
+      "name": "demo/integration-2026-09-13",
+      "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c"
     }
   },
   "excludedSourceCommits": [
@@ -1375,21 +1414,21 @@
     }
   ],
   "previousPreparedHeads": {
-    "upstream/emscripten-runtime": "041a165e0f1c5a2d38260eb408aaa3d6a2c116ed",
-    "upstream/cloud-streaming": "abd470f95dc217d3088ca5dfeb078b3d636eec78",
-    "upstream/touch-controls": "7a4661e1c186b3f1d6c9c939780dd0fbecced1e6",
-    "upstream/hpl1-webgl": "d178abfe99ef0b96a9456c5d201d769bc4c5db0c",
-    "upstream/emscripten-recorder": "c82bd02c422a682a3a9b9a09462d0c74077f617d"
+    "upstream/emscripten-runtime": "0c5737e1460024ad2a824161f71381d6db4f2f61",
+    "upstream/cloud-streaming": "6f7a61cae05f7f67ad1c1e9261e051ddfa92882e",
+    "upstream/touch-controls": "dcea6b202d67f3d9eeef91a4fc732c7865d9120e",
+    "upstream/hpl1-webgl": "48cf630343b745ce058d9ef9bec27336a73283bd",
+    "upstream/emscripten-recorder": "519426fdff1ac9294169e7480efd3a564174bd0a"
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
-    "upstreamBase": "2085bcb368c19bc90f0190efcd56b9d58cd7fb5a",
+    "head": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+    "upstreamBase": "454c594583003303b903d4619867b32db8394c72",
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "deployed; live revision and launcher verified; recorder replay timed out",
-    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069",
-    "demoCommit": "8ae0924e7d1bca98074baca146e0479b452846d1"
+    "status": "rebased onto upstream master on 2026-10-04; deployment pending",
+    "previousHead": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
+    "previousHeadTag": "demo/integration-2026-09-13"
   }
 }
