@@ -1,66 +1,38 @@
 # ScummVM upstream branch set
 
-Prepared from deployment source on 2026-09-13; revised to put Emscripten runtime first and cloud streaming second; rebased onto upstream master on 2026-10-04. The five branches are in the **`scummvm/` submodule**, based on upstream master `454c594583003303b903d4619867b32db8394c72`.
+Prepared from the deployed integration and rebased on ScummVM upstream master `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5` on 2026-10-05. The five branches live in the `scummvm/` submodule. They are prepared locally; no upstream PRs have been opened.
 
-Runtime and cloud have been pushed to `chkuendig/scummvm`; touch, HPL1, and recorder remain local. No PRs have been opened. The demo is now pinned to `demo/upstream-integration`, which combines all five branches. Its deployment build enables the event recorder.
+## Suggested PR order
 
-## Suggested opening order
-
-| Order | Branch | Review base | Own commits / files |
+| Order | Branch | Review base | Scope |
 | --- | --- | --- | --- |
-| 1 | `upstream/emscripten-runtime` | `upstream/master` | 35 / 45 |
-| 2 | `upstream/cloud-streaming` | `upstream/emscripten-runtime` | 6 / 23 |
-| 3 | `upstream/touch-controls` | `upstream/emscripten-runtime` | 5 / 46 |
-| 4 | `upstream/hpl1-webgl` | `upstream/emscripten-runtime` | 9 / 41 |
-| 5 | `upstream/emscripten-recorder` | `upstream/emscripten-runtime` | 6 / 14 |
+| 1 | `upstream/emscripten-runtime` | `upstream/master` | Shared Emscripten runtime, streamed VFS, SDK update, Asyncify configuration and loading progress |
+| 2 | `upstream/cloud-streaming` | runtime | Range downloads and cloud filesystem streaming |
+| 3 | `upstream/touch-controls` | runtime | Touch presets, on-screen controls and controller switching |
+| 4 | `upstream/hpl1-webgl` | runtime | HPL1 WebGL2 rendering, shaders and controller-friendly menus |
+| 5 | `upstream/emscripten-recorder` | runtime | Browser event recording, replay and timer integration |
 
-Runtime is the foundation. Branches 2–5 each depend only on runtime and can be reviewed separately after it lands. Cloud streaming does not block touch, HPL1, or recording.
+Runtime is the foundation. The other four branches depend on it and can be reviewed independently once it lands. Branch heads, commit lists, file counts and exact bases are recorded in [upstream-pr-branches.json](upstream-pr-branches.json).
 
-[Runtime diff on GitHub](https://github.com/chkuendig/scummvm/compare/454c594583003303b903d4619867b32db8394c72...upstream/emscripten-runtime) · [Cloud diff on GitHub](https://github.com/chkuendig/scummvm/compare/876d42bb06d15d6358a2406865b55060684fa479...upstream/cloud-streaming)
+## Runtime details
 
-## Suggested PR titles and descriptions
+The runtime branch includes the browser loading-progress correction: the fill now tracks the downloaded-byte text without a lagging CSS transition, and unknown or zero content lengths avoid invalid percentages. It also includes the SDL3 audio callback Asyncify guard. The Add Game exception was not reproduced during live browsing; a live-code A/B probe verified the guard returns before a callback enters wasm while Asyncify is suspended. The transient HTTP retry change remains deferred because its C++ implementation has not yet been compiled or runtime-tested.
 
-### 1. EMSCRIPTEN: Stream HTTP game data and update the browser runtime
-
-Add the shared virtual filesystem, HTTP range streaming, loading progress, bounded cache memory, persistent browser storage, drag-and-drop file and ROM import, browser printing, and JavaScript library integration for backend services. Include HTTP 206 response handling and download progress in SessionRequest, which the HTTP reader requires.
-
-Update Emscripten to 6.0.11 with the dependency fixes, WebGL2 defaults and fallback handling, memory limits, release-only Asyncify import narrowing, SDL3 audio re-entry guard, and the small SCUMM conditional-compilation warning fix.
-
-The browser OAuth callback and trusted-origin filter stay with the browser JavaScript integration. The shared cloud storage APIs and existing cloud filesystem stay at upstream's implementation in this branch; its HTTP streaming code does not depend on the new cloud APIs.
-
-### 2. CLOUD: Add range downloads and browser cloud streaming
-
-Add range downloads to cloud providers, cache OneDrive download URLs, handle token-refresh failures, centralize access-token access, and fix Box refresh handling in the browser. Connect the cloud filesystem to the shared virtual filesystem introduced by runtime, including chunked reads and folder-cache invalidation when the account changes. Update the browser Cloud tab to reflect direct access to cloud files.
-
-This branch includes the provider APIs and the cloud adapter that consumes them. Its diff contains 23 files, separate from the HTTP, SDK, graphics, and browser file-import changes in runtime.
-
-### 3. SDL: Add shared touch presets and on-screen controls
-
-Expose touch presets for menus, 2D games, and 3D games through the shared Control tab, and align iOS with those settings. Add SDL on-screen mode switching and an analog gamepad, including physical-controller fallback and session-persistent manual mode changes. Include the layouts and regenerated theme bundles.
-
-### 4. HPL1: Add GLES rendering and controller-friendly menus
-
-Run HPL1 using a GLES renderer and compatible shaders on the Emscripten WebGL2 backend. Bundle shader resources for generated projects and add controller bindings, menu focus navigation, and the related rendering and menu lifetime fixes.
-
-### 5. EMSCRIPTEN: Support event recording and replay
-
-Make recording and replay work with SDL3 and the Emscripten timer manager, preserve network polling when recorder modes change, and exclude HTTP waits from the recording timeline. Finalize buffered recordings correctly and provide accessible browser download and recorder controls on letterboxed displays. Keep the SDL audio callback out of the recorder: it runs from WebAudio while Asyncify usually has the main loop suspended, and its `getMillis()` call ran recorder timers and mixer updates from there.
-
-The integration demo enables `--enable-eventrecorder`. Recorder builds use the full Asyncify import list, including release builds: the narrowed list was generated without recorder support.
+Full Asyncify imports are used for plugin builds, including release builds. The narrowed import list had omitted recorder/plugin imports. The demo enables `--enable-eventrecorder` and uses the full list.
 
 ## AI attribution
 
-The repository's [AI-GUIDELINES.md](../scummvm/AI-GUIDELINES.md) and [published policy](https://github.com/scummvm/scummvm/blob/master/AI-GUIDELINES.md) require commit-message disclosure using `Assisted-by: AGENT_NAME:MODEL_VERSION` and prohibit AI authorship or co-authorship. Human contributors retain responsibility for understanding, reviewing, and testing their submissions.
+The repository's [AI-GUIDELINES.md](../scummvm/AI-GUIDELINES.md) requires commit-message disclosure with `Assisted-by: AGENT_NAME:MODEL_VERSION` and prohibits AI authorship or co-authorship. The prepared commits preserve Christian Kündig as author and record assistance in trailers. Historical model labels were preserved from existing metadata; no AI co-author trailers remain. Human contributors remain responsible for review and testing.
 
-The 58 commits prepared on 2026-09-13 retain Christian Kündig as author and disclose this branch-preparation assistance with `Assisted-by: Codex:GPT-6`. Twelve historical Claude co-author trailers were converted into `Assisted-by: Claude:Opus-4.8` or `Assisted-by: Claude:Fable-5`, preserving the model labels already recorded in those commits. No unrecorded historical model was inferred. Basic tools such as Git and the compiler are not listed in the trailers.
+## Validation and deployment
 
-The 2026-10-04 refresh changed one commit's content and message (the recorder conflict below), so that commit also carries `Assisted-by: Claude:Opus-5.5`. The recorder audio-callback fix added on 2026-10-05 (59 commits in total) carries the same trailer, as do the two Emscripten 6.0.11 commits (61 commits in total).
+The refreshed integration is `demo/upstream-integration`, based on the master commit above, and combines all five branches. `git diff --check`, shell syntax checks, the Asyncify audio-guard fixture test, and JavaScript syntax/logic checks passed. The full Emscripten build and live browser validation are pending the next demo deployment. The prior live deployment is identified in the JSON manifest; do not treat its results as validation of this new integration.
 
-Every pending commit was checked with Git's trailer parser. There are no AI co-author trailers in the prepared branch set. This metadata records assistance; it does not certify human review or a complete gameplay test.
+The Add Game trap was not reproduced organically in live browser testing. A stress scan did produce an HTTP 429 and fatal dialog; its proposed transient-request retry is intentionally excluded from this deployment until it is compiled and exercised. The event-recorder replay also remains incomplete: it loaded the recording and requested the expected FT files, then stalled before framebuffer checks. Investigation continues in the dedicated event-recorder workspace.
 
-## Reviewing and rebasing
+No iOS build, cloud-account gameplay test, physical touch/controller test, or HPL1 gameplay test has been completed for this refreshed branch set. The deployment build and browser smoke will add evidence for the combined integration, not replace those platform-specific checks.
 
-From this repository:
+## Review commands
 
 ```sh
 git -C scummvm diff upstream/master...upstream/emscripten-runtime
@@ -70,73 +42,4 @@ git -C scummvm diff upstream/emscripten-runtime...upstream/hpl1-webgl
 git -C scummvm diff upstream/emscripten-runtime...upstream/emscripten-recorder
 ```
 
-After runtime lands, use its recorded tip as the boundary to move each dependent branch onto upstream master. This also handles a squash merge. In a clean ScummVM worktree:
-
-```sh
-git fetch upstream master
-git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/cloud-streaming
-git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/touch-controls
-git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/hpl1-webgl
-git rebase --onto upstream/master 876d42bb06d15d6358a2406865b55060684fa479 upstream/emscripten-recorder
-```
-
-Use a separate worktree when building or switching branches; the deployment checkout contains local build artifacts.
-
-## Deployment provenance and coverage
-
-The original [verified successful deployment run](https://github.com/chkuendig/scummvm-demo/actions/runs/29839172807) used demo commit `e95a2d90fb1890856ba6338df035499c6f048d99`, pinning ScummVM to `c663ad7ab10ad669c8b6d9941f1f3814ba4c2486`. The live HTML matched its archived page byte-for-byte when checked: SHA-256 `2ab613330c16c07ee7913684025665aabbcdc6e501b4839c1dd1b6498901eb36`, Sentry release `194fa8f51e44`.
-
-All 54 downstream source commits are accounted for: 53 are included, and the SAGA commit is excluded at the user's request. SAGA re-release detection is already upstream in `e03be5eb96e`; the residual missing-patch resource guard was dropped and its branch deleted.
-
-Mixed source changes were separated where needed:
-
-- `c8f59745e29`: HTTP SessionRequest support into runtime; provider range APIs into cloud.
-- `8172967ea2b`: generic VFS and HTTP streaming into runtime; cloud adapter, cache invalidation, module entry, and Cloud-tab changes into cloud.
-- `3b6856a341e`: SDL/session settings into touch; recorder coordinate mapping and panel layout into recording.
-- `e6a55a293df`: virtual-keyboard default into runtime; HPL1 shader packaging into HPL1.
-
-Rebasing preserved upstream's cloud-header override cleanup and IHNM detection fix. The touch branch uses theme version 0.9.25 and regenerated bundles containing both upstream and touch layouts. Whitespace cleanup was folded into the commits that introduced those lines.
-
-The demo catalogue, assets, hosting workflows, Sentry integration, cloud-service repository, icons, and future threading/multiplayer notes remain outside these ScummVM branches. The demo-only cloud-host substitution remains in the hosting workflow.
-
-[The manifest](upstream-pr-branches.json) records exact tips, bases, source assignments and exclusions, publication state, and validation evidence.
-
-## Validation
-
-**2026-10-04 refresh.** All five branches were rebased onto upstream master `454c5945830` (287 new upstream commits): runtime directly, the siblings from the old runtime tip onto the new one. Runtime, cloud, touch, and HPL1 applied cleanly. The recorder commit "Make the event recorder work on the web port" conflicted in `gui/EventRecorder.cpp`. Upstream `85e26d3fe1b` ("RECORDER: Fix surface creation with SDL3") had added an equivalent SDL3 `getSurface()` path, so upstream's line was kept and the matching bullet was dropped from the commit message. All 58 commits remain, and every review diff passes `git diff --check`. The rebuilt integration tree is identical to merging upstream master into the previous integration `915ac4310a0`, apart from that resolved hunk. The previous integration is preserved as tag `demo/integration-2026-09-13` on `chkuendig/scummvm`. No local compile was run for this refresh. The [full Emscripten build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/37229924452) passed with the same configure flags, and live `build-info.json` matches demo commit `6cd4d2e01c4268330e7ab903be5ed9f15395a933`, integration `0988f53814b`, upstream `454c5945830`, and all five branch tips (Sentry release `f0b8677952e9`). The page, JavaScript, wasm, and data index are served with HTTP 200. No browser check was run for this deployment: no headless browser was available on the refresh host.
-
-**2026-10-05 recorder fix.** `afad30ac3a8` makes the SDL audio callback use `SDL_GetTicks()` instead of `g_system->getMillis()`, which with the recorder active ran `EventRecorder::processMillis()` (mixer update, all timers, and playback event consumption) from WebAudio while the main loop was suspended. It passed wasm-target Clang syntax checks with and without `ENABLE_EVENTRECORDER`. It has not been runtime-verified; the integration was rebuilt as `36d1c893018` with this as the only change. The existing `silence_callback` guard checks `Asyncify.state !== Normal`, but the state is `Normal` while the main loop sleeps, so it does not stop re-entry during a sleep.
-
-**2026-10-05 Emscripten 6.0.11.** Two commits on runtime: `ce274a97c8f` bumps the default emsdk from 6.0.2 to 6.0.11 and drops `-s GROWABLE_ARRAYBUFFERS=0`. That flag worked around `UTF8ToString` failing on a resizable heap; 6.0.3 fixed the bug and restored 0 as the default. `9181640a908` replaces `FS.analyzePath`, which 6.0.11 deprecates, with `FS.stat`. The demo workflows pin the same version. The integration was rebuilt as `faaca3ee6cd` by merging runtime into the previous integration. Cloud, touch, HPL1, and recorder were not rebased and still fork from `876d42bb06d`. Only syntax checks have run (`node --check` on the JavaScript library, `bash -n` on `build.sh`, `sh -n` on `configure`). There has been no full build or runtime check yet, and the narrowed release Asyncify import list has not been regenerated for 6.0.11. The integration build is unaffected because recorder builds use the full list.
-
-Earlier results:
-
-- The runtime/cloud split preserved the combined source tree. All five branches were then rebased onto upstream `2085bcb368c`; each rebased tree exactly matched merging upstream into its previous tip. The only subsequent source change is the recorder Asyncify configuration fix.
-- All branches merge together without conflicts; each review diff and every individual commit passes `git diff --check`.
-- All 58 commits passed the attribution audit: human authors preserved, recognized `Assisted-by` trailers, and no AI co-authors.
-- Before the latest upstream refresh, twenty-one C++ translation units passed Emscripten Clang syntax/type checks using the existing generated deployment configuration with `USE_CLOUD` enabled. Checks cover the runtime's existing cloud backend and new HTTP reader, then the new cloud provider APIs, adapter, factory, and options dialog.
-- Shell and JavaScript syntax checks passed. The earlier checks of eight JavaScript files, inline shell JavaScript, Asyncify JSON, four theme bundles, and the embedded default theme remain applicable to their unchanged final contents.
-
-The recorder import-selection check passed all four release/debug and recorder-on/off combinations. After the refresh, 33 additional C++ translation units covering touch, HPL1, and recording passed Emscripten syntax/type checks with the recorder enabled.
-
-Before the 2026-10-04 refresh, the [full Emscripten build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/34777683069) passed with `--enable-all-engines --enable-cloud --enable-eventrecorder`. Live `build-info.json` matches demo commit `8ae0924e7d1bca98074baca146e0479b452846d1`, integration `915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c`, upstream `2085bcb368c`, and all five branch tips. Headless Chromium initialized the runtime and rendered the launcher at 1280×720 with no JavaScript errors or failed network requests; the screenshot was inspected.
-
-No iOS build, cloud-account gameplay test, or physical touch/controller test has been run for these branches. Before upstream submission, complete the relevant platform/gameplay validation and regenerate/validate the narrowed release Asyncify import list for configurations that use it. Recorder builds use the full import list.
-
-## Combined demo testing
-
-The ScummVM branch `demo/upstream-integration` at `36d1c8930189050ea13ecc5021f4b66d6beac982` contains all five prepared branch tips as ancestors, based on upstream master `454c594583003303b903d4619867b32db8394c72`. The demo repository pins that exact commit, so the build is reproducible even if the upstream PR branches are rebased again.
-
-Pushing the demo's `main` branch runs the existing Build & Deploy workflow and updates [the demo](https://scummvm.kuendig.io/scummvm.html). The generated [build-info.json](https://scummvm.kuendig.io/build-info.json) identifies the demo commit, ScummVM commit, upstream base, and all five included branch tips. Compare it with this manifest to confirm which build is live.
-
-Suggested browser checks:
-
-1. Runtime: launch a catalogue game, check loading progress, and try file/folder drag and drop.
-2. Cloud: connect a provider in the Cloud tab, browse its files, and launch a game from cloud storage.
-3. Touch: test the 2D and 3D presets, the on-screen gamepad, and switching to a physical controller.
-4. HPL1: launch a supported HPL1 game in WebGL2 and check rendering and menu/controller navigation.
-5. Recorder: start a game with `--record-mode=record --record-file-name=test.r00`, stop and download the recording, then replay it. The scheduled replay workflow uses the same submodule revision.
-
-For later refreshes, rebase runtime onto upstream master first, then rebase each sibling from the old runtime tip onto the new one. Rebuild the integration branch by merging cloud, touch, HPL1, and recorder into runtime; update this manifest and the demo gitlink together. Keep the integration branch out of upstream PRs.
-
-The existing CI replay job previously failed before loading the recording because Cloudflare challenged its game-data requests. A fresh replay against this live integration **loaded the recording successfully**, and the FT directory, `FT.000` range, and `VIDEO/index.json` requests returned HTTP 200/206. It then stalled with the loading bar showing `FT.000` at 0% and timed out after ten minutes: zero framebuffer checks passed and zero mismatches were reported. This is an incomplete replay, not a passing result. The shared host became heavily loaded during the run; the stall cause is not yet established. The failure evidence has been passed to the dedicated event recorder workspace.
+The live [demo](https://scummvm.kuendig.io/scummvm.html) and its [build provenance](https://scummvm.kuendig.io/build-info.json) identify the deployed source and all five branch tips. See the JSON manifest for exact SHAs, current publication state and test evidence.
