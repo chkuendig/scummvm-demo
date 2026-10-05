@@ -1020,7 +1020,7 @@
     "attribution": {
       "policy": "https://github.com/scummvm/scummvm/blob/master/AI-GUIDELINES.md",
       "policyBlob": "cbbeb5706da0b552131e05adede31dc13dd1cbea",
-      "commitsAudited": 57,
+      "commitsAudited": 65,
       "convertedAiCoauthorTrailers": 12,
       "aiCoauthorTrailers": 0,
       "humanAuthorsPreserved": true,
@@ -1030,7 +1030,8 @@
         "Claude:Fable-5"
       ],
       "historicalLabelsSource": "Preserved model labels from existing commit metadata; unrecorded historical models were not inferred.",
-      "scope": "Current assistance covers branch preparation, splitting, rebase conflict resolution, and attribution corrections."
+      "scope": "Current assistance covers branch preparation, splitting, rebase conflict resolution, and attribution corrections.",
+      "integrationMergeCommits": 5
     },
     "preDemoRefresh": {
       "upstreamBase": "de8c01b4604f16ae9973607f1fd6a7f6ce310da2",
@@ -1450,11 +1451,11 @@
       "fix": "Runtime branch now uses Debian's original a52dec 0.7.4 tarball, verifies SHA-256 a21d724ab3b3933330194353687df82c475b5dfb997513eef4c25de6c865ec33, and extracts a52dec-0.7.4"
     },
     "latestSuccessfulDeployment": {
-      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37284168012",
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206",
       "status": "success",
       "deployed": true,
-      "demoCommit": "4d3c45c671623dbdb86bb1f3176dae32b2a88f7f",
-      "scummvmCommit": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+      "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
+      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
       "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
       "emsdkVersion": "6.0.11",
       "eventRecorder": true
@@ -1490,7 +1491,7 @@
       "progress": {
         "text": "Downloaded 33 MB / 33 MB",
         "fillAtCompletion": "100%",
-        "samples": 18,
+        "samples": 76,
         "pageErrors": 0,
         "requestFailures": 0
       },
@@ -1498,7 +1499,16 @@
         "pageExceptions": 0,
         "requestFailures": 0
       },
-      "screenshot": "demo-validation screenshots stored locally under .git/demo-validation (not committed)"
+      "screenshot": "demo-validation screenshots stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419"
+    },
+    "ciReplay": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308276144",
+      "integration": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+      "status": "failure before recording load",
+      "cause": "Cloudflare returned HTTP 403 challenge for /__cdn/index.json",
+      "recordingLoaded": false,
+      "distinctFromLiveReplay": true
     }
   },
   "publication": {

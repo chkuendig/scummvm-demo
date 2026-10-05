@@ -18,7 +18,7 @@ Runtime is the foundation. The other four branches depend on it and can be revie
 
 The runtime branch includes the browser loading-progress correction: the fill now tracks the downloaded-byte text without a lagging CSS transition, and unknown or zero content lengths avoid invalid percentages. It also includes the SDL3 audio callback Asyncify guard. The Add Game exception was not reproduced during live browsing; a live-code A/B probe verified the guard returns before a callback enters wasm while Asyncify is suspended. The transient HTTP retry change remains deferred because its C++ implementation has not yet been compiled or runtime-tested.
 
-The Emscripten dependency script now downloads a52dec 0.7.4 from Debian's original source archive and verifies its SHA-256 before extraction. The prior VideoLAN endpoint returned an Anubis challenge page to GitHub Actions; see the JSON manifest for the failed run and the retry status.
+The Emscripten dependency script now downloads a52dec 0.7.4 from Debian's original source archive and verifies its SHA-256 before extraction. The prior VideoLAN endpoint returned an Anubis challenge page to GitHub Actions. The separate libmpeg2 URL, pinned to commit `946bf4b5…`, returned a valid archive during this refresh, so it remains pinned to that source rather than substituting Debian's older 0.5.1 package.
 
 Full Asyncify imports are used for plugin builds, including release builds. The narrowed import list had omitted recorder/plugin imports. The demo enables `--enable-eventrecorder` and uses the full list.
 
