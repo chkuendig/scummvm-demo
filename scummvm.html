@@ -127,7 +127,7 @@
       width: 0%;
     }
   </style>
-<script>window.__SENTRY_CFG__={dsn:'https://9732c5774e694f79d94bd5c290d48a72@o180772.ingest.us.sentry.io/4511642918912000',release:'d0bd156391ca',environment:'production'};</script><script src="sentry.bundle.js"></script></head>
+<script>window.__SENTRY_CFG__={dsn:'https://9732c5774e694f79d94bd5c290d48a72@o180772.ingest.us.sentry.io/4511642918912000',release:'818febaa7d4c',environment:'production'};</script><script src="sentry.bundle.js"></script></head>
 
 <body>
   <div id="download-modal">
@@ -190,7 +190,6 @@
       setStatus: function (text) {
         if (!Module.setStatus.last) {
           Module.setStatus.last = '';
-          document.getElementById('download-modal-progress-fill').style.transition = 'width 0.5s ease';
         }
         document.getElementById('download-modal').style.display = 'block';
         if (text === Module.setStatus.last) { return; }
