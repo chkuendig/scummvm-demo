@@ -118,18 +118,19 @@
     {
       "order": 5,
       "name": "upstream/emscripten-recorder",
-      "head": "0834c49a1708f03e6c1c6dc8e2336d5211cd8f5f",
+      "head": "afad30ac3a8d2ce9c1244b438f1d85565aa4b6e0",
       "reviewBase": "upstream/emscripten-runtime",
       "base": "876d42bb06d15d6358a2406865b55060684fa479",
       "commits": 5,
-      "files": 13,
-      "diff": "13 files changed, 232 insertions(+), 11 deletions(-)",
+      "files": 14,
+      "diff": "14 files changed, 242 insertions(+), 14 deletions(-)",
       "ownCommits": [
         "70cb3dbe31b8b1448043face917214022cfe101b",
         "137a4c4fe09530c5454dadb81b1d4b1f4de762ca",
         "59d0d12a1130ed669abf6cb7d94412e78e945f5a",
         "5ddaaea23f75e2365d01e3a44e8d069b81242b68",
-        "0834c49a1708f03e6c1c6dc8e2336d5211cd8f5f"
+        "0834c49a1708f03e6c1c6dc8e2336d5211cd8f5f",
+        "afad30ac3a8d2ce9c1244b438f1d85565aa4b6e0"
       ]
     }
   ],
@@ -880,7 +881,7 @@
       "emscripten-recorder": "0f4d204760587255f3cf136792d5f46a3969ec3f",
       "emscripten-runtime": "1dadd2e34d8967909b7734705778249b088ad7b5"
     },
-    "integration": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+    "integration": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "freshBuildRun": true,
     "themes": {
       "archives": 4,
@@ -1172,14 +1173,8 @@
       }
     },
     "fullBuild": {
-      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37229924452",
-      "status": "success",
-      "deployed": true,
-      "scummvmCommit": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
-      "demoCommit": "6cd4d2e01c4268330e7ab903be5ed9f15395a933",
-      "emsdkVersion": "6.0.2",
-      "configure": "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder",
-      "sentryRelease": "f0b8677952e9"
+      "status": "pending",
+      "scummvmCommit": "36d1c8930189050ea13ecc5021f4b66d6beac982"
     },
     "combinedCppChecks": {
       "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
@@ -1381,6 +1376,25 @@
         "observed": "Playback stalled while the loading bar showed FT.000 at 0%. FT.000 range data and VIDEO/index.json had returned HTTP 206/200. No Cloudflare challenge was observed.",
         "limitation": "Host became heavily loaded during the run; stall cause is not yet established."
       }
+    },
+    "recorderAudioCallbackFix": {
+      "date": "2026-10-05",
+      "commit": "afad30ac3a8d2ce9c1244b438f1d85565aa4b6e0",
+      "file": "backends/mixer/emscriptensdl/emscriptensdl-mixer.cpp",
+      "problem": "The SDL3 audio callback (run from WebAudio, usually while Asyncify has main suspended) called g_system->getMillis(); with the event recorder recording or replaying, that runs EventRecorder::processMillis(), which updates the fake mixer, runs every timer, and in playback consumes recorded events. A nested suspend from there corrupts the suspended main stack.",
+      "fix": "Use SDL_GetTicks() in the callback.",
+      "syntaxCheck": "wasm32-emscripten clang -fsyntax-only, with and without ENABLE_EVENTRECORDER",
+      "runtimeVerified": false
+    },
+    "previousFullBuild2": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37229924452",
+      "status": "success",
+      "deployed": true,
+      "scummvmCommit": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+      "demoCommit": "6cd4d2e01c4268330e7ab903be5ed9f15395a933",
+      "emsdkVersion": "6.0.2",
+      "configure": "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder",
+      "sentryRelease": "f0b8677952e9"
     }
   },
   "publication": {
@@ -1403,7 +1417,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+      "head": "36d1c8930189050ea13ecc5021f4b66d6beac982",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1438,15 +1452,13 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+    "head": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "upstreamBase": "454c594583003303b903d4619867b32db8394c72",
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "deployed 2026-10-04; live revision verified; browser check not run",
-    "previousHead": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
-    "previousHeadTag": "demo/integration-2026-09-13",
-    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/37229924452",
-    "demoCommit": "6cd4d2e01c4268330e7ab903be5ed9f15395a933"
+    "status": "recorder audio-callback fix integrated 2026-10-05; deployment pending",
+    "previousHead": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+    "previousHeadTag": "demo/integration-2026-09-13"
   }
 }
