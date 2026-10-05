@@ -17,12 +17,12 @@
     {
       "order": 1,
       "name": "upstream/emscripten-runtime",
-      "head": "f980fb73e702d3f5e87e273d4c1fd7157df07f93",
+      "head": "6d523b035c3418fef86e100edb8f94f07e99281e",
       "reviewBase": "upstream/master",
       "base": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "commits": 39,
+      "commits": 40,
       "files": 46,
-      "diff": "46 files changed, 3379 insertions(+), 769 deletions(-)",
+      "diff": "46 files changed, 3374 insertions(+), 769 deletions(-)",
       "ownCommits": [
         "76a7ddf400ab030a2105d86fd9ddd46919a740c0",
         "a624d28c201a30a424afb9dd1d8ef582ecbc0f4c",
@@ -62,80 +62,81 @@
         "8f49d9c311d6d7513e6d705ed2278b67484f08a4",
         "4b51ac8a41e1c990d355e08733f5c1241b30c8a3",
         "0eeff91ccdd50ec289b3734d5a498246e2632ec1",
-        "f980fb73e702d3f5e87e273d4c1fd7157df07f93"
+        "f980fb73e702d3f5e87e273d4c1fd7157df07f93",
+        "6d523b035c3418fef86e100edb8f94f07e99281e"
       ]
     },
     {
       "order": 2,
       "name": "upstream/cloud-streaming",
-      "head": "89fb4061143bc1929098bec74db27dc4b8182d9b",
+      "head": "c21d8d52df39211960765e9136605ba41d8f8d26",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "f980fb73e702d3f5e87e273d4c1fd7157df07f93",
+      "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
       "commits": 6,
       "files": 23,
       "diff": "23 files changed, 422 insertions(+), 210 deletions(-)",
       "ownCommits": [
-        "f0a7e448cabb040beb4da6ad818667f9c0e24737",
-        "27408a6c933f1c7a57e3ef1c232c22980db6c797",
-        "8fa08071718250d48547267a0b5f4c7f4d7a73d8",
-        "e65299edf0a88f897da87307a4473cbb37f89242",
-        "64a00c6301566d0bb9bad99a206e24241e318150",
-        "89fb4061143bc1929098bec74db27dc4b8182d9b"
+        "9f40db6b7970e2bae18ef24e7fbcf2c10d8f1490",
+        "366342eff268e3cc7bd693a18f0e3d52ee95d2a0",
+        "c1d6760ddd7247a78054ffd61b60169fffd9dc65",
+        "904cdcf190b7ce38355ed127cb9c09e028b07392",
+        "4878987ec2c9297c50bd5b7a19d63ff6402c1939",
+        "c21d8d52df39211960765e9136605ba41d8f8d26"
       ]
     },
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "d2ad72bc464784443eb8a25ad3a1e1bde48663e5",
+      "head": "966c6c8f3e5219fad2db07103eb14b606ff64e91",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "f980fb73e702d3f5e87e273d4c1fd7157df07f93",
+      "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
       "commits": 5,
       "files": 46,
       "diff": "46 files changed, 2575 insertions(+), 217 deletions(-)",
       "ownCommits": [
-        "c22d31b478f50c6f0d9ac3376f97408210c86a3f",
-        "f2948dda1e420111518a59806be7809f42101855",
-        "2d1914d620ca2d51a8aaebc45a15cef98065ddc9",
-        "2e4643d589c1ddf70f940d73279ed420060634cd",
-        "d2ad72bc464784443eb8a25ad3a1e1bde48663e5"
+        "58bb53adc7ac6d0ac1e32bfdfba994bae427e73a",
+        "2534d58d0409280c4dab143651e94c9ecd672137",
+        "8759327f335e3ae3af6a0c7dcbb2093b3e63d18c",
+        "1b568102fb3384e1e6007ba8bbff385ea0266dff",
+        "966c6c8f3e5219fad2db07103eb14b606ff64e91"
       ]
     },
     {
       "order": 4,
       "name": "upstream/hpl1-webgl",
-      "head": "864e26580e75b840fc98a2cceb63f02ad15ca2d5",
+      "head": "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "f980fb73e702d3f5e87e273d4c1fd7157df07f93",
+      "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
       "commits": 9,
       "files": 41,
       "diff": "41 files changed, 3451 insertions(+), 192 deletions(-)",
       "ownCommits": [
-        "08da51a6adf4771b6855e5f06ccc5b5a7026d0c0",
-        "ac4ae6c2f30e6e51d34c3375ac9a62d418fc19f0",
-        "bdb869375e2489fe49fa2cbce448e88e0b542bff",
-        "55a095d2d639f101612e12105b247b72e79c05bb",
-        "b691cbf283aa9fef3d9b6ce92557174bb1fdceb1",
-        "92f12aa32d5439311b07a91ce35496bde6c106dc",
-        "0751068d3a6e28e941109ad0a4046144526a1745",
-        "0193bf327108919e5803ad8e56ed82f40ba22272",
-        "864e26580e75b840fc98a2cceb63f02ad15ca2d5"
+        "016e9756f5f337b456b3ecf3bda2a9923f5e424c",
+        "2446c2b40b94db18127f441cba1dd26fd3c4a971",
+        "408bb68b2e48e8ebddf12b8b83f26e780dfde708",
+        "44ad2fee67e05460f7d582bb5c3c85cffcd5aa70",
+        "93a546a525b840d89e5aa8407402a69459ce7437",
+        "f3ad1b77b6f55ff8f0a5df5d6a3bff9be893d077",
+        "cd8e725036111f37202be46237f4ccd37fbe8995",
+        "a4f48f85171a2d849dead7b23ae653a527a0b8cf",
+        "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02"
       ]
     },
     {
       "order": 5,
       "name": "upstream/emscripten-recorder",
-      "head": "aa43f12b195c0605b5fcc3b36148c429b173d834",
+      "head": "9517cd7b05194ec8b756f8505f80bdea49a3dd8f",
       "reviewBase": "upstream/emscripten-runtime",
-      "base": "f980fb73e702d3f5e87e273d4c1fd7157df07f93",
+      "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
       "commits": 5,
       "files": 13,
       "diff": "13 files changed, 238 insertions(+), 8 deletions(-)",
       "ownCommits": [
-        "b4242bacc4211f0d04a3365374cd5e9a330bb687",
-        "842ba7f9178c3a05f519d890d0dee023dcef1b02",
-        "47dc15b8c7355c7447baa25fe14668122bc008ef",
-        "04a5cf20f8ddbd8ad02c2d0582154017c0edc8eb",
-        "aa43f12b195c0605b5fcc3b36148c429b173d834"
+        "f94556ddd43f67451855b2810764b510949f2f69",
+        "9f0e39e2ade5fa74b42ee2167817999400950459",
+        "f27bcbe51e8bca52bd29e847b97f370a9aad1dd1",
+        "3438a7ee615258d9ea0b738bf4218efcb50df297",
+        "9517cd7b05194ec8b756f8505f80bdea49a3dd8f"
       ]
     }
   ],
@@ -1178,9 +1179,9 @@
       }
     },
     "fullBuild": {
-      "status": "queued",
-      "run": "pending",
-      "scummvmCommit": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+      "status": "pending",
+      "run": "pending after source-only RetroWave comment cleanup",
+      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
       "emsdkVersion": "6.0.11"
     },
     "combinedCppChecks": {
@@ -1426,13 +1427,16 @@
     "branchRefresh": {
       "date": "2026-10-05",
       "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "integration": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+      "integration": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
       "diffCheck": "git diff --check upstream/master..demo/upstream-integration passed",
       "shellSyntax": "bash -n dists/emscripten/build.sh and sh -n configure passed",
       "asyncifyAudioGuard": "dists/emscripten/test-asyncify-audio-guard.sh passed",
-      "progressBar": "node --check and DOM-stub checks for normal, complete, over-total and unknown/zero totals passed",
-      "dependencyArchive": "liba52 source archive SHA-256 verified against Debian source metadata; tarball root is a52dec-0.7.4",
-      "addGameTrap": "not reproduced organically; live A/B probe verified guard short-circuits active callback while Asyncify is suspended",
+      "progressBar": "Live playback sampled 18 times: text reached 33 MB / 33 MB while fill advanced to 100%; no page or network errors",
+      "progressBarLogic": "node --check and DOM-stub checks for normal, complete, over-total and unknown/zero totals passed",
+      "retroWaveComment": "Removed the requested explanatory comment; retained the -DEMSCRIPTEN CFLAGS define",
+      "a52decArchive": "Debian a52dec 0.7.4 original archive SHA-256 verified; extraction root a52dec-0.7.4",
+      "libmpeg2Archive": "Pinned VideoLAN commit archive currently returned valid gzip with expected root directory; no Debian substitution made",
+      "addGame": "Browsed Add Game into /data live; no page errors or request failures. The specific historical console trap remains unreproduced.",
       "transientHttpRetry": "deferred; C++ retry commit is not in integration pending compile/runtime validation"
     },
     "failedDeployAttempt": {
@@ -1441,6 +1445,27 @@
       "step": "Configure ScummVM",
       "cause": "VideoLAN liba52 archive URL returned an Anubis HTML challenge with HTTP 200; tar extraction failed",
       "fix": "Runtime branch now uses Debian's original a52dec 0.7.4 tarball, verifies SHA-256 a21d724ab3b3933330194353687df82c475b5dfb997513eef4c25de6c865ec33, and extracts a52dec-0.7.4"
+    },
+    "latestSuccessfulDeployment": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37284168012",
+      "status": "success",
+      "deployed": true,
+      "demoCommit": "4d3c45c671623dbdb86bb1f3176dae32b2a88f7f",
+      "scummvmCommit": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+      "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+      "emsdkVersion": "6.0.11",
+      "eventRecorder": true
+    },
+    "latestLiveReplay": {
+      "date": "2026-10-05",
+      "status": "pass",
+      "recording": "tests/replay/ftdemo.r00",
+      "loaded": true,
+      "screenshotChecksPassed": 1,
+      "screenshotChecksFailed": 0,
+      "pageErrors": 0,
+      "requestFailures": 0,
+      "observation": "FT.000 range and VIDEO/index.json loaded; one framebuffer MD5 check passed."
     }
   },
   "publication": {
@@ -1449,39 +1474,39 @@
       {
         "name": "upstream/emscripten-runtime",
         "repository": "chkuendig/scummvm",
-        "head": "f980fb73e702d3f5e87e273d4c1fd7157df07f93",
+        "head": "6d523b035c3418fef86e100edb8f94f07e99281e",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/71cb05b1c03aa6bdcd34f78c20cef12c10067ba5...upstream/emscripten-runtime"
       },
       {
         "name": "upstream/cloud-streaming",
         "repository": "chkuendig/scummvm",
-        "head": "89fb4061143bc1929098bec74db27dc4b8182d9b",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/f980fb73e702d3f5e87e273d4c1fd7157df07f93...upstream/cloud-streaming"
+        "head": "c21d8d52df39211960765e9136605ba41d8f8d26",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/cloud-streaming"
       },
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "d2ad72bc464784443eb8a25ad3a1e1bde48663e5",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/f980fb73e702d3f5e87e273d4c1fd7157df07f93...upstream/touch-controls"
+        "head": "966c6c8f3e5219fad2db07103eb14b606ff64e91",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/touch-controls"
       },
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "864e26580e75b840fc98a2cceb63f02ad15ca2d5",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/f980fb73e702d3f5e87e273d4c1fd7157df07f93...upstream/hpl1-webgl"
+        "head": "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/hpl1-webgl"
       },
       {
         "name": "upstream/emscripten-recorder",
         "repository": "chkuendig/scummvm",
-        "head": "aa43f12b195c0605b5fcc3b36148c429b173d834",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/f980fb73e702d3f5e87e273d4c1fd7157df07f93...upstream/emscripten-recorder"
+        "head": "9517cd7b05194ec8b756f8505f80bdea49a3dd8f",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/emscripten-recorder"
       }
     ],
     "synchronizedWithLocalBranches": true,
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+      "head": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1516,12 +1541,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+    "head": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
     "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Deployment rerun queued after correcting the blocked liba52 archive source",
+    "status": "New branch tip prepared; follow-up deployment pending (prior build passed with identical executable code)",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13"
   }
