@@ -1,27 +1,27 @@
 {
-  "demoCommit": "4d3c45c671623dbdb86bb1f3176dae32b2a88f7f",
-  "scummvmCommit": "c43c810075fd75dbddb55a2720d637b8d3d010e5",
+  "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
+  "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
   "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
   "branches": [
     {
       "name": "upstream/emscripten-runtime",
-      "head": "f980fb73e702d3f5e87e273d4c1fd7157df07f93"
+      "head": "6d523b035c3418fef86e100edb8f94f07e99281e"
     },
     {
       "name": "upstream/cloud-streaming",
-      "head": "89fb4061143bc1929098bec74db27dc4b8182d9b"
+      "head": "c21d8d52df39211960765e9136605ba41d8f8d26"
     },
     {
       "name": "upstream/touch-controls",
-      "head": "d2ad72bc464784443eb8a25ad3a1e1bde48663e5"
+      "head": "966c6c8f3e5219fad2db07103eb14b606ff64e91"
     },
     {
       "name": "upstream/hpl1-webgl",
-      "head": "864e26580e75b840fc98a2cceb63f02ad15ca2d5"
+      "head": "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02"
     },
     {
       "name": "upstream/emscripten-recorder",
-      "head": "aa43f12b195c0605b5fcc3b36148c429b173d834"
+      "head": "9517cd7b05194ec8b756f8505f80bdea49a3dd8f"
     }
   ],
   "eventRecorder": true
