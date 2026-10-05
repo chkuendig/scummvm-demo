@@ -1,6 +1,6 @@
 {
-  "demoCommit": "6cd4d2e01c4268330e7ab903be5ed9f15395a933",
-  "scummvmCommit": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+  "demoCommit": "798caa2ebb7a1dd01080c94cfff25e717ff9edbb",
+  "scummvmCommit": "36d1c8930189050ea13ecc5021f4b66d6beac982",
   "upstreamBase": "454c594583003303b903d4619867b32db8394c72",
   "branches": [
     {
@@ -21,7 +21,7 @@
     },
     {
       "name": "upstream/emscripten-recorder",
-      "head": "0834c49a1708f03e6c1c6dc8e2336d5211cd8f5f"
+      "head": "afad30ac3a8d2ce9c1244b438f1d85565aa4b6e0"
     }
   ],
   "eventRecorder": true
