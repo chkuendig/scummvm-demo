@@ -16,7 +16,7 @@ on:
 env:
   SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder"
   SCUMMVM_CONFIGURE_LIBS: " --enable-a52 --enable-faad --enable-fluidlite --enable-freetype2 --enable-fribidi --enable-gif --enable-gif --enable-jpeg --enable-jpeg --enable-mad --enable-mad --enable-mikmod --enable-mpcdec --enable-mpeg2 --enable-ogg --enable-png --enable-retrowave --enable-theoradec --enable-vorbis --enable-vpx --enable-zlib"
-  EMSDK_VERSION: "6.0.2"
+  EMSDK_VERSION: "6.0.11"
   DATA_BASEURL: "https://scummvm-data.kuendig.io"
 
 jobs:

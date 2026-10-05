@@ -8,7 +8,7 @@ Runtime and cloud have been pushed to `chkuendig/scummvm`; touch, HPL1, and reco
 
 | Order | Branch | Review base | Own commits / files |
 | --- | --- | --- | --- |
-| 1 | `upstream/emscripten-runtime` | `upstream/master` | 33 / 45 |
+| 1 | `upstream/emscripten-runtime` | `upstream/master` | 35 / 45 |
 | 2 | `upstream/cloud-streaming` | `upstream/emscripten-runtime` | 6 / 23 |
 | 3 | `upstream/touch-controls` | `upstream/emscripten-runtime` | 5 / 46 |
 | 4 | `upstream/hpl1-webgl` | `upstream/emscripten-runtime` | 9 / 41 |
@@ -24,7 +24,7 @@ Runtime is the foundation. Branches 2–5 each depend only on runtime and can be
 
 Add the shared virtual filesystem, HTTP range streaming, loading progress, bounded cache memory, persistent browser storage, drag-and-drop file and ROM import, browser printing, and JavaScript library integration for backend services. Include HTTP 206 response handling and download progress in SessionRequest, which the HTTP reader requires.
 
-Update Emscripten to 6.0.2 with the dependency fixes, WebGL2 defaults and fallback handling, memory limits, release-only Asyncify import narrowing, SDL3 audio re-entry guard, and the small SCUMM conditional-compilation warning fix.
+Update Emscripten to 6.0.11 with the dependency fixes, WebGL2 defaults and fallback handling, memory limits, release-only Asyncify import narrowing, SDL3 audio re-entry guard, and the small SCUMM conditional-compilation warning fix.
 
 The browser OAuth callback and trusted-origin filter stay with the browser JavaScript integration. The shared cloud storage APIs and existing cloud filesystem stay at upstream's implementation in this branch; its HTTP streaming code does not depend on the new cloud APIs.
 
@@ -54,7 +54,7 @@ The repository's [AI-GUIDELINES.md](../scummvm/AI-GUIDELINES.md) and [published 
 
 The 58 commits prepared on 2026-09-13 retain Christian Kündig as author and disclose this branch-preparation assistance with `Assisted-by: Codex:GPT-6`. Twelve historical Claude co-author trailers were converted into `Assisted-by: Claude:Opus-4.8` or `Assisted-by: Claude:Fable-5`, preserving the model labels already recorded in those commits. No unrecorded historical model was inferred. Basic tools such as Git and the compiler are not listed in the trailers.
 
-The 2026-10-04 refresh changed one commit's content and message (the recorder conflict below), so that commit also carries `Assisted-by: Claude:Opus-5.5`. The recorder audio-callback fix added on 2026-10-05 (59 commits in total) carries the same trailer.
+The 2026-10-04 refresh changed one commit's content and message (the recorder conflict below), so that commit also carries `Assisted-by: Claude:Opus-5.5`. The recorder audio-callback fix added on 2026-10-05 (59 commits in total) carries the same trailer, as do the two Emscripten 6.0.11 commits (61 commits in total).
 
 Every pending commit was checked with Git's trailer parser. There are no AI co-author trailers in the prepared branch set. This metadata records assistance; it does not certify human review or a complete gameplay test.
 
@@ -106,6 +106,8 @@ The demo catalogue, assets, hosting workflows, Sentry integration, cloud-service
 **2026-10-04 refresh.** All five branches were rebased onto upstream master `454c5945830` (287 new upstream commits): runtime directly, the siblings from the old runtime tip onto the new one. Runtime, cloud, touch, and HPL1 applied cleanly. The recorder commit "Make the event recorder work on the web port" conflicted in `gui/EventRecorder.cpp`. Upstream `85e26d3fe1b` ("RECORDER: Fix surface creation with SDL3") had added an equivalent SDL3 `getSurface()` path, so upstream's line was kept and the matching bullet was dropped from the commit message. All 58 commits remain, and every review diff passes `git diff --check`. The rebuilt integration tree is identical to merging upstream master into the previous integration `915ac4310a0`, apart from that resolved hunk. The previous integration is preserved as tag `demo/integration-2026-09-13` on `chkuendig/scummvm`. No local compile was run for this refresh. The [full Emscripten build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/37229924452) passed with the same configure flags, and live `build-info.json` matches demo commit `6cd4d2e01c4268330e7ab903be5ed9f15395a933`, integration `0988f53814b`, upstream `454c5945830`, and all five branch tips (Sentry release `f0b8677952e9`). The page, JavaScript, wasm, and data index are served with HTTP 200. No browser check was run for this deployment: no headless browser was available on the refresh host.
 
 **2026-10-05 recorder fix.** `afad30ac3a8` makes the SDL audio callback use `SDL_GetTicks()` instead of `g_system->getMillis()`, which with the recorder active ran `EventRecorder::processMillis()` (mixer update, all timers, and playback event consumption) from WebAudio while the main loop was suspended. It passed wasm-target Clang syntax checks with and without `ENABLE_EVENTRECORDER`. It has not been runtime-verified; the integration was rebuilt as `36d1c893018` with this as the only change. The existing `silence_callback` guard checks `Asyncify.state !== Normal`, but the state is `Normal` while the main loop sleeps, so it does not stop re-entry during a sleep.
+
+**2026-10-05 Emscripten 6.0.11.** Two commits on runtime: `ce274a97c8f` bumps the default emsdk from 6.0.2 to 6.0.11 and drops `-s GROWABLE_ARRAYBUFFERS=0`. That flag worked around `UTF8ToString` failing on a resizable heap; 6.0.3 fixed the bug and restored 0 as the default. `9181640a908` replaces `FS.analyzePath`, which 6.0.11 deprecates, with `FS.stat`. The demo workflows pin the same version. The integration was rebuilt as `faaca3ee6cd` by merging runtime into the previous integration. Cloud, touch, HPL1, and recorder were not rebased and still fork from `876d42bb06d`. Only syntax checks have run (`node --check` on the JavaScript library, `bash -n` on `build.sh`, `sh -n` on `configure`). There has been no full build or runtime check yet, and the narrowed release Asyncify import list has not been regenerated for 6.0.11. The integration build is unaffected because recorder builds use the full list.
 
 Earlier results:
 

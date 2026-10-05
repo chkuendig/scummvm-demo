@@ -17,12 +17,12 @@
     {
       "order": 1,
       "name": "upstream/emscripten-runtime",
-      "head": "876d42bb06d15d6358a2406865b55060684fa479",
+      "head": "9181640a9089c062cb7e6f1c9371709a561c007f",
       "reviewBase": "upstream/master",
       "base": "454c594583003303b903d4619867b32db8394c72",
-      "commits": 33,
+      "commits": 35,
       "files": 45,
-      "diff": "45 files changed, 3303 insertions(+), 766 deletions(-)",
+      "diff": "45 files changed, 3304 insertions(+), 766 deletions(-)",
       "ownCommits": [
         "05c1bf923338799c17796d6eac747a7bae72bb2b",
         "ba13eb584aced0d09fd48c4dc791c67dcbb66a11",
@@ -56,7 +56,9 @@
         "1973b16c81fa93e2ea02b480b4bb355d02c7f8d8",
         "f065f6fca4cba44d4a45250929a05b8f38f782fa",
         "bc4004558411c6f537a1bf1fedcd515dd7847852",
-        "876d42bb06d15d6358a2406865b55060684fa479"
+        "876d42bb06d15d6358a2406865b55060684fa479",
+        "ce274a97c8f0afdc9a8adc603ab1b00334646321",
+        "9181640a9089c062cb7e6f1c9371709a561c007f"
       ]
     },
     {
@@ -881,7 +883,7 @@
       "emscripten-recorder": "0f4d204760587255f3cf136792d5f46a3969ec3f",
       "emscripten-runtime": "1dadd2e34d8967909b7734705778249b088ad7b5"
     },
-    "integration": "36d1c8930189050ea13ecc5021f4b66d6beac982",
+    "integration": "faaca3ee6cd4109ac0b80ef539ff24c0f53a0e33",
     "freshBuildRun": true,
     "themes": {
       "archives": 4,
@@ -1174,7 +1176,8 @@
     },
     "fullBuild": {
       "status": "pending",
-      "scummvmCommit": "36d1c8930189050ea13ecc5021f4b66d6beac982"
+      "scummvmCommit": "faaca3ee6cd4109ac0b80ef539ff24c0f53a0e33",
+      "emsdkVersion": "6.0.11"
     },
     "combinedCppChecks": {
       "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
@@ -1395,6 +1398,26 @@
       "emsdkVersion": "6.0.2",
       "configure": "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder",
       "sentryRelease": "f0b8677952e9"
+    },
+    "emsdkUpdate": {
+      "date": "2026-10-05",
+      "from": "6.0.2",
+      "to": "6.0.11",
+      "commits": [
+        "ce274a97c8f0afdc9a8adc603ab1b00334646321",
+        "9181640a9089c062cb7e6f1c9371709a561c007f"
+      ],
+      "changes": [
+        "dists/emscripten/build.sh: default EMSDK_VERSION 6.0.11",
+        "configure: drop -s GROWABLE_ARRAYBUFFERS=0; emscripten 6.0.3 fixed UTF8ToString on resizable heaps (#27242) and restored 0 as the default",
+        "backends/fs/emscripten/emscripten-fs-factory.js: replace FS.analyzePath (deprecated in 6.0.11) with FS.stat"
+      ],
+      "siblingBranchesRebased": false,
+      "siblingNote": "cloud, touch, HPL1 and recorder still fork from 876d42bb06d; the integration merges the updated runtime on top",
+      "narrowedAsyncifyImportsRegenerated": false,
+      "syntaxChecks": "node --check on the JS library; bash -n build.sh; sh -n configure",
+      "fullBuild": false,
+      "runtimeVerified": false
     }
   },
   "publication": {
@@ -1413,7 +1436,7 @@
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/876d42bb06d15d6358a2406865b55060684fa479...upstream/cloud-streaming"
       }
     ],
-    "synchronizedWithLocalBranches": true,
+    "synchronizedWithLocalBranches": false,
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
@@ -1452,13 +1475,13 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "36d1c8930189050ea13ecc5021f4b66d6beac982",
+    "head": "faaca3ee6cd4109ac0b80ef539ff24c0f53a0e33",
     "upstreamBase": "454c594583003303b903d4619867b32db8394c72",
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "recorder audio-callback fix integrated 2026-10-05; deployment pending",
-    "previousHead": "0988f53814b3a94aca02ba8ae85456a68a28d36b",
+    "status": "Emscripten 6.0.11 integrated 2026-10-05; deployment pending",
+    "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13"
   }
 }
