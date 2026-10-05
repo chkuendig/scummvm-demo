@@ -1179,10 +1179,13 @@
       }
     },
     "fullBuild": {
-      "status": "pending",
-      "run": "pending after source-only RetroWave comment cleanup",
+      "status": "success",
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206",
+      "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
       "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-      "emsdkVersion": "6.0.11"
+      "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+      "emsdkVersion": "6.0.11",
+      "eventRecorder": true
     },
     "combinedCppChecks": {
       "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c",
@@ -1458,6 +1461,7 @@
     },
     "latestLiveReplay": {
       "date": "2026-10-05",
+      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
       "status": "pass",
       "recording": "tests/replay/ftdemo.r00",
       "loaded": true,
@@ -1465,7 +1469,36 @@
       "screenshotChecksFailed": 0,
       "pageErrors": 0,
       "requestFailures": 0,
-      "observation": "FT.000 range and VIDEO/index.json loaded; one framebuffer MD5 check passed."
+      "observation": "FT.000 range and VIDEO/index.json loaded; the recorded Full Throttle session passed a framebuffer MD5 check."
+    },
+    "finalLiveBuildInfo": {
+      "date": "2026-10-05",
+      "cacheBusted": true,
+      "provenanceMatchesManifest": true,
+      "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
+      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
+      "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+      "eventRecorder": true
+    },
+    "latestLiveBrowser": {
+      "date": "2026-10-05",
+      "browser": "Headless Chromium 1234 with SwiftShader in tvdb-playwright:local",
+      "provenanceMatchesManifest": true,
+      "launcherRendered": true,
+      "addGameOpened": true,
+      "dataDirectoryBrowsed": true,
+      "progress": {
+        "text": "Downloaded 33 MB / 33 MB",
+        "fillAtCompletion": "100%",
+        "samples": 18,
+        "pageErrors": 0,
+        "requestFailures": 0
+      },
+      "addGame": {
+        "pageExceptions": 0,
+        "requestFailures": 0
+      },
+      "screenshot": "demo-validation screenshots stored locally under .git/demo-validation (not committed)"
     }
   },
   "publication": {
@@ -1546,7 +1579,7 @@
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "New branch tip prepared; follow-up deployment pending (prior build passed with identical executable code)",
+    "status": "Deployed and live-verified 2026-10-05",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13"
   }
