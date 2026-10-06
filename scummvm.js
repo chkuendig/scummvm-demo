@@ -31796,78 +31796,78 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  8666156: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
- 8666212: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
- 8666526: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
- 8666741: () => { Module['SDL3'].camera = {}; },  
- 8666773: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
- 8666832: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
- 8669138: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
- 8669389: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
- 8669767: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
- 8669854: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
- 8670031: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
- 8670223: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
- 8670354: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
- 8670501: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
- 8670735: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
- 8671314: () => { return Module['SDL3'].audioContext.sampleRate; },  
- 8671365: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
- 8673206: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
- 8674522: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
- 8675678: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
- 8676211: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
- 8676838: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8677265: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8677349: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
- 8677710: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
- 8678702: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
- 8678868: () => { return document.hasFocus(); },  
- 8678900: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
- 8679082: () => { return document.body.clientWidth; },  
- 8679120: () => { return document.body.clientHeight; },  
- 8679159: () => { return window.innerWidth; },  
- 8679189: () => { return window.innerHeight; },  
- 8679220: () => { return window.outerWidth; },  
- 8679250: () => { return window.outerHeight; },  
- 8679281: () => { return window.pageXOffset; },  
- 8679312: () => { return window.pageYOffset; },  
- 8679343: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
- 8680731: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
- 8683098: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
- 8683928: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
- 8684662: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
- 8685411: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
- 8686099: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
- 8686757: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
- 8686840: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
- 8686909: () => { return Module['SDL3']['mouse_x']; },  
- 8686947: () => { return Module['SDL3']['mouse_y']; },  
- 8686985: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
- 8687033: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
- 8687242: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
- 8687495: () => { return window.innerWidth; },  
- 8687525: () => { return window.innerHeight; },  
- 8687556: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
- 8687665: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
- 8688158: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
- 8688232: () => { return window.innerWidth; },  
- 8688262: () => { return window.innerHeight; },  
- 8688293: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
- 8688991: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
- 8689550: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
- 8689872: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
- 8690413: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
- 8691422: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
- 8691560: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
- 8691742: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
- 8691799: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
- 8691974: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
- 8692310: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
- 8693018: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
- 8693359: ($0) => { window.open(UTF8ToString($0), "_blank") },  
- 8693399: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
- 8693447: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
+  8660764: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
+ 8660820: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
+ 8661134: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
+ 8661349: () => { Module['SDL3'].camera = {}; },  
+ 8661381: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
+ 8661440: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
+ 8663746: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
+ 8663997: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
+ 8664375: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
+ 8664462: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
+ 8664639: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
+ 8664831: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
+ 8664962: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
+ 8665109: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
+ 8665343: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
+ 8665922: () => { return Module['SDL3'].audioContext.sampleRate; },  
+ 8665973: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
+ 8667814: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
+ 8669130: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
+ 8670286: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
+ 8670819: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
+ 8671446: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8671873: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8671957: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
+ 8672318: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
+ 8673310: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
+ 8673476: () => { return document.hasFocus(); },  
+ 8673508: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
+ 8673690: () => { return document.body.clientWidth; },  
+ 8673728: () => { return document.body.clientHeight; },  
+ 8673767: () => { return window.innerWidth; },  
+ 8673797: () => { return window.innerHeight; },  
+ 8673828: () => { return window.outerWidth; },  
+ 8673858: () => { return window.outerHeight; },  
+ 8673889: () => { return window.pageXOffset; },  
+ 8673920: () => { return window.pageYOffset; },  
+ 8673951: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
+ 8675339: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
+ 8677706: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
+ 8678536: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
+ 8679270: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
+ 8680019: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
+ 8680707: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
+ 8681365: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
+ 8681448: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
+ 8681517: () => { return Module['SDL3']['mouse_x']; },  
+ 8681555: () => { return Module['SDL3']['mouse_y']; },  
+ 8681593: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
+ 8681641: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
+ 8681850: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
+ 8682103: () => { return window.innerWidth; },  
+ 8682133: () => { return window.innerHeight; },  
+ 8682164: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
+ 8682273: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
+ 8682766: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
+ 8682840: () => { return window.innerWidth; },  
+ 8682870: () => { return window.innerHeight; },  
+ 8682901: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
+ 8683599: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
+ 8684158: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
+ 8684480: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
+ 8685021: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
+ 8686030: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
+ 8686168: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
+ 8686350: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
+ 8686407: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
+ 8686582: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
+ 8686918: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
+ 8687626: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
+ 8687967: ($0) => { window.open(UTF8ToString($0), "_blank") },  
+ 8688007: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
+ 8688055: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
 };
 function __asyncjs__webserial_write(__buf,__nbyte) { return Asyncify.handleAsync(async () => { const port = globalThis['retrowave_port']; if ('retrowave_writer' in globalThis === false) { console.log("Getting Writer"); globalThis['retrowave_writer'] = port.writable.getWriter(); } data = new DataView(HEAPU8.buffer, __buf, __nbyte); await globalThis['retrowave_writer'].write(data); return __nbyte; }); }
 __asyncjs__webserial_write.sig = 'iii';
@@ -33451,8 +33451,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN7OSystemC2Ev,
   __ZN11OSystem_SDLD2Ev,
   _SDL_ShowCursor,
-  __ZN3GUI13EventRecorderC1Ev,
-  __ZN3GUI13EventRecorder15getTimerManagerEv,
   __ZN8Backends3Log3Log5closeEv,
   _SDL_Quit,
   __ZN13TouchControlsD1Ev,
@@ -33523,8 +33521,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN22DefaultSaveFileManagerC1Ev,
   __ZN15SdlMixerManagerC1Ev,
   __ZN16NullMixerManagerC1Ev,
-  __ZN3GUI13EventRecorder20registerMixerManagerEP12MixerManager,
-  __ZN3GUI13EventRecorder20registerTimerManagerEP19DefaultTimerManager,
   __ZN15SdlTimerManagerC1Ev,
   __ZN6Common13ConfigManager15registerDefaultERKNS_6StringERKNS_4PathE,
   __ZN6Common13ConfigManager15registerDefaultERKNS_6StringEPKc,
@@ -33616,25 +33612,20 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTv0_n320_N11OSystem_SDL11createMutexEv,
   __ZN11OSystem_SDL9getMillisEb,
   _SDL_GetTicks,
-  __ZN3GUI13EventRecorder13processMillisERjb,
   __ZTv0_n292_N11OSystem_SDL9getMillisEb,
   __ZN11OSystem_SDL11delayMillisEj,
-  __ZN3GUI13EventRecorder18processDelayMillisEv,
   _SDL_Delay,
   __ZTv0_n296_N11OSystem_SDL11delayMillisEj,
   __ZNK11OSystem_SDL14getTimeAndDateER8TimeDateb,
   _time,
   _localtime,
-  __ZN3GUI13EventRecorder18processTimeAndDateER8TimeDateb,
   __ZTv0_n300_NK11OSystem_SDL14getTimeAndDateER8TimeDateb,
   __ZN11OSystem_SDL15getMixerManagerEv,
-  __ZN3GUI13EventRecorder15getMixerManagerEv,
   __ZN11OSystem_SDL15getTimerManagerEv,
   __ZTv0_n304_N11OSystem_SDL15getTimerManagerEv,
   __ZN11OSystem_SDL20createAudioCDManagerEv,
   __ZN21DefaultAudioCDManagerC1Ev,
   __ZN11OSystem_SDL18getSavefileManagerEv,
-  __ZN3GUI13EventRecorder14getSaveManagerEPN6Common15SaveFileManagerE,
   __ZTv0_n348_N11OSystem_SDL18getSavefileManagerEv,
   __ZNK11OSystem_SDL18getDoubleClickTimeEv,
   __ZNK6Common13ConfigManager6getIntERKNS_6StringES3_,
@@ -34141,7 +34132,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI13MessageDialogC1ERKN6Common9U32StringES4_S4_N8Graphics9TextAlignEPKcS4_,
   __ZN3GUI6Dialog8runModalEv,
   __ZN3GUI9GuiObjectD2Ev,
-  __ZN3GUI13EventRecorder19RegisterEventSourceEv,
   __ZN6Common15OSDMessageQueueC1Ev,
   __ZN6Common15OSDMessageQueue19registerEventSourceEv,
   __ZN5Cloud12CloudManagerC1Ev,
@@ -34153,24 +34143,15 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common12DebugManager19addAllDebugChannelsEPK15DebugChannelDef,
   __ZN6Common13ConfigManager16removeGameDomainERKNS_6StringE,
   __ZN13PluginManager19unloadPluginsExceptE10PluginTypePK6Pluginb,
-  __ZN3GUI13EventRecorder22generateRecordFileNameERKN6Common6StringE,
-  __ZN3GUI13EventRecorder4initERKN6Common6StringENS0_10RecordModeE,
-  __ZN3GUI13EventRecorder15setFastPlaybackEb,
-  __ZN6Common12PlaybackFileC1Ev,
-  __ZN6Common12PlaybackFile8openReadERKNS_6StringE,
-  __Z5debugPKcz,
-  __ZN6Common12DebugManager22removeAllDebugChannelsEv,
-  __ZN6Common12PlaybackFileD1Ev,
-  __ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE,
-  __ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE,
   __ZN6Common19TextToSpeechManager9pushStateEv,
   __ZN6Common19TextToSpeechManager8popStateEv,
-  __ZN3GUI13EventRecorder6deinitEv,
+  __ZN6Common12DebugManager22removeAllDebugChannelsEv,
   __ZN6Common13ConfigManager10defragmentEv,
-  __ZN3GUI13EventRecorder20checkForContinueGameEv,
+  __ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE,
   __ZN19ChainedGamesManagerC1Ev,
   __ZN19ChainedGamesManager3popERN6Common6StringERi,
   __ZN6Common13ConfigManager9getDomainERKNS_6StringE,
+  __ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE,
   __ZN8Graphics11shutdownTTFEv,
   __ZN7OSystem14setStretchModeEPKc,
   __ZN7OSystem15setRotationModeEi,
@@ -34235,6 +34216,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK6Common7HashMapINS_6StringENS_13ConfigManager6DomainENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS6_4NodeEE5derefEv,
   __ZNK13EngineManager10findTargetERKN6Common6StringE,
   __ZNK6Common7HashMapINS_6StringEiNS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplIKNS6_4NodeEE5derefEv,
+  __ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_,
+  __ZN6Common5ArrayINS_6StringEE7reserveEj,
   __ZN6Common5ErrorC1ENS_9ErrorCodeERKNS_6StringE,
   __ZN6Common5ArrayI19SaveStateDescriptorE11freeStorageEPS1_j,
   __ZN3GUI11ThemeEngine16listUsableThemesERN6Common4ListINS0_15ThemeDescriptorEEE,
@@ -34246,8 +34229,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN13EngineManager20generateUniqueDomainERKN6Common6StringE,
   __ZN6Common13ConfigManager13addGameDomainERKNS_6StringE,
   __ZNK6Common10BaseStringIcEltERKS1_,
-  __ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_,
-  __ZN6Common5ArrayINS_6StringEE7reserveEj,
   __ZNK16DetectionResults17foundUnknownGamesEv,
   __ZNK16DetectionResults25generateUnknownGameReportEbj,
   __ZNK6Common10BaseStringIcEneERKS1_,
@@ -34304,6 +34285,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK6Common7HashMapINS_6StringES1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS4_4NodeEE5derefEv,
   __ZN13PluginManager16findLoadedPluginERKN6Common6StringE,
   __ZNK13EngineManager24upgradeTargetForEngineIdERKN6Common6StringE,
+  __Z5debugPKcz,
   __ZNK13ScalerManager10getPluginsEv,
   __ZNK13ScalerManager17getMaxExtraPixelsEv,
   __ZNK13ScalerManager16findScalerPluginEPKc,
@@ -34450,7 +34432,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Engine28warnUserAboutUnsupportedGameEN6Common6StringE,
   __ZN6Engine24warnUserAboutTestingModeEv,
   __ZN6Engine20errorUnsupportedGameEN6Common6StringE,
-  __ZN3GUI13EventRecorder22processGameDescriptionEPK17ADGameDescription,
   __ZNK22AdvancedMetaEngineBase14initSubSystemsEPK17ADGameDescription,
   __ZNK22AdvancedMetaEngineBase18checkExtendedSavesEN10MetaEngine17MetaEngineFeatureE,
   __ZN31AdvancedMetaEngineDetectionBaseD0Ev,
@@ -34684,7 +34665,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Engine30isDataAndCDAudioReadFromSameCDEv,
   __ZN6Engine27warnMissingExtractedCDAudioEv,
   __ZN6Engine14handleAutoSaveEv,
-  __ZN3GUI13EventRecorder15processAutosaveEv,
   __ZN6Engine21saveAutosaveIfEnabledEv,
   __ZN6Common20convertFromU32StringERKNS_9U32StringENS_8CodePageE,
   __ZN6Engine29warnBeforeOverwritingAutosaveEv,
@@ -35166,112 +35146,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK3GUI14EditableWidget24getSelectionCarretOffsetEv,
   __ZN3GUI14EditGameDialogC1ERKN6Common6StringE,
   __ZNK6Common5Error17getTranslatedDescEv,
-  __ZN3GUI13EventRecorderC2Ev,
-  __ZN22DefaultSaveFileManagerC2Ev,
-  __ZN3GUI13EventRecorderD2Ev,
-  __ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev,
-  __ZN6Common13EventObserverD2Ev,
-  __ZN6Common11EventSourceD2Ev,
-  __ZThn4_N3GUI13EventRecorderD1Ev,
-  __ZN3GUI13EventRecorderD1Ev,
-  __ZThn8_N3GUI13EventRecorderD1Ev,
-  __ZN3GUI13EventRecorderD0Ev,
-  __ZThn4_N3GUI13EventRecorderD0Ev,
-  __ZThn8_N3GUI13EventRecorderD0Ev,
-  __ZN3GUI13EventRecorder13setFileHeaderEv,
-  __ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE,
-  __ZN6Common15EventDispatcher13ignoreSourcesEb,
-  __ZN6Common12PlaybackFile5closeEv,
-  __ZN19DefaultTimerManagerC1Ev,
-  __ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv,
-  __ZN10Networking17ConnectionManager12restartTimerEv,
-  __ZN3GUI13EventRecorder11switchMixerEv,
-  __ZN3GUI13EventRecorder19switchTimerManagersEv,
-  __ZN3GUI13EventRecorder15updateFakeTimerEj,
-  __ZN3GUI14OnScreenDialog15setReplayedTimeEj,
-  __ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE,
-  __ZN6Common12PlaybackFile12getNextEventEv,
-  __ZN3GUI13EventRecorder16postPlaybackQuitEv,
-  __ZN16NullMixerManager6updateEh,
-  __ZN3GUI13EventRecorder16updateSubsystemsEv,
-  __ZN3GUI13EventRecorder19processScreenUpdateEv,
-  __ZN3GUI13EventRecorder23grabScreenAndComputeMD5ERN8Graphics7SurfaceEPh,
-  __ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics7SurfaceEPKh,
-  __ZN3GUI13EventRecorder14takeScreenshotEv,
-  __ZN3GUI13EventRecorder15checkForKeyCodeERKN6Common5EventE,
-  __ZN3GUI13EventRecorder11togglePauseEv,
-  __ZN3GUI13EventRecorder9pollEventERN6Common5EventE,
-  __ZN3GUI13EventRecorder14switchFastModeEv,
-  __ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb,
-  __ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE,
-  __ZN6Common12RandomSource15generateNewSeedEv,
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_,
-  __ZN6Common15EventDispatcher11clearEventsEv,
-  __ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb,
-  __ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE,
-  __Z15debugChannelSetij,
-  __ZN3GUI14OnScreenDialogC1Eb,
-  __ZN3GUI13EventRecorder21applyPlaybackSettingsEv,
-  __ZN3GUI13EventRecorder9getConfigEv,
-  __ZN6Common12PlaybackFile9openWriteERKNS_6StringE,
-  __ZNK3GUI13EventRecorder22isImGuiRecorderEnabledEv,
-  __ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE,
-  __ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE,
-  __ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription,
-  __ZN3GUI13EventRecorder10notifyPollEv,
-  __ZThn8_N3GUI13EventRecorder10notifyPollEv,
-  __ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE,
-  __ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE,
-  __ZN3GUI14OnScreenDialog11isMouseOverEv,
-  __ZN3GUI14OnScreenDialog16isEditDlgVisibleEv,
-  __ZN3GUI14OnScreenDialog12getActiveDlgEv,
-  __ZThn8_N3GUI13EventRecorder11notifyEventERKN6Common5EventE,
-  __ZN3GUI13EventRecorder10setGameMd5EPK17ADGameDescription,
-  __ZN3GUI13EventRecorder12deleteRecordERKN6Common6StringE,
-  __ZN8Graphics16createScreenShotERNS_7SurfaceE,
-  __ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_,
-  __ZN3GUI13EventRecorder17processSaveStreamERKN6Common6StringE,
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE24lookupAndCreateIfMissingERKS1_,
-  __ZN6Common12PlaybackFile11addSaveFileERKNS_6StringEPNS_18SeekableReadStreamE,
-  __ZN3GUI13EventRecorder17preDrawOverlayGuiEv,
-  __ZN3GUI11ThemeEngine8clearAllEv,
-  __ZN3GUI11ThemeEngine16drawToBackbufferEv,
-  __ZN3GUI11ThemeEngine12drawToScreenEv,
-  __ZN3GUI11ThemeEngine22copyBackBufferToScreenEv,
-  __ZN3GUI11ThemeEngine12updateScreenEv,
-  __ZN3GUI13EventRecorder18postDrawOverlayGuiEv,
-  __ZN3GUI13EventRecorder13listSaveFilesERKN6Common6StringE,
-  __ZNK6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv,
-  __ZNK6Common6String11matchStringERKS0_bPKc,
-  __ZN3GUI13EventRecorder10getSurfaceEii,
-  _SDL_CreateSurface,
-  __ZN3GUI13EventRecorder10switchModeEv,
-  __ZN3GUI13EventRecorder19deleteTemporarySaveEv,
-  __ZN3GUI13EventRecorder9showImGuiEv,
-  __ZN5ImGui12PushStyleVarEiRK6ImVec2,
-  __ZN5ImGui12PushStyleVarEif,
-  __ZN5ImGui14PushStyleColorEiRK6ImVec4,
-  __ZN5ImGui17SetNextWindowSizeERK6ImVec2i,
-  __ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_,
-  __ZN5ImGui5BeginEPKcPbi,
-  __ZN5ImGui11TextColoredERK6ImVec4PKcz,
-  __ZN5ImGui8SameLineEff,
-  __ZN5ImGui4TextEPKcz,
-  __ZN5ImGui21GetContentRegionAvailEv,
-  __ZN5ImGui12CalcTextSizeEPKcS1_bf,
-  __ZN5ImGui12TextDisabledEPKcz,
-  __ZN5ImGui8GetStyleEv,
-  __ZN5ImGui13SetCursorPosXEf,
-  __ZN5ImGui6ButtonEPKcRK6ImVec2,
-  __ZN5ImGui14SetItemTooltipEPKcz,
-  __ZN5ImGui13PopStyleColorEi,
-  __ZN5ImGui13BeginDisabledEb,
-  __ZN5ImGui11EndDisabledEv,
-  __ZN5ImGui3EndEv,
-  __ZN5ImGui11PopStyleVarEi,
-  __ZNK3GUI13EventRecorder12allowMappingEv,
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj,
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj,
   __ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_,
   __ZN6Common18convertToU32StringEPKcNS_8CodePageE,
   __ZN3GUI17FileBrowserDialog4openEv,
@@ -35279,6 +35153,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI17FileBrowserDialog13handleCommandEPNS_13CommandSenderEjj,
   __ZN3GUI17FileBrowserDialog16normalieFileNameEv,
   __ZN3GUI17FileBrowserDialog13isProceedSaveEv,
+  __ZNK6Common6String11matchStringERKS0_bPKc,
   __ZN3GUI17FileBrowserDialogD2Ev,
   __ZN3GUI17FileBrowserDialogD0Ev,
   __ZN3GUI17FileBrowserDialogC1EPKcS2_iS2_S2_,
@@ -35307,6 +35182,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI10GuiManager11setupCursorEv,
   __ZN3GUI10GuiManager27redrawInternalTopDialogOnlyEv,
   __ZN3GUI10GuiManager14redrawInternalEv,
+  __ZN3GUI11ThemeEngine12updateScreenEv,
   __ZN3GUI10GuiManagerD2Ev,
   __ZN8Graphics16MacWindowManagerD1Ev,
   __ZN6Common5MutexD1Ev,
@@ -35321,6 +35197,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common9Keymapper20setEnabledKeymapTypeENS_6Keymap10KeymapTypeE,
   __ZN3GUI10GuiManager6redrawEv,
   __ZN3GUI10GuiManager20displayTopDialogOnlyEb,
+  __ZN3GUI11ThemeEngine8clearAllEv,
+  __ZN3GUI11ThemeEngine16drawToBackbufferEv,
+  __ZN3GUI11ThemeEngine12drawToScreenEv,
+  __ZN3GUI11ThemeEngine22copyBackBufferToScreenEv,
   __ZN3GUI11ThemeEngine17restoreBackgroundEN6Common4RectE,
   __ZN3GUI11ThemeEngine12swapClipRectERKN6Common4RectE,
   __ZN3GUI11ThemeEngine18applyScreenShadingENS0_12ShadingStyleE,
@@ -35329,6 +35209,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI10GuiManager9saveStateEv,
   __ZN3GUI10GuiManager13animateCursorEv,
   __ZN3GUI10GuiManager12screenChangeEv,
+  __ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE,
   __ZN6Common5Mutex4lockEv,
   __ZN6Common5Mutex6unlockEv,
   __ZN3GUI7TooltipC1Ev,
@@ -35417,11 +35298,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI14LauncherDialog10removeGameEi,
   __ZN3GUI14LauncherDialog21removeGamesWithAddonsERKN6Common5ArrayINS1_6StringEEE,
   __ZN3GUI14LauncherDialog8editGameEi,
-  __ZN3GUI14LauncherDialog10recordGameEi,
-  __ZN3GUI14RecorderDialogC1Ev,
-  __ZN3GUI14RecorderDialog8runModalERN6Common6StringE,
   __ZN3GUI14LauncherDialog8loadGameEi,
-  __ZN3GUI14RecorderDialogD1Ev,
   __ZN3GUI15SaveLoadChooser31runModalWithMetaEngineAndTargetEPK10MetaEngineRKN6Common6StringE,
   __ZN3GUI14LauncherDialog15generateEntriesERKN6Common7HashMapINS1_6StringENS1_13ConfigManager6DomainENS1_15IgnoreCase_HashENS1_18IgnoreCase_EqualToEEEb,
   __ZN6Common7HashMapINS_6StringENS0_IS1_S1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEES2_S3_E24lookupAndCreateIfMissingERKS1_,
@@ -36877,53 +36754,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common8CallbackIN3GUI15IntegrityDialogEPKNS_9JSONValueEEclES5_,
   __ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEED0Ev,
   __ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEclES6_,
-  __ZN3GUI16EditRecordDialog9getAuthorEv,
-  __ZN3GUI16EditRecordDialog9setAuthorERKN6Common9U32StringE,
-  __ZN3GUI16EditRecordDialog8getNotesEv,
-  __ZN3GUI16EditRecordDialog8setNotesERKN6Common6StringE,
-  __ZN3GUI16EditRecordDialog7getNameEv,
-  __ZN3GUI16EditRecordDialog7setNameERKN6Common6StringE,
-  __ZN3GUI16EditRecordDialogD2Ev,
-  __ZN3GUI16EditRecordDialogD0Ev,
-  __ZN3GUI16EditRecordDialogD1Ev,
-  __ZN3GUI16EditRecordDialogC2ERKN6Common9U32StringERKNS1_6StringES7_,
-  __ZN3GUI16EditRecordDialog13handleCommandEPNS_13CommandSenderEjj,
-  __ZN3GUI16EditRecordDialogC1ERKN6Common9U32StringERKNS1_6StringES7_,
-  __ZNK3GUI14OnScreenDialog9isVisibleEv,
-  __ZN3GUI14OnScreenDialog12reflowLayoutEv,
-  __ZN3GUI14OnScreenDialog12releaseFocusEv,
-  __ZN3GUI14OnScreenDialogC2Eb,
-  __ZN3GUI14OnScreenDialog13handleCommandEPNS_13CommandSenderEjj,
-  __ZN8Graphics13CursorManager4lockEb,
-  __ZN3GUI14OnScreenDialogD2Ev,
-  __ZN3GUI14OnScreenDialogD0Ev,
-  __ZN3GUI14OnScreenDialogD1Ev,
-  __ZN3GUI14OnScreenDialog16handleMouseMovedEiii,
-  __ZN3GUI14OnScreenDialog11isMouseOverEii,
-  __ZN3GUI14OnScreenDialog15handleMouseDownEiiii,
-  __ZN3GUI14OnScreenDialog13handleMouseUpEiiii,
-  __ZN3GUI14OnScreenDialog5closeEv,
-  __ZN3GUI14RecorderDialogC2Ev,
-  __ZN3GUI14RecorderDialog35addThumbnailContainerButtonsAndTextEv,
-  __ZN3GUI14RecorderDialog12reflowLayoutEv,
-  __ZN3GUI14RecorderDialog15updateSelectionEb,
-  __ZN3GUI14RecorderDialog16updateScreenshotEv,
-  __ZN3GUI14RecorderDialog21updateScreenShotsTextEv,
-  __ZN3GUI14RecorderDialog13handleCommandEPNS_13CommandSenderEjj,
-  __ZN6Common12PlaybackFile12updateHeaderEv,
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEEaSERKS8_,
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEaSERKS4_,
-  __ZN3GUI14RecorderDialog10updateListEv,
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderD2Ev,
-  __ZN6Common5ArrayINS_12PlaybackFile18PlaybackFileHeaderEE7emplaceIJRKS2_EEEvPS5_DpOT_,
-  __ZN6Common12PlaybackFile15getScreensCountEv,
-  __ZN6Common12PlaybackFile13getScreenShotEi,
-  __ZN3GUI14RecorderDialogD2Ev,
-  __ZN3GUI14RecorderDialogD0Ev,
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE6assignERKS8_,
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE6assignERKS4_,
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderC2ERKS1_,
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderC2EOS1_,
   __ZN3GUI24FluidSynthSettingsDialogC2Ev,
   __ZN3GUI24FluidSynthSettingsDialogD2Ev,
   __ZN3GUI24FluidSynthSettingsDialogD0Ev,
@@ -36995,10 +36825,14 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN21DefaultAudioCDManager6openCDERKN6Common4PathE,
   __ZN19DefaultEventManagerC2EPN6Common11EventSourceE,
   __ZN6Common15EventDispatcherC1Ev,
+  __ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb,
+  __ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb,
   __ZN6Common12VirtualMouseC1EPNS_15EventDispatcherE,
   __ZN6Common9KeymapperC1EPNS_12EventManagerE,
   __ZN6Common15EventDispatcher14registerMapperEPNS_11EventMapperEb,
   __ZN19DefaultEventManagerD2Ev,
+  __ZN6Common11EventSourceD2Ev,
+  __ZN6Common13EventObserverD2Ev,
   __ZN6Common12EventManagerD2Ev,
   __ZN6Common21ArtificialEventSourceD2Ev,
   __ZThn28_N19DefaultEventManagerD1Ev,
@@ -37209,6 +37043,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common7HashMapIPNS_6KeymapENS_11RemapWidget14KeymapTitleRowENS_4HashIS2_EENS_7EqualToIS2_EEE13expandStorageEj,
   __ZN6Common12VirtualMouseC2EPNS_15EventDispatcherE,
   __ZN6Common12VirtualMouseD2Ev,
+  __ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE,
   __ZThn4_N6Common12VirtualMouseD1Ev,
   __ZN6Common12VirtualMouseD1Ev,
   __ZN6Common12VirtualMouseD0Ev,
@@ -37246,6 +37081,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common15SaveFileManager10clearErrorEv,
   __ZN6Common15SaveFileManager8getErrorEv,
   __ZN6Common15SaveFileManager12getErrorDescEv,
+  __ZN22DefaultSaveFileManagerC2Ev,
   __ZN22DefaultSaveFileManagerC2ERKN6Common4PathE,
   __ZN22DefaultSaveFileManager9checkPathERKN6Common6FSNodeE,
   __ZN22DefaultSaveFileManager19updateSavefilesListERN6Common5ArrayINS0_6StringEEE,
@@ -37273,6 +37109,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN22DefaultSaveFileManager6existsERKN6Common6StringE,
   __ZNK22DefaultSaveFileManager11getSavePathEv,
   __ZN22DefaultSaveFileManagerD2Ev,
+  __ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev,
   __ZN22DefaultSaveFileManagerD0Ev,
   __ZN6Common7HashMapINS_6StringEbNS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj,
   __ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj,
@@ -37289,6 +37126,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN19DefaultTimerManager15removeTimerProcEPFvPvE,
   __ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE5eraseENS7_12IteratorImplINS7_4NodeEEE,
   __ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj,
+  __ZN19DefaultTimerManagerC1Ev,
   __ZN10Networking17ConnectionManagerC2Ev,
   __ZN10Networking17ConnectionManagerD2Ev,
   __ZN10Networking17connectionsThreadEPv,
@@ -37298,8 +37136,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJS3_EEEvPKS3_DpOT_,
   __ZN10Networking17ConnectionManager10startTimerEi,
   __ZN10Networking17ConnectionManager36getCloudRequestsPeriodInMicrosecondsEv,
+  __ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv,
   __ZN10Networking17ConnectionManager6handleEv,
   __ZN10Networking17ConnectionManager15iterateRequestsEv,
+  __ZN10Networking17ConnectionManager12restartTimerEv,
   __ZN10Networking17ConnectionManager16hasAddedRequestsEv,
   __ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJRKS3_EEEvPS6_DpOT_,
   __ZNK10Networking7Request5stateEv,
@@ -39022,6 +38862,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui13CreateContextEP11ImFontAtlas,
   __ZN5ImGui5GetIOEv,
   __ZN5ImGui15StyleColorsDarkEP10ImGuiStyle,
+  __ZN5ImGui8GetStyleEv,
   __ZN5ImGui14DestroyContextEP12ImGuiContext,
   __Z28ImGui_ImplSDL3_InitForOpenGLP10SDL_WindowPv,
   __Z22ImGui_ImplOpenGL3_InitPKc,
@@ -39121,6 +38962,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN25SurfaceSdlGraphicsManager17setupHardwareSizeEv,
   __ZN25SurfaceSdlGraphicsManager19initGraphicsSurfaceEv,
   __ZN25SurfaceSdlGraphicsManager11loadGFXModeEv,
+  _SDL_CreateSurface,
   _SDL_SetSurfaceBlendMode,
   _SDL_CreateSurfacePalette,
   _SDL_SetPaletteColors,
@@ -39252,6 +39094,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN16NullMixerManager12suspendAudioEv,
   __ZN16NullMixerManager11resumeAudioEv,
   __ZNK16NullMixerManager12isNullDeviceEv,
+  __ZN16NullMixerManager6updateEh,
   _SDL_CreateMutex,
   __ZN16SdlMutexInternalD2Ev,
   _SDL_DestroyMutex,
@@ -39465,9 +39308,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _dlsym,
   __ZN20POSIXSaveFileManagerC2Ev,
   __ZN20POSIXSaveFileManagerD0Ev,
-  __ZN23RecorderSaveFileManager14openForLoadingERKN6Common6StringE,
-  __ZN23RecorderSaveFileManager13listSaveFilesERKN6Common6StringE,
-  __ZN23RecorderSaveFileManagerD0Ev,
   __ZN10ImGuiStyleC2Ev,
   __ZN10ImGuiStyle13ScaleAllSizesEf,
   __ZN7ImGuiIOC2Ev,
@@ -39598,13 +39438,20 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui11GetColorU32Ejf,
   __ZN5ImGui14PushStyleColorEij,
   __ZN8ImVectorI13ImGuiColorModE9push_backERKS0_,
+  __ZN5ImGui14PushStyleColorEiRK6ImVec4,
+  __ZN5ImGui13PopStyleColorEi,
   __ZN5ImGui8ErrorLogEPKc,
   __ZN5ImGui17BeginErrorTooltipEv,
+  __ZN5ImGui4TextEPKcz,
   __ZN10ImDrawList7AddRectERK6ImVec2S2_jfif,
+  __ZN5ImGui3EndEv,
   __ZN5ImGui15GetStyleVarInfoEi,
+  __ZN5ImGui12PushStyleVarEif,
   __ZN8ImVectorI13ImGuiStyleModE9push_backERKS0_,
   __ZN5ImGui13PushStyleVarXEif,
   __ZN5ImGui13PushStyleVarYEif,
+  __ZN5ImGui12PushStyleVarEiRK6ImVec2,
+  __ZN5ImGui11PopStyleVarEi,
   __ZN5ImGui17GetStyleColorNameEi,
   __ZN5ImGui19FindRenderedTextEndEPKcS1_,
   __ZN5ImGui10RenderTextE6ImVec2PKcS2_b,
@@ -39614,6 +39461,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui17RenderTextWrappedE6ImVec2PKcS2_f,
   __ZN5ImGui19RenderTextClippedExEP10ImDrawListRK6ImVec2S4_PKcS6_PS3_S4_PK6ImRect,
   __ZN6ImFont13CalcTextSizeAEfffPKcS1_PS1_,
+  __ZN5ImGui12CalcTextSizeEPKcS1_bf,
   __ZN5ImGui17RenderTextClippedERK6ImVec2S2_PKcS4_PS1_S2_PK6ImRect,
   __ZN5ImGui18RenderTextEllipsisEP10ImDrawListRK6ImVec2S4_fPKcS6_PS3_,
   __ZN6ImFont12GetFontBakedEff,
@@ -39812,8 +39660,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN8ImVectorIiE6resizeEi,
   __ZN8ImVectorI14ImGuiGroupDataE6resizeEi,
   __ZN5ImGui32DockContextNewFrameUpdateDockingEP12ImGuiContext,
+  __ZN5ImGui11TextColoredERK6ImVec4PKcz,
   __ZN8ImVectorI19ImGuiStackLevelInfoE6resizeEi,
   _cosf,
+  __ZN5ImGui5BeginEPKcPbi,
   __ZN8ImVectorItE9push_backERKt,
   __ZN5ImGui18SetShortcutRoutingEiij,
   __ZN5ImGui34DockBuilderRemoveNodeDockedWindowsEjb,
@@ -39822,6 +39672,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui30DockContextProcessUndockWindowEP12ImGuiContextP11ImGuiWindowb,
   __ZN5ImGui28DockContextProcessUndockNodeEP12ImGuiContextP13ImGuiDockNode,
   __ZN8ImVectorI16ImGuiDockRequestE6resizeEi,
+  __ZN5ImGui17SetNextWindowSizeERK6ImVec2i,
   __ZN11ImGuiWindowC1EP12ImGuiContextPKc,
   __ZN8ImVectorIP11ImGuiWindowE9push_backERKS1_,
   __ZN8ImVectorIP11ImGuiWindowE6insertEPKS1_RS3_,
@@ -39914,6 +39765,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui10BeginChildEPKcRK6ImVec2ii,
   __ZN5ImGui12BeginChildExEPKcjRK6ImVec2ii,
   __ZN5ImGui10BeginChildEjRK6ImVec2ii,
+  __ZN5ImGui21GetContentRegionAvailEv,
   __ZN5ImGui12CalcItemSizeE6ImVec2ff,
   __ZN5ImGui8ItemSizeERK6ImVec2f,
   __ZN5ImGui33NavMoveRequestResolveWithLastItemEP16ImGuiNavItemData,
@@ -39946,8 +39798,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui10EndMenuBarEv,
   __ZN5ImGui7TreePopEv,
   __ZN5ImGui8EndGroupEv,
+  __ZN5ImGui11EndDisabledEv,
   __ZN5ImGui12PushItemFlagEib,
   __ZN5ImGui11PopItemFlagEv,
+  __ZN5ImGui13BeginDisabledEb,
   __ZN5ImGui15PushTextWrapPosEf,
   __ZN8ImVectorIfE9push_backERKf,
   __ZN5ImGui14PopTextWrapPosEv,
@@ -39970,6 +39824,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui17IsWindowCollapsedEv,
   __ZN5ImGui17IsWindowAppearingEv,
   __ZN5ImGui18SetWindowCollapsedEPKcbi,
+  __ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_,
   __ZN5ImGui28SetNextWindowSizeConstraintsERK6ImVec2S2_PFvP21ImGuiSizeCallbackDataEPv,
   __ZN5ImGui24SetNextWindowContentSizeERK6ImVec2,
   __ZN5ImGui19SetNextWindowScrollERK6ImVec2,
@@ -40053,6 +39908,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui17IsKeyChordPressedEiij,
   __ZN5ImGui19SetNextItemShortcutEii,
   __ZN5ImGui15EndErrorTooltipEv,
+  __ZN5ImGui8SameLineEff,
   __ZN5ImGui20DebugStartItemPickerEv,
   __ZN5ImGui18GetCursorScreenPosEv,
   __ZN5ImGui18SetCursorScreenPosERK6ImVec2,
@@ -40060,6 +39916,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui13GetCursorPosXEv,
   __ZN5ImGui13GetCursorPosYEv,
   __ZN5ImGui12SetCursorPosERK6ImVec2,
+  __ZN5ImGui13SetCursorPosXEf,
   __ZN5ImGui13SetCursorPosYEf,
   __ZN5ImGui17GetCursorStartPosEv,
   __ZN5ImGui6IndentEf,
@@ -40096,6 +39953,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui16BeginItemTooltipEv,
   __ZN5ImGui10EndTooltipEv,
   __ZN5ImGui11SetTooltipVEPKcPv,
+  __ZN5ImGui14SetItemTooltipEPKcz,
   __ZN5ImGui15SetItemTooltipVEPKcPv,
   __ZN5ImGui11IsPopupOpenEPKci,
   __ZN5ImGui30GetTopMostAndVisiblePopupModalEv,
@@ -40150,6 +40008,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui9LogToFileEiPKc,
   __ZN5ImGui11LogToBufferEi,
   __ZN5ImGui10LogButtonsEv,
+  __ZN5ImGui6ButtonEPKcRK6ImVec2,
   __ZN5ImGui9SliderIntEPKcPiiiS1_i,
   __ZN5ImGui20MarkIniSettingsDirtyEv,
   __ZN5ImGui19FindSettingsHandlerEPKc,
@@ -40240,6 +40099,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5ImGui16DebugNodeTextureEP13ImTextureDataiPK15ImFontAtlasRect,
   __ZN5ImGui10BeginComboEPKcS1_i,
   __ZN5ImGui8EndComboEv,
+  __ZN5ImGui12TextDisabledEPKcz,
   __ZN5ImGui8TreeNodeEPKvPKcz,
   __ZN11ImFontAtlas10RemoveFontEP6ImFont,
   __Z27ImFontAtlasFontDiscardBakesP11ImFontAtlasP6ImFonti,
@@ -43480,6 +43340,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common5ArrayIPN8Graphics13CursorManager7PaletteEE7emplaceIJRKS4_EEEvPS7_DpOT_,
   __ZN8Graphics13CursorManager22supportsCursorPalettesEv,
   __ZN8Graphics13CursorManager20disableCursorPaletteEb,
+  __ZN8Graphics13CursorManager4lockEb,
   __ZN8Graphics13CursorManager21setDefaultArrowCursorEb,
   __ZN8Graphics13CursorManager6CursorC2ERKNS_7SurfaceEiijPKhii,
   __ZN8Graphics13CursorManager6CursorD2Ev,
@@ -44593,6 +44454,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __Z17createThumbnail_4IN8Graphics10ColorMasksILi565EEEEvPKhjPhjii,
   __Z15createThumbnailPN8Graphics7SurfaceEPKhiiS3_,
   __Z15createThumbnailPN8Graphics7SurfaceEPNS_14ManagedSurfaceE,
+  __ZN8Graphics16createScreenShotERNS_7SurfaceE,
   __ZN8Graphics6ScreenC2Ev,
   __ZN8Graphics6ScreenC2Eii,
   __ZN8Graphics6ScreenC2EiiNS_11PixelFormatE,
@@ -45050,6 +44912,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN8Graphics10MacToolbox21createRemappedSurfaceEPNS_16MacWindowManagerEPKNS_7SurfaceEPKhj,
   __ZN8Graphics10MacToolbox7Toolbox8CopyBitsERKN6Common9SharedPtrINS_14ManagedSurfaceEEERS5_RKNS2_4RectESB_NS0_10SourceModeENS3_INS0_6RegionEEE,
   __ZN8Graphics10MacToolbox7Toolbox11DrawPictureERN6Common9SharedPtrINS0_7PictureEEERKNS2_4RectE,
+  __Z15debugChannelSetij,
   __ZN6Common18SeekableReadStream7hexdumpEiii,
   __ZN8Graphics10MacToolbox7Toolbox8OpenPortEPNS0_8GrafPortE,
   __ZN8Graphics10MacToolbox10readRegionERN6Common18SeekableReadStreamE,
@@ -51762,7 +51625,9 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common15EventDispatcherD2Ev,
   __ZN6Common15EventDispatcher12dispatchPollEv,
   __ZN6Common15EventDispatcher13dispatchEventERKNS_5EventE,
+  __ZN6Common15EventDispatcher11clearEventsEv,
   __ZN6Common15EventDispatcher16unregisterMapperEPNS_11EventMapperE,
+  __ZN6Common15EventDispatcher13ignoreSourcesEb,
   __ZN6Common32makeKeyboardRepeatingEventSourceEPNS_11EventSourceE,
   __ZN6Common12EventManager4initEv,
   __ZN6Common32KeyboardRepeatEventSourceWrapperD0Ev,
@@ -51919,6 +51784,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common10MemoryPool15isPointerInPageEPvRKNS0_4PageE,
   __ZN6Common10MemoryPoolC1Em,
   __ZN6Common10MemoryPoolD1Ev,
+  __ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_,
   __ZN6Common5MutexC2Ev,
   __ZN6Common5MutexD2Ev,
   __ZN6Common9StackLockC2EPNS_13MutexInternalEPKc,
@@ -51971,6 +51837,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK6Common10BaseStringIDiE4findEDij,
   __ZN6Common10BaseStringIDiE7setCharEDij,
   __ZN6Common12RandomSourceC2ERKNS_6StringE,
+  __ZN6Common12RandomSource15generateNewSeedEv,
   __ZN6Common12RandomSource7setSeedEj,
   __ZN6Common12RandomSource15getRandomNumberEj,
   __ZN6Common12RandomSource18getRandomNumberRngEjj,
@@ -52495,38 +52362,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common4sortINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEEvT_S8_T0_,
   __ZN6Common13sortPartitionINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEET_S8_S8_S8_RT0_,
   __ZN6Common31ArchiveMemberListBackComparatorclERKNS_9SharedPtrINS_13ArchiveMemberEEES5_,
-  __ZN6Common12PlaybackFileC2Ev,
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderC2Ev,
-  __ZN6Common12PlaybackFileD2Ev,
-  __ZN6Common12PlaybackFile17dumpRecordsToFileEv,
-  __ZN6Common25SeekableMemoryWriteStreamD1Ev,
-  __ZN6Common12PlaybackFile11parseHeaderEv,
-  __ZN6Common12PlaybackFile12processChunkERNS0_11ChunkHeaderE,
-  __ZN6Common12PlaybackFile16dumpHeaderToFileEv,
-  __ZN6Common12PlaybackFile10skipHeaderEv,
-  __ZN6Common12PlaybackFile15readChunkHeaderERNS0_11ChunkHeaderE,
-  __ZN6Common12PlaybackFile14readSaveRecordEv,
-  __ZN6Common12PlaybackFile11readHashMapENS0_11ChunkHeaderE,
-  __ZN6Common12PlaybackFile20processRndSeedRecordENS0_11ChunkHeaderE,
-  __ZN6Common12PlaybackFile21processSettingsRecordEv,
-  __ZN6Common12PlaybackFile24checkPlaybackFileVersionEv,
-  __ZN6Common12PlaybackFile10readStringEi,
-  __ZN6Common12PlaybackFile19returnToChunkHeaderEv,
-  __ZNK6Common12PlaybackFile12hasNextEventEv,
-  __ZN6Common12PlaybackFile16checkRecordedMD5Ev,
-  __ZN6Common12PlaybackFile9readEventERNS_13RecorderEventE,
-  __ZNK6Common12PlaybackFile19isEventsBufferEmptyEv,
-  __ZN6Common12PlaybackFile18readEventsToBufferEj,
-  __ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics14ManagedSurfaceEPKh,
-  __ZN6Common12PlaybackFile18writeHeaderSectionEv,
-  __ZN6Common12PlaybackFile13writeGameHashEv,
-  __ZN6Common12PlaybackFile18writeRandomRecordsEv,
-  __ZN6Common12PlaybackFile17writeGameSettingsEv,
-  __ZN6Common12PlaybackFile21writeSaveFilesSectionEv,
-  __ZN6Common25SeekableMemoryWriteStream4seekExi,
-  __ZNK6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplINS4_4NodeEE5derefEv,
-  __ZN6Common12PlaybackFile20skipToNextScreenshotEv,
-  __ZN6Common25SeekableMemoryWriteStreamD0Ev,
   __ZN6Common18ClickteamInstaller23ClickteamFileDescriptorC2ERKNS0_12ClickteamTagEj,
   __ZNK6Common18ClickteamInstaller6getTagENS0_14ClickteamTagIdE,
   __ZN6Common18ClickteamInstaller12findPatchIdxERKNS0_23ClickteamFileDescriptorEPNS_18SeekableReadStreamERKNS_4PathEjb,
@@ -63615,15 +63450,12 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTT11OSystem_SDL,
   __ZTI18SdlGraphicsManager,
   __ZTI15GraphicsManager,
-  __ZN6Common9SingletonIN3GUI13EventRecorderEE10_singletonE,
   __ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE,
   _g_engine,
   __ZTI24OpenGLSdlGraphicsManager,
   __ZN6Common13ConfigManager14kSessionDomainE,
   __ZN6Common9SingletonI13ScalerManagerE10_singletonE,
   __ZTV13ScalerManager,
-  __ZTI19DefaultTimerManager,
-  __ZTIN6Common12TimerManagerE,
   __ZTVN6Common25CompositeHardwareInputSetE,
   __ZN6Common19defaultMouseButtonsE,
   __ZN6Common16defaultModifiersE,
@@ -63642,7 +63474,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTS15GraphicsManager,
   __ZTI14PaletteManager,
   __ZTS14PaletteManager,
-  __ZTSN6Common12TimerManagerE,
   __ZTI19ModularMixerBackend,
   __ZTI22ModularGraphicsBackend,
   __ZTS11OSystem_SDL,
@@ -63707,12 +63538,12 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _gDebugChannelsOnly,
   __ZN6Common9SingletonINS_12DebugManagerEE10_singletonE,
   __ZN13PluginManager9_instanceE,
-  __ZN6Common13ConfigManager16kTransientDomainE,
   __ZTVN3GUI13MessageDialogE,
   __ZN6Common9SingletonI12MusicManagerE10_singletonE,
   __ZTV12MusicManager,
   __ZN6Common9SingletonINS_15OSDMessageQueueEE10_singletonE,
   __ZN6Common9SingletonIN5Cloud12CloudManagerEE10_singletonE,
+  __ZN6Common13ConfigManager16kTransientDomainE,
   __ZN6Common9SingletonI13EngineManagerE10_singletonE,
   __ZTV13EngineManager,
   __ZN6Common9SingletonI19ChainedGamesManagerE10_singletonE,
@@ -63901,16 +63732,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTIN3GUI20DomainEditTextWidgetE,
   __ZTSN3GUI20DomainEditTextWidgetE,
   __ZTIN3GUI14EditTextWidgetE,
-  __ZTVN3GUI13EventRecorderE,
-  __ZTV23RecorderSaveFileManager,
-  __ZTV22DefaultSaveFileManager,
-  __ZTVN6Common15SaveFileManagerE,
-  __ZTIN3GUI13EventRecorderE,
-  __ZTSN3GUI13EventRecorderE,
-  __ZTIN6Common11EventSourceE,
-  __ZTIN6Common9SingletonIN3GUI13EventRecorderEEE,
-  __ZTIN6Common13EventObserverE,
-  __ZTSN6Common9SingletonIN3GUI13EventRecorderEEE,
   __ZTVN3GUI17FileBrowserDialogE,
   __ZTIN3GUI17FileBrowserDialogE,
   __ZTSN3GUI17FileBrowserDialogE,
@@ -64205,15 +64026,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTSN6Common12BaseCallbackIPKNS_9JSONValueEEE,
   __ZTIN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE,
   __ZTSN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE,
-  __ZTVN3GUI16EditRecordDialogE,
-  __ZTIN3GUI16EditRecordDialogE,
-  __ZTSN3GUI16EditRecordDialogE,
-  __ZTVN3GUI14OnScreenDialogE,
-  __ZTIN3GUI14OnScreenDialogE,
-  __ZTSN3GUI14OnScreenDialogE,
-  __ZTVN3GUI14RecorderDialogE,
-  __ZTIN3GUI14RecorderDialogE,
-  __ZTSN3GUI14RecorderDialogE,
   __ZTVN3GUI24FluidSynthSettingsDialogE,
   __ZTIN3GUI24FluidSynthSettingsDialogE,
   __ZTSN3GUI24FluidSynthSettingsDialogE,
@@ -64249,8 +64061,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTI19DefaultEventManager,
   __ZTS19DefaultEventManager,
   __ZTIN6Common12EventManagerE,
+  __ZTIN6Common13EventObserverE,
   __ZTIN6Common21ArtificialEventSourceE,
   __ZTSN6Common21ArtificialEventSourceE,
+  __ZTIN6Common11EventSourceE,
   __ZTV14AbstractFSNode,
   __ZTI14AbstractFSNode,
   __ZTS14AbstractFSNode,
@@ -64300,6 +64114,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTIN6Common12VirtualMouseE,
   __ZTSN6Common12VirtualMouseE,
   __ZTVN6Common11OutSaveFileE,
+  __ZTVN6Common15SaveFileManagerE,
   __ZTIN6Common11OutSaveFileE,
   __ZTTN6Common11OutSaveFileE,
   __ZTCN6Common11OutSaveFileE0_NS_19SeekableWriteStreamE,
@@ -64307,11 +64122,15 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTIN6Common15SaveFileManagerE,
   __ZTSN6Common15SaveFileManagerE,
   __ZTSN6Common11OutSaveFileE,
+  __ZTV22DefaultSaveFileManager,
   __ZTI22DefaultSaveFileManager,
   __ZN22DefaultSaveFileManager19TIMESTAMPS_FILENAMEE,
   __ZTS22DefaultSaveFileManager,
   __ZTV19DefaultTimerManager,
+  __ZTI19DefaultTimerManager,
   __ZTS19DefaultTimerManager,
+  __ZTIN6Common12TimerManagerE,
+  __ZTSN6Common12TimerManagerE,
   __ZTVN10Networking17ConnectionManagerE,
   __ZTIN10Networking17ConnectionManagerE,
   __ZTSN10Networking17ConnectionManagerE,
@@ -64913,8 +64732,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTV20POSIXSaveFileManager,
   __ZTI20POSIXSaveFileManager,
   __ZTS20POSIXSaveFileManager,
-  __ZTI23RecorderSaveFileManager,
-  __ZTS23RecorderSaveFileManager,
   _GImGui,
   __ZN15ImGuiTextBuffer11EmptyStringE,
   _GImGuiDemoMarkerCallback,
@@ -67310,9 +67127,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTS7OSystem,
   __ZTVN6Common19TextToSpeechManagerE,
   __ZTSN6Common19TextToSpeechManagerE,
-  __ZTVN6Common25SeekableMemoryWriteStreamE,
-  __ZTIN6Common25SeekableMemoryWriteStreamE,
-  __ZTSN6Common25SeekableMemoryWriteStreamE,
   __ZTVN6Common18BasePtrTrackerImplINS_18ClickteamInstaller12ClickteamTagEEE,
   __ZTVN6Common18ClickteamInstallerE,
   __ZTVN6Common26BasePtrTrackerDeletionImplIhNS_12ArrayDeleterIhEEEE,
@@ -70590,8 +70404,6 @@ function assignWasmExports(wasmExports) {
   __ZN7OSystemC2Ev = Module['__ZN7OSystemC2Ev'] = wasmExports['_ZN7OSystemC2Ev'];
   __ZN11OSystem_SDLD2Ev = Module['__ZN11OSystem_SDLD2Ev'] = wasmExports['_ZN11OSystem_SDLD2Ev'];
   _SDL_ShowCursor = Module['_SDL_ShowCursor'] = wasmExports['SDL_ShowCursor'];
-  __ZN3GUI13EventRecorderC1Ev = Module['__ZN3GUI13EventRecorderC1Ev'] = wasmExports['_ZN3GUI13EventRecorderC1Ev'];
-  __ZN3GUI13EventRecorder15getTimerManagerEv = Module['__ZN3GUI13EventRecorder15getTimerManagerEv'] = wasmExports['_ZN3GUI13EventRecorder15getTimerManagerEv'];
   __ZN8Backends3Log3Log5closeEv = Module['__ZN8Backends3Log3Log5closeEv'] = wasmExports['_ZN8Backends3Log3Log5closeEv'];
   _SDL_Quit = Module['_SDL_Quit'] = wasmExports['SDL_Quit'];
   __ZN13TouchControlsD1Ev = Module['__ZN13TouchControlsD1Ev'] = wasmExports['_ZN13TouchControlsD1Ev'];
@@ -70662,8 +70474,6 @@ function assignWasmExports(wasmExports) {
   __ZN22DefaultSaveFileManagerC1Ev = Module['__ZN22DefaultSaveFileManagerC1Ev'] = wasmExports['_ZN22DefaultSaveFileManagerC1Ev'];
   __ZN15SdlMixerManagerC1Ev = Module['__ZN15SdlMixerManagerC1Ev'] = wasmExports['_ZN15SdlMixerManagerC1Ev'];
   __ZN16NullMixerManagerC1Ev = Module['__ZN16NullMixerManagerC1Ev'] = wasmExports['_ZN16NullMixerManagerC1Ev'];
-  __ZN3GUI13EventRecorder20registerMixerManagerEP12MixerManager = Module['__ZN3GUI13EventRecorder20registerMixerManagerEP12MixerManager'] = wasmExports['_ZN3GUI13EventRecorder20registerMixerManagerEP12MixerManager'];
-  __ZN3GUI13EventRecorder20registerTimerManagerEP19DefaultTimerManager = Module['__ZN3GUI13EventRecorder20registerTimerManagerEP19DefaultTimerManager'] = wasmExports['_ZN3GUI13EventRecorder20registerTimerManagerEP19DefaultTimerManager'];
   __ZN15SdlTimerManagerC1Ev = Module['__ZN15SdlTimerManagerC1Ev'] = wasmExports['_ZN15SdlTimerManagerC1Ev'];
   __ZN6Common13ConfigManager15registerDefaultERKNS_6StringERKNS_4PathE = Module['__ZN6Common13ConfigManager15registerDefaultERKNS_6StringERKNS_4PathE'] = wasmExports['_ZN6Common13ConfigManager15registerDefaultERKNS_6StringERKNS_4PathE'];
   __ZN6Common13ConfigManager15registerDefaultERKNS_6StringEPKc = Module['__ZN6Common13ConfigManager15registerDefaultERKNS_6StringEPKc'] = wasmExports['_ZN6Common13ConfigManager15registerDefaultERKNS_6StringEPKc'];
@@ -70755,25 +70565,20 @@ function assignWasmExports(wasmExports) {
   __ZTv0_n320_N11OSystem_SDL11createMutexEv = Module['__ZTv0_n320_N11OSystem_SDL11createMutexEv'] = wasmExports['_ZTv0_n320_N11OSystem_SDL11createMutexEv'];
   __ZN11OSystem_SDL9getMillisEb = Module['__ZN11OSystem_SDL9getMillisEb'] = wasmExports['_ZN11OSystem_SDL9getMillisEb'];
   _SDL_GetTicks = Module['_SDL_GetTicks'] = wasmExports['SDL_GetTicks'];
-  __ZN3GUI13EventRecorder13processMillisERjb = Module['__ZN3GUI13EventRecorder13processMillisERjb'] = wasmExports['_ZN3GUI13EventRecorder13processMillisERjb'];
   __ZTv0_n292_N11OSystem_SDL9getMillisEb = Module['__ZTv0_n292_N11OSystem_SDL9getMillisEb'] = wasmExports['_ZTv0_n292_N11OSystem_SDL9getMillisEb'];
   __ZN11OSystem_SDL11delayMillisEj = Module['__ZN11OSystem_SDL11delayMillisEj'] = wasmExports['_ZN11OSystem_SDL11delayMillisEj'];
-  __ZN3GUI13EventRecorder18processDelayMillisEv = Module['__ZN3GUI13EventRecorder18processDelayMillisEv'] = wasmExports['_ZN3GUI13EventRecorder18processDelayMillisEv'];
   _SDL_Delay = Module['_SDL_Delay'] = wasmExports['SDL_Delay'];
   __ZTv0_n296_N11OSystem_SDL11delayMillisEj = Module['__ZTv0_n296_N11OSystem_SDL11delayMillisEj'] = wasmExports['_ZTv0_n296_N11OSystem_SDL11delayMillisEj'];
   __ZNK11OSystem_SDL14getTimeAndDateER8TimeDateb = Module['__ZNK11OSystem_SDL14getTimeAndDateER8TimeDateb'] = wasmExports['_ZNK11OSystem_SDL14getTimeAndDateER8TimeDateb'];
   _time = Module['_time'] = wasmExports['time'];
   _localtime = Module['_localtime'] = wasmExports['localtime'];
-  __ZN3GUI13EventRecorder18processTimeAndDateER8TimeDateb = Module['__ZN3GUI13EventRecorder18processTimeAndDateER8TimeDateb'] = wasmExports['_ZN3GUI13EventRecorder18processTimeAndDateER8TimeDateb'];
   __ZTv0_n300_NK11OSystem_SDL14getTimeAndDateER8TimeDateb = Module['__ZTv0_n300_NK11OSystem_SDL14getTimeAndDateER8TimeDateb'] = wasmExports['_ZTv0_n300_NK11OSystem_SDL14getTimeAndDateER8TimeDateb'];
   __ZN11OSystem_SDL15getMixerManagerEv = Module['__ZN11OSystem_SDL15getMixerManagerEv'] = wasmExports['_ZN11OSystem_SDL15getMixerManagerEv'];
-  __ZN3GUI13EventRecorder15getMixerManagerEv = Module['__ZN3GUI13EventRecorder15getMixerManagerEv'] = wasmExports['_ZN3GUI13EventRecorder15getMixerManagerEv'];
   __ZN11OSystem_SDL15getTimerManagerEv = Module['__ZN11OSystem_SDL15getTimerManagerEv'] = wasmExports['_ZN11OSystem_SDL15getTimerManagerEv'];
   __ZTv0_n304_N11OSystem_SDL15getTimerManagerEv = Module['__ZTv0_n304_N11OSystem_SDL15getTimerManagerEv'] = wasmExports['_ZTv0_n304_N11OSystem_SDL15getTimerManagerEv'];
   __ZN11OSystem_SDL20createAudioCDManagerEv = Module['__ZN11OSystem_SDL20createAudioCDManagerEv'] = wasmExports['_ZN11OSystem_SDL20createAudioCDManagerEv'];
   __ZN21DefaultAudioCDManagerC1Ev = Module['__ZN21DefaultAudioCDManagerC1Ev'] = wasmExports['_ZN21DefaultAudioCDManagerC1Ev'];
   __ZN11OSystem_SDL18getSavefileManagerEv = Module['__ZN11OSystem_SDL18getSavefileManagerEv'] = wasmExports['_ZN11OSystem_SDL18getSavefileManagerEv'];
-  __ZN3GUI13EventRecorder14getSaveManagerEPN6Common15SaveFileManagerE = Module['__ZN3GUI13EventRecorder14getSaveManagerEPN6Common15SaveFileManagerE'] = wasmExports['_ZN3GUI13EventRecorder14getSaveManagerEPN6Common15SaveFileManagerE'];
   __ZTv0_n348_N11OSystem_SDL18getSavefileManagerEv = Module['__ZTv0_n348_N11OSystem_SDL18getSavefileManagerEv'] = wasmExports['_ZTv0_n348_N11OSystem_SDL18getSavefileManagerEv'];
   __ZNK11OSystem_SDL18getDoubleClickTimeEv = Module['__ZNK11OSystem_SDL18getDoubleClickTimeEv'] = wasmExports['_ZNK11OSystem_SDL18getDoubleClickTimeEv'];
   __ZNK6Common13ConfigManager6getIntERKNS_6StringES3_ = Module['__ZNK6Common13ConfigManager6getIntERKNS_6StringES3_'] = wasmExports['_ZNK6Common13ConfigManager6getIntERKNS_6StringES3_'];
@@ -71280,7 +71085,6 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI13MessageDialogC1ERKN6Common9U32StringES4_S4_N8Graphics9TextAlignEPKcS4_ = Module['__ZN3GUI13MessageDialogC1ERKN6Common9U32StringES4_S4_N8Graphics9TextAlignEPKcS4_'] = wasmExports['_ZN3GUI13MessageDialogC1ERKN6Common9U32StringES4_S4_N8Graphics9TextAlignEPKcS4_'];
   __ZN3GUI6Dialog8runModalEv = Module['__ZN3GUI6Dialog8runModalEv'] = wasmExports['_ZN3GUI6Dialog8runModalEv'];
   __ZN3GUI9GuiObjectD2Ev = Module['__ZN3GUI9GuiObjectD2Ev'] = wasmExports['_ZN3GUI9GuiObjectD2Ev'];
-  __ZN3GUI13EventRecorder19RegisterEventSourceEv = Module['__ZN3GUI13EventRecorder19RegisterEventSourceEv'] = wasmExports['_ZN3GUI13EventRecorder19RegisterEventSourceEv'];
   __ZN6Common15OSDMessageQueueC1Ev = Module['__ZN6Common15OSDMessageQueueC1Ev'] = wasmExports['_ZN6Common15OSDMessageQueueC1Ev'];
   __ZN6Common15OSDMessageQueue19registerEventSourceEv = Module['__ZN6Common15OSDMessageQueue19registerEventSourceEv'] = wasmExports['_ZN6Common15OSDMessageQueue19registerEventSourceEv'];
   __ZN5Cloud12CloudManagerC1Ev = Module['__ZN5Cloud12CloudManagerC1Ev'] = wasmExports['_ZN5Cloud12CloudManagerC1Ev'];
@@ -71292,24 +71096,15 @@ function assignWasmExports(wasmExports) {
   __ZN6Common12DebugManager19addAllDebugChannelsEPK15DebugChannelDef = Module['__ZN6Common12DebugManager19addAllDebugChannelsEPK15DebugChannelDef'] = wasmExports['_ZN6Common12DebugManager19addAllDebugChannelsEPK15DebugChannelDef'];
   __ZN6Common13ConfigManager16removeGameDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager16removeGameDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager16removeGameDomainERKNS_6StringE'];
   __ZN13PluginManager19unloadPluginsExceptE10PluginTypePK6Pluginb = Module['__ZN13PluginManager19unloadPluginsExceptE10PluginTypePK6Pluginb'] = wasmExports['_ZN13PluginManager19unloadPluginsExceptE10PluginTypePK6Pluginb'];
-  __ZN3GUI13EventRecorder22generateRecordFileNameERKN6Common6StringE = Module['__ZN3GUI13EventRecorder22generateRecordFileNameERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder22generateRecordFileNameERKN6Common6StringE'];
-  __ZN3GUI13EventRecorder4initERKN6Common6StringENS0_10RecordModeE = Module['__ZN3GUI13EventRecorder4initERKN6Common6StringENS0_10RecordModeE'] = wasmExports['_ZN3GUI13EventRecorder4initERKN6Common6StringENS0_10RecordModeE'];
-  __ZN3GUI13EventRecorder15setFastPlaybackEb = Module['__ZN3GUI13EventRecorder15setFastPlaybackEb'] = wasmExports['_ZN3GUI13EventRecorder15setFastPlaybackEb'];
-  __ZN6Common12PlaybackFileC1Ev = Module['__ZN6Common12PlaybackFileC1Ev'] = wasmExports['_ZN6Common12PlaybackFileC1Ev'];
-  __ZN6Common12PlaybackFile8openReadERKNS_6StringE = Module['__ZN6Common12PlaybackFile8openReadERKNS_6StringE'] = wasmExports['_ZN6Common12PlaybackFile8openReadERKNS_6StringE'];
-  __Z5debugPKcz = Module['__Z5debugPKcz'] = wasmExports['_Z5debugPKcz'];
-  __ZN6Common12DebugManager22removeAllDebugChannelsEv = Module['__ZN6Common12DebugManager22removeAllDebugChannelsEv'] = wasmExports['_ZN6Common12DebugManager22removeAllDebugChannelsEv'];
-  __ZN6Common12PlaybackFileD1Ev = Module['__ZN6Common12PlaybackFileD1Ev'] = wasmExports['_ZN6Common12PlaybackFileD1Ev'];
-  __ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE = Module['__ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE'] = wasmExports['_ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE'];
-  __ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE'];
   __ZN6Common19TextToSpeechManager9pushStateEv = Module['__ZN6Common19TextToSpeechManager9pushStateEv'] = wasmExports['_ZN6Common19TextToSpeechManager9pushStateEv'];
   __ZN6Common19TextToSpeechManager8popStateEv = Module['__ZN6Common19TextToSpeechManager8popStateEv'] = wasmExports['_ZN6Common19TextToSpeechManager8popStateEv'];
-  __ZN3GUI13EventRecorder6deinitEv = Module['__ZN3GUI13EventRecorder6deinitEv'] = wasmExports['_ZN3GUI13EventRecorder6deinitEv'];
+  __ZN6Common12DebugManager22removeAllDebugChannelsEv = Module['__ZN6Common12DebugManager22removeAllDebugChannelsEv'] = wasmExports['_ZN6Common12DebugManager22removeAllDebugChannelsEv'];
   __ZN6Common13ConfigManager10defragmentEv = Module['__ZN6Common13ConfigManager10defragmentEv'] = wasmExports['_ZN6Common13ConfigManager10defragmentEv'];
-  __ZN3GUI13EventRecorder20checkForContinueGameEv = Module['__ZN3GUI13EventRecorder20checkForContinueGameEv'] = wasmExports['_ZN3GUI13EventRecorder20checkForContinueGameEv'];
+  __ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE = Module['__ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE'] = wasmExports['_ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE'];
   __ZN19ChainedGamesManagerC1Ev = Module['__ZN19ChainedGamesManagerC1Ev'] = wasmExports['_ZN19ChainedGamesManagerC1Ev'];
   __ZN19ChainedGamesManager3popERN6Common6StringERi = Module['__ZN19ChainedGamesManager3popERN6Common6StringERi'] = wasmExports['_ZN19ChainedGamesManager3popERN6Common6StringERi'];
   __ZN6Common13ConfigManager9getDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager9getDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager9getDomainERKNS_6StringE'];
+  __ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE'];
   __ZN8Graphics11shutdownTTFEv = Module['__ZN8Graphics11shutdownTTFEv'] = wasmExports['_ZN8Graphics11shutdownTTFEv'];
   __ZN7OSystem14setStretchModeEPKc = Module['__ZN7OSystem14setStretchModeEPKc'] = wasmExports['_ZN7OSystem14setStretchModeEPKc'];
   __ZN7OSystem15setRotationModeEi = Module['__ZN7OSystem15setRotationModeEi'] = wasmExports['_ZN7OSystem15setRotationModeEi'];
@@ -71374,6 +71169,8 @@ function assignWasmExports(wasmExports) {
   __ZNK6Common7HashMapINS_6StringENS_13ConfigManager6DomainENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS6_4NodeEE5derefEv = Module['__ZNK6Common7HashMapINS_6StringENS_13ConfigManager6DomainENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS6_4NodeEE5derefEv'] = wasmExports['_ZNK6Common7HashMapINS_6StringENS_13ConfigManager6DomainENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS6_4NodeEE5derefEv'];
   __ZNK13EngineManager10findTargetERKN6Common6StringE = Module['__ZNK13EngineManager10findTargetERKN6Common6StringE'] = wasmExports['_ZNK13EngineManager10findTargetERKN6Common6StringE'];
   __ZNK6Common7HashMapINS_6StringEiNS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplIKNS6_4NodeEE5derefEv = Module['__ZNK6Common7HashMapINS_6StringEiNS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplIKNS6_4NodeEE5derefEv'] = wasmExports['_ZNK6Common7HashMapINS_6StringEiNS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplIKNS6_4NodeEE5derefEv'];
+  __ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_ = Module['__ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_'] = wasmExports['_ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_'];
+  __ZN6Common5ArrayINS_6StringEE7reserveEj = Module['__ZN6Common5ArrayINS_6StringEE7reserveEj'] = wasmExports['_ZN6Common5ArrayINS_6StringEE7reserveEj'];
   __ZN6Common5ErrorC1ENS_9ErrorCodeERKNS_6StringE = Module['__ZN6Common5ErrorC1ENS_9ErrorCodeERKNS_6StringE'] = wasmExports['_ZN6Common5ErrorC1ENS_9ErrorCodeERKNS_6StringE'];
   __ZN6Common5ArrayI19SaveStateDescriptorE11freeStorageEPS1_j = Module['__ZN6Common5ArrayI19SaveStateDescriptorE11freeStorageEPS1_j'] = wasmExports['_ZN6Common5ArrayI19SaveStateDescriptorE11freeStorageEPS1_j'];
   __ZN3GUI11ThemeEngine16listUsableThemesERN6Common4ListINS0_15ThemeDescriptorEEE = Module['__ZN3GUI11ThemeEngine16listUsableThemesERN6Common4ListINS0_15ThemeDescriptorEEE'] = wasmExports['_ZN3GUI11ThemeEngine16listUsableThemesERN6Common4ListINS0_15ThemeDescriptorEEE'];
@@ -71385,8 +71182,6 @@ function assignWasmExports(wasmExports) {
   __ZN13EngineManager20generateUniqueDomainERKN6Common6StringE = Module['__ZN13EngineManager20generateUniqueDomainERKN6Common6StringE'] = wasmExports['_ZN13EngineManager20generateUniqueDomainERKN6Common6StringE'];
   __ZN6Common13ConfigManager13addGameDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager13addGameDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager13addGameDomainERKNS_6StringE'];
   __ZNK6Common10BaseStringIcEltERKS1_ = Module['__ZNK6Common10BaseStringIcEltERKS1_'] = wasmExports['_ZNK6Common10BaseStringIcEltERKS1_'];
-  __ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_ = Module['__ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_'] = wasmExports['_ZN6Common5ArrayINS_6StringEE7emplaceIJRKS1_EEEvPS4_DpOT_'];
-  __ZN6Common5ArrayINS_6StringEE7reserveEj = Module['__ZN6Common5ArrayINS_6StringEE7reserveEj'] = wasmExports['_ZN6Common5ArrayINS_6StringEE7reserveEj'];
   __ZNK16DetectionResults17foundUnknownGamesEv = Module['__ZNK16DetectionResults17foundUnknownGamesEv'] = wasmExports['_ZNK16DetectionResults17foundUnknownGamesEv'];
   __ZNK16DetectionResults25generateUnknownGameReportEbj = Module['__ZNK16DetectionResults25generateUnknownGameReportEbj'] = wasmExports['_ZNK16DetectionResults25generateUnknownGameReportEbj'];
   __ZNK6Common10BaseStringIcEneERKS1_ = Module['__ZNK6Common10BaseStringIcEneERKS1_'] = wasmExports['_ZNK6Common10BaseStringIcEneERKS1_'];
@@ -71443,6 +71238,7 @@ function assignWasmExports(wasmExports) {
   __ZNK6Common7HashMapINS_6StringES1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS4_4NodeEE5derefEv = Module['__ZNK6Common7HashMapINS_6StringES1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS4_4NodeEE5derefEv'] = wasmExports['_ZNK6Common7HashMapINS_6StringES1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplIKNS4_4NodeEE5derefEv'];
   __ZN13PluginManager16findLoadedPluginERKN6Common6StringE = Module['__ZN13PluginManager16findLoadedPluginERKN6Common6StringE'] = wasmExports['_ZN13PluginManager16findLoadedPluginERKN6Common6StringE'];
   __ZNK13EngineManager24upgradeTargetForEngineIdERKN6Common6StringE = Module['__ZNK13EngineManager24upgradeTargetForEngineIdERKN6Common6StringE'] = wasmExports['_ZNK13EngineManager24upgradeTargetForEngineIdERKN6Common6StringE'];
+  __Z5debugPKcz = Module['__Z5debugPKcz'] = wasmExports['_Z5debugPKcz'];
   __ZNK13ScalerManager10getPluginsEv = Module['__ZNK13ScalerManager10getPluginsEv'] = wasmExports['_ZNK13ScalerManager10getPluginsEv'];
   __ZNK13ScalerManager17getMaxExtraPixelsEv = Module['__ZNK13ScalerManager17getMaxExtraPixelsEv'] = wasmExports['_ZNK13ScalerManager17getMaxExtraPixelsEv'];
   __ZNK13ScalerManager16findScalerPluginEPKc = Module['__ZNK13ScalerManager16findScalerPluginEPKc'] = wasmExports['_ZNK13ScalerManager16findScalerPluginEPKc'];
@@ -71589,7 +71385,6 @@ function assignWasmExports(wasmExports) {
   __ZN6Engine28warnUserAboutUnsupportedGameEN6Common6StringE = Module['__ZN6Engine28warnUserAboutUnsupportedGameEN6Common6StringE'] = wasmExports['_ZN6Engine28warnUserAboutUnsupportedGameEN6Common6StringE'];
   __ZN6Engine24warnUserAboutTestingModeEv = Module['__ZN6Engine24warnUserAboutTestingModeEv'] = wasmExports['_ZN6Engine24warnUserAboutTestingModeEv'];
   __ZN6Engine20errorUnsupportedGameEN6Common6StringE = Module['__ZN6Engine20errorUnsupportedGameEN6Common6StringE'] = wasmExports['_ZN6Engine20errorUnsupportedGameEN6Common6StringE'];
-  __ZN3GUI13EventRecorder22processGameDescriptionEPK17ADGameDescription = Module['__ZN3GUI13EventRecorder22processGameDescriptionEPK17ADGameDescription'] = wasmExports['_ZN3GUI13EventRecorder22processGameDescriptionEPK17ADGameDescription'];
   __ZNK22AdvancedMetaEngineBase14initSubSystemsEPK17ADGameDescription = Module['__ZNK22AdvancedMetaEngineBase14initSubSystemsEPK17ADGameDescription'] = wasmExports['_ZNK22AdvancedMetaEngineBase14initSubSystemsEPK17ADGameDescription'];
   __ZNK22AdvancedMetaEngineBase18checkExtendedSavesEN10MetaEngine17MetaEngineFeatureE = Module['__ZNK22AdvancedMetaEngineBase18checkExtendedSavesEN10MetaEngine17MetaEngineFeatureE'] = wasmExports['_ZNK22AdvancedMetaEngineBase18checkExtendedSavesEN10MetaEngine17MetaEngineFeatureE'];
   __ZN31AdvancedMetaEngineDetectionBaseD0Ev = Module['__ZN31AdvancedMetaEngineDetectionBaseD0Ev'] = wasmExports['_ZN31AdvancedMetaEngineDetectionBaseD0Ev'];
@@ -71823,7 +71618,6 @@ function assignWasmExports(wasmExports) {
   __ZN6Engine30isDataAndCDAudioReadFromSameCDEv = Module['__ZN6Engine30isDataAndCDAudioReadFromSameCDEv'] = wasmExports['_ZN6Engine30isDataAndCDAudioReadFromSameCDEv'];
   __ZN6Engine27warnMissingExtractedCDAudioEv = Module['__ZN6Engine27warnMissingExtractedCDAudioEv'] = wasmExports['_ZN6Engine27warnMissingExtractedCDAudioEv'];
   __ZN6Engine14handleAutoSaveEv = Module['__ZN6Engine14handleAutoSaveEv'] = wasmExports['_ZN6Engine14handleAutoSaveEv'];
-  __ZN3GUI13EventRecorder15processAutosaveEv = Module['__ZN3GUI13EventRecorder15processAutosaveEv'] = wasmExports['_ZN3GUI13EventRecorder15processAutosaveEv'];
   __ZN6Engine21saveAutosaveIfEnabledEv = Module['__ZN6Engine21saveAutosaveIfEnabledEv'] = wasmExports['_ZN6Engine21saveAutosaveIfEnabledEv'];
   __ZN6Common20convertFromU32StringERKNS_9U32StringENS_8CodePageE = Module['__ZN6Common20convertFromU32StringERKNS_9U32StringENS_8CodePageE'] = wasmExports['_ZN6Common20convertFromU32StringERKNS_9U32StringENS_8CodePageE'];
   __ZN6Engine29warnBeforeOverwritingAutosaveEv = Module['__ZN6Engine29warnBeforeOverwritingAutosaveEv'] = wasmExports['_ZN6Engine29warnBeforeOverwritingAutosaveEv'];
@@ -72305,112 +72099,6 @@ function assignWasmExports(wasmExports) {
   __ZNK3GUI14EditableWidget24getSelectionCarretOffsetEv = Module['__ZNK3GUI14EditableWidget24getSelectionCarretOffsetEv'] = wasmExports['_ZNK3GUI14EditableWidget24getSelectionCarretOffsetEv'];
   __ZN3GUI14EditGameDialogC1ERKN6Common6StringE = Module['__ZN3GUI14EditGameDialogC1ERKN6Common6StringE'] = wasmExports['_ZN3GUI14EditGameDialogC1ERKN6Common6StringE'];
   __ZNK6Common5Error17getTranslatedDescEv = Module['__ZNK6Common5Error17getTranslatedDescEv'] = wasmExports['_ZNK6Common5Error17getTranslatedDescEv'];
-  __ZN3GUI13EventRecorderC2Ev = Module['__ZN3GUI13EventRecorderC2Ev'] = wasmExports['_ZN3GUI13EventRecorderC2Ev'];
-  __ZN22DefaultSaveFileManagerC2Ev = Module['__ZN22DefaultSaveFileManagerC2Ev'] = wasmExports['_ZN22DefaultSaveFileManagerC2Ev'];
-  __ZN3GUI13EventRecorderD2Ev = Module['__ZN3GUI13EventRecorderD2Ev'] = wasmExports['_ZN3GUI13EventRecorderD2Ev'];
-  __ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev = Module['__ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev'];
-  __ZN6Common13EventObserverD2Ev = Module['__ZN6Common13EventObserverD2Ev'] = wasmExports['_ZN6Common13EventObserverD2Ev'];
-  __ZN6Common11EventSourceD2Ev = Module['__ZN6Common11EventSourceD2Ev'] = wasmExports['_ZN6Common11EventSourceD2Ev'];
-  __ZThn4_N3GUI13EventRecorderD1Ev = Module['__ZThn4_N3GUI13EventRecorderD1Ev'] = wasmExports['_ZThn4_N3GUI13EventRecorderD1Ev'];
-  __ZN3GUI13EventRecorderD1Ev = Module['__ZN3GUI13EventRecorderD1Ev'] = wasmExports['_ZN3GUI13EventRecorderD1Ev'];
-  __ZThn8_N3GUI13EventRecorderD1Ev = Module['__ZThn8_N3GUI13EventRecorderD1Ev'] = wasmExports['_ZThn8_N3GUI13EventRecorderD1Ev'];
-  __ZN3GUI13EventRecorderD0Ev = Module['__ZN3GUI13EventRecorderD0Ev'] = wasmExports['_ZN3GUI13EventRecorderD0Ev'];
-  __ZThn4_N3GUI13EventRecorderD0Ev = Module['__ZThn4_N3GUI13EventRecorderD0Ev'] = wasmExports['_ZThn4_N3GUI13EventRecorderD0Ev'];
-  __ZThn8_N3GUI13EventRecorderD0Ev = Module['__ZThn8_N3GUI13EventRecorderD0Ev'] = wasmExports['_ZThn8_N3GUI13EventRecorderD0Ev'];
-  __ZN3GUI13EventRecorder13setFileHeaderEv = Module['__ZN3GUI13EventRecorder13setFileHeaderEv'] = wasmExports['_ZN3GUI13EventRecorder13setFileHeaderEv'];
-  __ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE = Module['__ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE'] = wasmExports['_ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE'];
-  __ZN6Common15EventDispatcher13ignoreSourcesEb = Module['__ZN6Common15EventDispatcher13ignoreSourcesEb'] = wasmExports['_ZN6Common15EventDispatcher13ignoreSourcesEb'];
-  __ZN6Common12PlaybackFile5closeEv = Module['__ZN6Common12PlaybackFile5closeEv'] = wasmExports['_ZN6Common12PlaybackFile5closeEv'];
-  __ZN19DefaultTimerManagerC1Ev = Module['__ZN19DefaultTimerManagerC1Ev'] = wasmExports['_ZN19DefaultTimerManagerC1Ev'];
-  __ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv = Module['__ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv'] = wasmExports['_ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv'];
-  __ZN10Networking17ConnectionManager12restartTimerEv = Module['__ZN10Networking17ConnectionManager12restartTimerEv'] = wasmExports['_ZN10Networking17ConnectionManager12restartTimerEv'];
-  __ZN3GUI13EventRecorder11switchMixerEv = Module['__ZN3GUI13EventRecorder11switchMixerEv'] = wasmExports['_ZN3GUI13EventRecorder11switchMixerEv'];
-  __ZN3GUI13EventRecorder19switchTimerManagersEv = Module['__ZN3GUI13EventRecorder19switchTimerManagersEv'] = wasmExports['_ZN3GUI13EventRecorder19switchTimerManagersEv'];
-  __ZN3GUI13EventRecorder15updateFakeTimerEj = Module['__ZN3GUI13EventRecorder15updateFakeTimerEj'] = wasmExports['_ZN3GUI13EventRecorder15updateFakeTimerEj'];
-  __ZN3GUI14OnScreenDialog15setReplayedTimeEj = Module['__ZN3GUI14OnScreenDialog15setReplayedTimeEj'] = wasmExports['_ZN3GUI14OnScreenDialog15setReplayedTimeEj'];
-  __ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE = Module['__ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE'] = wasmExports['_ZN6Common12PlaybackFile10writeEventERKNS_13RecorderEventE'];
-  __ZN6Common12PlaybackFile12getNextEventEv = Module['__ZN6Common12PlaybackFile12getNextEventEv'] = wasmExports['_ZN6Common12PlaybackFile12getNextEventEv'];
-  __ZN3GUI13EventRecorder16postPlaybackQuitEv = Module['__ZN3GUI13EventRecorder16postPlaybackQuitEv'] = wasmExports['_ZN3GUI13EventRecorder16postPlaybackQuitEv'];
-  __ZN16NullMixerManager6updateEh = Module['__ZN16NullMixerManager6updateEh'] = wasmExports['_ZN16NullMixerManager6updateEh'];
-  __ZN3GUI13EventRecorder16updateSubsystemsEv = Module['__ZN3GUI13EventRecorder16updateSubsystemsEv'] = wasmExports['_ZN3GUI13EventRecorder16updateSubsystemsEv'];
-  __ZN3GUI13EventRecorder19processScreenUpdateEv = Module['__ZN3GUI13EventRecorder19processScreenUpdateEv'] = wasmExports['_ZN3GUI13EventRecorder19processScreenUpdateEv'];
-  __ZN3GUI13EventRecorder23grabScreenAndComputeMD5ERN8Graphics7SurfaceEPh = Module['__ZN3GUI13EventRecorder23grabScreenAndComputeMD5ERN8Graphics7SurfaceEPh'] = wasmExports['_ZN3GUI13EventRecorder23grabScreenAndComputeMD5ERN8Graphics7SurfaceEPh'];
-  __ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics7SurfaceEPKh = Module['__ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics7SurfaceEPKh'] = wasmExports['_ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics7SurfaceEPKh'];
-  __ZN3GUI13EventRecorder14takeScreenshotEv = Module['__ZN3GUI13EventRecorder14takeScreenshotEv'] = wasmExports['_ZN3GUI13EventRecorder14takeScreenshotEv'];
-  __ZN3GUI13EventRecorder15checkForKeyCodeERKN6Common5EventE = Module['__ZN3GUI13EventRecorder15checkForKeyCodeERKN6Common5EventE'] = wasmExports['_ZN3GUI13EventRecorder15checkForKeyCodeERKN6Common5EventE'];
-  __ZN3GUI13EventRecorder11togglePauseEv = Module['__ZN3GUI13EventRecorder11togglePauseEv'] = wasmExports['_ZN3GUI13EventRecorder11togglePauseEv'];
-  __ZN3GUI13EventRecorder9pollEventERN6Common5EventE = Module['__ZN3GUI13EventRecorder9pollEventERN6Common5EventE'] = wasmExports['_ZN3GUI13EventRecorder9pollEventERN6Common5EventE'];
-  __ZN3GUI13EventRecorder14switchFastModeEv = Module['__ZN3GUI13EventRecorder14switchFastModeEv'] = wasmExports['_ZN3GUI13EventRecorder14switchFastModeEv'];
-  __ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb = Module['__ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb'] = wasmExports['_ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb'];
-  __ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE = Module['__ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder13getRandomSeedERKN6Common6StringE'];
-  __ZN6Common12RandomSource15generateNewSeedEv = Module['__ZN6Common12RandomSource15generateNewSeedEv'] = wasmExports['_ZN6Common12RandomSource15generateNewSeedEv'];
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_ = Module['__ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_'] = wasmExports['_ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE24lookupAndCreateIfMissingERKS1_'];
-  __ZN6Common15EventDispatcher11clearEventsEv = Module['__ZN6Common15EventDispatcher11clearEventsEv'] = wasmExports['_ZN6Common15EventDispatcher11clearEventsEv'];
-  __ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb = Module['__ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb'] = wasmExports['_ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb'];
-  __ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE = Module['__ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder14openRecordFileERKN6Common6StringE'];
-  __Z15debugChannelSetij = Module['__Z15debugChannelSetij'] = wasmExports['_Z15debugChannelSetij'];
-  __ZN3GUI14OnScreenDialogC1Eb = Module['__ZN3GUI14OnScreenDialogC1Eb'] = wasmExports['_ZN3GUI14OnScreenDialogC1Eb'];
-  __ZN3GUI13EventRecorder21applyPlaybackSettingsEv = Module['__ZN3GUI13EventRecorder21applyPlaybackSettingsEv'] = wasmExports['_ZN3GUI13EventRecorder21applyPlaybackSettingsEv'];
-  __ZN3GUI13EventRecorder9getConfigEv = Module['__ZN3GUI13EventRecorder9getConfigEv'] = wasmExports['_ZN3GUI13EventRecorder9getConfigEv'];
-  __ZN6Common12PlaybackFile9openWriteERKNS_6StringE = Module['__ZN6Common12PlaybackFile9openWriteERKNS_6StringE'] = wasmExports['_ZN6Common12PlaybackFile9openWriteERKNS_6StringE'];
-  __ZNK3GUI13EventRecorder22isImGuiRecorderEnabledEv = Module['__ZNK3GUI13EventRecorder22isImGuiRecorderEnabledEv'] = wasmExports['_ZNK3GUI13EventRecorder22isImGuiRecorderEnabledEv'];
-  __ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE = Module['__ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE'] = wasmExports['_ZN3GUI13EventRecorder30removeDifferentEntriesInDomainEPN6Common13ConfigManager6DomainE'];
-  __ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE = Module['__ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE'] = wasmExports['_ZN3GUI13EventRecorder19getConfigFromDomainEPKN6Common13ConfigManager6DomainE'];
-  __ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription = Module['__ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription'] = wasmExports['_ZN3GUI13EventRecorder13checkGameHashEPK17ADGameDescription'];
-  __ZN3GUI13EventRecorder10notifyPollEv = Module['__ZN3GUI13EventRecorder10notifyPollEv'] = wasmExports['_ZN3GUI13EventRecorder10notifyPollEv'];
-  __ZThn8_N3GUI13EventRecorder10notifyPollEv = Module['__ZThn8_N3GUI13EventRecorder10notifyPollEv'] = wasmExports['_ZThn8_N3GUI13EventRecorder10notifyPollEv'];
-  __ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE = Module['__ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE'] = wasmExports['_ZN3GUI13EventRecorder11notifyEventERKN6Common5EventE'];
-  __ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE = Module['__ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE'] = wasmExports['_ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE'];
-  __ZN3GUI14OnScreenDialog11isMouseOverEv = Module['__ZN3GUI14OnScreenDialog11isMouseOverEv'] = wasmExports['_ZN3GUI14OnScreenDialog11isMouseOverEv'];
-  __ZN3GUI14OnScreenDialog16isEditDlgVisibleEv = Module['__ZN3GUI14OnScreenDialog16isEditDlgVisibleEv'] = wasmExports['_ZN3GUI14OnScreenDialog16isEditDlgVisibleEv'];
-  __ZN3GUI14OnScreenDialog12getActiveDlgEv = Module['__ZN3GUI14OnScreenDialog12getActiveDlgEv'] = wasmExports['_ZN3GUI14OnScreenDialog12getActiveDlgEv'];
-  __ZThn8_N3GUI13EventRecorder11notifyEventERKN6Common5EventE = Module['__ZThn8_N3GUI13EventRecorder11notifyEventERKN6Common5EventE'] = wasmExports['_ZThn8_N3GUI13EventRecorder11notifyEventERKN6Common5EventE'];
-  __ZN3GUI13EventRecorder10setGameMd5EPK17ADGameDescription = Module['__ZN3GUI13EventRecorder10setGameMd5EPK17ADGameDescription'] = wasmExports['_ZN3GUI13EventRecorder10setGameMd5EPK17ADGameDescription'];
-  __ZN3GUI13EventRecorder12deleteRecordERKN6Common6StringE = Module['__ZN3GUI13EventRecorder12deleteRecordERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder12deleteRecordERKN6Common6StringE'];
-  __ZN8Graphics16createScreenShotERNS_7SurfaceE = Module['__ZN8Graphics16createScreenShotERNS_7SurfaceE'] = wasmExports['_ZN8Graphics16createScreenShotERNS_7SurfaceE'];
-  __ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_ = Module['__ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_'] = wasmExports['_ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_'];
-  __ZN3GUI13EventRecorder17processSaveStreamERKN6Common6StringE = Module['__ZN3GUI13EventRecorder17processSaveStreamERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder17processSaveStreamERKN6Common6StringE'];
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE24lookupAndCreateIfMissingERKS1_ = Module['__ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE24lookupAndCreateIfMissingERKS1_'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE24lookupAndCreateIfMissingERKS1_'];
-  __ZN6Common12PlaybackFile11addSaveFileERKNS_6StringEPNS_18SeekableReadStreamE = Module['__ZN6Common12PlaybackFile11addSaveFileERKNS_6StringEPNS_18SeekableReadStreamE'] = wasmExports['_ZN6Common12PlaybackFile11addSaveFileERKNS_6StringEPNS_18SeekableReadStreamE'];
-  __ZN3GUI13EventRecorder17preDrawOverlayGuiEv = Module['__ZN3GUI13EventRecorder17preDrawOverlayGuiEv'] = wasmExports['_ZN3GUI13EventRecorder17preDrawOverlayGuiEv'];
-  __ZN3GUI11ThemeEngine8clearAllEv = Module['__ZN3GUI11ThemeEngine8clearAllEv'] = wasmExports['_ZN3GUI11ThemeEngine8clearAllEv'];
-  __ZN3GUI11ThemeEngine16drawToBackbufferEv = Module['__ZN3GUI11ThemeEngine16drawToBackbufferEv'] = wasmExports['_ZN3GUI11ThemeEngine16drawToBackbufferEv'];
-  __ZN3GUI11ThemeEngine12drawToScreenEv = Module['__ZN3GUI11ThemeEngine12drawToScreenEv'] = wasmExports['_ZN3GUI11ThemeEngine12drawToScreenEv'];
-  __ZN3GUI11ThemeEngine22copyBackBufferToScreenEv = Module['__ZN3GUI11ThemeEngine22copyBackBufferToScreenEv'] = wasmExports['_ZN3GUI11ThemeEngine22copyBackBufferToScreenEv'];
-  __ZN3GUI11ThemeEngine12updateScreenEv = Module['__ZN3GUI11ThemeEngine12updateScreenEv'] = wasmExports['_ZN3GUI11ThemeEngine12updateScreenEv'];
-  __ZN3GUI13EventRecorder18postDrawOverlayGuiEv = Module['__ZN3GUI13EventRecorder18postDrawOverlayGuiEv'] = wasmExports['_ZN3GUI13EventRecorder18postDrawOverlayGuiEv'];
-  __ZN3GUI13EventRecorder13listSaveFilesERKN6Common6StringE = Module['__ZN3GUI13EventRecorder13listSaveFilesERKN6Common6StringE'] = wasmExports['_ZN3GUI13EventRecorder13listSaveFilesERKN6Common6StringE'];
-  __ZNK6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv = Module['__ZNK6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv'] = wasmExports['_ZNK6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv'];
-  __ZNK6Common6String11matchStringERKS0_bPKc = Module['__ZNK6Common6String11matchStringERKS0_bPKc'] = wasmExports['_ZNK6Common6String11matchStringERKS0_bPKc'];
-  __ZN3GUI13EventRecorder10getSurfaceEii = Module['__ZN3GUI13EventRecorder10getSurfaceEii'] = wasmExports['_ZN3GUI13EventRecorder10getSurfaceEii'];
-  _SDL_CreateSurface = Module['_SDL_CreateSurface'] = wasmExports['SDL_CreateSurface'];
-  __ZN3GUI13EventRecorder10switchModeEv = Module['__ZN3GUI13EventRecorder10switchModeEv'] = wasmExports['_ZN3GUI13EventRecorder10switchModeEv'];
-  __ZN3GUI13EventRecorder19deleteTemporarySaveEv = Module['__ZN3GUI13EventRecorder19deleteTemporarySaveEv'] = wasmExports['_ZN3GUI13EventRecorder19deleteTemporarySaveEv'];
-  __ZN3GUI13EventRecorder9showImGuiEv = Module['__ZN3GUI13EventRecorder9showImGuiEv'] = wasmExports['_ZN3GUI13EventRecorder9showImGuiEv'];
-  __ZN5ImGui12PushStyleVarEiRK6ImVec2 = Module['__ZN5ImGui12PushStyleVarEiRK6ImVec2'] = wasmExports['_ZN5ImGui12PushStyleVarEiRK6ImVec2'];
-  __ZN5ImGui12PushStyleVarEif = Module['__ZN5ImGui12PushStyleVarEif'] = wasmExports['_ZN5ImGui12PushStyleVarEif'];
-  __ZN5ImGui14PushStyleColorEiRK6ImVec4 = Module['__ZN5ImGui14PushStyleColorEiRK6ImVec4'] = wasmExports['_ZN5ImGui14PushStyleColorEiRK6ImVec4'];
-  __ZN5ImGui17SetNextWindowSizeERK6ImVec2i = Module['__ZN5ImGui17SetNextWindowSizeERK6ImVec2i'] = wasmExports['_ZN5ImGui17SetNextWindowSizeERK6ImVec2i'];
-  __ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_ = Module['__ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_'] = wasmExports['_ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_'];
-  __ZN5ImGui5BeginEPKcPbi = Module['__ZN5ImGui5BeginEPKcPbi'] = wasmExports['_ZN5ImGui5BeginEPKcPbi'];
-  __ZN5ImGui11TextColoredERK6ImVec4PKcz = Module['__ZN5ImGui11TextColoredERK6ImVec4PKcz'] = wasmExports['_ZN5ImGui11TextColoredERK6ImVec4PKcz'];
-  __ZN5ImGui8SameLineEff = Module['__ZN5ImGui8SameLineEff'] = wasmExports['_ZN5ImGui8SameLineEff'];
-  __ZN5ImGui4TextEPKcz = Module['__ZN5ImGui4TextEPKcz'] = wasmExports['_ZN5ImGui4TextEPKcz'];
-  __ZN5ImGui21GetContentRegionAvailEv = Module['__ZN5ImGui21GetContentRegionAvailEv'] = wasmExports['_ZN5ImGui21GetContentRegionAvailEv'];
-  __ZN5ImGui12CalcTextSizeEPKcS1_bf = Module['__ZN5ImGui12CalcTextSizeEPKcS1_bf'] = wasmExports['_ZN5ImGui12CalcTextSizeEPKcS1_bf'];
-  __ZN5ImGui12TextDisabledEPKcz = Module['__ZN5ImGui12TextDisabledEPKcz'] = wasmExports['_ZN5ImGui12TextDisabledEPKcz'];
-  __ZN5ImGui8GetStyleEv = Module['__ZN5ImGui8GetStyleEv'] = wasmExports['_ZN5ImGui8GetStyleEv'];
-  __ZN5ImGui13SetCursorPosXEf = Module['__ZN5ImGui13SetCursorPosXEf'] = wasmExports['_ZN5ImGui13SetCursorPosXEf'];
-  __ZN5ImGui6ButtonEPKcRK6ImVec2 = Module['__ZN5ImGui6ButtonEPKcRK6ImVec2'] = wasmExports['_ZN5ImGui6ButtonEPKcRK6ImVec2'];
-  __ZN5ImGui14SetItemTooltipEPKcz = Module['__ZN5ImGui14SetItemTooltipEPKcz'] = wasmExports['_ZN5ImGui14SetItemTooltipEPKcz'];
-  __ZN5ImGui13PopStyleColorEi = Module['__ZN5ImGui13PopStyleColorEi'] = wasmExports['_ZN5ImGui13PopStyleColorEi'];
-  __ZN5ImGui13BeginDisabledEb = Module['__ZN5ImGui13BeginDisabledEb'] = wasmExports['_ZN5ImGui13BeginDisabledEb'];
-  __ZN5ImGui11EndDisabledEv = Module['__ZN5ImGui11EndDisabledEv'] = wasmExports['_ZN5ImGui11EndDisabledEv'];
-  __ZN5ImGui3EndEv = Module['__ZN5ImGui3EndEv'] = wasmExports['_ZN5ImGui3EndEv'];
-  __ZN5ImGui11PopStyleVarEi = Module['__ZN5ImGui11PopStyleVarEi'] = wasmExports['_ZN5ImGui11PopStyleVarEi'];
-  __ZNK3GUI13EventRecorder12allowMappingEv = Module['__ZNK3GUI13EventRecorder12allowMappingEv'] = wasmExports['_ZNK3GUI13EventRecorder12allowMappingEv'];
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj = Module['__ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'];
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj = Module['__ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj'];
   __ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_ = Module['__ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_'] = wasmExports['_ZN3GUI17FileBrowserDialogC2EPKcS2_iS2_S2_'];
   __ZN6Common18convertToU32StringEPKcNS_8CodePageE = Module['__ZN6Common18convertToU32StringEPKcNS_8CodePageE'] = wasmExports['_ZN6Common18convertToU32StringEPKcNS_8CodePageE'];
   __ZN3GUI17FileBrowserDialog4openEv = Module['__ZN3GUI17FileBrowserDialog4openEv'] = wasmExports['_ZN3GUI17FileBrowserDialog4openEv'];
@@ -72418,6 +72106,7 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI17FileBrowserDialog13handleCommandEPNS_13CommandSenderEjj = Module['__ZN3GUI17FileBrowserDialog13handleCommandEPNS_13CommandSenderEjj'] = wasmExports['_ZN3GUI17FileBrowserDialog13handleCommandEPNS_13CommandSenderEjj'];
   __ZN3GUI17FileBrowserDialog16normalieFileNameEv = Module['__ZN3GUI17FileBrowserDialog16normalieFileNameEv'] = wasmExports['_ZN3GUI17FileBrowserDialog16normalieFileNameEv'];
   __ZN3GUI17FileBrowserDialog13isProceedSaveEv = Module['__ZN3GUI17FileBrowserDialog13isProceedSaveEv'] = wasmExports['_ZN3GUI17FileBrowserDialog13isProceedSaveEv'];
+  __ZNK6Common6String11matchStringERKS0_bPKc = Module['__ZNK6Common6String11matchStringERKS0_bPKc'] = wasmExports['_ZNK6Common6String11matchStringERKS0_bPKc'];
   __ZN3GUI17FileBrowserDialogD2Ev = Module['__ZN3GUI17FileBrowserDialogD2Ev'] = wasmExports['_ZN3GUI17FileBrowserDialogD2Ev'];
   __ZN3GUI17FileBrowserDialogD0Ev = Module['__ZN3GUI17FileBrowserDialogD0Ev'] = wasmExports['_ZN3GUI17FileBrowserDialogD0Ev'];
   __ZN3GUI17FileBrowserDialogC1EPKcS2_iS2_S2_ = Module['__ZN3GUI17FileBrowserDialogC1EPKcS2_iS2_S2_'] = wasmExports['_ZN3GUI17FileBrowserDialogC1EPKcS2_iS2_S2_'];
@@ -72446,6 +72135,7 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI10GuiManager11setupCursorEv = Module['__ZN3GUI10GuiManager11setupCursorEv'] = wasmExports['_ZN3GUI10GuiManager11setupCursorEv'];
   __ZN3GUI10GuiManager27redrawInternalTopDialogOnlyEv = Module['__ZN3GUI10GuiManager27redrawInternalTopDialogOnlyEv'] = wasmExports['_ZN3GUI10GuiManager27redrawInternalTopDialogOnlyEv'];
   __ZN3GUI10GuiManager14redrawInternalEv = Module['__ZN3GUI10GuiManager14redrawInternalEv'] = wasmExports['_ZN3GUI10GuiManager14redrawInternalEv'];
+  __ZN3GUI11ThemeEngine12updateScreenEv = Module['__ZN3GUI11ThemeEngine12updateScreenEv'] = wasmExports['_ZN3GUI11ThemeEngine12updateScreenEv'];
   __ZN3GUI10GuiManagerD2Ev = Module['__ZN3GUI10GuiManagerD2Ev'] = wasmExports['_ZN3GUI10GuiManagerD2Ev'];
   __ZN8Graphics16MacWindowManagerD1Ev = Module['__ZN8Graphics16MacWindowManagerD1Ev'] = wasmExports['_ZN8Graphics16MacWindowManagerD1Ev'];
   __ZN6Common5MutexD1Ev = Module['__ZN6Common5MutexD1Ev'] = wasmExports['_ZN6Common5MutexD1Ev'];
@@ -72460,6 +72150,10 @@ function assignWasmExports(wasmExports) {
   __ZN6Common9Keymapper20setEnabledKeymapTypeENS_6Keymap10KeymapTypeE = Module['__ZN6Common9Keymapper20setEnabledKeymapTypeENS_6Keymap10KeymapTypeE'] = wasmExports['_ZN6Common9Keymapper20setEnabledKeymapTypeENS_6Keymap10KeymapTypeE'];
   __ZN3GUI10GuiManager6redrawEv = Module['__ZN3GUI10GuiManager6redrawEv'] = wasmExports['_ZN3GUI10GuiManager6redrawEv'];
   __ZN3GUI10GuiManager20displayTopDialogOnlyEb = Module['__ZN3GUI10GuiManager20displayTopDialogOnlyEb'] = wasmExports['_ZN3GUI10GuiManager20displayTopDialogOnlyEb'];
+  __ZN3GUI11ThemeEngine8clearAllEv = Module['__ZN3GUI11ThemeEngine8clearAllEv'] = wasmExports['_ZN3GUI11ThemeEngine8clearAllEv'];
+  __ZN3GUI11ThemeEngine16drawToBackbufferEv = Module['__ZN3GUI11ThemeEngine16drawToBackbufferEv'] = wasmExports['_ZN3GUI11ThemeEngine16drawToBackbufferEv'];
+  __ZN3GUI11ThemeEngine12drawToScreenEv = Module['__ZN3GUI11ThemeEngine12drawToScreenEv'] = wasmExports['_ZN3GUI11ThemeEngine12drawToScreenEv'];
+  __ZN3GUI11ThemeEngine22copyBackBufferToScreenEv = Module['__ZN3GUI11ThemeEngine22copyBackBufferToScreenEv'] = wasmExports['_ZN3GUI11ThemeEngine22copyBackBufferToScreenEv'];
   __ZN3GUI11ThemeEngine17restoreBackgroundEN6Common4RectE = Module['__ZN3GUI11ThemeEngine17restoreBackgroundEN6Common4RectE'] = wasmExports['_ZN3GUI11ThemeEngine17restoreBackgroundEN6Common4RectE'];
   __ZN3GUI11ThemeEngine12swapClipRectERKN6Common4RectE = Module['__ZN3GUI11ThemeEngine12swapClipRectERKN6Common4RectE'] = wasmExports['_ZN3GUI11ThemeEngine12swapClipRectERKN6Common4RectE'];
   __ZN3GUI11ThemeEngine18applyScreenShadingENS0_12ShadingStyleE = Module['__ZN3GUI11ThemeEngine18applyScreenShadingENS0_12ShadingStyleE'] = wasmExports['_ZN3GUI11ThemeEngine18applyScreenShadingENS0_12ShadingStyleE'];
@@ -72468,6 +72162,7 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI10GuiManager9saveStateEv = Module['__ZN3GUI10GuiManager9saveStateEv'] = wasmExports['_ZN3GUI10GuiManager9saveStateEv'];
   __ZN3GUI10GuiManager13animateCursorEv = Module['__ZN3GUI10GuiManager13animateCursorEv'] = wasmExports['_ZN3GUI10GuiManager13animateCursorEv'];
   __ZN3GUI10GuiManager12screenChangeEv = Module['__ZN3GUI10GuiManager12screenChangeEv'] = wasmExports['_ZN3GUI10GuiManager12screenChangeEv'];
+  __ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE = Module['__ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE'] = wasmExports['_ZN3GUI10GuiManager12processEventERKN6Common5EventEPNS_6DialogE'];
   __ZN6Common5Mutex4lockEv = Module['__ZN6Common5Mutex4lockEv'] = wasmExports['_ZN6Common5Mutex4lockEv'];
   __ZN6Common5Mutex6unlockEv = Module['__ZN6Common5Mutex6unlockEv'] = wasmExports['_ZN6Common5Mutex6unlockEv'];
   __ZN3GUI7TooltipC1Ev = Module['__ZN3GUI7TooltipC1Ev'] = wasmExports['_ZN3GUI7TooltipC1Ev'];
@@ -72556,11 +72251,7 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI14LauncherDialog10removeGameEi = Module['__ZN3GUI14LauncherDialog10removeGameEi'] = wasmExports['_ZN3GUI14LauncherDialog10removeGameEi'];
   __ZN3GUI14LauncherDialog21removeGamesWithAddonsERKN6Common5ArrayINS1_6StringEEE = Module['__ZN3GUI14LauncherDialog21removeGamesWithAddonsERKN6Common5ArrayINS1_6StringEEE'] = wasmExports['_ZN3GUI14LauncherDialog21removeGamesWithAddonsERKN6Common5ArrayINS1_6StringEEE'];
   __ZN3GUI14LauncherDialog8editGameEi = Module['__ZN3GUI14LauncherDialog8editGameEi'] = wasmExports['_ZN3GUI14LauncherDialog8editGameEi'];
-  __ZN3GUI14LauncherDialog10recordGameEi = Module['__ZN3GUI14LauncherDialog10recordGameEi'] = wasmExports['_ZN3GUI14LauncherDialog10recordGameEi'];
-  __ZN3GUI14RecorderDialogC1Ev = Module['__ZN3GUI14RecorderDialogC1Ev'] = wasmExports['_ZN3GUI14RecorderDialogC1Ev'];
-  __ZN3GUI14RecorderDialog8runModalERN6Common6StringE = Module['__ZN3GUI14RecorderDialog8runModalERN6Common6StringE'] = wasmExports['_ZN3GUI14RecorderDialog8runModalERN6Common6StringE'];
   __ZN3GUI14LauncherDialog8loadGameEi = Module['__ZN3GUI14LauncherDialog8loadGameEi'] = wasmExports['_ZN3GUI14LauncherDialog8loadGameEi'];
-  __ZN3GUI14RecorderDialogD1Ev = Module['__ZN3GUI14RecorderDialogD1Ev'] = wasmExports['_ZN3GUI14RecorderDialogD1Ev'];
   __ZN3GUI15SaveLoadChooser31runModalWithMetaEngineAndTargetEPK10MetaEngineRKN6Common6StringE = Module['__ZN3GUI15SaveLoadChooser31runModalWithMetaEngineAndTargetEPK10MetaEngineRKN6Common6StringE'] = wasmExports['_ZN3GUI15SaveLoadChooser31runModalWithMetaEngineAndTargetEPK10MetaEngineRKN6Common6StringE'];
   __ZN3GUI14LauncherDialog15generateEntriesERKN6Common7HashMapINS1_6StringENS1_13ConfigManager6DomainENS1_15IgnoreCase_HashENS1_18IgnoreCase_EqualToEEEb = Module['__ZN3GUI14LauncherDialog15generateEntriesERKN6Common7HashMapINS1_6StringENS1_13ConfigManager6DomainENS1_15IgnoreCase_HashENS1_18IgnoreCase_EqualToEEEb'] = wasmExports['_ZN3GUI14LauncherDialog15generateEntriesERKN6Common7HashMapINS1_6StringENS1_13ConfigManager6DomainENS1_15IgnoreCase_HashENS1_18IgnoreCase_EqualToEEEb'];
   __ZN6Common7HashMapINS_6StringENS0_IS1_S1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEES2_S3_E24lookupAndCreateIfMissingERKS1_ = Module['__ZN6Common7HashMapINS_6StringENS0_IS1_S1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEES2_S3_E24lookupAndCreateIfMissingERKS1_'] = wasmExports['_ZN6Common7HashMapINS_6StringENS0_IS1_S1_NS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEES2_S3_E24lookupAndCreateIfMissingERKS1_'];
@@ -74016,53 +73707,6 @@ function assignWasmExports(wasmExports) {
   __ZN6Common8CallbackIN3GUI15IntegrityDialogEPKNS_9JSONValueEEclES5_ = Module['__ZN6Common8CallbackIN3GUI15IntegrityDialogEPKNS_9JSONValueEEclES5_'] = wasmExports['_ZN6Common8CallbackIN3GUI15IntegrityDialogEPKNS_9JSONValueEEclES5_'];
   __ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEED0Ev = Module['__ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEED0Ev'] = wasmExports['_ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEED0Ev'];
   __ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEclES6_ = Module['__ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEclES6_'] = wasmExports['_ZN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEclES6_'];
-  __ZN3GUI16EditRecordDialog9getAuthorEv = Module['__ZN3GUI16EditRecordDialog9getAuthorEv'] = wasmExports['_ZN3GUI16EditRecordDialog9getAuthorEv'];
-  __ZN3GUI16EditRecordDialog9setAuthorERKN6Common9U32StringE = Module['__ZN3GUI16EditRecordDialog9setAuthorERKN6Common9U32StringE'] = wasmExports['_ZN3GUI16EditRecordDialog9setAuthorERKN6Common9U32StringE'];
-  __ZN3GUI16EditRecordDialog8getNotesEv = Module['__ZN3GUI16EditRecordDialog8getNotesEv'] = wasmExports['_ZN3GUI16EditRecordDialog8getNotesEv'];
-  __ZN3GUI16EditRecordDialog8setNotesERKN6Common6StringE = Module['__ZN3GUI16EditRecordDialog8setNotesERKN6Common6StringE'] = wasmExports['_ZN3GUI16EditRecordDialog8setNotesERKN6Common6StringE'];
-  __ZN3GUI16EditRecordDialog7getNameEv = Module['__ZN3GUI16EditRecordDialog7getNameEv'] = wasmExports['_ZN3GUI16EditRecordDialog7getNameEv'];
-  __ZN3GUI16EditRecordDialog7setNameERKN6Common6StringE = Module['__ZN3GUI16EditRecordDialog7setNameERKN6Common6StringE'] = wasmExports['_ZN3GUI16EditRecordDialog7setNameERKN6Common6StringE'];
-  __ZN3GUI16EditRecordDialogD2Ev = Module['__ZN3GUI16EditRecordDialogD2Ev'] = wasmExports['_ZN3GUI16EditRecordDialogD2Ev'];
-  __ZN3GUI16EditRecordDialogD0Ev = Module['__ZN3GUI16EditRecordDialogD0Ev'] = wasmExports['_ZN3GUI16EditRecordDialogD0Ev'];
-  __ZN3GUI16EditRecordDialogD1Ev = Module['__ZN3GUI16EditRecordDialogD1Ev'] = wasmExports['_ZN3GUI16EditRecordDialogD1Ev'];
-  __ZN3GUI16EditRecordDialogC2ERKN6Common9U32StringERKNS1_6StringES7_ = Module['__ZN3GUI16EditRecordDialogC2ERKN6Common9U32StringERKNS1_6StringES7_'] = wasmExports['_ZN3GUI16EditRecordDialogC2ERKN6Common9U32StringERKNS1_6StringES7_'];
-  __ZN3GUI16EditRecordDialog13handleCommandEPNS_13CommandSenderEjj = Module['__ZN3GUI16EditRecordDialog13handleCommandEPNS_13CommandSenderEjj'] = wasmExports['_ZN3GUI16EditRecordDialog13handleCommandEPNS_13CommandSenderEjj'];
-  __ZN3GUI16EditRecordDialogC1ERKN6Common9U32StringERKNS1_6StringES7_ = Module['__ZN3GUI16EditRecordDialogC1ERKN6Common9U32StringERKNS1_6StringES7_'] = wasmExports['_ZN3GUI16EditRecordDialogC1ERKN6Common9U32StringERKNS1_6StringES7_'];
-  __ZNK3GUI14OnScreenDialog9isVisibleEv = Module['__ZNK3GUI14OnScreenDialog9isVisibleEv'] = wasmExports['_ZNK3GUI14OnScreenDialog9isVisibleEv'];
-  __ZN3GUI14OnScreenDialog12reflowLayoutEv = Module['__ZN3GUI14OnScreenDialog12reflowLayoutEv'] = wasmExports['_ZN3GUI14OnScreenDialog12reflowLayoutEv'];
-  __ZN3GUI14OnScreenDialog12releaseFocusEv = Module['__ZN3GUI14OnScreenDialog12releaseFocusEv'] = wasmExports['_ZN3GUI14OnScreenDialog12releaseFocusEv'];
-  __ZN3GUI14OnScreenDialogC2Eb = Module['__ZN3GUI14OnScreenDialogC2Eb'] = wasmExports['_ZN3GUI14OnScreenDialogC2Eb'];
-  __ZN3GUI14OnScreenDialog13handleCommandEPNS_13CommandSenderEjj = Module['__ZN3GUI14OnScreenDialog13handleCommandEPNS_13CommandSenderEjj'] = wasmExports['_ZN3GUI14OnScreenDialog13handleCommandEPNS_13CommandSenderEjj'];
-  __ZN8Graphics13CursorManager4lockEb = Module['__ZN8Graphics13CursorManager4lockEb'] = wasmExports['_ZN8Graphics13CursorManager4lockEb'];
-  __ZN3GUI14OnScreenDialogD2Ev = Module['__ZN3GUI14OnScreenDialogD2Ev'] = wasmExports['_ZN3GUI14OnScreenDialogD2Ev'];
-  __ZN3GUI14OnScreenDialogD0Ev = Module['__ZN3GUI14OnScreenDialogD0Ev'] = wasmExports['_ZN3GUI14OnScreenDialogD0Ev'];
-  __ZN3GUI14OnScreenDialogD1Ev = Module['__ZN3GUI14OnScreenDialogD1Ev'] = wasmExports['_ZN3GUI14OnScreenDialogD1Ev'];
-  __ZN3GUI14OnScreenDialog16handleMouseMovedEiii = Module['__ZN3GUI14OnScreenDialog16handleMouseMovedEiii'] = wasmExports['_ZN3GUI14OnScreenDialog16handleMouseMovedEiii'];
-  __ZN3GUI14OnScreenDialog11isMouseOverEii = Module['__ZN3GUI14OnScreenDialog11isMouseOverEii'] = wasmExports['_ZN3GUI14OnScreenDialog11isMouseOverEii'];
-  __ZN3GUI14OnScreenDialog15handleMouseDownEiiii = Module['__ZN3GUI14OnScreenDialog15handleMouseDownEiiii'] = wasmExports['_ZN3GUI14OnScreenDialog15handleMouseDownEiiii'];
-  __ZN3GUI14OnScreenDialog13handleMouseUpEiiii = Module['__ZN3GUI14OnScreenDialog13handleMouseUpEiiii'] = wasmExports['_ZN3GUI14OnScreenDialog13handleMouseUpEiiii'];
-  __ZN3GUI14OnScreenDialog5closeEv = Module['__ZN3GUI14OnScreenDialog5closeEv'] = wasmExports['_ZN3GUI14OnScreenDialog5closeEv'];
-  __ZN3GUI14RecorderDialogC2Ev = Module['__ZN3GUI14RecorderDialogC2Ev'] = wasmExports['_ZN3GUI14RecorderDialogC2Ev'];
-  __ZN3GUI14RecorderDialog35addThumbnailContainerButtonsAndTextEv = Module['__ZN3GUI14RecorderDialog35addThumbnailContainerButtonsAndTextEv'] = wasmExports['_ZN3GUI14RecorderDialog35addThumbnailContainerButtonsAndTextEv'];
-  __ZN3GUI14RecorderDialog12reflowLayoutEv = Module['__ZN3GUI14RecorderDialog12reflowLayoutEv'] = wasmExports['_ZN3GUI14RecorderDialog12reflowLayoutEv'];
-  __ZN3GUI14RecorderDialog15updateSelectionEb = Module['__ZN3GUI14RecorderDialog15updateSelectionEb'] = wasmExports['_ZN3GUI14RecorderDialog15updateSelectionEb'];
-  __ZN3GUI14RecorderDialog16updateScreenshotEv = Module['__ZN3GUI14RecorderDialog16updateScreenshotEv'] = wasmExports['_ZN3GUI14RecorderDialog16updateScreenshotEv'];
-  __ZN3GUI14RecorderDialog21updateScreenShotsTextEv = Module['__ZN3GUI14RecorderDialog21updateScreenShotsTextEv'] = wasmExports['_ZN3GUI14RecorderDialog21updateScreenShotsTextEv'];
-  __ZN3GUI14RecorderDialog13handleCommandEPNS_13CommandSenderEjj = Module['__ZN3GUI14RecorderDialog13handleCommandEPNS_13CommandSenderEjj'] = wasmExports['_ZN3GUI14RecorderDialog13handleCommandEPNS_13CommandSenderEjj'];
-  __ZN6Common12PlaybackFile12updateHeaderEv = Module['__ZN6Common12PlaybackFile12updateHeaderEv'] = wasmExports['_ZN6Common12PlaybackFile12updateHeaderEv'];
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEEaSERKS8_ = Module['__ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEEaSERKS8_'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEEaSERKS8_'];
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEaSERKS4_ = Module['__ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEaSERKS4_'] = wasmExports['_ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEEaSERKS4_'];
-  __ZN3GUI14RecorderDialog10updateListEv = Module['__ZN3GUI14RecorderDialog10updateListEv'] = wasmExports['_ZN3GUI14RecorderDialog10updateListEv'];
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderD2Ev = Module['__ZN6Common12PlaybackFile18PlaybackFileHeaderD2Ev'] = wasmExports['_ZN6Common12PlaybackFile18PlaybackFileHeaderD2Ev'];
-  __ZN6Common5ArrayINS_12PlaybackFile18PlaybackFileHeaderEE7emplaceIJRKS2_EEEvPS5_DpOT_ = Module['__ZN6Common5ArrayINS_12PlaybackFile18PlaybackFileHeaderEE7emplaceIJRKS2_EEEvPS5_DpOT_'] = wasmExports['_ZN6Common5ArrayINS_12PlaybackFile18PlaybackFileHeaderEE7emplaceIJRKS2_EEEvPS5_DpOT_'];
-  __ZN6Common12PlaybackFile15getScreensCountEv = Module['__ZN6Common12PlaybackFile15getScreensCountEv'] = wasmExports['_ZN6Common12PlaybackFile15getScreensCountEv'];
-  __ZN6Common12PlaybackFile13getScreenShotEi = Module['__ZN6Common12PlaybackFile13getScreenShotEi'] = wasmExports['_ZN6Common12PlaybackFile13getScreenShotEi'];
-  __ZN3GUI14RecorderDialogD2Ev = Module['__ZN3GUI14RecorderDialogD2Ev'] = wasmExports['_ZN3GUI14RecorderDialogD2Ev'];
-  __ZN3GUI14RecorderDialogD0Ev = Module['__ZN3GUI14RecorderDialogD0Ev'] = wasmExports['_ZN3GUI14RecorderDialogD0Ev'];
-  __ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE6assignERKS8_ = Module['__ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE6assignERKS8_'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_12PlaybackFile14SaveFileBufferENS_4HashIS1_EENS_7EqualToIS1_EEE6assignERKS8_'];
-  __ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE6assignERKS4_ = Module['__ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE6assignERKS4_'] = wasmExports['_ZN6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE6assignERKS4_'];
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderC2ERKS1_ = Module['__ZN6Common12PlaybackFile18PlaybackFileHeaderC2ERKS1_'] = wasmExports['_ZN6Common12PlaybackFile18PlaybackFileHeaderC2ERKS1_'];
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderC2EOS1_ = Module['__ZN6Common12PlaybackFile18PlaybackFileHeaderC2EOS1_'] = wasmExports['_ZN6Common12PlaybackFile18PlaybackFileHeaderC2EOS1_'];
   __ZN3GUI24FluidSynthSettingsDialogC2Ev = Module['__ZN3GUI24FluidSynthSettingsDialogC2Ev'] = wasmExports['_ZN3GUI24FluidSynthSettingsDialogC2Ev'];
   __ZN3GUI24FluidSynthSettingsDialogD2Ev = Module['__ZN3GUI24FluidSynthSettingsDialogD2Ev'] = wasmExports['_ZN3GUI24FluidSynthSettingsDialogD2Ev'];
   __ZN3GUI24FluidSynthSettingsDialogD0Ev = Module['__ZN3GUI24FluidSynthSettingsDialogD0Ev'] = wasmExports['_ZN3GUI24FluidSynthSettingsDialogD0Ev'];
@@ -74134,10 +73778,14 @@ function assignWasmExports(wasmExports) {
   __ZN21DefaultAudioCDManager6openCDERKN6Common4PathE = Module['__ZN21DefaultAudioCDManager6openCDERKN6Common4PathE'] = wasmExports['_ZN21DefaultAudioCDManager6openCDERKN6Common4PathE'];
   __ZN19DefaultEventManagerC2EPN6Common11EventSourceE = Module['__ZN19DefaultEventManagerC2EPN6Common11EventSourceE'] = wasmExports['_ZN19DefaultEventManagerC2EPN6Common11EventSourceE'];
   __ZN6Common15EventDispatcherC1Ev = Module['__ZN6Common15EventDispatcherC1Ev'] = wasmExports['_ZN6Common15EventDispatcherC1Ev'];
+  __ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb = Module['__ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb'] = wasmExports['_ZN6Common15EventDispatcher14registerSourceEPNS_11EventSourceEb'];
+  __ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb = Module['__ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb'] = wasmExports['_ZN6Common15EventDispatcher16registerObserverEPNS_13EventObserverEjbb'];
   __ZN6Common12VirtualMouseC1EPNS_15EventDispatcherE = Module['__ZN6Common12VirtualMouseC1EPNS_15EventDispatcherE'] = wasmExports['_ZN6Common12VirtualMouseC1EPNS_15EventDispatcherE'];
   __ZN6Common9KeymapperC1EPNS_12EventManagerE = Module['__ZN6Common9KeymapperC1EPNS_12EventManagerE'] = wasmExports['_ZN6Common9KeymapperC1EPNS_12EventManagerE'];
   __ZN6Common15EventDispatcher14registerMapperEPNS_11EventMapperEb = Module['__ZN6Common15EventDispatcher14registerMapperEPNS_11EventMapperEb'] = wasmExports['_ZN6Common15EventDispatcher14registerMapperEPNS_11EventMapperEb'];
   __ZN19DefaultEventManagerD2Ev = Module['__ZN19DefaultEventManagerD2Ev'] = wasmExports['_ZN19DefaultEventManagerD2Ev'];
+  __ZN6Common11EventSourceD2Ev = Module['__ZN6Common11EventSourceD2Ev'] = wasmExports['_ZN6Common11EventSourceD2Ev'];
+  __ZN6Common13EventObserverD2Ev = Module['__ZN6Common13EventObserverD2Ev'] = wasmExports['_ZN6Common13EventObserverD2Ev'];
   __ZN6Common12EventManagerD2Ev = Module['__ZN6Common12EventManagerD2Ev'] = wasmExports['_ZN6Common12EventManagerD2Ev'];
   __ZN6Common21ArtificialEventSourceD2Ev = Module['__ZN6Common21ArtificialEventSourceD2Ev'] = wasmExports['_ZN6Common21ArtificialEventSourceD2Ev'];
   __ZThn28_N19DefaultEventManagerD1Ev = Module['__ZThn28_N19DefaultEventManagerD1Ev'] = wasmExports['_ZThn28_N19DefaultEventManagerD1Ev'];
@@ -74348,6 +73996,7 @@ function assignWasmExports(wasmExports) {
   __ZN6Common7HashMapIPNS_6KeymapENS_11RemapWidget14KeymapTitleRowENS_4HashIS2_EENS_7EqualToIS2_EEE13expandStorageEj = Module['__ZN6Common7HashMapIPNS_6KeymapENS_11RemapWidget14KeymapTitleRowENS_4HashIS2_EENS_7EqualToIS2_EEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapIPNS_6KeymapENS_11RemapWidget14KeymapTitleRowENS_4HashIS2_EENS_7EqualToIS2_EEE13expandStorageEj'];
   __ZN6Common12VirtualMouseC2EPNS_15EventDispatcherE = Module['__ZN6Common12VirtualMouseC2EPNS_15EventDispatcherE'] = wasmExports['_ZN6Common12VirtualMouseC2EPNS_15EventDispatcherE'];
   __ZN6Common12VirtualMouseD2Ev = Module['__ZN6Common12VirtualMouseD2Ev'] = wasmExports['_ZN6Common12VirtualMouseD2Ev'];
+  __ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE = Module['__ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE'] = wasmExports['_ZN6Common15EventDispatcher16unregisterSourceEPNS_11EventSourceE'];
   __ZThn4_N6Common12VirtualMouseD1Ev = Module['__ZThn4_N6Common12VirtualMouseD1Ev'] = wasmExports['_ZThn4_N6Common12VirtualMouseD1Ev'];
   __ZN6Common12VirtualMouseD1Ev = Module['__ZN6Common12VirtualMouseD1Ev'] = wasmExports['_ZN6Common12VirtualMouseD1Ev'];
   __ZN6Common12VirtualMouseD0Ev = Module['__ZN6Common12VirtualMouseD0Ev'] = wasmExports['_ZN6Common12VirtualMouseD0Ev'];
@@ -74385,6 +74034,7 @@ function assignWasmExports(wasmExports) {
   __ZN6Common15SaveFileManager10clearErrorEv = Module['__ZN6Common15SaveFileManager10clearErrorEv'] = wasmExports['_ZN6Common15SaveFileManager10clearErrorEv'];
   __ZN6Common15SaveFileManager8getErrorEv = Module['__ZN6Common15SaveFileManager8getErrorEv'] = wasmExports['_ZN6Common15SaveFileManager8getErrorEv'];
   __ZN6Common15SaveFileManager12getErrorDescEv = Module['__ZN6Common15SaveFileManager12getErrorDescEv'] = wasmExports['_ZN6Common15SaveFileManager12getErrorDescEv'];
+  __ZN22DefaultSaveFileManagerC2Ev = Module['__ZN22DefaultSaveFileManagerC2Ev'] = wasmExports['_ZN22DefaultSaveFileManagerC2Ev'];
   __ZN22DefaultSaveFileManagerC2ERKN6Common4PathE = Module['__ZN22DefaultSaveFileManagerC2ERKN6Common4PathE'] = wasmExports['_ZN22DefaultSaveFileManagerC2ERKN6Common4PathE'];
   __ZN22DefaultSaveFileManager9checkPathERKN6Common6FSNodeE = Module['__ZN22DefaultSaveFileManager9checkPathERKN6Common6FSNodeE'] = wasmExports['_ZN22DefaultSaveFileManager9checkPathERKN6Common6FSNodeE'];
   __ZN22DefaultSaveFileManager19updateSavefilesListERN6Common5ArrayINS0_6StringEEE = Module['__ZN22DefaultSaveFileManager19updateSavefilesListERN6Common5ArrayINS0_6StringEEE'] = wasmExports['_ZN22DefaultSaveFileManager19updateSavefilesListERN6Common5ArrayINS0_6StringEEE'];
@@ -74412,6 +74062,7 @@ function assignWasmExports(wasmExports) {
   __ZN22DefaultSaveFileManager6existsERKN6Common6StringE = Module['__ZN22DefaultSaveFileManager6existsERKN6Common6StringE'] = wasmExports['_ZN22DefaultSaveFileManager6existsERKN6Common6StringE'];
   __ZNK22DefaultSaveFileManager11getSavePathEv = Module['__ZNK22DefaultSaveFileManager11getSavePathEv'] = wasmExports['_ZNK22DefaultSaveFileManager11getSavePathEv'];
   __ZN22DefaultSaveFileManagerD2Ev = Module['__ZN22DefaultSaveFileManagerD2Ev'] = wasmExports['_ZN22DefaultSaveFileManagerD2Ev'];
+  __ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev = Module['__ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEED2Ev'];
   __ZN22DefaultSaveFileManagerD0Ev = Module['__ZN22DefaultSaveFileManagerD0Ev'] = wasmExports['_ZN22DefaultSaveFileManagerD0Ev'];
   __ZN6Common7HashMapINS_6StringEbNS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj = Module['__ZN6Common7HashMapINS_6StringEbNS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapINS_6StringEbNS_4HashIS1_EENS_7EqualToIS1_EEE13expandStorageEj'];
   __ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj = Module['__ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapINS_6StringENS_6FSNodeENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'];
@@ -74428,6 +74079,7 @@ function assignWasmExports(wasmExports) {
   __ZN19DefaultTimerManager15removeTimerProcEPFvPvE = Module['__ZN19DefaultTimerManager15removeTimerProcEPFvPvE'] = wasmExports['_ZN19DefaultTimerManager15removeTimerProcEPFvPvE'];
   __ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE5eraseENS7_12IteratorImplINS7_4NodeEEE = Module['__ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE5eraseENS7_12IteratorImplINS7_4NodeEEE'] = wasmExports['_ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE5eraseENS7_12IteratorImplINS7_4NodeEEE'];
   __ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj = Module['__ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'] = wasmExports['_ZN6Common7HashMapINS_6StringEPFvPvENS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE13expandStorageEj'];
+  __ZN19DefaultTimerManagerC1Ev = Module['__ZN19DefaultTimerManagerC1Ev'] = wasmExports['_ZN19DefaultTimerManagerC1Ev'];
   __ZN10Networking17ConnectionManagerC2Ev = Module['__ZN10Networking17ConnectionManagerC2Ev'] = wasmExports['_ZN10Networking17ConnectionManagerC2Ev'];
   __ZN10Networking17ConnectionManagerD2Ev = Module['__ZN10Networking17ConnectionManagerD2Ev'] = wasmExports['_ZN10Networking17ConnectionManagerD2Ev'];
   __ZN10Networking17connectionsThreadEPv = Module['__ZN10Networking17connectionsThreadEPv'] = wasmExports['_ZN10Networking17connectionsThreadEPv'];
@@ -74437,8 +74089,10 @@ function assignWasmExports(wasmExports) {
   __ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJS3_EEEvPKS3_DpOT_ = Module['__ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJS3_EEEvPKS3_DpOT_'] = wasmExports['_ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJS3_EEEvPKS3_DpOT_'];
   __ZN10Networking17ConnectionManager10startTimerEi = Module['__ZN10Networking17ConnectionManager10startTimerEi'] = wasmExports['_ZN10Networking17ConnectionManager10startTimerEi'];
   __ZN10Networking17ConnectionManager36getCloudRequestsPeriodInMicrosecondsEv = Module['__ZN10Networking17ConnectionManager36getCloudRequestsPeriodInMicrosecondsEv'] = wasmExports['_ZN10Networking17ConnectionManager36getCloudRequestsPeriodInMicrosecondsEv'];
+  __ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv = Module['__ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv'] = wasmExports['_ZN6Common9SingletonIN10Networking17ConnectionManagerEE12makeInstanceEv'];
   __ZN10Networking17ConnectionManager6handleEv = Module['__ZN10Networking17ConnectionManager6handleEv'] = wasmExports['_ZN10Networking17ConnectionManager6handleEv'];
   __ZN10Networking17ConnectionManager15iterateRequestsEv = Module['__ZN10Networking17ConnectionManager15iterateRequestsEv'] = wasmExports['_ZN10Networking17ConnectionManager15iterateRequestsEv'];
+  __ZN10Networking17ConnectionManager12restartTimerEv = Module['__ZN10Networking17ConnectionManager12restartTimerEv'] = wasmExports['_ZN10Networking17ConnectionManager12restartTimerEv'];
   __ZN10Networking17ConnectionManager16hasAddedRequestsEv = Module['__ZN10Networking17ConnectionManager16hasAddedRequestsEv'] = wasmExports['_ZN10Networking17ConnectionManager16hasAddedRequestsEv'];
   __ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJRKS3_EEEvPS6_DpOT_ = Module['__ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJRKS3_EEEvPS6_DpOT_'] = wasmExports['_ZN6Common5ArrayIN10Networking17ConnectionManager19RequestWithCallbackEE7emplaceIJRKS3_EEEvPS6_DpOT_'];
   __ZNK10Networking7Request5stateEv = Module['__ZNK10Networking7Request5stateEv'] = wasmExports['_ZNK10Networking7Request5stateEv'];
@@ -76161,6 +75815,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui13CreateContextEP11ImFontAtlas = Module['__ZN5ImGui13CreateContextEP11ImFontAtlas'] = wasmExports['_ZN5ImGui13CreateContextEP11ImFontAtlas'];
   __ZN5ImGui5GetIOEv = Module['__ZN5ImGui5GetIOEv'] = wasmExports['_ZN5ImGui5GetIOEv'];
   __ZN5ImGui15StyleColorsDarkEP10ImGuiStyle = Module['__ZN5ImGui15StyleColorsDarkEP10ImGuiStyle'] = wasmExports['_ZN5ImGui15StyleColorsDarkEP10ImGuiStyle'];
+  __ZN5ImGui8GetStyleEv = Module['__ZN5ImGui8GetStyleEv'] = wasmExports['_ZN5ImGui8GetStyleEv'];
   __ZN5ImGui14DestroyContextEP12ImGuiContext = Module['__ZN5ImGui14DestroyContextEP12ImGuiContext'] = wasmExports['_ZN5ImGui14DestroyContextEP12ImGuiContext'];
   __Z28ImGui_ImplSDL3_InitForOpenGLP10SDL_WindowPv = Module['__Z28ImGui_ImplSDL3_InitForOpenGLP10SDL_WindowPv'] = wasmExports['_Z28ImGui_ImplSDL3_InitForOpenGLP10SDL_WindowPv'];
   __Z22ImGui_ImplOpenGL3_InitPKc = Module['__Z22ImGui_ImplOpenGL3_InitPKc'] = wasmExports['_Z22ImGui_ImplOpenGL3_InitPKc'];
@@ -76260,6 +75915,7 @@ function assignWasmExports(wasmExports) {
   __ZN25SurfaceSdlGraphicsManager17setupHardwareSizeEv = Module['__ZN25SurfaceSdlGraphicsManager17setupHardwareSizeEv'] = wasmExports['_ZN25SurfaceSdlGraphicsManager17setupHardwareSizeEv'];
   __ZN25SurfaceSdlGraphicsManager19initGraphicsSurfaceEv = Module['__ZN25SurfaceSdlGraphicsManager19initGraphicsSurfaceEv'] = wasmExports['_ZN25SurfaceSdlGraphicsManager19initGraphicsSurfaceEv'];
   __ZN25SurfaceSdlGraphicsManager11loadGFXModeEv = Module['__ZN25SurfaceSdlGraphicsManager11loadGFXModeEv'] = wasmExports['_ZN25SurfaceSdlGraphicsManager11loadGFXModeEv'];
+  _SDL_CreateSurface = Module['_SDL_CreateSurface'] = wasmExports['SDL_CreateSurface'];
   _SDL_SetSurfaceBlendMode = Module['_SDL_SetSurfaceBlendMode'] = wasmExports['SDL_SetSurfaceBlendMode'];
   _SDL_CreateSurfacePalette = Module['_SDL_CreateSurfacePalette'] = wasmExports['SDL_CreateSurfacePalette'];
   _SDL_SetPaletteColors = Module['_SDL_SetPaletteColors'] = wasmExports['SDL_SetPaletteColors'];
@@ -76391,6 +76047,7 @@ function assignWasmExports(wasmExports) {
   __ZN16NullMixerManager12suspendAudioEv = Module['__ZN16NullMixerManager12suspendAudioEv'] = wasmExports['_ZN16NullMixerManager12suspendAudioEv'];
   __ZN16NullMixerManager11resumeAudioEv = Module['__ZN16NullMixerManager11resumeAudioEv'] = wasmExports['_ZN16NullMixerManager11resumeAudioEv'];
   __ZNK16NullMixerManager12isNullDeviceEv = Module['__ZNK16NullMixerManager12isNullDeviceEv'] = wasmExports['_ZNK16NullMixerManager12isNullDeviceEv'];
+  __ZN16NullMixerManager6updateEh = Module['__ZN16NullMixerManager6updateEh'] = wasmExports['_ZN16NullMixerManager6updateEh'];
   _SDL_CreateMutex = Module['_SDL_CreateMutex'] = wasmExports['SDL_CreateMutex'];
   __ZN16SdlMutexInternalD2Ev = Module['__ZN16SdlMutexInternalD2Ev'] = wasmExports['_ZN16SdlMutexInternalD2Ev'];
   _SDL_DestroyMutex = Module['_SDL_DestroyMutex'] = wasmExports['SDL_DestroyMutex'];
@@ -76604,9 +76261,6 @@ function assignWasmExports(wasmExports) {
   _dlsym = Module['_dlsym'] = wasmExports['dlsym'];
   __ZN20POSIXSaveFileManagerC2Ev = Module['__ZN20POSIXSaveFileManagerC2Ev'] = wasmExports['_ZN20POSIXSaveFileManagerC2Ev'];
   __ZN20POSIXSaveFileManagerD0Ev = Module['__ZN20POSIXSaveFileManagerD0Ev'] = wasmExports['_ZN20POSIXSaveFileManagerD0Ev'];
-  __ZN23RecorderSaveFileManager14openForLoadingERKN6Common6StringE = Module['__ZN23RecorderSaveFileManager14openForLoadingERKN6Common6StringE'] = wasmExports['_ZN23RecorderSaveFileManager14openForLoadingERKN6Common6StringE'];
-  __ZN23RecorderSaveFileManager13listSaveFilesERKN6Common6StringE = Module['__ZN23RecorderSaveFileManager13listSaveFilesERKN6Common6StringE'] = wasmExports['_ZN23RecorderSaveFileManager13listSaveFilesERKN6Common6StringE'];
-  __ZN23RecorderSaveFileManagerD0Ev = Module['__ZN23RecorderSaveFileManagerD0Ev'] = wasmExports['_ZN23RecorderSaveFileManagerD0Ev'];
   __ZN10ImGuiStyleC2Ev = Module['__ZN10ImGuiStyleC2Ev'] = wasmExports['_ZN10ImGuiStyleC2Ev'];
   __ZN10ImGuiStyle13ScaleAllSizesEf = Module['__ZN10ImGuiStyle13ScaleAllSizesEf'] = wasmExports['_ZN10ImGuiStyle13ScaleAllSizesEf'];
   __ZN7ImGuiIOC2Ev = Module['__ZN7ImGuiIOC2Ev'] = wasmExports['_ZN7ImGuiIOC2Ev'];
@@ -76737,13 +76391,20 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui11GetColorU32Ejf = Module['__ZN5ImGui11GetColorU32Ejf'] = wasmExports['_ZN5ImGui11GetColorU32Ejf'];
   __ZN5ImGui14PushStyleColorEij = Module['__ZN5ImGui14PushStyleColorEij'] = wasmExports['_ZN5ImGui14PushStyleColorEij'];
   __ZN8ImVectorI13ImGuiColorModE9push_backERKS0_ = Module['__ZN8ImVectorI13ImGuiColorModE9push_backERKS0_'] = wasmExports['_ZN8ImVectorI13ImGuiColorModE9push_backERKS0_'];
+  __ZN5ImGui14PushStyleColorEiRK6ImVec4 = Module['__ZN5ImGui14PushStyleColorEiRK6ImVec4'] = wasmExports['_ZN5ImGui14PushStyleColorEiRK6ImVec4'];
+  __ZN5ImGui13PopStyleColorEi = Module['__ZN5ImGui13PopStyleColorEi'] = wasmExports['_ZN5ImGui13PopStyleColorEi'];
   __ZN5ImGui8ErrorLogEPKc = Module['__ZN5ImGui8ErrorLogEPKc'] = wasmExports['_ZN5ImGui8ErrorLogEPKc'];
   __ZN5ImGui17BeginErrorTooltipEv = Module['__ZN5ImGui17BeginErrorTooltipEv'] = wasmExports['_ZN5ImGui17BeginErrorTooltipEv'];
+  __ZN5ImGui4TextEPKcz = Module['__ZN5ImGui4TextEPKcz'] = wasmExports['_ZN5ImGui4TextEPKcz'];
   __ZN10ImDrawList7AddRectERK6ImVec2S2_jfif = Module['__ZN10ImDrawList7AddRectERK6ImVec2S2_jfif'] = wasmExports['_ZN10ImDrawList7AddRectERK6ImVec2S2_jfif'];
+  __ZN5ImGui3EndEv = Module['__ZN5ImGui3EndEv'] = wasmExports['_ZN5ImGui3EndEv'];
   __ZN5ImGui15GetStyleVarInfoEi = Module['__ZN5ImGui15GetStyleVarInfoEi'] = wasmExports['_ZN5ImGui15GetStyleVarInfoEi'];
+  __ZN5ImGui12PushStyleVarEif = Module['__ZN5ImGui12PushStyleVarEif'] = wasmExports['_ZN5ImGui12PushStyleVarEif'];
   __ZN8ImVectorI13ImGuiStyleModE9push_backERKS0_ = Module['__ZN8ImVectorI13ImGuiStyleModE9push_backERKS0_'] = wasmExports['_ZN8ImVectorI13ImGuiStyleModE9push_backERKS0_'];
   __ZN5ImGui13PushStyleVarXEif = Module['__ZN5ImGui13PushStyleVarXEif'] = wasmExports['_ZN5ImGui13PushStyleVarXEif'];
   __ZN5ImGui13PushStyleVarYEif = Module['__ZN5ImGui13PushStyleVarYEif'] = wasmExports['_ZN5ImGui13PushStyleVarYEif'];
+  __ZN5ImGui12PushStyleVarEiRK6ImVec2 = Module['__ZN5ImGui12PushStyleVarEiRK6ImVec2'] = wasmExports['_ZN5ImGui12PushStyleVarEiRK6ImVec2'];
+  __ZN5ImGui11PopStyleVarEi = Module['__ZN5ImGui11PopStyleVarEi'] = wasmExports['_ZN5ImGui11PopStyleVarEi'];
   __ZN5ImGui17GetStyleColorNameEi = Module['__ZN5ImGui17GetStyleColorNameEi'] = wasmExports['_ZN5ImGui17GetStyleColorNameEi'];
   __ZN5ImGui19FindRenderedTextEndEPKcS1_ = Module['__ZN5ImGui19FindRenderedTextEndEPKcS1_'] = wasmExports['_ZN5ImGui19FindRenderedTextEndEPKcS1_'];
   __ZN5ImGui10RenderTextE6ImVec2PKcS2_b = Module['__ZN5ImGui10RenderTextE6ImVec2PKcS2_b'] = wasmExports['_ZN5ImGui10RenderTextE6ImVec2PKcS2_b'];
@@ -76753,6 +76414,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui17RenderTextWrappedE6ImVec2PKcS2_f = Module['__ZN5ImGui17RenderTextWrappedE6ImVec2PKcS2_f'] = wasmExports['_ZN5ImGui17RenderTextWrappedE6ImVec2PKcS2_f'];
   __ZN5ImGui19RenderTextClippedExEP10ImDrawListRK6ImVec2S4_PKcS6_PS3_S4_PK6ImRect = Module['__ZN5ImGui19RenderTextClippedExEP10ImDrawListRK6ImVec2S4_PKcS6_PS3_S4_PK6ImRect'] = wasmExports['_ZN5ImGui19RenderTextClippedExEP10ImDrawListRK6ImVec2S4_PKcS6_PS3_S4_PK6ImRect'];
   __ZN6ImFont13CalcTextSizeAEfffPKcS1_PS1_ = Module['__ZN6ImFont13CalcTextSizeAEfffPKcS1_PS1_'] = wasmExports['_ZN6ImFont13CalcTextSizeAEfffPKcS1_PS1_'];
+  __ZN5ImGui12CalcTextSizeEPKcS1_bf = Module['__ZN5ImGui12CalcTextSizeEPKcS1_bf'] = wasmExports['_ZN5ImGui12CalcTextSizeEPKcS1_bf'];
   __ZN5ImGui17RenderTextClippedERK6ImVec2S2_PKcS4_PS1_S2_PK6ImRect = Module['__ZN5ImGui17RenderTextClippedERK6ImVec2S2_PKcS4_PS1_S2_PK6ImRect'] = wasmExports['_ZN5ImGui17RenderTextClippedERK6ImVec2S2_PKcS4_PS1_S2_PK6ImRect'];
   __ZN5ImGui18RenderTextEllipsisEP10ImDrawListRK6ImVec2S4_fPKcS6_PS3_ = Module['__ZN5ImGui18RenderTextEllipsisEP10ImDrawListRK6ImVec2S4_fPKcS6_PS3_'] = wasmExports['_ZN5ImGui18RenderTextEllipsisEP10ImDrawListRK6ImVec2S4_fPKcS6_PS3_'];
   __ZN6ImFont12GetFontBakedEff = Module['__ZN6ImFont12GetFontBakedEff'] = wasmExports['_ZN6ImFont12GetFontBakedEff'];
@@ -76951,8 +76613,10 @@ function assignWasmExports(wasmExports) {
   __ZN8ImVectorIiE6resizeEi = Module['__ZN8ImVectorIiE6resizeEi'] = wasmExports['_ZN8ImVectorIiE6resizeEi'];
   __ZN8ImVectorI14ImGuiGroupDataE6resizeEi = Module['__ZN8ImVectorI14ImGuiGroupDataE6resizeEi'] = wasmExports['_ZN8ImVectorI14ImGuiGroupDataE6resizeEi'];
   __ZN5ImGui32DockContextNewFrameUpdateDockingEP12ImGuiContext = Module['__ZN5ImGui32DockContextNewFrameUpdateDockingEP12ImGuiContext'] = wasmExports['_ZN5ImGui32DockContextNewFrameUpdateDockingEP12ImGuiContext'];
+  __ZN5ImGui11TextColoredERK6ImVec4PKcz = Module['__ZN5ImGui11TextColoredERK6ImVec4PKcz'] = wasmExports['_ZN5ImGui11TextColoredERK6ImVec4PKcz'];
   __ZN8ImVectorI19ImGuiStackLevelInfoE6resizeEi = Module['__ZN8ImVectorI19ImGuiStackLevelInfoE6resizeEi'] = wasmExports['_ZN8ImVectorI19ImGuiStackLevelInfoE6resizeEi'];
   _cosf = Module['_cosf'] = wasmExports['cosf'];
+  __ZN5ImGui5BeginEPKcPbi = Module['__ZN5ImGui5BeginEPKcPbi'] = wasmExports['_ZN5ImGui5BeginEPKcPbi'];
   __ZN8ImVectorItE9push_backERKt = Module['__ZN8ImVectorItE9push_backERKt'] = wasmExports['_ZN8ImVectorItE9push_backERKt'];
   __ZN5ImGui18SetShortcutRoutingEiij = Module['__ZN5ImGui18SetShortcutRoutingEiij'] = wasmExports['_ZN5ImGui18SetShortcutRoutingEiij'];
   __ZN5ImGui34DockBuilderRemoveNodeDockedWindowsEjb = Module['__ZN5ImGui34DockBuilderRemoveNodeDockedWindowsEjb'] = wasmExports['_ZN5ImGui34DockBuilderRemoveNodeDockedWindowsEjb'];
@@ -76961,6 +76625,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui30DockContextProcessUndockWindowEP12ImGuiContextP11ImGuiWindowb = Module['__ZN5ImGui30DockContextProcessUndockWindowEP12ImGuiContextP11ImGuiWindowb'] = wasmExports['_ZN5ImGui30DockContextProcessUndockWindowEP12ImGuiContextP11ImGuiWindowb'];
   __ZN5ImGui28DockContextProcessUndockNodeEP12ImGuiContextP13ImGuiDockNode = Module['__ZN5ImGui28DockContextProcessUndockNodeEP12ImGuiContextP13ImGuiDockNode'] = wasmExports['_ZN5ImGui28DockContextProcessUndockNodeEP12ImGuiContextP13ImGuiDockNode'];
   __ZN8ImVectorI16ImGuiDockRequestE6resizeEi = Module['__ZN8ImVectorI16ImGuiDockRequestE6resizeEi'] = wasmExports['_ZN8ImVectorI16ImGuiDockRequestE6resizeEi'];
+  __ZN5ImGui17SetNextWindowSizeERK6ImVec2i = Module['__ZN5ImGui17SetNextWindowSizeERK6ImVec2i'] = wasmExports['_ZN5ImGui17SetNextWindowSizeERK6ImVec2i'];
   __ZN11ImGuiWindowC1EP12ImGuiContextPKc = Module['__ZN11ImGuiWindowC1EP12ImGuiContextPKc'] = wasmExports['_ZN11ImGuiWindowC1EP12ImGuiContextPKc'];
   __ZN8ImVectorIP11ImGuiWindowE9push_backERKS1_ = Module['__ZN8ImVectorIP11ImGuiWindowE9push_backERKS1_'] = wasmExports['_ZN8ImVectorIP11ImGuiWindowE9push_backERKS1_'];
   __ZN8ImVectorIP11ImGuiWindowE6insertEPKS1_RS3_ = Module['__ZN8ImVectorIP11ImGuiWindowE6insertEPKS1_RS3_'] = wasmExports['_ZN8ImVectorIP11ImGuiWindowE6insertEPKS1_RS3_'];
@@ -77053,6 +76718,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui10BeginChildEPKcRK6ImVec2ii = Module['__ZN5ImGui10BeginChildEPKcRK6ImVec2ii'] = wasmExports['_ZN5ImGui10BeginChildEPKcRK6ImVec2ii'];
   __ZN5ImGui12BeginChildExEPKcjRK6ImVec2ii = Module['__ZN5ImGui12BeginChildExEPKcjRK6ImVec2ii'] = wasmExports['_ZN5ImGui12BeginChildExEPKcjRK6ImVec2ii'];
   __ZN5ImGui10BeginChildEjRK6ImVec2ii = Module['__ZN5ImGui10BeginChildEjRK6ImVec2ii'] = wasmExports['_ZN5ImGui10BeginChildEjRK6ImVec2ii'];
+  __ZN5ImGui21GetContentRegionAvailEv = Module['__ZN5ImGui21GetContentRegionAvailEv'] = wasmExports['_ZN5ImGui21GetContentRegionAvailEv'];
   __ZN5ImGui12CalcItemSizeE6ImVec2ff = Module['__ZN5ImGui12CalcItemSizeE6ImVec2ff'] = wasmExports['_ZN5ImGui12CalcItemSizeE6ImVec2ff'];
   __ZN5ImGui8ItemSizeERK6ImVec2f = Module['__ZN5ImGui8ItemSizeERK6ImVec2f'] = wasmExports['_ZN5ImGui8ItemSizeERK6ImVec2f'];
   __ZN5ImGui33NavMoveRequestResolveWithLastItemEP16ImGuiNavItemData = Module['__ZN5ImGui33NavMoveRequestResolveWithLastItemEP16ImGuiNavItemData'] = wasmExports['_ZN5ImGui33NavMoveRequestResolveWithLastItemEP16ImGuiNavItemData'];
@@ -77085,8 +76751,10 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui10EndMenuBarEv = Module['__ZN5ImGui10EndMenuBarEv'] = wasmExports['_ZN5ImGui10EndMenuBarEv'];
   __ZN5ImGui7TreePopEv = Module['__ZN5ImGui7TreePopEv'] = wasmExports['_ZN5ImGui7TreePopEv'];
   __ZN5ImGui8EndGroupEv = Module['__ZN5ImGui8EndGroupEv'] = wasmExports['_ZN5ImGui8EndGroupEv'];
+  __ZN5ImGui11EndDisabledEv = Module['__ZN5ImGui11EndDisabledEv'] = wasmExports['_ZN5ImGui11EndDisabledEv'];
   __ZN5ImGui12PushItemFlagEib = Module['__ZN5ImGui12PushItemFlagEib'] = wasmExports['_ZN5ImGui12PushItemFlagEib'];
   __ZN5ImGui11PopItemFlagEv = Module['__ZN5ImGui11PopItemFlagEv'] = wasmExports['_ZN5ImGui11PopItemFlagEv'];
+  __ZN5ImGui13BeginDisabledEb = Module['__ZN5ImGui13BeginDisabledEb'] = wasmExports['_ZN5ImGui13BeginDisabledEb'];
   __ZN5ImGui15PushTextWrapPosEf = Module['__ZN5ImGui15PushTextWrapPosEf'] = wasmExports['_ZN5ImGui15PushTextWrapPosEf'];
   __ZN8ImVectorIfE9push_backERKf = Module['__ZN8ImVectorIfE9push_backERKf'] = wasmExports['_ZN8ImVectorIfE9push_backERKf'];
   __ZN5ImGui14PopTextWrapPosEv = Module['__ZN5ImGui14PopTextWrapPosEv'] = wasmExports['_ZN5ImGui14PopTextWrapPosEv'];
@@ -77109,6 +76777,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui17IsWindowCollapsedEv = Module['__ZN5ImGui17IsWindowCollapsedEv'] = wasmExports['_ZN5ImGui17IsWindowCollapsedEv'];
   __ZN5ImGui17IsWindowAppearingEv = Module['__ZN5ImGui17IsWindowAppearingEv'] = wasmExports['_ZN5ImGui17IsWindowAppearingEv'];
   __ZN5ImGui18SetWindowCollapsedEPKcbi = Module['__ZN5ImGui18SetWindowCollapsedEPKcbi'] = wasmExports['_ZN5ImGui18SetWindowCollapsedEPKcbi'];
+  __ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_ = Module['__ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_'] = wasmExports['_ZN5ImGui16SetNextWindowPosERK6ImVec2iS2_'];
   __ZN5ImGui28SetNextWindowSizeConstraintsERK6ImVec2S2_PFvP21ImGuiSizeCallbackDataEPv = Module['__ZN5ImGui28SetNextWindowSizeConstraintsERK6ImVec2S2_PFvP21ImGuiSizeCallbackDataEPv'] = wasmExports['_ZN5ImGui28SetNextWindowSizeConstraintsERK6ImVec2S2_PFvP21ImGuiSizeCallbackDataEPv'];
   __ZN5ImGui24SetNextWindowContentSizeERK6ImVec2 = Module['__ZN5ImGui24SetNextWindowContentSizeERK6ImVec2'] = wasmExports['_ZN5ImGui24SetNextWindowContentSizeERK6ImVec2'];
   __ZN5ImGui19SetNextWindowScrollERK6ImVec2 = Module['__ZN5ImGui19SetNextWindowScrollERK6ImVec2'] = wasmExports['_ZN5ImGui19SetNextWindowScrollERK6ImVec2'];
@@ -77192,6 +76861,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui17IsKeyChordPressedEiij = Module['__ZN5ImGui17IsKeyChordPressedEiij'] = wasmExports['_ZN5ImGui17IsKeyChordPressedEiij'];
   __ZN5ImGui19SetNextItemShortcutEii = Module['__ZN5ImGui19SetNextItemShortcutEii'] = wasmExports['_ZN5ImGui19SetNextItemShortcutEii'];
   __ZN5ImGui15EndErrorTooltipEv = Module['__ZN5ImGui15EndErrorTooltipEv'] = wasmExports['_ZN5ImGui15EndErrorTooltipEv'];
+  __ZN5ImGui8SameLineEff = Module['__ZN5ImGui8SameLineEff'] = wasmExports['_ZN5ImGui8SameLineEff'];
   __ZN5ImGui20DebugStartItemPickerEv = Module['__ZN5ImGui20DebugStartItemPickerEv'] = wasmExports['_ZN5ImGui20DebugStartItemPickerEv'];
   __ZN5ImGui18GetCursorScreenPosEv = Module['__ZN5ImGui18GetCursorScreenPosEv'] = wasmExports['_ZN5ImGui18GetCursorScreenPosEv'];
   __ZN5ImGui18SetCursorScreenPosERK6ImVec2 = Module['__ZN5ImGui18SetCursorScreenPosERK6ImVec2'] = wasmExports['_ZN5ImGui18SetCursorScreenPosERK6ImVec2'];
@@ -77199,6 +76869,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui13GetCursorPosXEv = Module['__ZN5ImGui13GetCursorPosXEv'] = wasmExports['_ZN5ImGui13GetCursorPosXEv'];
   __ZN5ImGui13GetCursorPosYEv = Module['__ZN5ImGui13GetCursorPosYEv'] = wasmExports['_ZN5ImGui13GetCursorPosYEv'];
   __ZN5ImGui12SetCursorPosERK6ImVec2 = Module['__ZN5ImGui12SetCursorPosERK6ImVec2'] = wasmExports['_ZN5ImGui12SetCursorPosERK6ImVec2'];
+  __ZN5ImGui13SetCursorPosXEf = Module['__ZN5ImGui13SetCursorPosXEf'] = wasmExports['_ZN5ImGui13SetCursorPosXEf'];
   __ZN5ImGui13SetCursorPosYEf = Module['__ZN5ImGui13SetCursorPosYEf'] = wasmExports['_ZN5ImGui13SetCursorPosYEf'];
   __ZN5ImGui17GetCursorStartPosEv = Module['__ZN5ImGui17GetCursorStartPosEv'] = wasmExports['_ZN5ImGui17GetCursorStartPosEv'];
   __ZN5ImGui6IndentEf = Module['__ZN5ImGui6IndentEf'] = wasmExports['_ZN5ImGui6IndentEf'];
@@ -77235,6 +76906,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui16BeginItemTooltipEv = Module['__ZN5ImGui16BeginItemTooltipEv'] = wasmExports['_ZN5ImGui16BeginItemTooltipEv'];
   __ZN5ImGui10EndTooltipEv = Module['__ZN5ImGui10EndTooltipEv'] = wasmExports['_ZN5ImGui10EndTooltipEv'];
   __ZN5ImGui11SetTooltipVEPKcPv = Module['__ZN5ImGui11SetTooltipVEPKcPv'] = wasmExports['_ZN5ImGui11SetTooltipVEPKcPv'];
+  __ZN5ImGui14SetItemTooltipEPKcz = Module['__ZN5ImGui14SetItemTooltipEPKcz'] = wasmExports['_ZN5ImGui14SetItemTooltipEPKcz'];
   __ZN5ImGui15SetItemTooltipVEPKcPv = Module['__ZN5ImGui15SetItemTooltipVEPKcPv'] = wasmExports['_ZN5ImGui15SetItemTooltipVEPKcPv'];
   __ZN5ImGui11IsPopupOpenEPKci = Module['__ZN5ImGui11IsPopupOpenEPKci'] = wasmExports['_ZN5ImGui11IsPopupOpenEPKci'];
   __ZN5ImGui30GetTopMostAndVisiblePopupModalEv = Module['__ZN5ImGui30GetTopMostAndVisiblePopupModalEv'] = wasmExports['_ZN5ImGui30GetTopMostAndVisiblePopupModalEv'];
@@ -77289,6 +76961,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui9LogToFileEiPKc = Module['__ZN5ImGui9LogToFileEiPKc'] = wasmExports['_ZN5ImGui9LogToFileEiPKc'];
   __ZN5ImGui11LogToBufferEi = Module['__ZN5ImGui11LogToBufferEi'] = wasmExports['_ZN5ImGui11LogToBufferEi'];
   __ZN5ImGui10LogButtonsEv = Module['__ZN5ImGui10LogButtonsEv'] = wasmExports['_ZN5ImGui10LogButtonsEv'];
+  __ZN5ImGui6ButtonEPKcRK6ImVec2 = Module['__ZN5ImGui6ButtonEPKcRK6ImVec2'] = wasmExports['_ZN5ImGui6ButtonEPKcRK6ImVec2'];
   __ZN5ImGui9SliderIntEPKcPiiiS1_i = Module['__ZN5ImGui9SliderIntEPKcPiiiS1_i'] = wasmExports['_ZN5ImGui9SliderIntEPKcPiiiS1_i'];
   __ZN5ImGui20MarkIniSettingsDirtyEv = Module['__ZN5ImGui20MarkIniSettingsDirtyEv'] = wasmExports['_ZN5ImGui20MarkIniSettingsDirtyEv'];
   __ZN5ImGui19FindSettingsHandlerEPKc = Module['__ZN5ImGui19FindSettingsHandlerEPKc'] = wasmExports['_ZN5ImGui19FindSettingsHandlerEPKc'];
@@ -77379,6 +77052,7 @@ function assignWasmExports(wasmExports) {
   __ZN5ImGui16DebugNodeTextureEP13ImTextureDataiPK15ImFontAtlasRect = Module['__ZN5ImGui16DebugNodeTextureEP13ImTextureDataiPK15ImFontAtlasRect'] = wasmExports['_ZN5ImGui16DebugNodeTextureEP13ImTextureDataiPK15ImFontAtlasRect'];
   __ZN5ImGui10BeginComboEPKcS1_i = Module['__ZN5ImGui10BeginComboEPKcS1_i'] = wasmExports['_ZN5ImGui10BeginComboEPKcS1_i'];
   __ZN5ImGui8EndComboEv = Module['__ZN5ImGui8EndComboEv'] = wasmExports['_ZN5ImGui8EndComboEv'];
+  __ZN5ImGui12TextDisabledEPKcz = Module['__ZN5ImGui12TextDisabledEPKcz'] = wasmExports['_ZN5ImGui12TextDisabledEPKcz'];
   __ZN5ImGui8TreeNodeEPKvPKcz = Module['__ZN5ImGui8TreeNodeEPKvPKcz'] = wasmExports['_ZN5ImGui8TreeNodeEPKvPKcz'];
   __ZN11ImFontAtlas10RemoveFontEP6ImFont = Module['__ZN11ImFontAtlas10RemoveFontEP6ImFont'] = wasmExports['_ZN11ImFontAtlas10RemoveFontEP6ImFont'];
   __Z27ImFontAtlasFontDiscardBakesP11ImFontAtlasP6ImFonti = Module['__Z27ImFontAtlasFontDiscardBakesP11ImFontAtlasP6ImFonti'] = wasmExports['_Z27ImFontAtlasFontDiscardBakesP11ImFontAtlasP6ImFonti'];
@@ -80619,6 +80293,7 @@ function assignWasmExports(wasmExports) {
   __ZN6Common5ArrayIPN8Graphics13CursorManager7PaletteEE7emplaceIJRKS4_EEEvPS7_DpOT_ = Module['__ZN6Common5ArrayIPN8Graphics13CursorManager7PaletteEE7emplaceIJRKS4_EEEvPS7_DpOT_'] = wasmExports['_ZN6Common5ArrayIPN8Graphics13CursorManager7PaletteEE7emplaceIJRKS4_EEEvPS7_DpOT_'];
   __ZN8Graphics13CursorManager22supportsCursorPalettesEv = Module['__ZN8Graphics13CursorManager22supportsCursorPalettesEv'] = wasmExports['_ZN8Graphics13CursorManager22supportsCursorPalettesEv'];
   __ZN8Graphics13CursorManager20disableCursorPaletteEb = Module['__ZN8Graphics13CursorManager20disableCursorPaletteEb'] = wasmExports['_ZN8Graphics13CursorManager20disableCursorPaletteEb'];
+  __ZN8Graphics13CursorManager4lockEb = Module['__ZN8Graphics13CursorManager4lockEb'] = wasmExports['_ZN8Graphics13CursorManager4lockEb'];
   __ZN8Graphics13CursorManager21setDefaultArrowCursorEb = Module['__ZN8Graphics13CursorManager21setDefaultArrowCursorEb'] = wasmExports['_ZN8Graphics13CursorManager21setDefaultArrowCursorEb'];
   __ZN8Graphics13CursorManager6CursorC2ERKNS_7SurfaceEiijPKhii = Module['__ZN8Graphics13CursorManager6CursorC2ERKNS_7SurfaceEiijPKhii'] = wasmExports['_ZN8Graphics13CursorManager6CursorC2ERKNS_7SurfaceEiijPKhii'];
   __ZN8Graphics13CursorManager6CursorD2Ev = Module['__ZN8Graphics13CursorManager6CursorD2Ev'] = wasmExports['_ZN8Graphics13CursorManager6CursorD2Ev'];
@@ -81732,6 +81407,7 @@ function assignWasmExports(wasmExports) {
   __Z17createThumbnail_4IN8Graphics10ColorMasksILi565EEEEvPKhjPhjii = Module['__Z17createThumbnail_4IN8Graphics10ColorMasksILi565EEEEvPKhjPhjii'] = wasmExports['_Z17createThumbnail_4IN8Graphics10ColorMasksILi565EEEEvPKhjPhjii'];
   __Z15createThumbnailPN8Graphics7SurfaceEPKhiiS3_ = Module['__Z15createThumbnailPN8Graphics7SurfaceEPKhiiS3_'] = wasmExports['_Z15createThumbnailPN8Graphics7SurfaceEPKhiiS3_'];
   __Z15createThumbnailPN8Graphics7SurfaceEPNS_14ManagedSurfaceE = Module['__Z15createThumbnailPN8Graphics7SurfaceEPNS_14ManagedSurfaceE'] = wasmExports['_Z15createThumbnailPN8Graphics7SurfaceEPNS_14ManagedSurfaceE'];
+  __ZN8Graphics16createScreenShotERNS_7SurfaceE = Module['__ZN8Graphics16createScreenShotERNS_7SurfaceE'] = wasmExports['_ZN8Graphics16createScreenShotERNS_7SurfaceE'];
   __ZN8Graphics6ScreenC2Ev = Module['__ZN8Graphics6ScreenC2Ev'] = wasmExports['_ZN8Graphics6ScreenC2Ev'];
   __ZN8Graphics6ScreenC2Eii = Module['__ZN8Graphics6ScreenC2Eii'] = wasmExports['_ZN8Graphics6ScreenC2Eii'];
   __ZN8Graphics6ScreenC2EiiNS_11PixelFormatE = Module['__ZN8Graphics6ScreenC2EiiNS_11PixelFormatE'] = wasmExports['_ZN8Graphics6ScreenC2EiiNS_11PixelFormatE'];
@@ -82189,6 +81865,7 @@ function assignWasmExports(wasmExports) {
   __ZN8Graphics10MacToolbox21createRemappedSurfaceEPNS_16MacWindowManagerEPKNS_7SurfaceEPKhj = Module['__ZN8Graphics10MacToolbox21createRemappedSurfaceEPNS_16MacWindowManagerEPKNS_7SurfaceEPKhj'] = wasmExports['_ZN8Graphics10MacToolbox21createRemappedSurfaceEPNS_16MacWindowManagerEPKNS_7SurfaceEPKhj'];
   __ZN8Graphics10MacToolbox7Toolbox8CopyBitsERKN6Common9SharedPtrINS_14ManagedSurfaceEEERS5_RKNS2_4RectESB_NS0_10SourceModeENS3_INS0_6RegionEEE = Module['__ZN8Graphics10MacToolbox7Toolbox8CopyBitsERKN6Common9SharedPtrINS_14ManagedSurfaceEEERS5_RKNS2_4RectESB_NS0_10SourceModeENS3_INS0_6RegionEEE'] = wasmExports['_ZN8Graphics10MacToolbox7Toolbox8CopyBitsERKN6Common9SharedPtrINS_14ManagedSurfaceEEERS5_RKNS2_4RectESB_NS0_10SourceModeENS3_INS0_6RegionEEE'];
   __ZN8Graphics10MacToolbox7Toolbox11DrawPictureERN6Common9SharedPtrINS0_7PictureEEERKNS2_4RectE = Module['__ZN8Graphics10MacToolbox7Toolbox11DrawPictureERN6Common9SharedPtrINS0_7PictureEEERKNS2_4RectE'] = wasmExports['_ZN8Graphics10MacToolbox7Toolbox11DrawPictureERN6Common9SharedPtrINS0_7PictureEEERKNS2_4RectE'];
+  __Z15debugChannelSetij = Module['__Z15debugChannelSetij'] = wasmExports['_Z15debugChannelSetij'];
   __ZN6Common18SeekableReadStream7hexdumpEiii = Module['__ZN6Common18SeekableReadStream7hexdumpEiii'] = wasmExports['_ZN6Common18SeekableReadStream7hexdumpEiii'];
   __ZN8Graphics10MacToolbox7Toolbox8OpenPortEPNS0_8GrafPortE = Module['__ZN8Graphics10MacToolbox7Toolbox8OpenPortEPNS0_8GrafPortE'] = wasmExports['_ZN8Graphics10MacToolbox7Toolbox8OpenPortEPNS0_8GrafPortE'];
   __ZN8Graphics10MacToolbox10readRegionERN6Common18SeekableReadStreamE = Module['__ZN8Graphics10MacToolbox10readRegionERN6Common18SeekableReadStreamE'] = wasmExports['_ZN8Graphics10MacToolbox10readRegionERN6Common18SeekableReadStreamE'];
@@ -88901,7 +88578,9 @@ function assignWasmExports(wasmExports) {
   __ZN6Common15EventDispatcherD2Ev = Module['__ZN6Common15EventDispatcherD2Ev'] = wasmExports['_ZN6Common15EventDispatcherD2Ev'];
   __ZN6Common15EventDispatcher12dispatchPollEv = Module['__ZN6Common15EventDispatcher12dispatchPollEv'] = wasmExports['_ZN6Common15EventDispatcher12dispatchPollEv'];
   __ZN6Common15EventDispatcher13dispatchEventERKNS_5EventE = Module['__ZN6Common15EventDispatcher13dispatchEventERKNS_5EventE'] = wasmExports['_ZN6Common15EventDispatcher13dispatchEventERKNS_5EventE'];
+  __ZN6Common15EventDispatcher11clearEventsEv = Module['__ZN6Common15EventDispatcher11clearEventsEv'] = wasmExports['_ZN6Common15EventDispatcher11clearEventsEv'];
   __ZN6Common15EventDispatcher16unregisterMapperEPNS_11EventMapperE = Module['__ZN6Common15EventDispatcher16unregisterMapperEPNS_11EventMapperE'] = wasmExports['_ZN6Common15EventDispatcher16unregisterMapperEPNS_11EventMapperE'];
+  __ZN6Common15EventDispatcher13ignoreSourcesEb = Module['__ZN6Common15EventDispatcher13ignoreSourcesEb'] = wasmExports['_ZN6Common15EventDispatcher13ignoreSourcesEb'];
   __ZN6Common32makeKeyboardRepeatingEventSourceEPNS_11EventSourceE = Module['__ZN6Common32makeKeyboardRepeatingEventSourceEPNS_11EventSourceE'] = wasmExports['_ZN6Common32makeKeyboardRepeatingEventSourceEPNS_11EventSourceE'];
   __ZN6Common12EventManager4initEv = Module['__ZN6Common12EventManager4initEv'] = wasmExports['_ZN6Common12EventManager4initEv'];
   __ZN6Common32KeyboardRepeatEventSourceWrapperD0Ev = Module['__ZN6Common32KeyboardRepeatEventSourceWrapperD0Ev'] = wasmExports['_ZN6Common32KeyboardRepeatEventSourceWrapperD0Ev'];
@@ -89058,6 +88737,7 @@ function assignWasmExports(wasmExports) {
   __ZN6Common10MemoryPool15isPointerInPageEPvRKNS0_4PageE = Module['__ZN6Common10MemoryPool15isPointerInPageEPvRKNS0_4PageE'] = wasmExports['_ZN6Common10MemoryPool15isPointerInPageEPvRKNS0_4PageE'];
   __ZN6Common10MemoryPoolC1Em = Module['__ZN6Common10MemoryPoolC1Em'] = wasmExports['_ZN6Common10MemoryPoolC1Em'];
   __ZN6Common10MemoryPoolD1Ev = Module['__ZN6Common10MemoryPoolD1Ev'] = wasmExports['_ZN6Common10MemoryPoolD1Ev'];
+  __ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_ = Module['__ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_'] = wasmExports['_ZN6Common16computeStreamMD5ERNS_10ReadStreamEPhjPFbPviES3_'];
   __ZN6Common5MutexC2Ev = Module['__ZN6Common5MutexC2Ev'] = wasmExports['_ZN6Common5MutexC2Ev'];
   __ZN6Common5MutexD2Ev = Module['__ZN6Common5MutexD2Ev'] = wasmExports['_ZN6Common5MutexD2Ev'];
   __ZN6Common9StackLockC2EPNS_13MutexInternalEPKc = Module['__ZN6Common9StackLockC2EPNS_13MutexInternalEPKc'] = wasmExports['_ZN6Common9StackLockC2EPNS_13MutexInternalEPKc'];
@@ -89110,6 +88790,7 @@ function assignWasmExports(wasmExports) {
   __ZNK6Common10BaseStringIDiE4findEDij = Module['__ZNK6Common10BaseStringIDiE4findEDij'] = wasmExports['_ZNK6Common10BaseStringIDiE4findEDij'];
   __ZN6Common10BaseStringIDiE7setCharEDij = Module['__ZN6Common10BaseStringIDiE7setCharEDij'] = wasmExports['_ZN6Common10BaseStringIDiE7setCharEDij'];
   __ZN6Common12RandomSourceC2ERKNS_6StringE = Module['__ZN6Common12RandomSourceC2ERKNS_6StringE'] = wasmExports['_ZN6Common12RandomSourceC2ERKNS_6StringE'];
+  __ZN6Common12RandomSource15generateNewSeedEv = Module['__ZN6Common12RandomSource15generateNewSeedEv'] = wasmExports['_ZN6Common12RandomSource15generateNewSeedEv'];
   __ZN6Common12RandomSource7setSeedEj = Module['__ZN6Common12RandomSource7setSeedEj'] = wasmExports['_ZN6Common12RandomSource7setSeedEj'];
   __ZN6Common12RandomSource15getRandomNumberEj = Module['__ZN6Common12RandomSource15getRandomNumberEj'] = wasmExports['_ZN6Common12RandomSource15getRandomNumberEj'];
   __ZN6Common12RandomSource18getRandomNumberRngEjj = Module['__ZN6Common12RandomSource18getRandomNumberRngEjj'] = wasmExports['_ZN6Common12RandomSource18getRandomNumberRngEjj'];
@@ -89634,38 +89315,6 @@ function assignWasmExports(wasmExports) {
   __ZN6Common4sortINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEEvT_S8_T0_ = Module['__ZN6Common4sortINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEEvT_S8_T0_'] = wasmExports['_ZN6Common4sortINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEEvT_S8_T0_'];
   __ZN6Common13sortPartitionINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEET_S8_S8_S8_RT0_ = Module['__ZN6Common13sortPartitionINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEET_S8_S8_S8_RT0_'] = wasmExports['_ZN6Common13sortPartitionINS_12ListInternal8IteratorINS_9SharedPtrINS_13ArchiveMemberEEEEENS_31ArchiveMemberListBackComparatorEEET_S8_S8_S8_RT0_'];
   __ZN6Common31ArchiveMemberListBackComparatorclERKNS_9SharedPtrINS_13ArchiveMemberEEES5_ = Module['__ZN6Common31ArchiveMemberListBackComparatorclERKNS_9SharedPtrINS_13ArchiveMemberEEES5_'] = wasmExports['_ZN6Common31ArchiveMemberListBackComparatorclERKNS_9SharedPtrINS_13ArchiveMemberEEES5_'];
-  __ZN6Common12PlaybackFileC2Ev = Module['__ZN6Common12PlaybackFileC2Ev'] = wasmExports['_ZN6Common12PlaybackFileC2Ev'];
-  __ZN6Common12PlaybackFile18PlaybackFileHeaderC2Ev = Module['__ZN6Common12PlaybackFile18PlaybackFileHeaderC2Ev'] = wasmExports['_ZN6Common12PlaybackFile18PlaybackFileHeaderC2Ev'];
-  __ZN6Common12PlaybackFileD2Ev = Module['__ZN6Common12PlaybackFileD2Ev'] = wasmExports['_ZN6Common12PlaybackFileD2Ev'];
-  __ZN6Common12PlaybackFile17dumpRecordsToFileEv = Module['__ZN6Common12PlaybackFile17dumpRecordsToFileEv'] = wasmExports['_ZN6Common12PlaybackFile17dumpRecordsToFileEv'];
-  __ZN6Common25SeekableMemoryWriteStreamD1Ev = Module['__ZN6Common25SeekableMemoryWriteStreamD1Ev'] = wasmExports['_ZN6Common25SeekableMemoryWriteStreamD1Ev'];
-  __ZN6Common12PlaybackFile11parseHeaderEv = Module['__ZN6Common12PlaybackFile11parseHeaderEv'] = wasmExports['_ZN6Common12PlaybackFile11parseHeaderEv'];
-  __ZN6Common12PlaybackFile12processChunkERNS0_11ChunkHeaderE = Module['__ZN6Common12PlaybackFile12processChunkERNS0_11ChunkHeaderE'] = wasmExports['_ZN6Common12PlaybackFile12processChunkERNS0_11ChunkHeaderE'];
-  __ZN6Common12PlaybackFile16dumpHeaderToFileEv = Module['__ZN6Common12PlaybackFile16dumpHeaderToFileEv'] = wasmExports['_ZN6Common12PlaybackFile16dumpHeaderToFileEv'];
-  __ZN6Common12PlaybackFile10skipHeaderEv = Module['__ZN6Common12PlaybackFile10skipHeaderEv'] = wasmExports['_ZN6Common12PlaybackFile10skipHeaderEv'];
-  __ZN6Common12PlaybackFile15readChunkHeaderERNS0_11ChunkHeaderE = Module['__ZN6Common12PlaybackFile15readChunkHeaderERNS0_11ChunkHeaderE'] = wasmExports['_ZN6Common12PlaybackFile15readChunkHeaderERNS0_11ChunkHeaderE'];
-  __ZN6Common12PlaybackFile14readSaveRecordEv = Module['__ZN6Common12PlaybackFile14readSaveRecordEv'] = wasmExports['_ZN6Common12PlaybackFile14readSaveRecordEv'];
-  __ZN6Common12PlaybackFile11readHashMapENS0_11ChunkHeaderE = Module['__ZN6Common12PlaybackFile11readHashMapENS0_11ChunkHeaderE'] = wasmExports['_ZN6Common12PlaybackFile11readHashMapENS0_11ChunkHeaderE'];
-  __ZN6Common12PlaybackFile20processRndSeedRecordENS0_11ChunkHeaderE = Module['__ZN6Common12PlaybackFile20processRndSeedRecordENS0_11ChunkHeaderE'] = wasmExports['_ZN6Common12PlaybackFile20processRndSeedRecordENS0_11ChunkHeaderE'];
-  __ZN6Common12PlaybackFile21processSettingsRecordEv = Module['__ZN6Common12PlaybackFile21processSettingsRecordEv'] = wasmExports['_ZN6Common12PlaybackFile21processSettingsRecordEv'];
-  __ZN6Common12PlaybackFile24checkPlaybackFileVersionEv = Module['__ZN6Common12PlaybackFile24checkPlaybackFileVersionEv'] = wasmExports['_ZN6Common12PlaybackFile24checkPlaybackFileVersionEv'];
-  __ZN6Common12PlaybackFile10readStringEi = Module['__ZN6Common12PlaybackFile10readStringEi'] = wasmExports['_ZN6Common12PlaybackFile10readStringEi'];
-  __ZN6Common12PlaybackFile19returnToChunkHeaderEv = Module['__ZN6Common12PlaybackFile19returnToChunkHeaderEv'] = wasmExports['_ZN6Common12PlaybackFile19returnToChunkHeaderEv'];
-  __ZNK6Common12PlaybackFile12hasNextEventEv = Module['__ZNK6Common12PlaybackFile12hasNextEventEv'] = wasmExports['_ZNK6Common12PlaybackFile12hasNextEventEv'];
-  __ZN6Common12PlaybackFile16checkRecordedMD5Ev = Module['__ZN6Common12PlaybackFile16checkRecordedMD5Ev'] = wasmExports['_ZN6Common12PlaybackFile16checkRecordedMD5Ev'];
-  __ZN6Common12PlaybackFile9readEventERNS_13RecorderEventE = Module['__ZN6Common12PlaybackFile9readEventERNS_13RecorderEventE'] = wasmExports['_ZN6Common12PlaybackFile9readEventERNS_13RecorderEventE'];
-  __ZNK6Common12PlaybackFile19isEventsBufferEmptyEv = Module['__ZNK6Common12PlaybackFile19isEventsBufferEmptyEv'] = wasmExports['_ZNK6Common12PlaybackFile19isEventsBufferEmptyEv'];
-  __ZN6Common12PlaybackFile18readEventsToBufferEj = Module['__ZN6Common12PlaybackFile18readEventsToBufferEj'] = wasmExports['_ZN6Common12PlaybackFile18readEventsToBufferEj'];
-  __ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics14ManagedSurfaceEPKh = Module['__ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics14ManagedSurfaceEPKh'] = wasmExports['_ZN6Common12PlaybackFile14saveScreenShotERKN8Graphics14ManagedSurfaceEPKh'];
-  __ZN6Common12PlaybackFile18writeHeaderSectionEv = Module['__ZN6Common12PlaybackFile18writeHeaderSectionEv'] = wasmExports['_ZN6Common12PlaybackFile18writeHeaderSectionEv'];
-  __ZN6Common12PlaybackFile13writeGameHashEv = Module['__ZN6Common12PlaybackFile13writeGameHashEv'] = wasmExports['_ZN6Common12PlaybackFile13writeGameHashEv'];
-  __ZN6Common12PlaybackFile18writeRandomRecordsEv = Module['__ZN6Common12PlaybackFile18writeRandomRecordsEv'] = wasmExports['_ZN6Common12PlaybackFile18writeRandomRecordsEv'];
-  __ZN6Common12PlaybackFile17writeGameSettingsEv = Module['__ZN6Common12PlaybackFile17writeGameSettingsEv'] = wasmExports['_ZN6Common12PlaybackFile17writeGameSettingsEv'];
-  __ZN6Common12PlaybackFile21writeSaveFilesSectionEv = Module['__ZN6Common12PlaybackFile21writeSaveFilesSectionEv'] = wasmExports['_ZN6Common12PlaybackFile21writeSaveFilesSectionEv'];
-  __ZN6Common25SeekableMemoryWriteStream4seekExi = Module['__ZN6Common25SeekableMemoryWriteStream4seekExi'] = wasmExports['_ZN6Common25SeekableMemoryWriteStream4seekExi'];
-  __ZNK6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplINS4_4NodeEE5derefEv = Module['__ZNK6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplINS4_4NodeEE5derefEv'] = wasmExports['_ZNK6Common7HashMapINS_6StringEjNS_15IgnoreCase_HashENS_18IgnoreCase_EqualToEE12IteratorImplINS4_4NodeEE5derefEv'];
-  __ZN6Common12PlaybackFile20skipToNextScreenshotEv = Module['__ZN6Common12PlaybackFile20skipToNextScreenshotEv'] = wasmExports['_ZN6Common12PlaybackFile20skipToNextScreenshotEv'];
-  __ZN6Common25SeekableMemoryWriteStreamD0Ev = Module['__ZN6Common25SeekableMemoryWriteStreamD0Ev'] = wasmExports['_ZN6Common25SeekableMemoryWriteStreamD0Ev'];
   __ZN6Common18ClickteamInstaller23ClickteamFileDescriptorC2ERKNS0_12ClickteamTagEj = Module['__ZN6Common18ClickteamInstaller23ClickteamFileDescriptorC2ERKNS0_12ClickteamTagEj'] = wasmExports['_ZN6Common18ClickteamInstaller23ClickteamFileDescriptorC2ERKNS0_12ClickteamTagEj'];
   __ZNK6Common18ClickteamInstaller6getTagENS0_14ClickteamTagIdE = Module['__ZNK6Common18ClickteamInstaller6getTagENS0_14ClickteamTagIdE'] = wasmExports['_ZNK6Common18ClickteamInstaller6getTagENS0_14ClickteamTagIdE'];
   __ZN6Common18ClickteamInstaller12findPatchIdxERKNS0_23ClickteamFileDescriptorEPNS_18SeekableReadStreamERKNS_4PathEjb = Module['__ZN6Common18ClickteamInstaller12findPatchIdxERKNS0_23ClickteamFileDescriptorEPNS_18SeekableReadStreamERKNS_4PathEjb'] = wasmExports['_ZN6Common18ClickteamInstaller12findPatchIdxERKNS0_23ClickteamFileDescriptorEPNS_18SeekableReadStreamERKNS_4PathEjb'];
@@ -100754,15 +100403,12 @@ function assignWasmExports(wasmExports) {
   __ZTT11OSystem_SDL = Module['__ZTT11OSystem_SDL'] = wasmExports['_ZTT11OSystem_SDL'].value;
   __ZTI18SdlGraphicsManager = Module['__ZTI18SdlGraphicsManager'] = wasmExports['_ZTI18SdlGraphicsManager'].value;
   __ZTI15GraphicsManager = Module['__ZTI15GraphicsManager'] = wasmExports['_ZTI15GraphicsManager'].value;
-  __ZN6Common9SingletonIN3GUI13EventRecorderEE10_singletonE = Module['__ZN6Common9SingletonIN3GUI13EventRecorderEE10_singletonE'] = wasmExports['_ZN6Common9SingletonIN3GUI13EventRecorderEE10_singletonE'].value;
   __ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE = Module['__ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE'] = wasmExports['_ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE'].value;
   _g_engine = Module['_g_engine'] = wasmExports['g_engine'].value;
   __ZTI24OpenGLSdlGraphicsManager = Module['__ZTI24OpenGLSdlGraphicsManager'] = wasmExports['_ZTI24OpenGLSdlGraphicsManager'].value;
   __ZN6Common13ConfigManager14kSessionDomainE = Module['__ZN6Common13ConfigManager14kSessionDomainE'] = wasmExports['_ZN6Common13ConfigManager14kSessionDomainE'].value;
   __ZN6Common9SingletonI13ScalerManagerE10_singletonE = Module['__ZN6Common9SingletonI13ScalerManagerE10_singletonE'] = wasmExports['_ZN6Common9SingletonI13ScalerManagerE10_singletonE'].value;
   __ZTV13ScalerManager = Module['__ZTV13ScalerManager'] = wasmExports['_ZTV13ScalerManager'].value;
-  __ZTI19DefaultTimerManager = Module['__ZTI19DefaultTimerManager'] = wasmExports['_ZTI19DefaultTimerManager'].value;
-  __ZTIN6Common12TimerManagerE = Module['__ZTIN6Common12TimerManagerE'] = wasmExports['_ZTIN6Common12TimerManagerE'].value;
   __ZTVN6Common25CompositeHardwareInputSetE = Module['__ZTVN6Common25CompositeHardwareInputSetE'] = wasmExports['_ZTVN6Common25CompositeHardwareInputSetE'].value;
   __ZN6Common19defaultMouseButtonsE = Module['__ZN6Common19defaultMouseButtonsE'] = wasmExports['_ZN6Common19defaultMouseButtonsE'].value;
   __ZN6Common16defaultModifiersE = Module['__ZN6Common16defaultModifiersE'] = wasmExports['_ZN6Common16defaultModifiersE'].value;
@@ -100781,7 +100427,6 @@ function assignWasmExports(wasmExports) {
   __ZTS15GraphicsManager = Module['__ZTS15GraphicsManager'] = wasmExports['_ZTS15GraphicsManager'].value;
   __ZTI14PaletteManager = Module['__ZTI14PaletteManager'] = wasmExports['_ZTI14PaletteManager'].value;
   __ZTS14PaletteManager = Module['__ZTS14PaletteManager'] = wasmExports['_ZTS14PaletteManager'].value;
-  __ZTSN6Common12TimerManagerE = Module['__ZTSN6Common12TimerManagerE'] = wasmExports['_ZTSN6Common12TimerManagerE'].value;
   __ZTI19ModularMixerBackend = Module['__ZTI19ModularMixerBackend'] = wasmExports['_ZTI19ModularMixerBackend'].value;
   __ZTI22ModularGraphicsBackend = Module['__ZTI22ModularGraphicsBackend'] = wasmExports['_ZTI22ModularGraphicsBackend'].value;
   __ZTS11OSystem_SDL = Module['__ZTS11OSystem_SDL'] = wasmExports['_ZTS11OSystem_SDL'].value;
@@ -100846,12 +100491,12 @@ function assignWasmExports(wasmExports) {
   _gDebugChannelsOnly = Module['_gDebugChannelsOnly'] = wasmExports['gDebugChannelsOnly'].value;
   __ZN6Common9SingletonINS_12DebugManagerEE10_singletonE = Module['__ZN6Common9SingletonINS_12DebugManagerEE10_singletonE'] = wasmExports['_ZN6Common9SingletonINS_12DebugManagerEE10_singletonE'].value;
   __ZN13PluginManager9_instanceE = Module['__ZN13PluginManager9_instanceE'] = wasmExports['_ZN13PluginManager9_instanceE'].value;
-  __ZN6Common13ConfigManager16kTransientDomainE = Module['__ZN6Common13ConfigManager16kTransientDomainE'] = wasmExports['_ZN6Common13ConfigManager16kTransientDomainE'].value;
   __ZTVN3GUI13MessageDialogE = Module['__ZTVN3GUI13MessageDialogE'] = wasmExports['_ZTVN3GUI13MessageDialogE'].value;
   __ZN6Common9SingletonI12MusicManagerE10_singletonE = Module['__ZN6Common9SingletonI12MusicManagerE10_singletonE'] = wasmExports['_ZN6Common9SingletonI12MusicManagerE10_singletonE'].value;
   __ZTV12MusicManager = Module['__ZTV12MusicManager'] = wasmExports['_ZTV12MusicManager'].value;
   __ZN6Common9SingletonINS_15OSDMessageQueueEE10_singletonE = Module['__ZN6Common9SingletonINS_15OSDMessageQueueEE10_singletonE'] = wasmExports['_ZN6Common9SingletonINS_15OSDMessageQueueEE10_singletonE'].value;
   __ZN6Common9SingletonIN5Cloud12CloudManagerEE10_singletonE = Module['__ZN6Common9SingletonIN5Cloud12CloudManagerEE10_singletonE'] = wasmExports['_ZN6Common9SingletonIN5Cloud12CloudManagerEE10_singletonE'].value;
+  __ZN6Common13ConfigManager16kTransientDomainE = Module['__ZN6Common13ConfigManager16kTransientDomainE'] = wasmExports['_ZN6Common13ConfigManager16kTransientDomainE'].value;
   __ZN6Common9SingletonI13EngineManagerE10_singletonE = Module['__ZN6Common9SingletonI13EngineManagerE10_singletonE'] = wasmExports['_ZN6Common9SingletonI13EngineManagerE10_singletonE'].value;
   __ZTV13EngineManager = Module['__ZTV13EngineManager'] = wasmExports['_ZTV13EngineManager'].value;
   __ZN6Common9SingletonI19ChainedGamesManagerE10_singletonE = Module['__ZN6Common9SingletonI19ChainedGamesManagerE10_singletonE'] = wasmExports['_ZN6Common9SingletonI19ChainedGamesManagerE10_singletonE'].value;
@@ -101040,16 +100685,6 @@ function assignWasmExports(wasmExports) {
   __ZTIN3GUI20DomainEditTextWidgetE = Module['__ZTIN3GUI20DomainEditTextWidgetE'] = wasmExports['_ZTIN3GUI20DomainEditTextWidgetE'].value;
   __ZTSN3GUI20DomainEditTextWidgetE = Module['__ZTSN3GUI20DomainEditTextWidgetE'] = wasmExports['_ZTSN3GUI20DomainEditTextWidgetE'].value;
   __ZTIN3GUI14EditTextWidgetE = Module['__ZTIN3GUI14EditTextWidgetE'] = wasmExports['_ZTIN3GUI14EditTextWidgetE'].value;
-  __ZTVN3GUI13EventRecorderE = Module['__ZTVN3GUI13EventRecorderE'] = wasmExports['_ZTVN3GUI13EventRecorderE'].value;
-  __ZTV23RecorderSaveFileManager = Module['__ZTV23RecorderSaveFileManager'] = wasmExports['_ZTV23RecorderSaveFileManager'].value;
-  __ZTV22DefaultSaveFileManager = Module['__ZTV22DefaultSaveFileManager'] = wasmExports['_ZTV22DefaultSaveFileManager'].value;
-  __ZTVN6Common15SaveFileManagerE = Module['__ZTVN6Common15SaveFileManagerE'] = wasmExports['_ZTVN6Common15SaveFileManagerE'].value;
-  __ZTIN3GUI13EventRecorderE = Module['__ZTIN3GUI13EventRecorderE'] = wasmExports['_ZTIN3GUI13EventRecorderE'].value;
-  __ZTSN3GUI13EventRecorderE = Module['__ZTSN3GUI13EventRecorderE'] = wasmExports['_ZTSN3GUI13EventRecorderE'].value;
-  __ZTIN6Common11EventSourceE = Module['__ZTIN6Common11EventSourceE'] = wasmExports['_ZTIN6Common11EventSourceE'].value;
-  __ZTIN6Common9SingletonIN3GUI13EventRecorderEEE = Module['__ZTIN6Common9SingletonIN3GUI13EventRecorderEEE'] = wasmExports['_ZTIN6Common9SingletonIN3GUI13EventRecorderEEE'].value;
-  __ZTIN6Common13EventObserverE = Module['__ZTIN6Common13EventObserverE'] = wasmExports['_ZTIN6Common13EventObserverE'].value;
-  __ZTSN6Common9SingletonIN3GUI13EventRecorderEEE = Module['__ZTSN6Common9SingletonIN3GUI13EventRecorderEEE'] = wasmExports['_ZTSN6Common9SingletonIN3GUI13EventRecorderEEE'].value;
   __ZTVN3GUI17FileBrowserDialogE = Module['__ZTVN3GUI17FileBrowserDialogE'] = wasmExports['_ZTVN3GUI17FileBrowserDialogE'].value;
   __ZTIN3GUI17FileBrowserDialogE = Module['__ZTIN3GUI17FileBrowserDialogE'] = wasmExports['_ZTIN3GUI17FileBrowserDialogE'].value;
   __ZTSN3GUI17FileBrowserDialogE = Module['__ZTSN3GUI17FileBrowserDialogE'] = wasmExports['_ZTSN3GUI17FileBrowserDialogE'].value;
@@ -101344,15 +100979,6 @@ function assignWasmExports(wasmExports) {
   __ZTSN6Common12BaseCallbackIPKNS_9JSONValueEEE = Module['__ZTSN6Common12BaseCallbackIPKNS_9JSONValueEEE'] = wasmExports['_ZTSN6Common12BaseCallbackIPKNS_9JSONValueEEE'].value;
   __ZTIN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE = Module['__ZTIN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE'] = wasmExports['_ZTIN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE'].value;
   __ZTSN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE = Module['__ZTSN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE'] = wasmExports['_ZTSN6Common8CallbackIN3GUI15IntegrityDialogERKN10Networking13ErrorResponseEEE'].value;
-  __ZTVN3GUI16EditRecordDialogE = Module['__ZTVN3GUI16EditRecordDialogE'] = wasmExports['_ZTVN3GUI16EditRecordDialogE'].value;
-  __ZTIN3GUI16EditRecordDialogE = Module['__ZTIN3GUI16EditRecordDialogE'] = wasmExports['_ZTIN3GUI16EditRecordDialogE'].value;
-  __ZTSN3GUI16EditRecordDialogE = Module['__ZTSN3GUI16EditRecordDialogE'] = wasmExports['_ZTSN3GUI16EditRecordDialogE'].value;
-  __ZTVN3GUI14OnScreenDialogE = Module['__ZTVN3GUI14OnScreenDialogE'] = wasmExports['_ZTVN3GUI14OnScreenDialogE'].value;
-  __ZTIN3GUI14OnScreenDialogE = Module['__ZTIN3GUI14OnScreenDialogE'] = wasmExports['_ZTIN3GUI14OnScreenDialogE'].value;
-  __ZTSN3GUI14OnScreenDialogE = Module['__ZTSN3GUI14OnScreenDialogE'] = wasmExports['_ZTSN3GUI14OnScreenDialogE'].value;
-  __ZTVN3GUI14RecorderDialogE = Module['__ZTVN3GUI14RecorderDialogE'] = wasmExports['_ZTVN3GUI14RecorderDialogE'].value;
-  __ZTIN3GUI14RecorderDialogE = Module['__ZTIN3GUI14RecorderDialogE'] = wasmExports['_ZTIN3GUI14RecorderDialogE'].value;
-  __ZTSN3GUI14RecorderDialogE = Module['__ZTSN3GUI14RecorderDialogE'] = wasmExports['_ZTSN3GUI14RecorderDialogE'].value;
   __ZTVN3GUI24FluidSynthSettingsDialogE = Module['__ZTVN3GUI24FluidSynthSettingsDialogE'] = wasmExports['_ZTVN3GUI24FluidSynthSettingsDialogE'].value;
   __ZTIN3GUI24FluidSynthSettingsDialogE = Module['__ZTIN3GUI24FluidSynthSettingsDialogE'] = wasmExports['_ZTIN3GUI24FluidSynthSettingsDialogE'].value;
   __ZTSN3GUI24FluidSynthSettingsDialogE = Module['__ZTSN3GUI24FluidSynthSettingsDialogE'] = wasmExports['_ZTSN3GUI24FluidSynthSettingsDialogE'].value;
@@ -101388,8 +101014,10 @@ function assignWasmExports(wasmExports) {
   __ZTI19DefaultEventManager = Module['__ZTI19DefaultEventManager'] = wasmExports['_ZTI19DefaultEventManager'].value;
   __ZTS19DefaultEventManager = Module['__ZTS19DefaultEventManager'] = wasmExports['_ZTS19DefaultEventManager'].value;
   __ZTIN6Common12EventManagerE = Module['__ZTIN6Common12EventManagerE'] = wasmExports['_ZTIN6Common12EventManagerE'].value;
+  __ZTIN6Common13EventObserverE = Module['__ZTIN6Common13EventObserverE'] = wasmExports['_ZTIN6Common13EventObserverE'].value;
   __ZTIN6Common21ArtificialEventSourceE = Module['__ZTIN6Common21ArtificialEventSourceE'] = wasmExports['_ZTIN6Common21ArtificialEventSourceE'].value;
   __ZTSN6Common21ArtificialEventSourceE = Module['__ZTSN6Common21ArtificialEventSourceE'] = wasmExports['_ZTSN6Common21ArtificialEventSourceE'].value;
+  __ZTIN6Common11EventSourceE = Module['__ZTIN6Common11EventSourceE'] = wasmExports['_ZTIN6Common11EventSourceE'].value;
   __ZTV14AbstractFSNode = Module['__ZTV14AbstractFSNode'] = wasmExports['_ZTV14AbstractFSNode'].value;
   __ZTI14AbstractFSNode = Module['__ZTI14AbstractFSNode'] = wasmExports['_ZTI14AbstractFSNode'].value;
   __ZTS14AbstractFSNode = Module['__ZTS14AbstractFSNode'] = wasmExports['_ZTS14AbstractFSNode'].value;
@@ -101439,6 +101067,7 @@ function assignWasmExports(wasmExports) {
   __ZTIN6Common12VirtualMouseE = Module['__ZTIN6Common12VirtualMouseE'] = wasmExports['_ZTIN6Common12VirtualMouseE'].value;
   __ZTSN6Common12VirtualMouseE = Module['__ZTSN6Common12VirtualMouseE'] = wasmExports['_ZTSN6Common12VirtualMouseE'].value;
   __ZTVN6Common11OutSaveFileE = Module['__ZTVN6Common11OutSaveFileE'] = wasmExports['_ZTVN6Common11OutSaveFileE'].value;
+  __ZTVN6Common15SaveFileManagerE = Module['__ZTVN6Common15SaveFileManagerE'] = wasmExports['_ZTVN6Common15SaveFileManagerE'].value;
   __ZTIN6Common11OutSaveFileE = Module['__ZTIN6Common11OutSaveFileE'] = wasmExports['_ZTIN6Common11OutSaveFileE'].value;
   __ZTTN6Common11OutSaveFileE = Module['__ZTTN6Common11OutSaveFileE'] = wasmExports['_ZTTN6Common11OutSaveFileE'].value;
   __ZTCN6Common11OutSaveFileE0_NS_19SeekableWriteStreamE = Module['__ZTCN6Common11OutSaveFileE0_NS_19SeekableWriteStreamE'] = wasmExports['_ZTCN6Common11OutSaveFileE0_NS_19SeekableWriteStreamE'].value;
@@ -101446,11 +101075,15 @@ function assignWasmExports(wasmExports) {
   __ZTIN6Common15SaveFileManagerE = Module['__ZTIN6Common15SaveFileManagerE'] = wasmExports['_ZTIN6Common15SaveFileManagerE'].value;
   __ZTSN6Common15SaveFileManagerE = Module['__ZTSN6Common15SaveFileManagerE'] = wasmExports['_ZTSN6Common15SaveFileManagerE'].value;
   __ZTSN6Common11OutSaveFileE = Module['__ZTSN6Common11OutSaveFileE'] = wasmExports['_ZTSN6Common11OutSaveFileE'].value;
+  __ZTV22DefaultSaveFileManager = Module['__ZTV22DefaultSaveFileManager'] = wasmExports['_ZTV22DefaultSaveFileManager'].value;
   __ZTI22DefaultSaveFileManager = Module['__ZTI22DefaultSaveFileManager'] = wasmExports['_ZTI22DefaultSaveFileManager'].value;
   __ZN22DefaultSaveFileManager19TIMESTAMPS_FILENAMEE = Module['__ZN22DefaultSaveFileManager19TIMESTAMPS_FILENAMEE'] = wasmExports['_ZN22DefaultSaveFileManager19TIMESTAMPS_FILENAMEE'].value;
   __ZTS22DefaultSaveFileManager = Module['__ZTS22DefaultSaveFileManager'] = wasmExports['_ZTS22DefaultSaveFileManager'].value;
   __ZTV19DefaultTimerManager = Module['__ZTV19DefaultTimerManager'] = wasmExports['_ZTV19DefaultTimerManager'].value;
+  __ZTI19DefaultTimerManager = Module['__ZTI19DefaultTimerManager'] = wasmExports['_ZTI19DefaultTimerManager'].value;
   __ZTS19DefaultTimerManager = Module['__ZTS19DefaultTimerManager'] = wasmExports['_ZTS19DefaultTimerManager'].value;
+  __ZTIN6Common12TimerManagerE = Module['__ZTIN6Common12TimerManagerE'] = wasmExports['_ZTIN6Common12TimerManagerE'].value;
+  __ZTSN6Common12TimerManagerE = Module['__ZTSN6Common12TimerManagerE'] = wasmExports['_ZTSN6Common12TimerManagerE'].value;
   __ZTVN10Networking17ConnectionManagerE = Module['__ZTVN10Networking17ConnectionManagerE'] = wasmExports['_ZTVN10Networking17ConnectionManagerE'].value;
   __ZTIN10Networking17ConnectionManagerE = Module['__ZTIN10Networking17ConnectionManagerE'] = wasmExports['_ZTIN10Networking17ConnectionManagerE'].value;
   __ZTSN10Networking17ConnectionManagerE = Module['__ZTSN10Networking17ConnectionManagerE'] = wasmExports['_ZTSN10Networking17ConnectionManagerE'].value;
@@ -102052,8 +101685,6 @@ function assignWasmExports(wasmExports) {
   __ZTV20POSIXSaveFileManager = Module['__ZTV20POSIXSaveFileManager'] = wasmExports['_ZTV20POSIXSaveFileManager'].value;
   __ZTI20POSIXSaveFileManager = Module['__ZTI20POSIXSaveFileManager'] = wasmExports['_ZTI20POSIXSaveFileManager'].value;
   __ZTS20POSIXSaveFileManager = Module['__ZTS20POSIXSaveFileManager'] = wasmExports['_ZTS20POSIXSaveFileManager'].value;
-  __ZTI23RecorderSaveFileManager = Module['__ZTI23RecorderSaveFileManager'] = wasmExports['_ZTI23RecorderSaveFileManager'].value;
-  __ZTS23RecorderSaveFileManager = Module['__ZTS23RecorderSaveFileManager'] = wasmExports['_ZTS23RecorderSaveFileManager'].value;
   _GImGui = Module['_GImGui'] = wasmExports['GImGui'].value;
   __ZN15ImGuiTextBuffer11EmptyStringE = Module['__ZN15ImGuiTextBuffer11EmptyStringE'] = wasmExports['_ZN15ImGuiTextBuffer11EmptyStringE'].value;
   _GImGuiDemoMarkerCallback = Module['_GImGuiDemoMarkerCallback'] = wasmExports['GImGuiDemoMarkerCallback'].value;
@@ -104449,9 +104080,6 @@ function assignWasmExports(wasmExports) {
   __ZTS7OSystem = Module['__ZTS7OSystem'] = wasmExports['_ZTS7OSystem'].value;
   __ZTVN6Common19TextToSpeechManagerE = Module['__ZTVN6Common19TextToSpeechManagerE'] = wasmExports['_ZTVN6Common19TextToSpeechManagerE'].value;
   __ZTSN6Common19TextToSpeechManagerE = Module['__ZTSN6Common19TextToSpeechManagerE'] = wasmExports['_ZTSN6Common19TextToSpeechManagerE'].value;
-  __ZTVN6Common25SeekableMemoryWriteStreamE = Module['__ZTVN6Common25SeekableMemoryWriteStreamE'] = wasmExports['_ZTVN6Common25SeekableMemoryWriteStreamE'].value;
-  __ZTIN6Common25SeekableMemoryWriteStreamE = Module['__ZTIN6Common25SeekableMemoryWriteStreamE'] = wasmExports['_ZTIN6Common25SeekableMemoryWriteStreamE'].value;
-  __ZTSN6Common25SeekableMemoryWriteStreamE = Module['__ZTSN6Common25SeekableMemoryWriteStreamE'] = wasmExports['_ZTSN6Common25SeekableMemoryWriteStreamE'].value;
   __ZTVN6Common18BasePtrTrackerImplINS_18ClickteamInstaller12ClickteamTagEEE = Module['__ZTVN6Common18BasePtrTrackerImplINS_18ClickteamInstaller12ClickteamTagEEE'] = wasmExports['_ZTVN6Common18BasePtrTrackerImplINS_18ClickteamInstaller12ClickteamTagEEE'].value;
   __ZTVN6Common18ClickteamInstallerE = Module['__ZTVN6Common18ClickteamInstallerE'] = wasmExports['_ZTVN6Common18ClickteamInstallerE'].value;
   __ZTVN6Common26BasePtrTrackerDeletionImplIhNS_12ArrayDeleterIhEEEE = Module['__ZTVN6Common26BasePtrTrackerDeletionImplIhNS_12ArrayDeleterIhEEEE'] = wasmExports['_ZTVN6Common26BasePtrTrackerDeletionImplIhNS_12ArrayDeleterIhEEEE'].value;

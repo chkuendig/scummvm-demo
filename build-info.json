@@ -1,5 +1,5 @@
 {
-  "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
+  "demoCommit": "4babbd680a05a724de2ebf20ee317cd53742b9bf",
   "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
   "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
   "branches": [
@@ -24,5 +24,5 @@
       "head": "9517cd7b05194ec8b756f8505f80bdea49a3dd8f"
     }
   ],
-  "eventRecorder": true
+  "eventRecorder": false
 }
