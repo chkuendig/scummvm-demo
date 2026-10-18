@@ -1,6 +1,6 @@
 # ScummVM upstream branch set
 
-The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. The demo submodule now points to that integration; it has not been built or deployed.
+The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. The demo submodule points to that integration. A subsequent [manual build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) succeeded, and the live build provenance matches the pinned source.
 
 The five source branches live in the `scummvm/` submodule. The original branch set was prepared from the deployed integration on upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5` on 2026-10-05. No upstream PRs have been opened.
 
@@ -30,7 +30,9 @@ The repository's [AI-GUIDELINES.md](../scummvm/AI-GUIDELINES.md) requires commit
 
 ## Validation and deployment
 
-For the 2026-10-19 source refresh, all five touch-policy tests passed. SDL2, SDL3 and GUI syntax checks passed on the combined integration, as did Emscripten build-script shell syntax and theme-archive/source consistency. Seven focused SDL3 hotplug cases passed on the touch-controls branch. No full build or physical-device tests were run, and the pin update skips CI. The deployment evidence below records the previous integration.
+For the 2026-10-19 source refresh, all five touch-policy tests passed. SDL2, SDL3 and GUI syntax checks passed on the combined integration, as did Emscripten build-script shell syntax and theme-archive/source consistency. Seven focused SDL3 hotplug cases passed on the touch-controls branch. The subsequent [manual workflow](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) built and deployed all engines successfully. An emulated-touchscreen browser rendered Grim Fandango with the on-screen pad and switched to touchpad mode, with no page errors or failed requests. Physical-device tests remain unverified. The older deployment evidence below records the previous integration.
+
+Use the [game-library Grim launch](https://scummvm.kuendig.io/scummvm.html#--path=/data/games/grim-win-demo1-en%20grim:grim) for testing. The pre-added launcher entry still points to an obsolete `grimdemo` subfolder.
 
 The previous deployed integration was `demo/upstream-integration` at `de7b4e39851d0111ec7e3f1165fd9c2997ee9419`, based on `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`, combining all five branches. `git diff --check`, shell syntax checks, the Asyncify audio-guard fixture test, JavaScript syntax/logic checks, and verification of the replacement source archive passed. The [final build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206) succeeded. Live build-info matches demo commit `cae236857f07589dece40df3c606fad6e798ada9`, integration `de7b4e39851d0111ec7e3f1165fd9c2997ee9419`, upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`, all five then-current branch tips, and `eventRecorder=true`.
 

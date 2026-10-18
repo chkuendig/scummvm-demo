@@ -1452,14 +1452,14 @@
       "fix": "Runtime branch now uses Debian's original a52dec 0.7.4 tarball, verifies SHA-256 a21d724ab3b3933330194353687df82c475b5dfb997513eef4c25de6c865ec33, and extracts a52dec-0.7.4"
     },
     "latestSuccessfulDeployment": {
-      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206",
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016",
       "status": "success",
       "deployed": true,
-      "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
-      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-      "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+      "demoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
+      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
       "emsdkVersion": "6.0.11",
-      "eventRecorder": true
+      "eventRecorder": false
     },
     "latestLiveReplay": {
       "date": "2026-10-05",
@@ -1474,34 +1474,34 @@
       "observation": "FT.000 range and VIDEO/index.json loaded; the recorded Full Throttle session passed a framebuffer MD5 check."
     },
     "finalLiveBuildInfo": {
-      "date": "2026-10-05",
+      "date": "2026-10-19",
       "cacheBusted": true,
       "provenanceMatchesManifest": true,
-      "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
-      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-      "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "eventRecorder": true
+      "demoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
+      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
+      "eventRecorder": false
     },
     "latestLiveBrowser": {
-      "date": "2026-10-05",
-      "browser": "Headless Chromium 1234 with SwiftShader in tvdb-playwright:local",
+      "date": "2026-10-19",
+      "browser": "Headless Chromium 1234 with SwiftShader and an emulated touchscreen",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
       "provenanceMatchesManifest": true,
       "launcherRendered": true,
-      "addGameOpened": true,
-      "dataDirectoryBrowsed": true,
-      "progress": {
-        "text": "Downloaded 33 MB / 33 MB",
-        "fillAtCompletion": "100%",
-        "samples": 76,
-        "pageErrors": 0,
-        "requestFailures": 0
-      },
-      "addGame": {
-        "pageExceptions": 0,
-        "requestFailures": 0
-      },
-      "screenshot": "demo-validation screenshots stored locally under .git/demo-validation (not committed)",
-      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419"
+      "menuTouchModeToggle": "passed",
+      "grimGameRendered": true,
+      "grimOnScreenGamepadVisible": true,
+      "grimTouchpadToggle": "passed",
+      "grimLaunchPath": "/data/games/grim-win-demo1-en",
+      "grimDefaultLauncherEntry": "Existing default entry points to an obsolete grimdemo subfolder; game-library launch path was used for testing",
+      "pageErrors": 0,
+      "requestFailures": 0,
+      "httpErrors": 0,
+      "screenshot": "Screenshots and JSON evidence are stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972"
     },
     "ciReplay": {
       "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308276144",
@@ -1529,9 +1529,42 @@
       ],
       "themes": "All four theme archives match their sources; ZIP integrity passed",
       "diffCheck": "passed",
-      "fullBuild": "not run",
+      "fullBuild": "passed",
       "physicalDeviceTests": "not run",
-      "deployed": false
+      "deployed": true,
+      "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016",
+      "browserSmoke": "Grim Fandango rendered with the on-screen pad; touch mode switched to touchpad; no page errors or failed requests"
+    },
+    "previousSuccessfulDeploymentBeforeTouchCleanup": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206",
+      "status": "success",
+      "deployed": true,
+      "demoCommit": "cae236857f07589dece40df3c606fad6e798ada9",
+      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
+      "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+      "emsdkVersion": "6.0.11",
+      "eventRecorder": true
+    },
+    "previousLiveBrowserBeforeTouchCleanup": {
+      "date": "2026-10-05",
+      "browser": "Headless Chromium 1234 with SwiftShader in tvdb-playwright:local",
+      "provenanceMatchesManifest": true,
+      "launcherRendered": true,
+      "addGameOpened": true,
+      "dataDirectoryBrowsed": true,
+      "progress": {
+        "text": "Downloaded 33 MB / 33 MB",
+        "fillAtCompletion": "100%",
+        "samples": 76,
+        "pageErrors": 0,
+        "requestFailures": 0
+      },
+      "addGame": {
+        "pageExceptions": 0,
+        "requestFailures": 0
+      },
+      "screenshot": "demo-validation screenshots stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419"
     }
   },
   "publication": {
@@ -1609,13 +1642,15 @@
     "branch": "demo/upstream-integration",
     "head": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
-    "eventRecorder": true,
+    "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Source rebased and touch-controls cleanup cherry-picked 2026-10-19; not deployed",
+    "status": "Built, deployed and verified with an emulated touchscreen 2026-10-19",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
-    "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419"
+    "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016",
+    "deployedDemoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032"
   },
   "updated": "2026-10-19"
 }
