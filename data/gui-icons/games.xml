@@ -698,6 +698,9 @@
 	<game id="colapso" name="Colapso: Episode 1" engine_id="wintermute" company_id="unknown" year="" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="colony" name="The Colony" engine_id="colony" company_id="davidalansmith" year="1988" moby_id="3489" steam_id="" gog_id="" zoom_id="the-colony" additional_stores="" datafiles="The_Colony" wikipedia_page="The_Colony_(video_game)" series_id=""/>
+	
+	
 	<game id="colorsoncanvas" name="Colors on Canvas" engine_id="wintermute" company_id="mpcernea" year="2015" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Colors_on_Canvas" wikipedia_page="" series_id=""/>
 	
 	

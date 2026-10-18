@@ -31796,78 +31796,78 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  8660764: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
- 8660820: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
- 8661134: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
- 8661349: () => { Module['SDL3'].camera = {}; },  
- 8661381: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
- 8661440: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
- 8663746: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
- 8663997: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
- 8664375: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
- 8664462: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
- 8664639: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
- 8664831: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
- 8664962: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
- 8665109: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
- 8665343: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
- 8665922: () => { return Module['SDL3'].audioContext.sampleRate; },  
- 8665973: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
- 8667814: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
- 8669130: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
- 8670286: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
- 8670819: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
- 8671446: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8671873: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8671957: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
- 8672318: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
- 8673310: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
- 8673476: () => { return document.hasFocus(); },  
- 8673508: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
- 8673690: () => { return document.body.clientWidth; },  
- 8673728: () => { return document.body.clientHeight; },  
- 8673767: () => { return window.innerWidth; },  
- 8673797: () => { return window.innerHeight; },  
- 8673828: () => { return window.outerWidth; },  
- 8673858: () => { return window.outerHeight; },  
- 8673889: () => { return window.pageXOffset; },  
- 8673920: () => { return window.pageYOffset; },  
- 8673951: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
- 8675339: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
- 8677706: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
- 8678536: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
- 8679270: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
- 8680019: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
- 8680707: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
- 8681365: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
- 8681448: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
- 8681517: () => { return Module['SDL3']['mouse_x']; },  
- 8681555: () => { return Module['SDL3']['mouse_y']; },  
- 8681593: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
- 8681641: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
- 8681850: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
- 8682103: () => { return window.innerWidth; },  
- 8682133: () => { return window.innerHeight; },  
- 8682164: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
- 8682273: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
- 8682766: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
- 8682840: () => { return window.innerWidth; },  
- 8682870: () => { return window.innerHeight; },  
- 8682901: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
- 8683599: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
- 8684158: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
- 8684480: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
- 8685021: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
- 8686030: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
- 8686168: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
- 8686350: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
- 8686407: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
- 8686582: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
- 8686918: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
- 8687626: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
- 8687967: ($0) => { window.open(UTF8ToString($0), "_blank") },  
- 8688007: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
- 8688055: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
+  8688860: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
+ 8688916: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
+ 8689230: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
+ 8689445: () => { Module['SDL3'].camera = {}; },  
+ 8689477: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
+ 8689536: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
+ 8691842: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
+ 8692093: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
+ 8692471: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
+ 8692558: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
+ 8692735: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
+ 8692927: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
+ 8693058: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
+ 8693205: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
+ 8693439: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
+ 8694018: () => { return Module['SDL3'].audioContext.sampleRate; },  
+ 8694069: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
+ 8695910: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
+ 8697226: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
+ 8698382: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
+ 8698915: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
+ 8699542: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8699969: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8700053: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
+ 8700414: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
+ 8701406: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
+ 8701572: () => { return document.hasFocus(); },  
+ 8701604: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
+ 8701786: () => { return document.body.clientWidth; },  
+ 8701824: () => { return document.body.clientHeight; },  
+ 8701863: () => { return window.innerWidth; },  
+ 8701893: () => { return window.innerHeight; },  
+ 8701924: () => { return window.outerWidth; },  
+ 8701954: () => { return window.outerHeight; },  
+ 8701985: () => { return window.pageXOffset; },  
+ 8702016: () => { return window.pageYOffset; },  
+ 8702047: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
+ 8703435: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
+ 8705802: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
+ 8706632: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
+ 8707366: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
+ 8708115: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
+ 8708803: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
+ 8709461: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
+ 8709544: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
+ 8709613: () => { return Module['SDL3']['mouse_x']; },  
+ 8709651: () => { return Module['SDL3']['mouse_y']; },  
+ 8709689: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
+ 8709737: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
+ 8709946: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
+ 8710199: () => { return window.innerWidth; },  
+ 8710229: () => { return window.innerHeight; },  
+ 8710260: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
+ 8710369: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
+ 8710862: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
+ 8710936: () => { return window.innerWidth; },  
+ 8710966: () => { return window.innerHeight; },  
+ 8710997: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
+ 8711695: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
+ 8712254: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
+ 8712576: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
+ 8713117: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
+ 8714126: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
+ 8714264: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
+ 8714446: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
+ 8714503: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
+ 8714678: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
+ 8715014: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
+ 8715722: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
+ 8716063: ($0) => { window.open(UTF8ToString($0), "_blank") },  
+ 8716103: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
+ 8716151: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
 };
 function __asyncjs__webserial_write(__buf,__nbyte) { return Asyncify.handleAsync(async () => { const port = globalThis['retrowave_port']; if ('retrowave_writer' in globalThis === false) { console.log("Getting Writer"); globalThis['retrowave_writer'] = port.writable.getWriter(); } data = new DataView(HEAPU8.buffer, __buf, __nbyte); await globalThis['retrowave_writer'].write(data); return __nbyte; }); }
 __asyncjs__webserial_write.sig = 'iii';
@@ -33481,8 +33481,13 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZThn8_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE,
   __ZTv0_n44_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE,
   __ZN11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb,
-  __ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_,
+  __ZNK24OpenGLSdlGraphicsManager13isRendering3DEv,
+  __ZN6Common13ConfigManager3setERKNS_6StringES3_S3_,
+  __ZN11OSystem_SDL18applyTouchSettingsEv,
   __ZN22ModularGraphicsBackend15setFeatureStateEN7OSystem7FeatureEb,
+  __ZN11OSystem_SDL19currentTouchContextEv,
+  __ZNK11OSystem_SDL26isOnScreenGamepadAvailableEv,
+  __ZN13TouchControls6updateE11TouchActioniii,
   __ZThn8_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb,
   __ZTv0_n48_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb,
   __ZN11OSystem_SDL15getFeatureStateEN7OSystem7FeatureE,
@@ -33492,14 +33497,13 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK11OSystem_SDL14hasTouchscreenEv,
   _SDL_GetTouchDevices,
   _SDL_free,
-  __ZN11OSystem_SDL19currentTouchContextEv,
-  __ZNK22ModularGraphicsBackend16isOverlayVisibleEv,
-  __ZNK24OpenGLSdlGraphicsManager13isRendering3DEv,
-  __ZN11OSystem_SDL22touchModeKeyForContextENS_12TouchContextE,
-  __ZN11OSystem_SDL18applyTouchSettingsEv,
-  __ZN13TouchControls6updateE11TouchActioniii,
+  __ZNK11OSystem_SDL23isOnScreenGamepadActiveEv,
+  __ZNK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE,
+  __ZN6Common13ConfigManager9getDomainERKNS_6StringE,
+  __ZTv0_n388_NK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE,
+  __ZN11OSystem_SDL20applyBackendSettingsEv,
+  __ZTv0_n400_N11OSystem_SDL20applyBackendSettingsEv,
   __ZN11OSystem_SDL14cycleTouchModeEv,
-  __ZN6Common13ConfigManager3setERKNS_6StringES3_S3_,
   __ZN6Common9U32StringaSEOS0_,
   __ZN22ModularGraphicsBackend19displayMessageOnOSDERKN6Common9U32StringE,
   __ZNK11OSystem_SDL20isTouchToggleVisibleEv,
@@ -33756,6 +33760,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN22ModularGraphicsBackend19clearFocusRectangleEv,
   __ZN22ModularGraphicsBackend11showOverlayEb,
   __ZN22ModularGraphicsBackend11hideOverlayEv,
+  __ZNK22ModularGraphicsBackend16isOverlayVisibleEv,
   __ZNK22ModularGraphicsBackend16getOverlayFormatEv,
   __ZN22ModularGraphicsBackend12clearOverlayEv,
   __ZN22ModularGraphicsBackend11grabOverlayERN8Graphics7SurfaceE,
@@ -34150,7 +34155,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE,
   __ZN19ChainedGamesManagerC1Ev,
   __ZN19ChainedGamesManager3popERN6Common6StringERi,
-  __ZN6Common13ConfigManager9getDomainERKNS_6StringE,
   __ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE,
   __ZN8Graphics11shutdownTTFEv,
   __ZN7OSystem14setStretchModeEPKc,
@@ -34169,6 +34173,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK6Common18TranslationManager18getCurrentLanguageEv,
   __ZN6Common18TranslationManager11setLanguageERKNS_6StringE,
   __ZN6Common9Keymapper13addGameKeymapEPNS_6KeymapE,
+  __ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_,
   __ZN6Common9Keymapper18cleanupGameKeymapsEv,
   __ZN6Common9SingletonI13EngineManagerED2Ev,
   __ZN13EngineManagerD0Ev,
@@ -35083,6 +35088,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI14EditGameDialogC2ERKN6Common6StringE,
   __ZN3GUI14EditGameDialog15addGameControlsEPNS_9GuiObjectERKN6Common6StringES6_,
   __ZN3GUI13OptionsDialog18addGraphicControlsEPNS_9GuiObjectERKN6Common6StringE,
+  __ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE,
   __ZN3GUI13OptionsDialog16addAudioControlsEPNS_9GuiObjectERKN6Common6StringE,
   __ZN3GUI13OptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE,
   __ZN3GUI13OptionsDialog15addMT32ControlsEPNS_9GuiObjectERKN6Common6StringE,
@@ -35567,7 +35573,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK3GUI13OptionsDialog15updateSfxVolumeEi,
   __ZN6Common11RemapWidget18handleInputChangedEv,
   __ZN3GUI16RadiobuttonGroup10setEnabledEb,
-  __ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE,
   __ZN6Common9Keymapper10initKeymapEPNS_6KeymapEPNS_13ConfigManager6DomainE,
   __ZN6Common11RemapWidgetC1EPN3GUI9GuiObjectERKNS_6StringERKNS_5ArrayIPNS_6KeymapEEE,
   __ZN3GUI14CheckboxWidgetC1EPNS_9GuiObjectEiiiiRKN6Common9U32StringES6_jh,
@@ -35581,9 +35586,9 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNK5Cloud12CloudManager15getStorageIndexEv,
   __ZN6Common9SingletonIN5Cloud12CloudManagerEE8instanceEv,
   __ZN3GUI19GlobalOptionsDialogD2Ev,
-  __ZThn532_N3GUI19GlobalOptionsDialogD1Ev,
+  __ZThn544_N3GUI19GlobalOptionsDialogD1Ev,
   __ZN3GUI19GlobalOptionsDialogD0Ev,
-  __ZThn532_N3GUI19GlobalOptionsDialogD0Ev,
+  __ZThn544_N3GUI19GlobalOptionsDialogD0Ev,
   __ZN3GUI19GlobalOptionsDialog5buildEv,
   __ZN6Common5ArrayIPNS_6KeymapEE10insert_auxEPS2_PKS2_S6_,
   __ZN3GUI19GlobalOptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE,
@@ -36054,10 +36059,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3GUI7TooltipD0Ev,
   __ZN3GUI7Tooltip13receivedFocusEii,
   __ZN3GUI17UnknownGameDialogC2ERK12DetectedGame,
-  __ZN3GUI17UnknownGameDialog7rebuildEv,
-  __ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_,
   __ZN3GUI17UnknownGameDialog16handleMouseWheelEiii,
   __ZN3GUI17UnknownGameDialog12reflowLayoutEv,
+  __ZN3GUI17UnknownGameDialog7rebuildEv,
+  __ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_,
   __ZN3GUI17UnknownGameDialog15encodeUrlStringERKN6Common6StringE,
   __ZN3GUI17UnknownGameDialog21generateBugtrackerURLEv,
   __ZN3GUI17UnknownGameDialog13handleCommandEPNS_13CommandSenderEjj,
@@ -38826,7 +38831,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _SDL_GetWindowSize,
   __ZN14SdlEventSource24getTouchscreenSizePixelsEv,
   _SDL_GetWindowSizeInPixels,
-  __ZN14SdlEventSource17handleTouchToggleEiff,
+  __ZN14SdlEventSource17handleTouchToggleEiyyff,
+  __ZN14SdlEventSource8addEventERKN6Common5EventE,
   __ZN14SdlEventSource13fakeWarpMouseEii,
   __ZN14SdlEventSource17handleResizeEventERN6Common5EventEii,
   __ZN18SdlGraphicsManagerC2EP14SdlEventSourceP9SdlWindow,
@@ -40980,6 +40986,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5Video10AVIDecoder16shouldQueueAudioERNS0_11TrackStatusE,
   __ZN5Video10AVIDecoder14getStreamIndexEj,
   __ZN5Video10AVIDecoder13AVIVideoTrack11decodeFrameEPN6Common18SeekableReadStreamE,
+  __ZN5Video10AVIDecoder13AVIAudioTrack23needsAudioOnlyBufferingEv,
   __ZN5Video10AVIDecoder6rewindEv,
   __ZN5Video10AVIDecoder12IndexEntries4findEjj,
   __ZN5Video10AVIDecoder10seekInternERKN5Audio9TimestampE,
@@ -41017,6 +41024,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5Video10AVIDecoder13AVIAudioTrackD1Ev,
   __ZN5Video10AVIDecoder13AVIAudioTrack10queueSoundEPN6Common18SeekableReadStreamE,
   __ZN5Video10AVIDecoder13AVIAudioTrack11resetStreamEv,
+  __ZNK5Video10AVIDecoder13AVIAudioTrack10endOfTrackEv,
   __ZN5Video10AVIDecoder13AVIAudioTrack6rewindEv,
   __ZN5Video10AVIDecoder13AVIAudioTrack17createAudioStreamEv,
   __ZN5Audio23makePacketizedMP3StreamEjj,
@@ -48232,10 +48240,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN17MidiDriver_MT32GMC2E9MusicType,
   __ZN5Audio21MidiDriver_Miles_MidiD2Ev,
   __ZN17MidiDriver_MT32GMD2Ev,
-  __ZThn596_N5Audio21MidiDriver_Miles_MidiD1Ev,
+  __ZThn600_N5Audio21MidiDriver_Miles_MidiD1Ev,
   __ZN5Audio21MidiDriver_Miles_MidiD1Ev,
   __ZN5Audio21MidiDriver_Miles_MidiD0Ev,
-  __ZThn596_N5Audio21MidiDriver_Miles_MidiD0Ev,
+  __ZThn600_N5Audio21MidiDriver_Miles_MidiD0Ev,
   __ZN5Audio21MidiDriver_Miles_Midi15initControlDataEv,
   __ZN5Audio21MidiDriver_Miles_Midi14initMidiDeviceEv,
   __ZN17MidiDriver_MT32GM14initMidiDeviceEv,
@@ -48266,7 +48274,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN5Audio21MidiDriver_Miles_Midi16writePatchTimbreEhhhb,
   __ZN5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj,
   __ZN5Audio21MidiDriver_Miles_Midi19installCustomTimbreEhh,
-  __ZThn596_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj,
+  __ZThn600_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj,
   __ZN5Audio28MidiDriver_Miles_MT32_createERKN6Common4PathE,
   __ZN5Audio28MidiDriver_Miles_MIDI_createE9MusicTypeRKN6Common4PathE,
   __ZN5Audio21MidiDriver_Miles_MidiC1E9MusicTypePNS_24MilesMT32InstrumentEntryEt,
@@ -52712,6 +52720,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _inflateSetDictionary,
   _inflateEnd,
   _inflate,
+  __ZN6Common21inflateZlibHeaderlessERNS_11WriteStreamERNS_10ReadStreamEPKhj,
   __ZN6Common14GZipReadStreamC1EPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagEj,
   _deflateInit2_,
   __ZN6Common14GZipReadStreamD1Ev,
@@ -53018,6 +53027,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common11NEResources11loadFromEXEEPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagE,
   __ZN6Common11NEResources22getResourceTableOffsetEv,
   __ZN6Common11NEResources17readResourceTableEj,
+  __ZN6Common5ArrayINS_9NESegmentEE7reserveEj,
+  __ZN6Common5ArrayINS_9NESegmentEE7emplaceIJS1_EEEvPKS1_DpOT_,
   __ZN6Common11NEResources17getResourceStringERNS_18SeekableReadStreamEj,
   __ZN6Common11NEResources13readNameTableEjj,
   __ZN6Common7HashMapINS_13WinResourceIDENS0_IS1_NS_6StringENS_18WinResourceID_HashENS_21WinResourceID_EqualToEEES3_S4_E24lookupAndCreateIfMissingERKS1_,
@@ -53300,6 +53311,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __Z12luaV_executeP9lua_Statei,
   __Z14luaZ_lookaheadP3Zio,
   __Z11luaY_parserP9lua_StateP3ZioP7MbufferPKc,
+  __Z11luaU_undumpP9lua_StateP3ZioP7MbufferPKc,
   __Z16luaF_newLclosureP9lua_StateiP5Table,
   __Z13luaF_newupvalP9lua_State,
   __Z9luaC_linkP9lua_StateP8GCObjecth,
@@ -53385,8 +53397,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN3Lua16boxUpValue_startEP9lua_State,
   __ZN3Lua17boxUpValue_finishEP9lua_State,
   __ZN3Lua12unpersistLuaEP9lua_StatePN6Common10ReadStreamE,
-  __Z14luaZ_openspaceP9lua_StateP7Mbufferm,
   __Z9luaZ_readP3ZioPvm,
+  __Z14luaZ_openspaceP9lua_StateP7Mbufferm,
   __ZN3Lua13LuaFileConfigC1ERKN6Common6StringES4_,
   __ZN3Lua11LuaFileReadC1ERKN6Common4PathERKNS1_6StringE,
   __ZN3Lua13LuaFileConfigC2ERKN6Common6StringES4_,
@@ -63450,12 +63462,12 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTT11OSystem_SDL,
   __ZTI18SdlGraphicsManager,
   __ZTI15GraphicsManager,
-  __ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE,
-  _g_engine,
   __ZTI24OpenGLSdlGraphicsManager,
+  __ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE,
   __ZN6Common13ConfigManager14kSessionDomainE,
   __ZN6Common9SingletonI13ScalerManagerE10_singletonE,
   __ZTV13ScalerManager,
+  __ZN6Common13ConfigManager18kApplicationDomainE,
   __ZTVN6Common25CompositeHardwareInputSetE,
   __ZN6Common19defaultMouseButtonsE,
   __ZN6Common16defaultModifiersE,
@@ -63532,7 +63544,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTS17NullMutexInternal,
   __ZTIN6Common13MutexInternalE,
   __ZTSN6Common13MutexInternalE,
-  __ZN6Common13ConfigManager18kApplicationDomainE,
   _gScummVMVersion,
   _gDebugLevel,
   _gDebugChannelsOnly,
@@ -63639,6 +63650,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTV14MainMenuDialog,
   __ZN3GUI11ThemeEngine15kImageLogoSmallE,
   __ZTVN3GUI12ConfigDialogE,
+  _g_engine,
   __ZTVN3GUI21ExtraGuiOptionsWidgetE,
   __ZTI14MainMenuDialog,
   __ZTIN3GUI12ConfigDialogE,
@@ -70434,8 +70446,13 @@ function assignWasmExports(wasmExports) {
   __ZThn8_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE = Module['__ZThn8_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE'] = wasmExports['_ZThn8_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE'];
   __ZTv0_n44_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE = Module['__ZTv0_n44_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE'] = wasmExports['_ZTv0_n44_N11OSystem_SDL10hasFeatureEN7OSystem7FeatureE'];
   __ZN11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb = Module['__ZN11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb'] = wasmExports['_ZN11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb'];
-  __ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_ = Module['__ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_'] = wasmExports['_ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_'];
+  __ZNK24OpenGLSdlGraphicsManager13isRendering3DEv = Module['__ZNK24OpenGLSdlGraphicsManager13isRendering3DEv'] = wasmExports['_ZNK24OpenGLSdlGraphicsManager13isRendering3DEv'];
+  __ZN6Common13ConfigManager3setERKNS_6StringES3_S3_ = Module['__ZN6Common13ConfigManager3setERKNS_6StringES3_S3_'] = wasmExports['_ZN6Common13ConfigManager3setERKNS_6StringES3_S3_'];
+  __ZN11OSystem_SDL18applyTouchSettingsEv = Module['__ZN11OSystem_SDL18applyTouchSettingsEv'] = wasmExports['_ZN11OSystem_SDL18applyTouchSettingsEv'];
   __ZN22ModularGraphicsBackend15setFeatureStateEN7OSystem7FeatureEb = Module['__ZN22ModularGraphicsBackend15setFeatureStateEN7OSystem7FeatureEb'] = wasmExports['_ZN22ModularGraphicsBackend15setFeatureStateEN7OSystem7FeatureEb'];
+  __ZN11OSystem_SDL19currentTouchContextEv = Module['__ZN11OSystem_SDL19currentTouchContextEv'] = wasmExports['_ZN11OSystem_SDL19currentTouchContextEv'];
+  __ZNK11OSystem_SDL26isOnScreenGamepadAvailableEv = Module['__ZNK11OSystem_SDL26isOnScreenGamepadAvailableEv'] = wasmExports['_ZNK11OSystem_SDL26isOnScreenGamepadAvailableEv'];
+  __ZN13TouchControls6updateE11TouchActioniii = Module['__ZN13TouchControls6updateE11TouchActioniii'] = wasmExports['_ZN13TouchControls6updateE11TouchActioniii'];
   __ZThn8_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb = Module['__ZThn8_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb'] = wasmExports['_ZThn8_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb'];
   __ZTv0_n48_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb = Module['__ZTv0_n48_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb'] = wasmExports['_ZTv0_n48_N11OSystem_SDL15setFeatureStateEN7OSystem7FeatureEb'];
   __ZN11OSystem_SDL15getFeatureStateEN7OSystem7FeatureE = Module['__ZN11OSystem_SDL15getFeatureStateEN7OSystem7FeatureE'] = wasmExports['_ZN11OSystem_SDL15getFeatureStateEN7OSystem7FeatureE'];
@@ -70445,14 +70462,13 @@ function assignWasmExports(wasmExports) {
   __ZNK11OSystem_SDL14hasTouchscreenEv = Module['__ZNK11OSystem_SDL14hasTouchscreenEv'] = wasmExports['_ZNK11OSystem_SDL14hasTouchscreenEv'];
   _SDL_GetTouchDevices = Module['_SDL_GetTouchDevices'] = wasmExports['SDL_GetTouchDevices'];
   _SDL_free = Module['_SDL_free'] = wasmExports['SDL_free'];
-  __ZN11OSystem_SDL19currentTouchContextEv = Module['__ZN11OSystem_SDL19currentTouchContextEv'] = wasmExports['_ZN11OSystem_SDL19currentTouchContextEv'];
-  __ZNK22ModularGraphicsBackend16isOverlayVisibleEv = Module['__ZNK22ModularGraphicsBackend16isOverlayVisibleEv'] = wasmExports['_ZNK22ModularGraphicsBackend16isOverlayVisibleEv'];
-  __ZNK24OpenGLSdlGraphicsManager13isRendering3DEv = Module['__ZNK24OpenGLSdlGraphicsManager13isRendering3DEv'] = wasmExports['_ZNK24OpenGLSdlGraphicsManager13isRendering3DEv'];
-  __ZN11OSystem_SDL22touchModeKeyForContextENS_12TouchContextE = Module['__ZN11OSystem_SDL22touchModeKeyForContextENS_12TouchContextE'] = wasmExports['_ZN11OSystem_SDL22touchModeKeyForContextENS_12TouchContextE'];
-  __ZN11OSystem_SDL18applyTouchSettingsEv = Module['__ZN11OSystem_SDL18applyTouchSettingsEv'] = wasmExports['_ZN11OSystem_SDL18applyTouchSettingsEv'];
-  __ZN13TouchControls6updateE11TouchActioniii = Module['__ZN13TouchControls6updateE11TouchActioniii'] = wasmExports['_ZN13TouchControls6updateE11TouchActioniii'];
+  __ZNK11OSystem_SDL23isOnScreenGamepadActiveEv = Module['__ZNK11OSystem_SDL23isOnScreenGamepadActiveEv'] = wasmExports['_ZNK11OSystem_SDL23isOnScreenGamepadActiveEv'];
+  __ZNK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE = Module['__ZNK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE'] = wasmExports['_ZNK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE'];
+  __ZN6Common13ConfigManager9getDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager9getDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager9getDomainERKNS_6StringE'];
+  __ZTv0_n388_NK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE = Module['__ZTv0_n388_NK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE'] = wasmExports['_ZTv0_n388_NK11OSystem_SDL23registerDefaultSettingsERKN6Common6StringE'];
+  __ZN11OSystem_SDL20applyBackendSettingsEv = Module['__ZN11OSystem_SDL20applyBackendSettingsEv'] = wasmExports['_ZN11OSystem_SDL20applyBackendSettingsEv'];
+  __ZTv0_n400_N11OSystem_SDL20applyBackendSettingsEv = Module['__ZTv0_n400_N11OSystem_SDL20applyBackendSettingsEv'] = wasmExports['_ZTv0_n400_N11OSystem_SDL20applyBackendSettingsEv'];
   __ZN11OSystem_SDL14cycleTouchModeEv = Module['__ZN11OSystem_SDL14cycleTouchModeEv'] = wasmExports['_ZN11OSystem_SDL14cycleTouchModeEv'];
-  __ZN6Common13ConfigManager3setERKNS_6StringES3_S3_ = Module['__ZN6Common13ConfigManager3setERKNS_6StringES3_S3_'] = wasmExports['_ZN6Common13ConfigManager3setERKNS_6StringES3_S3_'];
   __ZN6Common9U32StringaSEOS0_ = Module['__ZN6Common9U32StringaSEOS0_'] = wasmExports['_ZN6Common9U32StringaSEOS0_'];
   __ZN22ModularGraphicsBackend19displayMessageOnOSDERKN6Common9U32StringE = Module['__ZN22ModularGraphicsBackend19displayMessageOnOSDERKN6Common9U32StringE'] = wasmExports['_ZN22ModularGraphicsBackend19displayMessageOnOSDERKN6Common9U32StringE'];
   __ZNK11OSystem_SDL20isTouchToggleVisibleEv = Module['__ZNK11OSystem_SDL20isTouchToggleVisibleEv'] = wasmExports['_ZNK11OSystem_SDL20isTouchToggleVisibleEv'];
@@ -70709,6 +70725,7 @@ function assignWasmExports(wasmExports) {
   __ZN22ModularGraphicsBackend19clearFocusRectangleEv = Module['__ZN22ModularGraphicsBackend19clearFocusRectangleEv'] = wasmExports['_ZN22ModularGraphicsBackend19clearFocusRectangleEv'];
   __ZN22ModularGraphicsBackend11showOverlayEb = Module['__ZN22ModularGraphicsBackend11showOverlayEb'] = wasmExports['_ZN22ModularGraphicsBackend11showOverlayEb'];
   __ZN22ModularGraphicsBackend11hideOverlayEv = Module['__ZN22ModularGraphicsBackend11hideOverlayEv'] = wasmExports['_ZN22ModularGraphicsBackend11hideOverlayEv'];
+  __ZNK22ModularGraphicsBackend16isOverlayVisibleEv = Module['__ZNK22ModularGraphicsBackend16isOverlayVisibleEv'] = wasmExports['_ZNK22ModularGraphicsBackend16isOverlayVisibleEv'];
   __ZNK22ModularGraphicsBackend16getOverlayFormatEv = Module['__ZNK22ModularGraphicsBackend16getOverlayFormatEv'] = wasmExports['_ZNK22ModularGraphicsBackend16getOverlayFormatEv'];
   __ZN22ModularGraphicsBackend12clearOverlayEv = Module['__ZN22ModularGraphicsBackend12clearOverlayEv'] = wasmExports['_ZN22ModularGraphicsBackend12clearOverlayEv'];
   __ZN22ModularGraphicsBackend11grabOverlayERN8Graphics7SurfaceE = Module['__ZN22ModularGraphicsBackend11grabOverlayERN8Graphics7SurfaceE'] = wasmExports['_ZN22ModularGraphicsBackend11grabOverlayERN8Graphics7SurfaceE'];
@@ -71103,7 +71120,6 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE = Module['__ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE'] = wasmExports['_ZN3GUI18displayErrorDialogERKN6Common5ErrorERKNS0_9U32StringE'];
   __ZN19ChainedGamesManagerC1Ev = Module['__ZN19ChainedGamesManagerC1Ev'] = wasmExports['_ZN19ChainedGamesManagerC1Ev'];
   __ZN19ChainedGamesManager3popERN6Common6StringERi = Module['__ZN19ChainedGamesManager3popERN6Common6StringERi'] = wasmExports['_ZN19ChainedGamesManager3popERN6Common6StringERi'];
-  __ZN6Common13ConfigManager9getDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager9getDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager9getDomainERKNS_6StringE'];
   __ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE = Module['__ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE'] = wasmExports['_ZN6Common13ConfigManager15setActiveDomainERKNS_6StringE'];
   __ZN8Graphics11shutdownTTFEv = Module['__ZN8Graphics11shutdownTTFEv'] = wasmExports['_ZN8Graphics11shutdownTTFEv'];
   __ZN7OSystem14setStretchModeEPKc = Module['__ZN7OSystem14setStretchModeEPKc'] = wasmExports['_ZN7OSystem14setStretchModeEPKc'];
@@ -71122,6 +71138,7 @@ function assignWasmExports(wasmExports) {
   __ZNK6Common18TranslationManager18getCurrentLanguageEv = Module['__ZNK6Common18TranslationManager18getCurrentLanguageEv'] = wasmExports['_ZNK6Common18TranslationManager18getCurrentLanguageEv'];
   __ZN6Common18TranslationManager11setLanguageERKNS_6StringE = Module['__ZN6Common18TranslationManager11setLanguageERKNS_6StringE'] = wasmExports['_ZN6Common18TranslationManager11setLanguageERKNS_6StringE'];
   __ZN6Common9Keymapper13addGameKeymapEPNS_6KeymapE = Module['__ZN6Common9Keymapper13addGameKeymapEPNS_6KeymapE'] = wasmExports['_ZN6Common9Keymapper13addGameKeymapEPNS_6KeymapE'];
+  __ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_ = Module['__ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_'] = wasmExports['_ZN6Common13ConfigManager7setBoolERKNS_6StringEbS3_'];
   __ZN6Common9Keymapper18cleanupGameKeymapsEv = Module['__ZN6Common9Keymapper18cleanupGameKeymapsEv'] = wasmExports['_ZN6Common9Keymapper18cleanupGameKeymapsEv'];
   __ZN6Common9SingletonI13EngineManagerED2Ev = Module['__ZN6Common9SingletonI13EngineManagerED2Ev'] = wasmExports['_ZN6Common9SingletonI13EngineManagerED2Ev'];
   __ZN13EngineManagerD0Ev = Module['__ZN13EngineManagerD0Ev'] = wasmExports['_ZN13EngineManagerD0Ev'];
@@ -72036,6 +72053,7 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI14EditGameDialogC2ERKN6Common6StringE = Module['__ZN3GUI14EditGameDialogC2ERKN6Common6StringE'] = wasmExports['_ZN3GUI14EditGameDialogC2ERKN6Common6StringE'];
   __ZN3GUI14EditGameDialog15addGameControlsEPNS_9GuiObjectERKN6Common6StringES6_ = Module['__ZN3GUI14EditGameDialog15addGameControlsEPNS_9GuiObjectERKN6Common6StringES6_'] = wasmExports['_ZN3GUI14EditGameDialog15addGameControlsEPNS_9GuiObjectERKN6Common6StringES6_'];
   __ZN3GUI13OptionsDialog18addGraphicControlsEPNS_9GuiObjectERKN6Common6StringE = Module['__ZN3GUI13OptionsDialog18addGraphicControlsEPNS_9GuiObjectERKN6Common6StringE'] = wasmExports['_ZN3GUI13OptionsDialog18addGraphicControlsEPNS_9GuiObjectERKN6Common6StringE'];
+  __ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE = Module['__ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE'] = wasmExports['_ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE'];
   __ZN3GUI13OptionsDialog16addAudioControlsEPNS_9GuiObjectERKN6Common6StringE = Module['__ZN3GUI13OptionsDialog16addAudioControlsEPNS_9GuiObjectERKN6Common6StringE'] = wasmExports['_ZN3GUI13OptionsDialog16addAudioControlsEPNS_9GuiObjectERKN6Common6StringE'];
   __ZN3GUI13OptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE = Module['__ZN3GUI13OptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE'] = wasmExports['_ZN3GUI13OptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE'];
   __ZN3GUI13OptionsDialog15addMT32ControlsEPNS_9GuiObjectERKN6Common6StringE = Module['__ZN3GUI13OptionsDialog15addMT32ControlsEPNS_9GuiObjectERKN6Common6StringE'] = wasmExports['_ZN3GUI13OptionsDialog15addMT32ControlsEPNS_9GuiObjectERKN6Common6StringE'];
@@ -72520,7 +72538,6 @@ function assignWasmExports(wasmExports) {
   __ZNK3GUI13OptionsDialog15updateSfxVolumeEi = Module['__ZNK3GUI13OptionsDialog15updateSfxVolumeEi'] = wasmExports['_ZNK3GUI13OptionsDialog15updateSfxVolumeEi'];
   __ZN6Common11RemapWidget18handleInputChangedEv = Module['__ZN6Common11RemapWidget18handleInputChangedEv'] = wasmExports['_ZN6Common11RemapWidget18handleInputChangedEv'];
   __ZN3GUI16RadiobuttonGroup10setEnabledEb = Module['__ZN3GUI16RadiobuttonGroup10setEnabledEb'] = wasmExports['_ZN3GUI16RadiobuttonGroup10setEnabledEb'];
-  __ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE = Module['__ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE'] = wasmExports['_ZN3GUI13OptionsDialog18addControlControlsEPNS_9GuiObjectERKN6Common6StringE'];
   __ZN6Common9Keymapper10initKeymapEPNS_6KeymapEPNS_13ConfigManager6DomainE = Module['__ZN6Common9Keymapper10initKeymapEPNS_6KeymapEPNS_13ConfigManager6DomainE'] = wasmExports['_ZN6Common9Keymapper10initKeymapEPNS_6KeymapEPNS_13ConfigManager6DomainE'];
   __ZN6Common11RemapWidgetC1EPN3GUI9GuiObjectERKNS_6StringERKNS_5ArrayIPNS_6KeymapEEE = Module['__ZN6Common11RemapWidgetC1EPN3GUI9GuiObjectERKNS_6StringERKNS_5ArrayIPNS_6KeymapEEE'] = wasmExports['_ZN6Common11RemapWidgetC1EPN3GUI9GuiObjectERKNS_6StringERKNS_5ArrayIPNS_6KeymapEEE'];
   __ZN3GUI14CheckboxWidgetC1EPNS_9GuiObjectEiiiiRKN6Common9U32StringES6_jh = Module['__ZN3GUI14CheckboxWidgetC1EPNS_9GuiObjectEiiiiRKN6Common9U32StringES6_jh'] = wasmExports['_ZN3GUI14CheckboxWidgetC1EPNS_9GuiObjectEiiiiRKN6Common9U32StringES6_jh'];
@@ -72534,9 +72551,9 @@ function assignWasmExports(wasmExports) {
   __ZNK5Cloud12CloudManager15getStorageIndexEv = Module['__ZNK5Cloud12CloudManager15getStorageIndexEv'] = wasmExports['_ZNK5Cloud12CloudManager15getStorageIndexEv'];
   __ZN6Common9SingletonIN5Cloud12CloudManagerEE8instanceEv = Module['__ZN6Common9SingletonIN5Cloud12CloudManagerEE8instanceEv'] = wasmExports['_ZN6Common9SingletonIN5Cloud12CloudManagerEE8instanceEv'];
   __ZN3GUI19GlobalOptionsDialogD2Ev = Module['__ZN3GUI19GlobalOptionsDialogD2Ev'] = wasmExports['_ZN3GUI19GlobalOptionsDialogD2Ev'];
-  __ZThn532_N3GUI19GlobalOptionsDialogD1Ev = Module['__ZThn532_N3GUI19GlobalOptionsDialogD1Ev'] = wasmExports['_ZThn532_N3GUI19GlobalOptionsDialogD1Ev'];
+  __ZThn544_N3GUI19GlobalOptionsDialogD1Ev = Module['__ZThn544_N3GUI19GlobalOptionsDialogD1Ev'] = wasmExports['_ZThn544_N3GUI19GlobalOptionsDialogD1Ev'];
   __ZN3GUI19GlobalOptionsDialogD0Ev = Module['__ZN3GUI19GlobalOptionsDialogD0Ev'] = wasmExports['_ZN3GUI19GlobalOptionsDialogD0Ev'];
-  __ZThn532_N3GUI19GlobalOptionsDialogD0Ev = Module['__ZThn532_N3GUI19GlobalOptionsDialogD0Ev'] = wasmExports['_ZThn532_N3GUI19GlobalOptionsDialogD0Ev'];
+  __ZThn544_N3GUI19GlobalOptionsDialogD0Ev = Module['__ZThn544_N3GUI19GlobalOptionsDialogD0Ev'] = wasmExports['_ZThn544_N3GUI19GlobalOptionsDialogD0Ev'];
   __ZN3GUI19GlobalOptionsDialog5buildEv = Module['__ZN3GUI19GlobalOptionsDialog5buildEv'] = wasmExports['_ZN3GUI19GlobalOptionsDialog5buildEv'];
   __ZN6Common5ArrayIPNS_6KeymapEE10insert_auxEPS2_PKS2_S6_ = Module['__ZN6Common5ArrayIPNS_6KeymapEE10insert_auxEPS2_PKS2_S6_'] = wasmExports['_ZN6Common5ArrayIPNS_6KeymapEE10insert_auxEPS2_PKS2_S6_'];
   __ZN3GUI19GlobalOptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE = Module['__ZN3GUI19GlobalOptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE'] = wasmExports['_ZN3GUI19GlobalOptionsDialog15addMIDIControlsEPNS_9GuiObjectERKN6Common6StringE'];
@@ -73007,10 +73024,10 @@ function assignWasmExports(wasmExports) {
   __ZN3GUI7TooltipD0Ev = Module['__ZN3GUI7TooltipD0Ev'] = wasmExports['_ZN3GUI7TooltipD0Ev'];
   __ZN3GUI7Tooltip13receivedFocusEii = Module['__ZN3GUI7Tooltip13receivedFocusEii'] = wasmExports['_ZN3GUI7Tooltip13receivedFocusEii'];
   __ZN3GUI17UnknownGameDialogC2ERK12DetectedGame = Module['__ZN3GUI17UnknownGameDialogC2ERK12DetectedGame'] = wasmExports['_ZN3GUI17UnknownGameDialogC2ERK12DetectedGame'];
-  __ZN3GUI17UnknownGameDialog7rebuildEv = Module['__ZN3GUI17UnknownGameDialog7rebuildEv'] = wasmExports['_ZN3GUI17UnknownGameDialog7rebuildEv'];
-  __ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_ = Module['__ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_'] = wasmExports['_ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_'];
   __ZN3GUI17UnknownGameDialog16handleMouseWheelEiii = Module['__ZN3GUI17UnknownGameDialog16handleMouseWheelEiii'] = wasmExports['_ZN3GUI17UnknownGameDialog16handleMouseWheelEiii'];
   __ZN3GUI17UnknownGameDialog12reflowLayoutEv = Module['__ZN3GUI17UnknownGameDialog12reflowLayoutEv'] = wasmExports['_ZN3GUI17UnknownGameDialog12reflowLayoutEv'];
+  __ZN3GUI17UnknownGameDialog7rebuildEv = Module['__ZN3GUI17UnknownGameDialog7rebuildEv'] = wasmExports['_ZN3GUI17UnknownGameDialog7rebuildEv'];
+  __ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_ = Module['__ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_'] = wasmExports['_ZN6Common5ArrayIPN3GUI16StaticTextWidgetEE7emplaceIJRKS3_EEEvPS6_DpOT_'];
   __ZN3GUI17UnknownGameDialog15encodeUrlStringERKN6Common6StringE = Module['__ZN3GUI17UnknownGameDialog15encodeUrlStringERKN6Common6StringE'] = wasmExports['_ZN3GUI17UnknownGameDialog15encodeUrlStringERKN6Common6StringE'];
   __ZN3GUI17UnknownGameDialog21generateBugtrackerURLEv = Module['__ZN3GUI17UnknownGameDialog21generateBugtrackerURLEv'] = wasmExports['_ZN3GUI17UnknownGameDialog21generateBugtrackerURLEv'];
   __ZN3GUI17UnknownGameDialog13handleCommandEPNS_13CommandSenderEjj = Module['__ZN3GUI17UnknownGameDialog13handleCommandEPNS_13CommandSenderEjj'] = wasmExports['_ZN3GUI17UnknownGameDialog13handleCommandEPNS_13CommandSenderEjj'];
@@ -75779,7 +75796,8 @@ function assignWasmExports(wasmExports) {
   _SDL_GetWindowSize = Module['_SDL_GetWindowSize'] = wasmExports['SDL_GetWindowSize'];
   __ZN14SdlEventSource24getTouchscreenSizePixelsEv = Module['__ZN14SdlEventSource24getTouchscreenSizePixelsEv'] = wasmExports['_ZN14SdlEventSource24getTouchscreenSizePixelsEv'];
   _SDL_GetWindowSizeInPixels = Module['_SDL_GetWindowSizeInPixels'] = wasmExports['SDL_GetWindowSizeInPixels'];
-  __ZN14SdlEventSource17handleTouchToggleEiff = Module['__ZN14SdlEventSource17handleTouchToggleEiff'] = wasmExports['_ZN14SdlEventSource17handleTouchToggleEiff'];
+  __ZN14SdlEventSource17handleTouchToggleEiyyff = Module['__ZN14SdlEventSource17handleTouchToggleEiyyff'] = wasmExports['_ZN14SdlEventSource17handleTouchToggleEiyyff'];
+  __ZN14SdlEventSource8addEventERKN6Common5EventE = Module['__ZN14SdlEventSource8addEventERKN6Common5EventE'] = wasmExports['_ZN14SdlEventSource8addEventERKN6Common5EventE'];
   __ZN14SdlEventSource13fakeWarpMouseEii = Module['__ZN14SdlEventSource13fakeWarpMouseEii'] = wasmExports['_ZN14SdlEventSource13fakeWarpMouseEii'];
   __ZN14SdlEventSource17handleResizeEventERN6Common5EventEii = Module['__ZN14SdlEventSource17handleResizeEventERN6Common5EventEii'] = wasmExports['_ZN14SdlEventSource17handleResizeEventERN6Common5EventEii'];
   __ZN18SdlGraphicsManagerC2EP14SdlEventSourceP9SdlWindow = Module['__ZN18SdlGraphicsManagerC2EP14SdlEventSourceP9SdlWindow'] = wasmExports['_ZN18SdlGraphicsManagerC2EP14SdlEventSourceP9SdlWindow'];
@@ -77933,6 +77951,7 @@ function assignWasmExports(wasmExports) {
   __ZN5Video10AVIDecoder16shouldQueueAudioERNS0_11TrackStatusE = Module['__ZN5Video10AVIDecoder16shouldQueueAudioERNS0_11TrackStatusE'] = wasmExports['_ZN5Video10AVIDecoder16shouldQueueAudioERNS0_11TrackStatusE'];
   __ZN5Video10AVIDecoder14getStreamIndexEj = Module['__ZN5Video10AVIDecoder14getStreamIndexEj'] = wasmExports['_ZN5Video10AVIDecoder14getStreamIndexEj'];
   __ZN5Video10AVIDecoder13AVIVideoTrack11decodeFrameEPN6Common18SeekableReadStreamE = Module['__ZN5Video10AVIDecoder13AVIVideoTrack11decodeFrameEPN6Common18SeekableReadStreamE'] = wasmExports['_ZN5Video10AVIDecoder13AVIVideoTrack11decodeFrameEPN6Common18SeekableReadStreamE'];
+  __ZN5Video10AVIDecoder13AVIAudioTrack23needsAudioOnlyBufferingEv = Module['__ZN5Video10AVIDecoder13AVIAudioTrack23needsAudioOnlyBufferingEv'] = wasmExports['_ZN5Video10AVIDecoder13AVIAudioTrack23needsAudioOnlyBufferingEv'];
   __ZN5Video10AVIDecoder6rewindEv = Module['__ZN5Video10AVIDecoder6rewindEv'] = wasmExports['_ZN5Video10AVIDecoder6rewindEv'];
   __ZN5Video10AVIDecoder12IndexEntries4findEjj = Module['__ZN5Video10AVIDecoder12IndexEntries4findEjj'] = wasmExports['_ZN5Video10AVIDecoder12IndexEntries4findEjj'];
   __ZN5Video10AVIDecoder10seekInternERKN5Audio9TimestampE = Module['__ZN5Video10AVIDecoder10seekInternERKN5Audio9TimestampE'] = wasmExports['_ZN5Video10AVIDecoder10seekInternERKN5Audio9TimestampE'];
@@ -77970,6 +77989,7 @@ function assignWasmExports(wasmExports) {
   __ZN5Video10AVIDecoder13AVIAudioTrackD1Ev = Module['__ZN5Video10AVIDecoder13AVIAudioTrackD1Ev'] = wasmExports['_ZN5Video10AVIDecoder13AVIAudioTrackD1Ev'];
   __ZN5Video10AVIDecoder13AVIAudioTrack10queueSoundEPN6Common18SeekableReadStreamE = Module['__ZN5Video10AVIDecoder13AVIAudioTrack10queueSoundEPN6Common18SeekableReadStreamE'] = wasmExports['_ZN5Video10AVIDecoder13AVIAudioTrack10queueSoundEPN6Common18SeekableReadStreamE'];
   __ZN5Video10AVIDecoder13AVIAudioTrack11resetStreamEv = Module['__ZN5Video10AVIDecoder13AVIAudioTrack11resetStreamEv'] = wasmExports['_ZN5Video10AVIDecoder13AVIAudioTrack11resetStreamEv'];
+  __ZNK5Video10AVIDecoder13AVIAudioTrack10endOfTrackEv = Module['__ZNK5Video10AVIDecoder13AVIAudioTrack10endOfTrackEv'] = wasmExports['_ZNK5Video10AVIDecoder13AVIAudioTrack10endOfTrackEv'];
   __ZN5Video10AVIDecoder13AVIAudioTrack6rewindEv = Module['__ZN5Video10AVIDecoder13AVIAudioTrack6rewindEv'] = wasmExports['_ZN5Video10AVIDecoder13AVIAudioTrack6rewindEv'];
   __ZN5Video10AVIDecoder13AVIAudioTrack17createAudioStreamEv = Module['__ZN5Video10AVIDecoder13AVIAudioTrack17createAudioStreamEv'] = wasmExports['_ZN5Video10AVIDecoder13AVIAudioTrack17createAudioStreamEv'];
   __ZN5Audio23makePacketizedMP3StreamEjj = Module['__ZN5Audio23makePacketizedMP3StreamEjj'] = wasmExports['_ZN5Audio23makePacketizedMP3StreamEjj'];
@@ -85185,10 +85205,10 @@ function assignWasmExports(wasmExports) {
   __ZN17MidiDriver_MT32GMC2E9MusicType = Module['__ZN17MidiDriver_MT32GMC2E9MusicType'] = wasmExports['_ZN17MidiDriver_MT32GMC2E9MusicType'];
   __ZN5Audio21MidiDriver_Miles_MidiD2Ev = Module['__ZN5Audio21MidiDriver_Miles_MidiD2Ev'] = wasmExports['_ZN5Audio21MidiDriver_Miles_MidiD2Ev'];
   __ZN17MidiDriver_MT32GMD2Ev = Module['__ZN17MidiDriver_MT32GMD2Ev'] = wasmExports['_ZN17MidiDriver_MT32GMD2Ev'];
-  __ZThn596_N5Audio21MidiDriver_Miles_MidiD1Ev = Module['__ZThn596_N5Audio21MidiDriver_Miles_MidiD1Ev'] = wasmExports['_ZThn596_N5Audio21MidiDriver_Miles_MidiD1Ev'];
+  __ZThn600_N5Audio21MidiDriver_Miles_MidiD1Ev = Module['__ZThn600_N5Audio21MidiDriver_Miles_MidiD1Ev'] = wasmExports['_ZThn600_N5Audio21MidiDriver_Miles_MidiD1Ev'];
   __ZN5Audio21MidiDriver_Miles_MidiD1Ev = Module['__ZN5Audio21MidiDriver_Miles_MidiD1Ev'] = wasmExports['_ZN5Audio21MidiDriver_Miles_MidiD1Ev'];
   __ZN5Audio21MidiDriver_Miles_MidiD0Ev = Module['__ZN5Audio21MidiDriver_Miles_MidiD0Ev'] = wasmExports['_ZN5Audio21MidiDriver_Miles_MidiD0Ev'];
-  __ZThn596_N5Audio21MidiDriver_Miles_MidiD0Ev = Module['__ZThn596_N5Audio21MidiDriver_Miles_MidiD0Ev'] = wasmExports['_ZThn596_N5Audio21MidiDriver_Miles_MidiD0Ev'];
+  __ZThn600_N5Audio21MidiDriver_Miles_MidiD0Ev = Module['__ZThn600_N5Audio21MidiDriver_Miles_MidiD0Ev'] = wasmExports['_ZThn600_N5Audio21MidiDriver_Miles_MidiD0Ev'];
   __ZN5Audio21MidiDriver_Miles_Midi15initControlDataEv = Module['__ZN5Audio21MidiDriver_Miles_Midi15initControlDataEv'] = wasmExports['_ZN5Audio21MidiDriver_Miles_Midi15initControlDataEv'];
   __ZN5Audio21MidiDriver_Miles_Midi14initMidiDeviceEv = Module['__ZN5Audio21MidiDriver_Miles_Midi14initMidiDeviceEv'] = wasmExports['_ZN5Audio21MidiDriver_Miles_Midi14initMidiDeviceEv'];
   __ZN17MidiDriver_MT32GM14initMidiDeviceEv = Module['__ZN17MidiDriver_MT32GM14initMidiDeviceEv'] = wasmExports['_ZN17MidiDriver_MT32GM14initMidiDeviceEv'];
@@ -85219,7 +85239,7 @@ function assignWasmExports(wasmExports) {
   __ZN5Audio21MidiDriver_Miles_Midi16writePatchTimbreEhhhb = Module['__ZN5Audio21MidiDriver_Miles_Midi16writePatchTimbreEhhhb'] = wasmExports['_ZN5Audio21MidiDriver_Miles_Midi16writePatchTimbreEhhhb'];
   __ZN5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj = Module['__ZN5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj'] = wasmExports['_ZN5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj'];
   __ZN5Audio21MidiDriver_Miles_Midi19installCustomTimbreEhh = Module['__ZN5Audio21MidiDriver_Miles_Midi19installCustomTimbreEhh'] = wasmExports['_ZN5Audio21MidiDriver_Miles_Midi19installCustomTimbreEhh'];
-  __ZThn596_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj = Module['__ZThn596_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj'] = wasmExports['_ZThn596_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj'];
+  __ZThn600_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj = Module['__ZThn600_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj'] = wasmExports['_ZThn600_N5Audio21MidiDriver_Miles_Midi23processXMIDITimbreChunkEPKhj'];
   __ZN5Audio28MidiDriver_Miles_MT32_createERKN6Common4PathE = Module['__ZN5Audio28MidiDriver_Miles_MT32_createERKN6Common4PathE'] = wasmExports['_ZN5Audio28MidiDriver_Miles_MT32_createERKN6Common4PathE'];
   __ZN5Audio28MidiDriver_Miles_MIDI_createE9MusicTypeRKN6Common4PathE = Module['__ZN5Audio28MidiDriver_Miles_MIDI_createE9MusicTypeRKN6Common4PathE'] = wasmExports['_ZN5Audio28MidiDriver_Miles_MIDI_createE9MusicTypeRKN6Common4PathE'];
   __ZN5Audio21MidiDriver_Miles_MidiC1E9MusicTypePNS_24MilesMT32InstrumentEntryEt = Module['__ZN5Audio21MidiDriver_Miles_MidiC1E9MusicTypePNS_24MilesMT32InstrumentEntryEt'] = wasmExports['_ZN5Audio21MidiDriver_Miles_MidiC1E9MusicTypePNS_24MilesMT32InstrumentEntryEt'];
@@ -89665,6 +89685,7 @@ function assignWasmExports(wasmExports) {
   _inflateSetDictionary = Module['_inflateSetDictionary'] = wasmExports['inflateSetDictionary'];
   _inflateEnd = Module['_inflateEnd'] = wasmExports['inflateEnd'];
   _inflate = Module['_inflate'] = wasmExports['inflate'];
+  __ZN6Common21inflateZlibHeaderlessERNS_11WriteStreamERNS_10ReadStreamEPKhj = Module['__ZN6Common21inflateZlibHeaderlessERNS_11WriteStreamERNS_10ReadStreamEPKhj'] = wasmExports['_ZN6Common21inflateZlibHeaderlessERNS_11WriteStreamERNS_10ReadStreamEPKhj'];
   __ZN6Common14GZipReadStreamC1EPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagEj = Module['__ZN6Common14GZipReadStreamC1EPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagEj'] = wasmExports['_ZN6Common14GZipReadStreamC1EPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagEj'];
   _deflateInit2_ = Module['_deflateInit2_'] = wasmExports['deflateInit2_'];
   __ZN6Common14GZipReadStreamD1Ev = Module['__ZN6Common14GZipReadStreamD1Ev'] = wasmExports['_ZN6Common14GZipReadStreamD1Ev'];
@@ -89971,6 +89992,8 @@ function assignWasmExports(wasmExports) {
   __ZN6Common11NEResources11loadFromEXEEPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagE = Module['__ZN6Common11NEResources11loadFromEXEEPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagE'] = wasmExports['_ZN6Common11NEResources11loadFromEXEEPNS_18SeekableReadStreamEN15DisposeAfterUse4FlagE'];
   __ZN6Common11NEResources22getResourceTableOffsetEv = Module['__ZN6Common11NEResources22getResourceTableOffsetEv'] = wasmExports['_ZN6Common11NEResources22getResourceTableOffsetEv'];
   __ZN6Common11NEResources17readResourceTableEj = Module['__ZN6Common11NEResources17readResourceTableEj'] = wasmExports['_ZN6Common11NEResources17readResourceTableEj'];
+  __ZN6Common5ArrayINS_9NESegmentEE7reserveEj = Module['__ZN6Common5ArrayINS_9NESegmentEE7reserveEj'] = wasmExports['_ZN6Common5ArrayINS_9NESegmentEE7reserveEj'];
+  __ZN6Common5ArrayINS_9NESegmentEE7emplaceIJS1_EEEvPKS1_DpOT_ = Module['__ZN6Common5ArrayINS_9NESegmentEE7emplaceIJS1_EEEvPKS1_DpOT_'] = wasmExports['_ZN6Common5ArrayINS_9NESegmentEE7emplaceIJS1_EEEvPKS1_DpOT_'];
   __ZN6Common11NEResources17getResourceStringERNS_18SeekableReadStreamEj = Module['__ZN6Common11NEResources17getResourceStringERNS_18SeekableReadStreamEj'] = wasmExports['_ZN6Common11NEResources17getResourceStringERNS_18SeekableReadStreamEj'];
   __ZN6Common11NEResources13readNameTableEjj = Module['__ZN6Common11NEResources13readNameTableEjj'] = wasmExports['_ZN6Common11NEResources13readNameTableEjj'];
   __ZN6Common7HashMapINS_13WinResourceIDENS0_IS1_NS_6StringENS_18WinResourceID_HashENS_21WinResourceID_EqualToEEES3_S4_E24lookupAndCreateIfMissingERKS1_ = Module['__ZN6Common7HashMapINS_13WinResourceIDENS0_IS1_NS_6StringENS_18WinResourceID_HashENS_21WinResourceID_EqualToEEES3_S4_E24lookupAndCreateIfMissingERKS1_'] = wasmExports['_ZN6Common7HashMapINS_13WinResourceIDENS0_IS1_NS_6StringENS_18WinResourceID_HashENS_21WinResourceID_EqualToEEES3_S4_E24lookupAndCreateIfMissingERKS1_'];
@@ -90253,6 +90276,7 @@ function assignWasmExports(wasmExports) {
   __Z12luaV_executeP9lua_Statei = Module['__Z12luaV_executeP9lua_Statei'] = wasmExports['_Z12luaV_executeP9lua_Statei'];
   __Z14luaZ_lookaheadP3Zio = Module['__Z14luaZ_lookaheadP3Zio'] = wasmExports['_Z14luaZ_lookaheadP3Zio'];
   __Z11luaY_parserP9lua_StateP3ZioP7MbufferPKc = Module['__Z11luaY_parserP9lua_StateP3ZioP7MbufferPKc'] = wasmExports['_Z11luaY_parserP9lua_StateP3ZioP7MbufferPKc'];
+  __Z11luaU_undumpP9lua_StateP3ZioP7MbufferPKc = Module['__Z11luaU_undumpP9lua_StateP3ZioP7MbufferPKc'] = wasmExports['_Z11luaU_undumpP9lua_StateP3ZioP7MbufferPKc'];
   __Z16luaF_newLclosureP9lua_StateiP5Table = Module['__Z16luaF_newLclosureP9lua_StateiP5Table'] = wasmExports['_Z16luaF_newLclosureP9lua_StateiP5Table'];
   __Z13luaF_newupvalP9lua_State = Module['__Z13luaF_newupvalP9lua_State'] = wasmExports['_Z13luaF_newupvalP9lua_State'];
   __Z9luaC_linkP9lua_StateP8GCObjecth = Module['__Z9luaC_linkP9lua_StateP8GCObjecth'] = wasmExports['_Z9luaC_linkP9lua_StateP8GCObjecth'];
@@ -90338,8 +90362,8 @@ function assignWasmExports(wasmExports) {
   __ZN3Lua16boxUpValue_startEP9lua_State = Module['__ZN3Lua16boxUpValue_startEP9lua_State'] = wasmExports['_ZN3Lua16boxUpValue_startEP9lua_State'];
   __ZN3Lua17boxUpValue_finishEP9lua_State = Module['__ZN3Lua17boxUpValue_finishEP9lua_State'] = wasmExports['_ZN3Lua17boxUpValue_finishEP9lua_State'];
   __ZN3Lua12unpersistLuaEP9lua_StatePN6Common10ReadStreamE = Module['__ZN3Lua12unpersistLuaEP9lua_StatePN6Common10ReadStreamE'] = wasmExports['_ZN3Lua12unpersistLuaEP9lua_StatePN6Common10ReadStreamE'];
-  __Z14luaZ_openspaceP9lua_StateP7Mbufferm = Module['__Z14luaZ_openspaceP9lua_StateP7Mbufferm'] = wasmExports['_Z14luaZ_openspaceP9lua_StateP7Mbufferm'];
   __Z9luaZ_readP3ZioPvm = Module['__Z9luaZ_readP3ZioPvm'] = wasmExports['_Z9luaZ_readP3ZioPvm'];
+  __Z14luaZ_openspaceP9lua_StateP7Mbufferm = Module['__Z14luaZ_openspaceP9lua_StateP7Mbufferm'] = wasmExports['_Z14luaZ_openspaceP9lua_StateP7Mbufferm'];
   __ZN3Lua13LuaFileConfigC1ERKN6Common6StringES4_ = Module['__ZN3Lua13LuaFileConfigC1ERKN6Common6StringES4_'] = wasmExports['_ZN3Lua13LuaFileConfigC1ERKN6Common6StringES4_'];
   __ZN3Lua11LuaFileReadC1ERKN6Common4PathERKNS1_6StringE = Module['__ZN3Lua11LuaFileReadC1ERKN6Common4PathERKNS1_6StringE'] = wasmExports['_ZN3Lua11LuaFileReadC1ERKN6Common4PathERKNS1_6StringE'];
   __ZN3Lua13LuaFileConfigC2ERKN6Common6StringES4_ = Module['__ZN3Lua13LuaFileConfigC2ERKN6Common6StringES4_'] = wasmExports['_ZN3Lua13LuaFileConfigC2ERKN6Common6StringES4_'];
@@ -100403,12 +100427,12 @@ function assignWasmExports(wasmExports) {
   __ZTT11OSystem_SDL = Module['__ZTT11OSystem_SDL'] = wasmExports['_ZTT11OSystem_SDL'].value;
   __ZTI18SdlGraphicsManager = Module['__ZTI18SdlGraphicsManager'] = wasmExports['_ZTI18SdlGraphicsManager'].value;
   __ZTI15GraphicsManager = Module['__ZTI15GraphicsManager'] = wasmExports['_ZTI15GraphicsManager'].value;
-  __ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE = Module['__ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE'] = wasmExports['_ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE'].value;
-  _g_engine = Module['_g_engine'] = wasmExports['g_engine'].value;
   __ZTI24OpenGLSdlGraphicsManager = Module['__ZTI24OpenGLSdlGraphicsManager'] = wasmExports['_ZTI24OpenGLSdlGraphicsManager'].value;
+  __ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE = Module['__ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE'] = wasmExports['_ZN6Common9SingletonIN6OpenGL7ContextEE10_singletonE'].value;
   __ZN6Common13ConfigManager14kSessionDomainE = Module['__ZN6Common13ConfigManager14kSessionDomainE'] = wasmExports['_ZN6Common13ConfigManager14kSessionDomainE'].value;
   __ZN6Common9SingletonI13ScalerManagerE10_singletonE = Module['__ZN6Common9SingletonI13ScalerManagerE10_singletonE'] = wasmExports['_ZN6Common9SingletonI13ScalerManagerE10_singletonE'].value;
   __ZTV13ScalerManager = Module['__ZTV13ScalerManager'] = wasmExports['_ZTV13ScalerManager'].value;
+  __ZN6Common13ConfigManager18kApplicationDomainE = Module['__ZN6Common13ConfigManager18kApplicationDomainE'] = wasmExports['_ZN6Common13ConfigManager18kApplicationDomainE'].value;
   __ZTVN6Common25CompositeHardwareInputSetE = Module['__ZTVN6Common25CompositeHardwareInputSetE'] = wasmExports['_ZTVN6Common25CompositeHardwareInputSetE'].value;
   __ZN6Common19defaultMouseButtonsE = Module['__ZN6Common19defaultMouseButtonsE'] = wasmExports['_ZN6Common19defaultMouseButtonsE'].value;
   __ZN6Common16defaultModifiersE = Module['__ZN6Common16defaultModifiersE'] = wasmExports['_ZN6Common16defaultModifiersE'].value;
@@ -100485,7 +100509,6 @@ function assignWasmExports(wasmExports) {
   __ZTS17NullMutexInternal = Module['__ZTS17NullMutexInternal'] = wasmExports['_ZTS17NullMutexInternal'].value;
   __ZTIN6Common13MutexInternalE = Module['__ZTIN6Common13MutexInternalE'] = wasmExports['_ZTIN6Common13MutexInternalE'].value;
   __ZTSN6Common13MutexInternalE = Module['__ZTSN6Common13MutexInternalE'] = wasmExports['_ZTSN6Common13MutexInternalE'].value;
-  __ZN6Common13ConfigManager18kApplicationDomainE = Module['__ZN6Common13ConfigManager18kApplicationDomainE'] = wasmExports['_ZN6Common13ConfigManager18kApplicationDomainE'].value;
   _gScummVMVersion = Module['_gScummVMVersion'] = wasmExports['gScummVMVersion'].value;
   _gDebugLevel = Module['_gDebugLevel'] = wasmExports['gDebugLevel'].value;
   _gDebugChannelsOnly = Module['_gDebugChannelsOnly'] = wasmExports['gDebugChannelsOnly'].value;
@@ -100592,6 +100615,7 @@ function assignWasmExports(wasmExports) {
   __ZTV14MainMenuDialog = Module['__ZTV14MainMenuDialog'] = wasmExports['_ZTV14MainMenuDialog'].value;
   __ZN3GUI11ThemeEngine15kImageLogoSmallE = Module['__ZN3GUI11ThemeEngine15kImageLogoSmallE'] = wasmExports['_ZN3GUI11ThemeEngine15kImageLogoSmallE'].value;
   __ZTVN3GUI12ConfigDialogE = Module['__ZTVN3GUI12ConfigDialogE'] = wasmExports['_ZTVN3GUI12ConfigDialogE'].value;
+  _g_engine = Module['_g_engine'] = wasmExports['g_engine'].value;
   __ZTVN3GUI21ExtraGuiOptionsWidgetE = Module['__ZTVN3GUI21ExtraGuiOptionsWidgetE'] = wasmExports['_ZTVN3GUI21ExtraGuiOptionsWidgetE'].value;
   __ZTI14MainMenuDialog = Module['__ZTI14MainMenuDialog'] = wasmExports['_ZTI14MainMenuDialog'].value;
   __ZTIN3GUI12ConfigDialogE = Module['__ZTIN3GUI12ConfigDialogE'] = wasmExports['_ZTIN3GUI12ConfigDialogE'].value;

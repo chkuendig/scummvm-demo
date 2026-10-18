@@ -1,7 +1,7 @@
 {
-  "demoCommit": "4babbd680a05a724de2ebf20ee317cd53742b9bf",
-  "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-  "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+  "demoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
+  "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+  "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
   "branches": [
     {
       "name": "upstream/emscripten-runtime",
@@ -13,7 +13,7 @@
     },
     {
       "name": "upstream/touch-controls",
-      "head": "966c6c8f3e5219fad2db07103eb14b606ff64e91"
+      "head": "a96d92559e76a7fefe2953b60547510716b327be"
     },
     {
       "name": "upstream/hpl1-webgl",

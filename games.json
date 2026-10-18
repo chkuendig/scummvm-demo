@@ -646,6 +646,13 @@
     "platform": "Windows"
   },
   {
+    "relative_path": "dm-amiga-demo-en",
+    "id": "dm:dm",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/dm/dm-amiga-demo-en.zip",
+    "platform": "Amiga"
+  },
+  {
     "relative_path": "drascula-1.0",
     "id": "drascula:drascula",
     "featured": {
@@ -1661,6 +1668,26 @@
     "id": "m4:riddle",
     "description": "DOS Demo",
     "download_url": "https://downloads.scummvm.org/frs/demos/m4/riddle-dos-demo-en.zip",
+    "platform": "DOS"
+  },
+  {
+    "relative_path": "macs2-sis-amiga-demo-de",
+    "id": "macs2:sis",
+    "description": "Amiga Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/macs2/macs2-sis-amiga-demo-de.zip",
+    "languages": [
+      "de"
+    ],
+    "platform": "Amiga"
+  },
+  {
+    "relative_path": "macs2-sis-demo-de",
+    "id": "macs2:sis",
+    "description": "DOS Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/macs2/macs2-sis-demo-de.zip",
+    "languages": [
+      "de"
+    ],
     "platform": "DOS"
   },
   {

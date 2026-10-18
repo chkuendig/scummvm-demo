@@ -9,7 +9,7 @@
 	<engine id="alg" name="ALG" alt_name="American Laser Games" enabled="TRUE"/>
 	<engine id="asylum" name="Asylum" alt_name="Sanitarium" enabled="TRUE"/>
 	<engine id="alcachofa" name="Alcachofa" alt_name="" enabled="TRUE"/>
-	<engine id="avalanche" name="Avalanche" alt_name="" enabled="FALSE"/>
+	<engine id="avalanche" name="Avalanche" alt_name="" enabled="TRUE"/>
 	<engine id="awe" name="Another World" alt_name="" enabled="TRUE"/>
 	<engine id="bagel" name="BAGEL" alt_name="Boffo Adventure Game Engine and Libraries" enabled="TRUE"/>
 	<engine id="bbvs" name="Beavis and Butt-Head in Virtual Stupidity" alt_name="" enabled="TRUE"/>
@@ -23,6 +23,7 @@
 	<engine id="cine" name="Cinématique" alt_name="" enabled="TRUE"/>
 	<engine id="comfy" name="Comfy" alt_name="" enabled="FALSE"/>
 	<engine id="composer" name="Magic Composer" alt_name="" enabled="TRUE"/>
+	<engine id="colony" name="The Colony" alt_name="" enabled="TRUE"/>
 	<engine id="crab" name="CRAB" alt_name="" enabled="TRUE"/>
 	<engine id="cruise" name="CruisE" alt_name="" enabled="TRUE"/>
 	<engine id="cryo" name="Cryo" alt_name="" enabled="FALSE"/>
@@ -30,7 +31,7 @@
 	<engine id="darkseed" name="Darkseed" alt_name="" enabled="TRUE"/>
 	<engine id="dgds" name="DGDS" alt_name="Dynamix Game Development System" enabled="TRUE"/>
 	<engine id="director" name="Macromedia Director" alt_name="MacroMind Director" enabled="TRUE"/>
-	<engine id="dm" name="Dungeon Master" alt_name="" enabled="FALSE"/>
+	<engine id="dm" name="Dungeon Master" alt_name="" enabled="TRUE"/>
 	<engine id="draci" name="Draci" alt_name="Dračí Historie" enabled="TRUE"/>
 	<engine id="dragons" name="Blazing Dragons" alt_name="" enabled="TRUE"/>
 	<engine id="drascula" name="Drascula" alt_name="" enabled="TRUE"/>
