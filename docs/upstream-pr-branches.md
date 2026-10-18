@@ -1,6 +1,8 @@
 # ScummVM upstream branch set
 
-Prepared from the deployed integration and rebased on ScummVM upstream master `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5` on 2026-10-05. The five branches live in the `scummvm/` submodule. They are prepared locally; no upstream PRs have been opened.
+The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. The demo submodule now points to that integration; it has not been built or deployed.
+
+The five source branches live in the `scummvm/` submodule. The original branch set was prepared from the deployed integration on upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5` on 2026-10-05. No upstream PRs have been opened.
 
 ## Suggested PR order
 
@@ -8,11 +10,11 @@ Prepared from the deployed integration and rebased on ScummVM upstream master `7
 | --- | --- | --- | --- |
 | 1 | `upstream/emscripten-runtime` | `upstream/master` | Shared Emscripten runtime, streamed VFS, SDK update, Asyncify configuration and loading progress |
 | 2 | `upstream/cloud-streaming` | runtime | Range downloads and cloud filesystem streaming |
-| 3 | `upstream/touch-controls` | runtime | Touch presets, on-screen controls and controller switching |
+| 3 | `upstream/touch-controls` | `upstream/master` | Touch presets, on-screen controls and controller switching |
 | 4 | `upstream/hpl1-webgl` | runtime | HPL1 WebGL2 rendering, shaders and controller-friendly menus |
 | 5 | `upstream/emscripten-recorder` | runtime | Browser event recording, replay and timer integration |
 
-Runtime is the foundation. The other four branches depend on it and can be reviewed independently once it lands. Branch heads, commit lists, file counts and exact bases are recorded in [upstream-pr-branches.json](upstream-pr-branches.json).
+Runtime is the foundation for cloud streaming, HPL1 WebGL and the recorder. Touch controls now has an independent upstream base. The demo contains rebased copies of the original branch commits plus the touch-controls cleanup; the source branches retain their own histories. Branch heads, commit lists, file counts and exact bases are recorded in [upstream-pr-branches.json](upstream-pr-branches.json).
 
 ## Runtime details
 
@@ -28,7 +30,9 @@ The repository's [AI-GUIDELINES.md](../scummvm/AI-GUIDELINES.md) requires commit
 
 ## Validation and deployment
 
-The refreshed integration is `demo/upstream-integration`, based on the master commit above, and combines all five branches. `git diff --check`, shell syntax checks, the Asyncify audio-guard fixture test, JavaScript syntax/logic checks, and verification of the replacement source archive passed. The [final build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206) succeeded. Live build-info matches demo commit `cae236857f07589dece40df3c606fad6e798ada9`, integration `de7b4e39851d0111ec7e3f1165fd9c2997ee9419`, upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`, all five current branch tips, and `eventRecorder=true`.
+For the 2026-10-19 source refresh, all five touch-policy tests passed. SDL2, SDL3 and GUI syntax checks passed on the combined integration, as did Emscripten build-script shell syntax and theme-archive/source consistency. Seven focused SDL3 hotplug cases passed on the touch-controls branch. No full build or physical-device tests were run, and the pin update skips CI. The deployment evidence below records the previous integration.
+
+The previous deployed integration was `demo/upstream-integration` at `de7b4e39851d0111ec7e3f1165fd9c2997ee9419`, based on `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`, combining all five branches. `git diff --check`, shell syntax checks, the Asyncify audio-guard fixture test, JavaScript syntax/logic checks, and verification of the replacement source archive passed. The [final build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206) succeeded. Live build-info matches demo commit `cae236857f07589dece40df3c606fad6e798ada9`, integration `de7b4e39851d0111ec7e3f1165fd9c2997ee9419`, upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`, all five then-current branch tips, and `eventRecorder=true`.
 
 The Add Game trap was not reproduced organically in live browser testing; browsing into `/data` produced no JavaScript exceptions or failed requests. A stress scan did produce an HTTP 429 and fatal dialog; its proposed transient-request retry is intentionally excluded from this deployment until it is compiled and exercised. The golden event-recorder replay passed against the final live integration: it loaded `ftdemo.r00`, fetched the Full Throttle demo files, and passed one framebuffer MD5 check with no mismatches, page errors, or failed requests. The dedicated event-recorder workspace remains available for follow-up investigations.
 
@@ -39,7 +43,7 @@ No iOS build, cloud-account gameplay test, physical touch/controller test, or HP
 ```sh
 git -C scummvm diff upstream/master...upstream/emscripten-runtime
 git -C scummvm diff upstream/emscripten-runtime...upstream/cloud-streaming
-git -C scummvm diff upstream/emscripten-runtime...upstream/touch-controls
+git -C scummvm diff upstream/master...upstream/touch-controls
 git -C scummvm diff upstream/emscripten-runtime...upstream/hpl1-webgl
 git -C scummvm diff upstream/emscripten-runtime...upstream/emscripten-recorder
 ```

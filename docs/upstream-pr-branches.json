@@ -12,7 +12,7 @@
     "htmlSha256": "2ab613330c16c07ee7913684025665aabbcdc6e501b4839c1dd1b6498901eb36",
     "sentryRelease": "194fa8f51e44"
   },
-  "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+  "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
   "branches": [
     {
       "order": 1,
@@ -87,18 +87,19 @@
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "966c6c8f3e5219fad2db07103eb14b606ff64e91",
-      "reviewBase": "upstream/emscripten-runtime",
-      "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
-      "commits": 5,
-      "files": 46,
-      "diff": "46 files changed, 2575 insertions(+), 217 deletions(-)",
+      "head": "a96d92559e76a7fefe2953b60547510716b327be",
+      "reviewBase": "upstream/master",
+      "base": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+      "commits": 6,
+      "files": 66,
+      "diff": "66 files changed, 3264 insertions(+), 566 deletions(-)",
       "ownCommits": [
-        "58bb53adc7ac6d0ac1e32bfdfba994bae427e73a",
-        "2534d58d0409280c4dab143651e94c9ecd672137",
-        "8759327f335e3ae3af6a0c7dcbb2093b3e63d18c",
-        "1b568102fb3384e1e6007ba8bbff385ea0266dff",
-        "966c6c8f3e5219fad2db07103eb14b606ff64e91"
+        "8eeb337972b8e6284bdef38ddb9de01404c725e4",
+        "a739ee3872d367c3ee3f221ef01b241ef60c0385",
+        "8ef9f26a094059b0d8554d186449c1431c9ecd14",
+        "1ff03168795e6be0aa5da37e38087eb1343d0e63",
+        "d71d0cd8c5ac72f62fd4b5a9c9b52d205dc47892",
+        "a96d92559e76a7fefe2953b60547510716b327be"
       ]
     },
     {
@@ -1509,6 +1510,28 @@
       "cause": "Cloudflare returned HTTP 403 challenge for /__cdn/index.json",
       "recordingLoaded": false,
       "distinctFromLiveReplay": true
+    },
+    "touchControlsRefresh": {
+      "date": "2026-10-19",
+      "sourceBranch": "upstream/touch-controls",
+      "sourceCommit": "a96d92559e76a7fefe2953b60547510716b327be",
+      "integrationCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
+      "previousIntegrationCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
+      "rebaseMode": "--rebase-merges",
+      "touchPolicyTests": "5 passed",
+      "sdl3HotplugTests": "7 focused cases passed on the source branch",
+      "integrationSyntaxChecks": [
+        "SDL2 backend, events, touch controls and OpenGL graphics",
+        "SDL3 backend, events, touch controls and OpenGL graphics",
+        "GUI options and per-game dialog",
+        "Emscripten build shell syntax"
+      ],
+      "themes": "All four theme archives match their sources; ZIP integrity passed",
+      "diffCheck": "passed",
+      "fullBuild": "not run",
+      "physicalDeviceTests": "not run",
+      "deployed": false
     }
   },
   "publication": {
@@ -1529,8 +1552,8 @@
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "966c6c8f3e5219fad2db07103eb14b606ff64e91",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/touch-controls"
+        "head": "a96d92559e76a7fefe2953b60547510716b327be",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/71cb05b1c03aa6bdcd34f78c20cef12c10067ba5...upstream/touch-controls"
       },
       {
         "name": "upstream/hpl1-webgl",
@@ -1549,7 +1572,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
+      "head": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1584,13 +1607,15 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-    "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+    "head": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+    "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": true,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Deployed and live-verified 2026-10-05",
+    "status": "Source rebased and touch-controls cleanup cherry-picked 2026-10-19; not deployed",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
-    "previousHeadTag": "demo/integration-2026-09-13"
-  }
+    "previousHeadTag": "demo/integration-2026-09-13",
+    "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419"
+  },
+  "updated": "2026-10-19"
 }
