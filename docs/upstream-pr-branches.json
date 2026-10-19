@@ -87,12 +87,12 @@
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "b1aeeac29935bc5f1852de0273008a738c4dc034",
+      "head": "a8668d0864ddbfc05df5572226df013688117b74",
       "reviewBase": "upstream/master",
       "base": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "commits": 7,
+      "commits": 8,
       "files": 66,
-      "diff": "66 files changed, 3173 insertions(+), 566 deletions(-)",
+      "diff": "66 files changed, 3248 insertions(+), 566 deletions(-)",
       "ownCommits": [
         "8eeb337972b8e6284bdef38ddb9de01404c725e4",
         "a739ee3872d367c3ee3f221ef01b241ef60c0385",
@@ -100,7 +100,8 @@
         "1ff03168795e6be0aa5da37e38087eb1343d0e63",
         "d71d0cd8c5ac72f62fd4b5a9c9b52d205dc47892",
         "a96d92559e76a7fefe2953b60547510716b327be",
-        "b1aeeac29935bc5f1852de0273008a738c4dc034"
+        "b1aeeac29935bc5f1852de0273008a738c4dc034",
+        "a8668d0864ddbfc05df5572226df013688117b74"
       ]
     },
     {
@@ -1678,6 +1679,36 @@
       "httpErrors": 0,
       "screenshot": "axis-grim-* screenshots and axis-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed)",
       "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a"
+    },
+    "touchMouseBehaviorRestoration": {
+      "date": "2026-10-19",
+      "sourceCommit": "a8668d0864ddbfc05df5572226df013688117b74",
+      "integrationCommit": "f392f1bf7fc7775dcf3ccb1064a440ef7f517e9e",
+      "referenceTouchCommit": "a96d92559e76a7fefe2953b60547510716b327be",
+      "referenceIntegration": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "axisConversion": "Deferred: held-position axis events did not preserve the established SDL mouse-look response",
+      "behavior": "Restored original relative-mouse generator, speed setting response, tap-to-click, indicator positions, finger ownership and cancellation; shared controller switching/detection retained",
+      "traceParity": {
+        "cases": 576,
+        "mouseEvents": 2889,
+        "exactMatch": true,
+        "sha256": "2b5a9103ddc09c4ad47ba9d9e2facb8d815bab86ad2043e15371ed7e462f30a5",
+        "coverage": [
+          "All eight speed settings",
+          "Three screen widths and three DPI scales",
+          "Slow, large and reversing motion",
+          "Stationary holds",
+          "Tap and travel threshold",
+          "Multiple fingers and cancellation",
+          "Mouse event coordinates, deltas, clicks and indicator positions"
+        ]
+      },
+      "syntaxChecks": [
+        "SDL2 touch controls passed",
+        "SDL3 touch controls passed"
+      ],
+      "diffCheck": "passed",
+      "deployed": false
     }
   },
   "publication": {
@@ -1698,7 +1729,7 @@
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "b1aeeac29935bc5f1852de0273008a738c4dc034",
+        "head": "a8668d0864ddbfc05df5572226df013688117b74",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/71cb05b1c03aa6bdcd34f78c20cef12c10067ba5...upstream/touch-controls"
       },
       {
@@ -1718,7 +1749,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
+      "head": "f392f1bf7fc7775dcf3ccb1064a440ef7f517e9e",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1753,12 +1784,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
+    "head": "f392f1bf7fc7775dcf3ccb1064a440ef7f517e9e",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "HPL1 right-stick movement-loss fix built and deployed 2026-10-19; live provenance verified",
+    "status": "Original SDL touch mouse-look behavior restored 2026-10-19; build and deployment pending",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
