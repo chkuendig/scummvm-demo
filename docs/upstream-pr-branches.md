@@ -1,6 +1,8 @@
 # ScummVM upstream branch set
 
-The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. The demo submodule points to that integration. A subsequent [manual build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) succeeded, and the live build provenance matches the pinned source.
+The current demo source pin is `ccab4f0fe3d6b4e784430884900dbd755aa0fe4a`. It includes SDL analog right-stick events (`b1aeeac29935bc5f1852de0273008a738c4dc034`) and HPL1 keymaps using shared virtual-mouse action constants (`266a6e1c4bb284c1361b3b6accde99b0f2d635ee`). Axis-range, saturation, DPI, hold, release/cancel and camera-consumer checks passed, along with SDL2/SDL3/HPL1 syntax checks. These follow-up changes have not been built or deployed; the live integration remains `a11aa5f098b2024d94c7f32cf89bc67ea4c55972`.
+
+The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. That integration was the previous demo source pin. A subsequent [manual build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) succeeded, and the live build provenance matches the pinned source.
 
 The five source branches live in the `scummvm/` submodule. The original branch set was prepared from the deployed integration on upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5` on 2026-10-05. No upstream PRs have been opened.
 

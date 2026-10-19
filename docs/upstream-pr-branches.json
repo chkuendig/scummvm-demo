@@ -87,30 +87,31 @@
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "a96d92559e76a7fefe2953b60547510716b327be",
+      "head": "b1aeeac29935bc5f1852de0273008a738c4dc034",
       "reviewBase": "upstream/master",
       "base": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "commits": 6,
+      "commits": 7,
       "files": 66,
-      "diff": "66 files changed, 3264 insertions(+), 566 deletions(-)",
+      "diff": "66 files changed, 3173 insertions(+), 566 deletions(-)",
       "ownCommits": [
         "8eeb337972b8e6284bdef38ddb9de01404c725e4",
         "a739ee3872d367c3ee3f221ef01b241ef60c0385",
         "8ef9f26a094059b0d8554d186449c1431c9ecd14",
         "1ff03168795e6be0aa5da37e38087eb1343d0e63",
         "d71d0cd8c5ac72f62fd4b5a9c9b52d205dc47892",
-        "a96d92559e76a7fefe2953b60547510716b327be"
+        "a96d92559e76a7fefe2953b60547510716b327be",
+        "b1aeeac29935bc5f1852de0273008a738c4dc034"
       ]
     },
     {
       "order": 4,
       "name": "upstream/hpl1-webgl",
-      "head": "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
+      "head": "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
       "reviewBase": "upstream/emscripten-runtime",
       "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
-      "commits": 9,
-      "files": 41,
-      "diff": "41 files changed, 3451 insertions(+), 192 deletions(-)",
+      "commits": 10,
+      "files": 42,
+      "diff": "42 files changed, 3444 insertions(+), 196 deletions(-)",
       "ownCommits": [
         "016e9756f5f337b456b3ecf3bda2a9923f5e424c",
         "2446c2b40b94db18127f441cba1dd26fd3c4a971",
@@ -120,7 +121,8 @@
         "f3ad1b77b6f55ff8f0a5df5d6a3bff9be893d077",
         "cd8e725036111f37202be46237f4ccd37fbe8995",
         "a4f48f85171a2d849dead7b23ae653a527a0b8cf",
-        "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02"
+        "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
+        "266a6e1c4bb284c1361b3b6accde99b0f2d635ee"
       ]
     },
     {
@@ -1565,6 +1567,29 @@
       },
       "screenshot": "demo-validation screenshots stored locally under .git/demo-validation (not committed)",
       "scummvmCommit": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419"
+    },
+    "sdlRightStick": {
+      "date": "2026-10-19",
+      "sourceCommit": "b1aeeac29935bc5f1852de0273008a738c4dc034",
+      "hpl1Commit": "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
+      "integrationCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
+      "behavior": "Floating right-stick X/Y axes, radial saturation, held deflection and neutral on release/cancel; no synthetic mouse clicks or relative movement",
+      "focusedChecks": [
+        "Axis sign and partial range",
+        "Diagonal saturation and knob clamp",
+        "DPI scaling",
+        "Held state and tap behavior",
+        "Finger capture and unrelated finger release",
+        "Release and global cancellation neutralize axes",
+        "Virtual mouse camera consumer holds movement and stops at neutral"
+      ],
+      "syntaxChecks": [
+        "SDL2 touch controls and event source",
+        "SDL3 touch controls and event source",
+        "HPL1 metaengine and shared virtual mouse"
+      ],
+      "diffCheck": "passed",
+      "deployed": false
     }
   },
   "publication": {
@@ -1585,13 +1610,13 @@
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "a96d92559e76a7fefe2953b60547510716b327be",
+        "head": "b1aeeac29935bc5f1852de0273008a738c4dc034",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/71cb05b1c03aa6bdcd34f78c20cef12c10067ba5...upstream/touch-controls"
       },
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
+        "head": "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/hpl1-webgl"
       },
       {
@@ -1605,7 +1630,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "head": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1640,17 +1665,18 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+    "head": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Built, deployed and verified with an emulated touchscreen 2026-10-19",
+    "status": "SDL analog right-stick and HPL1 keymap updates integrated 2026-10-19; not yet built or deployed",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
     "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016",
-    "deployedDemoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032"
+    "deployedDemoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
+    "deployedScummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972"
   },
   "updated": "2026-10-19"
 }
