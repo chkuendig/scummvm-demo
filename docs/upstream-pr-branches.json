@@ -87,12 +87,12 @@
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "c17a821481e68377d78b02c30140ee5d0fad37ce",
+      "head": "a36875d34b2697caa92ff464ebd894953be8ac88",
       "reviewBase": "upstream/master",
       "base": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "commits": 10,
-      "files": 75,
-      "diff": "75 files changed, 3554 insertions(+), 585 deletions(-)",
+      "commits": 11,
+      "files": 76,
+      "diff": "76 files changed, 3674 insertions(+), 586 deletions(-)",
       "ownCommits": [
         "8eeb337972b8e6284bdef38ddb9de01404c725e4",
         "a739ee3872d367c3ee3f221ef01b241ef60c0385",
@@ -103,18 +103,19 @@
         "b1aeeac29935bc5f1852de0273008a738c4dc034",
         "a8668d0864ddbfc05df5572226df013688117b74",
         "02703552e51762b2f48cb93342765527406b7027",
-        "c17a821481e68377d78b02c30140ee5d0fad37ce"
+        "c17a821481e68377d78b02c30140ee5d0fad37ce",
+        "a36875d34b2697caa92ff464ebd894953be8ac88"
       ]
     },
     {
       "order": 4,
       "name": "upstream/hpl1-webgl",
-      "head": "d157de7606ab9e907b13ba5dc414ec6617ee110a",
+      "head": "4905418de9ac8930c934cab9ccdb575b596b4b86",
       "reviewBase": "upstream/emscripten-runtime",
       "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
-      "commits": 12,
-      "files": 42,
-      "diff": "42 files changed, 3444 insertions(+), 196 deletions(-)",
+      "commits": 14,
+      "files": 60,
+      "diff": "60 files changed, 4301 insertions(+), 217 deletions(-)",
       "ownCommits": [
         "016e9756f5f337b456b3ecf3bda2a9923f5e424c",
         "2446c2b40b94db18127f441cba1dd26fd3c4a971",
@@ -127,7 +128,9 @@
         "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
         "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
         "f323d26895b2e519795277914784fb8b0424f7d9",
-        "d157de7606ab9e907b13ba5dc414ec6617ee110a"
+        "d157de7606ab9e907b13ba5dc414ec6617ee110a",
+        "47a98c7bbe8d42578efcd5531ad3337a548fff3a",
+        "4905418de9ac8930c934cab9ccdb575b596b4b86"
       ]
     },
     {
@@ -1768,11 +1771,11 @@
       "scummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1"
     },
     "touchAxisMouseParity": {
-      "sourceTouchCommit": "c17a821481e68377d78b02c30140ee5d0fad37ce",
-      "integrationCommit": "5d1f77a50663947424f746c18694b87c405ffedf",
+      "sourceTouchCommit": "a36875d34b2697caa92ff464ebd894953be8ac88",
+      "integrationCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
       "behavior": "Normal right-stick positions remain available to native joystick consumers. Optional per-axis mouse-emulation deltas retain the pre-conversion SDL response and are transformed through configured virtual-mouse bindings. X/Y are emitted as one mouse event with unchanged absolute cursor position; no velocity/deadzone/warp is applied to this relative input.",
       "nativeSuite": {
-        "tests": 417,
+        "tests": 421,
         "status": "passed",
         "mappingRegressions": [
           "paired axes",
@@ -1822,6 +1825,47 @@
       "fullBuild": "pending",
       "deployed": false,
       "physicalDeviceTests": "not run"
+    },
+    "hpl1NativeCamera": {
+      "sourceTouchCommit": "a36875d34b2697caa92ff464ebd894953be8ac88",
+      "sourceHpl1Commit": "4905418de9ac8930c934cab9ccdb575b596b4b86",
+      "integrationCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
+      "behavior": "HPL1 look bindings use engine axis actions. Held ordinary controller axes drive frame-time-based camera rotation with a radial deadzone. Optional SDL relative data keeps the established touch response without synthesizing camera mouse events. Existing player sensitivity, invert-Y and interaction handling apply. Inventory and related menus retain stick cursor motion.",
+      "dependencies": "The HPL1 branch imports common axis-event, keymapper and recorder support from the touch branch. The demo cherry-picks the shared feature once and the native HPL1 engine change separately.",
+      "nativeSuite": {
+        "tests": 429,
+        "hpl1Tests": 8,
+        "status": "passed",
+        "coverage": "held and neutral axes; opposite-half resets; zero/deadzone/diagonal clamp; 30/60/120fps rotation; same-frame release; batched relative motion; mouse-event ordering; partial mappings; focus/input-change reset"
+      },
+      "endToEndParity": {
+        "traces": 1728,
+        "nativeAxisAndButtonEvents": 33264,
+        "emulatedCameraMouseMoves": 0,
+        "status": "exact camera input match",
+        "sha256": "45d05f51177098c8387b73943c6573feb4455c00d2998b4233568d9be5c41477",
+        "coverage": "speed 0..7; widths 640/1280/2400; DPI scales 1/2/4; HPL input batches 1/2/4; small/large/reverse moves; stationary holds; taps and tap threshold; cancellation and finger capture",
+        "scope": "Production SDL look methods, production keymapper motion methods with native HPL action bindings, and production HPL1 Gamepad and Mouse consumers. Compared with the pre-conversion camera trace; separate full-suite tests exercise actual keymap lookup."
+      },
+      "recordingCompatibility": {
+        "version": 3,
+        "roundTrips": 200,
+        "version2Cases": 100,
+        "status": "passed",
+        "scope": "Actual recorder read/write methods for raw joystick and mapped engine axis events"
+      },
+      "syntaxChecks": [
+        "HPL1 input, gamepad, low-level input, button handler and metaengine passed",
+        "Recorder-enabled common/recorderfile.cpp passed"
+      ],
+      "physicalDeviceTests": "not run",
+      "fullBuild": "pending",
+      "deployed": false,
+      "cancelledPreliminaryBuild": {
+        "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39315875012",
+        "deployed": false,
+        "reason": "Cancelled before deployment to implement native HPL1 camera handling"
+      }
     }
   },
   "publication": {
@@ -1842,13 +1886,13 @@
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "c17a821481e68377d78b02c30140ee5d0fad37ce",
+        "head": "a36875d34b2697caa92ff464ebd894953be8ac88",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/71cb05b1c03aa6bdcd34f78c20cef12c10067ba5...upstream/touch-controls"
       },
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "d157de7606ab9e907b13ba5dc414ec6617ee110a",
+        "head": "4905418de9ac8930c934cab9ccdb575b596b4b86",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/hpl1-webgl"
       },
       {
@@ -1862,7 +1906,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "5d1f77a50663947424f746c18694b87c405ffedf",
+      "head": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1897,12 +1941,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "5d1f77a50663947424f746c18694b87c405ffedf",
+    "head": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Joystick-axis conversion with the established SDL mouse-emulation response; native tests passed, build and deployment pending",
+    "status": "Native HPL1 camera actions and standard SDL joystick axes; previous touch response preserved, build and deployment pending",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
