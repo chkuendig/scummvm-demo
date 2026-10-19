@@ -107,12 +107,12 @@
     {
       "order": 4,
       "name": "upstream/hpl1-webgl",
-      "head": "f323d26895b2e519795277914784fb8b0424f7d9",
+      "head": "d157de7606ab9e907b13ba5dc414ec6617ee110a",
       "reviewBase": "upstream/emscripten-runtime",
       "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
-      "commits": 11,
-      "files": 43,
-      "diff": "43 files changed, 3447 insertions(+), 197 deletions(-)",
+      "commits": 12,
+      "files": 42,
+      "diff": "42 files changed, 3444 insertions(+), 196 deletions(-)",
       "ownCommits": [
         "016e9756f5f337b456b3ecf3bda2a9923f5e424c",
         "2446c2b40b94db18127f441cba1dd26fd3c4a971",
@@ -124,7 +124,8 @@
         "a4f48f85171a2d849dead7b23ae653a527a0b8cf",
         "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
         "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
-        "f323d26895b2e519795277914784fb8b0424f7d9"
+        "f323d26895b2e519795277914784fb8b0424f7d9",
+        "d157de7606ab9e907b13ba5dc414ec6617ee110a"
       ]
     },
     {
@@ -1648,7 +1649,8 @@
       "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39249588450",
       "liveProvenance": "matches",
       "physicalDeviceTests": "not run",
-      "browserSmoke": "Penumbra setup/main menus and intro rendered; on-screen confirm activated menu choices; no page errors or failed requests. First-level loading did not finish within the bounded browser check, so in-game camera response was not verified there."
+      "browserSmoke": "Penumbra setup/main menus and intro rendered; on-screen confirm activated menu choices; no page errors or failed requests. First-level loading did not finish within the bounded browser check, so in-game camera response was not verified there.",
+      "supersededByRestoration": "d157de7606ab9e907b13ba5dc414ec6617ee110a"
     },
     "previousSuccessfulDeploymentBeforeHpl1MouseMotion": {
       "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935",
@@ -1683,7 +1685,7 @@
     "touchMouseBehaviorRestoration": {
       "date": "2026-10-19",
       "sourceCommit": "a8668d0864ddbfc05df5572226df013688117b74",
-      "integrationCommit": "f392f1bf7fc7775dcf3ccb1064a440ef7f517e9e",
+      "integrationCommit": "681a3f02263f4f28e181587d26eac2b52e674787",
       "referenceTouchCommit": "a96d92559e76a7fefe2953b60547510716b327be",
       "referenceIntegration": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
       "axisConversion": "Deferred: held-position axis events did not preserve the established SDL mouse-look response",
@@ -1708,7 +1710,25 @@
         "SDL3 touch controls passed"
       ],
       "diffCheck": "passed",
-      "deployed": false
+      "deployed": false,
+      "hpl1SourceCommit": "d157de7606ab9e907b13ba5dc414ec6617ee110a",
+      "endToEndParity": {
+        "cases": 1728,
+        "mouseEvents": 8667,
+        "eventsPerInputUpdate": [
+          1,
+          2,
+          4
+        ],
+        "exactMatch": true,
+        "sha256": "d68b594238eced44264dc72fdcbb6a2625b8e3991529458e6784d0e0213bed6c",
+        "scope": "Original/restored actual SDL input generator and actual HPL1 mouse consumer; event/drawing traces and camera-consumed relative deltas match exactly",
+        "caughtMismatch": "Accumulation workaround changed a batched camera delta from (1,0) to (2,1); reverted the workaround to restore full-path parity"
+      },
+      "cancelledPreliminaryBuild": {
+        "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39305369988",
+        "reason": "Cancelled before deployment to restore original HPL1 event consumption after end-to-end parity check found a difference"
+      }
     }
   },
   "publication": {
@@ -1735,7 +1755,7 @@
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "f323d26895b2e519795277914784fb8b0424f7d9",
+        "head": "d157de7606ab9e907b13ba5dc414ec6617ee110a",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/hpl1-webgl"
       },
       {
@@ -1749,7 +1769,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "f392f1bf7fc7775dcf3ccb1064a440ef7f517e9e",
+      "head": "681a3f02263f4f28e181587d26eac2b52e674787",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1784,7 +1804,7 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "f392f1bf7fc7775dcf3ccb1064a440ef7f517e9e",
+    "head": "681a3f02263f4f28e181587d26eac2b52e674787",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
