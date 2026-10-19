@@ -33934,8 +33934,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN13TouchControls7keyDownEN6Common7KeyCodeE,
   __ZN13TouchControls5keyUpEN6Common7KeyCodeE,
   __ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs,
-  __ZN13TouchControls13mouseRelativeEii,
-  __ZN13TouchControls10mouseClickEv,
   __ZN13TouchControls8mainMenuEv,
   __ZNK13TouchControls9auxCenterEiiRiS0_,
   __ZNK13TouchControls16drawSysHighlightEhRKN6Common4RectEii,
@@ -33957,8 +33955,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN13TouchControls13FunctionStart8isInsideEii,
   __ZN13TouchControls13FunctionStart5touchEii11TouchAction,
   __ZN13TouchControls13FunctionStart4drawEhh,
-  __ZN13TouchControls12FunctionLook5touchEii11TouchAction,
-  __ZN13TouchControls12FunctionLook4drawEhh,
+  __ZN13TouchControls18FunctionRightStick5touchEii11TouchAction,
+  __ZN13TouchControls18FunctionRightStick4drawEhh,
   __ZN13TouchControls12FunctionDpad10resetStateEv,
   __ZN13TouchControls12FunctionDpadD0Ev,
   __ZN13TouchControls15FunctionScummVM10resetStateEv,
@@ -33969,10 +33967,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN13TouchControls16FunctionShoulderD0Ev,
   __ZN13TouchControls13FunctionStart10resetStateEv,
   __ZN13TouchControls13FunctionStartD0Ev,
-  __ZN13TouchControls12FunctionLook8isInsideEii,
-  __ZN13TouchControls12FunctionLook10resetStateEv,
+  __ZN13TouchControls18FunctionRightStick8isInsideEii,
+  __ZN13TouchControls18FunctionRightStick10resetStateEv,
   __ZN13TouchControls8FunctionD2Ev,
-  __ZN13TouchControls12FunctionLookD0Ev,
+  __ZN13TouchControls18FunctionRightStickD0Ev,
   __ZN13OSystem_POSIX4initEv,
   __ZTv0_n16_N13OSystem_POSIX4initEv,
   __ZN13OSystem_POSIX11initBackendEv,
@@ -63502,7 +63500,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTVN13TouchControls16FunctionShoulderE,
   __ZTVN13TouchControls13FunctionStartE,
   __ZTVN13TouchControls15FunctionScummVME,
-  __ZTVN13TouchControls12FunctionLookE,
+  __ZTVN13TouchControls18FunctionRightStickE,
   __ZTIN13TouchControls12FunctionDpadE,
   __ZTSN13TouchControls12FunctionDpadE,
   __ZTIN13TouchControls8FunctionE,
@@ -63515,8 +63513,8 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTSN13TouchControls16FunctionShoulderE,
   __ZTIN13TouchControls13FunctionStartE,
   __ZTSN13TouchControls13FunctionStartE,
-  __ZTIN13TouchControls12FunctionLookE,
-  __ZTSN13TouchControls12FunctionLookE,
+  __ZTIN13TouchControls18FunctionRightStickE,
+  __ZTSN13TouchControls18FunctionRightStickE,
   __ZTV22POSIXFilesystemFactory,
   __ZTT13OSystem_POSIX,
   __ZTV13OSystem_POSIX,
@@ -70899,8 +70897,6 @@ function assignWasmExports(wasmExports) {
   __ZN13TouchControls7keyDownEN6Common7KeyCodeE = Module['__ZN13TouchControls7keyDownEN6Common7KeyCodeE'] = wasmExports['_ZN13TouchControls7keyDownEN6Common7KeyCodeE'];
   __ZN13TouchControls5keyUpEN6Common7KeyCodeE = Module['__ZN13TouchControls5keyUpEN6Common7KeyCodeE'] = wasmExports['_ZN13TouchControls5keyUpEN6Common7KeyCodeE'];
   __ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs = Module['__ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs'] = wasmExports['_ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs'];
-  __ZN13TouchControls13mouseRelativeEii = Module['__ZN13TouchControls13mouseRelativeEii'] = wasmExports['_ZN13TouchControls13mouseRelativeEii'];
-  __ZN13TouchControls10mouseClickEv = Module['__ZN13TouchControls10mouseClickEv'] = wasmExports['_ZN13TouchControls10mouseClickEv'];
   __ZN13TouchControls8mainMenuEv = Module['__ZN13TouchControls8mainMenuEv'] = wasmExports['_ZN13TouchControls8mainMenuEv'];
   __ZNK13TouchControls9auxCenterEiiRiS0_ = Module['__ZNK13TouchControls9auxCenterEiiRiS0_'] = wasmExports['_ZNK13TouchControls9auxCenterEiiRiS0_'];
   __ZNK13TouchControls16drawSysHighlightEhRKN6Common4RectEii = Module['__ZNK13TouchControls16drawSysHighlightEhRKN6Common4RectEii'] = wasmExports['_ZNK13TouchControls16drawSysHighlightEhRKN6Common4RectEii'];
@@ -70922,8 +70918,8 @@ function assignWasmExports(wasmExports) {
   __ZN13TouchControls13FunctionStart8isInsideEii = Module['__ZN13TouchControls13FunctionStart8isInsideEii'] = wasmExports['_ZN13TouchControls13FunctionStart8isInsideEii'];
   __ZN13TouchControls13FunctionStart5touchEii11TouchAction = Module['__ZN13TouchControls13FunctionStart5touchEii11TouchAction'] = wasmExports['_ZN13TouchControls13FunctionStart5touchEii11TouchAction'];
   __ZN13TouchControls13FunctionStart4drawEhh = Module['__ZN13TouchControls13FunctionStart4drawEhh'] = wasmExports['_ZN13TouchControls13FunctionStart4drawEhh'];
-  __ZN13TouchControls12FunctionLook5touchEii11TouchAction = Module['__ZN13TouchControls12FunctionLook5touchEii11TouchAction'] = wasmExports['_ZN13TouchControls12FunctionLook5touchEii11TouchAction'];
-  __ZN13TouchControls12FunctionLook4drawEhh = Module['__ZN13TouchControls12FunctionLook4drawEhh'] = wasmExports['_ZN13TouchControls12FunctionLook4drawEhh'];
+  __ZN13TouchControls18FunctionRightStick5touchEii11TouchAction = Module['__ZN13TouchControls18FunctionRightStick5touchEii11TouchAction'] = wasmExports['_ZN13TouchControls18FunctionRightStick5touchEii11TouchAction'];
+  __ZN13TouchControls18FunctionRightStick4drawEhh = Module['__ZN13TouchControls18FunctionRightStick4drawEhh'] = wasmExports['_ZN13TouchControls18FunctionRightStick4drawEhh'];
   __ZN13TouchControls12FunctionDpad10resetStateEv = Module['__ZN13TouchControls12FunctionDpad10resetStateEv'] = wasmExports['_ZN13TouchControls12FunctionDpad10resetStateEv'];
   __ZN13TouchControls12FunctionDpadD0Ev = Module['__ZN13TouchControls12FunctionDpadD0Ev'] = wasmExports['_ZN13TouchControls12FunctionDpadD0Ev'];
   __ZN13TouchControls15FunctionScummVM10resetStateEv = Module['__ZN13TouchControls15FunctionScummVM10resetStateEv'] = wasmExports['_ZN13TouchControls15FunctionScummVM10resetStateEv'];
@@ -70934,10 +70930,10 @@ function assignWasmExports(wasmExports) {
   __ZN13TouchControls16FunctionShoulderD0Ev = Module['__ZN13TouchControls16FunctionShoulderD0Ev'] = wasmExports['_ZN13TouchControls16FunctionShoulderD0Ev'];
   __ZN13TouchControls13FunctionStart10resetStateEv = Module['__ZN13TouchControls13FunctionStart10resetStateEv'] = wasmExports['_ZN13TouchControls13FunctionStart10resetStateEv'];
   __ZN13TouchControls13FunctionStartD0Ev = Module['__ZN13TouchControls13FunctionStartD0Ev'] = wasmExports['_ZN13TouchControls13FunctionStartD0Ev'];
-  __ZN13TouchControls12FunctionLook8isInsideEii = Module['__ZN13TouchControls12FunctionLook8isInsideEii'] = wasmExports['_ZN13TouchControls12FunctionLook8isInsideEii'];
-  __ZN13TouchControls12FunctionLook10resetStateEv = Module['__ZN13TouchControls12FunctionLook10resetStateEv'] = wasmExports['_ZN13TouchControls12FunctionLook10resetStateEv'];
+  __ZN13TouchControls18FunctionRightStick8isInsideEii = Module['__ZN13TouchControls18FunctionRightStick8isInsideEii'] = wasmExports['_ZN13TouchControls18FunctionRightStick8isInsideEii'];
+  __ZN13TouchControls18FunctionRightStick10resetStateEv = Module['__ZN13TouchControls18FunctionRightStick10resetStateEv'] = wasmExports['_ZN13TouchControls18FunctionRightStick10resetStateEv'];
   __ZN13TouchControls8FunctionD2Ev = Module['__ZN13TouchControls8FunctionD2Ev'] = wasmExports['_ZN13TouchControls8FunctionD2Ev'];
-  __ZN13TouchControls12FunctionLookD0Ev = Module['__ZN13TouchControls12FunctionLookD0Ev'] = wasmExports['_ZN13TouchControls12FunctionLookD0Ev'];
+  __ZN13TouchControls18FunctionRightStickD0Ev = Module['__ZN13TouchControls18FunctionRightStickD0Ev'] = wasmExports['_ZN13TouchControls18FunctionRightStickD0Ev'];
   __ZN13OSystem_POSIX4initEv = Module['__ZN13OSystem_POSIX4initEv'] = wasmExports['_ZN13OSystem_POSIX4initEv'];
   __ZTv0_n16_N13OSystem_POSIX4initEv = Module['__ZTv0_n16_N13OSystem_POSIX4initEv'] = wasmExports['_ZTv0_n16_N13OSystem_POSIX4initEv'];
   __ZN13OSystem_POSIX11initBackendEv = Module['__ZN13OSystem_POSIX11initBackendEv'] = wasmExports['_ZN13OSystem_POSIX11initBackendEv'];
@@ -100467,7 +100463,7 @@ function assignWasmExports(wasmExports) {
   __ZTVN13TouchControls16FunctionShoulderE = Module['__ZTVN13TouchControls16FunctionShoulderE'] = wasmExports['_ZTVN13TouchControls16FunctionShoulderE'].value;
   __ZTVN13TouchControls13FunctionStartE = Module['__ZTVN13TouchControls13FunctionStartE'] = wasmExports['_ZTVN13TouchControls13FunctionStartE'].value;
   __ZTVN13TouchControls15FunctionScummVME = Module['__ZTVN13TouchControls15FunctionScummVME'] = wasmExports['_ZTVN13TouchControls15FunctionScummVME'].value;
-  __ZTVN13TouchControls12FunctionLookE = Module['__ZTVN13TouchControls12FunctionLookE'] = wasmExports['_ZTVN13TouchControls12FunctionLookE'].value;
+  __ZTVN13TouchControls18FunctionRightStickE = Module['__ZTVN13TouchControls18FunctionRightStickE'] = wasmExports['_ZTVN13TouchControls18FunctionRightStickE'].value;
   __ZTIN13TouchControls12FunctionDpadE = Module['__ZTIN13TouchControls12FunctionDpadE'] = wasmExports['_ZTIN13TouchControls12FunctionDpadE'].value;
   __ZTSN13TouchControls12FunctionDpadE = Module['__ZTSN13TouchControls12FunctionDpadE'] = wasmExports['_ZTSN13TouchControls12FunctionDpadE'].value;
   __ZTIN13TouchControls8FunctionE = Module['__ZTIN13TouchControls8FunctionE'] = wasmExports['_ZTIN13TouchControls8FunctionE'].value;
@@ -100480,8 +100476,8 @@ function assignWasmExports(wasmExports) {
   __ZTSN13TouchControls16FunctionShoulderE = Module['__ZTSN13TouchControls16FunctionShoulderE'] = wasmExports['_ZTSN13TouchControls16FunctionShoulderE'].value;
   __ZTIN13TouchControls13FunctionStartE = Module['__ZTIN13TouchControls13FunctionStartE'] = wasmExports['_ZTIN13TouchControls13FunctionStartE'].value;
   __ZTSN13TouchControls13FunctionStartE = Module['__ZTSN13TouchControls13FunctionStartE'] = wasmExports['_ZTSN13TouchControls13FunctionStartE'].value;
-  __ZTIN13TouchControls12FunctionLookE = Module['__ZTIN13TouchControls12FunctionLookE'] = wasmExports['_ZTIN13TouchControls12FunctionLookE'].value;
-  __ZTSN13TouchControls12FunctionLookE = Module['__ZTSN13TouchControls12FunctionLookE'] = wasmExports['_ZTSN13TouchControls12FunctionLookE'].value;
+  __ZTIN13TouchControls18FunctionRightStickE = Module['__ZTIN13TouchControls18FunctionRightStickE'] = wasmExports['_ZTIN13TouchControls18FunctionRightStickE'].value;
+  __ZTSN13TouchControls18FunctionRightStickE = Module['__ZTSN13TouchControls18FunctionRightStickE'] = wasmExports['_ZTSN13TouchControls18FunctionRightStickE'].value;
   __ZTV22POSIXFilesystemFactory = Module['__ZTV22POSIXFilesystemFactory'] = wasmExports['_ZTV22POSIXFilesystemFactory'].value;
   __ZTT13OSystem_POSIX = Module['__ZTT13OSystem_POSIX'] = wasmExports['_ZTT13OSystem_POSIX'].value;
   __ZTV13OSystem_POSIX = Module['__ZTV13OSystem_POSIX'] = wasmExports['_ZTV13OSystem_POSIX'].value;
