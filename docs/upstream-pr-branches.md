@@ -1,8 +1,8 @@
 # ScummVM upstream branch set
 
-The current demo source pin is `ccab4f0fe3d6b4e784430884900dbd755aa0fe4a`. It includes SDL analog right-stick events (`b1aeeac29935bc5f1852de0273008a738c4dc034`) and HPL1 keymaps using shared virtual-mouse action constants (`266a6e1c4bb284c1361b3b6accde99b0f2d635ee`). Axis-range, saturation, DPI, hold, release/cancel and camera-consumer checks passed, along with SDL2/SDL3/HPL1 syntax checks. These follow-up changes have not been built or deployed; the live integration remains `a11aa5f098b2024d94c7f32cf89bc67ea4c55972`.
+The current demo source pin is `ccab4f0fe3d6b4e784430884900dbd755aa0fe4a`. It includes SDL analog right-stick events (`b1aeeac29935bc5f1852de0273008a738c4dc034`) and HPL1 keymaps using shared virtual-mouse action constants (`266a6e1c4bb284c1361b3b6accde99b0f2d635ee`). Axis-range, saturation, DPI, hold, release/cancel and camera-consumer checks passed, along with SDL2/SDL3/HPL1 syntax checks. The [full build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935) succeeded from demo commit `da1dc33f17076ebbbe48e90060ce9a253dbee833`, and live build provenance matches this pin. An emulated-touchscreen browser rendered Grim Fandango, held and released the floating right stick with its knob clamped to the stick radius, and switched to touchpad mode without page errors or failed requests. Physical-device testing remains unverified.
 
-The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. That integration was the previous demo source pin. A subsequent [manual build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) succeeded, and the live build provenance matches the pinned source.
+The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. That integration was the previous demo source pin. Its [manual build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) succeeded, with matching live build provenance at the time.
 
 The five source branches live in the `scummvm/` submodule. The original branch set was prepared from the deployed integration on upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5` on 2026-10-05. No upstream PRs have been opened.
 
@@ -24,7 +24,7 @@ The runtime branch includes the browser loading-progress correction: the fill no
 
 The Emscripten dependency script now downloads a52dec 0.7.4 from Debian's original source archive and verifies its SHA-256 before extraction. The prior VideoLAN endpoint returned an Anubis challenge page to GitHub Actions. The separate libmpeg2 URL, pinned to commit `946bf4b5…`, returned a valid archive during this refresh, so it remains pinned to that source rather than substituting Debian's older 0.5.1 package.
 
-Full Asyncify imports are used for plugin builds, including release builds. The narrowed import list had omitted recorder/plugin imports. The demo enables `--enable-eventrecorder` and uses the full list.
+Full Asyncify imports are used for plugin builds, including release builds. The narrowed import list had omitted recorder/plugin imports. The current demo omits `--enable-eventrecorder`; recorder-enabled deployments below are historical.
 
 ## AI attribution
 
@@ -40,7 +40,7 @@ The previous deployed integration was `demo/upstream-integration` at `de7b4e3985
 
 The Add Game trap was not reproduced organically in live browser testing; browsing into `/data` produced no JavaScript exceptions or failed requests. A stress scan did produce an HTTP 429 and fatal dialog; its proposed transient-request retry is intentionally excluded from this deployment until it is compiled and exercised. The golden event-recorder replay passed against the final live integration: it loaded `ftdemo.r00`, fetched the Full Throttle demo files, and passed one framebuffer MD5 check with no mismatches, page errors, or failed requests. The dedicated event-recorder workspace remains available for follow-up investigations.
 
-No iOS build, cloud-account gameplay test, physical touch/controller test, or HPL1 gameplay test has been completed for this refreshed branch set. The deployment build and browser smoke will add evidence for the combined integration, not replace those platform-specific checks.
+No iOS build, cloud-account gameplay test, physical touch/controller test, or HPL1 gameplay test has been completed for this refreshed branch set. The successful deployment build and emulated-touch browser smoke validate the combined integration; those platform-specific checks remain outstanding.
 
 ## Review commands
 

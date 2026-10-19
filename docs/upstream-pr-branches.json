@@ -1454,11 +1454,11 @@
       "fix": "Runtime branch now uses Debian's original a52dec 0.7.4 tarball, verifies SHA-256 a21d724ab3b3933330194353687df82c475b5dfb997513eef4c25de6c865ec33, and extracts a52dec-0.7.4"
     },
     "latestSuccessfulDeployment": {
-      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016",
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935",
       "status": "success",
       "deployed": true,
-      "demoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
-      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "demoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
+      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
       "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
       "emsdkVersion": "6.0.11",
       "eventRecorder": false
@@ -1479,8 +1479,8 @@
       "date": "2026-10-19",
       "cacheBusted": true,
       "provenanceMatchesManifest": true,
-      "demoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
-      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "demoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
+      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
       "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
       "eventRecorder": false
     },
@@ -1492,18 +1492,17 @@
         "height": 720
       },
       "provenanceMatchesManifest": true,
-      "launcherRendered": true,
-      "menuTouchModeToggle": "passed",
       "grimGameRendered": true,
       "grimOnScreenGamepadVisible": true,
       "grimTouchpadToggle": "passed",
+      "rightStick": "Held beyond its radius; inspected clamped knob and its disappearance on release",
       "grimLaunchPath": "/data/games/grim-win-demo1-en",
       "grimDefaultLauncherEntry": "Existing default entry points to an obsolete grimdemo subfolder; game-library launch path was used for testing",
       "pageErrors": 0,
       "requestFailures": 0,
       "httpErrors": 0,
-      "screenshot": "Screenshots and JSON evidence are stored locally under .git/demo-validation (not committed)",
-      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972"
+      "screenshot": "axis-grim-* screenshots and axis-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a"
     },
     "ciReplay": {
       "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308276144",
@@ -1589,7 +1588,42 @@
         "HPL1 metaengine and shared virtual mouse"
       ],
       "diffCheck": "passed",
-      "deployed": false
+      "deployed": true,
+      "fullBuild": "passed",
+      "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935",
+      "browserSmoke": "Grim rendered with the on-screen pad; held and released the floating right stick, then switched to touchpad mode; no page errors or failed requests",
+      "physicalDeviceTests": "not run"
+    },
+    "previousSuccessfulDeploymentBeforeAnalogStick": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016",
+      "status": "success",
+      "deployed": true,
+      "demoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
+      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972",
+      "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
+      "emsdkVersion": "6.0.11",
+      "eventRecorder": false
+    },
+    "previousLiveBrowserBeforeAnalogStick": {
+      "date": "2026-10-19",
+      "browser": "Headless Chromium 1234 with SwiftShader and an emulated touchscreen",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "provenanceMatchesManifest": true,
+      "launcherRendered": true,
+      "menuTouchModeToggle": "passed",
+      "grimGameRendered": true,
+      "grimOnScreenGamepadVisible": true,
+      "grimTouchpadToggle": "passed",
+      "grimLaunchPath": "/data/games/grim-win-demo1-en",
+      "grimDefaultLauncherEntry": "Existing default entry points to an obsolete grimdemo subfolder; game-library launch path was used for testing",
+      "pageErrors": 0,
+      "requestFailures": 0,
+      "httpErrors": 0,
+      "screenshot": "Screenshots and JSON evidence are stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972"
     }
   },
   "publication": {
@@ -1670,13 +1704,13 @@
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "SDL analog right-stick and HPL1 keymap updates integrated 2026-10-19; not yet built or deployed",
+    "status": "SDL analog right-stick and HPL1 keymap updates built, deployed and browser-verified 2026-10-19",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016",
-    "deployedDemoCommit": "bbcd9c0b09ef648539d812cb9b5604610b091032",
-    "deployedScummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972"
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935",
+    "deployedDemoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
+    "deployedScummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a"
   },
   "updated": "2026-10-19"
 }
