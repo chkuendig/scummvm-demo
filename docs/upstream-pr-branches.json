@@ -131,7 +131,13 @@
         "d157de7606ab9e907b13ba5dc414ec6617ee110a",
         "47a98c7bbe8d42578efcd5531ad3337a548fff3a",
         "4905418de9ac8930c934cab9ccdb575b596b4b86"
-      ]
+      ],
+      "prerequisites": [
+        "upstream/emscripten-runtime",
+        "Shared joystick payload and engine-axis/keymapper support from upstream/touch-controls"
+      ],
+      "sharedSupportImport": "47a98c7bbe8d42578efcd5531ad3337a548fff3a",
+      "landingNote": "The shared-support import keeps this branch buildable on its runtime review base. Once the touch branch shared support is upstream, omit the duplicate import when rebasing the HPL1 series."
     },
     {
       "order": 5,
@@ -889,7 +895,7 @@
       "gui/themes/scummremastered/THEMERC"
     ],
     "integrationTree": "4fc45798a88238f6159ad61dc8b1758ff3f4863d",
-    "allBranchesMergeCleanly": true,
+    "allBranchesMergeCleanly": false,
     "allDiffChecksPass": true,
     "rawIntegration": "59e074b67ffec467082f56769a977de67863bb54",
     "rawBranches": {
@@ -1908,6 +1914,23 @@
       "httpErrors": 0,
       "screenshot": "restored-grim-*.png and restored-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed)",
       "scummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787"
+    },
+    "upstreamingBranchCheck": {
+      "date": "2026-10-19",
+      "publishedHeadsMatchManifest": true,
+      "publishedBranchDiffChecks": "all five pass",
+      "touchControlsHead": "a36875d34b2697caa92ff464ebd894953be8ac88",
+      "hpl1Head": "4905418de9ac8930c934cab9ccdb575b596b4b86",
+      "latestControlsChangesPushed": true,
+      "directTouchHplMerge": {
+        "status": "conflicts; use the reviewed demo integration resolutions",
+        "paths": [
+          "backends/keymapper/virtual-mouse.h",
+          "backends/platform/sdl/sdl.cpp"
+        ],
+        "demoIntegration": "d1905802c06d6d3e8487e9e122b2df325b3150f9"
+      },
+      "unpublishedLocalRuntimeCleanup": "ac8535226f807f66210ed552ba1db9dfbe8cd831"
     }
   },
   "publication": {
@@ -1944,7 +1967,7 @@
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/emscripten-recorder"
       }
     ],
-    "synchronizedWithLocalBranches": true,
+    "synchronizedWithLocalBranches": false,
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
@@ -1955,7 +1978,15 @@
     "previousIntegrationTag": {
       "name": "demo/integration-2026-09-13",
       "head": "915ac4310a0e0a7bcda08f8765d2abb4d9c58a8c"
-    }
+    },
+    "unpublishedLocalChanges": [
+      {
+        "name": "upstream/emscripten-runtime",
+        "publishedHead": "6d523b035c3418fef86e100edb8f94f07e99281e",
+        "localHead": "ac8535226f807f66210ed552ba1db9dfbe8cd831",
+        "scope": "Older local removal of speculative audio-guard tests and stale Asyncify tooling; separate from the deployed controls update"
+      }
+    ]
   },
   "excludedSourceCommits": [
     {

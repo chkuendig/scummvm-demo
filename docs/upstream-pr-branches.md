@@ -26,6 +26,10 @@ The five source branches live in the `scummvm/` submodule. The original branch s
 | 4 | `upstream/hpl1-webgl` | runtime | HPL1 WebGL2 rendering, shaders, native stick look and controller-friendly menus |
 | 5 | `upstream/emscripten-recorder` | runtime | Browser event recording, replay and timer integration |
 
+HPL1 native look also needs the shared joystick payload and engine-axis/keymapper support from the touch-controls branch. The HPL1 branch carries that support in `47a98c7bbe8d42578efcd5531ad3337a548fff3a` so it builds on its runtime review base. Once the shared support lands upstream, omit that duplicate import when rebasing the HPL1 series. The demo integration already includes the shared implementation once.
+
+The published branch tips match the manifest, and all five published branch diffs pass `git diff --check`. The latest controls changes are pushed on both source branches. A direct merge of the touch and HPL1 source branches still needs resolutions in `backends/keymapper/virtual-mouse.h` and `backends/platform/sdl/sdl.cpp`; the deployed demo integration contains the resolved combination. The older local runtime cleanup at `ac8535226f8` remains unpublished and is separate from this controls update.
+
 Runtime is the foundation for cloud streaming, HPL1 WebGL and the recorder. Touch controls now has an independent upstream base. The demo contains rebased copies of the original branch commits plus the touch-controls cleanup; the source branches retain their own histories. Branch heads, commit lists, file counts and exact bases are recorded in [upstream-pr-branches.json](upstream-pr-branches.json).
 
 ## Runtime details
