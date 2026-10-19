@@ -87,12 +87,12 @@
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "a8668d0864ddbfc05df5572226df013688117b74",
+      "head": "02703552e51762b2f48cb93342765527406b7027",
       "reviewBase": "upstream/master",
       "base": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "commits": 8,
-      "files": 66,
-      "diff": "66 files changed, 3248 insertions(+), 566 deletions(-)",
+      "commits": 9,
+      "files": 73,
+      "diff": "73 files changed, 3506 insertions(+), 584 deletions(-)",
       "ownCommits": [
         "8eeb337972b8e6284bdef38ddb9de01404c725e4",
         "a739ee3872d367c3ee3f221ef01b241ef60c0385",
@@ -101,7 +101,8 @@
         "d71d0cd8c5ac72f62fd4b5a9c9b52d205dc47892",
         "a96d92559e76a7fefe2953b60547510716b327be",
         "b1aeeac29935bc5f1852de0273008a738c4dc034",
-        "a8668d0864ddbfc05df5572226df013688117b74"
+        "a8668d0864ddbfc05df5572226df013688117b74",
+        "02703552e51762b2f48cb93342765527406b7027"
       ]
     },
     {
@@ -1733,7 +1734,8 @@
       "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39307181167",
       "liveProvenance": "matches",
       "physicalDeviceTests": "not run",
-      "browserSmoke": "Grim rendered with the pad and original mouse-look indicator behavior, release cleared the indicator and touch mode switched to touchpad; no page errors or failed requests. Full SDL-to-HPL1 behavior parity is covered by 1,728 native actual-code traces."
+      "browserSmoke": "Grim rendered with the pad and original mouse-look indicator behavior, release cleared the indicator and touch mode switched to touchpad; no page errors or failed requests. Full SDL-to-HPL1 behavior parity is covered by 1,728 native actual-code traces.",
+      "supersededByAxisConversion": "02703552e51762b2f48cb93342765527406b7027"
     },
     "previousSuccessfulDeploymentBeforeTouchMouseRestoration": {
       "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39249588450",
@@ -1763,6 +1765,51 @@
       "httpErrors": 0,
       "screenshot": "penumbra-*.png and penumbra-check.json stored locally under .git/demo-validation (not committed)",
       "scummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1"
+    },
+    "touchAxisMouseParity": {
+      "sourceTouchCommit": "02703552e51762b2f48cb93342765527406b7027",
+      "integrationCommit": "4cac51ee2371eda407bcf6b5ca0ba7beaeb0c4e5",
+      "behavior": "Normal right-stick positions remain available to native joystick consumers. Optional per-axis mouse-emulation deltas retain the pre-conversion SDL response and are transformed through configured virtual-mouse bindings. X/Y are emitted as one mouse event with unchanged absolute cursor position; no velocity/deadzone/warp is applied to this relative input.",
+      "nativeSuite": {
+        "tests": 416,
+        "status": "passed",
+        "mappingRegressions": [
+          "paired axes",
+          "reversal and neutral without duplicates",
+          "axis remapping and unmapped final axis",
+          "native axis passthrough",
+          "hardware velocity mapping unchanged"
+        ]
+      },
+      "endToEndParity": {
+        "traces": 1728,
+        "mouseEvents": 8667,
+        "status": "exact match",
+        "sha256": "d68b594238eced44264dc72fdcbb6a2625b8e3991529458e6784d0e0213bed6c",
+        "coverage": "speed 0..7; widths 640/1280/2400; DPI scales 1/2/4; HPL input batches 1/2/4; small/large/reverse moves; stationary holds; taps and tap threshold; cancellation and finger capture",
+        "scope": "Production SDL dispatch/look methods, production keymapper motion methods with the HPL binding fixture, and production HPL mouse consumer. Separate native suite tests the complete real keymap lookup."
+      },
+      "nativeAxisCases": {
+        "cases": 21,
+        "status": "passed",
+        "coverage": "axis identifiers, cardinal full range, half range, radial diagonal clamp, DPI, neutral positions and independent mouse deltas"
+      },
+      "recordingCompatibility": {
+        "version": 3,
+        "roundTrips": 100,
+        "version2Cases": 100,
+        "status": "passed",
+        "scope": "Actual recorder read/write methods preserve the new joystick payload; older axis payloads keep ordinary velocity semantics and stream alignment"
+      },
+      "syntaxChecks": [
+        "SDL2 touchcontrols.cpp passed",
+        "SDL3 touchcontrols.cpp passed",
+        "keymapper.cpp passed",
+        "recorderfile.cpp with event recorder enabled passed"
+      ],
+      "fullBuild": "pending",
+      "deployed": false,
+      "physicalDeviceTests": "not run"
     }
   },
   "publication": {
@@ -1783,7 +1830,7 @@
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "a8668d0864ddbfc05df5572226df013688117b74",
+        "head": "02703552e51762b2f48cb93342765527406b7027",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/71cb05b1c03aa6bdcd34f78c20cef12c10067ba5...upstream/touch-controls"
       },
       {
@@ -1803,7 +1850,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "681a3f02263f4f28e181587d26eac2b52e674787",
+      "head": "4cac51ee2371eda407bcf6b5ca0ba7beaeb0c4e5",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1838,12 +1885,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "681a3f02263f4f28e181587d26eac2b52e674787",
+    "head": "4cac51ee2371eda407bcf6b5ca0ba7beaeb0c4e5",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Original SDL mouse-look and HPL1 input behavior restored, built and deployed 2026-10-19; live provenance verified",
+    "status": "Joystick-axis conversion with the established SDL mouse-emulation response; native tests passed, build and deployment pending",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
