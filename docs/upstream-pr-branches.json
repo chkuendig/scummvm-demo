@@ -87,12 +87,12 @@
     {
       "order": 3,
       "name": "upstream/touch-controls",
-      "head": "02703552e51762b2f48cb93342765527406b7027",
+      "head": "c17a821481e68377d78b02c30140ee5d0fad37ce",
       "reviewBase": "upstream/master",
       "base": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
-      "commits": 9,
-      "files": 73,
-      "diff": "73 files changed, 3506 insertions(+), 584 deletions(-)",
+      "commits": 10,
+      "files": 75,
+      "diff": "75 files changed, 3554 insertions(+), 585 deletions(-)",
       "ownCommits": [
         "8eeb337972b8e6284bdef38ddb9de01404c725e4",
         "a739ee3872d367c3ee3f221ef01b241ef60c0385",
@@ -102,7 +102,8 @@
         "a96d92559e76a7fefe2953b60547510716b327be",
         "b1aeeac29935bc5f1852de0273008a738c4dc034",
         "a8668d0864ddbfc05df5572226df013688117b74",
-        "02703552e51762b2f48cb93342765527406b7027"
+        "02703552e51762b2f48cb93342765527406b7027",
+        "c17a821481e68377d78b02c30140ee5d0fad37ce"
       ]
     },
     {
@@ -1735,7 +1736,7 @@
       "liveProvenance": "matches",
       "physicalDeviceTests": "not run",
       "browserSmoke": "Grim rendered with the pad and original mouse-look indicator behavior, release cleared the indicator and touch mode switched to touchpad; no page errors or failed requests. Full SDL-to-HPL1 behavior parity is covered by 1,728 native actual-code traces.",
-      "supersededByAxisConversion": "02703552e51762b2f48cb93342765527406b7027"
+      "supersededByAxisConversion": "c17a821481e68377d78b02c30140ee5d0fad37ce"
     },
     "previousSuccessfulDeploymentBeforeTouchMouseRestoration": {
       "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39249588450",
@@ -1767,11 +1768,11 @@
       "scummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1"
     },
     "touchAxisMouseParity": {
-      "sourceTouchCommit": "02703552e51762b2f48cb93342765527406b7027",
-      "integrationCommit": "4cac51ee2371eda407bcf6b5ca0ba7beaeb0c4e5",
+      "sourceTouchCommit": "c17a821481e68377d78b02c30140ee5d0fad37ce",
+      "integrationCommit": "5d1f77a50663947424f746c18694b87c405ffedf",
       "behavior": "Normal right-stick positions remain available to native joystick consumers. Optional per-axis mouse-emulation deltas retain the pre-conversion SDL response and are transformed through configured virtual-mouse bindings. X/Y are emitted as one mouse event with unchanged absolute cursor position; no velocity/deadzone/warp is applied to this relative input.",
       "nativeSuite": {
-        "tests": 416,
+        "tests": 417,
         "status": "passed",
         "mappingRegressions": [
           "paired axes",
@@ -1807,6 +1808,17 @@
         "keymapper.cpp passed",
         "recorderfile.cpp with event recorder enabled passed"
       ],
+      "eventReuseRegression": {
+        "status": "failed before fix, passed after fix",
+        "behavior": "The dispatcher clears joystick payload before each event poll so optional touch data cannot leak into a subsequent hardware event"
+      },
+      "cancelledPreliminaryBuild": {
+        "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39315190449",
+        "demoCommit": "77fbd54b9ceb6a9c906f98d70ff15365a1764a7e",
+        "scummvmCommit": "4cac51ee2371eda407bcf6b5ca0ba7beaeb0c4e5",
+        "deployed": false,
+        "reason": "Cancelled before deployment to include the event reuse fix"
+      },
       "fullBuild": "pending",
       "deployed": false,
       "physicalDeviceTests": "not run"
@@ -1830,7 +1842,7 @@
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "02703552e51762b2f48cb93342765527406b7027",
+        "head": "c17a821481e68377d78b02c30140ee5d0fad37ce",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/71cb05b1c03aa6bdcd34f78c20cef12c10067ba5...upstream/touch-controls"
       },
       {
@@ -1850,7 +1862,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "4cac51ee2371eda407bcf6b5ca0ba7beaeb0c4e5",
+      "head": "5d1f77a50663947424f746c18694b87c405ffedf",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1885,7 +1897,7 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "4cac51ee2371eda407bcf6b5ca0ba7beaeb0c4e5",
+    "head": "5d1f77a50663947424f746c18694b87c405ffedf",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
