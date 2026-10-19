@@ -1,6 +1,6 @@
 {
-  "demoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
-  "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
+  "demoCommit": "c4a12bd2fd5d640da58afa0379e31394610d078e",
+  "scummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
   "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
   "branches": [
     {
@@ -17,7 +17,7 @@
     },
     {
       "name": "upstream/hpl1-webgl",
-      "head": "266a6e1c4bb284c1361b3b6accde99b0f2d635ee"
+      "head": "f323d26895b2e519795277914784fb8b0424f7d9"
     },
     {
       "name": "upstream/emscripten-recorder",
