@@ -1462,11 +1462,11 @@
       "fix": "Runtime branch now uses Debian's original a52dec 0.7.4 tarball, verifies SHA-256 a21d724ab3b3933330194353687df82c475b5dfb997513eef4c25de6c865ec33, and extracts a52dec-0.7.4"
     },
     "latestSuccessfulDeployment": {
-      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39307181167",
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148",
       "status": "success",
       "deployed": true,
-      "demoCommit": "649a203d2ce497c3aacb35166d141112533523be",
-      "scummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787",
+      "demoCommit": "70926e9d42a1c36a21a36bdc623b7730e5848357",
+      "scummvmCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
       "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
       "emsdkVersion": "6.0.11",
       "eventRecorder": false
@@ -1487,8 +1487,8 @@
       "date": "2026-10-19",
       "cacheBusted": true,
       "provenanceMatchesManifest": true,
-      "demoCommit": "649a203d2ce497c3aacb35166d141112533523be",
-      "scummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787",
+      "demoCommit": "70926e9d42a1c36a21a36bdc623b7730e5848357",
+      "scummvmCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
       "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
       "eventRecorder": false
     },
@@ -1503,13 +1503,21 @@
       "grimGameRendered": true,
       "grimOnScreenGamepadVisible": true,
       "grimTouchpadToggle": "passed",
-      "restoredMouseLookIndicator": "Original ring and finger-following knob visible during movement; indicator disappears on release",
+      "mouseLookIndicator": "Original ring and finger-following knob visible during input; indicator disappears on release",
       "grimLaunchPath": "/data/games/grim-win-demo1-en",
       "pageErrors": 0,
       "requestFailures": 0,
       "httpErrors": 0,
-      "screenshot": "restored-grim-*.png and restored-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed)",
-      "scummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787"
+      "screenshot": "native-hpl-grim-*.png and native-hpl-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed); native-hpl-penumbra-*.png and native-hpl-penumbra-check.json also stored there",
+      "scummvmCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
+      "demoCommit": "70926e9d42a1c36a21a36bdc623b7730e5848357",
+      "penumbraIntroRendered": true,
+      "penumbraSetupRendered": true,
+      "penumbraMainMenuRendered": true,
+      "penumbraOnScreenConfirm": "passed with a held press",
+      "penumbraNativeStickEvents": "sent and released without browser errors",
+      "penumbraLaunchPath": "/data/games/penumbra-overture-mac",
+      "penumbraGameplay": "not tested; camera input parity verified by native traces"
     },
     "ciReplay": {
       "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308276144",
@@ -1822,9 +1830,11 @@
         "deployed": false,
         "reason": "Cancelled before deployment to include the event reuse fix"
       },
-      "fullBuild": "pending",
-      "deployed": false,
-      "physicalDeviceTests": "not run"
+      "fullBuild": "passed",
+      "deployed": true,
+      "physicalDeviceTests": "not run",
+      "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148",
+      "liveProvenance": "matches"
     },
     "hpl1NativeCamera": {
       "sourceTouchCommit": "a36875d34b2697caa92ff464ebd894953be8ac88",
@@ -1859,13 +1869,45 @@
         "Recorder-enabled common/recorderfile.cpp passed"
       ],
       "physicalDeviceTests": "not run",
-      "fullBuild": "pending",
-      "deployed": false,
+      "fullBuild": "passed",
+      "deployed": true,
       "cancelledPreliminaryBuild": {
         "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39315875012",
         "deployed": false,
         "reason": "Cancelled before deployment to implement native HPL1 camera handling"
-      }
+      },
+      "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148",
+      "liveProvenance": "matches",
+      "browserSmoke": "Grim rendered with the pad, preserved indicator and successful touchpad toggle. Penumbra rendered its intro, setup and main menu; a held on-screen confirm press activated setup OK, and native stick events were sent and released. No page errors or failed requests in either browser check. Gameplay feel remains untested; camera input parity is verified by 1,728 production-code traces."
+    },
+    "previousSuccessfulDeploymentBeforeNativeHpl1Camera": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39307181167",
+      "status": "success",
+      "deployed": true,
+      "demoCommit": "649a203d2ce497c3aacb35166d141112533523be",
+      "scummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787",
+      "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
+      "emsdkVersion": "6.0.11",
+      "eventRecorder": false
+    },
+    "previousLiveBrowserBeforeNativeHpl1Camera": {
+      "date": "2026-10-19",
+      "browser": "Headless Chromium 1234 with SwiftShader and an emulated touchscreen",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "provenanceMatchesManifest": true,
+      "grimGameRendered": true,
+      "grimOnScreenGamepadVisible": true,
+      "grimTouchpadToggle": "passed",
+      "restoredMouseLookIndicator": "Original ring and finger-following knob visible during movement; indicator disappears on release",
+      "grimLaunchPath": "/data/games/grim-win-demo1-en",
+      "pageErrors": 0,
+      "requestFailures": 0,
+      "httpErrors": 0,
+      "screenshot": "restored-grim-*.png and restored-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787"
     }
   },
   "publication": {
@@ -1946,13 +1988,13 @@
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Native HPL1 camera actions and standard SDL joystick axes; previous touch response preserved, build and deployment pending",
+    "status": "Native HPL1 camera actions and SDL joystick axes built and deployed with the established touch response; live provenance and browser smoke verified",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39307181167",
-    "deployedDemoCommit": "649a203d2ce497c3aacb35166d141112533523be",
-    "deployedScummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787"
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148",
+    "deployedDemoCommit": "70926e9d42a1c36a21a36bdc623b7730e5848357",
+    "deployedScummvmCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9"
   },
   "updated": "2026-10-19"
 }
