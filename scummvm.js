@@ -33933,8 +33933,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN13TouchControls8buttonUpEN6Common14JoystickButtonE,
   __ZN13TouchControls7keyDownEN6Common7KeyCodeE,
   __ZN13TouchControls5keyUpEN6Common7KeyCodeE,
-  __ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs,
-  __ZN13TouchControls13mouseRelativeEii,
+  __ZN13TouchControls10axisMotionEN6Common12JoystickAxisEssb,
   __ZN13TouchControls10mouseClickEv,
   __ZN13TouchControls8mainMenuEv,
   __ZNK13TouchControls9auxCenterEiiRiS0_,
@@ -33958,6 +33957,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN13TouchControls13FunctionStart5touchEii11TouchAction,
   __ZN13TouchControls13FunctionStart4drawEhh,
   __ZN13TouchControls12FunctionLook5touchEii11TouchAction,
+  __ZN13TouchControls12FunctionLook8emitAxesEiiii,
   __ZN13TouchControls12FunctionLook4drawEhh,
   __ZN13TouchControls12FunctionDpad10resetStateEv,
   __ZN13TouchControls12FunctionDpadD0Ev,
@@ -37015,10 +37015,12 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN6Common9Keymapper21disableAllGameKeymapsEv,
   __ZN6Common9Keymapper8mapEventERKNS_5EventERNS_4ListIS1_EE,
   __ZN6Common18DelayedEventSource13scheduleEventERKNS_5EventEj,
-  __ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE,
+  __ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEE,
   __ZN6Common9Keymapper13executeActionEPKNS_6ActionERKNS_5EventE,
   __ZN6Common12isMouseEventERKNS_5EventE,
+  __ZN6Common9Keymapper14mapMouseMotionERKNS_5EventERNS_4ListIS1_EE,
   __ZN6Common9Keymapper21hardcodedEventMappingENS_5EventE,
+  __ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE,
   __ZNK6Common9Keymapper26convertToIncomingEventTypeERKNS_5EventE,
   __ZN6Common9Keymapper17convertStartToEndENS_9EventTypeE,
   __ZN6Common18DelayedEventSource9pollEventERNS_5EventE,
@@ -70898,8 +70900,7 @@ function assignWasmExports(wasmExports) {
   __ZN13TouchControls8buttonUpEN6Common14JoystickButtonE = Module['__ZN13TouchControls8buttonUpEN6Common14JoystickButtonE'] = wasmExports['_ZN13TouchControls8buttonUpEN6Common14JoystickButtonE'];
   __ZN13TouchControls7keyDownEN6Common7KeyCodeE = Module['__ZN13TouchControls7keyDownEN6Common7KeyCodeE'] = wasmExports['_ZN13TouchControls7keyDownEN6Common7KeyCodeE'];
   __ZN13TouchControls5keyUpEN6Common7KeyCodeE = Module['__ZN13TouchControls5keyUpEN6Common7KeyCodeE'] = wasmExports['_ZN13TouchControls5keyUpEN6Common7KeyCodeE'];
-  __ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs = Module['__ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs'] = wasmExports['_ZN13TouchControls10axisMotionEN6Common12JoystickAxisEs'];
-  __ZN13TouchControls13mouseRelativeEii = Module['__ZN13TouchControls13mouseRelativeEii'] = wasmExports['_ZN13TouchControls13mouseRelativeEii'];
+  __ZN13TouchControls10axisMotionEN6Common12JoystickAxisEssb = Module['__ZN13TouchControls10axisMotionEN6Common12JoystickAxisEssb'] = wasmExports['_ZN13TouchControls10axisMotionEN6Common12JoystickAxisEssb'];
   __ZN13TouchControls10mouseClickEv = Module['__ZN13TouchControls10mouseClickEv'] = wasmExports['_ZN13TouchControls10mouseClickEv'];
   __ZN13TouchControls8mainMenuEv = Module['__ZN13TouchControls8mainMenuEv'] = wasmExports['_ZN13TouchControls8mainMenuEv'];
   __ZNK13TouchControls9auxCenterEiiRiS0_ = Module['__ZNK13TouchControls9auxCenterEiiRiS0_'] = wasmExports['_ZNK13TouchControls9auxCenterEiiRiS0_'];
@@ -70923,6 +70924,7 @@ function assignWasmExports(wasmExports) {
   __ZN13TouchControls13FunctionStart5touchEii11TouchAction = Module['__ZN13TouchControls13FunctionStart5touchEii11TouchAction'] = wasmExports['_ZN13TouchControls13FunctionStart5touchEii11TouchAction'];
   __ZN13TouchControls13FunctionStart4drawEhh = Module['__ZN13TouchControls13FunctionStart4drawEhh'] = wasmExports['_ZN13TouchControls13FunctionStart4drawEhh'];
   __ZN13TouchControls12FunctionLook5touchEii11TouchAction = Module['__ZN13TouchControls12FunctionLook5touchEii11TouchAction'] = wasmExports['_ZN13TouchControls12FunctionLook5touchEii11TouchAction'];
+  __ZN13TouchControls12FunctionLook8emitAxesEiiii = Module['__ZN13TouchControls12FunctionLook8emitAxesEiiii'] = wasmExports['_ZN13TouchControls12FunctionLook8emitAxesEiiii'];
   __ZN13TouchControls12FunctionLook4drawEhh = Module['__ZN13TouchControls12FunctionLook4drawEhh'] = wasmExports['_ZN13TouchControls12FunctionLook4drawEhh'];
   __ZN13TouchControls12FunctionDpad10resetStateEv = Module['__ZN13TouchControls12FunctionDpad10resetStateEv'] = wasmExports['_ZN13TouchControls12FunctionDpad10resetStateEv'];
   __ZN13TouchControls12FunctionDpadD0Ev = Module['__ZN13TouchControls12FunctionDpadD0Ev'] = wasmExports['_ZN13TouchControls12FunctionDpadD0Ev'];
@@ -73980,10 +73982,12 @@ function assignWasmExports(wasmExports) {
   __ZN6Common9Keymapper21disableAllGameKeymapsEv = Module['__ZN6Common9Keymapper21disableAllGameKeymapsEv'] = wasmExports['_ZN6Common9Keymapper21disableAllGameKeymapsEv'];
   __ZN6Common9Keymapper8mapEventERKNS_5EventERNS_4ListIS1_EE = Module['__ZN6Common9Keymapper8mapEventERKNS_5EventERNS_4ListIS1_EE'] = wasmExports['_ZN6Common9Keymapper8mapEventERKNS_5EventERNS_4ListIS1_EE'];
   __ZN6Common18DelayedEventSource13scheduleEventERKNS_5EventEj = Module['__ZN6Common18DelayedEventSource13scheduleEventERKNS_5EventEj'] = wasmExports['_ZN6Common18DelayedEventSource13scheduleEventERKNS_5EventEj'];
-  __ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE = Module['__ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE'] = wasmExports['_ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE'];
+  __ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEE = Module['__ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEE'] = wasmExports['_ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEE'];
   __ZN6Common9Keymapper13executeActionEPKNS_6ActionERKNS_5EventE = Module['__ZN6Common9Keymapper13executeActionEPKNS_6ActionERKNS_5EventE'] = wasmExports['_ZN6Common9Keymapper13executeActionEPKNS_6ActionERKNS_5EventE'];
   __ZN6Common12isMouseEventERKNS_5EventE = Module['__ZN6Common12isMouseEventERKNS_5EventE'] = wasmExports['_ZN6Common12isMouseEventERKNS_5EventE'];
+  __ZN6Common9Keymapper14mapMouseMotionERKNS_5EventERNS_4ListIS1_EE = Module['__ZN6Common9Keymapper14mapMouseMotionERKNS_5EventERNS_4ListIS1_EE'] = wasmExports['_ZN6Common9Keymapper14mapMouseMotionERKNS_5EventERNS_4ListIS1_EE'];
   __ZN6Common9Keymapper21hardcodedEventMappingENS_5EventE = Module['__ZN6Common9Keymapper21hardcodedEventMappingENS_5EventE'] = wasmExports['_ZN6Common9Keymapper21hardcodedEventMappingENS_5EventE'];
+  __ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE = Module['__ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE'] = wasmExports['_ZNK6Common9Keymapper16getMappedActionsERKNS_5EventERNS_5ArrayIPNS_6ActionEEENS_6Keymap10KeymapTypeE'];
   __ZNK6Common9Keymapper26convertToIncomingEventTypeERKNS_5EventE = Module['__ZNK6Common9Keymapper26convertToIncomingEventTypeERKNS_5EventE'] = wasmExports['_ZNK6Common9Keymapper26convertToIncomingEventTypeERKNS_5EventE'];
   __ZN6Common9Keymapper17convertStartToEndENS_9EventTypeE = Module['__ZN6Common9Keymapper17convertStartToEndENS_9EventTypeE'] = wasmExports['_ZN6Common9Keymapper17convertStartToEndENS_9EventTypeE'];
   __ZN6Common18DelayedEventSource9pollEventERNS_5EventE = Module['__ZN6Common18DelayedEventSource9pollEventERNS_5EventE'] = wasmExports['_ZN6Common18DelayedEventSource9pollEventERNS_5EventE'];

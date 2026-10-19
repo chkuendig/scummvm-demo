@@ -1,6 +1,6 @@
 {
-  "demoCommit": "649a203d2ce497c3aacb35166d141112533523be",
-  "scummvmCommit": "681a3f02263f4f28e181587d26eac2b52e674787",
+  "demoCommit": "70926e9d42a1c36a21a36bdc623b7730e5848357",
+  "scummvmCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
   "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
   "branches": [
     {
@@ -13,11 +13,11 @@
     },
     {
       "name": "upstream/touch-controls",
-      "head": "a8668d0864ddbfc05df5572226df013688117b74"
+      "head": "a36875d34b2697caa92ff464ebd894953be8ac88"
     },
     {
       "name": "upstream/hpl1-webgl",
-      "head": "d157de7606ab9e907b13ba5dc414ec6617ee110a"
+      "head": "4905418de9ac8930c934cab9ccdb575b596b4b86"
     },
     {
       "name": "upstream/emscripten-recorder",
