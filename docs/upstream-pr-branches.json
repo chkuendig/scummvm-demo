@@ -1455,11 +1455,11 @@
       "fix": "Runtime branch now uses Debian's original a52dec 0.7.4 tarball, verifies SHA-256 a21d724ab3b3933330194353687df82c475b5dfb997513eef4c25de6c865ec33, and extracts a52dec-0.7.4"
     },
     "latestSuccessfulDeployment": {
-      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935",
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39249588450",
       "status": "success",
       "deployed": true,
-      "demoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
-      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
+      "demoCommit": "c4a12bd2fd5d640da58afa0379e31394610d078e",
+      "scummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
       "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
       "emsdkVersion": "6.0.11",
       "eventRecorder": false
@@ -1480,8 +1480,8 @@
       "date": "2026-10-19",
       "cacheBusted": true,
       "provenanceMatchesManifest": true,
-      "demoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
-      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
+      "demoCommit": "c4a12bd2fd5d640da58afa0379e31394610d078e",
+      "scummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
       "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
       "eventRecorder": false
     },
@@ -1493,17 +1493,16 @@
         "height": 720
       },
       "provenanceMatchesManifest": true,
-      "grimGameRendered": true,
-      "grimOnScreenGamepadVisible": true,
-      "grimTouchpadToggle": "passed",
-      "rightStick": "Held beyond its radius; inspected clamped knob and its disappearance on release",
-      "grimLaunchPath": "/data/games/grim-win-demo1-en",
-      "grimDefaultLauncherEntry": "Existing default entry points to an obsolete grimdemo subfolder; game-library launch path was used for testing",
+      "penumbraSetupMenuRendered": true,
+      "penumbraMainMenuRendered": true,
+      "penumbraOnScreenConfirm": "passed",
+      "penumbraIntroRendered": true,
+      "penumbraGameplayCamera": "Not verified in the browser: first-level assets were still loading at the end of the bounded check; camera-input regression is covered by the native actual-code harness",
       "pageErrors": 0,
       "requestFailures": 0,
       "httpErrors": 0,
-      "screenshot": "axis-grim-* screenshots and axis-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed)",
-      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a"
+      "screenshot": "penumbra-*.png and penumbra-check.json stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1"
     },
     "ciReplay": {
       "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/37308276144",
@@ -1643,7 +1642,42 @@
       ],
       "focusedResult": "passed",
       "diffCheck": "passed",
-      "deployed": false
+      "deployed": true,
+      "fullBuild": "passed",
+      "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39249588450",
+      "liveProvenance": "matches",
+      "physicalDeviceTests": "not run",
+      "browserSmoke": "Penumbra setup/main menus and intro rendered; on-screen confirm activated menu choices; no page errors or failed requests. First-level loading did not finish within the bounded browser check, so in-game camera response was not verified there."
+    },
+    "previousSuccessfulDeploymentBeforeHpl1MouseMotion": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935",
+      "status": "success",
+      "deployed": true,
+      "demoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
+      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
+      "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
+      "emsdkVersion": "6.0.11",
+      "eventRecorder": false
+    },
+    "previousLiveBrowserBeforeHpl1MouseMotion": {
+      "date": "2026-10-19",
+      "browser": "Headless Chromium 1234 with SwiftShader and an emulated touchscreen",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "provenanceMatchesManifest": true,
+      "grimGameRendered": true,
+      "grimOnScreenGamepadVisible": true,
+      "grimTouchpadToggle": "passed",
+      "rightStick": "Held beyond its radius; inspected clamped knob and its disappearance on release",
+      "grimLaunchPath": "/data/games/grim-win-demo1-en",
+      "grimDefaultLauncherEntry": "Existing default entry points to an obsolete grimdemo subfolder; game-library launch path was used for testing",
+      "pageErrors": 0,
+      "requestFailures": 0,
+      "httpErrors": 0,
+      "screenshot": "axis-grim-* screenshots and axis-grim-smoke-20261019.json stored locally under .git/demo-validation (not committed)",
+      "scummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a"
     }
   },
   "publication": {
@@ -1724,13 +1758,13 @@
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "HPL1 right-stick movement-loss fix integrated 2026-10-19; build and deployment pending",
+    "status": "HPL1 right-stick movement-loss fix built and deployed 2026-10-19; live provenance verified",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935",
-    "deployedDemoCommit": "da1dc33f17076ebbbe48e90060ce9a253dbee833",
-    "deployedScummvmCommit": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a"
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39249588450",
+    "deployedDemoCommit": "c4a12bd2fd5d640da58afa0379e31394610d078e",
+    "deployedScummvmCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1"
   },
   "updated": "2026-10-19"
 }
