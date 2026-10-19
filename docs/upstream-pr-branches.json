@@ -106,12 +106,12 @@
     {
       "order": 4,
       "name": "upstream/hpl1-webgl",
-      "head": "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
+      "head": "f323d26895b2e519795277914784fb8b0424f7d9",
       "reviewBase": "upstream/emscripten-runtime",
       "base": "6d523b035c3418fef86e100edb8f94f07e99281e",
-      "commits": 10,
-      "files": 42,
-      "diff": "42 files changed, 3444 insertions(+), 196 deletions(-)",
+      "commits": 11,
+      "files": 43,
+      "diff": "43 files changed, 3447 insertions(+), 197 deletions(-)",
       "ownCommits": [
         "016e9756f5f337b456b3ecf3bda2a9923f5e424c",
         "2446c2b40b94db18127f441cba1dd26fd3c4a971",
@@ -122,7 +122,8 @@
         "cd8e725036111f37202be46237f4ccd37fbe8995",
         "a4f48f85171a2d849dead7b23ae653a527a0b8cf",
         "addac9e7d6ba5b281a6ce87d3e29774d3ee25f02",
-        "266a6e1c4bb284c1361b3b6accde99b0f2d635ee"
+        "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
+        "f323d26895b2e519795277914784fb8b0424f7d9"
       ]
     },
     {
@@ -1624,6 +1625,25 @@
       "httpErrors": 0,
       "screenshot": "Screenshots and JSON evidence are stored locally under .git/demo-validation (not committed)",
       "scummvmCommit": "a11aa5f098b2024d94c7f32cf89bc67ea4c55972"
+    },
+    "hpl1MouseMotion": {
+      "date": "2026-10-19",
+      "sourceCommit": "f323d26895b2e519795277914784fb8b0424f7d9",
+      "integrationCommit": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
+      "problem": "HPL1 replaced relative mouse motion with the final mouse event, allowing a zero-delta virtual-mouse cursor warp or button event to erase camera movement",
+      "fix": "Accumulate mouse-motion deltas within each input update and reset the accumulator at the start of the next update",
+      "beforeFix": "Reproduced: full right-stick deflection emitted 10 pixels but HPL1 consumed zero after a cursor warp",
+      "focusedChecks": [
+        "Real HPL1 Mouse.cpp and InputDevice.cpp linked into the existing SDL-stick/virtual-mouse harness",
+        "Held stick followed by zero-delta cursor warps preserves the full relative delta",
+        "All four directions at quarter, half and full deflection",
+        "Multiple motion events accumulate; button events preserve motion and button state",
+        "Absolute cursor coordinates remain available; consumed deltas reset",
+        "New frame discards unconsumed menu motion; neutral stick stops movement"
+      ],
+      "focusedResult": "passed",
+      "diffCheck": "passed",
+      "deployed": false
     }
   },
   "publication": {
@@ -1650,7 +1670,7 @@
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "266a6e1c4bb284c1361b3b6accde99b0f2d635ee",
+        "head": "f323d26895b2e519795277914784fb8b0424f7d9",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/6d523b035c3418fef86e100edb8f94f07e99281e...upstream/hpl1-webgl"
       },
       {
@@ -1664,7 +1684,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
+      "head": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -1699,12 +1719,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "ccab4f0fe3d6b4e784430884900dbd755aa0fe4a",
+    "head": "a61201a6eb3deef1626722dc4336e04f06a58cb1",
     "upstreamBase": "f631a289b7137cf324e0032db9b87c0af26271e9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "SDL analog right-stick and HPL1 keymap updates built, deployed and browser-verified 2026-10-19",
+    "status": "HPL1 right-stick movement-loss fix integrated 2026-10-19; build and deployment pending",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
