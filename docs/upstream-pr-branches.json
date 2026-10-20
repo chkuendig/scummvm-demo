@@ -35,19 +35,19 @@
     {
       "order": 2,
       "name": "upstream/emscripten-opengl",
-      "head": "c5d62fedc64109cf0c3c45535151f6e20fd07b31",
+      "head": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
       "base": "ed949213a23440447ea402e263daa871394b6bf9",
       "reviewBase": "upstream/master",
       "scope": "WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending",
       "commits": 4,
       "commitsIncludingPrerequisites": 4,
       "files": 4,
-      "diff": "4 files changed, 65 insertions(+), 25 deletions(-)",
+      "diff": "4 files changed, 63 insertions(+), 25 deletions(-)",
       "ownCommits": [
         "b7e92acd6435dce9077b0c53a3ff037f7a02f424",
         "fd4a3ebfde0ce05a5e2f602dae43a60823aecea4",
         "cb0020dd4dfd3a536a59885084e557561ee7a9fc",
-        "c5d62fedc64109cf0c3c45535151f6e20fd07b31"
+        "872e9f67538ef0b94b63e3b418b2ac62dc25e34f"
       ],
       "landingNote": "The Emscripten cleanup branch owns port-library filtering needed for reliable ImGui SDL3 discovery with SDK 6.0.13. This rendering branch remains based directly on upstream master."
     },
@@ -118,8 +118,8 @@
     {
       "order": 7,
       "name": "upstream/hpl1-webgl",
-      "head": "711a72b84b6f0af3f2cee797ebe8b9bc01e1dcdc",
-      "base": "c5d62fedc64109cf0c3c45535151f6e20fd07b31",
+      "head": "35f7ef041f4d906a0f2fe61f9582cefa93eec24f",
+      "base": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
       "reviewBase": "upstream/emscripten-opengl",
       "scope": "GLES rendering/shaders, menu navigation and native camera input",
       "commits": 5,
@@ -127,13 +127,13 @@
       "files": 60,
       "diff": "60 files changed, 4300 insertions(+), 216 deletions(-)",
       "ownCommits": [
-        "ebe0dc26f65b51fd481bd1044d98d3bc2d9808dd",
-        "e5e90bcef127f46ff464633a80bac0745c4b1f0e",
-        "37c2380d4b35da73c9350a057920c7ba5d42b49e",
-        "7d361f529dd95756ca998db02f5c316e3a88b089",
-        "711a72b84b6f0af3f2cee797ebe8b9bc01e1dcdc"
+        "bd757118569d1a1bc2f543c38c1d4b9fcc3d15cf",
+        "fe83b59ba99e9ef53ee405cab619b2fc4190b338",
+        "a4a1a8c5cf8d86d845f8e0a9619b2e311a8a4d97",
+        "1bfa0774dffeed752fcbbf6db0648a6db97a0c5f",
+        "35f7ef041f4d906a0f2fe61f9582cefa93eec24f"
       ],
-      "sharedSupportImport": "7d361f529dd95756ca998db02f5c316e3a88b089",
+      "sharedSupportImport": "1bfa0774dffeed752fcbbf6db0648a6db97a0c5f",
       "landingNote": "The shared-support commit mirrors the touch branch axis API. Once that API is upstream, omit the duplicate prerequisite during rebase."
     },
     {
@@ -271,7 +271,7 @@
       ]
     },
     {
-      "sourceCommit": "c5d62fedc64109cf0c3c45535151f6e20fd07b31",
+      "sourceCommit": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
       "subject": "EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default",
       "parts": [
         {
@@ -438,7 +438,7 @@
       ]
     },
     {
-      "sourceCommit": "ebe0dc26f65b51fd481bd1044d98d3bc2d9808dd",
+      "sourceCommit": "bd757118569d1a1bc2f543c38c1d4b9fcc3d15cf",
       "subject": "HPL1: Bundle shaders and adapt them for GLES",
       "parts": [
         {
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "sourceCommit": "e5e90bcef127f46ff464633a80bac0745c4b1f0e",
+      "sourceCommit": "fe83b59ba99e9ef53ee405cab619b2fc4190b338",
       "subject": "HPL1: Add the WebGL2 renderer and GLES compatibility layer",
       "parts": [
         {
@@ -498,7 +498,7 @@
       ]
     },
     {
-      "sourceCommit": "37c2380d4b35da73c9350a057920c7ba5d42b49e",
+      "sourceCommit": "a4a1a8c5cf8d86d845f8e0a9619b2e311a8a4d97",
       "subject": "HPL1: Add controller bindings and menu focus navigation",
       "parts": [
         {
@@ -512,7 +512,7 @@
       ]
     },
     {
-      "sourceCommit": "7d361f529dd95756ca998db02f5c316e3a88b089",
+      "sourceCommit": "1bfa0774dffeed752fcbbf6db0648a6db97a0c5f",
       "subject": "KEYMAPPER: Provide shared engine-axis actions for HPL1",
       "parts": [
         {
@@ -533,7 +533,7 @@
       ]
     },
     {
-      "sourceCommit": "711a72b84b6f0af3f2cee797ebe8b9bc01e1dcdc",
+      "sourceCommit": "35f7ef041f4d906a0f2fe61f9582cefa93eec24f",
       "subject": "HPL1: Handle native camera axes and preserve touch response",
       "parts": [
         {
@@ -3830,6 +3830,18 @@
       "fallbackCommit": "fd4a3ebfde0ce05a5e2f602dae43a60823aecea4",
       "demoCherryPickCount": 27,
       "scope": "cleanup SDK/build commit owns port filtering; OpenGL fallback commit contains no configure changes; demo source tree identical"
+    },
+    "removeEs3Comment": {
+      "passed": true,
+      "onlyChange": "two configure comment lines removed",
+      "commitMessages": "unchanged",
+      "reviewCommits": 27,
+      "demoCherryPicks": 27,
+      "shellSyntax": "passed",
+      "branchScopesAndLimits": "passed",
+      "previousIntegration": "f7f03f80f83d161d8f971ac5411039190bd16cc6",
+      "integration": "6d3f5d98de5a44ae8803cb6dd966c04a76f12aab",
+      "es3Commit": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f"
     }
   },
   "publication": {
@@ -3844,7 +3856,7 @@
       {
         "name": "upstream/emscripten-opengl",
         "repository": "chkuendig/scummvm",
-        "head": "c5d62fedc64109cf0c3c45535151f6e20fd07b31",
+        "head": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/emscripten-opengl"
       },
       {
@@ -3874,8 +3886,8 @@
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "711a72b84b6f0af3f2cee797ebe8b9bc01e1dcdc",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/c5d62fedc64109cf0c3c45535151f6e20fd07b31...upstream/hpl1-webgl"
+        "head": "35f7ef041f4d906a0f2fe61f9582cefa93eec24f",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/872e9f67538ef0b94b63e3b418b2ac62dc25e34f...upstream/hpl1-webgl"
       },
       {
         "name": "upstream/emscripten-recorder",
@@ -3894,7 +3906,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "f7f03f80f83d161d8f971ac5411039190bd16cc6",
+      "head": "6d3f5d98de5a44ae8803cb6dd966c04a76f12aab",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -3934,12 +3946,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "f7f03f80f83d161d8f971ac5411039190bd16cc6",
+    "head": "6d3f5d98de5a44ae8803cb6dd966c04a76f12aab",
     "upstreamBase": "ed949213a23440447ea402e263daa871394b6bf9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Port-library filtering is folded into the cleanup SDK/build commit and removed from the independent OpenGL series. All dependent review heads and 27 demo cherry-picks are refreshed and pushed. The demo source tree is unchanged. SDK link and branch-scope checks pass; a full refreshed demo build/deployment remains pending.",
+    "status": "Redundant GLES3 configure comment removed from the existing ES3 commit, HPL1 and demo. Commit messages and executable configuration unchanged; refreshed heads and all 27 demo cherry-picks pushed. Full demo rebuild/deployment remains pending.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
@@ -4864,7 +4876,7 @@
     "base": "f631a289b7137cf324e0032db9b87c0af26271e9"
   },
   "emscriptenUpgradePlan": {
-    "status": "SDK 6.0.13 remains deployed. Port-library filtering is folded into the cleanup SDK/build commit and removed from the independent OpenGL series. All dependent review heads and 27 demo cherry-picks are refreshed and pushed. The demo source tree is unchanged. SDK link and branch-scope checks pass; a full refreshed demo build/deployment remains pending.",
+    "status": "SDK 6.0.13 remains deployed. The GLES3 rationale comment was removed from the refreshed review/demo source; executable configuration is unchanged. Full refreshed demo build/deployment remains pending.",
     "current": "6.0.13",
     "target": "6.0.13",
     "branch": "upstream/emscripten-update-cleanup",
