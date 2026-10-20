@@ -17,26 +17,26 @@
     {
       "order": 1,
       "name": "upstream/emscripten-update-cleanup",
-      "head": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
+      "head": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
       "base": "ed949213a23440447ea402e263daa871394b6bf9",
       "reviewBase": "upstream/master",
       "scope": "SDK/dependencies and separate WebMIDI, speech and browser JavaScript libraries",
       "commits": 4,
       "commitsIncludingPrerequisites": 4,
       "files": 14,
-      "diff": "14 files changed, 599 insertions(+), 365 deletions(-)",
+      "diff": "14 files changed, 594 insertions(+), 360 deletions(-)",
       "ownCommits": [
-        "9f3b5a4a0a605e360dd3ef6edb849ecb080eed30",
-        "bd2d003c92c5061a6a47e73f9d846043556b52b5",
-        "eb0b50b25751c723033fee1da7453452c1e16b86",
-        "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e"
+        "b9a73fb3c760209215cec616c6aaf141b349f57a",
+        "50cd93b54b9a52345d4b55111480075f27dd6280",
+        "e30dbf5c1125db4921ba5ff79a99bc6776c78539",
+        "3100d77b5804f5bb765d7ddd36c76870555cc73b"
       ]
     },
     {
       "order": 2,
       "name": "upstream/emscripten-opengl",
-      "head": "5e488cb226c63f3b6daf6cfdad998c4e17b3a8fc",
-      "base": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
+      "head": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
+      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
       "reviewBase": "upstream/emscripten-update-cleanup",
       "scope": "WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending",
       "commits": 1,
@@ -44,14 +44,14 @@
       "files": 4,
       "diff": "4 files changed, 65 insertions(+), 25 deletions(-)",
       "ownCommits": [
-        "5e488cb226c63f3b6daf6cfdad998c4e17b3a8fc"
+        "a1302e4a7231d79d41a9b3af5fad9c9fa3608667"
       ]
     },
     {
       "order": 3,
       "name": "upstream/emscripten-filesystem",
-      "head": "2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef",
-      "base": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
+      "head": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
+      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
       "reviewBase": "upstream/emscripten-update-cleanup",
       "scope": "HTTP ranges and VFS streaming/cache, drag/drop/ROM import and persistent settings",
       "commits": 3,
@@ -59,16 +59,16 @@
       "files": 25,
       "diff": "25 files changed, 2113 insertions(+), 303 deletions(-)",
       "ownCommits": [
-        "3e5151be4070a20fe46149150ada9fc7bc8ff8e5",
-        "acc49da32fb178fa78432293d98f90fe98f4226a",
-        "2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef"
+        "ea5355b3f55bb746bb031178c11f021c9e30e2ce",
+        "122c839299d2ca158a4554cd1e9a44051f08e50c",
+        "e71b030436aa4ae77f7e984d0e058e12d0dc52c6"
       ]
     },
     {
       "order": 4,
       "name": "upstream/emscripten-printing",
-      "head": "6341a7fa0fbd2726599be516e5518c160ddbf8a0",
-      "base": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
+      "head": "2a7fb40ccf48707eef301174230c92bb7231b880",
+      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
       "reviewBase": "upstream/emscripten-update-cleanup",
       "scope": "Download game print-outs through the browser",
       "commits": 1,
@@ -76,14 +76,14 @@
       "files": 4,
       "diff": "4 files changed, 137 insertions(+)",
       "ownCommits": [
-        "6341a7fa0fbd2726599be516e5518c160ddbf8a0"
+        "2a7fb40ccf48707eef301174230c92bb7231b880"
       ]
     },
     {
       "order": 5,
       "name": "upstream/emscripten-loading-progress",
-      "head": "d35aab3551d55649439797af57b1687c92569cc4",
-      "base": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
+      "head": "62f5898ead2a089d4178268b3bd4b8632d7c7d71",
+      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
       "reviewBase": "upstream/emscripten-update-cleanup",
       "scope": "Wasm download and initialization progress",
       "commits": 1,
@@ -91,14 +91,14 @@
       "files": 2,
       "diff": "2 files changed, 202 insertions(+), 73 deletions(-)",
       "ownCommits": [
-        "d35aab3551d55649439797af57b1687c92569cc4"
+        "62f5898ead2a089d4178268b3bd4b8632d7c7d71"
       ]
     },
     {
       "order": 6,
       "name": "upstream/cloud-streaming",
-      "head": "31bd47dc122e3901cf0f1e0345933ae6308e075d",
-      "base": "2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef",
+      "head": "1583b35b0e6230d3bfecf12b53c0048dfa4a079a",
+      "base": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
       "reviewBase": "upstream/emscripten-filesystem",
       "scope": "Stream cloud providers through the shared VFS",
       "commits": 3,
@@ -106,16 +106,16 @@
       "files": 23,
       "diff": "23 files changed, 422 insertions(+), 210 deletions(-)",
       "ownCommits": [
-        "b3b340a446bd8b1293798be0e35d5cb7489b3573",
-        "4894b1d441a3c421c4a404b2330494e6a0297c08",
-        "31bd47dc122e3901cf0f1e0345933ae6308e075d"
+        "45100e0408d09abc8211fc968176973533929f58",
+        "4333adf305cfd1d1ffd5d1a5ce703a2a9f14a74e",
+        "1583b35b0e6230d3bfecf12b53c0048dfa4a079a"
       ]
     },
     {
       "order": 7,
       "name": "upstream/hpl1-webgl",
-      "head": "4f0b2897d23292a4c28e9d441d6ef312a3ca7e42",
-      "base": "5e488cb226c63f3b6daf6cfdad998c4e17b3a8fc",
+      "head": "7e6fd9711e5030c7924dd09a5715305dcca9f4c6",
+      "base": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
       "reviewBase": "upstream/emscripten-opengl",
       "scope": "GLES rendering/shaders, menu navigation and native camera input",
       "commits": 5,
@@ -123,20 +123,20 @@
       "files": 60,
       "diff": "60 files changed, 4300 insertions(+), 216 deletions(-)",
       "ownCommits": [
-        "fb572df251db3b39046eb3d83a4cb81f5b041075",
-        "5ae3a1686238c6c203fe0aa6b3bb4253842c833b",
-        "ebd040b2a202404e0b3252606e585694cc1704be",
-        "d294a87c65e7d034319bfb75f1eb361c61ac5bd9",
-        "4f0b2897d23292a4c28e9d441d6ef312a3ca7e42"
+        "3fc2bfdd96bd3e2d3a40b7736fbdae8ae4c34c15",
+        "525586c0afe7dbf2adce5bb925acaf51e7740655",
+        "ad2fa65e17e00a48aafa7d1661231d0681d274e1",
+        "bc864206e6e5d1fc116009db9a143c18ad5e9165",
+        "7e6fd9711e5030c7924dd09a5715305dcca9f4c6"
       ],
-      "sharedSupportImport": "d294a87c65e7d034319bfb75f1eb361c61ac5bd9",
+      "sharedSupportImport": "bc864206e6e5d1fc116009db9a143c18ad5e9165",
       "landingNote": "The shared-support commit mirrors the touch branch axis API. Once that API is upstream, omit the duplicate prerequisite during rebase."
     },
     {
       "order": 8,
       "name": "upstream/emscripten-recorder",
-      "head": "05f12c5d38265ed8d44a95c094b6a01e7646169e",
-      "base": "2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef",
+      "head": "f2e3883212ca9facbc2d36f2d389f5dec73c7687",
+      "base": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
       "reviewBase": "upstream/emscripten-filesystem",
       "scope": "Browser recording/export/replay and viewport-aware controls",
       "commits": 3,
@@ -144,9 +144,9 @@
       "files": 13,
       "diff": "13 files changed, 237 insertions(+), 8 deletions(-)",
       "ownCommits": [
-        "574c581c1d7b7b68ecf5230397f9e1317b90bd72",
-        "d493eb92a98c7f488e09356dc8c654e8a620088c",
-        "05f12c5d38265ed8d44a95c094b6a01e7646169e"
+        "4cbf7631c8a4be65878a20c336676349f6ec8edb",
+        "295676adccf39c470a3042fae5a619a890c48a25",
+        "f2e3883212ca9facbc2d36f2d389f5dec73c7687"
       ]
     },
     {
@@ -169,7 +169,7 @@
   ],
   "sourceCommits": [
     {
-      "sourceCommit": "9f3b5a4a0a605e360dd3ef6edb849ecb080eed30",
+      "sourceCommit": "b9a73fb3c760209215cec616c6aaf141b349f57a",
       "subject": "EMSCRIPTEN: Extract WebMIDI into a JavaScript library",
       "parts": [
         {
@@ -184,7 +184,7 @@
       ]
     },
     {
-      "sourceCommit": "bd2d003c92c5061a6a47e73f9d846043556b52b5",
+      "sourceCommit": "50cd93b54b9a52345d4b55111480075f27dd6280",
       "subject": "EMSCRIPTEN: Extract text-to-speech into a JavaScript library",
       "parts": [
         {
@@ -199,7 +199,7 @@
       ]
     },
     {
-      "sourceCommit": "eb0b50b25751c723033fee1da7453452c1e16b86",
+      "sourceCommit": "e30dbf5c1125db4921ba5ff79a99bc6776c78539",
       "subject": "EMSCRIPTEN: Extract browser backend APIs into a JavaScript library",
       "parts": [
         {
@@ -217,8 +217,8 @@
       ]
     },
     {
-      "sourceCommit": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
-      "subject": "EMSCRIPTEN: Update SDK, dependencies and Asyncify build handling",
+      "sourceCommit": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+      "subject": "EMSCRIPTEN: Update to SDK 6.0.13 and refresh dependencies",
       "parts": [
         {
           "branch": "upstream/emscripten-update-cleanup",
@@ -231,7 +231,7 @@
       ]
     },
     {
-      "sourceCommit": "5e488cb226c63f3b6daf6cfdad998c4e17b3a8fc",
+      "sourceCommit": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
       "subject": "EMSCRIPTEN: Scope WebGL rendering fixes to the browser",
       "parts": [
         {
@@ -246,7 +246,7 @@
       ]
     },
     {
-      "sourceCommit": "3e5151be4070a20fe46149150ada9fc7bc8ff8e5",
+      "sourceCommit": "ea5355b3f55bb746bb031178c11f021c9e30e2ce",
       "subject": "EMSCRIPTEN: Stream HTTP files through a bounded virtual filesystem",
       "parts": [
         {
@@ -272,7 +272,7 @@
       ]
     },
     {
-      "sourceCommit": "acc49da32fb178fa78432293d98f90fe98f4226a",
+      "sourceCommit": "122c839299d2ca158a4554cd1e9a44051f08e50c",
       "subject": "EMSCRIPTEN: Mount dropped files and import Roland ROMs",
       "parts": [
         {
@@ -297,7 +297,7 @@
       ]
     },
     {
-      "sourceCommit": "2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef",
+      "sourceCommit": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
       "subject": "EMSCRIPTEN: Persist settings storage and use supported FS APIs",
       "parts": [
         {
@@ -309,7 +309,7 @@
       ]
     },
     {
-      "sourceCommit": "6341a7fa0fbd2726599be516e5518c160ddbf8a0",
+      "sourceCommit": "2a7fb40ccf48707eef301174230c92bb7231b880",
       "subject": "EMSCRIPTEN: Download game print-outs through the browser",
       "parts": [
         {
@@ -324,7 +324,7 @@
       ]
     },
     {
-      "sourceCommit": "d35aab3551d55649439797af57b1687c92569cc4",
+      "sourceCommit": "62f5898ead2a089d4178268b3bd4b8632d7c7d71",
       "subject": "EMSCRIPTEN: Show download and initialization progress",
       "parts": [
         {
@@ -337,7 +337,7 @@
       ]
     },
     {
-      "sourceCommit": "b3b340a446bd8b1293798be0e35d5cb7489b3573",
+      "sourceCommit": "45100e0408d09abc8211fc968176973533929f58",
       "subject": "CLOUD: Support efficient ranged downloads",
       "parts": [
         {
@@ -361,7 +361,7 @@
       ]
     },
     {
-      "sourceCommit": "4894b1d441a3c421c4a404b2330494e6a0297c08",
+      "sourceCommit": "4333adf305cfd1d1ffd5d1a5ce703a2a9f14a74e",
       "subject": "CLOUD: Handle access tokens and browser refresh failures",
       "parts": [
         {
@@ -379,7 +379,7 @@
       ]
     },
     {
-      "sourceCommit": "31bd47dc122e3901cf0f1e0345933ae6308e075d",
+      "sourceCommit": "1583b35b0e6230d3bfecf12b53c0048dfa4a079a",
       "subject": "EMSCRIPTEN: Stream cloud files through the shared filesystem",
       "parts": [
         {
@@ -397,7 +397,7 @@
       ]
     },
     {
-      "sourceCommit": "fb572df251db3b39046eb3d83a4cb81f5b041075",
+      "sourceCommit": "3fc2bfdd96bd3e2d3a40b7736fbdae8ae4c34c15",
       "subject": "HPL1: Bundle shaders and adapt them for GLES",
       "parts": [
         {
@@ -422,7 +422,7 @@
       ]
     },
     {
-      "sourceCommit": "5ae3a1686238c6c203fe0aa6b3bb4253842c833b",
+      "sourceCommit": "525586c0afe7dbf2adce5bb925acaf51e7740655",
       "subject": "HPL1: Add the WebGL2 renderer and GLES compatibility layer",
       "parts": [
         {
@@ -457,7 +457,7 @@
       ]
     },
     {
-      "sourceCommit": "ebd040b2a202404e0b3252606e585694cc1704be",
+      "sourceCommit": "ad2fa65e17e00a48aafa7d1661231d0681d274e1",
       "subject": "HPL1: Add controller bindings and menu focus navigation",
       "parts": [
         {
@@ -471,7 +471,7 @@
       ]
     },
     {
-      "sourceCommit": "d294a87c65e7d034319bfb75f1eb361c61ac5bd9",
+      "sourceCommit": "bc864206e6e5d1fc116009db9a143c18ad5e9165",
       "subject": "KEYMAPPER: Provide shared engine-axis actions for HPL1",
       "parts": [
         {
@@ -492,7 +492,7 @@
       ]
     },
     {
-      "sourceCommit": "4f0b2897d23292a4c28e9d441d6ef312a3ca7e42",
+      "sourceCommit": "7e6fd9711e5030c7924dd09a5715305dcca9f4c6",
       "subject": "HPL1: Handle native camera axes and preserve touch response",
       "parts": [
         {
@@ -515,7 +515,7 @@
       ]
     },
     {
-      "sourceCommit": "574c581c1d7b7b68ecf5230397f9e1317b90bd72",
+      "sourceCommit": "4cbf7631c8a4be65878a20c336676349f6ec8edb",
       "subject": "COMMON: Propagate finalize() through buffered and recorder write streams",
       "parts": [
         {
@@ -528,7 +528,7 @@
       ]
     },
     {
-      "sourceCommit": "d493eb92a98c7f488e09356dc8c654e8a620088c",
+      "sourceCommit": "295676adccf39c470a3042fae5a619a890c48a25",
       "subject": "BACKENDS: EMSCRIPTEN: Support browser recording, replay and viewport controls",
       "parts": [
         {
@@ -549,7 +549,7 @@
       ]
     },
     {
-      "sourceCommit": "05f12c5d38265ed8d44a95c094b6a01e7646169e",
+      "sourceCommit": "f2e3883212ca9facbc2d36f2d389f5dec73c7687",
       "subject": "BACKENDS: EMSCRIPTEN: Keep the SDL audio callback out of the event recorder",
       "parts": [
         {
@@ -2213,6 +2213,103 @@
           "sdk": "6.0.13"
         }
       }
+    },
+    "dependencyFollowup": {
+      "archive": {
+        "url": "https://code.videolan.org/videolan/liba52/-/archive/0.7.4/liba52-0.7.4.tar.gz",
+        "status": 200,
+        "version": "0.7.4",
+        "root": "liba52-0.7.4",
+        "comparedFiles": [
+          [
+            "configure.in",
+            true
+          ],
+          [
+            "include/Makefile.am",
+            true
+          ],
+          [
+            "include/a52.h",
+            true
+          ],
+          [
+            "include/attributes.h",
+            true
+          ],
+          [
+            "include/audio_out.h",
+            true
+          ],
+          [
+            "include/mm_accel.h",
+            true
+          ],
+          [
+            "include/tendra.h",
+            true
+          ],
+          [
+            "liba52/Makefile.am",
+            true
+          ],
+          [
+            "liba52/a52_internal.h",
+            true
+          ],
+          [
+            "liba52/bit_allocate.c",
+            true
+          ],
+          [
+            "liba52/bitstream.c",
+            true
+          ],
+          [
+            "liba52/bitstream.h",
+            true
+          ],
+          [
+            "liba52/configure.incl",
+            true
+          ],
+          [
+            "liba52/downmix.c",
+            true
+          ],
+          [
+            "liba52/imdct.c",
+            true
+          ],
+          [
+            "liba52/parse.c",
+            true
+          ],
+          [
+            "liba52/tables.h",
+            true
+          ]
+        ]
+      },
+      "archiveSha256": "92920424db9670e89defa08e9b024f5db2ec96a264d9906464e8450435e1001d",
+      "matchesExistingCachedArchive": true,
+      "libmadCompatibilityPatch": "retained at user request",
+      "generatedJavaScriptAudioPatches": "absent",
+      "SCUMMWarningEdit": "absent",
+      "commitMessages": {
+        "audited": 24,
+        "SplitFromLines": 0,
+        "sdk": "4.0.10 -> 6.0.13",
+        "libtheora": "1.1.1 -> 1.2.0",
+        "RetroWave": "e6bf60e -> ddb5b34",
+        "sdkPorts": {
+          "SDL3": "3.4.2",
+          "FreeType": "2.14.3",
+          "libpng": "1.6.59"
+        }
+      },
+      "sourceDiffFromPrevious": "only dists/emscripten/build.sh; other source blobs unchanged",
+      "fullBuild": "pending"
     }
   },
   "publication": {
@@ -2221,50 +2318,50 @@
       {
         "name": "upstream/emscripten-update-cleanup",
         "repository": "chkuendig/scummvm",
-        "head": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
+        "head": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/emscripten-update-cleanup"
       },
       {
         "name": "upstream/emscripten-opengl",
         "repository": "chkuendig/scummvm",
-        "head": "5e488cb226c63f3b6daf6cfdad998c4e17b3a8fc",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e...upstream/emscripten-opengl"
+        "head": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-opengl"
       },
       {
         "name": "upstream/emscripten-filesystem",
         "repository": "chkuendig/scummvm",
-        "head": "2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e...upstream/emscripten-filesystem"
+        "head": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-filesystem"
       },
       {
         "name": "upstream/emscripten-printing",
         "repository": "chkuendig/scummvm",
-        "head": "6341a7fa0fbd2726599be516e5518c160ddbf8a0",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e...upstream/emscripten-printing"
+        "head": "2a7fb40ccf48707eef301174230c92bb7231b880",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-printing"
       },
       {
         "name": "upstream/emscripten-loading-progress",
         "repository": "chkuendig/scummvm",
-        "head": "d35aab3551d55649439797af57b1687c92569cc4",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e...upstream/emscripten-loading-progress"
+        "head": "62f5898ead2a089d4178268b3bd4b8632d7c7d71",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-loading-progress"
       },
       {
         "name": "upstream/cloud-streaming",
         "repository": "chkuendig/scummvm",
-        "head": "31bd47dc122e3901cf0f1e0345933ae6308e075d",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef...upstream/cloud-streaming"
+        "head": "1583b35b0e6230d3bfecf12b53c0048dfa4a079a",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/e71b030436aa4ae77f7e984d0e058e12d0dc52c6...upstream/cloud-streaming"
       },
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "4f0b2897d23292a4c28e9d441d6ef312a3ca7e42",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/5e488cb226c63f3b6daf6cfdad998c4e17b3a8fc...upstream/hpl1-webgl"
+        "head": "7e6fd9711e5030c7924dd09a5715305dcca9f4c6",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/a1302e4a7231d79d41a9b3af5fad9c9fa3608667...upstream/hpl1-webgl"
       },
       {
         "name": "upstream/emscripten-recorder",
         "repository": "chkuendig/scummvm",
-        "head": "05f12c5d38265ed8d44a95c094b6a01e7646169e",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef...upstream/emscripten-recorder"
+        "head": "f2e3883212ca9facbc2d36f2d389f5dec73c7687",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/e71b030436aa4ae77f7e984d0e058e12d0dc52c6...upstream/emscripten-recorder"
       },
       {
         "name": "upstream/touch-controls",
@@ -2277,7 +2374,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "f1eb58b234a8aba09ceafd5f297444a9a3c67431",
+      "head": "0a9be9ca753fbf9a7665148efb395a2b8fa4e006",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -2317,12 +2414,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "f1eb58b234a8aba09ceafd5f297444a9a3c67431",
+    "head": "0a9be9ca753fbf9a7665148efb395a2b8fa4e006",
     "upstreamBase": "ed949213a23440447ea402e263daa871394b6bf9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Rebased source and nine review branches pushed; generated-JavaScript and libmad patches removed, SCUMM warning change reverted. Full refreshed build dispatched with deploy=false; result pending. Live deployment remains the previously validated SDK 6.0.13 build.",
+    "status": "Nine rebased review branches and consolidated source pushed. Retain the libmad compatibility patch and original VideoLAN liba52 URL; generated-JavaScript audio patches and SCUMM warning change remain removed. SDK/dependency commit message names the version updates; all Split-from lines removed. Refreshed full build pending. Live deployment remains the previously validated SDK 6.0.13 build.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
@@ -3379,5 +3476,20 @@
       "upstream/touch-controls": "8ef1023b2b8ee6413c44e76f1e3ca4abfbf54246"
     },
     "integrationHead": "9e52e845659e3ec37112c5ae37cd52a2aaa44aa3"
+  },
+  "beforeDependencyFollowup": {
+    "manifestCommit": "420e54e65ee4ec0735192a798d95f47fd74c68bc",
+    "branchHeads": {
+      "upstream/emscripten-update-cleanup": "7a5be6a0974f5ab063f0ee89b96fbd0a6222bb8e",
+      "upstream/emscripten-opengl": "5e488cb226c63f3b6daf6cfdad998c4e17b3a8fc",
+      "upstream/emscripten-filesystem": "2d2e3cddf1dca7ee567d564e3e2cb5ac5a59cfef",
+      "upstream/emscripten-printing": "6341a7fa0fbd2726599be516e5518c160ddbf8a0",
+      "upstream/emscripten-loading-progress": "d35aab3551d55649439797af57b1687c92569cc4",
+      "upstream/cloud-streaming": "31bd47dc122e3901cf0f1e0345933ae6308e075d",
+      "upstream/hpl1-webgl": "4f0b2897d23292a4c28e9d441d6ef312a3ca7e42",
+      "upstream/emscripten-recorder": "05f12c5d38265ed8d44a95c094b6a01e7646169e",
+      "upstream/touch-controls": "052dd2269c345b1dda12132613b500df6621aa17"
+    },
+    "integrationHead": "f1eb58b234a8aba09ceafd5f297444a9a3c67431"
   }
 }
