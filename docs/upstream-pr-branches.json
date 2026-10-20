@@ -17,58 +17,58 @@
     {
       "order": 1,
       "name": "upstream/emscripten-update-cleanup",
-      "head": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+      "head": "4968b30962b603e73a3bcc277d3c87ec93029aae",
       "base": "ed949213a23440447ea402e263daa871394b6bf9",
       "reviewBase": "upstream/master",
       "scope": "SDK/dependencies and separate WebMIDI, speech and browser JavaScript libraries",
       "commits": 4,
       "commitsIncludingPrerequisites": 4,
       "files": 14,
-      "diff": "14 files changed, 594 insertions(+), 360 deletions(-)",
+      "diff": "14 files changed, 582 insertions(+), 357 deletions(-)",
       "ownCommits": [
         "b9a73fb3c760209215cec616c6aaf141b349f57a",
         "50cd93b54b9a52345d4b55111480075f27dd6280",
-        "e30dbf5c1125db4921ba5ff79a99bc6776c78539",
-        "3100d77b5804f5bb765d7ddd36c76870555cc73b"
+        "d9ed2610ee8bf0891ab45d62a446d9f54dc6110f",
+        "4968b30962b603e73a3bcc277d3c87ec93029aae"
       ]
     },
     {
       "order": 2,
       "name": "upstream/emscripten-opengl",
-      "head": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
-      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
-      "reviewBase": "upstream/emscripten-update-cleanup",
+      "head": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+      "base": "ed949213a23440447ea402e263daa871394b6bf9",
+      "reviewBase": "upstream/master",
       "scope": "WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending",
       "commits": 1,
-      "commitsIncludingPrerequisites": 5,
+      "commitsIncludingPrerequisites": 1,
       "files": 4,
-      "diff": "4 files changed, 65 insertions(+), 25 deletions(-)",
+      "diff": "4 files changed, 71 insertions(+), 26 deletions(-)",
       "ownCommits": [
-        "a1302e4a7231d79d41a9b3af5fad9c9fa3608667"
+        "1dc74cae145863ec3e79935c7341b57128a0ba1a"
       ]
     },
     {
       "order": 3,
       "name": "upstream/emscripten-filesystem",
-      "head": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
-      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+      "head": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+      "base": "4968b30962b603e73a3bcc277d3c87ec93029aae",
       "reviewBase": "upstream/emscripten-update-cleanup",
       "scope": "HTTP ranges and VFS streaming/cache, drag/drop/ROM import and persistent settings",
       "commits": 3,
       "commitsIncludingPrerequisites": 7,
-      "files": 25,
-      "diff": "25 files changed, 2113 insertions(+), 303 deletions(-)",
+      "files": 28,
+      "diff": "28 files changed, 2116 insertions(+), 306 deletions(-)",
       "ownCommits": [
-        "ea5355b3f55bb746bb031178c11f021c9e30e2ce",
-        "122c839299d2ca158a4554cd1e9a44051f08e50c",
-        "e71b030436aa4ae77f7e984d0e058e12d0dc52c6"
+        "fb455e28ef85c76d8b4e35f285236a47c8a05800",
+        "59a0d6a2d7d76300a64f38bd3e35298b91a7606e",
+        "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a"
       ]
     },
     {
       "order": 4,
       "name": "upstream/emscripten-printing",
-      "head": "2a7fb40ccf48707eef301174230c92bb7231b880",
-      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+      "head": "45b99081b333223f8fcb66fc39f41bbada3b718c",
+      "base": "4968b30962b603e73a3bcc277d3c87ec93029aae",
       "reviewBase": "upstream/emscripten-update-cleanup",
       "scope": "Download game print-outs through the browser",
       "commits": 1,
@@ -76,14 +76,14 @@
       "files": 4,
       "diff": "4 files changed, 137 insertions(+)",
       "ownCommits": [
-        "2a7fb40ccf48707eef301174230c92bb7231b880"
+        "45b99081b333223f8fcb66fc39f41bbada3b718c"
       ]
     },
     {
       "order": 5,
       "name": "upstream/emscripten-loading-progress",
-      "head": "62f5898ead2a089d4178268b3bd4b8632d7c7d71",
-      "base": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+      "head": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
+      "base": "4968b30962b603e73a3bcc277d3c87ec93029aae",
       "reviewBase": "upstream/emscripten-update-cleanup",
       "scope": "Wasm download and initialization progress",
       "commits": 1,
@@ -91,14 +91,14 @@
       "files": 2,
       "diff": "2 files changed, 202 insertions(+), 73 deletions(-)",
       "ownCommits": [
-        "62f5898ead2a089d4178268b3bd4b8632d7c7d71"
+        "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50"
       ]
     },
     {
       "order": 6,
       "name": "upstream/cloud-streaming",
-      "head": "1583b35b0e6230d3bfecf12b53c0048dfa4a079a",
-      "base": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
+      "head": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
+      "base": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
       "reviewBase": "upstream/emscripten-filesystem",
       "scope": "Stream cloud providers through the shared VFS",
       "commits": 3,
@@ -106,37 +106,37 @@
       "files": 23,
       "diff": "23 files changed, 422 insertions(+), 210 deletions(-)",
       "ownCommits": [
-        "45100e0408d09abc8211fc968176973533929f58",
-        "4333adf305cfd1d1ffd5d1a5ce703a2a9f14a74e",
-        "1583b35b0e6230d3bfecf12b53c0048dfa4a079a"
+        "97969e53deee6886dbb77729a9ea0bb1ce856f25",
+        "654a17f616b7687e18e652e0a1bb15e568b911d1",
+        "5ecdf1c77e2da4aa19efe68df8403cecc27918b1"
       ]
     },
     {
       "order": 7,
       "name": "upstream/hpl1-webgl",
-      "head": "7e6fd9711e5030c7924dd09a5715305dcca9f4c6",
-      "base": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
+      "head": "685fdd4e5f387cb96138868fbbd7749f74d85045",
+      "base": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
       "reviewBase": "upstream/emscripten-opengl",
       "scope": "GLES rendering/shaders, menu navigation and native camera input",
       "commits": 5,
-      "commitsIncludingPrerequisites": 10,
+      "commitsIncludingPrerequisites": 6,
       "files": 60,
       "diff": "60 files changed, 4300 insertions(+), 216 deletions(-)",
       "ownCommits": [
-        "3fc2bfdd96bd3e2d3a40b7736fbdae8ae4c34c15",
-        "525586c0afe7dbf2adce5bb925acaf51e7740655",
-        "ad2fa65e17e00a48aafa7d1661231d0681d274e1",
-        "bc864206e6e5d1fc116009db9a143c18ad5e9165",
-        "7e6fd9711e5030c7924dd09a5715305dcca9f4c6"
+        "0b7f2619fa5ab57077a196d5237fe6a0309c84e0",
+        "4d18365dd4bf9a8612b0de15b1d24fba61c96e09",
+        "14aedcae5c7eb6782815c296d675e1ec972d2803",
+        "d02af301bc74d2213aab6e8563b1d4ed8526837e",
+        "685fdd4e5f387cb96138868fbbd7749f74d85045"
       ],
-      "sharedSupportImport": "bc864206e6e5d1fc116009db9a143c18ad5e9165",
+      "sharedSupportImport": "d02af301bc74d2213aab6e8563b1d4ed8526837e",
       "landingNote": "The shared-support commit mirrors the touch branch axis API. Once that API is upstream, omit the duplicate prerequisite during rebase."
     },
     {
       "order": 8,
       "name": "upstream/emscripten-recorder",
-      "head": "f2e3883212ca9facbc2d36f2d389f5dec73c7687",
-      "base": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
+      "head": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
+      "base": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
       "reviewBase": "upstream/emscripten-filesystem",
       "scope": "Browser recording/export/replay and viewport-aware controls",
       "commits": 3,
@@ -144,9 +144,9 @@
       "files": 13,
       "diff": "13 files changed, 237 insertions(+), 8 deletions(-)",
       "ownCommits": [
-        "4cbf7631c8a4be65878a20c336676349f6ec8edb",
-        "295676adccf39c470a3042fae5a619a890c48a25",
-        "f2e3883212ca9facbc2d36f2d389f5dec73c7687"
+        "1e5c707959fbdca4c1edf896849b076a56086549",
+        "14c78382f937d791713bde81394398b24934a0a7",
+        "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8"
       ]
     },
     {
@@ -199,7 +199,7 @@
       ]
     },
     {
-      "sourceCommit": "e30dbf5c1125db4921ba5ff79a99bc6776c78539",
+      "sourceCommit": "d9ed2610ee8bf0891ab45d62a446d9f54dc6110f",
       "subject": "EMSCRIPTEN: Extract browser backend APIs into a JavaScript library",
       "parts": [
         {
@@ -217,7 +217,7 @@
       ]
     },
     {
-      "sourceCommit": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+      "sourceCommit": "4968b30962b603e73a3bcc277d3c87ec93029aae",
       "subject": "EMSCRIPTEN: Update to SDK 6.0.13 and refresh dependencies",
       "parts": [
         {
@@ -231,7 +231,7 @@
       ]
     },
     {
-      "sourceCommit": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
+      "sourceCommit": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
       "subject": "EMSCRIPTEN: Scope WebGL rendering fixes to the browser",
       "parts": [
         {
@@ -246,7 +246,7 @@
       ]
     },
     {
-      "sourceCommit": "ea5355b3f55bb746bb031178c11f021c9e30e2ce",
+      "sourceCommit": "fb455e28ef85c76d8b4e35f285236a47c8a05800",
       "subject": "EMSCRIPTEN: Stream HTTP files through a bounded virtual filesystem",
       "parts": [
         {
@@ -264,6 +264,9 @@
             "backends/fs/emscripten/virtual-readstream.cpp",
             "backends/fs/emscripten/virtual-readstream.h",
             "backends/module.mk",
+            "backends/networking/http/emscripten/networkreadstream-emscripten.cpp",
+            "backends/networking/http/emscripten/networkreadstream-emscripten.h",
+            "backends/networking/http/emscripten/networkreadstream-emscripten.js",
             "backends/networking/http/sessionrequest.cpp",
             "backends/networking/http/sessionrequest.h",
             "configure"
@@ -272,7 +275,7 @@
       ]
     },
     {
-      "sourceCommit": "122c839299d2ca158a4554cd1e9a44051f08e50c",
+      "sourceCommit": "59a0d6a2d7d76300a64f38bd3e35298b91a7606e",
       "subject": "EMSCRIPTEN: Mount dropped files and import Roland ROMs",
       "parts": [
         {
@@ -297,7 +300,7 @@
       ]
     },
     {
-      "sourceCommit": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
+      "sourceCommit": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
       "subject": "EMSCRIPTEN: Persist settings storage and use supported FS APIs",
       "parts": [
         {
@@ -309,7 +312,7 @@
       ]
     },
     {
-      "sourceCommit": "2a7fb40ccf48707eef301174230c92bb7231b880",
+      "sourceCommit": "45b99081b333223f8fcb66fc39f41bbada3b718c",
       "subject": "EMSCRIPTEN: Download game print-outs through the browser",
       "parts": [
         {
@@ -324,7 +327,7 @@
       ]
     },
     {
-      "sourceCommit": "62f5898ead2a089d4178268b3bd4b8632d7c7d71",
+      "sourceCommit": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
       "subject": "EMSCRIPTEN: Show download and initialization progress",
       "parts": [
         {
@@ -337,7 +340,7 @@
       ]
     },
     {
-      "sourceCommit": "45100e0408d09abc8211fc968176973533929f58",
+      "sourceCommit": "97969e53deee6886dbb77729a9ea0bb1ce856f25",
       "subject": "CLOUD: Support efficient ranged downloads",
       "parts": [
         {
@@ -361,7 +364,7 @@
       ]
     },
     {
-      "sourceCommit": "4333adf305cfd1d1ffd5d1a5ce703a2a9f14a74e",
+      "sourceCommit": "654a17f616b7687e18e652e0a1bb15e568b911d1",
       "subject": "CLOUD: Handle access tokens and browser refresh failures",
       "parts": [
         {
@@ -379,7 +382,7 @@
       ]
     },
     {
-      "sourceCommit": "1583b35b0e6230d3bfecf12b53c0048dfa4a079a",
+      "sourceCommit": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
       "subject": "EMSCRIPTEN: Stream cloud files through the shared filesystem",
       "parts": [
         {
@@ -397,7 +400,7 @@
       ]
     },
     {
-      "sourceCommit": "3fc2bfdd96bd3e2d3a40b7736fbdae8ae4c34c15",
+      "sourceCommit": "0b7f2619fa5ab57077a196d5237fe6a0309c84e0",
       "subject": "HPL1: Bundle shaders and adapt them for GLES",
       "parts": [
         {
@@ -422,7 +425,7 @@
       ]
     },
     {
-      "sourceCommit": "525586c0afe7dbf2adce5bb925acaf51e7740655",
+      "sourceCommit": "4d18365dd4bf9a8612b0de15b1d24fba61c96e09",
       "subject": "HPL1: Add the WebGL2 renderer and GLES compatibility layer",
       "parts": [
         {
@@ -457,7 +460,7 @@
       ]
     },
     {
-      "sourceCommit": "ad2fa65e17e00a48aafa7d1661231d0681d274e1",
+      "sourceCommit": "14aedcae5c7eb6782815c296d675e1ec972d2803",
       "subject": "HPL1: Add controller bindings and menu focus navigation",
       "parts": [
         {
@@ -471,7 +474,7 @@
       ]
     },
     {
-      "sourceCommit": "bc864206e6e5d1fc116009db9a143c18ad5e9165",
+      "sourceCommit": "d02af301bc74d2213aab6e8563b1d4ed8526837e",
       "subject": "KEYMAPPER: Provide shared engine-axis actions for HPL1",
       "parts": [
         {
@@ -492,7 +495,7 @@
       ]
     },
     {
-      "sourceCommit": "7e6fd9711e5030c7924dd09a5715305dcca9f4c6",
+      "sourceCommit": "685fdd4e5f387cb96138868fbbd7749f74d85045",
       "subject": "HPL1: Handle native camera axes and preserve touch response",
       "parts": [
         {
@@ -515,7 +518,7 @@
       ]
     },
     {
-      "sourceCommit": "4cbf7631c8a4be65878a20c336676349f6ec8edb",
+      "sourceCommit": "1e5c707959fbdca4c1edf896849b076a56086549",
       "subject": "COMMON: Propagate finalize() through buffered and recorder write streams",
       "parts": [
         {
@@ -528,7 +531,7 @@
       ]
     },
     {
-      "sourceCommit": "295676adccf39c470a3042fae5a619a890c48a25",
+      "sourceCommit": "14c78382f937d791713bde81394398b24934a0a7",
       "subject": "BACKENDS: EMSCRIPTEN: Support browser recording, replay and viewport controls",
       "parts": [
         {
@@ -549,7 +552,7 @@
       ]
     },
     {
-      "sourceCommit": "f2e3883212ca9facbc2d36f2d389f5dec73c7687",
+      "sourceCommit": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
       "subject": "BACKENDS: EMSCRIPTEN: Keep the SDL audio callback out of the event recorder",
       "parts": [
         {
@@ -2315,6 +2318,784 @@
         "demoCommit": "78c684ff7d48936bfcd3d5f0b9f9559b120a8b61",
         "deploy": false
       }
+    },
+    "configureReview": {
+      "branchChecks": [
+        {
+          "branch": "upstream/emscripten-update-cleanup",
+          "head": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+          "commits": 4,
+          "includingPrerequisites": 4,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/emscripten-opengl",
+          "head": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+          "commits": 1,
+          "includingPrerequisites": 1,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "head": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+          "commits": 3,
+          "includingPrerequisites": 7,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/emscripten-printing",
+          "head": "45b99081b333223f8fcb66fc39f41bbada3b718c",
+          "commits": 1,
+          "includingPrerequisites": 5,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/emscripten-loading-progress",
+          "head": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
+          "commits": 1,
+          "includingPrerequisites": 5,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "head": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
+          "commits": 3,
+          "includingPrerequisites": 10,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "head": "685fdd4e5f387cb96138868fbbd7749f74d85045",
+          "commits": 5,
+          "includingPrerequisites": 6,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/emscripten-recorder",
+          "head": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
+          "commits": 3,
+          "includingPrerequisites": 10,
+          "checks": "passed"
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "head": "052dd2269c345b1dda12132613b500df6621aa17",
+          "commits": 3,
+          "includingPrerequisites": 3,
+          "checks": "passed"
+        }
+      ],
+      "demoCherryPicks": {
+        "commits": [
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "b9a73fb3c760209215cec616c6aaf141b349f57a",
+            "cherryPick": "09a31e3888a5400862fd2d11a5b6e2a68c032468",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "50cd93b54b9a52345d4b55111480075f27dd6280",
+            "cherryPick": "1fe0616f1d45df671f5c8ab39c36f33aa8abfd50",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "d9ed2610ee8bf0891ab45d62a446d9f54dc6110f",
+            "cherryPick": "e72143b76219e821467e42d7763e462b3b134e5d",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+            "cherryPick": "f4346c4bc70798df7b335737e4ad3379a167ea4f",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-opengl",
+            "source": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+            "cherryPick": "fb9c620e7534278949d17351a37ddd2174056b5a",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-filesystem",
+            "source": "fb455e28ef85c76d8b4e35f285236a47c8a05800",
+            "cherryPick": "78a313da45c2b7c49b53a8e497f213f3a243ed4d",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-filesystem",
+            "source": "59a0d6a2d7d76300a64f38bd3e35298b91a7606e",
+            "cherryPick": "6123b2ca850831ca2ad25c6cf6ba0dec45bad907",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-filesystem",
+            "source": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+            "cherryPick": "b7f738792e02c3953ed021b2fc0d4135c3ec1564",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-printing",
+            "source": "45b99081b333223f8fcb66fc39f41bbada3b718c",
+            "cherryPick": "76c2e7dd844c53116a26f9e79c64b90f6f3d65e4",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-loading-progress",
+            "source": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
+            "cherryPick": "f9615a9f63bbda43ec59e9ff3f31c126bb4b23d7",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "source": "97969e53deee6886dbb77729a9ea0bb1ce856f25",
+            "cherryPick": "1b7392fe5ee8a4b15d3529277cf38d61f5197f8a",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "source": "654a17f616b7687e18e652e0a1bb15e568b911d1",
+            "cherryPick": "5a03e49f2a006eb7662fdb4183d644bdd5b54d9f",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "source": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
+            "cherryPick": "cdc4ae0ba044dc6227343f7b83ca70695ed79e28",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/touch-controls",
+            "source": "ebd7fe8c6db2dc2077d67d86cb47736d43dbed3d",
+            "cherryPick": "44aaeed6fb5bafa8aa9cc9df2ec7b45ab501be3d",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/touch-controls",
+            "source": "63f6fabc919d178890a30184888bc9f054a7a3f1",
+            "cherryPick": "51f3c9c7672a8ba74d869bcd11a0fc104db0023d",
+            "conflictsResolvedFromPreservedDemoTree": [
+              "backends/platform/sdl/sdl.cpp"
+            ]
+          },
+          {
+            "branch": "upstream/touch-controls",
+            "source": "052dd2269c345b1dda12132613b500df6621aa17",
+            "cherryPick": "fefc3a99d6a4980538b1ccc25ef5890b23df9057",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "0b7f2619fa5ab57077a196d5237fe6a0309c84e0",
+            "cherryPick": "5d854db75f5a54ce3d6263b74f2d956d5ab2b52e",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "4d18365dd4bf9a8612b0de15b1d24fba61c96e09",
+            "cherryPick": "7c91bd2017bc5009be3da6fad8a42d7021b9194e",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "14aedcae5c7eb6782815c296d675e1ec972d2803",
+            "cherryPick": "5ccfa7213cac78c4cff3c38d971ba93e3c1e83e1",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "d02af301bc74d2213aab6e8563b1d4ed8526837e",
+            "cherryPick": "f771c2f8f6d40262fa0bb8c94cb49b347b89bf85",
+            "conflictsResolvedFromPreservedDemoTree": [
+              "backends/keymapper/virtual-mouse.h"
+            ]
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "685fdd4e5f387cb96138868fbbd7749f74d85045",
+            "cherryPick": "6004353880a539bc6f67e4a31eb18546e7ac0f48",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-recorder",
+            "source": "1e5c707959fbdca4c1edf896849b076a56086549",
+            "cherryPick": "85cfb469789ca54a1754b331382a0090e3d1e3b4",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-recorder",
+            "source": "14c78382f937d791713bde81394398b24934a0a7",
+            "cherryPick": "43e051aa8da45d060040399c10e06dc30e899936",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-recorder",
+            "source": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
+            "cherryPick": "77a2851515611b4a143e569616e64e3c6a887848",
+            "conflictsResolvedFromPreservedDemoTree": []
+          }
+        ],
+        "seriesHead": "77a2851515611b4a143e569616e64e3c6a887848",
+        "preservedDemoPaths": [
+          "backends/platform/sdl/emscripten/emscripten.cpp",
+          "dists/emscripten/build.sh"
+        ],
+        "integrationTreeMatchesPreparedSource": false,
+        "runtimeTreeMatchesPreparedSource": true,
+        "regressionTestRetained": "test/common/joystick-events.h"
+      },
+      "sdk": "6.0.13",
+      "memory": {
+        "initialMiB": 128,
+        "stackMiB": 32,
+        "maximumMiB": 2048,
+        "explicitMaximum": false,
+        "reason": "Restore upstream settings; prior iOS maximum/stack justification was not established by recorded measurements."
+      },
+      "raiseExport": "retained; comment shortened",
+      "networking": "Browser window.fetch implementation, not libcurl or emscripten_fetch",
+      "renames": {
+        "OSystem_Emscripten_toggleFullscreen": "OSystem_Emscripten_setFullscreen",
+        "NetworkReadStreamEmscripten_getErr": "NetworkReadStreamEmscripten_getError"
+      },
+      "behaviorComparisons": 7,
+      "sdkProbes": {
+        "passed": true,
+        "sdk": "6.0.13",
+        "cppCallersSyntaxChecks": 2,
+        "renamedBridges": {
+          "compileAndLink": "passed",
+          "nodeRun": "passed"
+        },
+        "imguiProbe": {
+          "withUnrelatedVorbisfile": "failed as expected: unable to find library -lvorbisfile",
+          "withoutUnrelatedLibraries": "passed"
+        },
+        "commands": [
+          [
+            "/tmp/scummvm-sdk-6.0.13/emsdk-6.0.13/upstream/emscripten/em++",
+            "/home/christian/projects/scummvm-demo/.git/configure-review/sdk-imgui-probe.cpp",
+            "-sUSE_SDL=3",
+            "-sENVIRONMENT=node",
+            "-o",
+            "/home/christian/projects/scummvm-demo/.git/configure-review/imgui-probe.js"
+          ]
+        ]
+      },
+      "staticBuildExports": "Restore upstream malloc/free and runtime-method exports; required by the standalone OpenGL branch HTTP filesystem.",
+      "browser": {
+        "sourceBranch": "upstream/emscripten-opengl",
+        "upstreamBase": "ed949213a23440447ea402e263daa871394b6bf9",
+        "sourceTree": "independent OpenGL branch without local source edits",
+        "sdk": "6.0.13",
+        "checks": [
+          {
+            "webglBlocked": true,
+            "pageErrors": [],
+            "console": [
+              {
+                "type": "log",
+                "text": "7:37:10 PM Downloading ScummVM..."
+              },
+              {
+                "type": "error",
+                "text": "No MIDI support in your browser."
+              },
+              {
+                "type": "log",
+                "text": "7:37:11 PM Running..."
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/games/index.json"
+              },
+              {
+                "type": "log",
+                "text": "Debuglevel (from command line): 1"
+              },
+              {
+                "type": "log",
+                "text": "Using SDL Audio Driver \"emscripten\""
+              },
+              {
+                "type": "log",
+                "text": "Output sample rate: 44100 Hz"
+              },
+              {
+                "type": "warning",
+                "text": "The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+              },
+              {
+                "type": "log",
+                "text": "Using SDL Video Driver \"emscripten\""
+              },
+              {
+                "type": "error",
+                "text": "WARNING: SDL_GL_CreateContext() failed!"
+              },
+              {
+                "type": "log",
+                "text": "creating SurfaceSDL graphics manager"
+              },
+              {
+                "type": "error",
+                "text": "WARNING: OpenGL graphics manager requested, but OpenGL is not supported!!"
+              },
+              {
+                "type": "error",
+                "text": "WARNING: No graphics modes found for manager 1!"
+              },
+              {
+                "type": "error",
+                "text": "WARNING: OpenGL graphics manager requested, but OpenGL is not supported!!"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/vkeybd_default.zip"
+              },
+              {
+                "type": "log",
+                "text": "Virtual keyboard pack 'vkeybd_default' loaded successfully"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/translations.dat"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_START' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_BACK' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_Y-' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_Y+' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_X-' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_X+' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_RIGHT_SHOULDER' not known"
+              },
+              {
+                "type": "log",
+                "text": "CPU extensions:"
+              },
+              {
+                "type": "log",
+                "text": "SSE2(not supported) AVX2(not supported) NEON(not supported)"
+              },
+              {
+                "type": "log",
+                "text": "Setting 640 x 480 -> 640 x 480 -- 1"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/scummclassic.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/scummremastered.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/helpdialog.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/vkeybd_small.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Cache hit for %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/scummmodern.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/residualvm.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/games/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Cache hit for %s /data/games/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/fonts.dat"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Cache hit for %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "error",
+                "text": "WARNING: initWithU32String: Fribidi not available, will use input strings as fallback.!"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_A' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_Y' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_UP' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_DOWN' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_RIGHT' not known"
+              },
+              {
+                "type": "log",
+                "text": "Setting 640 x 480 -> 640 x 480 -- 1"
+              }
+            ],
+            "httpErrors": [],
+            "probe": {
+              "instances": [
+                {
+                  "platform": "imgui_impl_sdl3 (3.4.2; 3.4.2)",
+                  "renderer": "imgui_impl_sdlrenderer3",
+                  "ioFieldsAddress": 35381048,
+                  "platformUserData": 34674648,
+                  "rendererUserData": 35395360
+                }
+              ],
+              "contexts": [
+                {
+                  "type": "webgl2",
+                  "success": false,
+                  "canvasId": "canvas",
+                  "count": 7
+                },
+                {
+                  "type": "2d",
+                  "success": true,
+                  "canvasId": "canvas",
+                  "count": 1
+                }
+              ],
+              "canvas": {
+                "width": 1280,
+                "height": 720
+              }
+            },
+            "passed": true
+          },
+          {
+            "webglBlocked": false,
+            "pageErrors": [],
+            "console": [
+              {
+                "type": "log",
+                "text": "7:37:19 PM Downloading ScummVM..."
+              },
+              {
+                "type": "error",
+                "text": "No MIDI support in your browser."
+              },
+              {
+                "type": "log",
+                "text": "7:37:20 PM Running..."
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/games/index.json"
+              },
+              {
+                "type": "log",
+                "text": "Debuglevel (from command line): 1"
+              },
+              {
+                "type": "log",
+                "text": "Using SDL Audio Driver \"emscripten\""
+              },
+              {
+                "type": "log",
+                "text": "Output sample rate: 44100 Hz"
+              },
+              {
+                "type": "warning",
+                "text": "The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+              },
+              {
+                "type": "log",
+                "text": "Using SDL Video Driver \"emscripten\""
+              },
+              {
+                "type": "log",
+                "text": "creating SurfaceSDL graphics manager"
+              },
+              {
+                "type": "log",
+                "text": "creating OpenGL graphics manager"
+              },
+              {
+                "type": "log",
+                "text": "creating OpenGL graphics manager"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Cache hit for %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/shaders.dat"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/vkeybd_default.zip"
+              },
+              {
+                "type": "log",
+                "text": "Virtual keyboard pack 'vkeybd_default' loaded successfully"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/translations.dat"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_START' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_BACK' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_Y-' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_Y+' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_X-' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT_STICK_X+' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_RIGHT_SHOULDER' not known"
+              },
+              {
+                "type": "log",
+                "text": "CPU extensions:"
+              },
+              {
+                "type": "log",
+                "text": "SSE2(not supported) AVX2(not supported) NEON(not supported)"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/scummclassic.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/scummremastered.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/helpdialog.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/vkeybd_small.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Cache hit for %s /data/gui-icons/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/scummmodern.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/residualvm.zip"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/games/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Cache hit for %s /data/games/index.json"
+              },
+              {
+                "type": "debug",
+                "text": "Downloading %s /data/fonts.dat"
+              },
+              {
+                "type": "error",
+                "text": "WARNING: initWithU32String: Fribidi not available, will use input strings as fallback.!"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_A' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_Y' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_UP' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_DOWN' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_LEFT' not known"
+              },
+              {
+                "type": "log",
+                "text": "HardwareInput with ID 'JOY_RIGHT' not known"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              },
+              {
+                "type": "log",
+                "text": "Setting 1280 x 720 -> 1280 x 720 -- 1"
+              }
+            ],
+            "httpErrors": [],
+            "probe": {
+              "instances": [
+                {
+                  "platform": "imgui_impl_sdl3 (3.4.2; 3.4.2)",
+                  "renderer": "imgui_impl_opengl3",
+                  "ioFieldsAddress": 34703704,
+                  "platformUserData": 34680064,
+                  "rendererUserData": 34714920
+                }
+              ],
+              "contexts": [
+                {
+                  "type": "webgl2",
+                  "success": true,
+                  "canvasId": "canvas",
+                  "count": 7
+                }
+              ],
+              "canvas": {
+                "width": 1280,
+                "height": 720
+              }
+            },
+            "passed": true
+          }
+        ],
+        "sourceCommit": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+        "passed": true
+      },
+      "fullBuild": "not run for this revision; focused OpenGL branch browser build passed",
+      "supersededFullBuild": {
+        "id": 39478998521,
+        "url": "https://github.com/chkuendig/scummvm-demo/actions/runs/39478998521",
+        "demoCommit": "78c684ff7d48936bfcd3d5f0b9f9559b120a8b61",
+        "scummvmCommit": "0a9be9ca753fbf9a7665148efb395a2b8fa4e006",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "reason": "Superseded while queued by the configure review and refreshed demo integration."
+      }
     }
   },
   "publication": {
@@ -2323,50 +3104,50 @@
       {
         "name": "upstream/emscripten-update-cleanup",
         "repository": "chkuendig/scummvm",
-        "head": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+        "head": "4968b30962b603e73a3bcc277d3c87ec93029aae",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/emscripten-update-cleanup"
       },
       {
         "name": "upstream/emscripten-opengl",
         "repository": "chkuendig/scummvm",
-        "head": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-opengl"
+        "head": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/emscripten-opengl"
       },
       {
         "name": "upstream/emscripten-filesystem",
         "repository": "chkuendig/scummvm",
-        "head": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-filesystem"
+        "head": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/4968b30962b603e73a3bcc277d3c87ec93029aae...upstream/emscripten-filesystem"
       },
       {
         "name": "upstream/emscripten-printing",
         "repository": "chkuendig/scummvm",
-        "head": "2a7fb40ccf48707eef301174230c92bb7231b880",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-printing"
+        "head": "45b99081b333223f8fcb66fc39f41bbada3b718c",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/4968b30962b603e73a3bcc277d3c87ec93029aae...upstream/emscripten-printing"
       },
       {
         "name": "upstream/emscripten-loading-progress",
         "repository": "chkuendig/scummvm",
-        "head": "62f5898ead2a089d4178268b3bd4b8632d7c7d71",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/3100d77b5804f5bb765d7ddd36c76870555cc73b...upstream/emscripten-loading-progress"
+        "head": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/4968b30962b603e73a3bcc277d3c87ec93029aae...upstream/emscripten-loading-progress"
       },
       {
         "name": "upstream/cloud-streaming",
         "repository": "chkuendig/scummvm",
-        "head": "1583b35b0e6230d3bfecf12b53c0048dfa4a079a",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/e71b030436aa4ae77f7e984d0e058e12d0dc52c6...upstream/cloud-streaming"
+        "head": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/bcd09c38b7492f5f9ead7188f4987790bc8e0f9a...upstream/cloud-streaming"
       },
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "7e6fd9711e5030c7924dd09a5715305dcca9f4c6",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/a1302e4a7231d79d41a9b3af5fad9c9fa3608667...upstream/hpl1-webgl"
+        "head": "685fdd4e5f387cb96138868fbbd7749f74d85045",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/1dc74cae145863ec3e79935c7341b57128a0ba1a...upstream/hpl1-webgl"
       },
       {
         "name": "upstream/emscripten-recorder",
         "repository": "chkuendig/scummvm",
-        "head": "f2e3883212ca9facbc2d36f2d389f5dec73c7687",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/e71b030436aa4ae77f7e984d0e058e12d0dc52c6...upstream/emscripten-recorder"
+        "head": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/bcd09c38b7492f5f9ead7188f4987790bc8e0f9a...upstream/emscripten-recorder"
       },
       {
         "name": "upstream/touch-controls",
@@ -2379,7 +3160,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "0a9be9ca753fbf9a7665148efb395a2b8fa4e006",
+      "head": "b0354958e1eb74017a98b725a710c3af47556267",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -2419,12 +3200,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "0a9be9ca753fbf9a7665148efb395a2b8fa4e006",
+    "head": "b0354958e1eb74017a98b725a710c3af47556267",
     "upstreamBase": "ed949213a23440447ea402e263daa871394b6bf9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Nine rebased review branches and consolidated source pushed. Retain the libmad compatibility patch and original VideoLAN liba52 URL; generated-JavaScript audio patches and SCUMM warning change remain removed. SDK/dependency commit message names the version updates; all Split-from lines removed. Refreshed full build pending. Live deployment remains the previously validated SDK 6.0.13 build.",
+    "status": "Configure review and two C/JS bridge renames pushed across nine review branches and consolidated demo source. The OpenGL branch owns the Emscripten ImGui capability probe fix. Upstream memory settings restored. Local browser checks validate WebGL-unavailable surface fallback; full demo rebuild/deployment remains pending. Live deployment stays on the previously validated SDK 6.0.13 build.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
@@ -3349,7 +4130,7 @@
     "base": "f631a289b7137cf324e0032db9b87c0af26271e9"
   },
   "emscriptenUpgradePlan": {
-    "status": "SDK 6.0.13 remains deployed; source cleanup and upstream-master rebase prepared, refreshed full build pending",
+    "status": "SDK 6.0.13 remains deployed; configure fixes, independent OpenGL and bridge renames pushed and locally browser-tested. Full refreshed demo build/deployment pending.",
     "current": "6.0.13",
     "target": "6.0.13",
     "branch": "upstream/emscripten-update-cleanup",
@@ -3496,5 +4277,20 @@
       "upstream/touch-controls": "052dd2269c345b1dda12132613b500df6621aa17"
     },
     "integrationHead": "f1eb58b234a8aba09ceafd5f297444a9a3c67431"
+  },
+  "beforeConfigureReview": {
+    "manifestCommit": "515b1a8aa55654b219398fbfc2f5df54facc2398",
+    "branchHeads": {
+      "upstream/emscripten-update-cleanup": "3100d77b5804f5bb765d7ddd36c76870555cc73b",
+      "upstream/emscripten-opengl": "a1302e4a7231d79d41a9b3af5fad9c9fa3608667",
+      "upstream/emscripten-filesystem": "e71b030436aa4ae77f7e984d0e058e12d0dc52c6",
+      "upstream/emscripten-printing": "2a7fb40ccf48707eef301174230c92bb7231b880",
+      "upstream/emscripten-loading-progress": "62f5898ead2a089d4178268b3bd4b8632d7c7d71",
+      "upstream/cloud-streaming": "1583b35b0e6230d3bfecf12b53c0048dfa4a079a",
+      "upstream/hpl1-webgl": "7e6fd9711e5030c7924dd09a5715305dcca9f4c6",
+      "upstream/emscripten-recorder": "f2e3883212ca9facbc2d36f2d389f5dec73c7687",
+      "upstream/touch-controls": "052dd2269c345b1dda12132613b500df6621aa17"
+    },
+    "integrationHead": "0a9be9ca753fbf9a7665148efb395a2b8fa4e006"
   }
 }
