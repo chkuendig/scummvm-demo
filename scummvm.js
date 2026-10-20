@@ -14,7 +14,7 @@
 // after the generated code, you will need to define   var Module = {};
 // before the code. Then that object will be used in the code, and you
 // can continue to use Module afterwards as well.
-var Module = typeof Module != 'undefined' ? Module : {};
+var Module = typeof Module !== 'undefined' ? Module : {};
 
 // Determine the runtime environment we are in. You can customize this by
 // setting the ENVIRONMENT setting at compile time (see settings.js).
@@ -31,6 +31,11 @@ var ENVIRONMENT_IS_SHELL = !ENVIRONMENT_IS_WEB && !ENVIRONMENT_IS_NODE && !ENVIR
 // refer to Module (if they choose; they can also define Module)
 // include: ./dists/emscripten/custom_shell-pre.js
 /*global Module*/
+// Reload page when fragment identifier (and launch parameters) changes
+window.addEventListener("hashchange", function () {
+	location.reload();
+});
+
 Module["arguments"] = [];
 
 
@@ -105,11 +110,6 @@ if (window.location.hash.length > 0) {
     })
 }
 
-// Reload page when fragment identifier (and launch parameters) changes
-window.addEventListener("hashchange", function () {
-	location.reload();
-});
-
 // Loading Indicator for WASM Initialization
 // To get the progress of WebAssembly.instantiateStreaming / WebAssembly.compileStreaming,
 // we hook the browser fetch API and create a new Fetch Response with a custom ReadableStream which implements it's own controller.
@@ -179,7 +179,7 @@ var quit_ = (status, toThrow) => {
 // before the page load. In non-MODULARIZE modes generate it here.
 var _scriptName = globalThis.document?.currentScript?.src;
 
-if (typeof __filename != 'undefined') { // Node
+if (typeof __filename !== 'undefined') { // Node
   _scriptName = __filename;
 } else
 if (ENVIRONMENT_IS_WORKER) {
@@ -228,7 +228,7 @@ readAsync = async (filename, binary = true) => {
   programArgs = process.argv.slice(2);
 
   // MODULARIZE will export the module in the proper place outside, we don't need to export here
-  if (typeof module != 'undefined') {
+  if (typeof module !== 'undefined') {
     module['exports'] = Module;
   }
 
@@ -397,7 +397,7 @@ var __RELOC_FUNCS__ = [];
 function preRun() {
   var preRun = Module['preRun'];
   if (preRun) {
-    if (typeof preRun == 'function') preRun = [preRun];
+    if (typeof preRun === 'function') preRun = [preRun];
     onPreRuns.push(...preRun);
   }
   // Begin ATPRERUNS hooks
@@ -431,7 +431,7 @@ function postRun() {
 
   var postRun = Module['postRun'];
   if (postRun) {
-    if (typeof postRun == 'function') postRun = [postRun];
+    if (typeof postRun === 'function') postRun = [postRun];
     onPostRuns.push(...postRun);
   }
 
@@ -463,18 +463,7 @@ function abort(what) {
   // a trap or not based on a hidden field within the object. So at the moment
   // we don't have a way of throwing a wasm trap from JS. TODO Make a JS API that
   // allows this in the wasm spec.
-
-  // Suppress closure compiler warning here. Closure compiler's builtin extern
-  // definition for WebAssembly.RuntimeError claims it takes no arguments even
-  // though it can.
-  // TODO(https://github.com/google/closure-compiler/pull/3913): Remove if/when upstream closure gets fixed.
-  /** @suppress {checkTypes} */
-  var e = new WebAssembly.RuntimeError(what);
-
-  // Throw the error whether or not MODULARIZE is set because abort is used
-  // in code paths apart from instantiation where an exception is expected
-  // to be thrown when abort is called.
-  throw e;
+  throw new WebAssembly.RuntimeError(what);
 }
 
 var wasmBinaryFile;
@@ -834,15 +823,15 @@ var asyncifyStubs = {};
       }
   
       var customSection = { neededDynlibs: [], tlsExports: new Set(), weakImports: new Set(), runtimePaths: [] };
-      var WASM_DYLINK_MEM_INFO = 0x1;
-      var WASM_DYLINK_NEEDED = 0x2;
-      var WASM_DYLINK_EXPORT_INFO = 0x3;
-      var WASM_DYLINK_IMPORT_INFO = 0x4;
-      var WASM_DYLINK_RUNTIME_PATH = 0x5;
-      var WASM_DYLINK_TARGET_ARCH = 0x6;
-      var WASM_SYMBOL_TLS = 0x100;
-      var WASM_SYMBOL_BINDING_MASK = 0x3;
-      var WASM_SYMBOL_BINDING_WEAK = 0x1;
+      const WASM_DYLINK_MEM_INFO = 0x1;
+      const WASM_DYLINK_NEEDED = 0x2;
+      const WASM_DYLINK_EXPORT_INFO = 0x3;
+      const WASM_DYLINK_IMPORT_INFO = 0x4;
+      const WASM_DYLINK_RUNTIME_PATH = 0x5;
+      const WASM_DYLINK_TARGET_ARCH = 0x6;
+      const WASM_SYMBOL_TLS = 0x100;
+      const WASM_SYMBOL_BINDING_MASK = 0x3;
+      const WASM_SYMBOL_BINDING_WEAK = 0x1;
       while (offset < end) {
         var subsectionType = getU8();
         var subsectionSize = getLEB();
@@ -1146,9 +1135,9 @@ var asyncifyStubs = {};
         var existingEntry = GOT[symName] && GOT[symName].value != -1;
         if (replace || !existingEntry) {
           var newValue;
-          if (typeof value == 'function') {
+          if (typeof value === 'function') {
             newValue = addFunction(value);
-          } else if (typeof value.value == 'number') {
+          } else if (typeof value.value === 'number') {
             newValue = value;
           } else {
             // The GOT can only contain addresses (i.e data addresses or function
@@ -1747,7 +1736,7 @@ resolve:(...args) => {
       for (var i = args.length - 1; i >= -1 && !resolvedAbsolute; i--) {
         var path = (i >= 0) ? args[i] : FS.cwd();
         // Skip empty and invalid entries
-        if (typeof path != 'string') {
+        if (typeof path !== 'string') {
           throw new TypeError('Arguments to path.resolve must be strings');
         } else if (!path) {
           return ''; // an invalid portion invalidates the whole thing
@@ -2005,7 +1994,7 @@ var FS_stdin_getChar_buffer = [];
   mount(mount) {
         return MEMFS.createNode(null, '/', 16895, 0);
       },
-  createNode(parent, name, mode, dev) {
+  createNode(parent, name, mode, dev = undefined) {
         if (FS.isBlkdev(mode) || FS.isFIFO(mode)) {
           // not supported
           throw new FS.ErrnoError(63);
@@ -2098,7 +2087,7 @@ var FS_stdin_getChar_buffer = [];
         // For small filesizes (<1MB), perform size*2 geometric increase, but for
         // large sizes, do a much more conservative size*1.125 increase to avoid
         // overshooting the allocation cap by a very large margin.
-        var CAPACITY_DOUBLING_MAX = 1024 * 1024;
+        const CAPACITY_DOUBLING_MAX = 1024 * 1024;
         newCapacity = Math.max(newCapacity, (prevCapacity * (prevCapacity < CAPACITY_DOUBLING_MAX ? 2.0 : 1.125)) >>> 0);
         if (prevCapacity) newCapacity = Math.max(newCapacity, 256); // At minimum allocate 256b for each file when expanding.
         var oldContents = MEMFS.getFileDataAsTypedArray(node);
@@ -2161,7 +2150,7 @@ var FS_stdin_getChar_buffer = [];
           }
           throw MEMFS.doesNotExistError;
         },
-  mknod(parent, name, mode, dev) {
+  mknod(parent, name, mode, dev = undefined) {
           return MEMFS.createNode(parent, name, mode, dev);
         },
   rename(old_node, new_dir, new_name) {
@@ -2169,14 +2158,11 @@ var FS_stdin_getChar_buffer = [];
           try {
             new_node = FS.lookupNode(new_dir, new_name);
           } catch (e) {}
-          if (new_node) {
-            if (FS.isDir(old_node.mode)) {
-              // if we're overwriting a directory at new_name, make sure it's empty.
-              for (var i in new_node.contents) {
-                throw new FS.ErrnoError(55);
-              }
+          if (new_node && FS.isDir(old_node.mode)) {
+            // if we're overwriting a directory at new_name, make sure it's empty.
+            for (var i in new_node.contents) {
+              throw new FS.ErrnoError(55);
             }
-            FS.hashRemoveNode(new_node);
           }
           // do the internal rewiring
           delete old_node.parent.contents[old_node.name];
@@ -2302,7 +2288,7 @@ var FS_stdin_getChar_buffer = [];
   };
   
   var FS_modeStringToFlags = (str) => {
-      if (typeof str != 'string') return str;
+      if (typeof str !== 'string') return str;
       var flagModes = {
         'r': 0,
         'r+': 2,
@@ -2312,14 +2298,14 @@ var FS_stdin_getChar_buffer = [];
         'a+': 1024 | 64 | 2,
       };
       var flags = flagModes[str];
-      if (typeof flags == 'undefined') {
+      if (typeof flags === 'undefined') {
         throw new Error(`Unknown file open mode: ${str}`);
       }
       return flags;
     };
   
   var FS_fileDataToTypedArray = (data) => {
-      if (typeof data == 'string') {
+      if (typeof data === 'string') {
         data = intArrayFromString(data, true);
       }
       if (!data.subarray) {
@@ -2754,7 +2740,7 @@ var FS_stdin_getChar_buffer = [];
   
   var FS_handledByPreloadPlugin = async (byteArray, fullname) => {
       // Ensure plugins are ready.
-      if (typeof Browser != 'undefined') Browser.init();
+      if (typeof Browser !== 'undefined') Browser.init();
   
       for (var plugin of preloadPlugins) {
         if (plugin['canHandle'](fullname)) {
@@ -2774,7 +2760,7 @@ var FS_stdin_getChar_buffer = [];
   
       try {
         var byteArray = url;
-        if (typeof url == 'string') {
+        if (typeof url === 'string') {
           byteArray = await asyncLoad(url);
         }
   
@@ -2798,11 +2784,10 @@ var FS_stdin_getChar_buffer = [];
   },
   streams:[],
   nextInode:1,
-  nameTable:null,
+  nameTable:[],
   currentPath:"/",
   initialized:false,
   ignorePermissions:true,
-  filesystems:null,
   syncFSRequests:0,
   ErrnoError:class {
         name = 'ErrnoError';
@@ -3060,7 +3045,7 @@ var FS_stdin_getChar_buffer = [];
         // if we failed to find it in the cache, call into the VFS
         return FS.lookup(parent, name);
       },
-  createNode(parent, name, mode, rdev) {
+  createNode(parent, name, mode, rdev = undefined) {
         var node = new FS.FSNode(parent, name, mode, rdev);
   
         FS.hashAddNode(node);
@@ -3268,7 +3253,7 @@ var FS_stdin_getChar_buffer = [];
         return mounts;
       },
   syncfs(populate, callback) {
-        if (typeof populate == 'function') {
+        if (typeof populate === 'function') {
           callback = populate;
           populate = false;
         }
@@ -3451,7 +3436,7 @@ var FS_stdin_getChar_buffer = [];
         mode |= 16384;
         return FS.mknod(path, mode, 0);
       },
-  mkdirTree(path, mode) {
+  mkdirTree(path, mode = 0o777) {
         var dirs = path.split('/');
         var d = '';
         for (var dir of dirs) {
@@ -3465,8 +3450,8 @@ var FS_stdin_getChar_buffer = [];
           }
         }
       },
-  mkdev(path, mode, dev) {
-        if (typeof dev == 'undefined') {
+  mkdev(path, mode, dev = undefined) {
+        if (typeof dev === 'undefined') {
           dev = mode;
           mode = 0o666;
         }
@@ -3585,6 +3570,11 @@ var FS_stdin_getChar_buffer = [];
         // do the underlying fs rename
         try {
           old_dir.node_ops.rename(old_node, new_dir, new_name);
+          // The replaced node is stale now. Evict it only after the rename
+          // succeeded: backends like NODEFS report node.id as st_ino.
+          if (new_node) {
+            FS.hashRemoveNode(new_node);
+          }
           // update old node (we do this here to avoid each backend
           // needing to)
           old_node.parent = new_dir;
@@ -3655,7 +3645,7 @@ var FS_stdin_getChar_buffer = [];
         }
         return link.node_ops.readlink(link);
       },
-  stat(path, dontFollow) {
+  stat(path, dontFollow = false) {
         var lookup = FS.lookupPath(path, { follow: !dontFollow });
         var node = lookup.node;
         var getattr = FS.checkOpExists(node.node_ops.getattr, 63);
@@ -3673,16 +3663,16 @@ var FS_stdin_getChar_buffer = [];
   lstat(path) {
         return FS.stat(path, true);
       },
-  doChmod(stream, node, mode, dontFollow) {
+  doChmod(stream, node, mode, dontFollow = false) {
         FS.doSetAttr(stream, node, {
           mode: (mode & 4095) | (node.mode & ~4095),
           ctime: Date.now(),
           dontFollow
         });
       },
-  chmod(path, mode, dontFollow) {
+  chmod(path, mode, dontFollow = false) {
         var node;
-        if (typeof path == 'string') {
+        if (typeof path === 'string') {
           var lookup = FS.lookupPath(path, { follow: !dontFollow });
           node = lookup.node;
         } else {
@@ -3697,16 +3687,16 @@ var FS_stdin_getChar_buffer = [];
         var stream = FS.getStreamChecked(fd);
         FS.doChmod(stream, stream.node, mode, false);
       },
-  doChown(stream, node, dontFollow) {
+  doChown(stream, node, dontFollow = false) {
         FS.doSetAttr(stream, node, {
           timestamp: Date.now(),
           dontFollow
           // we ignore the uid / gid for now
         });
       },
-  chown(path, uid, gid, dontFollow) {
+  chown(path, uid, gid, dontFollow = false) {
         var node;
-        if (typeof path == 'string') {
+        if (typeof path === 'string') {
           var lookup = FS.lookupPath(path, { follow: !dontFollow });
           node = lookup.node;
         } else {
@@ -3742,7 +3732,7 @@ var FS_stdin_getChar_buffer = [];
           throw new FS.ErrnoError(28);
         }
         var node;
-        if (typeof path == 'string') {
+        if (typeof path === 'string') {
           var lookup = FS.lookupPath(path, { follow: true });
           node = lookup.node;
         } else {
@@ -3757,7 +3747,7 @@ var FS_stdin_getChar_buffer = [];
         }
         FS.doTruncate(stream, stream.node, len);
       },
-  utime(path, atime, mtime, dontFollow) {
+  utime(path, atime, mtime, dontFollow = false) {
         var lookup = FS.lookupPath(path, { follow: !dontFollow });
         FS.doSetAttr(null, lookup.node, {
           atime: atime,
@@ -3777,7 +3767,7 @@ var FS_stdin_getChar_buffer = [];
         }
         var node;
         var isDirPath;
-        if (typeof path == 'object') {
+        if (typeof path === 'object') {
           node = path;
         } else {
           isDirPath = path.endsWith('/');
@@ -3896,7 +3886,7 @@ var FS_stdin_getChar_buffer = [];
         stream.ungotten = [];
         return stream.position;
       },
-  read(stream, buffer, offset, length, position) {
+  read(stream, buffer, offset, length, position = undefined) {
         if (length < 0 || position < 0) {
           throw new FS.ErrnoError(28);
         }
@@ -3912,7 +3902,7 @@ var FS_stdin_getChar_buffer = [];
         if (!stream.stream_ops.read) {
           throw new FS.ErrnoError(28);
         }
-        var seeking = typeof position != 'undefined';
+        var seeking = typeof position !== 'undefined';
         if (!seeking) {
           position = stream.position;
         } else if (!stream.seekable) {
@@ -3922,7 +3912,7 @@ var FS_stdin_getChar_buffer = [];
         if (!seeking) stream.position += bytesRead;
         return bytesRead;
       },
-  write(stream, buffer, offset, length, position, canOwn) {
+  write(stream, buffer, offset, length, position = undefined, canOwn = undefined) {
         if (length < 0 || position < 0) {
           throw new FS.ErrnoError(28);
         }
@@ -3942,7 +3932,7 @@ var FS_stdin_getChar_buffer = [];
           // seek to the end before writing in append mode
           FS.llseek(stream, 0, 2);
         }
-        var seeking = typeof position != 'undefined';
+        var seeking = typeof position !== 'undefined';
         if (!seeking) {
           position = stream.position;
         } else if (!stream.seekable) {
@@ -4131,20 +4121,15 @@ var FS_stdin_getChar_buffer = [];
         var stderr = FS.open('/dev/stderr', 1);
       },
   staticInit() {
-        FS.nameTable = new Array(4096);
+        FS.nameTable.length = 4096;
   
         FS.mount(MEMFS, {}, '/');
   
         FS.createDefaultDirectories();
         FS.createDefaultDevices();
         FS.createSpecialDirectories();
-  
-        FS.filesystems = {
-          'MEMFS': MEMFS,
-          'IDBFS': IDBFS,
-        };
       },
-  init(input, output, error) {
+  init(input = undefined, output = undefined, error = undefined) {
         FS.initialized = true;
   
         // Allow Module.stdin etc. to provide defaults, if none explicitly passed to us here
@@ -4165,7 +4150,7 @@ var FS_stdin_getChar_buffer = [];
           }
         }
       },
-  analyzePath(path, dontResolveLastLink) {
+  analyzePath(path, dontResolveLastLink = false) {
         // operate from within the context of the symlink's target
         try {
           var lookup = FS.lookupPath(path, { follow: !dontResolveLastLink });
@@ -4193,8 +4178,8 @@ var FS_stdin_getChar_buffer = [];
         };
         return ret;
       },
-  createPath(parent, path, canRead, canWrite) {
-        parent = typeof parent == 'string' ? parent : FS.getPath(parent);
+  createPath(parent, path, canRead = undefined, canWrite = undefined) {
+        parent = typeof parent === 'string' ? parent : FS.getPath(parent);
         var parts = path.split('/').reverse();
         while (parts.length) {
           var part = parts.pop();
@@ -4209,15 +4194,15 @@ var FS_stdin_getChar_buffer = [];
         }
         return current;
       },
-  createFile(parent, name, properties, canRead, canWrite) {
-        var path = PATH.join2(typeof parent == 'string' ? parent : FS.getPath(parent), name);
+  createFile(parent, name, properties, canRead = undefined, canWrite = undefined) {
+        var path = PATH.join2(typeof parent === 'string' ? parent : FS.getPath(parent), name);
         var mode = FS_getMode(canRead, canWrite);
         return FS.create(path, mode);
       },
-  createDataFile(parent, name, data, canRead, canWrite, canOwn) {
+  createDataFile(parent, name, data = undefined, canRead = undefined, canWrite = undefined, canOwn = undefined) {
         var path = name;
         if (parent) {
-          parent = typeof parent == 'string' ? parent : FS.getPath(parent);
+          parent = typeof parent === 'string' ? parent : FS.getPath(parent);
           path = name ? PATH.join2(parent, name) : parent;
         }
         var mode = FS_getMode(canRead, canWrite);
@@ -4232,8 +4217,8 @@ var FS_stdin_getChar_buffer = [];
           FS.chmod(node, mode);
         }
       },
-  createDevice(parent, name, input, output) {
-        var path = PATH.join2(typeof parent == 'string' ? parent : FS.getPath(parent), name);
+  createDevice(parent, name, input = undefined, output = undefined) {
+        var path = PATH.join2(typeof parent === 'string' ? parent : FS.getPath(parent), name);
         var mode = FS_getMode(!!input, !!output);
         FS.createDevice.major ??= 64;
         var dev = FS.makedev(FS.createDevice.major++, 0);
@@ -4298,7 +4283,7 @@ var FS_stdin_getChar_buffer = [];
           }
         }
       },
-  createLazyFile(parent, name, url, canRead, canWrite) {
+  createLazyFile(parent, name, url, canRead = undefined, canWrite = undefined) {
         // Lazy chunked Uint8Array (implements get and length from Uint8Array).
         // Actual getting is abstracted away for eventual reuse.
         class LazyUint8Array {
@@ -4358,10 +4343,10 @@ var FS_stdin_getChar_buffer = [];
               var start = chunkNum * chunkSize;
               var end = (chunkNum+1) * chunkSize - 1; // including this byte
               end = Math.min(end, datalength-1); // if datalength-1 is selected, this is the last block
-              if (typeof lazyArray.chunks[chunkNum] == 'undefined') {
+              if (typeof lazyArray.chunks[chunkNum] === 'undefined') {
                 lazyArray.chunks[chunkNum] = doXHR(start, end);
               }
-              if (typeof lazyArray.chunks[chunkNum] == 'undefined') abort('doXHR failed!');
+              if (typeof lazyArray.chunks[chunkNum] === 'undefined') abort('doXHR failed!');
               return lazyArray.chunks[chunkNum];
             });
   
@@ -4482,7 +4467,7 @@ var FS_stdin_getChar_buffer = [];
       return withStackSave(() => {
         // In dylink.c we use: `char buf[2*NAME_MAX+2];` and NAME_MAX is 255.
         // So we use the same size here.
-        var bufSize = 2*255 + 2;
+        const bufSize = 2*255 + 2;
         var buf = stackAlloc(bufSize);
         var rpathC = stringToUTF8OnStack(rpathResolved.join(':'));
         var libNameC = stringToUTF8OnStack(libName);
@@ -4621,12 +4606,12 @@ var FS_stdin_getChar_buffer = [];
             entry.value = 0;
             continue;
           }
-          if (typeof value == 'function') {
+          if (typeof value === 'function') {
             /** @suppress {checkTypes} */
             entry.value = addFunction(value, value.sig);
-          } else if (typeof value == 'number') {
+          } else if (typeof value === 'number') {
             entry.value = value;
-          } else if (typeof value.value == 'number') {
+          } else if (typeof value.value === 'number') {
             entry.value = value;
           } else {
             throw new Error(`bad export type for '${symName}': ${typeof value} (${value})`);
@@ -5709,10 +5694,10 @@ var FS_stdin_getChar_buffer = [];
         return `socket[${SOCKFS.nextname.current++}]`;
       },
   websocket_sock_ops:{
-  createPeer(sock, addr, port) {
+  createPeer(sock, addr, port = undefined) {
           var ws;
   
-          if (typeof addr == 'object') {
+          if (typeof addr === 'object') {
             ws = addr;
             addr = null;
             port = null;
@@ -5798,7 +5783,7 @@ var FS_stdin_getChar_buffer = [];
           // if this is a bound dgram socket, send the port number first to allow
           // us to override the ephemeral port reported to us by remotePort on the
           // remote end.
-          if (sock.type === 2 && typeof sock.sport != 'undefined') {
+          if (sock.type === 2 && typeof sock.sport !== 'undefined') {
             peer.msg_send_queue.push(new Uint8Array([
                 255, 255, 255, 255,
                 'p'.charCodeAt(0), 'o'.charCodeAt(0), 'r'.charCodeAt(0), 't'.charCodeAt(0),
@@ -5839,7 +5824,7 @@ var FS_stdin_getChar_buffer = [];
           }
   
           function handleMessage(data) {
-            if (typeof data == 'string') {
+            if (typeof data === 'string') {
               var encoder = new TextEncoder(); // should be utf-8
               data = encoder.encode(data); // make a typed array from the string
             } else {
@@ -5992,7 +5977,7 @@ var FS_stdin_getChar_buffer = [];
           return 0;
         },
   bind(sock, addr, port) {
-          if (typeof sock.saddr != 'undefined' || typeof sock.sport != 'undefined') {
+          if (typeof sock.saddr !== 'undefined' || typeof sock.sport !== 'undefined') {
             throw new FS.ErrnoError(28);  // already bound
           }
           sock.saddr = addr;
@@ -6026,7 +6011,7 @@ var FS_stdin_getChar_buffer = [];
           // }
   
           // early out if we're already connected / in the middle of connecting
-          if (typeof sock.daddr != 'undefined' && typeof sock.dport != 'undefined') {
+          if (typeof sock.daddr !== 'undefined' && typeof sock.dport !== 'undefined') {
             var dest = SOCKFS.websocket_sock_ops.getPeer(sock, sock.daddr, sock.dport);
             if (dest) {
               if (dest.socket.readyState === dest.socket.CONNECTING) {
@@ -6297,7 +6282,7 @@ var FS_stdin_getChar_buffer = [];
   
       offset = 0; z = 0;
       for (w=0; w < words.length; w++) {
-        if (typeof words[w] == 'string') {
+        if (typeof words[w] === 'string') {
           if (words[w] === 'Z') {
             // compressed zeros - write appropriate number of zero words
             for (z = 0; z < (8 - words.length+1); z++) {
@@ -6320,6 +6305,7 @@ var FS_stdin_getChar_buffer = [];
         (parts[7] << 16) | parts[6]
       ];
     };
+  
   
   
   
@@ -6368,14 +6354,13 @@ var FS_stdin_getChar_buffer = [];
   };
   
   
-  
   /** @param {number=} addrlen */
   var writeSockaddr = (sa, family, addr, port, addrlen) => {
       switch (family) {
         case 2:
           // The address may still be an unresolved hostname (e.g. a peer name
-          // recorded at connect time); map it to its (possibly fake) IP here so
-          // callers can pass names and IPs alike.
+          // recorded at connect time); map it to its fake IP here so callers can
+          // pass names and IPs alike. Real sockets only ever see numeric addresses.
           addr = inetPton4(DNS.lookup_name(addr));
           zeroMemory(sa, 16);
           if (addrlen) {
@@ -6413,7 +6398,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return newsock.stream.fd;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6576,7 +6561,7 @@ var FS_stdin_getChar_buffer = [];
       sock.sock_ops.bind(sock, info.addr, info.port);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6591,7 +6576,7 @@ var FS_stdin_getChar_buffer = [];
   
   var SYSCALLS = {
   currentUmask:18,
-  calculateAt(dirfd, path, allowEmpty) {
+  calculateAt(dirfd, path, allowEmpty = false) {
         if (PATH.isAbs(path)) {
           return path;
         }
@@ -6621,17 +6606,15 @@ var FS_stdin_getChar_buffer = [];
         HEAP64[(((buf)+(24))>>3)] = BigInt(stat.size);
         HEAP32[(((buf)+(32))>>2)] = 4096;
         HEAP32[(((buf)+(36))>>2)] = stat.blocks;
-        // Prefer `*Ms` properties if available (e.g. from NODEFS / host `fs.Stats`)
-        // for sub-millisecond precision; fall back to Date#getTime for other filesystems.
-        var atime = stat.atimeMs ?? stat.atime.getTime();
-        var mtime = stat.mtimeMs ?? stat.mtime.getTime();
-        var ctime = stat.ctimeMs ?? stat.ctime.getTime();
+        var atime = stat.atime.getTime();
+        var mtime = stat.mtime.getTime();
+        var ctime = stat.ctime.getTime();
         HEAP64[(((buf)+(40))>>3)] = BigInt(Math.floor(atime / 1000));
-        HEAPU32[(((buf)+(48))>>2)] = Math.floor((atime % 1000) * 1_000_000);
+        HEAPU32[(((buf)+(48))>>2)] = (atime % 1000) * 1000 * 1000;
         HEAP64[(((buf)+(56))>>3)] = BigInt(Math.floor(mtime / 1000));
-        HEAPU32[(((buf)+(64))>>2)] = Math.floor((mtime % 1000) * 1_000_000);
+        HEAPU32[(((buf)+(64))>>2)] = (mtime % 1000) * 1000 * 1000;
         HEAP64[(((buf)+(72))>>3)] = BigInt(Math.floor(ctime / 1000));
-        HEAPU32[(((buf)+(80))>>2)] = Math.floor((ctime % 1000) * 1_000_000);
+        HEAPU32[(((buf)+(80))>>2)] = (ctime % 1000) * 1000 * 1000;
         HEAP64[(((buf)+(88))>>3)] = BigInt(stat.ino);
         return 0;
       },
@@ -6675,7 +6658,7 @@ var FS_stdin_getChar_buffer = [];
       FS.chdir(path);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6689,7 +6672,7 @@ var FS_stdin_getChar_buffer = [];
       FS.chmod(path, mode);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6705,7 +6688,7 @@ var FS_stdin_getChar_buffer = [];
       sock.sock_ops.connect(sock, info.addr, info.port);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6718,7 +6701,7 @@ var FS_stdin_getChar_buffer = [];
       var old = SYSCALLS.getStreamFromFD(fd);
       return FS.dupStream(old).fd;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6741,7 +6724,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return stream.fd;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6787,30 +6770,38 @@ var FS_stdin_getChar_buffer = [];
       }
       return true;
     };
+  
+  var epollClearListener = (stream, it) => {
+      stream.listeners.delete(it.key);
+      it.cleared = true;
+      it.listener.listeners.delete(it.listener.entry);
+    };
   var epollNewInstance = () => {
       // Its own (detached) node, so the epoll fd can be watched by a parent epoll
       // (nesting) and carry the readiness wait-queue methods. Shared across dups.
       var node = new FS.FSNode(0, '', 0, 0);
       var stream = FS.createStream({
         node,
+        listeners: new Map(),
         stream_ops: {
           // Readable when any listed registration is currently ready: this is what
           // lets an epoll fd be polled/nested.
           poll(stream) {
             return epollWouldBlock(stream.shared) ? 0 : 1;
           },
-          // dup(2): another fd to the same epoll instance (Linux: another reference
-          // to the eventpoll). The instance state lives on the shared open file
-          // description, already propagated by reference to the dup'd stream, so
-          // there is nothing to copy - just count the new reference.
+          // A dup shares readiness but starts without callbacks.
           dup(stream) {
             stream.shared.refcount++;
+            stream.listeners = new Map();
           },
           // close(2): drop one reference. Only the last close reclaims the
           // instance: drop every registration's listener (a fired EPOLLONESHOT has
           // already dropped its own) from its watched node. A surviving dup keeps
           // it all live.
           close(stream) {
+            for (var it of stream.listeners.values()) {
+              epollClearListener(stream, it);
+            }
             var ep = stream.shared;
             // FS.close already fired POLLNVAL on the (shared) node, waking any
             // parent epoll watching this fd so it re-derives and drops the
@@ -6839,7 +6830,7 @@ var FS_stdin_getChar_buffer = [];
       if (flags & ~524288) return -28;
       return epollNewInstance().fd;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -6944,9 +6935,10 @@ var FS_stdin_getChar_buffer = [];
       // (ep_poll_callback: on an edge, list the reg and wake any waiter on this
       // epoll - and through ep.node any parent epoll nesting it.)
       if (!reg.listener) {
-        reg.listener = target.node.addListener(() => {
+        reg.listener = target.node.addListener((flags) => {
           readyListAdd(ep, reg);
-          ep.node.notifyListeners(1);
+          // A closing fd (POLLNVAL) wakes the epoll as a teardown, not readiness.
+          ep.node.notifyListeners(flags & 32 ? 32 : 1);
         // EPOLLEXCLUSIVE: when one fd is watched by several epolls, the watched
         // node wakes only one of them per edge (round-robin), not all.
         }, !!(events & 268435456));
@@ -6967,7 +6959,7 @@ var FS_stdin_getChar_buffer = [];
       if (!ep?.shared.epoll) return -8;
       return epollCtl(ep.shared, op, fd, ev);
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7074,7 +7066,7 @@ var FS_stdin_getChar_buffer = [];
       if (maxevents <= 0) return -28;
       return epollPwait(ep.shared, ev, maxevents, timeout);
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   
@@ -7094,7 +7086,7 @@ var FS_stdin_getChar_buffer = [];
       if (maxevents <= 0) return -28;
       return doEpollWait(ep.shared, ev, maxevents);
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7124,7 +7116,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7150,7 +7142,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   ;
@@ -7186,7 +7178,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   ;
@@ -7200,7 +7192,7 @@ var FS_stdin_getChar_buffer = [];
       FS.chdir(stream.path);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7213,7 +7205,7 @@ var FS_stdin_getChar_buffer = [];
       FS.fchmod(fd, mode);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7229,7 +7221,7 @@ var FS_stdin_getChar_buffer = [];
       FS.chmod(path, mode, nofollow);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7242,7 +7234,7 @@ var FS_stdin_getChar_buffer = [];
       FS.fchown(fd, owner, group);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7259,7 +7251,7 @@ var FS_stdin_getChar_buffer = [];
       (nofollow ? FS.lchown : FS.chown)(path, owner, group);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7322,7 +7314,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return -28;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7335,7 +7327,7 @@ var FS_stdin_getChar_buffer = [];
       var stream = SYSCALLS.getStreamFromFD(fd);
       return 0; // we can't do anything synchronously; the in-memory FS is already synced to
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7347,7 +7339,7 @@ var FS_stdin_getChar_buffer = [];
   
       return SYSCALLS.writeStat(buf, FS.fstat(fd));
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7361,7 +7353,7 @@ var FS_stdin_getChar_buffer = [];
       SYSCALLS.writeStatFs(buf, FS.statfsStream(stream));
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7378,7 +7370,7 @@ var FS_stdin_getChar_buffer = [];
       FS.ftruncate(fd, length);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   ;
@@ -7396,7 +7388,7 @@ var FS_stdin_getChar_buffer = [];
       stringToUTF8(cwd, buf, size);
       return cwdLengthInBytes;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7460,7 +7452,7 @@ var FS_stdin_getChar_buffer = [];
       FS.llseek(stream, idx * struct_size, 0);
       return pos;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7487,7 +7479,7 @@ var FS_stdin_getChar_buffer = [];
       var errno = writeSockaddr(addr, sock.family, sock.daddr, sock.dport, len);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7504,7 +7496,7 @@ var FS_stdin_getChar_buffer = [];
       var errno = writeSockaddr(addr, sock.family, sock.saddr || defaultAddr, sock.sport, len);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7528,7 +7520,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return -50; // The option is unknown at the level indicated.
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7633,7 +7625,7 @@ var FS_stdin_getChar_buffer = [];
         default: return -28; // not supported
       }
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7650,7 +7642,7 @@ var FS_stdin_getChar_buffer = [];
       FS.link(oldpath, newpath, flags);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7664,7 +7656,7 @@ var FS_stdin_getChar_buffer = [];
       sock.sock_ops.listen(sock, backlog);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7677,7 +7669,7 @@ var FS_stdin_getChar_buffer = [];
       path = SYSCALLS.getStr(path);
       return SYSCALLS.writeStat(buf, FS.lstat(path));
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7690,10 +7682,10 @@ var FS_stdin_getChar_buffer = [];
       path = SYSCALLS.getStr(path);
       path = SYSCALLS.calculateAt(dirfd, path);
       mode &= ~SYSCALLS.currentUmask;
-      FS.mkdir(path, mode, 0);
+      FS.mkdir(path, mode);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7719,7 +7711,7 @@ var FS_stdin_getChar_buffer = [];
       FS.mknod(path, mode, dev);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7736,7 +7728,7 @@ var FS_stdin_getChar_buffer = [];
       path = SYSCALLS.calculateAt(dirfd, path, allowEmpty);
       return SYSCALLS.writeStat(buf, nofollow ? FS.lstat(path) : FS.stat(path));
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -7756,7 +7748,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return FS.open(path, flags, mode).fd;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8065,7 +8057,7 @@ var FS_stdin_getChar_buffer = [];
   
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8143,7 +8135,7 @@ var FS_stdin_getChar_buffer = [];
       var count = doPollSync(fds, nfds);
       return count;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   
@@ -8159,7 +8151,7 @@ var FS_stdin_getChar_buffer = [];
   
       return doPollSync(fds, nfds);
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8185,7 +8177,7 @@ var FS_stdin_getChar_buffer = [];
       HEAP8[buf+len] = endChar;
       return len;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8206,7 +8198,7 @@ var FS_stdin_getChar_buffer = [];
       HEAPU8.set(msg.buffer, buf);
       return msg.buffer.byteLength;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8274,7 +8266,7 @@ var FS_stdin_getChar_buffer = [];
   
       return bytesRead;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8291,7 +8283,7 @@ var FS_stdin_getChar_buffer = [];
       FS.rename(oldpath, newpath);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8305,7 +8297,7 @@ var FS_stdin_getChar_buffer = [];
       FS.rmdir(path);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8348,7 +8340,7 @@ var FS_stdin_getChar_buffer = [];
       // write the buffer
       return sock.sock_ops.sendmsg(sock, view, 0, total, addr, port);
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8369,7 +8361,7 @@ var FS_stdin_getChar_buffer = [];
       // sendto an address
       return sock.sock_ops.sendmsg(sock, HEAP8, buf, len, dest.addr, dest.port);
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8382,7 +8374,7 @@ var FS_stdin_getChar_buffer = [];
       getSocketFromFD(fd); // validate the fd (and keep this syscall's catch reachable)
       return -50; // The option is unknown at the level indicated.
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8395,7 +8387,7 @@ var FS_stdin_getChar_buffer = [];
       var sock = getSocketFromFD(fd);
       return -52; // unsupported feature
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8408,7 +8400,7 @@ var FS_stdin_getChar_buffer = [];
       var sock = SOCKFS.createSocket(domain, type, protocol);
       return sock.stream.fd;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8421,7 +8413,7 @@ var FS_stdin_getChar_buffer = [];
       path = SYSCALLS.getStr(path);
       return SYSCALLS.writeStat(buf, FS.stat(path));
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8434,7 +8426,7 @@ var FS_stdin_getChar_buffer = [];
       SYSCALLS.writeStatFs(buf, FS.statfs(SYSCALLS.getStr(path)));
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8450,7 +8442,7 @@ var FS_stdin_getChar_buffer = [];
       FS.symlink(target, linkpath);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8469,7 +8461,7 @@ var FS_stdin_getChar_buffer = [];
       FS.truncate(path, length);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   ;
@@ -8483,12 +8475,26 @@ var FS_stdin_getChar_buffer = [];
       SYSCALLS.currentUmask = mask;
       return old;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
   
   ___syscall_umask.sig = 'ii';
+
+  var ___syscall_uname = (buf) => {
+      if (!buf) {
+        return -21;
+      }
+      var copyString = (offset, value) => stringToUTF8(value, buf + offset, 65);
+      copyString(0, 'Emscripten');
+      copyString(65, 'emscripten');
+      copyString(130, '6.0.13');
+      copyString(195, '#1');
+      copyString(260, 'wasm32');
+      return 0;
+    };
+  ___syscall_uname.sig = 'ip';
 
   function ___syscall_unlinkat(dirfd, path, flags) {
   try {
@@ -8504,7 +8510,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8537,10 +8543,7 @@ var FS_stdin_getChar_buffer = [];
             return null;
           }
           var tv_sec = readI53FromI64(ptr);
-          // Round down tv_nsec to the nearest 10 microseconds (10,000 ns) to prevent
-          // floating-point rounding into the next whole second when converting to host/Windows timestamps.
-          tv_nsec = (tv_nsec / 10_000 | 0) * 10_000;
-          return (tv_sec + (tv_nsec / 1_000_000_000)) * 1000;
+          return (tv_sec*1000) + Math.floor(tv_nsec/(1000*1000));
         }
         atime = readTimespec(times);
         mtime = readTimespec(times + 16);
@@ -8552,7 +8555,7 @@ var FS_stdin_getChar_buffer = [];
       }
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   }
@@ -8631,7 +8634,7 @@ var FS_stdin_getChar_buffer = [];
       }
       result = lib.exports[symbol];
   
-      if (typeof result == 'function') {
+      if (typeof result === 'function') {
   
         // Asyncify wraps exports, and we need to look through those wrappers.
         if (result.orig) {
@@ -8973,16 +8976,6 @@ var FS_stdin_getChar_buffer = [];
     };
   __emscripten_log_formatted.sig = 'vip';
 
-  
-  
-  
-  var __emscripten_lookup_name = (name) => {
-      // uint32_t _emscripten_lookup_name(const char *name);
-      var nameString = UTF8ToString(name);
-      return inetPton4(DNS.lookup_name(nameString));
-    };
-  __emscripten_lookup_name.sig = 'ip';
-
   var __emscripten_runtime_keepalive_clear = () => {
       noExitRuntime = false;
       runtimeKeepaliveCounter = 0;
@@ -9180,7 +9173,7 @@ var FS_stdin_getChar_buffer = [];
       HEAPU32[((addr)>>2)] = ptr;
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   ;
@@ -9198,7 +9191,7 @@ var FS_stdin_getChar_buffer = [];
       SYSCALLS.doMsync(addr, SYSCALLS.getStreamFromFD(fd), len, flags, offset);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   ;
@@ -9217,7 +9210,7 @@ var FS_stdin_getChar_buffer = [];
         SYSCALLS.doMsync(addr, stream, len, flags, offset);
       }
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return -e.errno;
   }
   ;
@@ -9694,11 +9687,11 @@ var FS_stdin_getChar_buffer = [];
   
             audioSrc.connect(src.gain);
   
-            if (typeof audioSrc.start != 'undefined') {
+            if (typeof audioSrc.start !== 'undefined') {
               // Sample the current time as late as possible to mitigate drift
               startTime = Math.max(startTime, src.context.audioCtx.currentTime);
               audioSrc.start(startTime, startOffset);
-            } else if (typeof audioSrc.noteOn != 'undefined') {
+            } else if (typeof audioSrc.noteOn !== 'undefined') {
               startTime = Math.max(startTime, src.context.audioCtx.currentTime);
               audioSrc.noteOn(startTime);
             }
@@ -12780,7 +12773,7 @@ var FS_stdin_getChar_buffer = [];
         // Have to pick a size from 256, 512, 1024, 2048, 4096, 8192, 16384.
         // One can also set it to zero, which leaves the decision up to the impl.
         // An extension could allow specifying this value.
-        var processorFrameCount = 512;
+        const processorFrameCount = 512;
   
         newCapture.scriptProcessorNode = newCapture.audioCtx.createScriptProcessor(
           processorFrameCount, inputChannelCount, outputChannelCount
@@ -13067,7 +13060,7 @@ var FS_stdin_getChar_buffer = [];
       autoResumeAudioContext(ac);
   
       // Old Web Audio API (e.g. Safari 6.0.5) had an inconsistently named createGainNode function.
-      if (typeof ac.createGain == 'undefined') {
+      if (typeof ac.createGain === 'undefined') {
         ac.createGain = ac.createGainNode;
       }
   
@@ -14144,16 +14137,6 @@ var FS_stdin_getChar_buffer = [];
   
   
   
-  var warnOnce = (text) => {
-      warnOnce.shown ||= {};
-      if (!warnOnce.shown[text]) {
-        warnOnce.shown[text] = 1;
-        if (ENVIRONMENT_IS_NODE) text = 'warning: ' + text;
-        err(text);
-      }
-    };
-  
-  
   
   
   
@@ -14233,7 +14216,7 @@ var FS_stdin_getChar_buffer = [];
               err(`warning: browser could not fully decode audio ${name}, trying slower base64 approach`);
               function encode64(data) {
                 var BASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-                var PAD = '=';
+                const PAD = '=';
                 var ret = '';
                 var leftchar = 0;
                 var leftbits = 0;
@@ -14312,7 +14295,7 @@ var FS_stdin_getChar_buffer = [];
           // This check of existence of GL is here to satisfy Closure compiler, which yells if variable GL is referenced below but GL object is not
           // actually compiled in because application is not doing any GL operations. TODO: Ideally if GL is not being used, this function
           // Browser.createContext() should not even be emitted.
-          if (typeof GL != 'undefined') {
+          if (typeof GL !== 'undefined') {
             contextHandle = GL.createContext(canvas, contextAttributes);
             if (contextHandle) {
               ctx = GL.getContext(contextHandle).GLctx;
@@ -14339,8 +14322,8 @@ var FS_stdin_getChar_buffer = [];
   requestFullscreen(lockPointer, resizeCanvas) {
         Browser.lockPointer = lockPointer;
         Browser.resizeCanvas = resizeCanvas;
-        if (typeof Browser.lockPointer == 'undefined') Browser.lockPointer = true;
-        if (typeof Browser.resizeCanvas == 'undefined') Browser.resizeCanvas = false;
+        if (typeof Browser.lockPointer === 'undefined') Browser.lockPointer = true;
+        if (typeof Browser.resizeCanvas === 'undefined') Browser.resizeCanvas = false;
   
         var canvas = Browser.getCanvas();
         function fullscreenChange() {
@@ -14400,12 +14383,6 @@ var FS_stdin_getChar_buffer = [];
         CFS.apply(document, []);
         return true;
       },
-  safeSetTimeout(func, timeout) {
-        // Legacy function, this is used by the SDL2 port so we need to keep it
-        // around at least until that is updated.
-        // See https://github.com/libsdl-org/SDL/pull/6304
-        return safeSetTimeout(func, timeout);
-      },
   getMimetype(name) {
         return {
           'jpg': 'image/jpeg',
@@ -14416,9 +14393,6 @@ var FS_stdin_getChar_buffer = [];
           'wav': 'audio/wav',
           'mp3': 'audio/mpeg'
         }[name.slice(name.lastIndexOf('.')+1)];
-      },
-  getUserMedia(func) {
-        return navigator.mediaDevices.getUserMedia(func);
       },
   getMouseWheelDelta(event) {
         var delta = 0;
@@ -14531,13 +14505,11 @@ var FS_stdin_getChar_buffer = [];
         Browser.updateCanvasDimensions(canvas, width, height);
         if (!noUpdates) Browser.updateResizeListeners();
       },
-  windowedWidth:0,
-  windowedHeight:0,
   setFullscreenCanvasSize() {
         // check if SDL is available
-        if (typeof SDL != 'undefined') {
+        if (typeof SDL !== 'undefined') {
           var flags = HEAPU32[((SDL.screen)>>2)];
-          flags = flags | 0x00800000; // set SDL_FULLSCREEN flag
+          flags = flags | 8388608;
           HEAP32[((SDL.screen)>>2)] = flags;
         }
         Browser.updateCanvasDimensions(Browser.getCanvas());
@@ -14545,9 +14517,9 @@ var FS_stdin_getChar_buffer = [];
       },
   setWindowedCanvasSize() {
         // check if SDL is available
-        if (typeof SDL != 'undefined') {
+        if (typeof SDL !== 'undefined') {
           var flags = HEAPU32[((SDL.screen)>>2)];
-          flags = flags & ~0x00800000; // clear SDL_FULLSCREEN flag
+          flags = flags & ~8388608;
           HEAP32[((SDL.screen)>>2)] = flags;
         }
         Browser.updateCanvasDimensions(Browser.getCanvas());
@@ -14563,7 +14535,7 @@ var FS_stdin_getChar_buffer = [];
         }
         var w = wNative;
         var h = hNative;
-        if ((getFullscreenElement() === canvas.parentNode) && (typeof screen != 'undefined')) {
+        if ((getFullscreenElement() === canvas.parentNode) && (typeof screen !== 'undefined')) {
            var factor = Math.min(screen.width / w, screen.height / h);
            w = Math.round(w * factor);
            h = Math.round(h * factor);
@@ -14571,14 +14543,14 @@ var FS_stdin_getChar_buffer = [];
         if (Browser.resizeCanvas) {
           if (canvas.width  != w) canvas.width  = w;
           if (canvas.height != h) canvas.height = h;
-          if (typeof canvas.style != 'undefined') {
+          if (typeof canvas.style !== 'undefined') {
             canvas.style.removeProperty( 'width');
             canvas.style.removeProperty('height');
           }
         } else {
           if (canvas.width  != wNative) canvas.width  = wNative;
           if (canvas.height != hNative) canvas.height = hNative;
-          if (typeof canvas.style != 'undefined') {
+          if (typeof canvas.style !== 'undefined') {
             if (w != wNative || h != hNative) {
               canvas.style.setProperty( 'width', w + 'px', 'important');
               canvas.style.setProperty('height', h + 'px', 'important');
@@ -14661,7 +14633,7 @@ var FS_stdin_getChar_buffer = [];
   
   var registerPreMainLoop = (f) => {
       // Does nothing unless $MainLoop is included/used.
-      typeof MainLoop != 'undefined' && MainLoop.preMainLoop.push(f);
+      typeof MainLoop !== 'undefined' && MainLoop.preMainLoop.push(f);
     };
   
   
@@ -14844,7 +14816,6 @@ var FS_stdin_getChar_buffer = [];
         var typeSize = GL.byteSizeByType[type - GL.byteSizeByTypeRoot];
         return size * typeSize * count;
       },
-  usedTempBuffers:[],
   preDrawHandleClientVertexAttribBindings:(count) => {
         GL.resetBufferBinding = false;
   
@@ -14881,7 +14852,7 @@ var FS_stdin_getChar_buffer = [];
         // version field in above check.
         if (!canvas.getContextSafariWebGL2Fixed) {
           canvas.getContextSafariWebGL2Fixed = canvas.getContext;
-          /** @type {function(this:HTMLCanvasElement, string, (Object|null)=): (Object|null)} */
+          /** @type {function(this:HTMLCanvasElement, string, (Object|null)=): (RenderingContext|null)} */
           function fixedGetContext(ver, attrs) {
             var gl = canvas.getContextSafariWebGL2Fixed(ver, attrs);
             return ((ver == 'webgl') == (gl instanceof WebGLRenderingContext)) ? gl : null;
@@ -14912,7 +14883,7 @@ var FS_stdin_getChar_buffer = [];
         // given a canvas without having to pass the parameters again.
         if (ctx.canvas) ctx.canvas.GLctxObject = context;
         GL.contexts[handle] = context;
-        if (typeof webGLContextAttributes.enableExtensionsByDefault == 'undefined' || webGLContextAttributes.enableExtensionsByDefault) {
+        if (typeof webGLContextAttributes.enableExtensionsByDefault === 'undefined' || webGLContextAttributes.enableExtensionsByDefault) {
           GL.initExtensions(context);
         }
   
@@ -14950,7 +14921,7 @@ var FS_stdin_getChar_buffer = [];
         if (GL.currentContext === GL.contexts[contextHandle]) {
           GL.currentContext = null;
         }
-        if (typeof JSEvents == 'object') {
+        if (typeof JSEvents === 'object') {
           // Release all JS event handlers on the DOM element that the GL context is
           // associated with since the context is now deleted.
           JSEvents.removeAllHandlersOnTarget(GL.contexts[contextHandle].GLctx.canvas);
@@ -15115,9 +15086,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glBindVertexArray.sig = 'vi';
 
   
-  var _glBindVertexArray = _emscripten_glBindVertexArray;
-  _glBindVertexArray.sig = 'vi';
-  var _emscripten_glBindVertexArrayOES = _glBindVertexArray;
+  var _emscripten_glBindVertexArrayOES = _emscripten_glBindVertexArray;
   _emscripten_glBindVertexArrayOES.sig = 'vi';
 
   var _emscripten_glBlendColor = (x0, x1, x2, x3) => GLctx.blendColor(x0, x1, x2, x3);
@@ -15470,9 +15439,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glDeleteVertexArrays.sig = 'vip';
 
   
-  var _glDeleteVertexArrays = _emscripten_glDeleteVertexArrays;
-  _glDeleteVertexArrays.sig = 'vip';
-  var _emscripten_glDeleteVertexArraysOES = _glDeleteVertexArrays;
+  var _emscripten_glDeleteVertexArraysOES = _emscripten_glDeleteVertexArrays;
   _emscripten_glDeleteVertexArraysOES.sig = 'vip';
 
   var _emscripten_glDepthFunc = (x0) => GLctx.depthFunc(x0);
@@ -15517,18 +15484,16 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glDrawArraysInstanced.sig = 'viiii';
 
   
-  var _glDrawArraysInstanced = _emscripten_glDrawArraysInstanced;
-  _glDrawArraysInstanced.sig = 'viiii';
-  var _emscripten_glDrawArraysInstancedANGLE = _glDrawArraysInstanced;
+  var _emscripten_glDrawArraysInstancedANGLE = _emscripten_glDrawArraysInstanced;
 
   
-  var _emscripten_glDrawArraysInstancedARB = _glDrawArraysInstanced;
+  var _emscripten_glDrawArraysInstancedARB = _emscripten_glDrawArraysInstanced;
 
   
-  var _emscripten_glDrawArraysInstancedEXT = _glDrawArraysInstanced;
+  var _emscripten_glDrawArraysInstancedEXT = _emscripten_glDrawArraysInstanced;
 
   
-  var _emscripten_glDrawArraysInstancedNV = _glDrawArraysInstanced;
+  var _emscripten_glDrawArraysInstancedNV = _emscripten_glDrawArraysInstanced;
 
   var tempFixedLengthArray = [];
   
@@ -15545,12 +15510,10 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glDrawBuffers.sig = 'vip';
 
   
-  var _glDrawBuffers = _emscripten_glDrawBuffers;
-  _glDrawBuffers.sig = 'vip';
-  var _emscripten_glDrawBuffersEXT = _glDrawBuffers;
+  var _emscripten_glDrawBuffersEXT = _emscripten_glDrawBuffers;
 
   
-  var _emscripten_glDrawBuffersWEBGL = _glDrawBuffers;
+  var _emscripten_glDrawBuffersWEBGL = _emscripten_glDrawBuffers;
 
   
   
@@ -15607,18 +15570,16 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glDrawElementsInstanced.sig = 'viiipi';
 
   
-  var _glDrawElementsInstanced = _emscripten_glDrawElementsInstanced;
-  _glDrawElementsInstanced.sig = 'viiipi';
-  var _emscripten_glDrawElementsInstancedANGLE = _glDrawElementsInstanced;
+  var _emscripten_glDrawElementsInstancedANGLE = _emscripten_glDrawElementsInstanced;
 
   
-  var _emscripten_glDrawElementsInstancedARB = _glDrawElementsInstanced;
+  var _emscripten_glDrawElementsInstancedARB = _emscripten_glDrawElementsInstanced;
 
   
-  var _emscripten_glDrawElementsInstancedEXT = _glDrawElementsInstanced;
+  var _emscripten_glDrawElementsInstancedEXT = _emscripten_glDrawElementsInstanced;
 
   
-  var _emscripten_glDrawElementsInstancedNV = _glDrawElementsInstanced;
+  var _emscripten_glDrawElementsInstancedNV = _emscripten_glDrawElementsInstanced;
 
   var _glDrawElements = _emscripten_glDrawElements;
   _glDrawElements.sig = 'viiip';
@@ -15820,9 +15781,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glGenVertexArrays.sig = 'vip';
 
   
-  var _glGenVertexArrays = _emscripten_glGenVertexArrays;
-  _glGenVertexArrays.sig = 'vip';
-  var _emscripten_glGenVertexArraysOES = _glGenVertexArrays;
+  var _emscripten_glGenVertexArraysOES = _emscripten_glGenVertexArrays;
   _emscripten_glGenVertexArraysOES.sig = 'vip';
 
   var _emscripten_glGenerateMipmap = (x0) => GLctx.generateMipmap(x0);
@@ -16331,7 +16290,7 @@ var FS_stdin_getChar_buffer = [];
         param = GLctx.getQueryParameter(query, pname);
       }
       var ret;
-      if (typeof param == 'boolean') {
+      if (typeof param === 'boolean') {
         ret = param ? 1 : 0;
       } else {
         ret = param;
@@ -16351,7 +16310,7 @@ var FS_stdin_getChar_buffer = [];
       var query = GL.queries[id];
       var param = GLctx.disjointTimerQueryExt['getQueryObjectEXT'](query, pname);
       var ret;
-      if (typeof param == 'boolean') {
+      if (typeof param === 'boolean') {
         ret = param ? 1 : 0;
       } else {
         ret = param;
@@ -16361,8 +16320,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glGetQueryObjectivEXT.sig = 'viip';
 
   
-  var _glGetQueryObjecti64vEXT = _emscripten_glGetQueryObjecti64vEXT;
-  var _emscripten_glGetQueryObjectui64vEXT = _glGetQueryObjecti64vEXT;
+  var _emscripten_glGetQueryObjectui64vEXT = _emscripten_glGetQueryObjecti64vEXT;
 
   var _emscripten_glGetQueryObjectuiv = (id, pname, params) => {
       if (!params) {
@@ -16374,7 +16332,7 @@ var FS_stdin_getChar_buffer = [];
       var query = GL.queries[id];
       var param = GLctx.getQueryParameter(query, pname);
       var ret;
-      if (typeof param == 'boolean') {
+      if (typeof param === 'boolean') {
         ret = param ? 1 : 0;
       } else {
         ret = param;
@@ -16384,8 +16342,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glGetQueryObjectuiv.sig = 'viip';
 
   
-  var _glGetQueryObjectivEXT = _emscripten_glGetQueryObjectivEXT;
-  var _emscripten_glGetQueryObjectuivEXT = _glGetQueryObjectivEXT;
+  var _emscripten_glGetQueryObjectuivEXT = _emscripten_glGetQueryObjectivEXT;
 
   var _emscripten_glGetQueryiv = (target, pname, params) => {
       if (!params) {
@@ -16785,7 +16742,7 @@ var FS_stdin_getChar_buffer = [];
         // WebGLUniformLocation.
         // If an integer, we have not yet bound the location, so do it now. The
         // integer value specifies the array index we should bind to.
-        if (typeof webglLoc == 'number') {
+        if (typeof webglLoc === 'number') {
           program.uniformLocsById[location] = webglLoc = GLctx.getUniformLocation(program, program.uniformArrayNamesById[location] + (webglLoc > 0 ? `[${webglLoc}]` : ''));
         }
         // Else an already cached WebGLUniformLocation, return it.
@@ -16810,7 +16767,7 @@ var FS_stdin_getChar_buffer = [];
       program = GL.programs[program];
       webglPrepareUniformLocationsBeforeFirstUse(program);
       var data = GLctx.getUniform(program, webglGetProgramUniformLocation(program, location));
-      if (typeof data == 'number' || typeof data == 'boolean') {
+      if (typeof data === 'number' || typeof data === 'boolean') {
         switch (type) {
           case 0: HEAP32[((params)>>2)] = data; break;
           case 2: HEAPF32[((params)>>2)] = data; break;
@@ -16857,7 +16814,7 @@ var FS_stdin_getChar_buffer = [];
       var data = GLctx.getVertexAttrib(index, pname);
       if (pname == 0x889F/*VERTEX_ATTRIB_ARRAY_BUFFER_BINDING*/) {
         HEAP32[((params)>>2)] = data && data["name"];
-      } else if (typeof data == 'number' || typeof data == 'boolean') {
+      } else if (typeof data === 'number' || typeof data === 'boolean') {
         switch (type) {
           case 0: HEAP32[((params)>>2)] = data; break;
           case 2: HEAPF32[((params)>>2)] = data; break;
@@ -16881,9 +16838,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glGetVertexAttribIiv.sig = 'viip';
 
   
-  var _glGetVertexAttribIiv = _emscripten_glGetVertexAttribIiv;
-  _glGetVertexAttribIiv.sig = 'viip';
-  var _emscripten_glGetVertexAttribIuiv = _glGetVertexAttribIiv;
+  var _emscripten_glGetVertexAttribIuiv = _emscripten_glGetVertexAttribIiv;
   _emscripten_glGetVertexAttribIuiv.sig = 'viip';
 
   
@@ -17026,9 +16981,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glIsVertexArray.sig = 'ii';
 
   
-  var _glIsVertexArray = _emscripten_glIsVertexArray;
-  _glIsVertexArray.sig = 'ii';
-  var _emscripten_glIsVertexArrayOES = _glIsVertexArray;
+  var _emscripten_glIsVertexArrayOES = _emscripten_glIsVertexArray;
   _emscripten_glIsVertexArrayOES.sig = 'ii';
 
   var _emscripten_glLineWidth = (x0) => GLctx.lineWidth(x0);
@@ -17711,18 +17664,16 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_glVertexAttribDivisor.sig = 'vii';
 
   
-  var _glVertexAttribDivisor = _emscripten_glVertexAttribDivisor;
-  _glVertexAttribDivisor.sig = 'vii';
-  var _emscripten_glVertexAttribDivisorANGLE = _glVertexAttribDivisor;
+  var _emscripten_glVertexAttribDivisorANGLE = _emscripten_glVertexAttribDivisor;
 
   
-  var _emscripten_glVertexAttribDivisorARB = _glVertexAttribDivisor;
+  var _emscripten_glVertexAttribDivisorARB = _emscripten_glVertexAttribDivisor;
 
   
-  var _emscripten_glVertexAttribDivisorEXT = _glVertexAttribDivisor;
+  var _emscripten_glVertexAttribDivisorEXT = _emscripten_glVertexAttribDivisor;
 
   
-  var _emscripten_glVertexAttribDivisorNV = _glVertexAttribDivisor;
+  var _emscripten_glVertexAttribDivisorNV = _emscripten_glVertexAttribDivisor;
 
   var _emscripten_glVertexAttribI4i = (x0, x1, x2, x3, x4) => GLctx.vertexAttribI4i(x0, x1, x2, x3, x4);
   _emscripten_glVertexAttribI4i.sig = 'viiiii';
@@ -18033,7 +17984,7 @@ var FS_stdin_getChar_buffer = [];
       return JSEvents.registerOrRemoveHandler(eventHandler);
     };
   var _emscripten_set_beforeunload_callback_on_thread = (userData, callbackfunc, targetThread) => {
-      if (typeof onbeforeunload == 'undefined') return -1;
+      if (typeof onbeforeunload === 'undefined') return -1;
       // beforeunload callback can only be registered on the main browser thread, because the page will go away immediately after returning from the handler,
       // and there is no time to start proxying it anywhere.
       if (targetThread !== 1) return -5;
@@ -18045,7 +17996,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerFocusEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 256;
+      const eventSize = 256;
       JSEvents.focusEvent ||= _malloc(eventSize);
   
       var focusEventHandlerFunc = (e) => {
@@ -18094,7 +18045,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerFullscreenChangeEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 276;
+      const eventSize = 276;
       JSEvents.fullscreenChangeEvent ||= _malloc(eventSize);
   
       var fullscreenChangeEventHandlerFunc = (e) => {
@@ -18132,7 +18083,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerGamepadEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 1240;
+      const eventSize = 1240;
       JSEvents.gamepadEvent ||= _malloc(eventSize);
   
       var gamepadEventHandlerFunc = (e) => {
@@ -18175,7 +18126,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerKeyEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 160;
+      const eventSize = 160;
       JSEvents.keyEvent ||= _malloc(eventSize);
   
       var keyEventHandlerFunc = (e) => {
@@ -18264,7 +18215,7 @@ var FS_stdin_getChar_buffer = [];
     };
   
   var registerOrientationChangeEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 8;
+      const eventSize = 8;
       JSEvents.orientationChangeEvent ||= _malloc(eventSize);
   
       var orientationChangeEventHandlerFunc = (e) => {
@@ -18308,7 +18259,7 @@ var FS_stdin_getChar_buffer = [];
     };
   
   var registerPointerlockChangeEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 257;
+      const eventSize = 257;
       JSEvents.pointerlockChangeEvent ||= _malloc(eventSize);
   
       var pointerlockChangeEventHandlerFunc = (e) => {
@@ -18345,7 +18296,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerUiEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 36;
+      const eventSize = 36;
       JSEvents.uiEvent ||= _malloc(eventSize);
   
       target = findEventTarget(target);
@@ -18408,7 +18359,7 @@ var FS_stdin_getChar_buffer = [];
     };
   
   var registerVisibilityChangeEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 8;
+      const eventSize = 8;
       JSEvents.visibilityChangeEvent ||= _malloc(eventSize);
   
       var visibilityChangeEventHandlerFunc = (e) => {
@@ -18468,7 +18419,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerWheelEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 96;
+      const eventSize = 96;
       JSEvents.wheelEvent ||= _malloc(eventSize)
   
       // The DOM Level 3 events spec event 'wheel'
@@ -18498,7 +18449,7 @@ var FS_stdin_getChar_buffer = [];
   var _emscripten_set_wheel_callback_on_thread = (target, userData, useCapture, callbackfunc, targetThread) => {
       target = findEventTarget(target);
       if (!target) return -4;
-      if (typeof target.onwheel != 'undefined') {
+      if (typeof target.onwheel !== 'undefined') {
         return registerWheelEventCallback(target, userData, useCapture, callbackfunc, 9, 'wheel', targetThread);
       } else {
         return -1;
@@ -18563,10 +18514,13 @@ var FS_stdin_getChar_buffer = [];
   var _emscripten_webgl_create_context = _emscripten_webgl_do_create_context;
   _emscripten_webgl_create_context.sig = 'ppp';
 
-  var _emscripten_webgl_destroy_context = (contextHandle) => {
+  
+  var _emscripten_webgl_do_destroy_context = (contextHandle) => {
       if (GL.currentContext == contextHandle) GL.currentContext = 0;
       GL.deleteContext(contextHandle);
     };
+  _emscripten_webgl_do_destroy_context.sig = 'ip';
+  var _emscripten_webgl_destroy_context = _emscripten_webgl_do_destroy_context;
   _emscripten_webgl_destroy_context.sig = 'ip';
 
   var _emscripten_webgl_make_context_current = (contextHandle) => {
@@ -18672,7 +18626,7 @@ var FS_stdin_getChar_buffer = [];
       FS.close(stream);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   }
@@ -18703,7 +18657,7 @@ var FS_stdin_getChar_buffer = [];
       HEAP64[(((pbuf)+(16))>>3)] = BigInt(rightsInheriting);
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   }
@@ -18733,7 +18687,7 @@ var FS_stdin_getChar_buffer = [];
         if (curr < 0) return -1;
         ret += curr;
         if (curr < len) break; // nothing more to read
-        if (typeof offset != 'undefined') {
+        if (typeof offset !== 'undefined') {
           offset += curr;
         }
       }
@@ -18754,7 +18708,7 @@ var FS_stdin_getChar_buffer = [];
       HEAPU32[((pnum)>>2)] = num;
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   ;
@@ -18802,7 +18756,7 @@ var FS_stdin_getChar_buffer = [];
       HEAPU32[((pnum)>>2)] = num;
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   ;
@@ -18819,7 +18773,7 @@ var FS_stdin_getChar_buffer = [];
       HEAPU32[((pnum)>>2)] = num;
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   }
@@ -18841,7 +18795,7 @@ var FS_stdin_getChar_buffer = [];
       if (stream.getdents && !offset && whence === 0) stream.getdents = null; // reset readdir state
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   ;
@@ -18864,7 +18818,7 @@ var FS_stdin_getChar_buffer = [];
         }
       });
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   
@@ -18885,12 +18839,191 @@ var FS_stdin_getChar_buffer = [];
       HEAPU32[((pnum)>>2)] = num;
       return 0;
     } catch (e) {
-    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    if (typeof FS === 'undefined' || !(e.name === 'ErrnoError')) throw e;
     return e.errno;
   }
   }
   
   _fd_write.sig = 'iippp';
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  var _getaddrinfo = (node, service, hint, out) => {
+      // Note getaddrinfo currently only returns a single addrinfo with ai_next defaulting to NULL. When NULL
+      // hints are specified or ai_family set to AF_UNSPEC or ai_socktype or ai_protocol set to 0 then we
+      // really should provide a linked list of suitable addrinfo values.
+      var addrs = [];
+      var canon = null;
+      var addr = 0;
+      var port = 0;
+      var flags = 0;
+      var family = 0;
+      var type = 0;
+      var proto = 0;
+      var ai, last;
+  
+      function allocaddrinfo(family, type, proto, canon, addr, port) {
+        var sa, salen, ai;
+        var errno;
+  
+        salen = family === 10 ?
+          28 :
+          16;
+        addr = family === 10 ?
+          inetNtop6(addr) :
+          inetNtop4(addr);
+        sa = _malloc(salen);
+        errno = writeSockaddr(sa, family, addr, port);
+  
+        ai = _malloc(32);
+        HEAP32[(((ai)+(4))>>2)] = family;
+        HEAP32[(((ai)+(8))>>2)] = type;
+        HEAP32[(((ai)+(12))>>2)] = proto;
+        HEAPU32[(((ai)+(24))>>2)] = canon;
+        HEAPU32[(((ai)+(20))>>2)] = sa;
+        if (family === 10) {
+          HEAP32[(((ai)+(16))>>2)] = 28;
+        } else {
+          HEAP32[(((ai)+(16))>>2)] = 16;
+        }
+        HEAP32[(((ai)+(28))>>2)] = 0;
+  
+        return ai;
+      }
+  
+      if (hint) {
+        flags = HEAP32[((hint)>>2)];
+        family = HEAP32[(((hint)+(4))>>2)];
+        type = HEAP32[(((hint)+(8))>>2)];
+        proto = HEAP32[(((hint)+(12))>>2)];
+      }
+      if (type && !proto) {
+        proto = type === 2 ? 17 : 6;
+      }
+      if (!type && proto) {
+        type = proto === 17 ? 2 : 1;
+      }
+  
+      // If type or proto are set to zero in hints we should really be returning multiple addrinfo values, but for
+      // now default to a TCP STREAM socket so we can at least return a sensible addrinfo given NULL hints.
+      if (!proto) {
+        proto = 6;
+      }
+      if (!type) {
+        type = 1;
+      }
+  
+      if (!node && !service) {
+        return -2;
+      }
+      if (flags & ~(1|2|4|
+          1024|8|16|32)) {
+        return -1;
+      }
+      if (hint && (HEAP32[((hint)>>2)] & 2) && !node) {
+        return -1;
+      }
+      if (flags & 32) {
+        // TODO
+        return -2;
+      }
+      if (type && type !== 1 && type !== 2) {
+        return -7;
+      }
+      if (family !== 0 && family !== 2 && family !== 10) {
+        return -6;
+      }
+  
+      if (service) {
+        service = UTF8ToString(service);
+        port = parseInt(service, 10);
+  
+        if (isNaN(port)) {
+          if (flags & 1024) {
+            return -2;
+          }
+          // TODO support resolving well-known service names from:
+          // http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
+          return -8;
+        }
+      }
+  
+      if (!node) {
+        if (family === 0) {
+          family = 2;
+        }
+        if (!(flags & 1)) {
+          if (family === 2) {
+            addr = _htonl(2130706433);
+          } else {
+            addr = [0, 0, 0, _htonl(1)];
+          }
+        }
+        ai = allocaddrinfo(family, type, proto, null, addr, port);
+        HEAPU32[((out)>>2)] = ai;
+        return 0;
+      }
+  
+      //
+      // try as a numeric address
+      //
+      node = UTF8ToString(node);
+      addr = inetPton4(node);
+      if (addr !== null) {
+        // incoming node is a valid ipv4 address
+        if (family === 0 || family === 2) {
+          family = 2;
+        }
+        else if (family === 10 && (flags & 8)) {
+          addr = [0, 0, _htonl(0xffff), addr];
+          family = 10;
+        } else {
+          return -2;
+        }
+      } else {
+        addr = inetPton6(node);
+        if (addr !== null) {
+          // incoming node is a valid ipv6 address
+          if (family === 0 || family === 10) {
+            family = 10;
+          } else {
+            return -2;
+          }
+        }
+      }
+      if (addr != null) {
+        ai = allocaddrinfo(family, type, proto, node, addr, port);
+        HEAPU32[((out)>>2)] = ai;
+        return 0;
+      }
+      if (flags & 4) {
+        return -2;
+      }
+  
+      //
+      // try as a hostname
+      //
+      // resolve the hostname to a temporary fake address
+      node = DNS.lookup_name(node);
+      addr = inetPton4(node);
+      if (family === 0) {
+        family = 2;
+      } else if (family === 10) {
+        addr = [0, 0, _htonl(0xffff), addr];
+      }
+      ai = allocaddrinfo(family, type, proto, null, addr, port);
+      HEAPU32[((out)>>2)] = ai;
+      return 0;
+    };
+  _getaddrinfo.sig = 'ipppp';
 
   
   
@@ -18902,39 +19035,47 @@ var FS_stdin_getChar_buffer = [];
       var port = info.port;
       var addr = info.addr;
   
-      var overflowed = false;
+      // Write the result, with `lookup` the host name for addr if one is wanted
+      // and known.
+      function write(lookup) {
+        var overflowed = false;
   
-      if (node && nodelen) {
-        var lookup;
-        if ((flags & 1) || !(lookup = DNS.lookup_addr(addr))) {
-          if (flags & 8) {
-            return -2;
+        if (node && nodelen) {
+          if (!lookup) {
+            if (flags & 8) {
+              return -2;
+            }
+          } else {
+            addr = lookup;
           }
-        } else {
-          addr = lookup;
-        }
-        var numBytesWrittenExclNull = stringToUTF8(addr, node, nodelen);
+          var numBytesWrittenExclNull = stringToUTF8(addr, node, nodelen);
   
-        if (numBytesWrittenExclNull+1 >= nodelen) {
-          overflowed = true;
+          if (numBytesWrittenExclNull+1 >= nodelen) {
+            overflowed = true;
+          }
         }
+  
+        if (serv && servlen) {
+          port = '' + port;
+          var numBytesWrittenExclNull = stringToUTF8(port, serv, servlen);
+  
+          if (numBytesWrittenExclNull+1 >= servlen) {
+            overflowed = true;
+          }
+        }
+  
+        if (overflowed) {
+          // Note: even when we overflow, getnameinfo() is specced to write out the truncated results.
+          return -12;
+        }
+  
+        return 0;
       }
   
-      if (serv && servlen) {
-        port = '' + port;
-        var numBytesWrittenExclNull = stringToUTF8(port, serv, servlen);
-  
-        if (numBytesWrittenExclNull+1 >= servlen) {
-          overflowed = true;
-        }
+      if (node && nodelen && !(flags & 1)) {
+        return write(DNS.lookup_addr(addr));
       }
-  
-      if (overflowed) {
-        // Note: even when we overflow, getnameinfo() is specced to write out the truncated results.
-        return -12;
-      }
-  
-      return 0;
+      return write(null);
     };
   _getnameinfo.sig = 'ipipipii';
 
@@ -19494,7 +19635,7 @@ var FS_stdin_getChar_buffer = [];
         var importPattern = /^(invoke_.*|__asyncjs__.*)$/;
   
         for (let [x, original] of Object.entries(imports)) {
-          if (typeof original == 'function') {
+          if (typeof original === 'function') {
             let isAsyncifyImport = original.isAsync || importPattern.test(x);
           }
         }
@@ -19518,7 +19659,7 @@ var FS_stdin_getChar_buffer = [];
   instrumentWasmExports(exports) {
         var ret = {};
         for (let [x, original] of Object.entries(exports)) {
-          if (typeof original == 'function') {
+          if (typeof original === 'function') {
             var wrapper = Asyncify.instrumentFunction(original);
             ret[x] = wrapper;
           } else {
@@ -19565,7 +19706,7 @@ var FS_stdin_getChar_buffer = [];
           
           // Keep the runtime alive so that a re-wind can be done later.
           runAndAbortIfError(_asyncify_stop_unwind);
-          if (typeof Fibers != 'undefined') {
+          if (typeof Fibers !== 'undefined') {
             Fibers.trampoline();
           }
         }
@@ -19630,7 +19771,7 @@ var FS_stdin_getChar_buffer = [];
             }
             Asyncify.state = Asyncify.State.Rewinding;
             runAndAbortIfError(() => _asyncify_start_rewind(Asyncify.currData));
-            if (typeof MainLoop != 'undefined' && MainLoop.func) {
+            if (typeof MainLoop !== 'undefined' && MainLoop.func) {
               MainLoop.resume();
             }
             var asyncWasmReturnValue, isError = false;
@@ -19675,7 +19816,7 @@ var FS_stdin_getChar_buffer = [];
             Asyncify.state = Asyncify.State.Unwinding;
             // TODO: reuse, don't alloc/free every sleep
             Asyncify.currData = Asyncify.allocateData();
-            if (typeof MainLoop != 'undefined' && MainLoop.func) {
+            if (typeof MainLoop !== 'undefined' && MainLoop.func) {
               MainLoop.pause();
             }
             runAndAbortIfError(() => _asyncify_start_unwind(Asyncify.currData));
@@ -19821,7 +19962,7 @@ var FS_stdin_getChar_buffer = [];
 
   var _stackSave = stackSave;
 
-  var _stackRestore = stackSave;
+  var _stackRestore = stackRestore;
 
 
 
@@ -19863,185 +20004,6 @@ var FS_stdin_getChar_buffer = [];
 
 
 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  var _getaddrinfo = (node, service, hint, out) => {
-      // Note getaddrinfo currently only returns a single addrinfo with ai_next defaulting to NULL. When NULL
-      // hints are specified or ai_family set to AF_UNSPEC or ai_socktype or ai_protocol set to 0 then we
-      // really should provide a linked list of suitable addrinfo values.
-      var addrs = [];
-      var canon = null;
-      var addr = 0;
-      var port = 0;
-      var flags = 0;
-      var family = 0;
-      var type = 0;
-      var proto = 0;
-      var ai, last;
-  
-      function allocaddrinfo(family, type, proto, canon, addr, port) {
-        var sa, salen, ai;
-        var errno;
-  
-        salen = family === 10 ?
-          28 :
-          16;
-        addr = family === 10 ?
-          inetNtop6(addr) :
-          inetNtop4(addr);
-        sa = _malloc(salen);
-        errno = writeSockaddr(sa, family, addr, port);
-  
-        ai = _malloc(32);
-        HEAP32[(((ai)+(4))>>2)] = family;
-        HEAP32[(((ai)+(8))>>2)] = type;
-        HEAP32[(((ai)+(12))>>2)] = proto;
-        HEAPU32[(((ai)+(24))>>2)] = canon;
-        HEAPU32[(((ai)+(20))>>2)] = sa;
-        if (family === 10) {
-          HEAP32[(((ai)+(16))>>2)] = 28;
-        } else {
-          HEAP32[(((ai)+(16))>>2)] = 16;
-        }
-        HEAP32[(((ai)+(28))>>2)] = 0;
-  
-        return ai;
-      }
-  
-      if (hint) {
-        flags = HEAP32[((hint)>>2)];
-        family = HEAP32[(((hint)+(4))>>2)];
-        type = HEAP32[(((hint)+(8))>>2)];
-        proto = HEAP32[(((hint)+(12))>>2)];
-      }
-      if (type && !proto) {
-        proto = type === 2 ? 17 : 6;
-      }
-      if (!type && proto) {
-        type = proto === 17 ? 2 : 1;
-      }
-  
-      // If type or proto are set to zero in hints we should really be returning multiple addrinfo values, but for
-      // now default to a TCP STREAM socket so we can at least return a sensible addrinfo given NULL hints.
-      if (!proto) {
-        proto = 6;
-      }
-      if (!type) {
-        type = 1;
-      }
-  
-      if (!node && !service) {
-        return -2;
-      }
-      if (flags & ~(1|2|4|
-          1024|8|16|32)) {
-        return -1;
-      }
-      if (hint && (HEAP32[((hint)>>2)] & 2) && !node) {
-        return -1;
-      }
-      if (flags & 32) {
-        // TODO
-        return -2;
-      }
-      if (type && type !== 1 && type !== 2) {
-        return -7;
-      }
-      if (family !== 0 && family !== 2 && family !== 10) {
-        return -6;
-      }
-  
-      if (service) {
-        service = UTF8ToString(service);
-        port = parseInt(service, 10);
-  
-        if (isNaN(port)) {
-          if (flags & 1024) {
-            return -2;
-          }
-          // TODO support resolving well-known service names from:
-          // http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
-          return -8;
-        }
-      }
-  
-      if (!node) {
-        if (family === 0) {
-          family = 2;
-        }
-        if (!(flags & 1)) {
-          if (family === 2) {
-            addr = _htonl(2130706433);
-          } else {
-            addr = [0, 0, 0, _htonl(1)];
-          }
-        }
-        ai = allocaddrinfo(family, type, proto, null, addr, port);
-        HEAPU32[((out)>>2)] = ai;
-        return 0;
-      }
-  
-      //
-      // try as a numeric address
-      //
-      node = UTF8ToString(node);
-      addr = inetPton4(node);
-      if (addr !== null) {
-        // incoming node is a valid ipv4 address
-        if (family === 0 || family === 2) {
-          family = 2;
-        }
-        else if (family === 10 && (flags & 8)) {
-          addr = [0, 0, _htonl(0xffff), addr];
-          family = 10;
-        } else {
-          return -2;
-        }
-      } else {
-        addr = inetPton6(node);
-        if (addr !== null) {
-          // incoming node is a valid ipv6 address
-          if (family === 0 || family === 10) {
-            family = 10;
-          } else {
-            return -2;
-          }
-        }
-      }
-      if (addr != null) {
-        ai = allocaddrinfo(family, type, proto, node, addr, port);
-        HEAPU32[((out)>>2)] = ai;
-        return 0;
-      }
-      if (flags & 4) {
-        return -2;
-      }
-  
-      //
-      // try as a hostname
-      //
-      // resolve the hostname to a temporary fake address
-      node = DNS.lookup_name(node);
-      addr = inetPton4(node);
-      if (family === 0) {
-        family = 2;
-      } else if (family === 10) {
-        addr = [0, 0, _htonl(0xffff), addr];
-      }
-      ai = allocaddrinfo(family, type, proto, null, addr, port);
-      HEAPU32[((out)>>2)] = ai;
-      return 0;
-    };
-  _getaddrinfo.sig = 'ipppp';
 
 
   var Protocols = {
@@ -20146,23 +20108,6 @@ var FS_stdin_getChar_buffer = [];
     };
   _getprotobynumber.sig = 'pi';
 
-  var Sockets = {
-  BUFFER_SIZE:10240,
-  MAX_BUFFER_SIZE:10485760,
-  nextFd:1,
-  fds:{
-  },
-  nextport:1,
-  maxport:65535,
-  peer:null,
-  connections:{
-  },
-  portmap:{
-  },
-  localAddr:4261412874,
-  addrPool:[33554442,50331658,67108874,83886090,100663306,117440522,134217738,150994954,167772170,184549386,201326602,218103818,234881034],
-  };
-
 
 
 
@@ -20238,6 +20183,14 @@ var FS_stdin_getChar_buffer = [];
   var __emscripten_get_now_is_monotonic = () => nowIsMonotonic;
   __emscripten_get_now_is_monotonic.sig = 'i';
 
+  var warnOnce = (text) => {
+      warnOnce.shown ||= {};
+      if (!warnOnce.shown[text]) {
+        warnOnce.shown[text] = 1;
+        if (ENVIRONMENT_IS_NODE) text = 'warning: ' + text;
+        err(text);
+      }
+    };
 
 
   var _emscripten_get_compiler_setting = (name) => abort('You must build with -sRETAIN_COMPILER_SETTINGS for getCompilerSetting or emscripten_get_compiler_setting to work');
@@ -20684,7 +20637,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerMouseEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 64;
+      const eventSize = 64;
       JSEvents.mouseEvent ||= _malloc(eventSize);
       target = findEventTarget(target);
   
@@ -20779,7 +20732,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerDeviceOrientationEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 32;
+      const eventSize = 32;
       JSEvents.deviceOrientationEvent ||= _malloc(eventSize);
   
       var deviceOrientationEventHandlerFunc = (e) => {
@@ -20831,7 +20784,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerDeviceMotionEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 80;
+      const eventSize = 80;
       JSEvents.deviceMotionEvent ||= _malloc(eventSize);
   
       var deviceMotionEventHandlerFunc = (e) => {
@@ -21137,7 +21090,7 @@ var FS_stdin_getChar_buffer = [];
 
 
   var _emscripten_get_visibility_status = (visibilityStatus) => {
-      if (typeof document.visibilityState == 'undefined' && typeof document.hidden == 'undefined') {
+      if (typeof document.visibilityState === 'undefined' && typeof document.hidden === 'undefined') {
         return -1;
       }
       fillVisibilityChangeEventData(visibilityStatus);
@@ -21152,7 +21105,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerTouchEventCallback = (target, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 1552;
+      const eventSize = 1552;
       JSEvents.touchEvent ||= _malloc(eventSize);
   
       target = findEventTarget(target);
@@ -21256,7 +21209,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   var registerBatteryEventCallback = (battery, userData, useCapture, callbackfunc, eventTypeId, eventTypeString, targetThread) => {
-      var eventSize = 32;
+      const eventSize = 32;
       JSEvents.batteryEvent ||= _malloc(eventSize)
   
       var batteryEventHandlerFunc = (e) => {
@@ -21602,8 +21555,6 @@ var FS_stdin_getChar_buffer = [];
   var emClearImmediate;
   var emSetImmediate;
 
-  var emClearImmediate_deps = ["$emSetImmediate"];
-
 
   
   var _emscripten_set_immediate = (cb, userData) => {
@@ -21693,7 +21644,7 @@ var FS_stdin_getChar_buffer = [];
 
   var registerPostMainLoop = (f) => {
       // Does nothing unless $MainLoop is included/used.
-      typeof MainLoop != 'undefined' && MainLoop.postMainLoop.push(f);
+      typeof MainLoop !== 'undefined' && MainLoop.postMainLoop.push(f);
     };
 
 
@@ -21782,7 +21733,7 @@ var FS_stdin_getChar_buffer = [];
           // allow arbitrary objects to be thrown here, we will get a TypeError in
           // MEMORY64 mode when they are later converted to void* rejection
           // values.
-          if (typeof e != 'number') {
+          if (typeof e !== 'number') {
             throw 0;
           }
           throw e;
@@ -21914,6 +21865,11 @@ var FS_stdin_getChar_buffer = [];
   ;
   _emscripten_promise_await_unchecked.sig = 'pp';
   _emscripten_promise_await_unchecked.isAsync = true;
+
+
+
+
+
 
   var findMatchingCatch = (args) => {
       setTempRet0(0);
@@ -22110,8 +22066,6 @@ var FS_stdin_getChar_buffer = [];
 
   var setCanvasSize = Browser.setCanvasSize;
 
-  var getUserMedia = Browser.getUserMedia;
-
   var createContext = Browser.createContext;
 
   
@@ -22196,6 +22150,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   
+  
   var _emscripten_async_load_script = async (url, onload, onerror) => {
       url = UTF8ToString(url);
       
@@ -22235,7 +22190,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_async_load_script.sig = 'vppp';
 
   var _emscripten_get_window_title = () => {
-      var buflen = 256;
+      const buflen = 256;
   
       if (!_emscripten_get_window_title.buffer) {
         _emscripten_get_window_title.buffer = _malloc(buflen);
@@ -22369,6 +22324,8 @@ var FS_stdin_getChar_buffer = [];
 
   
   
+  
+  
   var getPreloadedImageData = (path, w, h) => {
       path = PATH_FS.resolve(path);
   
@@ -22390,8 +22347,6 @@ var FS_stdin_getChar_buffer = [];
   
   var _emscripten_get_preloaded_image_data = (path, w, h) => getPreloadedImageData(UTF8ToString(path), w, h);
   _emscripten_get_preloaded_image_data.sig = 'pppp';
-
-  var getPreloadedImageData__data = ["$PATH_FS","malloc"];
 
 
   
@@ -22809,7 +22764,7 @@ var FS_stdin_getChar_buffer = [];
   
       function initDate() {
         function fixup(value, min, max) {
-          return (typeof value != 'number' || isNaN(value)) ? min : (value>=min ? (value<=max ? value: max): min);
+          return (typeof value !== 'number' || isNaN(value)) ? min : (value>=min ? (value<=max ? value: max): min);
         };
         return {
           year: fixup(HEAP32[(((tm)+(20))>>2)] + 1900 , 1970, 9999),
@@ -23091,10 +23046,6 @@ var FS_stdin_getChar_buffer = [];
 
 
 
-
-
-
-
   var __dlsym_catchup_js = (handle, symbolIndex) => {
       var lib = LDSO.loadedLibsByHandle[handle];
       var symDict = lib.exports;
@@ -23139,8 +23090,6 @@ var FS_stdin_getChar_buffer = [];
   var FS_initialized = (...args) => FS.initialized(...args);
 
   var FS_ignorePermissions = (...args) => FS.ignorePermissions(...args);
-
-  var FS_filesystems = (...args) => FS.filesystems(...args);
 
   var FS_syncFSRequests = (...args) => FS.syncFSRequests(...args);
 
@@ -23389,6 +23338,49 @@ var FS_stdin_getChar_buffer = [];
 
 
 
+  
+  
+  
+  
+  var _emscripten_epoll_listener_add = (epfd, callback, userdata) => {
+      var stream = FS.getStream(epfd);
+      // A public API, not a syscall: positive errno.
+      if (!stream?.shared.epoll) return 8;
+      var ep = stream.shared;
+      var key = callback + ':' + userdata;
+      if (stream.listeners.has(key)) return 20;
+      var it = {key};
+      stream.listeners.set(key, it);
+  
+      // Every delivery is an event-loop task, never under the notifying wasm
+      // call's frames. Every wake schedules its own turn; one that finds nothing
+      // to deliver is a no-op.
+      function turn() {
+        if (it.cleared || epollWouldBlock(ep)) return;
+        callUserCallback(() => {
+          ((a1, a2) => dynCall_vii(callback, a1, a2))(epfd, userdata);
+          // A still-ready level fd yields to I/O before the next delivery.
+          if (!it.cleared && !epollWouldBlock(ep)) emSetImmediate(turn);
+        });
+      }
+      it.listener = ep.node.addListener(() => emSetImmediate(turn));
+      emSetImmediate(turn);
+      return 0;
+    };
+  _emscripten_epoll_listener_add.sig = 'iipp';
+
+  
+  var _emscripten_epoll_listener_remove = (epfd, callback, userdata) => {
+      var stream = FS.getStream(epfd);
+      if (!stream?.shared.epoll) return 8;
+      var it = stream.listeners.get(callback + ':' + userdata);
+      if (!it) return 44;
+      epollClearListener(stream, it);
+      return 0;
+    };
+  _emscripten_epoll_listener_remove.sig = 'iipp';
+
+
   var miniTempWebGLFloatBuffers = [];
 
   var miniTempWebGLIntBuffers = [];
@@ -23519,11 +23511,13 @@ var FS_stdin_getChar_buffer = [];
   var _glGetQueryivEXT = _emscripten_glGetQueryivEXT;
 
 
+  var _glGetQueryObjectivEXT = _emscripten_glGetQueryObjectivEXT;
 
 
   var _glGetQueryObjectuivEXT = _emscripten_glGetQueryObjectuivEXT;
 
 
+  var _glGetQueryObjecti64vEXT = _emscripten_glGetQueryObjecti64vEXT;
 
 
   var _glGetQueryObjectui64vEXT = _emscripten_glGetQueryObjectui64vEXT;
@@ -23727,12 +23721,20 @@ var FS_stdin_getChar_buffer = [];
   _glIsFramebuffer.sig = 'ii';
 
 
+  var _glGenVertexArrays = _emscripten_glGenVertexArrays;
+  _glGenVertexArrays.sig = 'vip';
 
 
+  var _glDeleteVertexArrays = _emscripten_glDeleteVertexArrays;
+  _glDeleteVertexArrays.sig = 'vip';
 
 
+  var _glBindVertexArray = _emscripten_glBindVertexArray;
+  _glBindVertexArray.sig = 'vi';
 
 
+  var _glIsVertexArray = _emscripten_glIsVertexArray;
+  _glIsVertexArray.sig = 'ii';
 
   var _emscripten_glVertexPointer = (size, type, stride, ptr) =>
       abort('Legacy GL function (glVertexPointer) called. If you want legacy GL emulation, you need to compile with -sLEGACY_GL_EMULATION to enable legacy GL emulation.');
@@ -23793,10 +23795,16 @@ var FS_stdin_getChar_buffer = [];
 
 
 
+  var _glVertexAttribDivisor = _emscripten_glVertexAttribDivisor;
+  _glVertexAttribDivisor.sig = 'vii';
 
 
+  var _glDrawArraysInstanced = _emscripten_glDrawArraysInstanced;
+  _glDrawArraysInstanced.sig = 'viiii';
 
 
+  var _glDrawElementsInstanced = _emscripten_glDrawElementsInstanced;
+  _glDrawElementsInstanced.sig = 'viiipi';
 
 
   var _glVertexAttribDivisorNV = _emscripten_glVertexAttribDivisorNV;
@@ -23835,6 +23843,8 @@ var FS_stdin_getChar_buffer = [];
   var _glDrawElementsInstancedANGLE = _emscripten_glDrawElementsInstancedANGLE;
 
 
+  var _glDrawBuffers = _emscripten_glDrawBuffers;
+  _glDrawBuffers.sig = 'vip';
 
 
   var _glDrawBuffersEXT = _emscripten_glDrawBuffersEXT;
@@ -23862,19 +23872,19 @@ var FS_stdin_getChar_buffer = [];
         drawcount);
     };
   _emscripten_glMultiDrawArraysWEBGL.sig = 'vippi';
-  var _glMultiDrawArraysWEBGL = _emscripten_glMultiDrawArraysWEBGL;
-  var _emscripten_glMultiDrawArrays = _glMultiDrawArraysWEBGL;
+  var _emscripten_glMultiDrawArrays = _emscripten_glMultiDrawArraysWEBGL;
   _emscripten_glMultiDrawArrays.sig = 'vippi';
 
   var _glMultiDrawArrays = _emscripten_glMultiDrawArrays;
   _glMultiDrawArrays.sig = 'vippi';
 
   
-  var _emscripten_glMultiDrawArraysANGLE = _glMultiDrawArraysWEBGL;
+  var _emscripten_glMultiDrawArraysANGLE = _emscripten_glMultiDrawArraysWEBGL;
 
   var _glMultiDrawArraysANGLE = _emscripten_glMultiDrawArraysANGLE;
 
 
+  var _glMultiDrawArraysWEBGL = _emscripten_glMultiDrawArraysWEBGL;
 
   
   
@@ -23890,12 +23900,12 @@ var FS_stdin_getChar_buffer = [];
         drawcount);
     };
   _emscripten_glMultiDrawArraysInstancedWEBGL.sig = 'vipppi';
-  var _glMultiDrawArraysInstancedWEBGL = _emscripten_glMultiDrawArraysInstancedWEBGL;
-  var _emscripten_glMultiDrawArraysInstancedANGLE = _glMultiDrawArraysInstancedWEBGL;
+  var _emscripten_glMultiDrawArraysInstancedANGLE = _emscripten_glMultiDrawArraysInstancedWEBGL;
 
   var _glMultiDrawArraysInstancedANGLE = _emscripten_glMultiDrawArraysInstancedANGLE;
 
 
+  var _glMultiDrawArraysInstancedWEBGL = _emscripten_glMultiDrawArraysInstancedWEBGL;
 
   
   
@@ -23910,19 +23920,19 @@ var FS_stdin_getChar_buffer = [];
         drawcount);
     };
   _emscripten_glMultiDrawElementsWEBGL.sig = 'vipipi';
-  var _glMultiDrawElementsWEBGL = _emscripten_glMultiDrawElementsWEBGL;
-  var _emscripten_glMultiDrawElements = _glMultiDrawElementsWEBGL;
+  var _emscripten_glMultiDrawElements = _emscripten_glMultiDrawElementsWEBGL;
   _emscripten_glMultiDrawElements.sig = 'vipipi';
 
   var _glMultiDrawElements = _emscripten_glMultiDrawElements;
   _glMultiDrawElements.sig = 'vipipi';
 
   
-  var _emscripten_glMultiDrawElementsANGLE = _glMultiDrawElementsWEBGL;
+  var _emscripten_glMultiDrawElementsANGLE = _emscripten_glMultiDrawElementsWEBGL;
 
   var _glMultiDrawElementsANGLE = _emscripten_glMultiDrawElementsANGLE;
 
 
+  var _glMultiDrawElementsWEBGL = _emscripten_glMultiDrawElementsWEBGL;
 
   
   
@@ -23939,12 +23949,12 @@ var FS_stdin_getChar_buffer = [];
         drawcount);
     };
   _emscripten_glMultiDrawElementsInstancedWEBGL.sig = 'vipippi';
-  var _glMultiDrawElementsInstancedWEBGL = _emscripten_glMultiDrawElementsInstancedWEBGL;
-  var _emscripten_glMultiDrawElementsInstancedANGLE = _glMultiDrawElementsInstancedWEBGL;
+  var _emscripten_glMultiDrawElementsInstancedANGLE = _emscripten_glMultiDrawElementsInstancedWEBGL;
 
   var _glMultiDrawElementsInstancedANGLE = _emscripten_glMultiDrawElementsInstancedANGLE;
 
 
+  var _glMultiDrawElementsInstancedWEBGL = _emscripten_glMultiDrawElementsInstancedWEBGL;
 
 
   var _glMapBufferRange = _emscripten_glMapBufferRange;
@@ -24136,6 +24146,7 @@ var FS_stdin_getChar_buffer = [];
   _emscripten_webgl_do_commit_frame.sig = 'i';
   var _emscripten_webgl_commit_frame = _emscripten_webgl_do_commit_frame;
   _emscripten_webgl_commit_frame.sig = 'i';
+
 
 
 
@@ -24457,8 +24468,6 @@ var FS_stdin_getChar_buffer = [];
   initWindowWidth:256,
   initWindowHeight:256,
   initDisplayMode:18,
-  windowX:0,
-  windowY:0,
   windowWidth:0,
   windowHeight:0,
   requestedAnimationFrame:false,
@@ -24706,7 +24715,6 @@ var FS_stdin_getChar_buffer = [];
           height = GLUT.windowHeight;
           // TODO set position
           document.removeEventListener('fullscreenchange', GLUT.onFullscreenEventChange, true);
-          document.removeEventListener('mozfullscreenchange', GLUT.onFullscreenEventChange, true);
           document.removeEventListener('webkitfullscreenchange', GLUT.onFullscreenEventChange, true);
         }
         Browser.setCanvasSize(width, height, true); // N.B. GLUT.reshapeFunc is also registered as a canvas resize callback.
@@ -25028,13 +25036,10 @@ var FS_stdin_getChar_buffer = [];
 
   
   var _glutFullScreen = () => {
-      GLUT.windowX = 0; // TODO
-      GLUT.windowY = 0; // TODO
       var canvas = Browser.getCanvas();
       GLUT.windowWidth = canvas.width;
       GLUT.windowHeight = canvas.height;
       document.addEventListener('fullscreenchange', GLUT.onFullscreenEventChange, true);
-      document.addEventListener('mozfullscreenchange', GLUT.onFullscreenEventChange, true);
       document.addEventListener('webkitfullscreenchange', GLUT.onFullscreenEventChange, true);
       Browser.requestFullscreen(/*lockPointer=*/false, /*resizeCanvas=*/false);
     };
@@ -26295,6 +26300,7 @@ var FS_stdin_getChar_buffer = [];
   
   
   
+  
   var SDL = {
   defaults:{
   width:320,
@@ -26316,9 +26322,7 @@ var FS_stdin_getChar_buffer = [];
   volume:1,
   },
   mixerFrequency:22050,
-  mixerFormat:32784,
   mixerNumChannels:2,
-  mixerChunkSize:1024,
   channelMinimumNumber:0,
   GL:false,
   glAttributes:{
@@ -26542,15 +26546,10 @@ var FS_stdin_getChar_buffer = [];
         var rgba = HEAP32[((color)>>2)];
         return 'rgb(' + (rgba&255) + ',' + ((rgba >> 8)&255) + ',' + ((rgba >> 16)&255) + ')';
       },
-  loadColorToCSSRGBA(color) {
-        var rgba = HEAP32[((color)>>2)];
-        return 'rgba(' + (rgba&255) + ',' + ((rgba >> 8)&255) + ',' + ((rgba >> 16)&255) + ',' + (((rgba >> 24)&255)/255) + ')';
-      },
   translateColorToCSSRGBA:(rgba) =>
         'rgba(' + (rgba&0xff) + ',' + (rgba>>8 & 0xff) + ',' + (rgba>>16 & 0xff) + ',' + (rgba>>>24)/0xff + ')',
   translateRGBAToCSSRGBA:(r, g, b, a) =>
         'rgba(' + (r&0xff) + ',' + (g&0xff) + ',' + (b&0xff) + ',' + (a&0xff)/255 + ')',
-  translateRGBAToColor:(r, g, b, a) => r | g << 8 | b << 16 | a << 24,
   makeSurface(width, height, flags, usePageCanvas, source, rmask, gmask, bmask, amask) {
         var is_SDL_HWSURFACE = flags & 134217729;
         var is_SDL_HWPALETTE = flags & 2097152;
@@ -27084,7 +27083,7 @@ var FS_stdin_getChar_buffer = [];
         return SDL.events.length > 0;
       },
   makeCEvent(event, ptr) {
-        if (typeof event == 'number') {
+        if (typeof event === 'number') {
           // This is a pointer to a copy of a native C event that was SDL_PushEvent'ed
           _memcpy(ptr, event, 28);
           _free(event); // the copy is no longer needed
@@ -27400,13 +27399,13 @@ var FS_stdin_getChar_buffer = [];
           var state = SDL.getGamepad(joystick - 1);
           var prevState = SDL.lastJoystickState[joystick];
           // If joystick was removed, state returns null.
-          if (typeof state == 'undefined') return;
+          if (typeof state === 'undefined') return;
           if (state === null) return;
           // Check only if the timestamp has differed.
           // NOTE: Timestamp is not available in Firefox.
           // NOTE: Timestamp is currently not properly set for the GearVR controller
           //       on Samsung Internet: it is always zero.
-          if (typeof state.timestamp != 'number' || state.timestamp != prevState.timestamp || !state.timestamp) {
+          if (typeof state.timestamp !== 'number' || state.timestamp != prevState.timestamp || !state.timestamp) {
             var i;
             for (i = 0; i < state.buttons.length; i++) {
               var buttonState = state.buttons[i].pressed;
@@ -28228,9 +28227,9 @@ var FS_stdin_getChar_buffer = [];
             // Don't ever start buffer playbacks earlier from current time than a given constant 'SDL.audio.bufferingDelay', since a browser
             // may not be able to mix that audio clip in immediately, and there may be subsequent jitter that might cause the stream to starve.
             var playtime = Math.max(curtime + SDL.audio.bufferingDelay, SDL.audio.nextPlayTime);
-            if (typeof source['start'] != 'undefined') {
+            if (typeof source['start'] !== 'undefined') {
               source['start'](playtime); // New Web Audio API: sound sources are started with a .start() call.
-            } else if (typeof source['noteOn'] != 'undefined') {
+            } else if (typeof source['noteOn'] !== 'undefined') {
               source['noteOn'](playtime); // Support old Web Audio API specification which had the .noteOn() API.
             }
             /*
@@ -28361,9 +28360,7 @@ var FS_stdin_getChar_buffer = [];
       SDL.allocateChannels(32);
       // Just record the values for a later call to Mix_QuickLoad_RAW
       SDL.mixerFrequency = frequency;
-      SDL.mixerFormat = format;
       SDL.mixerNumChannels = channels;
-      SDL.mixerChunkSize = chunksize;
       return 0;
     };
   _Mix_OpenAudio.sig = 'iiiii';
@@ -28453,7 +28450,7 @@ var FS_stdin_getChar_buffer = [];
   
       var arrayBuffer = bytes ? bytes.buffer || bytes : bytes;
   
-      var canPlayWithWebAudio = true;
+      const canPlayWithWebAudio = true;
   
       if (bytes !== undefined && SDL.webAudioAvailable() && canPlayWithWebAudio) {
         audio = undefined;
@@ -29506,6 +29503,8 @@ var FS_stdin_getChar_buffer = [];
   _glGetFragDataLocation.sig = 'iip';
 
 
+  var _glGetVertexAttribIiv = _emscripten_glGetVertexAttribIiv;
+  _glGetVertexAttribIiv.sig = 'viip';
 
 
   var _glGetVertexAttribIuiv = _emscripten_glGetVertexAttribIuiv;
@@ -29606,13 +29605,13 @@ var FS_stdin_getChar_buffer = [];
 
   var _glDrawArraysInstancedBaseInstanceWEBGL = _emscripten_glDrawArraysInstancedBaseInstanceWEBGL;
 
-  var _emscripten_glDrawArraysInstancedBaseInstance = _glDrawArraysInstancedBaseInstanceWEBGL;
+  var _emscripten_glDrawArraysInstancedBaseInstance = _emscripten_glDrawArraysInstancedBaseInstanceWEBGL;
   _emscripten_glDrawArraysInstancedBaseInstance.sig = 'viiiii';
 
   var _glDrawArraysInstancedBaseInstance = _emscripten_glDrawArraysInstancedBaseInstance;
   _glDrawArraysInstancedBaseInstance.sig = 'viiiii';
 
-  var _emscripten_glDrawArraysInstancedBaseInstanceANGLE = _glDrawArraysInstancedBaseInstanceWEBGL;
+  var _emscripten_glDrawArraysInstancedBaseInstanceANGLE = _emscripten_glDrawArraysInstancedBaseInstanceWEBGL;
 
   var _glDrawArraysInstancedBaseInstanceANGLE = _emscripten_glDrawArraysInstancedBaseInstanceANGLE;
 
@@ -29623,7 +29622,7 @@ var FS_stdin_getChar_buffer = [];
 
   var _glDrawElementsInstancedBaseVertexBaseInstanceWEBGL = _emscripten_glDrawElementsInstancedBaseVertexBaseInstanceWEBGL;
 
-  var _emscripten_glDrawElementsInstancedBaseVertexBaseInstanceANGLE = _glDrawElementsInstancedBaseVertexBaseInstanceWEBGL;
+  var _emscripten_glDrawElementsInstancedBaseVertexBaseInstanceANGLE = _emscripten_glDrawElementsInstancedBaseVertexBaseInstanceWEBGL;
 
   var _glDrawElementsInstancedBaseVertexBaseInstanceANGLE = _emscripten_glDrawElementsInstancedBaseVertexBaseInstanceANGLE;
 
@@ -29645,7 +29644,7 @@ var FS_stdin_getChar_buffer = [];
 
   var _glMultiDrawArraysInstancedBaseInstanceWEBGL = _emscripten_glMultiDrawArraysInstancedBaseInstanceWEBGL;
 
-  var _emscripten_glMultiDrawArraysInstancedBaseInstanceANGLE = _glMultiDrawArraysInstancedBaseInstanceWEBGL;
+  var _emscripten_glMultiDrawArraysInstancedBaseInstanceANGLE = _emscripten_glMultiDrawArraysInstancedBaseInstanceWEBGL;
 
   var _glMultiDrawArraysInstancedBaseInstanceANGLE = _emscripten_glMultiDrawArraysInstancedBaseInstanceANGLE;
 
@@ -29670,7 +29669,7 @@ var FS_stdin_getChar_buffer = [];
 
   var _glMultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL = _emscripten_glMultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL;
 
-  var _emscripten_glMultiDrawElementsInstancedBaseVertexBaseInstanceANGLE = _glMultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL;
+  var _emscripten_glMultiDrawElementsInstancedBaseVertexBaseInstanceANGLE = _emscripten_glMultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL;
 
   var _glMultiDrawElementsInstancedBaseVertexBaseInstanceANGLE = _emscripten_glMultiDrawElementsInstancedBaseVertexBaseInstanceANGLE;
 
@@ -29958,7 +29957,7 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
 
   var preInit = Module['preInit'];
   if (preInit) {
-    if (typeof preInit == 'function') Module['preInit'] = preInit = [preInit];
+    if (typeof preInit === 'function') Module['preInit'] = preInit = [preInit];
     // Written as a loop so that preInit functions that themselves add more
     // preInit functions.  Is this actually needed?
     while (preInit.length > 0) {
@@ -30127,6 +30126,7 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['pollOne'] = pollOne;
   Module['epollEvict'] = epollEvict;
   Module['readyListRemove'] = readyListRemove;
+  Module['epollClearListener'] = epollClearListener;
   Module['___syscall_epoll_ctl'] = ___syscall_epoll_ctl;
   Module['epollCtl'] = epollCtl;
   Module['readyListAdd'] = readyListAdd;
@@ -30190,6 +30190,7 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['___syscall_symlinkat'] = ___syscall_symlinkat;
   Module['___syscall_truncate64'] = ___syscall_truncate64;
   Module['___syscall_umask'] = ___syscall_umask;
+  Module['___syscall_uname'] = ___syscall_uname;
   Module['___syscall_unlinkat'] = ___syscall_unlinkat;
   Module['___syscall_utimensat'] = ___syscall_utimensat;
   Module['readI53FromI64'] = readI53FromI64;
@@ -30217,7 +30218,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['__emscripten_log_formatted'] = __emscripten_log_formatted;
   Module['getCallstack'] = getCallstack;
   Module['jsStackTrace'] = jsStackTrace;
-  Module['__emscripten_lookup_name'] = __emscripten_lookup_name;
   Module['__emscripten_runtime_keepalive_clear'] = __emscripten_runtime_keepalive_clear;
   Module['__emscripten_system'] = __emscripten_system;
   Module['__emscripten_throw_longjmp'] = __emscripten_throw_longjmp;
@@ -30397,7 +30397,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_get_num_gamepads'] = _emscripten_get_num_gamepads;
   Module['_emscripten_get_screen_size'] = _emscripten_get_screen_size;
   Module['Browser'] = Browser;
-  Module['warnOnce'] = warnOnce;
   Module['_emscripten_glActiveTexture'] = _emscripten_glActiveTexture;
   Module['GL'] = GL;
   Module['GLctx'] = GLctx;
@@ -30425,7 +30424,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glBindTransformFeedback'] = _emscripten_glBindTransformFeedback;
   Module['_emscripten_glBindVertexArray'] = _emscripten_glBindVertexArray;
   Module['_emscripten_glBindVertexArrayOES'] = _emscripten_glBindVertexArrayOES;
-  Module['_glBindVertexArray'] = _glBindVertexArray;
   Module['_emscripten_glBlendColor'] = _emscripten_glBlendColor;
   Module['_emscripten_glBlendEquation'] = _emscripten_glBlendEquation;
   Module['_emscripten_glBlendEquationSeparate'] = _emscripten_glBlendEquationSeparate;
@@ -30471,7 +30469,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glDeleteTransformFeedbacks'] = _emscripten_glDeleteTransformFeedbacks;
   Module['_emscripten_glDeleteVertexArrays'] = _emscripten_glDeleteVertexArrays;
   Module['_emscripten_glDeleteVertexArraysOES'] = _emscripten_glDeleteVertexArraysOES;
-  Module['_glDeleteVertexArrays'] = _glDeleteVertexArrays;
   Module['_emscripten_glDepthFunc'] = _emscripten_glDepthFunc;
   Module['_emscripten_glDepthMask'] = _emscripten_glDepthMask;
   Module['_emscripten_glDepthRangef'] = _emscripten_glDepthRangef;
@@ -30481,19 +30478,16 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glDrawArrays'] = _emscripten_glDrawArrays;
   Module['_emscripten_glDrawArraysInstanced'] = _emscripten_glDrawArraysInstanced;
   Module['_emscripten_glDrawArraysInstancedANGLE'] = _emscripten_glDrawArraysInstancedANGLE;
-  Module['_glDrawArraysInstanced'] = _glDrawArraysInstanced;
   Module['_emscripten_glDrawArraysInstancedARB'] = _emscripten_glDrawArraysInstancedARB;
   Module['_emscripten_glDrawArraysInstancedEXT'] = _emscripten_glDrawArraysInstancedEXT;
   Module['_emscripten_glDrawArraysInstancedNV'] = _emscripten_glDrawArraysInstancedNV;
   Module['_emscripten_glDrawBuffers'] = _emscripten_glDrawBuffers;
   Module['tempFixedLengthArray'] = tempFixedLengthArray;
   Module['_emscripten_glDrawBuffersEXT'] = _emscripten_glDrawBuffersEXT;
-  Module['_glDrawBuffers'] = _glDrawBuffers;
   Module['_emscripten_glDrawBuffersWEBGL'] = _emscripten_glDrawBuffersWEBGL;
   Module['_emscripten_glDrawElements'] = _emscripten_glDrawElements;
   Module['_emscripten_glDrawElementsInstanced'] = _emscripten_glDrawElementsInstanced;
   Module['_emscripten_glDrawElementsInstancedANGLE'] = _emscripten_glDrawElementsInstancedANGLE;
-  Module['_glDrawElementsInstanced'] = _glDrawElementsInstanced;
   Module['_emscripten_glDrawElementsInstancedARB'] = _emscripten_glDrawElementsInstancedARB;
   Module['_emscripten_glDrawElementsInstancedEXT'] = _emscripten_glDrawElementsInstancedEXT;
   Module['_emscripten_glDrawElementsInstancedNV'] = _emscripten_glDrawElementsInstancedNV;
@@ -30524,7 +30518,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glGenTransformFeedbacks'] = _emscripten_glGenTransformFeedbacks;
   Module['_emscripten_glGenVertexArrays'] = _emscripten_glGenVertexArrays;
   Module['_emscripten_glGenVertexArraysOES'] = _emscripten_glGenVertexArraysOES;
-  Module['_glGenVertexArrays'] = _glGenVertexArrays;
   Module['_emscripten_glGenerateMipmap'] = _emscripten_glGenerateMipmap;
   Module['_emscripten_glGetActiveAttrib'] = _emscripten_glGetActiveAttrib;
   Module['__glGetActiveAttribOrUniform'] = __glGetActiveAttribOrUniform;
@@ -30557,10 +30550,8 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glGetQueryObjecti64vEXT'] = _emscripten_glGetQueryObjecti64vEXT;
   Module['_emscripten_glGetQueryObjectivEXT'] = _emscripten_glGetQueryObjectivEXT;
   Module['_emscripten_glGetQueryObjectui64vEXT'] = _emscripten_glGetQueryObjectui64vEXT;
-  Module['_glGetQueryObjecti64vEXT'] = _glGetQueryObjecti64vEXT;
   Module['_emscripten_glGetQueryObjectuiv'] = _emscripten_glGetQueryObjectuiv;
   Module['_emscripten_glGetQueryObjectuivEXT'] = _emscripten_glGetQueryObjectuivEXT;
-  Module['_glGetQueryObjectivEXT'] = _glGetQueryObjectivEXT;
   Module['_emscripten_glGetQueryiv'] = _emscripten_glGetQueryiv;
   Module['_emscripten_glGetQueryivEXT'] = _emscripten_glGetQueryivEXT;
   Module['_emscripten_glGetRenderbufferParameteriv'] = _emscripten_glGetRenderbufferParameteriv;
@@ -30590,7 +30581,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glGetVertexAttribIiv'] = _emscripten_glGetVertexAttribIiv;
   Module['emscriptenWebGLGetVertexAttrib'] = emscriptenWebGLGetVertexAttrib;
   Module['_emscripten_glGetVertexAttribIuiv'] = _emscripten_glGetVertexAttribIuiv;
-  Module['_glGetVertexAttribIiv'] = _glGetVertexAttribIiv;
   Module['_emscripten_glGetVertexAttribPointerv'] = _emscripten_glGetVertexAttribPointerv;
   Module['_emscripten_glGetVertexAttribfv'] = _emscripten_glGetVertexAttribfv;
   Module['_emscripten_glGetVertexAttribiv'] = _emscripten_glGetVertexAttribiv;
@@ -30611,7 +30601,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glIsTransformFeedback'] = _emscripten_glIsTransformFeedback;
   Module['_emscripten_glIsVertexArray'] = _emscripten_glIsVertexArray;
   Module['_emscripten_glIsVertexArrayOES'] = _emscripten_glIsVertexArrayOES;
-  Module['_glIsVertexArray'] = _glIsVertexArray;
   Module['_emscripten_glLineWidth'] = _emscripten_glLineWidth;
   Module['_emscripten_glLinkProgram'] = _emscripten_glLinkProgram;
   Module['_emscripten_glMapBufferRange'] = _emscripten_glMapBufferRange;
@@ -30707,7 +30696,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_glVertexAttrib4fv'] = _emscripten_glVertexAttrib4fv;
   Module['_emscripten_glVertexAttribDivisor'] = _emscripten_glVertexAttribDivisor;
   Module['_emscripten_glVertexAttribDivisorANGLE'] = _emscripten_glVertexAttribDivisorANGLE;
-  Module['_glVertexAttribDivisor'] = _glVertexAttribDivisor;
   Module['_emscripten_glVertexAttribDivisorARB'] = _emscripten_glVertexAttribDivisorARB;
   Module['_emscripten_glVertexAttribDivisorEXT'] = _emscripten_glVertexAttribDivisorEXT;
   Module['_emscripten_glVertexAttribDivisorNV'] = _emscripten_glVertexAttribDivisorNV;
@@ -30773,6 +30761,7 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_webgl_do_create_context'] = _emscripten_webgl_do_create_context;
   Module['webglPowerPreferences'] = webglPowerPreferences;
   Module['_emscripten_webgl_destroy_context'] = _emscripten_webgl_destroy_context;
+  Module['_emscripten_webgl_do_destroy_context'] = _emscripten_webgl_do_destroy_context;
   Module['_emscripten_webgl_make_context_current'] = _emscripten_webgl_make_context_current;
   Module['_emscripten_wget_data'] = _emscripten_wget_data;
   Module['_environ_get'] = _environ_get;
@@ -30789,6 +30778,7 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_fd_seek'] = _fd_seek;
   Module['_fd_sync'] = _fd_sync;
   Module['_fd_write'] = _fd_write;
+  Module['_getaddrinfo'] = _getaddrinfo;
   Module['_getnameinfo'] = _getnameinfo;
   Module['_glActiveTexture'] = _glActiveTexture;
   Module['_glAttachShader'] = _glAttachShader;
@@ -30911,7 +30901,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['ptrToString'] = ptrToString;
   Module['_emscripten_notify_memory_growth'] = _emscripten_notify_memory_growth;
   Module['strError'] = strError;
-  Module['_getaddrinfo'] = _getaddrinfo;
   Module['Protocols'] = Protocols;
   Module['_setprotoent'] = _setprotoent;
   Module['stringToAscii'] = stringToAscii;
@@ -30919,13 +30908,13 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_getprotoent'] = _getprotoent;
   Module['_getprotobyname'] = _getprotobyname;
   Module['_getprotobynumber'] = _getprotobynumber;
-  Module['Sockets'] = Sockets;
   Module['_emscripten_run_script'] = _emscripten_run_script;
   Module['_emscripten_run_script_int'] = _emscripten_run_script_int;
   Module['_emscripten_run_script_string'] = _emscripten_run_script_string;
   Module['_emscripten_random'] = _emscripten_random;
   Module['_emscripten_performance_now'] = _emscripten_performance_now;
   Module['__emscripten_get_now_is_monotonic'] = __emscripten_get_now_is_monotonic;
+  Module['warnOnce'] = warnOnce;
   Module['_emscripten_get_compiler_setting'] = _emscripten_get_compiler_setting;
   Module['_emscripten_debugger'] = _emscripten_debugger;
   Module['_emscripten_print_double'] = _emscripten_print_double;
@@ -31058,7 +31047,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['clearImmediateWrapped'] = clearImmediateWrapped;
   Module['emSetImmediate'] = emSetImmediate;
   Module['emClearImmediate'] = emClearImmediate;
-  Module['emClearImmediate_deps'] = emClearImmediate_deps;
   Module['_emscripten_set_immediate'] = _emscripten_set_immediate;
   Module['_emscripten_clear_immediate'] = _emscripten_clear_immediate;
   Module['_emscripten_set_immediate_loop'] = _emscripten_set_immediate_loop;
@@ -31110,7 +31098,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['workerHandles'] = workerHandles;
   Module['requestFullscreen'] = requestFullscreen;
   Module['setCanvasSize'] = setCanvasSize;
-  Module['getUserMedia'] = getUserMedia;
   Module['createContext'] = createContext;
   Module['_emscripten_run_preload_plugins'] = _emscripten_run_preload_plugins;
   Module['Browser_asyncPrepareDataCounter'] = Browser_asyncPrepareDataCounter;
@@ -31127,7 +31114,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_get_worker_queue_size'] = _emscripten_get_worker_queue_size;
   Module['_emscripten_get_preloaded_image_data'] = _emscripten_get_preloaded_image_data;
   Module['getPreloadedImageData'] = getPreloadedImageData;
-  Module['getPreloadedImageData__data'] = getPreloadedImageData__data;
   Module['_emscripten_get_preloaded_image_data_from_FILE'] = _emscripten_get_preloaded_image_data_from_FILE;
   Module['wget'] = wget;
   Module['_emscripten_async_wget'] = _emscripten_async_wget;
@@ -31154,7 +31140,6 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['FS_currentPath'] = FS_currentPath;
   Module['FS_initialized'] = FS_initialized;
   Module['FS_ignorePermissions'] = FS_ignorePermissions;
-  Module['FS_filesystems'] = FS_filesystems;
   Module['FS_syncFSRequests'] = FS_syncFSRequests;
   Module['FS_lookupPath'] = FS_lookupPath;
   Module['FS_getPath'] = FS_getPath;
@@ -31255,6 +31240,8 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_emscripten_set_socket_connection_callback'] = _emscripten_set_socket_connection_callback;
   Module['_emscripten_set_socket_message_callback'] = _emscripten_set_socket_message_callback;
   Module['_emscripten_set_socket_close_callback'] = _emscripten_set_socket_close_callback;
+  Module['_emscripten_epoll_listener_add'] = _emscripten_epoll_listener_add;
+  Module['_emscripten_epoll_listener_remove'] = _emscripten_epoll_listener_remove;
   Module['miniTempWebGLFloatBuffers'] = miniTempWebGLFloatBuffers;
   Module['miniTempWebGLIntBuffers'] = miniTempWebGLIntBuffers;
   Module['_emscripten_webgl_enable_WEBGL_multi_draw'] = _emscripten_webgl_enable_WEBGL_multi_draw;
@@ -31277,7 +31264,9 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_glEndQueryEXT'] = _glEndQueryEXT;
   Module['_glQueryCounterEXT'] = _glQueryCounterEXT;
   Module['_glGetQueryivEXT'] = _glGetQueryivEXT;
+  Module['_glGetQueryObjectivEXT'] = _glGetQueryObjectivEXT;
   Module['_glGetQueryObjectuivEXT'] = _glGetQueryObjectuivEXT;
+  Module['_glGetQueryObjecti64vEXT'] = _glGetQueryObjecti64vEXT;
   Module['_glGetQueryObjectui64vEXT'] = _glGetQueryObjectui64vEXT;
   Module['_glIsBuffer'] = _glIsBuffer;
   Module['_glGetRenderbufferParameteriv'] = _glGetRenderbufferParameteriv;
@@ -31311,6 +31300,10 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_glValidateProgram'] = _glValidateProgram;
   Module['_glGetFramebufferAttachmentParameteriv'] = _glGetFramebufferAttachmentParameteriv;
   Module['_glIsFramebuffer'] = _glIsFramebuffer;
+  Module['_glGenVertexArrays'] = _glGenVertexArrays;
+  Module['_glDeleteVertexArrays'] = _glDeleteVertexArrays;
+  Module['_glBindVertexArray'] = _glBindVertexArray;
+  Module['_glIsVertexArray'] = _glIsVertexArray;
   Module['_emscripten_glVertexPointer'] = _emscripten_glVertexPointer;
   Module['_glVertexPointer'] = _glVertexPointer;
   Module['_emscripten_glMatrixMode'] = _emscripten_glMatrixMode;
@@ -31322,6 +31315,9 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_glIsVertexArrayOES'] = _glIsVertexArrayOES;
   Module['_glShaderBinary'] = _glShaderBinary;
   Module['_glReleaseShaderCompiler'] = _glReleaseShaderCompiler;
+  Module['_glVertexAttribDivisor'] = _glVertexAttribDivisor;
+  Module['_glDrawArraysInstanced'] = _glDrawArraysInstanced;
+  Module['_glDrawElementsInstanced'] = _glDrawElementsInstanced;
   Module['_glVertexAttribDivisorNV'] = _glVertexAttribDivisorNV;
   Module['_glDrawArraysInstancedNV'] = _glDrawArraysInstancedNV;
   Module['_glDrawElementsInstancedNV'] = _glDrawElementsInstancedNV;
@@ -31334,29 +31330,30 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_glVertexAttribDivisorANGLE'] = _glVertexAttribDivisorANGLE;
   Module['_glDrawArraysInstancedANGLE'] = _glDrawArraysInstancedANGLE;
   Module['_glDrawElementsInstancedANGLE'] = _glDrawElementsInstancedANGLE;
+  Module['_glDrawBuffers'] = _glDrawBuffers;
   Module['_glDrawBuffersEXT'] = _glDrawBuffersEXT;
   Module['_glDrawBuffersWEBGL'] = _glDrawBuffersWEBGL;
   Module['_glSampleCoverage'] = _glSampleCoverage;
   Module['_emscripten_glMultiDrawArrays'] = _emscripten_glMultiDrawArrays;
-  Module['_glMultiDrawArraysWEBGL'] = _glMultiDrawArraysWEBGL;
   Module['_emscripten_glMultiDrawArraysWEBGL'] = _emscripten_glMultiDrawArraysWEBGL;
   Module['_glMultiDrawArrays'] = _glMultiDrawArrays;
   Module['_emscripten_glMultiDrawArraysANGLE'] = _emscripten_glMultiDrawArraysANGLE;
   Module['_glMultiDrawArraysANGLE'] = _glMultiDrawArraysANGLE;
+  Module['_glMultiDrawArraysWEBGL'] = _glMultiDrawArraysWEBGL;
   Module['_emscripten_glMultiDrawArraysInstancedANGLE'] = _emscripten_glMultiDrawArraysInstancedANGLE;
-  Module['_glMultiDrawArraysInstancedWEBGL'] = _glMultiDrawArraysInstancedWEBGL;
   Module['_emscripten_glMultiDrawArraysInstancedWEBGL'] = _emscripten_glMultiDrawArraysInstancedWEBGL;
   Module['_glMultiDrawArraysInstancedANGLE'] = _glMultiDrawArraysInstancedANGLE;
+  Module['_glMultiDrawArraysInstancedWEBGL'] = _glMultiDrawArraysInstancedWEBGL;
   Module['_emscripten_glMultiDrawElements'] = _emscripten_glMultiDrawElements;
-  Module['_glMultiDrawElementsWEBGL'] = _glMultiDrawElementsWEBGL;
   Module['_emscripten_glMultiDrawElementsWEBGL'] = _emscripten_glMultiDrawElementsWEBGL;
   Module['_glMultiDrawElements'] = _glMultiDrawElements;
   Module['_emscripten_glMultiDrawElementsANGLE'] = _emscripten_glMultiDrawElementsANGLE;
   Module['_glMultiDrawElementsANGLE'] = _glMultiDrawElementsANGLE;
+  Module['_glMultiDrawElementsWEBGL'] = _glMultiDrawElementsWEBGL;
   Module['_emscripten_glMultiDrawElementsInstancedANGLE'] = _emscripten_glMultiDrawElementsInstancedANGLE;
-  Module['_glMultiDrawElementsInstancedWEBGL'] = _glMultiDrawElementsInstancedWEBGL;
   Module['_emscripten_glMultiDrawElementsInstancedWEBGL'] = _emscripten_glMultiDrawElementsInstancedWEBGL;
   Module['_glMultiDrawElementsInstancedANGLE'] = _glMultiDrawElementsInstancedANGLE;
+  Module['_glMultiDrawElementsInstancedWEBGL'] = _glMultiDrawElementsInstancedWEBGL;
   Module['_glMapBufferRange'] = _glMapBufferRange;
   Module['_glGetBufferPointerv'] = _glGetBufferPointerv;
   Module['_glFlushMappedBufferRange'] = _glFlushMappedBufferRange;
@@ -31724,6 +31721,7 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
   Module['_glIsSync'] = _glIsSync;
   Module['_glGetUniformuiv'] = _glGetUniformuiv;
   Module['_glGetFragDataLocation'] = _glGetFragDataLocation;
+  Module['_glGetVertexAttribIiv'] = _glGetVertexAttribIiv;
   Module['_glGetVertexAttribIuiv'] = _glGetVertexAttribIuiv;
   Module['_glUniform1ui'] = _glUniform1ui;
   Module['_glUniform2ui'] = _glUniform2ui;
@@ -31796,78 +31794,78 @@ if (Module['dynamicLibraries']) dynamicLibraries = Module['dynamicLibraries'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  8688860: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
- 8688916: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
- 8689230: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
- 8689445: () => { Module['SDL3'].camera = {}; },  
- 8689477: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
- 8689536: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
- 8691842: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
- 8692093: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
- 8692471: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
- 8692558: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
- 8692735: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
- 8692927: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
- 8693058: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
- 8693205: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
- 8693439: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
- 8694018: () => { return Module['SDL3'].audioContext.sampleRate; },  
- 8694069: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
- 8695910: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
- 8697226: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
- 8698382: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
- 8698915: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
- 8699542: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8699969: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
- 8700053: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
- 8700414: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
- 8701406: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
- 8701572: () => { return document.hasFocus(); },  
- 8701604: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
- 8701786: () => { return document.body.clientWidth; },  
- 8701824: () => { return document.body.clientHeight; },  
- 8701863: () => { return window.innerWidth; },  
- 8701893: () => { return window.innerHeight; },  
- 8701924: () => { return window.outerWidth; },  
- 8701954: () => { return window.outerHeight; },  
- 8701985: () => { return window.pageXOffset; },  
- 8702016: () => { return window.pageYOffset; },  
- 8702047: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
- 8703435: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
- 8705802: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
- 8706632: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
- 8707366: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
- 8708115: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
- 8708803: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
- 8709461: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
- 8709544: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
- 8709613: () => { return Module['SDL3']['mouse_x']; },  
- 8709651: () => { return Module['SDL3']['mouse_y']; },  
- 8709689: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
- 8709737: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
- 8709946: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
- 8710199: () => { return window.innerWidth; },  
- 8710229: () => { return window.innerHeight; },  
- 8710260: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
- 8710369: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
- 8710862: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
- 8710936: () => { return window.innerWidth; },  
- 8710966: () => { return window.innerHeight; },  
- 8710997: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
- 8711695: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
- 8712254: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
- 8712576: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
- 8713117: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
- 8714126: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
- 8714264: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
- 8714446: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
- 8714503: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
- 8714678: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
- 8715014: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
- 8715722: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
- 8716063: ($0) => { window.open(UTF8ToString($0), "_blank") },  
- 8716103: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
- 8716151: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
+  8688812: () => { return (navigator.maxTouchPoints || 0) > 0 ? 1 : 0; },  
+ 8688868: () => { if (typeof(Module['SDL3']) === 'undefined') { Module['SDL3'] = {}; } var SDL3 = Module['SDL3']; if (typeof(SDL3.JSVarToCPtr) === 'undefined') { SDL3.JSVarToCPtr = function(v) { return v; }; } if (typeof(SDL3.CPtrToHeap32Index) === 'undefined') { SDL3.CPtrToHeap32Index = function(ptr) { return ptr >>> 2; }; } },  
+ 8689182: ($0) => { var str = UTF8ToString($0) + '\n\n' + 'Abort/Retry/Ignore/AlwaysIgnore? [ariA] :'; var reply = window.prompt(str, "i"); if (reply === null) { reply = "i"; } return reply.length === 1 ? reply.charCodeAt(0) : -1; },  
+ 8689397: () => { Module['SDL3'].camera = {}; },  
+ 8689429: () => { return (navigator.mediaDevices === undefined) ? 0 : 1; },  
+ 8689488: ($0, $1, $2, $3, $4) => { const device = $0; const w = $1; const h = $2; const framerate_numerator = $3; const framerate_denominator = $4; const outcome = Module._SDLEmscriptenCameraPermissionOutcome; const iterate = Module._SDLEmscriptenThreadIterate; const constraints = {}; if ((w <= 0) || (h <= 0)) { constraints.video = true; } else { constraints.video = {}; constraints.video.width = w; constraints.video.height = h; } if ((framerate_numerator > 0) && (framerate_denominator > 0)) { var fps = framerate_numerator / framerate_denominator; constraints.video.frameRate = { ideal: fps }; } function grabNextCameraFrame() { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } const nextframems = SDL3.camera.next_frame_time; const now = performance.now(); if (now >= nextframems) { iterate(device); while (SDL3.camera.next_frame_time < now) { SDL3.camera.next_frame_time += SDL3.camera.fpsincrms; } } requestAnimationFrame(grabNextCameraFrame); } navigator.mediaDevices.getUserMedia(constraints) .then((stream) => { const settings = stream.getVideoTracks()[0].getSettings(); const actualw = settings.width; const actualh = settings.height; const actualfps = settings.frameRate; console.log("Camera is opened! Actual spec: (" + actualw + "x" + actualh + "), fps=" + actualfps); if (outcome(device, 1, actualw, actualh, actualfps)) { const video = document.createElement("video"); video.width = actualw; video.height = actualh; video.style.display = 'none'; video.srcObject = stream; const canvas = document.createElement("canvas"); canvas.width = actualw; canvas.height = actualh; canvas.style.display = 'none'; const ctx2d = canvas.getContext('2d'); const SDL3 = Module['SDL3']; SDL3.camera.width = actualw; SDL3.camera.height = actualh; SDL3.camera.fps = actualfps; SDL3.camera.fpsincrms = 1000.0 / actualfps; SDL3.camera.stream = stream; SDL3.camera.video = video; SDL3.camera.canvas = canvas; SDL3.camera.ctx2d = ctx2d; SDL3.camera.next_frame_time = performance.now(); video.play(); video.addEventListener('loadedmetadata', () => { grabNextCameraFrame(); }); } }) .catch((err) => { console.error("Tried to open camera but it threw an error! " + err.name + ": " + err.message); outcome(device, 0, 0, 0, 0); }); },  
+ 8691794: () => { const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.stream) === 'undefined')) { return; } SDL3.camera.stream.getTracks().forEach(track => track.stop()); SDL3.camera = {}; },  
+ 8692045: ($0, $1, $2) => { const w = $0; const h = $1; const rgba = $2; const SDL3 = Module['SDL3']; if ((typeof(SDL3) === 'undefined') || (typeof(SDL3.camera) === 'undefined') || (typeof(SDL3.camera.ctx2d) === 'undefined')) { return 0; } SDL3.camera.ctx2d.drawImage(SDL3.camera.video, 0, 0, w, h); const imgrgba = SDL3.camera.ctx2d.getImageData(0, 0, w, h).data; HEAPU8.set(imgrgba, rgba); return 1; },  
+ 8692423: () => { if (typeof(Module['SDL3']) !== 'undefined') { Module['SDL3'].camera = undefined; } },  
+ 8692510: () => { Module['SDL3'].dummy_audio = {}; Module['SDL3'].dummy_audio.timers = []; Module['SDL3'].dummy_audio.timers[0] = undefined; Module['SDL3'].dummy_audio.timers[1] = undefined; },  
+ 8692687: ($0, $1, $2, $3, $4) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = setInterval(function() { dynCall('vi', $3, [$4]); }, ($1 / $2) * 1000); },  
+ 8692879: ($0) => { var a = Module['SDL3'].dummy_audio; if (a.timers[$0] !== undefined) { clearInterval(a.timers[$0]); } a.timers[$0] = undefined; },  
+ 8693010: () => { if (typeof(AudioContext) !== 'undefined') { return true; } else if (typeof(webkitAudioContext) !== 'undefined') { return true; } return false; },  
+ 8693157: () => { if ((typeof(navigator.mediaDevices) !== 'undefined') && (typeof(navigator.mediaDevices.getUserMedia) !== 'undefined')) { return true; } else if (typeof(navigator.webkitGetUserMedia) !== 'undefined') { return true; } return false; },  
+ 8693391: () => { var SDL3 = Module['SDL3']; if (typeof(SDL3.audio_playback) === 'undefined') { SDL3.audio_playback = {}; } if (typeof(SDL3.audio_recording) === 'undefined') { SDL3.audio_recording = {}; } if (!SDL3.audioContext) { if (typeof(AudioContext) !== 'undefined') { SDL3.audioContext = new AudioContext(); } else if (typeof(webkitAudioContext) !== 'undefined') { SDL3.audioContext = new webkitAudioContext(); } if (SDL3.audioContext) { if ((typeof navigator.userActivation) === 'undefined') { autoResumeAudioContext(SDL3.audioContext); } } } return (SDL3.audioContext !== undefined); },  
+ 8693970: () => { return Module['SDL3'].audioContext.sampleRate; },  
+ 8694021: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; var have_microphone = function(stream) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); SDL3.audio_recording.silenceTimer = undefined; SDL3.audio_recording.silenceBuffer = undefined } SDL3.audio_recording.mediaStreamNode = SDL3.audioContext.createMediaStreamSource(stream); SDL3.audio_recording.scriptProcessorNode = SDL3.audioContext.createScriptProcessor($1, $0, 1); SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_recording === undefined)) { return; } audioProcessingEvent.outputBuffer.getChannelData(0).fill(0.0); SDL3.audio_recording.currentRecordingBuffer = audioProcessingEvent.inputBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.mediaStreamNode.connect(SDL3.audio_recording.scriptProcessorNode); SDL3.audio_recording.scriptProcessorNode.connect(SDL3.audioContext.destination); SDL3.audio_recording.stream = stream; }; var no_microphone = function(error) { }; SDL3.audio_recording.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_recording.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; SDL3.audio_recording.currentRecordingBuffer = SDL3.audio_recording.silenceBuffer; dynCall('ip', $2, [$3]); }; SDL3.audio_recording.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); if ((navigator.mediaDevices !== undefined) && (navigator.mediaDevices.getUserMedia !== undefined)) { navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(have_microphone).catch(no_microphone); } else if (navigator.webkitGetUserMedia !== undefined) { navigator.webkitGetUserMedia({ audio: true, video: false }, have_microphone, no_microphone); } },  
+ 8695862: ($0, $1, $2, $3) => { var SDL3 = Module['SDL3']; SDL3.audio_playback.scriptProcessorNode = SDL3.audioContext['createScriptProcessor']($1, 0, $0); SDL3.audio_playback.scriptProcessorNode['onaudioprocess'] = function (e) { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((SDL3 === undefined) || (SDL3.audio_playback === undefined)) { return; } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); SDL3.audio_playback.silenceTimer = undefined; SDL3.audio_playback.silenceBuffer = undefined; } SDL3.audio_playback.currentPlaybackBuffer = e['outputBuffer']; dynCall('ip', $2, [$3]); }; SDL3.audio_playback.scriptProcessorNode['connect'](SDL3.audioContext['destination']); if (SDL3.audioContext.state === 'suspended') { SDL3.audio_playback.silenceBuffer = SDL3.audioContext.createBuffer($0, $1, SDL3.audioContext.sampleRate); SDL3.audio_playback.silenceBuffer.getChannelData(0).fill(0.0); var silence_callback = function() { if (typeof Asyncify !== "undefined" && Asyncify.state !== Asyncify.State.Normal) return; if ((typeof navigator.userActivation) !== 'undefined') { if (navigator.userActivation.hasBeenActive) { SDL3.audioContext.resume(); } } SDL3.audio_playback.currentPlaybackBuffer = SDL3.audio_playback.silenceBuffer; dynCall('ip', $2, [$3]); SDL3.audio_playback.currentPlaybackBuffer = undefined; }; SDL3.audio_playback.silenceTimer = setInterval(silence_callback, ($1 / SDL3.audioContext.sampleRate) * 1000); } },  
+ 8697178: ($0) => { var SDL3 = Module['SDL3']; if ($0) { if (SDL3.audio_recording.silenceTimer !== undefined) { clearInterval(SDL3.audio_recording.silenceTimer); } if (SDL3.audio_recording.stream !== undefined) { var tracks = SDL3.audio_recording.stream.getAudioTracks(); for (var i = 0; i < tracks.length; i++) { SDL3.audio_recording.stream.removeTrack(tracks[i]); } } if (SDL3.audio_recording.scriptProcessorNode !== undefined) { SDL3.audio_recording.scriptProcessorNode.onaudioprocess = function(audioProcessingEvent) {}; SDL3.audio_recording.scriptProcessorNode.disconnect(); } if (SDL3.audio_recording.mediaStreamNode !== undefined) { SDL3.audio_recording.mediaStreamNode.disconnect(); } SDL3.audio_recording = undefined; } else { if (SDL3.audio_playback.scriptProcessorNode != undefined) { SDL3.audio_playback.scriptProcessorNode.disconnect(); } if (SDL3.audio_playback.silenceTimer !== undefined) { clearInterval(SDL3.audio_playback.silenceTimer); } SDL3.audio_playback = undefined; } if ((SDL3.audioContext !== undefined) && (SDL3.audio_playback === undefined) && (SDL3.audio_recording === undefined)) { SDL3.audioContext.close(); SDL3.audioContext = undefined; } },  
+ 8698334: ($0, $1) => { var SDL3 = Module['SDL3']; var buf = SDL3.CPtrToHeap32Index($0); var numChannels = SDL3.audio_playback.currentPlaybackBuffer['numberOfChannels']; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_playback.currentPlaybackBuffer['getChannelData'](c); if (channelData.length != $1) { throw 'Web Audio playback buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } for (var j = 0; j < $1; ++j) { channelData[j] = HEAPF32[buf + (j * numChannels + c)]; } } },  
+ 8698867: ($0, $1) => { var SDL3 = Module['SDL3']; var numChannels = SDL3.audio_recording.currentRecordingBuffer.numberOfChannels; for (var c = 0; c < numChannels; ++c) { var channelData = SDL3.audio_recording.currentRecordingBuffer.getChannelData(c); if (channelData.length != $1) { throw 'Web Audio recording buffer length mismatch! Destination size: ' + channelData.length + ' samples vs expected ' + $1 + ' samples!'; } if (numChannels == 1) { for (var j = 0; j < $1; ++j) { setValue($0 + (j * 4), channelData[j], 'float'); } } else { for (var j = 0; j < $1; ++j) { setValue($0 + (((j * numChannels) + c) * 4), channelData[j], 'float'); } } } },  
+ 8699494: ($0) => { var data = $0; document.sdlEventHandlerLockKeysCheck = function(event) { if ((event.key != "CapsLock") && (event.key != "NumLock") && (event.key != "ScrollLock")) { _Emscripten_HandleLockKeysCheck(Module['SDL3'].JSVarToCPtr(data), event.getModifierState("CapsLock"), event.getModifierState("NumLock"), event.getModifierState("ScrollLock")); } }; document.addEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8699921: () => { document.removeEventListener("keydown", document.sdlEventHandlerLockKeysCheck); },  
+ 8700005: ($0) => { var target = document; if (target) { target.sdlEventHandlerMouseButtonUpGlobal = function(event) { var SDL3 = Module['SDL3']; var d = SDL3.makePointerEventCStruct(0, 0, event); if (d != 0) { _Emscripten_HandleMouseButtonUpGlobal(SDL3.JSVarToCPtr($0), d); _SDL_free(d); } }; target.addEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); } },  
+ 8700366: ($0) => { var SDL3 = Module['SDL3']; if (SDL3.makePointerEventCStruct === undefined) { SDL3.makePointerEventCStruct = function(left, top, event) { var ptrtype = 0; if (event.pointerType == "mouse") { ptrtype = 1; } else if (event.pointerType == "touch") { ptrtype = 2; } else if (event.pointerType == "pen") { ptrtype = 3; } else { return 0; } var ptr = _SDL_malloc($0); if (ptr != 0) { var idx = SDL3.CPtrToHeap32Index(ptr); HEAP32[idx++] = ptrtype; HEAP32[idx++] = event.pointerId; HEAP32[idx++] = (typeof(event.button) !== "undefined") ? event.button : -1; HEAP32[idx++] = event.buttons; HEAP32[idx++] = (event.type == "pointerdown") ? 1 : 0; HEAPF32[idx++] = event.movementX; HEAPF32[idx++] = event.movementY; HEAPF32[idx++] = event.clientX - left; HEAPF32[idx++] = event.clientY - top; if (ptrtype == 3) { HEAPF32[idx++] = event.pressure; HEAPF32[idx++] = event.tangentialPressure; HEAPF32[idx++] = event.tiltX; HEAPF32[idx++] = event.tiltY; HEAPF32[idx++] = event.twist; } } return ptr; }; } },  
+ 8701358: ($0) => { var id = UTF8ToString($0); try { var canvas = document.querySelector(id); if (canvas) { return canvas === document.activeElement; } } catch (e) { } return false; },  
+ 8701524: () => { return document.hasFocus(); },  
+ 8701556: () => { var target = document; if (target) { target.removeEventListener("pointerup", target.sdlEventHandlerMouseButtonUpGlobal); target.sdlEventHandlerMouseButtonUpGlobal = undefined; } },  
+ 8701738: () => { return document.body.clientWidth; },  
+ 8701776: () => { return document.body.clientHeight; },  
+ 8701815: () => { return window.innerWidth; },  
+ 8701845: () => { return window.innerHeight; },  
+ 8701876: () => { return window.outerWidth; },  
+ 8701906: () => { return window.outerHeight; },  
+ 8701937: () => { return window.pageXOffset; },  
+ 8701968: () => { return window.pageYOffset; },  
+ 8701999: ($0, $1) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var SDL3 = Module['SDL3']; var data = $0; target.sdlEventHandlerPointerEnter = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerEnter(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerLeave = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerLeave(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.sdlEventHandlerPointerGeneric = function(event) { var rect = target.getBoundingClientRect(); var d = SDL3.makePointerEventCStruct(rect.left, rect.top, event); if (d != 0) { _Emscripten_HandlePointerGeneric(SDL3.JSVarToCPtr(data), d); _SDL_free(d); } }; target.style.touchAction = "none"; target.addEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.addEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.addEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.addEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.addEventListener("pointerup", target.sdlEventHandlerPointerGeneric); } },  
+ 8703387: ($0, $1, $2) => { var target = document.querySelector(UTF8ToString($1)); if (target) { var data = $0; var SDL3 = Module['SDL3']; var makeDropEventCStruct = function(event) { var ptr = 0; ptr = _SDL_malloc($2); if (ptr != 0) { var idx = ptr >> 2; var rect = target.getBoundingClientRect(); HEAP32[idx++] = event.clientX - rect.left; HEAP32[idx++] = event.clientY - rect.top; } return ptr; }; SDL3.eventHandlerDropDragover = function(event) { event.preventDefault(); var d = makeDropEventCStruct(event); if (d != 0) { _Emscripten_SendDragEvent(data, d); _SDL_free(d); } }; target.addEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.drop_count = 0; try { FS.mkdir("/tmp/filedrop"); } catch (e) {} SDL3.eventHandlerDropDrop = function(event) { event.preventDefault(); if (event.dataTransfer.types.includes("text/plain")) { let plain_text = stringToNewUTF8(event.dataTransfer.getData("text/plain")); _Emscripten_SendDragTextEvent(data, plain_text); _Emscripten_force_free(plain_text); } else if (event.dataTransfer.types.includes("Files")) { let files_read = 0; const files_to_read = event.dataTransfer.files.length; for (let i = 0; i < files_to_read; i++) { const file = event.dataTransfer.files.item(i); const file_reader = new FileReader(); file_reader.readAsArrayBuffer(file); file_reader.onload = function(event) { const fs_dropdir = `/tmp/filedrop/${SDL3.drop_count}`; SDL3.drop_count += 1; const fs_filepath = `${fs_dropdir}/${file.name}`; const c_fs_filepath = stringToNewUTF8(fs_filepath); const contents_array8 = new Uint8Array(event.target.result); try { FS.mkdir(fs_dropdir); var stream = FS.open(fs_filepath, "w"); FS.write(stream, contents_array8, 0, contents_array8.length, 0); FS.close(stream); _Emscripten_SendDragFileEvent(data, c_fs_filepath); } catch (e) { } _Emscripten_force_free(c_fs_filepath); onFileRead(); }; file_reader.onerror = function(event) { onFileRead(); }; } function onFileRead() { ++files_read; if (files_read === files_to_read) { _Emscripten_SendDragCompleteEvent(data); } } } _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.eventHandlerDropDragend = function(event) { event.preventDefault(); _Emscripten_SendDragCompleteEvent(data); }; target.addEventListener("dragend", SDL3.eventHandlerDropDragend); target.addEventListener("dragleave", SDL3.eventHandlerDropDragend); } },  
+ 8705754: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { var SDL3 = Module['SDL3']; target.removeEventListener("dragleave", SDL3.eventHandlerDropDragend); target.removeEventListener("dragend", SDL3.eventHandlerDropDragend); target.removeEventListener("drop", SDL3.eventHandlerDropDrop); SDL3.drop_count = undefined; function recursive_remove(dirpath) { FS.readdir(dirpath).forEach((filename) => { const p = `${dirpath}/${filename}`; const p_s = FS.stat(p); if (FS.isFile(p_s.mode)) { FS.unlink(p); } else if (FS.isDir(p)) { recursive_remove(p); } }); FS.rmdir(dirpath); }("/tmp/filedrop"); FS.rmdir("/tmp/filedrop"); target.removeEventListener("dragover", SDL3.eventHandlerDropDragover); SDL3.eventHandlerDropDragover = undefined; SDL3.eventHandlerDropDrop = undefined; SDL3.eventHandlerDropDragend = undefined; } },  
+ 8706584: ($0) => { var target = document.querySelector(UTF8ToString($0)); if (target) { target.removeEventListener("pointerenter", target.sdlEventHandlerPointerEnter); target.removeEventListener("pointerleave", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointercancel", target.sdlEventHandlerPointerLeave); target.removeEventListener("pointerdown", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointermove", target.sdlEventHandlerPointerGeneric); target.removeEventListener("pointerup", target.sdlEventHandlerPointerGeneric); target.style.touchAction = ""; target.sdlEventHandlerPointerEnter = undefined; target.sdlEventHandlerPointerLeave = undefined; target.sdlEventHandlerPointerGeneric = undefined; } },  
+ 8707318: ($0, $1, $2, $3) => { var w = $0; var h = $1; var pixels = $2; var canvasId = UTF8ToString($3); var canvas = document.querySelector(canvasId); var SDL3 = Module['SDL3']; if (SDL3.ctxCanvas !== canvas) { SDL3.ctx = Browser.createContext(canvas, false, true); if (!SDL3.ctx) { return false; } SDL3.ctxCanvas = canvas; } if (SDL3.w !== w || SDL3.h !== h || SDL3.imageCtx !== SDL3.ctx) { SDL3.image = SDL3.ctx.createImageData(w, h); SDL3.w = w; SDL3.h = h; SDL3.imageCtx = SDL3.ctx; } var data = SDL3.image.data; var src = pixels / 4; if (SDL3.data32Data !== data) { SDL3.data32 = new Int32Array(data.buffer); SDL3.data32Data = data; } var data32 = SDL3.data32; data32.set(HEAP32.subarray(src, src + data32.length)); SDL3.ctx.putImageData(SDL3.image, 0, 0); return true; },  
+ 8708067: () => { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = 0; SDL3['mouse_y'] = 0; SDL3['mouse_buttons'] = []; for (var i = 0; i < 5; ++i) { SDL3['mouse_buttons'][i] = false; } document.addEventListener('mousemove', function(e) { var SDL3 = Module['SDL3']; SDL3['mouse_x'] = e.clientX; SDL3['mouse_y'] = e.clientY; }); document.addEventListener('mousedown', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = true; } }); document.addEventListener('mouseup', function(e) { var SDL3 = Module['SDL3']; if (0 <= e.button && e.button < SDL3['mouse_buttons'].length) { SDL3['mouse_buttons'][e.button] = false; } }); },  
+ 8708755: ($0, $1, $2, $3, $4) => { var w = $0; var h = $1; var hot_x = $2; var hot_y = $3; var pixels = $4; var canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h; var ctx = canvas.getContext("2d"); var image = ctx.createImageData(w, h); var data = image.data; var src = pixels / 4; var data32 = new Int32Array(data.buffer); data32.set(HEAP32.subarray(src, src + data32.length)); ctx.putImageData(image, 0, 0); var url = hot_x === 0 && hot_y === 0 ? "url(" + canvas.toDataURL() + "), auto" : "url(" + canvas.toDataURL() + ") " + hot_x + " " + hot_y + ", auto"; var urlBuf = _SDL_malloc(url.length + 1); stringToUTF8(url, urlBuf, url.length + 1); return urlBuf; },  
+ 8709413: ($0) => { if (Module['canvas']) { Module['canvas'].style['cursor'] = UTF8ToString($0); } },  
+ 8709496: () => { if (Module['canvas']) { Module['canvas'].style['cursor'] = 'none'; } },  
+ 8709565: () => { return Module['SDL3']['mouse_x']; },  
+ 8709603: () => { return Module['SDL3']['mouse_y']; },  
+ 8709641: ($0) => { return Module['SDL3']['mouse_buttons'][$0]; },  
+ 8709689: () => { if (!window.matchMedia) { return -1; } if (window.matchMedia('(prefers-color-scheme: light)').matches) { return 0; } if (window.matchMedia('(prefers-color-scheme: dark)').matches) { return 1; } return -1; },  
+ 8709898: () => { if (typeof(Module['SDL3']) !== 'undefined') { var SDL3 = Module['SDL3']; SDL3.themeChangedMatchMedia.removeEventListener('change', SDL3.eventHandlerThemeChanged); SDL3.themeChangedMatchMedia = undefined; SDL3.eventHandlerThemeChanged = undefined; } },  
+ 8710151: () => { return window.innerWidth; },  
+ 8710181: () => { return window.innerHeight; },  
+ 8710212: ($0) => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) { _requestFullscreenThroughSDL($0); }; },  
+ 8710321: ($0, $1) => { var pngData = HEAPU8.buffer instanceof ArrayBuffer ? HEAPU8.subarray($0, $0 + $1) : HEAPU8.slice($0, $0 + $1); var blob = new Blob([pngData], {type: 'image/png'}); var url = URL.createObjectURL(blob); var link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; link.type = 'image/png'; document.head.appendChild(link); } if (link.href && link.href.startsWith('blob:')) { URL.revokeObjectURL(link.href); } link.href = url; },  
+ 8710814: () => { Module['requestFullscreen'] = function(lockPointer, resizeCanvas) {}; },  
+ 8710888: () => { return window.innerWidth; },  
+ 8710918: () => { return window.innerHeight; },  
+ 8710949: ($0) => { var canvas = document.querySelector(UTF8ToString($0)); canvas.SDL3_original_position = canvas.style.position; canvas.SDL3_original_top = canvas.style.top; canvas.SDL3_original_left = canvas.style.left; var div = document.createElement('div'); div.id = 'SDL3_fill_document_background_elements'; div.SDL3_canvas = canvas; div.SDL3_canvas_parent = canvas.parentNode; div.SDL3_canvas_nextsib = canvas.nextSibling; var children = Array.from(document.body.children); for (var child of children) { div.appendChild(child); } document.body.appendChild(div); div.style.display = 'none'; document.body.appendChild(canvas); canvas.style.position = 'fixed'; canvas.style.top = '0'; canvas.style.left = '0'; },  
+ 8711647: () => { var div = document.getElementById('SDL3_fill_document_background_elements'); if (div) { if (div.SDL3_canvas_nextsib) { div.SDL3_canvas_parent.insertBefore(div.SDL3_canvas, div.SDL3_canvas_nextsib); } else { div.SDL3_canvas_parent.appendChild(div.SDL3_canvas); } while (div.firstChild) { document.body.insertBefore(div.firstChild, div); } div.SDL3_canvas.style.position = div.SDL3_canvas.SDL3_original_position; div.SDL3_canvas.style.top = div.SDL3_canvas.SDL3_original_top; div.SDL3_canvas.style.left = div.SDL3_canvas.SDL3_original_left; div.remove(); } },  
+ 8712206: () => { if (window.matchMedia) { var SDL3 = Module['SDL3']; SDL3.eventHandlerThemeChanged = function(event) { _Emscripten_SendSystemThemeChangedEvent(); }; SDL3.themeChangedMatchMedia = window.matchMedia('(prefers-color-scheme: dark)'); SDL3.themeChangedMatchMedia.addEventListener('change', SDL3.eventHandlerThemeChanged); } },  
+ 8712528: ($0, $1, $2, $3, $4) => { var title = UTF8ToString($0); var message = UTF8ToString($1); var background = UTF8ToString($2); var color = UTF8ToString($3); var id = UTF8ToString($4); var dialog = document.createElement("dialog"); dialog.classList.add("SDL3_messagebox"); dialog.id = id; dialog.style.color = color; dialog.style.backgroundColor = background; document.body.append(dialog); var h1 = document.createElement("h1"); h1.innerText = title; dialog.append(h1); var p = document.createElement("p"); p.innerText = message; dialog.append(p); dialog.showModal(); },  
+ 8713069: ($0, $1, $2, $3, $4, $5, $6, $7) => { var dialog_id = UTF8ToString($0); var text = UTF8ToString($1); var responseId = $2; var clickOnReturn = $3; var clickOnEscape = $4; var border = UTF8ToString($5); var background = UTF8ToString($6); var hovered = UTF8ToString($7); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } var button = document.createElement("button"); button.innerText = text; button.style.borderColor = border; button.style.backgroundColor = background; dialog.addEventListener('keydown', function(e) { if (clickOnReturn && e.key === "Enter") { e.preventDefault(); button.click(); } else if (clickOnEscape && e.key === "Escape") { e.preventDefault(); button.click(); } }); dialog.addEventListener('cancel', function(e){ e.preventDefault(); }); button.onmouseenter = function(e){ button.style.backgroundColor = hovered; }; button.onmouseleave = function(e){ button.style.backgroundColor = background; }; button.onclick = function(e) { dialog.close(responseId); }; dialog.append(button); return true; },  
+ 8714078: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return false; } return dialog.open; },  
+ 8714216: ($0) => { var dialog_id = UTF8ToString($0); var dialog = document.getElementById(dialog_id); if (!dialog) { return 0; } try { return parseInt(dialog.returnValue); } catch(e) { return 0; } },  
+ 8714398: ($0, $1) => { alert(UTF8ToString($0) + "\n\n" + UTF8ToString($1)); },  
+ 8714455: ($0) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } return 1; },  
+ 8714630: ($0, $1, $2) => { let gamepads = navigator['getGamepads'](); if (!gamepads) { return 0; } let gamepad = gamepads[$0]; if (!gamepad || !gamepad['vibrationActuator']) { return 0; } gamepad['vibrationActuator']['playEffect']('dual-rumble', { 'startDelay': 0, 'duration': 3000, 'weakMagnitude': $2 / 0xFFFF, 'strongMagnitude': $1 / 0xFFFF, }); return 1; },  
+ 8714966: ($0, $1) => { var buf = $0; var buflen = $1; var list = undefined; if (navigator.languages && navigator.languages.length) { list = navigator.languages; } else { var oneOfThese = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage; if (oneOfThese !== undefined) { list = [ oneOfThese ]; } } if (list === undefined) { return; } var str = ""; for (var i = 0; i < list.length; i++) { var item = list[i]; if ((str.length + item.length + 1) > buflen) { break; } if (str.length > 0) { str += ","; } str += item; } str = str.replace(/-/g, "_"); if (buflen > str.length) { buflen = str.length; } for (var i = 0; i < buflen; i++) { setValue(buf + i, str.charCodeAt(i), "i8"); } },  
+ 8715674: ($0) => { var parms = new URLSearchParams(window.location.search); for (const [key, value] of parms) { if (key.startsWith("SDL_")) { var ckey = stringToNewUTF8(key); var cvalue = stringToNewUTF8(value); if ((ckey != 0) && (cvalue != 0)) { dynCall('iiii', $0, [ckey, cvalue, 1]); } _Emscripten_force_free(ckey); _Emscripten_force_free(cvalue); } } },  
+ 8716015: ($0) => { window.open(UTF8ToString($0), "_blank") },  
+ 8716055: ($0) => { if (!$0) { AL.alcErr = 0xA004 ; return 1; } },  
+ 8716103: ($0) => { if (!AL.currentCtx) { err("alGetProcAddress() called without a valid context"); return 1; } if (!$0) { AL.currentCtx.err = 0xA003 ; return 1; } }
 };
 function __asyncjs__webserial_write(__buf,__nbyte) { return Asyncify.handleAsync(async () => { const port = globalThis['retrowave_port']; if ('retrowave_writer' in globalThis === false) { console.log("Getting Writer"); globalThis['retrowave_writer'] = port.writable.getWriter(); } data = new DataView(HEAPU8.buffer, __buf, __nbyte); await globalThis['retrowave_writer'].write(data); return __nbyte; }); }
 __asyncjs__webserial_write.sig = 'iii';
@@ -38215,10 +38213,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKS5_bb,
   __ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKNS3_7HashMapIS5_S5_NS3_4HashIS5_EENS3_7EqualToIS5_EEEERKNS8_IS5_NS3_4PathESA_SC_EE,
   __ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEEPKhjbbb,
-  __ZN6Common15PrintingManagerD2Ev,
-  __ZNK6Common15PrintingManager16getPrintableAreaEv,
-  __ZNK6Common15PrintingManager22getPrintableAreaOffsetEv,
-  __ZNK6Common15PrintingManager18getPaperDimensionsEv,
   __ZN22EmscriptenTimerManagerC2Ev,
   __ZN22EmscriptenTimerManagerD2Ev,
   __ZN22EmscriptenTimerManagerD0Ev,
@@ -38280,6 +38274,10 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZN29EmscriptenTextToSpeechManager9setVolumeEj,
   __ZN29EmscriptenTextToSpeechManager13freeVoiceDataEPv,
   __ZN6Common19TextToSpeechManager15getDefaultVoiceEv,
+  __ZN6Common15PrintingManagerD2Ev,
+  __ZNK6Common15PrintingManager16getPrintableAreaEv,
+  __ZNK6Common15PrintingManager22getPrintableAreaOffsetEv,
+  __ZNK6Common15PrintingManager18getPaperDimensionsEv,
   __ZN6Common8ImageMapD2Ev,
   __ZN6Common8ImageMap14removeAllAreasEv,
   __ZNK6Common7HashMapINS_6StringEPNS_7PolygonENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv,
@@ -55266,360 +55264,642 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _fribidi_get_joining_type_name,
   _fribidi_shape_mirroring,
   _fribidi_get_bracket,
-  _png_error,
-  _png_sig_cmp,
-  _png_zalloc,
-  _png_warning,
-  _png_malloc_warn,
-  _png_zfree,
-  _png_free,
-  _png_reset_crc,
-  _png_calculate_crc,
-  _png_user_version_check,
-  _png_safecat,
-  _png_create_png_struct,
-  _png_set_mem_fn,
-  _png_malloc_base,
-  _png_destroy_info_struct,
-  _png_free_data,
-  _png_info_init_3,
-  _png_data_freer,
-  _png_init_io,
-  _png_save_int_32,
-  _png_save_uint_32,
-  _png_convert_to_rfc1123_buffer,
-  _png_format_number,
-  _png_convert_to_rfc1123,
-  _png_get_copyright,
-  _png_get_libpng_ver,
-  _png_get_header_ver,
-  _png_get_header_version,
-  _png_build_grayscale_palette,
-  _png_handle_as_unknown,
-  _png_chunk_unknown_handling,
-  _png_reset_zstream,
-  _png_access_version_number,
-  _png_zstream_error,
-  _png_xy_from_XYZ,
-  _png_muldiv,
-  _png_XYZ_from_xy,
-  _png_reciprocal,
-  _png_icc_check_length,
-  _png_chunk_benign_error,
-  _png_icc_check_header,
-  _png_icc_check_tag_table,
-  _png_set_rgb_coefficients,
-  _png_check_IHDR,
-  _png_check_fp_number,
-  _png_check_fp_string,
-  _png_ascii_from_fp,
-  _png_ascii_from_fixed,
-  _png_fixed,
-  _png_fixed_error,
-  _png_fixed_ITU,
-  _png_gamma_significant,
-  _png_reciprocal2,
-  _png_gamma_8bit_correct,
-  _png_gamma_16bit_correct,
-  _png_gamma_correct,
-  _png_destroy_gamma_table,
-  _png_build_gamma_table,
-  _png_malloc,
-  _png_calloc,
-  _png_set_option,
-  _png_image_free,
-  _png_image_error,
-  _png_longjmp,
-  _png_warning_parameter,
-  _png_warning_parameter_unsigned,
-  _png_warning_parameter_signed,
-  _png_formatted_warning,
-  _png_benign_error,
-  _png_chunk_error,
-  _png_chunk_warning,
-  _png_app_warning,
-  _png_app_error,
-  _png_chunk_report,
-  _png_set_longjmp_fn,
-  _png_free_jmpbuf,
-  _png_get_error_ptr,
-  _png_safe_error,
-  _png_safe_warning,
-  _png_safe_execute,
-  _png_get_rowbytes,
-  _png_get_rows,
-  _png_get_image_width,
-  _png_get_image_height,
-  _png_get_bit_depth,
-  _png_get_color_type,
-  _png_get_filter_type,
-  _png_get_interlace_type,
-  _png_get_compression_type,
-  _png_get_x_pixels_per_meter,
-  _png_get_y_pixels_per_meter,
-  _png_get_pixels_per_meter,
-  _png_get_pixel_aspect_ratio,
-  _png_get_pixel_aspect_ratio_fixed,
-  _png_get_x_offset_microns,
-  _png_get_y_offset_microns,
-  _png_get_x_offset_pixels,
-  _png_get_y_offset_pixels,
-  _png_get_pixels_per_inch,
-  _png_get_x_pixels_per_inch,
-  _png_get_y_pixels_per_inch,
-  _png_get_x_offset_inches_fixed,
-  _png_get_y_offset_inches_fixed,
-  _png_get_x_offset_inches,
-  _png_get_y_offset_inches,
-  _png_get_pHYs_dpi,
-  _png_get_channels,
-  _png_get_signature,
-  _png_get_bKGD,
-  _png_get_cHRM,
-  _png_get_cHRM_XYZ,
-  _png_get_cHRM_XYZ_fixed,
-  _png_get_cHRM_fixed,
-  _png_get_gAMA_fixed,
-  _png_get_gAMA,
-  _png_get_sRGB,
-  _png_get_iCCP,
-  _png_get_sPLT,
-  _png_get_cICP,
-  _png_get_cLLI_fixed,
-  _png_get_cLLI,
-  _png_get_mDCV_fixed,
-  _png_get_mDCV,
-  _png_get_eXIf,
-  _png_get_eXIf_1,
-  _png_get_hIST,
-  _png_get_oFFs,
-  _png_get_pCAL,
-  _png_get_sCAL_fixed,
-  _png_get_sCAL,
-  _png_get_sCAL_s,
-  _png_get_pHYs,
-  _png_get_sBIT,
-  _png_get_text,
-  _png_get_tIME,
-  _png_get_unknown_chunks,
-  _png_get_rgb_to_gray_status,
-  _png_get_user_chunk_ptr,
-  _png_get_compression_buffer_size,
-  _png_get_user_width_max,
-  _png_get_user_height_max,
-  _png_get_chunk_cache_max,
-  _png_get_chunk_malloc_max,
-  _png_get_io_state,
-  _png_get_io_chunk_type,
-  _png_get_palette_max,
-  _png_destroy_png_struct,
-  _png_malloc_array,
-  _png_realloc_array,
-  _png_malloc_default,
-  _png_free_default,
-  _png_get_mem_ptr,
-  _png_process_data,
-  _png_push_read_chunk,
-  _png_push_read_IDAT,
-  _png_push_read_sig,
-  _png_push_restore_buffer,
-  _png_process_some_data,
-  _png_process_data_pause,
-  _png_push_save_buffer,
-  _png_process_data_skip,
-  _png_read_chunk_header,
-  _png_handle_chunk,
-  _png_handle_unknown,
-  _png_get_uint_31,
-  _png_crc_read,
-  _png_process_IDAT_data,
-  _png_crc_finish,
-  _png_push_fill_buffer,
-  _png_push_have_end,
-  _png_push_have_info,
-  _png_zlib_inflate,
-  _png_push_process_row,
-  _png_read_filter_row,
-  _png_do_read_transformations,
-  _png_do_read_interlace,
-  _png_read_push_finish_row,
-  _png_push_have_row,
-  _png_progressive_combine_row,
-  _png_combine_row,
-  _png_set_progressive_read_fn,
-  _png_get_progressive_ptr,
-  _png_create_read_struct_2,
-  _png_read_sig,
-  _png_read_start_row,
-  _png_read_transform_info,
-  _png_start_read_image,
-  _png_read_finish_row,
-  _png_read_IDAT_data,
-  _png_read_rows,
-  _png_read_finish_IDAT,
-  _png_set_read_status_fn,
-  _png_read_png,
-  _png_set_scale_16,
-  _png_set_strip_alpha,
-  _png_set_packswap,
-  _png_set_invert_mono,
-  _png_set_shift,
-  _png_set_bgr,
-  _png_set_swap_alpha,
-  _png_set_swap,
-  _png_set_invert_alpha,
-  _png_set_expand_16,
-  _png_image_begin_read_from_stdio,
-  _png_set_benign_errors,
-  _png_image_begin_read_from_file,
-  _png_image_begin_read_from_memory,
-  _png_image_finish_read,
-  _png_set_background_fixed,
-  _png_set_rgb_to_gray_fixed,
-  _png_resolve_file_gamma,
-  _png_set_tRNS_to_alpha,
-  _png_set_alpha_mode_fixed,
-  _png_set_keep_unknown_chunks,
-  _png_set_add_alpha,
-  _png_read_data,
-  _png_default_read_data,
-  _png_set_background,
-  _png_set_alpha_mode,
-  _png_set_quantize,
-  _png_set_gamma_fixed,
-  _png_set_gamma,
-  _png_set_palette_to_rgb,
-  _png_set_expand_gray_1_2_4_to_8,
-  _png_set_rgb_to_gray,
-  _png_set_read_user_transform_fn,
-  _png_init_read_transformations,
-  _png_do_strip_channel,
-  _png_do_invert,
-  _png_do_check_palette_indexes,
-  _png_do_bgr,
-  _png_do_packswap,
-  _png_do_swap,
-  _png_get_uint_32,
-  _png_get_int_32,
-  _png_get_uint_16,
-  _png_set_unknown_chunks,
-  _inflateReset2,
-  _png_set_bKGD,
-  _png_set_cHRM_fixed,
-  _png_set_cICP,
-  _png_set_cLLI_fixed,
-  _png_set_eXIf_1,
-  _png_set_gAMA_fixed,
-  _png_set_hIST,
-  _png_set_text_2,
-  _png_set_mDCV_fixed,
-  _png_set_oFFs,
-  _png_set_pCAL,
-  _png_set_pHYs,
-  _png_set_sBIT,
-  _png_set_sCAL_s,
-  _png_set_sPLT,
-  _png_set_sRGB,
-  _png_set_tIME,
-  _png_set_tRNS,
-  _png_set_cHRM_XYZ_fixed,
-  _png_set_cHRM,
-  _png_set_cHRM_XYZ,
-  _png_set_cLLI,
-  _png_set_mDCV,
-  _png_set_eXIf,
-  _png_set_gAMA,
-  _png_set_sCAL,
-  _png_set_sCAL_fixed,
-  _png_set_sRGB_gAMA_and_cHRM,
-  _png_set_iCCP,
-  _png_set_text,
-  _png_set_unknown_chunk_location,
-  _png_permit_mng_features,
-  _png_set_read_user_chunk_fn,
-  _png_set_compression_buffer_size,
-  _png_free_buffer_list,
-  _png_set_invalid,
-  _png_set_user_limits,
-  _png_set_chunk_cache_max,
-  _png_set_chunk_malloc_max,
-  _png_set_check_for_invalid_index,
-  _png_check_keyword,
-  _png_set_filler,
-  _png_set_user_transform_info,
-  _png_get_user_transform_ptr,
-  _png_get_current_row_number,
-  _png_get_current_pass_number,
-  _png_write_data,
-  _png_default_write_data,
-  _png_flush,
-  _png_default_flush,
-  _png_write_info_before_PLTE,
-  _png_write_sig,
-  _png_write_IHDR,
-  _png_write_sBIT,
-  _png_write_cLLI_fixed,
-  _png_write_mDCV_fixed,
-  _png_write_cICP,
-  _png_write_iCCP,
-  _png_write_sRGB,
-  _png_write_gAMA_fixed,
-  _png_write_cHRM_fixed,
-  _png_write_chunk,
-  _png_write_info,
-  _png_write_PLTE,
-  _png_write_tRNS,
-  _png_write_bKGD,
-  _png_write_eXIf,
-  _png_write_hIST,
-  _png_write_oFFs,
-  _png_write_pCAL,
-  _png_write_sCAL_s,
-  _png_write_pHYs,
-  _png_write_tIME,
-  _png_write_sPLT,
-  _png_write_iTXt,
-  _png_write_zTXt,
-  _png_write_tEXt,
-  _png_write_end,
-  _png_write_IEND,
-  _png_convert_from_struct_tm,
-  _png_convert_from_time_t,
-  _png_create_write_struct_2,
-  _png_write_rows,
-  _png_write_row,
-  _png_write_start_row,
-  _png_write_finish_row,
-  _png_do_write_interlace,
-  _png_do_write_transformations,
-  _png_write_find_filter,
-  _png_write_image,
-  _png_set_flush,
-  _png_write_flush,
-  _png_compress_IDAT,
-  _png_set_filter,
-  _png_set_filter_heuristics,
-  _png_set_filter_heuristics_fixed,
-  _png_set_compression_level,
-  _png_set_compression_mem_level,
-  _png_set_compression_strategy,
-  _png_set_compression_window_bits,
-  _png_set_compression_method,
-  _png_set_text_compression_level,
-  _png_set_text_compression_mem_level,
-  _png_set_text_compression_strategy,
-  _png_set_text_compression_window_bits,
-  _png_set_text_compression_method,
-  _png_set_write_status_fn,
-  _png_set_write_user_transform_fn,
-  _png_image_write_to_memory,
-  _png_image_write_to_stdio,
-  _png_image_write_to_file,
-  _png_save_uint_16,
-  _png_write_chunk_start,
-  _png_write_chunk_data,
-  _png_write_chunk_end,
-  _deflateReset,
+  _af_shaper_get_cluster,
+  _FT_Get_Advance,
+  _FT_MulDiv,
+  _ft_hash_num_init,
+  _ft_hash_num_insert,
+  _ft_hash_str_free,
+  _ft_hash_num_lookup,
+  _FT_Matrix_Invert,
+  _FT_Vector_Transform,
+  _FT_Outline_Translate,
+  _FT_Outline_Transform,
+  _FT_Outline_Get_CBox,
+  _af_shaper_get_coverage,
+  _af_shaper_buf_create,
+  _af_shaper_buf_destroy,
+  _af_shaper_get_elem,
+  _FT_Outline_Get_Orientation,
+  _FT_DivFix,
+  _FT_Outline_EmboldenXY,
+  _FT_Get_Next_Char,
+  _ft_hash_str_lookup,
+  _ft_hash_str_init,
+  _ft_hash_str_insert,
+  _FT_Get_Module,
+  _FT_Set_Named_Instance,
+  _FT_RoundFix,
+  _ps_property_set,
+  _ps_property_get,
+  _FT_Get_Advances,
+  _FT_Palette_Data_Get,
+  _FT_Palette_Select,
+  _FT_Palette_Set_Foreground_Color,
+  _FT_Error_String,
+  _FT_Get_Font_Format,
+  _FT_Get_X11_Font_Format,
+  _ft_hash_str_insert_no_overwrite,
+  _ft_hash_num_insert_no_overwrite,
+  _ft_hash_num_iterator,
+  _ft_hash_str_iterator,
+  _FT_Library_SetLcdFilterWeights,
+  _FT_Library_SetLcdFilter,
+  _FT_Library_SetLcdGeometry,
+  _FT_Get_Transform,
+  _FT_Outline_Check,
+  _FT_Load_Char,
+  _FT_Get_CMap_Format,
+  _FT_Attach_File,
+  _FT_Attach_Stream,
+  _FT_Reference_Face,
+  _FT_List_Find,
+  _FT_List_Remove,
+  _FT_List_Add,
+  _FT_Select_Size,
+  _FT_Get_Track_Kerning,
+  _FT_Set_Charmap,
+  _FT_Get_Charmap_Index,
+  _FT_Get_First_Char,
+  _FT_Face_GetCharVariantIndex,
+  _FT_Face_GetCharVariantIsDefault,
+  _FT_Face_GetVariantSelectors,
+  _FT_Face_GetVariantsOfChar,
+  _FT_Face_GetCharsOfVariant,
+  _FT_Get_Name_Index,
+  _FT_Get_Glyph_Name,
+  _FT_Get_Postscript_Name,
+  _FT_Sfnt_Table_Info,
+  _FT_Get_CMap_Language_ID,
+  _FT_Get_Renderer,
+  _FT_Set_Renderer,
+  _FT_List_Up,
+  _FT_Get_Color_Glyph_Layer,
+  _FT_Add_Module,
+  _FT_Remove_Module,
+  _FT_Property_Set,
+  _FT_Property_Get,
+  _FT_Reference_Library,
+  _FT_Library_Version,
+  _FT_Set_Debug_Hook,
+  _FT_Get_TrueType_Engine_Type,
+  _FT_Get_SubGlyph_Info,
+  _FT_Get_Color_Glyph_Paint,
+  _FT_Get_Color_Glyph_ClipBox,
+  _FT_Get_Paint_Layers,
+  _FT_Get_Paint,
+  _FT_Get_Colorline_Stops,
+  _FT_Outline_Decompose,
+  _FT_Outline_New,
+  _FT_Outline_Done,
+  _FT_Outline_Copy,
+  _FT_Outline_Reverse,
+  _FT_Outline_Render,
+  _FT_Outline_Get_Bitmap,
+  _FT_Outline_Embolden,
+  _FT_Get_Sfnt_LangTag,
+  _FT_Cos,
+  _FT_Vector_Unit,
+  _FT_Sin,
+  _FT_Tan,
+  _FT_Atan2,
+  _FT_Vector_Rotate,
+  _FT_Vector_Length,
+  _FT_Vector_Polarize,
+  _FT_Vector_From_Polar,
+  _FT_Angle_Diff,
+  _FT_CeilFix,
+  _FT_FloorFix,
+  _FT_MulFix,
+  _FT_Matrix_Multiply,
+  _FT_List_Insert,
+  _FT_List_Iterate,
+  _FT_List_Finalize,
+  _FT_Outline_Get_BBox,
+  _FT_Get_BDF_Charset_ID,
+  _FT_Get_BDF_Property,
+  _FT_Bitmap_Init,
+  _FT_Bitmap_New,
+  _FT_Bitmap_Copy,
+  _FT_Bitmap_Convert,
+  _FT_Bitmap_Done,
+  _FT_Bitmap_Blend,
+  _FT_Stream_OpenBzip2,
+  _FTC_ImageCache_New,
+  _FTC_ImageCache_Lookup,
+  _FTC_ImageCache_LookupScaler,
+  _FTC_SBitCache_New,
+  _FTC_SBitCache_Lookup,
+  _FTC_SBitCache_LookupScaler,
+  _FTC_CMapCache_New,
+  _FTC_CMapCache_Lookup,
+  _FTC_Manager_LookupFace,
+  _FTC_Manager_LookupSize,
+  _FTC_Manager_New,
+  _FTC_Manager_Done,
+  _FTC_Manager_Reset,
+  _FTC_Manager_RemoveFaceID,
+  _FTC_Node_Unref,
+  _FT_Get_CID_Registry_Ordering_Supplement,
+  _FT_Get_CID_Is_Internally_CID_Keyed,
+  _FT_Get_CID_From_Glyph_Index,
+  _FT_Trace_Set_Level,
+  _FT_Trace_Set_Default_Level,
+  _FT_Set_Log_Handler,
+  _FT_Set_Default_Log_Handler,
+  _FT_Get_FSType_Flags,
+  _FT_Get_Gasp,
+  _FT_New_Glyph,
+  _FT_Glyph_Transform,
+  _FT_Glyph_Get_CBox,
+  _FT_TrueTypeGX_Validate,
+  _FT_TrueTypeGX_Free,
+  _FT_ClassicKern_Validate,
+  _FT_ClassicKern_Free,
+  _FT_Stream_OpenGzip,
+  _FT_Gzip_Uncompress,
+  _FT_Set_Default_Properties,
+  _FT_Stream_OpenLZW,
+  _FT_Get_Multi_Master,
+  _FT_Get_MM_Var,
+  _FT_Done_MM_Var,
+  _FT_Set_MM_Design_Coordinates,
+  _FT_Set_MM_WeightVector,
+  _FT_Get_MM_WeightVector,
+  _FT_Set_Var_Design_Coordinates,
+  _FT_Get_Var_Design_Coordinates,
+  _FT_Set_MM_Blend_Coordinates,
+  _FT_Set_Var_Blend_Coordinates,
+  _FT_Get_MM_Blend_Coordinates,
+  _FT_Get_Var_Blend_Coordinates,
+  _FT_Get_Var_Axis_Flags,
+  _FT_Get_Default_Named_Instance,
+  _FT_OpenType_Validate,
+  _FT_OpenType_Free,
+  _FT_Face_CheckTrueTypePatents,
+  _FT_Face_SetUnpatentedHinting,
+  _FT_Get_PFR_Metrics,
+  _FT_Get_PFR_Kerning,
+  _FT_Get_PFR_Advance,
+  _FT_Outline_GetInsideBorder,
+  _FT_Outline_GetOutsideBorder,
+  _FT_Stroker_New,
+  _FT_Stroker_Set,
+  _FT_Stroker_Rewind,
+  _FT_Stroker_Done,
+  _FT_Stroker_LineTo,
+  _FT_Stroker_ConicTo,
+  _FT_Stroker_CubicTo,
+  _FT_Stroker_BeginSubPath,
+  _FT_Stroker_EndSubPath,
+  _FT_Stroker_GetBorderCounts,
+  _FT_Stroker_GetCounts,
+  _FT_Stroker_ExportBorder,
+  _FT_Stroker_Export,
+  _FT_Stroker_ParseOutline,
+  _FT_Glyph_Stroke,
+  _FT_Glyph_StrokeBorder,
+  _FT_GlyphSlot_Slant,
+  _FT_GlyphSlot_AdjustWeight,
+  _open,
+  _mmap,
+  _munmap,
+  _FT_Get_PS_Font_Info,
+  _FT_Has_PS_Glyph_Names,
+  _FT_Get_PS_Font_Private,
+  _FT_Get_PS_Font_Value,
+  _FT_Get_WinFNT_Header,
+  _ps_hints_apply,
+  _TT_RunIns,
+  _TT_New_Context,
+  _DGifOpenFileName,
+  _DGifOpenFileHandle,
+  _fdopen,
+  _DGifGetScreenDesc,
+  _GifFreeMapObject,
+  _GifMakeMapObject,
+  _DGifGetGifVersion,
+  _DGifGetRecordType,
+  _DGifGetImageHeader,
+  _DGifGetImageDesc,
+  _openbsd_reallocarray,
+  _DGifGetLine,
+  _DGifGetCodeNext,
+  _DGifGetPixel,
+  _DGifGetExtension,
+  _DGifGetExtensionNext,
+  _DGifSavedExtensionToGCB,
+  _GifFreeSavedImages,
+  _GifFreeExtensions,
+  _DGifGetCode,
+  _DGifGetLZCodes,
+  _GifAddExtensionBlock,
+  _EGifOpenFileName,
+  _EGifOpenFileHandle,
+  __InitHashTable,
+  _EGifOpen,
+  _EGifGetGifVersion,
+  _EGifSetGifVersion,
+  _EGifPutScreenDesc,
+  _EGifPutImageDesc,
+  __ClearHashTable,
+  _EGifPutLine,
+  __ExistsHashTable,
+  __InsertHashTable,
+  _EGifPutPixel,
+  _EGifPutComment,
+  _EGifPutExtension,
+  _EGifPutExtensionLeader,
+  _EGifPutExtensionBlock,
+  _EGifPutExtensionTrailer,
+  _EGifGCBToExtension,
+  _EGifGCBToSavedExtension,
+  _EGifPutCode,
+  _EGifPutCodeNext,
+  _EGifCloseFile,
+  _EGifSpew,
+  _GAGetArgs,
+  _GAPrintErrMsg,
+  _GAPrintHowTo,
+  _GifDrawText8x8,
+  _GifDrawBox,
+  _GifDrawRectangle,
+  _GifDrawBoxedText8x8,
+  _strtok_r,
+  _GifBitSize,
+  _GifUnionColorMap,
+  _GifApplyTranslation,
+  _FreeLastSavedImage,
+  _GifMakeSavedImage,
+  _GifQprintf,
+  _PrintGifError,
+  _GifQuantizeBuffer,
+  _jpeg_CreateCompress,
+  _jinit_memory_mgr,
+  _jpeg_destroy_compress,
+  _jpeg_destroy,
+  _jpeg_abort_compress,
+  _jpeg_abort,
+  _jpeg_suppress_tables,
+  _jpeg_finish_compress,
+  _jpeg_write_marker,
+  _jpeg_write_m_header,
+  _jpeg_write_m_byte,
+  _jpeg_write_tables,
+  _jinit_marker_writer,
+  _jpeg_start_compress,
+  _jinit_compress_master,
+  _jpeg_write_scanlines,
+  _jpeg_write_raw_data,
+  _jinit_arith_encoder,
+  _jinit_c_coef_controller,
+  _jround_up,
+  _jinit_color_converter,
+  _jinit_forward_dct,
+  _jpeg_fdct_1x1,
+  _jpeg_fdct_3x3,
+  _jpeg_fdct_4x4,
+  _jpeg_fdct_5x5,
+  _jpeg_fdct_6x6,
+  _jpeg_fdct_7x7,
+  _jpeg_fdct_10x10,
+  _jpeg_fdct_11x11,
+  _jpeg_fdct_12x12,
+  _jpeg_fdct_13x13,
+  _jpeg_fdct_14x14,
+  _jpeg_fdct_15x15,
+  _jpeg_fdct_16x16,
+  _jpeg_fdct_16x8,
+  _jpeg_fdct_14x7,
+  _jpeg_fdct_12x6,
+  _jpeg_fdct_10x5,
+  _jpeg_fdct_8x4,
+  _jpeg_fdct_6x3,
+  _jpeg_fdct_4x2,
+  _jpeg_fdct_2x1,
+  _jpeg_fdct_8x16,
+  _jpeg_fdct_7x14,
+  _jpeg_fdct_6x12,
+  _jpeg_fdct_5x10,
+  _jpeg_fdct_4x8,
+  _jpeg_fdct_3x6,
+  _jpeg_fdct_2x4,
+  _jpeg_fdct_1x2,
+  _jpeg_fdct_islow,
+  _jpeg_fdct_2x2,
+  _jpeg_fdct_float,
+  _jpeg_fdct_ifast,
+  _jpeg_fdct_9x9,
+  _jinit_huff_encoder,
+  _jpeg_alloc_huff_table,
+  _jpeg_std_huff_table,
+  _jpeg_calc_jpeg_dimensions,
+  _jdiv_round_up,
+  _jinit_c_master_control,
+  _jinit_downsampler,
+  _jinit_c_prep_controller,
+  _jinit_c_main_controller,
+  _jpeg_alloc_quant_table,
+  _jpeg_add_quant_table,
+  _jpeg_default_qtables,
+  _jpeg_set_linear_quality,
+  _jpeg_quality_scaling,
+  _jpeg_set_quality,
+  _jpeg_set_defaults,
+  _jpeg_default_colorspace,
+  _jpeg_set_colorspace,
+  _jpeg_simple_progression,
+  _jcopy_sample_rows,
+  _jpeg_write_coefficients,
+  _jpeg_copy_critical_parameters,
+  _jinit_marker_reader,
+  _jinit_input_controller,
+  _jpeg_abort_decompress,
+  _jpeg_consume_input,
+  _jpeg_input_complete,
+  _jpeg_has_multiple_scans,
+  _jinit_master_decompress,
+  _jpeg_read_raw_data,
+  _jpeg_start_output,
+  _jpeg_finish_output,
+  _jinit_arith_decoder,
+  _jpeg_stdio_dest,
+  _jpeg_mem_dest,
+  _jpeg_stdio_src,
+  _jpeg_mem_src,
+  _jinit_d_coef_controller,
+  _jcopy_block_row,
+  _jinit_color_deconverter,
+  _jinit_inverse_dct,
+  _jpeg_idct_1x1,
+  _jpeg_idct_3x3,
+  _jpeg_idct_4x4,
+  _jpeg_idct_5x5,
+  _jpeg_idct_6x6,
+  _jpeg_idct_7x7,
+  _jpeg_idct_10x10,
+  _jpeg_idct_11x11,
+  _jpeg_idct_12x12,
+  _jpeg_idct_13x13,
+  _jpeg_idct_14x14,
+  _jpeg_idct_15x15,
+  _jpeg_idct_16x16,
+  _jpeg_idct_16x8,
+  _jpeg_idct_14x7,
+  _jpeg_idct_12x6,
+  _jpeg_idct_10x5,
+  _jpeg_idct_8x4,
+  _jpeg_idct_6x3,
+  _jpeg_idct_4x2,
+  _jpeg_idct_2x1,
+  _jpeg_idct_8x16,
+  _jpeg_idct_7x14,
+  _jpeg_idct_6x12,
+  _jpeg_idct_5x10,
+  _jpeg_idct_4x8,
+  _jpeg_idct_3x6,
+  _jpeg_idct_2x4,
+  _jpeg_idct_1x2,
+  _jpeg_idct_islow,
+  _jpeg_idct_ifast,
+  _jpeg_idct_2x2,
+  _jpeg_idct_float,
+  _jpeg_idct_9x9,
+  _jinit_huff_decoder,
+  _jpeg_core_output_dimensions,
+  _jinit_d_main_controller,
+  _jpeg_save_markers,
+  _jpeg_set_marker_processor,
+  _jpeg_calc_output_dimensions,
+  _jpeg_new_colormap,
+  _jinit_1pass_quantizer,
+  _jinit_2pass_quantizer,
+  _jinit_merged_upsampler,
+  _jinit_upsampler,
+  _jinit_d_post_controller,
+  _jpeg_read_coefficients,
+  _jpeg_mem_init,
+  _jpeg_get_small,
+  _jpeg_mem_term,
+  _jpeg_get_large,
+  _jpeg_mem_available,
+  _jpeg_open_backing_store,
+  _jpeg_free_large,
+  _jpeg_free_small,
+  _jinit_read_bmp,
+  _getc,
+  _read_color_map,
+  _jinit_read_gif,
+  _jinit_read_ppm,
+  _read_quant_tables,
+  _read_scan_script,
+  _ungetc,
+  _set_quality_ratings,
+  _set_quant_slots,
+  _set_sample_factors,
+  _jinit_read_targa,
+  _jtransform_parse_crop_spec,
+  _jtransform_request_workspace,
+  _jtransform_perfect_transform,
+  _jtransform_adjust_parameters,
+  _jtransform_execute_transform,
+  _jcopy_markers_setup,
+  _jcopy_markers_execute,
+  _jinit_write_bmp,
+  _putc,
+  _jinit_write_gif,
+  _jinit_write_ppm,
+  _jinit_write_targa,
+  _vorbis_analysis,
+  _oggpack_reset,
+  _vorbis_bitrate_managed,
+  _oggpack_get_buffer,
+  _oggpack_bytes,
+  _vorbis_bitrate_init,
+  _vorbis_bitrate_clear,
+  _vorbis_bitrate_addblock,
+  _oggpack_writetrunc,
+  _oggpack_write,
+  _vorbis_bitrate_flushpacket,
+  _oggpack_writeinit,
+  __vorbis_block_alloc,
+  __vorbis_block_ripcord,
+  _oggpack_writeclear,
+  _vorbis_analysis_init,
+  __vp_global_look,
+  __ve_envelope_init,
+  _ov_ilog,
+  _mdct_init,
+  _drft_init,
+  _vorbis_book_init_encode,
+  __vp_psy_init,
+  _vorbis_book_init_decode,
+  _vorbis_staticbook_destroy,
+  __ve_envelope_clear,
+  _mdct_clear,
+  __vp_psy_clear,
+  __vp_global_free,
+  _drft_clear,
+  _vorbis_analysis_buffer,
+  _vorbis_analysis_wrote,
+  _vorbis_lpc_from_data,
+  _vorbis_lpc_predict,
+  _vorbis_analysis_blockout,
+  __ve_envelope_search,
+  __ve_envelope_mark,
+  __vp_ampmax_decay,
+  __ve_envelope_shift,
+  _vorbis_synthesis_restart,
+  __vorbis_window_get,
+  _vorbis_synthesis_lapout,
+  _vorbis_window,
+  _vorbis_staticbook_pack,
+  __book_maptype1_quantvals,
+  _vorbis_staticbook_unpack,
+  _oggpack_read,
+  _vorbis_book_encode,
+  _vorbis_book_decode,
+  _oggpack_look,
+  _oggpack_adv,
+  _vorbis_book_decodevs_add,
+  _vorbis_book_decodev_add,
+  _vorbis_book_decodev_set,
+  _vorbis_book_decodevv_add,
+  _mdct_forward,
+  _vorbis_lsp_to_curve,
+  _floor1_fit,
+  _floor1_interpolate_fit,
+  _floor1_encode,
+  _vorbis_comment_add,
+  _vorbis_comment_add_tag,
+  _vorbis_comment_query,
+  _vorbis_comment_query_count,
+  _vorbis_info_blocksize,
+  _vorbis_book_clear,
+  __vi_psy_free,
+  _vorbis_synthesis_idheader,
+  _oggpack_readinit,
+  _vorbis_commentheader_out,
+  _vorbis_analysis_headerout,
+  _vorbis_granule_time,
+  _vorbis_version_string,
+  _vorbis_lpc_to_lsp,
+  __vorbis_apply_window,
+  _drft_forward,
+  __vp_noisemask,
+  __vp_tonemask,
+  __vp_offset_and_mix,
+  __vp_couple_quantize_normalize,
+  _mdct_backward,
+  __vi_gpsy_free,
+  _res0_free_info,
+  _res0_free_look,
+  _res0_pack,
+  _res0_unpack,
+  _res0_look,
+  _res0_inverse,
+  _res1_forward,
+  _res1_class,
+  _res1_inverse,
+  _res2_class,
+  _res2_forward,
+  _res2_inverse,
+  __float32_pack,
+  __float32_unpack,
+  __make_words,
+  __book_unquantize,
+  _vorbis_book_codeword,
+  _vorbis_book_codelen,
+  _drft_backward,
+  _vorbis_synthesis_trackonly,
+  _vorbis_packet_blocksize,
+  _vorbis_synthesis_halfrate,
+  _vorbis_synthesis_halfrate_p,
+  _vorbis_encode_setup_init,
+  _vorbis_encode_setup_vbr,
+  _vorbis_encode_init_vbr,
+  _vorbis_encode_setup_managed,
+  _vorbis_encode_init,
+  _vorbis_encode_ctl,
+  _ov_raw_seek,
+  _ov_open,
+  _ov_fopen,
+  _ov_halfrate,
+  _ov_pcm_seek_page,
+  _ogg_stream_packetpeek,
+  _ov_pcm_total,
+  _ogg_stream_reset_serialno,
+  _ov_halfrate_p,
+  _ov_test_callbacks,
+  _ov_test,
+  _ov_test_open,
+  _ov_streams,
+  _ov_seekable,
+  _ov_bitrate,
+  _ov_bitrate_instant,
+  _ov_serialnumber,
+  _ov_raw_total,
+  _ogg_sync_reset,
+  _ogg_stream_reset,
+  _ogg_page_eos,
+  _ogg_sync_pageseek,
+  _ogg_page_granulepos,
+  _ogg_page_continued,
+  _ov_time_seek,
+  _ov_time_seek_page,
+  _ov_raw_tell,
+  _ov_pcm_tell,
+  _ov_time_tell,
+  _ov_comment,
+  _ov_read_filter,
+  _ov_read_float,
+  _ov_crosslap,
+  _ov_raw_seek_lap,
+  _ov_pcm_seek_lap,
+  _ov_pcm_seek_page_lap,
+  _ov_time_seek_lap,
+  _ov_time_seek_page_lap,
+  _oggpackB_writeinit,
+  _oggpack_writecheck,
+  _oggpackB_writecheck,
+  _oggpackB_writetrunc,
+  _oggpackB_write,
+  _oggpack_writealign,
+  _oggpackB_writealign,
+  _oggpack_writecopy,
+  _oggpackB_writecopy,
+  _oggpackB_reset,
+  _oggpackB_writeclear,
+  _oggpackB_readinit,
+  _oggpackB_look,
+  _oggpack_look1,
+  _oggpackB_look1,
+  _oggpackB_adv,
+  _oggpack_adv1,
+  _oggpackB_adv1,
+  _oggpackB_read,
+  _oggpack_read1,
+  _oggpackB_read1,
+  _oggpack_bits,
+  _oggpackB_bytes,
+  _oggpackB_bits,
+  _oggpackB_get_buffer,
+  _ogg_page_version,
+  _ogg_page_pageno,
+  _ogg_page_packets,
+  _ogg_stream_check,
+  _ogg_stream_destroy,
+  _ogg_page_checksum_set,
+  _ogg_stream_iovecin,
+  _ogg_stream_packetin,
+  _ogg_stream_flush,
+  _ogg_stream_flush_fill,
+  _ogg_stream_pageout,
+  _ogg_stream_pageout_fill,
+  _ogg_stream_eos,
+  _ogg_sync_destroy,
+  _ogg_sync_check,
+  _ogg_packet_clear,
   _SDL_ExitProcess,
   _SDL_SetAppMetadata,
   _SDL_SetError,
@@ -57150,7 +57430,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _SDL_vswprintf,
   _SDL_strpbrk,
   _SDL_strtok_r,
-  _strtok_r,
   _SDL_CalculateSurfaceSize,
   _SDL_CalculateYUVSize,
   _SDL_GetSurfacePalette,
@@ -57425,451 +57704,360 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _SDL_SW_QueryYUVTexturePixels,
   _SDL_SW_UnlockYUVTexture,
   _rgb24_yuv420_std,
-  _jpeg_CreateCompress,
-  _jinit_memory_mgr,
-  _jpeg_destroy_compress,
-  _jpeg_destroy,
-  _jpeg_abort_compress,
-  _jpeg_abort,
-  _jpeg_suppress_tables,
-  _jpeg_finish_compress,
-  _jpeg_write_marker,
-  _jpeg_write_m_header,
-  _jpeg_write_m_byte,
-  _jpeg_write_tables,
-  _jinit_marker_writer,
-  _jpeg_start_compress,
-  _jinit_compress_master,
-  _jpeg_write_scanlines,
-  _jpeg_write_raw_data,
-  _jinit_arith_encoder,
-  _jinit_c_coef_controller,
-  _jround_up,
-  _jinit_color_converter,
-  _jinit_forward_dct,
-  _jpeg_fdct_1x1,
-  _jpeg_fdct_3x3,
-  _jpeg_fdct_4x4,
-  _jpeg_fdct_5x5,
-  _jpeg_fdct_6x6,
-  _jpeg_fdct_7x7,
-  _jpeg_fdct_10x10,
-  _jpeg_fdct_11x11,
-  _jpeg_fdct_12x12,
-  _jpeg_fdct_13x13,
-  _jpeg_fdct_14x14,
-  _jpeg_fdct_15x15,
-  _jpeg_fdct_16x16,
-  _jpeg_fdct_16x8,
-  _jpeg_fdct_14x7,
-  _jpeg_fdct_12x6,
-  _jpeg_fdct_10x5,
-  _jpeg_fdct_8x4,
-  _jpeg_fdct_6x3,
-  _jpeg_fdct_4x2,
-  _jpeg_fdct_2x1,
-  _jpeg_fdct_8x16,
-  _jpeg_fdct_7x14,
-  _jpeg_fdct_6x12,
-  _jpeg_fdct_5x10,
-  _jpeg_fdct_4x8,
-  _jpeg_fdct_3x6,
-  _jpeg_fdct_2x4,
-  _jpeg_fdct_1x2,
-  _jpeg_fdct_islow,
-  _jpeg_fdct_2x2,
-  _jpeg_fdct_float,
-  _jpeg_fdct_ifast,
-  _jpeg_fdct_9x9,
-  _jinit_huff_encoder,
-  _jpeg_alloc_huff_table,
-  _jpeg_std_huff_table,
-  _jpeg_calc_jpeg_dimensions,
-  _jdiv_round_up,
-  _jinit_c_master_control,
-  _jinit_downsampler,
-  _jinit_c_prep_controller,
-  _jinit_c_main_controller,
-  _jpeg_alloc_quant_table,
-  _jpeg_add_quant_table,
-  _jpeg_default_qtables,
-  _jpeg_set_linear_quality,
-  _jpeg_quality_scaling,
-  _jpeg_set_quality,
-  _jpeg_set_defaults,
-  _jpeg_default_colorspace,
-  _jpeg_set_colorspace,
-  _jpeg_simple_progression,
-  _jcopy_sample_rows,
-  _jpeg_write_coefficients,
-  _jpeg_copy_critical_parameters,
-  _jinit_marker_reader,
-  _jinit_input_controller,
-  _jpeg_abort_decompress,
-  _jpeg_consume_input,
-  _jpeg_input_complete,
-  _jpeg_has_multiple_scans,
-  _jinit_master_decompress,
-  _jpeg_read_raw_data,
-  _jpeg_start_output,
-  _jpeg_finish_output,
-  _jinit_arith_decoder,
-  _jpeg_stdio_dest,
-  _jpeg_mem_dest,
-  _jpeg_stdio_src,
-  _jpeg_mem_src,
-  _jinit_d_coef_controller,
-  _jcopy_block_row,
-  _jinit_color_deconverter,
-  _jinit_inverse_dct,
-  _jpeg_idct_1x1,
-  _jpeg_idct_3x3,
-  _jpeg_idct_4x4,
-  _jpeg_idct_5x5,
-  _jpeg_idct_6x6,
-  _jpeg_idct_7x7,
-  _jpeg_idct_10x10,
-  _jpeg_idct_11x11,
-  _jpeg_idct_12x12,
-  _jpeg_idct_13x13,
-  _jpeg_idct_14x14,
-  _jpeg_idct_15x15,
-  _jpeg_idct_16x16,
-  _jpeg_idct_16x8,
-  _jpeg_idct_14x7,
-  _jpeg_idct_12x6,
-  _jpeg_idct_10x5,
-  _jpeg_idct_8x4,
-  _jpeg_idct_6x3,
-  _jpeg_idct_4x2,
-  _jpeg_idct_2x1,
-  _jpeg_idct_8x16,
-  _jpeg_idct_7x14,
-  _jpeg_idct_6x12,
-  _jpeg_idct_5x10,
-  _jpeg_idct_4x8,
-  _jpeg_idct_3x6,
-  _jpeg_idct_2x4,
-  _jpeg_idct_1x2,
-  _jpeg_idct_islow,
-  _jpeg_idct_ifast,
-  _jpeg_idct_2x2,
-  _jpeg_idct_float,
-  _jpeg_idct_9x9,
-  _jinit_huff_decoder,
-  _jpeg_core_output_dimensions,
-  _jinit_d_main_controller,
-  _jpeg_save_markers,
-  _jpeg_set_marker_processor,
-  _jpeg_calc_output_dimensions,
-  _jpeg_new_colormap,
-  _jinit_1pass_quantizer,
-  _jinit_2pass_quantizer,
-  _jinit_merged_upsampler,
-  _jinit_upsampler,
-  _jinit_d_post_controller,
-  _jpeg_read_coefficients,
-  _jpeg_mem_init,
-  _jpeg_get_small,
-  _jpeg_mem_term,
-  _jpeg_get_large,
-  _jpeg_mem_available,
-  _jpeg_open_backing_store,
-  _jpeg_free_large,
-  _jpeg_free_small,
-  _jinit_read_bmp,
-  _getc,
-  _read_color_map,
-  _jinit_read_gif,
-  _jinit_read_ppm,
-  _read_quant_tables,
-  _read_scan_script,
-  _ungetc,
-  _set_quality_ratings,
-  _set_quant_slots,
-  _set_sample_factors,
-  _jinit_read_targa,
-  _jtransform_parse_crop_spec,
-  _jtransform_request_workspace,
-  _jtransform_perfect_transform,
-  _jtransform_adjust_parameters,
-  _jtransform_execute_transform,
-  _jcopy_markers_setup,
-  _jcopy_markers_execute,
-  _jinit_write_bmp,
-  _putc,
-  _jinit_write_gif,
-  _jinit_write_ppm,
-  _jinit_write_targa,
-  _DGifOpenFileName,
-  _open,
-  _DGifOpenFileHandle,
-  _fdopen,
-  _DGifGetScreenDesc,
-  _GifFreeMapObject,
-  _GifMakeMapObject,
-  _DGifGetGifVersion,
-  _DGifGetRecordType,
-  _DGifGetImageHeader,
-  _DGifGetImageDesc,
-  _openbsd_reallocarray,
-  _DGifGetLine,
-  _DGifGetCodeNext,
-  _DGifGetPixel,
-  _DGifGetExtension,
-  _DGifGetExtensionNext,
-  _DGifSavedExtensionToGCB,
-  _GifFreeSavedImages,
-  _GifFreeExtensions,
-  _DGifGetCode,
-  _DGifGetLZCodes,
-  _GifAddExtensionBlock,
-  _EGifOpenFileName,
-  _EGifOpenFileHandle,
-  __InitHashTable,
-  _EGifOpen,
-  _EGifGetGifVersion,
-  _EGifSetGifVersion,
-  _EGifPutScreenDesc,
-  _EGifPutImageDesc,
-  __ClearHashTable,
-  _EGifPutLine,
-  __ExistsHashTable,
-  __InsertHashTable,
-  _EGifPutPixel,
-  _EGifPutComment,
-  _EGifPutExtension,
-  _EGifPutExtensionLeader,
-  _EGifPutExtensionBlock,
-  _EGifPutExtensionTrailer,
-  _EGifGCBToExtension,
-  _EGifGCBToSavedExtension,
-  _EGifPutCode,
-  _EGifPutCodeNext,
-  _EGifCloseFile,
-  _EGifSpew,
-  _GAGetArgs,
-  _GAPrintErrMsg,
-  _GAPrintHowTo,
-  _GifDrawText8x8,
-  _GifDrawBox,
-  _GifDrawRectangle,
-  _GifDrawBoxedText8x8,
-  _GifBitSize,
-  _GifUnionColorMap,
-  _GifApplyTranslation,
-  _FreeLastSavedImage,
-  _GifMakeSavedImage,
-  _GifQprintf,
-  _PrintGifError,
-  _GifQuantizeBuffer,
-  _af_shaper_get_cluster,
-  _FT_Get_Advance,
-  _FT_MulDiv,
-  _ft_hash_num_init,
-  _ft_hash_num_insert,
-  _ft_hash_str_free,
-  _ft_hash_num_lookup,
-  _FT_Matrix_Invert,
-  _FT_Vector_Transform,
-  _FT_Outline_Translate,
-  _FT_Outline_Transform,
-  _FT_Outline_Get_CBox,
-  _af_shaper_get_coverage,
-  _af_shaper_buf_create,
-  _af_shaper_buf_destroy,
-  _af_shaper_get_elem,
-  _FT_Outline_Get_Orientation,
-  _FT_DivFix,
-  _FT_Outline_EmboldenXY,
-  _FT_Get_Next_Char,
-  _ft_hash_str_lookup,
-  _ft_hash_str_init,
-  _ft_hash_str_insert,
-  _FT_Get_Module,
-  _FT_Set_Named_Instance,
-  _FT_RoundFix,
-  _ps_property_set,
-  _ps_property_get,
-  _FT_Get_Advances,
-  _FT_Palette_Data_Get,
-  _FT_Palette_Select,
-  _FT_Palette_Set_Foreground_Color,
-  _FT_Error_String,
-  _FT_Get_Font_Format,
-  _FT_Get_X11_Font_Format,
-  _ft_hash_str_insert_no_overwrite,
-  _ft_hash_num_insert_no_overwrite,
-  _ft_hash_num_iterator,
-  _ft_hash_str_iterator,
-  _FT_Library_SetLcdFilterWeights,
-  _FT_Library_SetLcdFilter,
-  _FT_Library_SetLcdGeometry,
-  _FT_Get_Transform,
-  _FT_Outline_Check,
-  _FT_Load_Char,
-  _FT_Get_CMap_Format,
-  _FT_Attach_File,
-  _FT_Attach_Stream,
-  _FT_Reference_Face,
-  _FT_List_Find,
-  _FT_List_Remove,
-  _FT_List_Add,
-  _FT_Select_Size,
-  _FT_Get_Track_Kerning,
-  _FT_Set_Charmap,
-  _FT_Get_Charmap_Index,
-  _FT_Get_First_Char,
-  _FT_Face_GetCharVariantIndex,
-  _FT_Face_GetCharVariantIsDefault,
-  _FT_Face_GetVariantSelectors,
-  _FT_Face_GetVariantsOfChar,
-  _FT_Face_GetCharsOfVariant,
-  _FT_Get_Name_Index,
-  _FT_Get_Glyph_Name,
-  _FT_Get_Postscript_Name,
-  _FT_Sfnt_Table_Info,
-  _FT_Get_CMap_Language_ID,
-  _FT_Get_Renderer,
-  _FT_Set_Renderer,
-  _FT_List_Up,
-  _FT_Get_Color_Glyph_Layer,
-  _FT_Add_Module,
-  _FT_Remove_Module,
-  _FT_Property_Set,
-  _FT_Property_Get,
-  _FT_Reference_Library,
-  _FT_Library_Version,
-  _FT_Set_Debug_Hook,
-  _FT_Get_TrueType_Engine_Type,
-  _FT_Get_SubGlyph_Info,
-  _FT_Get_Color_Glyph_Paint,
-  _FT_Get_Color_Glyph_ClipBox,
-  _FT_Get_Paint_Layers,
-  _FT_Get_Paint,
-  _FT_Get_Colorline_Stops,
-  _FT_Outline_Decompose,
-  _FT_Outline_New,
-  _FT_Outline_Done,
-  _FT_Outline_Copy,
-  _FT_Outline_Reverse,
-  _FT_Outline_Render,
-  _FT_Outline_Get_Bitmap,
-  _FT_Outline_Embolden,
-  _FT_Get_Sfnt_LangTag,
-  _FT_Cos,
-  _FT_Vector_Unit,
-  _FT_Sin,
-  _FT_Tan,
-  _FT_Atan2,
-  _FT_Vector_Rotate,
-  _FT_Vector_Length,
-  _FT_Vector_Polarize,
-  _FT_Vector_From_Polar,
-  _FT_Angle_Diff,
-  _FT_CeilFix,
-  _FT_FloorFix,
-  _FT_MulFix,
-  _FT_Matrix_Multiply,
-  _FT_List_Insert,
-  _FT_List_Iterate,
-  _FT_List_Finalize,
-  _FT_Outline_Get_BBox,
-  _FT_Get_BDF_Charset_ID,
-  _FT_Get_BDF_Property,
-  _FT_Bitmap_Init,
-  _FT_Bitmap_New,
-  _FT_Bitmap_Copy,
-  _FT_Bitmap_Convert,
-  _FT_Bitmap_Done,
-  _FT_Bitmap_Blend,
-  _FT_Stream_OpenBzip2,
-  _FTC_ImageCache_New,
-  _FTC_ImageCache_Lookup,
-  _FTC_ImageCache_LookupScaler,
-  _FTC_SBitCache_New,
-  _FTC_SBitCache_Lookup,
-  _FTC_SBitCache_LookupScaler,
-  _FTC_CMapCache_New,
-  _FTC_CMapCache_Lookup,
-  _FTC_Manager_LookupFace,
-  _FTC_Manager_LookupSize,
-  _FTC_Manager_New,
-  _FTC_Manager_Done,
-  _FTC_Manager_Reset,
-  _FTC_Manager_RemoveFaceID,
-  _FTC_Node_Unref,
-  _FT_Get_CID_Registry_Ordering_Supplement,
-  _FT_Get_CID_Is_Internally_CID_Keyed,
-  _FT_Get_CID_From_Glyph_Index,
-  _FT_Trace_Set_Level,
-  _FT_Trace_Set_Default_Level,
-  _FT_Set_Log_Handler,
-  _FT_Set_Default_Log_Handler,
-  _FT_Get_FSType_Flags,
-  _FT_Get_Gasp,
-  _FT_New_Glyph,
-  _FT_Glyph_Transform,
-  _FT_Glyph_Get_CBox,
-  _FT_TrueTypeGX_Validate,
-  _FT_TrueTypeGX_Free,
-  _FT_ClassicKern_Validate,
-  _FT_ClassicKern_Free,
-  _FT_Stream_OpenGzip,
-  _FT_Gzip_Uncompress,
-  _FT_Set_Default_Properties,
-  _FT_Stream_OpenLZW,
-  _FT_Get_Multi_Master,
-  _FT_Get_MM_Var,
-  _FT_Done_MM_Var,
-  _FT_Set_MM_Design_Coordinates,
-  _FT_Set_MM_WeightVector,
-  _FT_Get_MM_WeightVector,
-  _FT_Set_Var_Design_Coordinates,
-  _FT_Get_Var_Design_Coordinates,
-  _FT_Set_MM_Blend_Coordinates,
-  _FT_Set_Var_Blend_Coordinates,
-  _FT_Get_MM_Blend_Coordinates,
-  _FT_Get_Var_Blend_Coordinates,
-  _FT_Get_Var_Axis_Flags,
-  _FT_Get_Default_Named_Instance,
-  _FT_OpenType_Validate,
-  _FT_OpenType_Free,
-  _FT_Face_CheckTrueTypePatents,
-  _FT_Face_SetUnpatentedHinting,
-  _FT_Get_PFR_Metrics,
-  _FT_Get_PFR_Kerning,
-  _FT_Get_PFR_Advance,
-  _FT_Outline_GetInsideBorder,
-  _FT_Outline_GetOutsideBorder,
-  _FT_Stroker_New,
-  _FT_Stroker_Set,
-  _FT_Stroker_Rewind,
-  _FT_Stroker_Done,
-  _FT_Stroker_LineTo,
-  _FT_Stroker_ConicTo,
-  _FT_Stroker_CubicTo,
-  _FT_Stroker_BeginSubPath,
-  _FT_Stroker_EndSubPath,
-  _FT_Stroker_GetBorderCounts,
-  _FT_Stroker_GetCounts,
-  _FT_Stroker_ExportBorder,
-  _FT_Stroker_Export,
-  _FT_Stroker_ParseOutline,
-  _FT_Glyph_Stroke,
-  _FT_Glyph_StrokeBorder,
-  _FT_GlyphSlot_Slant,
-  _FT_GlyphSlot_AdjustWeight,
-  _mmap,
-  _munmap,
-  _FT_Get_PS_Font_Info,
-  _FT_Has_PS_Glyph_Names,
-  _FT_Get_PS_Font_Private,
-  _FT_Get_PS_Font_Value,
-  _FT_Get_WinFNT_Header,
-  _ps_hints_apply,
-  _TT_RunIns,
-  _TT_New_Context,
+  _png_error,
+  _png_sig_cmp,
+  _png_zalloc,
+  _png_warning,
+  _png_malloc_warn,
+  _png_zfree,
+  _png_free,
+  _png_reset_crc,
+  _png_calculate_crc,
+  _png_user_version_check,
+  _png_safecat,
+  _png_create_png_struct,
+  _png_set_mem_fn,
+  _png_malloc_base,
+  _png_destroy_info_struct,
+  _png_free_data,
+  _png_info_init_3,
+  _png_data_freer,
+  _png_init_io,
+  _png_save_int_32,
+  _png_save_uint_32,
+  _png_convert_to_rfc1123_buffer,
+  _png_format_number,
+  _png_convert_to_rfc1123,
+  _png_get_copyright,
+  _png_get_libpng_ver,
+  _png_get_header_ver,
+  _png_get_header_version,
+  _png_build_grayscale_palette,
+  _png_handle_as_unknown,
+  _png_chunk_unknown_handling,
+  _png_reset_zstream,
+  _png_access_version_number,
+  _png_zstream_error,
+  _png_xy_from_XYZ,
+  _png_muldiv,
+  _png_XYZ_from_xy,
+  _png_reciprocal,
+  _png_icc_check_length,
+  _png_chunk_benign_error,
+  _png_icc_check_header,
+  _png_icc_check_tag_table,
+  _png_set_rgb_coefficients,
+  _png_check_IHDR,
+  _png_check_fp_number,
+  _png_check_fp_string,
+  _png_ascii_from_fp,
+  _png_ascii_from_fixed,
+  _png_fixed,
+  _png_fixed_error,
+  _png_fixed_ITU,
+  _png_gamma_significant,
+  _png_reciprocal2,
+  _png_gamma_8bit_correct,
+  _png_gamma_16bit_correct,
+  _png_gamma_correct,
+  _png_destroy_gamma_table,
+  _png_build_gamma_table,
+  _png_malloc,
+  _png_calloc,
+  _png_set_option,
+  _png_image_free,
+  _png_image_error,
+  _png_longjmp,
+  _png_warning_parameter,
+  _png_warning_parameter_unsigned,
+  _png_warning_parameter_signed,
+  _png_formatted_warning,
+  _png_benign_error,
+  _png_chunk_error,
+  _png_chunk_warning,
+  _png_app_warning,
+  _png_app_error,
+  _png_chunk_report,
+  _png_set_longjmp_fn,
+  _png_free_jmpbuf,
+  _png_get_error_ptr,
+  _png_safe_error,
+  _png_safe_warning,
+  _png_safe_execute,
+  _png_get_rowbytes,
+  _png_get_rows,
+  _png_get_image_width,
+  _png_get_image_height,
+  _png_get_bit_depth,
+  _png_get_color_type,
+  _png_get_filter_type,
+  _png_get_interlace_type,
+  _png_get_compression_type,
+  _png_get_x_pixels_per_meter,
+  _png_get_y_pixels_per_meter,
+  _png_get_pixels_per_meter,
+  _png_get_pixel_aspect_ratio,
+  _png_get_pixel_aspect_ratio_fixed,
+  _png_get_x_offset_microns,
+  _png_get_y_offset_microns,
+  _png_get_x_offset_pixels,
+  _png_get_y_offset_pixels,
+  _png_get_pixels_per_inch,
+  _png_get_x_pixels_per_inch,
+  _png_get_y_pixels_per_inch,
+  _png_get_x_offset_inches_fixed,
+  _png_get_y_offset_inches_fixed,
+  _png_get_x_offset_inches,
+  _png_get_y_offset_inches,
+  _png_get_pHYs_dpi,
+  _png_get_channels,
+  _png_get_signature,
+  _png_get_bKGD,
+  _png_get_cHRM,
+  _png_get_cHRM_XYZ,
+  _png_get_cHRM_XYZ_fixed,
+  _png_get_cHRM_fixed,
+  _png_get_gAMA_fixed,
+  _png_get_gAMA,
+  _png_get_sRGB,
+  _png_get_iCCP,
+  _png_get_sPLT,
+  _png_get_cICP,
+  _png_get_cLLI_fixed,
+  _png_get_cLLI,
+  _png_get_mDCV_fixed,
+  _png_get_mDCV,
+  _png_get_eXIf,
+  _png_get_eXIf_1,
+  _png_get_hIST,
+  _png_get_oFFs,
+  _png_get_pCAL,
+  _png_get_sCAL_fixed,
+  _png_get_sCAL,
+  _png_get_sCAL_s,
+  _png_get_pHYs,
+  _png_get_sBIT,
+  _png_get_text,
+  _png_get_tIME,
+  _png_get_unknown_chunks,
+  _png_get_rgb_to_gray_status,
+  _png_get_user_chunk_ptr,
+  _png_get_compression_buffer_size,
+  _png_get_user_width_max,
+  _png_get_user_height_max,
+  _png_get_chunk_cache_max,
+  _png_get_chunk_malloc_max,
+  _png_get_io_state,
+  _png_get_io_chunk_type,
+  _png_get_palette_max,
+  _png_destroy_png_struct,
+  _png_malloc_array,
+  _png_realloc_array,
+  _png_malloc_default,
+  _png_free_default,
+  _png_get_mem_ptr,
+  _png_process_data,
+  _png_push_read_chunk,
+  _png_push_read_IDAT,
+  _png_push_read_sig,
+  _png_push_restore_buffer,
+  _png_process_some_data,
+  _png_process_data_pause,
+  _png_push_save_buffer,
+  _png_process_data_skip,
+  _png_read_chunk_header,
+  _png_handle_chunk,
+  _png_handle_unknown,
+  _png_get_uint_31,
+  _png_crc_read,
+  _png_process_IDAT_data,
+  _png_crc_finish,
+  _png_push_fill_buffer,
+  _png_push_have_end,
+  _png_push_have_info,
+  _png_zlib_inflate,
+  _png_push_process_row,
+  _png_read_filter_row,
+  _png_do_read_transformations,
+  _png_do_read_interlace,
+  _png_read_push_finish_row,
+  _png_push_have_row,
+  _png_progressive_combine_row,
+  _png_combine_row,
+  _png_set_progressive_read_fn,
+  _png_get_progressive_ptr,
+  _png_create_read_struct_2,
+  _png_read_sig,
+  _png_read_start_row,
+  _png_read_transform_info,
+  _png_start_read_image,
+  _png_read_finish_row,
+  _png_read_IDAT_data,
+  _png_read_rows,
+  _png_read_finish_IDAT,
+  _png_set_read_status_fn,
+  _png_read_png,
+  _png_set_scale_16,
+  _png_set_strip_alpha,
+  _png_set_packswap,
+  _png_set_invert_mono,
+  _png_set_shift,
+  _png_set_bgr,
+  _png_set_swap_alpha,
+  _png_set_swap,
+  _png_set_invert_alpha,
+  _png_set_expand_16,
+  _png_image_begin_read_from_stdio,
+  _png_set_benign_errors,
+  _png_image_begin_read_from_file,
+  _png_image_begin_read_from_memory,
+  _png_image_finish_read,
+  _png_set_background_fixed,
+  _png_set_rgb_to_gray_fixed,
+  _png_resolve_file_gamma,
+  _png_set_tRNS_to_alpha,
+  _png_set_alpha_mode_fixed,
+  _png_set_keep_unknown_chunks,
+  _png_set_add_alpha,
+  _png_read_data,
+  _png_default_read_data,
+  _png_set_background,
+  _png_set_alpha_mode,
+  _png_set_quantize,
+  _png_set_gamma_fixed,
+  _png_set_gamma,
+  _png_set_palette_to_rgb,
+  _png_set_expand_gray_1_2_4_to_8,
+  _png_set_rgb_to_gray,
+  _png_set_read_user_transform_fn,
+  _png_init_read_transformations,
+  _png_do_strip_channel,
+  _png_do_invert,
+  _png_do_check_palette_indexes,
+  _png_do_bgr,
+  _png_do_packswap,
+  _png_do_swap,
+  _png_get_uint_32,
+  _png_get_int_32,
+  _png_get_uint_16,
+  _png_set_unknown_chunks,
+  _inflateReset2,
+  _png_set_bKGD,
+  _png_set_cHRM_fixed,
+  _png_set_cICP,
+  _png_set_cLLI_fixed,
+  _png_set_eXIf_1,
+  _png_set_gAMA_fixed,
+  _png_set_hIST,
+  _png_set_text_2,
+  _png_set_mDCV_fixed,
+  _png_set_oFFs,
+  _png_set_pCAL,
+  _png_set_pHYs,
+  _png_set_sBIT,
+  _png_set_sCAL_s,
+  _png_set_sPLT,
+  _png_set_sRGB,
+  _png_set_tIME,
+  _png_set_tRNS,
+  _png_set_cHRM_XYZ_fixed,
+  _png_set_cHRM,
+  _png_set_cHRM_XYZ,
+  _png_set_cLLI,
+  _png_set_mDCV,
+  _png_set_eXIf,
+  _png_set_gAMA,
+  _png_set_sCAL,
+  _png_set_sCAL_fixed,
+  _png_set_sRGB_gAMA_and_cHRM,
+  _png_set_iCCP,
+  _png_set_text,
+  _png_set_unknown_chunk_location,
+  _png_permit_mng_features,
+  _png_set_read_user_chunk_fn,
+  _png_set_compression_buffer_size,
+  _png_free_buffer_list,
+  _png_set_invalid,
+  _png_set_user_limits,
+  _png_set_chunk_cache_max,
+  _png_set_chunk_malloc_max,
+  _png_set_check_for_invalid_index,
+  _png_check_keyword,
+  _png_set_filler,
+  _png_set_user_transform_info,
+  _png_get_user_transform_ptr,
+  _png_get_current_row_number,
+  _png_get_current_pass_number,
+  _png_write_data,
+  _png_default_write_data,
+  _png_flush,
+  _png_default_flush,
+  _png_write_info_before_PLTE,
+  _png_write_sig,
+  _png_write_IHDR,
+  _png_write_sBIT,
+  _png_write_cLLI_fixed,
+  _png_write_mDCV_fixed,
+  _png_write_cICP,
+  _png_write_iCCP,
+  _png_write_sRGB,
+  _png_write_gAMA_fixed,
+  _png_write_cHRM_fixed,
+  _png_write_chunk,
+  _png_write_info,
+  _png_write_PLTE,
+  _png_write_tRNS,
+  _png_write_bKGD,
+  _png_write_eXIf,
+  _png_write_hIST,
+  _png_write_oFFs,
+  _png_write_pCAL,
+  _png_write_sCAL_s,
+  _png_write_pHYs,
+  _png_write_tIME,
+  _png_write_sPLT,
+  _png_write_iTXt,
+  _png_write_zTXt,
+  _png_write_tEXt,
+  _png_write_end,
+  _png_write_IEND,
+  _png_convert_from_struct_tm,
+  _png_convert_from_time_t,
+  _png_create_write_struct_2,
+  _png_write_rows,
+  _png_write_row,
+  _png_write_start_row,
+  _png_write_finish_row,
+  _png_do_write_interlace,
+  _png_do_write_transformations,
+  _png_write_find_filter,
+  _png_write_image,
+  _png_set_flush,
+  _png_write_flush,
+  _png_compress_IDAT,
+  _png_set_filter,
+  _png_set_filter_heuristics,
+  _png_set_filter_heuristics_fixed,
+  _png_set_compression_level,
+  _png_set_compression_mem_level,
+  _png_set_compression_strategy,
+  _png_set_compression_window_bits,
+  _png_set_compression_method,
+  _png_set_text_compression_level,
+  _png_set_text_compression_mem_level,
+  _png_set_text_compression_strategy,
+  _png_set_text_compression_window_bits,
+  _png_set_text_compression_method,
+  _png_set_write_status_fn,
+  _png_set_write_user_transform_fn,
+  _png_image_write_to_memory,
+  _png_image_write_to_stdio,
+  _png_image_write_to_file,
+  _png_save_uint_16,
+  _png_write_chunk_start,
+  _png_write_chunk_data,
+  _png_write_chunk_end,
+  _deflateReset,
   _adler32_z,
   _adler32,
   _adler32_combine,
@@ -57966,196 +58154,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _zlibVersion,
   _zlibCompileFlags,
   _zError,
-  _vorbis_analysis,
-  _oggpack_reset,
-  _vorbis_bitrate_managed,
-  _oggpack_get_buffer,
-  _oggpack_bytes,
-  _vorbis_bitrate_init,
-  _vorbis_bitrate_clear,
-  _vorbis_bitrate_addblock,
-  _oggpack_writetrunc,
-  _oggpack_write,
-  _vorbis_bitrate_flushpacket,
-  _oggpack_writeinit,
-  __vorbis_block_alloc,
-  __vorbis_block_ripcord,
-  _oggpack_writeclear,
-  _vorbis_analysis_init,
-  __vp_global_look,
-  __ve_envelope_init,
-  _ov_ilog,
-  _mdct_init,
-  _drft_init,
-  _vorbis_book_init_encode,
-  __vp_psy_init,
-  _vorbis_book_init_decode,
-  _vorbis_staticbook_destroy,
-  __ve_envelope_clear,
-  _mdct_clear,
-  __vp_psy_clear,
-  __vp_global_free,
-  _drft_clear,
-  _vorbis_analysis_buffer,
-  _vorbis_analysis_wrote,
-  _vorbis_lpc_from_data,
-  _vorbis_lpc_predict,
-  _vorbis_analysis_blockout,
-  __ve_envelope_search,
-  __ve_envelope_mark,
-  __vp_ampmax_decay,
-  __ve_envelope_shift,
-  _vorbis_synthesis_restart,
-  __vorbis_window_get,
-  _vorbis_synthesis_lapout,
-  _vorbis_window,
-  _vorbis_staticbook_pack,
-  __book_maptype1_quantvals,
-  _vorbis_staticbook_unpack,
-  _oggpack_read,
-  _vorbis_book_encode,
-  _vorbis_book_decode,
-  _oggpack_look,
-  _oggpack_adv,
-  _vorbis_book_decodevs_add,
-  _vorbis_book_decodev_add,
-  _vorbis_book_decodev_set,
-  _vorbis_book_decodevv_add,
-  _mdct_forward,
-  _vorbis_lsp_to_curve,
-  _floor1_fit,
-  _floor1_interpolate_fit,
-  _floor1_encode,
-  _vorbis_comment_add,
-  _vorbis_comment_add_tag,
-  _vorbis_comment_query,
-  _vorbis_comment_query_count,
-  _vorbis_info_blocksize,
-  _vorbis_book_clear,
-  __vi_psy_free,
-  _vorbis_synthesis_idheader,
-  _oggpack_readinit,
-  _vorbis_commentheader_out,
-  _vorbis_analysis_headerout,
-  _vorbis_granule_time,
-  _vorbis_version_string,
-  _vorbis_lpc_to_lsp,
-  __vorbis_apply_window,
-  _drft_forward,
-  __vp_noisemask,
-  __vp_tonemask,
-  __vp_offset_and_mix,
-  __vp_couple_quantize_normalize,
-  _mdct_backward,
-  __vi_gpsy_free,
-  _res0_free_info,
-  _res0_free_look,
-  _res0_pack,
-  _res0_unpack,
-  _res0_look,
-  _res0_inverse,
-  _res1_forward,
-  _res1_class,
-  _res1_inverse,
-  _res2_class,
-  _res2_forward,
-  _res2_inverse,
-  __float32_pack,
-  __float32_unpack,
-  __make_words,
-  __book_unquantize,
-  _vorbis_book_codeword,
-  _vorbis_book_codelen,
-  _drft_backward,
-  _vorbis_synthesis_trackonly,
-  _vorbis_packet_blocksize,
-  _vorbis_synthesis_halfrate,
-  _vorbis_synthesis_halfrate_p,
-  _vorbis_encode_setup_init,
-  _vorbis_encode_setup_vbr,
-  _vorbis_encode_init_vbr,
-  _vorbis_encode_setup_managed,
-  _vorbis_encode_init,
-  _vorbis_encode_ctl,
-  _ov_raw_seek,
-  _ov_open,
-  _ov_fopen,
-  _ov_halfrate,
-  _ov_pcm_seek_page,
-  _ogg_stream_packetpeek,
-  _ov_pcm_total,
-  _ogg_stream_reset_serialno,
-  _ov_halfrate_p,
-  _ov_test_callbacks,
-  _ov_test,
-  _ov_test_open,
-  _ov_streams,
-  _ov_seekable,
-  _ov_bitrate,
-  _ov_bitrate_instant,
-  _ov_serialnumber,
-  _ov_raw_total,
-  _ogg_sync_reset,
-  _ogg_stream_reset,
-  _ogg_page_eos,
-  _ogg_sync_pageseek,
-  _ogg_page_granulepos,
-  _ogg_page_continued,
-  _ov_time_seek,
-  _ov_time_seek_page,
-  _ov_raw_tell,
-  _ov_pcm_tell,
-  _ov_time_tell,
-  _ov_comment,
-  _ov_read_filter,
-  _ov_read_float,
-  _ov_crosslap,
-  _ov_raw_seek_lap,
-  _ov_pcm_seek_lap,
-  _ov_pcm_seek_page_lap,
-  _ov_time_seek_lap,
-  _ov_time_seek_page_lap,
-  _oggpackB_writeinit,
-  _oggpack_writecheck,
-  _oggpackB_writecheck,
-  _oggpackB_writetrunc,
-  _oggpackB_write,
-  _oggpack_writealign,
-  _oggpackB_writealign,
-  _oggpack_writecopy,
-  _oggpackB_writecopy,
-  _oggpackB_reset,
-  _oggpackB_writeclear,
-  _oggpackB_readinit,
-  _oggpackB_look,
-  _oggpack_look1,
-  _oggpackB_look1,
-  _oggpackB_adv,
-  _oggpack_adv1,
-  _oggpackB_adv1,
-  _oggpackB_read,
-  _oggpack_read1,
-  _oggpackB_read1,
-  _oggpack_bits,
-  _oggpackB_bytes,
-  _oggpackB_bits,
-  _oggpackB_get_buffer,
-  _ogg_page_version,
-  _ogg_page_pageno,
-  _ogg_page_packets,
-  _ogg_stream_check,
-  _ogg_stream_destroy,
-  _ogg_page_checksum_set,
-  _ogg_stream_iovecin,
-  _ogg_stream_packetin,
-  _ogg_stream_flush,
-  _ogg_stream_flush_fill,
-  _ogg_stream_pageout,
-  _ogg_stream_pageout_fill,
-  _ogg_stream_eos,
-  _ogg_sync_destroy,
-  _ogg_sync_check,
-  _ogg_packet_clear,
   _emscripten_GetProcAddress,
   _emscripten_webgl1_get_proc_address,
   __webgl1_match_ext_proc_address_without_suffix,
@@ -58207,7 +58205,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _setgroups,
   _sigaltstack,
   _getloadavg,
-  ___syscall_uname,
   ___syscall_setpgid,
   ___syscall_sync,
   ___syscall_getsid,
@@ -58977,6 +58974,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _logbf,
   _logbl,
   _setsid,
+  _freeaddrinfo,
   _nrand48,
   _lrand48,
   _lrint,
@@ -62611,7 +62609,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZNSt10bad_typeidC1Ev,
   _accept,
   _accept4,
-  _freeaddrinfo,
   _gethostbyaddr,
   _gethostbyaddr_r,
   _gethostbyname,
@@ -62671,11 +62668,11 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   dynCall_jij,
   dynCall_dij,
   dynCall_iiid,
+  dynCall_iid,
   dynCall_viiifi,
   dynCall_iiiij,
   dynCall_iiiiiiiiiiiiiiff,
   dynCall_iiiiiidiiff,
-  dynCall_iid,
   dynCall_iidiiiii,
   dynCall_viijii,
   dynCall_iiiiij,
@@ -64566,7 +64563,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTIN10Networking17NetworkReadStreamE,
   __ZTSN10Networking17NetworkReadStreamE,
   __ZTSN10Networking27NetworkReadStreamEmscriptenE,
-  __ZTIN6Common15PrintingManagerE,
   __ZTV22EmscriptenTimerManager,
   __ZTI22EmscriptenTimerManager,
   __ZTS22EmscriptenTimerManager,
@@ -64597,6 +64593,7 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   __ZTI29EmscriptenTextToSpeechManager,
   __ZTS29EmscriptenTextToSpeechManager,
   __ZTIN6Common19TextToSpeechManagerE,
+  __ZTIN6Common15PrintingManagerE,
   __ZTVN6Common15VirtualKeyboardE,
   __ZTIN6Common15VirtualKeyboardE,
   __ZTSN6Common15VirtualKeyboardE,
@@ -67597,43 +67594,6 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _fribidi_version_info,
   _mandatory_liga_table,
   _console_liga_table,
-  _png_sRGB_table,
-  _png_sRGB_base,
-  _png_sRGB_delta,
-  _SDL_expand_byte,
-  _EMSCRIPTENAUDIO_bootstrap,
-  _DISKAUDIO_bootstrap,
-  _DUMMYAUDIO_bootstrap,
-  _SDL_GeneratedBlitFuncTable,
-  _EMSCRIPTENCAMERA_bootstrap,
-  _DUMMYCAMERA_bootstrap,
-  _SDL_DUMMY_SensorDriver,
-  _Emscripten_fill_document_window,
-  _Emscripten_bootstrap,
-  _SDL_object_validation,
-  _GENERIC_titlebootstrap,
-  _GENERIC_userbootstrap,
-  _environ,
-  _SDL_EMSCRIPTEN_JoystickDriver,
-  _SDL_VIRTUAL_JoystickDriver,
-  _DUMMY_bootstrap,
-  _OFFSCREEN_bootstrap,
-  _SDL_expand_byte_10,
-  _GLES2_RenderDriver,
-  _GPU_RenderDriver,
-  _SW_RenderDriver,
-  _appindicator_names,
-  _jpeg_aritab,
-  _jpeg_natural_order,
-  _jpeg_natural_order2,
-  _jpeg_natural_order3,
-  _jpeg_natural_order4,
-  _jpeg_natural_order5,
-  _jpeg_natural_order6,
-  _jpeg_natural_order7,
-  _jpeg_std_message_table,
-  _GifAsciiTable8x8,
-  _GifNoisyPrint,
   _af_adlm_dflt_style_class,
   _af_cjk_writing_system_class,
   _af_dummy_writing_system_class,
@@ -67965,11 +67925,17 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _tt_cmap14_class_rec,
   _ft_grays_raster,
   _tt_default_graphics_state,
-  _z_errmsg,
-  __length_code,
-  __dist_code,
-  _deflate_copyright,
-  _inflate_copyright,
+  _GifAsciiTable8x8,
+  _GifNoisyPrint,
+  _jpeg_aritab,
+  _jpeg_natural_order,
+  _jpeg_natural_order2,
+  _jpeg_natural_order3,
+  _jpeg_natural_order4,
+  _jpeg_natural_order5,
+  _jpeg_natural_order6,
+  _jpeg_natural_order7,
+  _jpeg_std_message_table,
   __mapping_P,
   __floor_P,
   __residue_P,
@@ -67979,6 +67945,37 @@ var __Z28g_ACCESS_DETECTION_getObjectv,
   _residue0_exportbundle,
   _residue1_exportbundle,
   _residue2_exportbundle,
+  _SDL_expand_byte,
+  _EMSCRIPTENAUDIO_bootstrap,
+  _DISKAUDIO_bootstrap,
+  _DUMMYAUDIO_bootstrap,
+  _SDL_GeneratedBlitFuncTable,
+  _EMSCRIPTENCAMERA_bootstrap,
+  _DUMMYCAMERA_bootstrap,
+  _SDL_DUMMY_SensorDriver,
+  _Emscripten_fill_document_window,
+  _Emscripten_bootstrap,
+  _SDL_object_validation,
+  _GENERIC_titlebootstrap,
+  _GENERIC_userbootstrap,
+  _environ,
+  _SDL_EMSCRIPTEN_JoystickDriver,
+  _SDL_VIRTUAL_JoystickDriver,
+  _DUMMY_bootstrap,
+  _OFFSCREEN_bootstrap,
+  _SDL_expand_byte_10,
+  _GLES2_RenderDriver,
+  _GPU_RenderDriver,
+  _SW_RenderDriver,
+  _appindicator_names,
+  _png_sRGB_table,
+  _png_sRGB_base,
+  _png_sRGB_delta,
+  _z_errmsg,
+  __length_code,
+  __dist_code,
+  _deflate_copyright,
+  _inflate_copyright,
   ___tls_locale,
   ___environ,
   ____environ,
@@ -75182,10 +75179,6 @@ function assignWasmExports(wasmExports) {
   __ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKS5_bb = Module['__ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKS5_bb'] = wasmExports['_ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKS5_bb'];
   __ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKNS3_7HashMapIS5_S5_NS3_4HashIS5_EENS3_7EqualToIS5_EEEERKNS8_IS5_NS3_4PathESA_SC_EE = Module['__ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKNS3_7HashMapIS5_S5_NS3_4HashIS5_EENS3_7EqualToIS5_EEEERKNS8_IS5_NS3_4PathESA_SC_EE'] = wasmExports['_ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEERKNS3_7HashMapIS5_S5_NS3_4HashIS5_EENS3_7EqualToIS5_EEEERKNS8_IS5_NS3_4PathESA_SC_EE'];
   __ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEEPKhjbbb = Module['__ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEEPKhjbbb'] = wasmExports['_ZN10Networking27NetworkReadStreamEmscripten5reuseEPKcPN6Common5ArrayINS3_6StringEEEPKhjbbb'];
-  __ZN6Common15PrintingManagerD2Ev = Module['__ZN6Common15PrintingManagerD2Ev'] = wasmExports['_ZN6Common15PrintingManagerD2Ev'];
-  __ZNK6Common15PrintingManager16getPrintableAreaEv = Module['__ZNK6Common15PrintingManager16getPrintableAreaEv'] = wasmExports['_ZNK6Common15PrintingManager16getPrintableAreaEv'];
-  __ZNK6Common15PrintingManager22getPrintableAreaOffsetEv = Module['__ZNK6Common15PrintingManager22getPrintableAreaOffsetEv'] = wasmExports['_ZNK6Common15PrintingManager22getPrintableAreaOffsetEv'];
-  __ZNK6Common15PrintingManager18getPaperDimensionsEv = Module['__ZNK6Common15PrintingManager18getPaperDimensionsEv'] = wasmExports['_ZNK6Common15PrintingManager18getPaperDimensionsEv'];
   __ZN22EmscriptenTimerManagerC2Ev = Module['__ZN22EmscriptenTimerManagerC2Ev'] = wasmExports['_ZN22EmscriptenTimerManagerC2Ev'];
   __ZN22EmscriptenTimerManagerD2Ev = Module['__ZN22EmscriptenTimerManagerD2Ev'] = wasmExports['_ZN22EmscriptenTimerManagerD2Ev'];
   __ZN22EmscriptenTimerManagerD0Ev = Module['__ZN22EmscriptenTimerManagerD0Ev'] = wasmExports['_ZN22EmscriptenTimerManagerD0Ev'];
@@ -75247,6 +75240,10 @@ function assignWasmExports(wasmExports) {
   __ZN29EmscriptenTextToSpeechManager9setVolumeEj = Module['__ZN29EmscriptenTextToSpeechManager9setVolumeEj'] = wasmExports['_ZN29EmscriptenTextToSpeechManager9setVolumeEj'];
   __ZN29EmscriptenTextToSpeechManager13freeVoiceDataEPv = Module['__ZN29EmscriptenTextToSpeechManager13freeVoiceDataEPv'] = wasmExports['_ZN29EmscriptenTextToSpeechManager13freeVoiceDataEPv'];
   __ZN6Common19TextToSpeechManager15getDefaultVoiceEv = Module['__ZN6Common19TextToSpeechManager15getDefaultVoiceEv'] = wasmExports['_ZN6Common19TextToSpeechManager15getDefaultVoiceEv'];
+  __ZN6Common15PrintingManagerD2Ev = Module['__ZN6Common15PrintingManagerD2Ev'] = wasmExports['_ZN6Common15PrintingManagerD2Ev'];
+  __ZNK6Common15PrintingManager16getPrintableAreaEv = Module['__ZNK6Common15PrintingManager16getPrintableAreaEv'] = wasmExports['_ZNK6Common15PrintingManager16getPrintableAreaEv'];
+  __ZNK6Common15PrintingManager22getPrintableAreaOffsetEv = Module['__ZNK6Common15PrintingManager22getPrintableAreaOffsetEv'] = wasmExports['_ZNK6Common15PrintingManager22getPrintableAreaOffsetEv'];
+  __ZNK6Common15PrintingManager18getPaperDimensionsEv = Module['__ZNK6Common15PrintingManager18getPaperDimensionsEv'] = wasmExports['_ZNK6Common15PrintingManager18getPaperDimensionsEv'];
   __ZN6Common8ImageMapD2Ev = Module['__ZN6Common8ImageMapD2Ev'] = wasmExports['_ZN6Common8ImageMapD2Ev'];
   __ZN6Common8ImageMap14removeAllAreasEv = Module['__ZN6Common8ImageMap14removeAllAreasEv'] = wasmExports['_ZN6Common8ImageMap14removeAllAreasEv'];
   __ZNK6Common7HashMapINS_6StringEPNS_7PolygonENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv = Module['__ZNK6Common7HashMapINS_6StringEPNS_7PolygonENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv'] = wasmExports['_ZNK6Common7HashMapINS_6StringEPNS_7PolygonENS_4HashIS1_EENS_7EqualToIS1_EEE12IteratorImplINS8_4NodeEE5derefEv'];
@@ -92233,360 +92230,642 @@ function assignWasmExports(wasmExports) {
   _fribidi_get_joining_type_name = Module['_fribidi_get_joining_type_name'] = wasmExports['fribidi_get_joining_type_name'];
   _fribidi_shape_mirroring = Module['_fribidi_shape_mirroring'] = wasmExports['fribidi_shape_mirroring'];
   _fribidi_get_bracket = Module['_fribidi_get_bracket'] = wasmExports['fribidi_get_bracket'];
-  _png_error = Module['_png_error'] = wasmExports['png_error'];
-  _png_sig_cmp = Module['_png_sig_cmp'] = wasmExports['png_sig_cmp'];
-  _png_zalloc = Module['_png_zalloc'] = wasmExports['png_zalloc'];
-  _png_warning = Module['_png_warning'] = wasmExports['png_warning'];
-  _png_malloc_warn = Module['_png_malloc_warn'] = wasmExports['png_malloc_warn'];
-  _png_zfree = Module['_png_zfree'] = wasmExports['png_zfree'];
-  _png_free = Module['_png_free'] = wasmExports['png_free'];
-  _png_reset_crc = Module['_png_reset_crc'] = wasmExports['png_reset_crc'];
-  _png_calculate_crc = Module['_png_calculate_crc'] = wasmExports['png_calculate_crc'];
-  _png_user_version_check = Module['_png_user_version_check'] = wasmExports['png_user_version_check'];
-  _png_safecat = Module['_png_safecat'] = wasmExports['png_safecat'];
-  _png_create_png_struct = Module['_png_create_png_struct'] = wasmExports['png_create_png_struct'];
-  _png_set_mem_fn = Module['_png_set_mem_fn'] = wasmExports['png_set_mem_fn'];
-  _png_malloc_base = Module['_png_malloc_base'] = wasmExports['png_malloc_base'];
-  _png_destroy_info_struct = Module['_png_destroy_info_struct'] = wasmExports['png_destroy_info_struct'];
-  _png_free_data = Module['_png_free_data'] = wasmExports['png_free_data'];
-  _png_info_init_3 = Module['_png_info_init_3'] = wasmExports['png_info_init_3'];
-  _png_data_freer = Module['_png_data_freer'] = wasmExports['png_data_freer'];
-  _png_init_io = Module['_png_init_io'] = wasmExports['png_init_io'];
-  _png_save_int_32 = Module['_png_save_int_32'] = wasmExports['png_save_int_32'];
-  _png_save_uint_32 = Module['_png_save_uint_32'] = wasmExports['png_save_uint_32'];
-  _png_convert_to_rfc1123_buffer = Module['_png_convert_to_rfc1123_buffer'] = wasmExports['png_convert_to_rfc1123_buffer'];
-  _png_format_number = Module['_png_format_number'] = wasmExports['png_format_number'];
-  _png_convert_to_rfc1123 = Module['_png_convert_to_rfc1123'] = wasmExports['png_convert_to_rfc1123'];
-  _png_get_copyright = Module['_png_get_copyright'] = wasmExports['png_get_copyright'];
-  _png_get_libpng_ver = Module['_png_get_libpng_ver'] = wasmExports['png_get_libpng_ver'];
-  _png_get_header_ver = Module['_png_get_header_ver'] = wasmExports['png_get_header_ver'];
-  _png_get_header_version = Module['_png_get_header_version'] = wasmExports['png_get_header_version'];
-  _png_build_grayscale_palette = Module['_png_build_grayscale_palette'] = wasmExports['png_build_grayscale_palette'];
-  _png_handle_as_unknown = Module['_png_handle_as_unknown'] = wasmExports['png_handle_as_unknown'];
-  _png_chunk_unknown_handling = Module['_png_chunk_unknown_handling'] = wasmExports['png_chunk_unknown_handling'];
-  _png_reset_zstream = Module['_png_reset_zstream'] = wasmExports['png_reset_zstream'];
-  _png_access_version_number = Module['_png_access_version_number'] = wasmExports['png_access_version_number'];
-  _png_zstream_error = Module['_png_zstream_error'] = wasmExports['png_zstream_error'];
-  _png_xy_from_XYZ = Module['_png_xy_from_XYZ'] = wasmExports['png_xy_from_XYZ'];
-  _png_muldiv = Module['_png_muldiv'] = wasmExports['png_muldiv'];
-  _png_XYZ_from_xy = Module['_png_XYZ_from_xy'] = wasmExports['png_XYZ_from_xy'];
-  _png_reciprocal = Module['_png_reciprocal'] = wasmExports['png_reciprocal'];
-  _png_icc_check_length = Module['_png_icc_check_length'] = wasmExports['png_icc_check_length'];
-  _png_chunk_benign_error = Module['_png_chunk_benign_error'] = wasmExports['png_chunk_benign_error'];
-  _png_icc_check_header = Module['_png_icc_check_header'] = wasmExports['png_icc_check_header'];
-  _png_icc_check_tag_table = Module['_png_icc_check_tag_table'] = wasmExports['png_icc_check_tag_table'];
-  _png_set_rgb_coefficients = Module['_png_set_rgb_coefficients'] = wasmExports['png_set_rgb_coefficients'];
-  _png_check_IHDR = Module['_png_check_IHDR'] = wasmExports['png_check_IHDR'];
-  _png_check_fp_number = Module['_png_check_fp_number'] = wasmExports['png_check_fp_number'];
-  _png_check_fp_string = Module['_png_check_fp_string'] = wasmExports['png_check_fp_string'];
-  _png_ascii_from_fp = Module['_png_ascii_from_fp'] = wasmExports['png_ascii_from_fp'];
-  _png_ascii_from_fixed = Module['_png_ascii_from_fixed'] = wasmExports['png_ascii_from_fixed'];
-  _png_fixed = Module['_png_fixed'] = wasmExports['png_fixed'];
-  _png_fixed_error = Module['_png_fixed_error'] = wasmExports['png_fixed_error'];
-  _png_fixed_ITU = Module['_png_fixed_ITU'] = wasmExports['png_fixed_ITU'];
-  _png_gamma_significant = Module['_png_gamma_significant'] = wasmExports['png_gamma_significant'];
-  _png_reciprocal2 = Module['_png_reciprocal2'] = wasmExports['png_reciprocal2'];
-  _png_gamma_8bit_correct = Module['_png_gamma_8bit_correct'] = wasmExports['png_gamma_8bit_correct'];
-  _png_gamma_16bit_correct = Module['_png_gamma_16bit_correct'] = wasmExports['png_gamma_16bit_correct'];
-  _png_gamma_correct = Module['_png_gamma_correct'] = wasmExports['png_gamma_correct'];
-  _png_destroy_gamma_table = Module['_png_destroy_gamma_table'] = wasmExports['png_destroy_gamma_table'];
-  _png_build_gamma_table = Module['_png_build_gamma_table'] = wasmExports['png_build_gamma_table'];
-  _png_malloc = Module['_png_malloc'] = wasmExports['png_malloc'];
-  _png_calloc = Module['_png_calloc'] = wasmExports['png_calloc'];
-  _png_set_option = Module['_png_set_option'] = wasmExports['png_set_option'];
-  _png_image_free = Module['_png_image_free'] = wasmExports['png_image_free'];
-  _png_image_error = Module['_png_image_error'] = wasmExports['png_image_error'];
-  _png_longjmp = Module['_png_longjmp'] = wasmExports['png_longjmp'];
-  _png_warning_parameter = Module['_png_warning_parameter'] = wasmExports['png_warning_parameter'];
-  _png_warning_parameter_unsigned = Module['_png_warning_parameter_unsigned'] = wasmExports['png_warning_parameter_unsigned'];
-  _png_warning_parameter_signed = Module['_png_warning_parameter_signed'] = wasmExports['png_warning_parameter_signed'];
-  _png_formatted_warning = Module['_png_formatted_warning'] = wasmExports['png_formatted_warning'];
-  _png_benign_error = Module['_png_benign_error'] = wasmExports['png_benign_error'];
-  _png_chunk_error = Module['_png_chunk_error'] = wasmExports['png_chunk_error'];
-  _png_chunk_warning = Module['_png_chunk_warning'] = wasmExports['png_chunk_warning'];
-  _png_app_warning = Module['_png_app_warning'] = wasmExports['png_app_warning'];
-  _png_app_error = Module['_png_app_error'] = wasmExports['png_app_error'];
-  _png_chunk_report = Module['_png_chunk_report'] = wasmExports['png_chunk_report'];
-  _png_set_longjmp_fn = Module['_png_set_longjmp_fn'] = wasmExports['png_set_longjmp_fn'];
-  _png_free_jmpbuf = Module['_png_free_jmpbuf'] = wasmExports['png_free_jmpbuf'];
-  _png_get_error_ptr = Module['_png_get_error_ptr'] = wasmExports['png_get_error_ptr'];
-  _png_safe_error = Module['_png_safe_error'] = wasmExports['png_safe_error'];
-  _png_safe_warning = Module['_png_safe_warning'] = wasmExports['png_safe_warning'];
-  _png_safe_execute = Module['_png_safe_execute'] = wasmExports['png_safe_execute'];
-  _png_get_rowbytes = Module['_png_get_rowbytes'] = wasmExports['png_get_rowbytes'];
-  _png_get_rows = Module['_png_get_rows'] = wasmExports['png_get_rows'];
-  _png_get_image_width = Module['_png_get_image_width'] = wasmExports['png_get_image_width'];
-  _png_get_image_height = Module['_png_get_image_height'] = wasmExports['png_get_image_height'];
-  _png_get_bit_depth = Module['_png_get_bit_depth'] = wasmExports['png_get_bit_depth'];
-  _png_get_color_type = Module['_png_get_color_type'] = wasmExports['png_get_color_type'];
-  _png_get_filter_type = Module['_png_get_filter_type'] = wasmExports['png_get_filter_type'];
-  _png_get_interlace_type = Module['_png_get_interlace_type'] = wasmExports['png_get_interlace_type'];
-  _png_get_compression_type = Module['_png_get_compression_type'] = wasmExports['png_get_compression_type'];
-  _png_get_x_pixels_per_meter = Module['_png_get_x_pixels_per_meter'] = wasmExports['png_get_x_pixels_per_meter'];
-  _png_get_y_pixels_per_meter = Module['_png_get_y_pixels_per_meter'] = wasmExports['png_get_y_pixels_per_meter'];
-  _png_get_pixels_per_meter = Module['_png_get_pixels_per_meter'] = wasmExports['png_get_pixels_per_meter'];
-  _png_get_pixel_aspect_ratio = Module['_png_get_pixel_aspect_ratio'] = wasmExports['png_get_pixel_aspect_ratio'];
-  _png_get_pixel_aspect_ratio_fixed = Module['_png_get_pixel_aspect_ratio_fixed'] = wasmExports['png_get_pixel_aspect_ratio_fixed'];
-  _png_get_x_offset_microns = Module['_png_get_x_offset_microns'] = wasmExports['png_get_x_offset_microns'];
-  _png_get_y_offset_microns = Module['_png_get_y_offset_microns'] = wasmExports['png_get_y_offset_microns'];
-  _png_get_x_offset_pixels = Module['_png_get_x_offset_pixels'] = wasmExports['png_get_x_offset_pixels'];
-  _png_get_y_offset_pixels = Module['_png_get_y_offset_pixels'] = wasmExports['png_get_y_offset_pixels'];
-  _png_get_pixels_per_inch = Module['_png_get_pixels_per_inch'] = wasmExports['png_get_pixels_per_inch'];
-  _png_get_x_pixels_per_inch = Module['_png_get_x_pixels_per_inch'] = wasmExports['png_get_x_pixels_per_inch'];
-  _png_get_y_pixels_per_inch = Module['_png_get_y_pixels_per_inch'] = wasmExports['png_get_y_pixels_per_inch'];
-  _png_get_x_offset_inches_fixed = Module['_png_get_x_offset_inches_fixed'] = wasmExports['png_get_x_offset_inches_fixed'];
-  _png_get_y_offset_inches_fixed = Module['_png_get_y_offset_inches_fixed'] = wasmExports['png_get_y_offset_inches_fixed'];
-  _png_get_x_offset_inches = Module['_png_get_x_offset_inches'] = wasmExports['png_get_x_offset_inches'];
-  _png_get_y_offset_inches = Module['_png_get_y_offset_inches'] = wasmExports['png_get_y_offset_inches'];
-  _png_get_pHYs_dpi = Module['_png_get_pHYs_dpi'] = wasmExports['png_get_pHYs_dpi'];
-  _png_get_channels = Module['_png_get_channels'] = wasmExports['png_get_channels'];
-  _png_get_signature = Module['_png_get_signature'] = wasmExports['png_get_signature'];
-  _png_get_bKGD = Module['_png_get_bKGD'] = wasmExports['png_get_bKGD'];
-  _png_get_cHRM = Module['_png_get_cHRM'] = wasmExports['png_get_cHRM'];
-  _png_get_cHRM_XYZ = Module['_png_get_cHRM_XYZ'] = wasmExports['png_get_cHRM_XYZ'];
-  _png_get_cHRM_XYZ_fixed = Module['_png_get_cHRM_XYZ_fixed'] = wasmExports['png_get_cHRM_XYZ_fixed'];
-  _png_get_cHRM_fixed = Module['_png_get_cHRM_fixed'] = wasmExports['png_get_cHRM_fixed'];
-  _png_get_gAMA_fixed = Module['_png_get_gAMA_fixed'] = wasmExports['png_get_gAMA_fixed'];
-  _png_get_gAMA = Module['_png_get_gAMA'] = wasmExports['png_get_gAMA'];
-  _png_get_sRGB = Module['_png_get_sRGB'] = wasmExports['png_get_sRGB'];
-  _png_get_iCCP = Module['_png_get_iCCP'] = wasmExports['png_get_iCCP'];
-  _png_get_sPLT = Module['_png_get_sPLT'] = wasmExports['png_get_sPLT'];
-  _png_get_cICP = Module['_png_get_cICP'] = wasmExports['png_get_cICP'];
-  _png_get_cLLI_fixed = Module['_png_get_cLLI_fixed'] = wasmExports['png_get_cLLI_fixed'];
-  _png_get_cLLI = Module['_png_get_cLLI'] = wasmExports['png_get_cLLI'];
-  _png_get_mDCV_fixed = Module['_png_get_mDCV_fixed'] = wasmExports['png_get_mDCV_fixed'];
-  _png_get_mDCV = Module['_png_get_mDCV'] = wasmExports['png_get_mDCV'];
-  _png_get_eXIf = Module['_png_get_eXIf'] = wasmExports['png_get_eXIf'];
-  _png_get_eXIf_1 = Module['_png_get_eXIf_1'] = wasmExports['png_get_eXIf_1'];
-  _png_get_hIST = Module['_png_get_hIST'] = wasmExports['png_get_hIST'];
-  _png_get_oFFs = Module['_png_get_oFFs'] = wasmExports['png_get_oFFs'];
-  _png_get_pCAL = Module['_png_get_pCAL'] = wasmExports['png_get_pCAL'];
-  _png_get_sCAL_fixed = Module['_png_get_sCAL_fixed'] = wasmExports['png_get_sCAL_fixed'];
-  _png_get_sCAL = Module['_png_get_sCAL'] = wasmExports['png_get_sCAL'];
-  _png_get_sCAL_s = Module['_png_get_sCAL_s'] = wasmExports['png_get_sCAL_s'];
-  _png_get_pHYs = Module['_png_get_pHYs'] = wasmExports['png_get_pHYs'];
-  _png_get_sBIT = Module['_png_get_sBIT'] = wasmExports['png_get_sBIT'];
-  _png_get_text = Module['_png_get_text'] = wasmExports['png_get_text'];
-  _png_get_tIME = Module['_png_get_tIME'] = wasmExports['png_get_tIME'];
-  _png_get_unknown_chunks = Module['_png_get_unknown_chunks'] = wasmExports['png_get_unknown_chunks'];
-  _png_get_rgb_to_gray_status = Module['_png_get_rgb_to_gray_status'] = wasmExports['png_get_rgb_to_gray_status'];
-  _png_get_user_chunk_ptr = Module['_png_get_user_chunk_ptr'] = wasmExports['png_get_user_chunk_ptr'];
-  _png_get_compression_buffer_size = Module['_png_get_compression_buffer_size'] = wasmExports['png_get_compression_buffer_size'];
-  _png_get_user_width_max = Module['_png_get_user_width_max'] = wasmExports['png_get_user_width_max'];
-  _png_get_user_height_max = Module['_png_get_user_height_max'] = wasmExports['png_get_user_height_max'];
-  _png_get_chunk_cache_max = Module['_png_get_chunk_cache_max'] = wasmExports['png_get_chunk_cache_max'];
-  _png_get_chunk_malloc_max = Module['_png_get_chunk_malloc_max'] = wasmExports['png_get_chunk_malloc_max'];
-  _png_get_io_state = Module['_png_get_io_state'] = wasmExports['png_get_io_state'];
-  _png_get_io_chunk_type = Module['_png_get_io_chunk_type'] = wasmExports['png_get_io_chunk_type'];
-  _png_get_palette_max = Module['_png_get_palette_max'] = wasmExports['png_get_palette_max'];
-  _png_destroy_png_struct = Module['_png_destroy_png_struct'] = wasmExports['png_destroy_png_struct'];
-  _png_malloc_array = Module['_png_malloc_array'] = wasmExports['png_malloc_array'];
-  _png_realloc_array = Module['_png_realloc_array'] = wasmExports['png_realloc_array'];
-  _png_malloc_default = Module['_png_malloc_default'] = wasmExports['png_malloc_default'];
-  _png_free_default = Module['_png_free_default'] = wasmExports['png_free_default'];
-  _png_get_mem_ptr = Module['_png_get_mem_ptr'] = wasmExports['png_get_mem_ptr'];
-  _png_process_data = Module['_png_process_data'] = wasmExports['png_process_data'];
-  _png_push_read_chunk = Module['_png_push_read_chunk'] = wasmExports['png_push_read_chunk'];
-  _png_push_read_IDAT = Module['_png_push_read_IDAT'] = wasmExports['png_push_read_IDAT'];
-  _png_push_read_sig = Module['_png_push_read_sig'] = wasmExports['png_push_read_sig'];
-  _png_push_restore_buffer = Module['_png_push_restore_buffer'] = wasmExports['png_push_restore_buffer'];
-  _png_process_some_data = Module['_png_process_some_data'] = wasmExports['png_process_some_data'];
-  _png_process_data_pause = Module['_png_process_data_pause'] = wasmExports['png_process_data_pause'];
-  _png_push_save_buffer = Module['_png_push_save_buffer'] = wasmExports['png_push_save_buffer'];
-  _png_process_data_skip = Module['_png_process_data_skip'] = wasmExports['png_process_data_skip'];
-  _png_read_chunk_header = Module['_png_read_chunk_header'] = wasmExports['png_read_chunk_header'];
-  _png_handle_chunk = Module['_png_handle_chunk'] = wasmExports['png_handle_chunk'];
-  _png_handle_unknown = Module['_png_handle_unknown'] = wasmExports['png_handle_unknown'];
-  _png_get_uint_31 = Module['_png_get_uint_31'] = wasmExports['png_get_uint_31'];
-  _png_crc_read = Module['_png_crc_read'] = wasmExports['png_crc_read'];
-  _png_process_IDAT_data = Module['_png_process_IDAT_data'] = wasmExports['png_process_IDAT_data'];
-  _png_crc_finish = Module['_png_crc_finish'] = wasmExports['png_crc_finish'];
-  _png_push_fill_buffer = Module['_png_push_fill_buffer'] = wasmExports['png_push_fill_buffer'];
-  _png_push_have_end = Module['_png_push_have_end'] = wasmExports['png_push_have_end'];
-  _png_push_have_info = Module['_png_push_have_info'] = wasmExports['png_push_have_info'];
-  _png_zlib_inflate = Module['_png_zlib_inflate'] = wasmExports['png_zlib_inflate'];
-  _png_push_process_row = Module['_png_push_process_row'] = wasmExports['png_push_process_row'];
-  _png_read_filter_row = Module['_png_read_filter_row'] = wasmExports['png_read_filter_row'];
-  _png_do_read_transformations = Module['_png_do_read_transformations'] = wasmExports['png_do_read_transformations'];
-  _png_do_read_interlace = Module['_png_do_read_interlace'] = wasmExports['png_do_read_interlace'];
-  _png_read_push_finish_row = Module['_png_read_push_finish_row'] = wasmExports['png_read_push_finish_row'];
-  _png_push_have_row = Module['_png_push_have_row'] = wasmExports['png_push_have_row'];
-  _png_progressive_combine_row = Module['_png_progressive_combine_row'] = wasmExports['png_progressive_combine_row'];
-  _png_combine_row = Module['_png_combine_row'] = wasmExports['png_combine_row'];
-  _png_set_progressive_read_fn = Module['_png_set_progressive_read_fn'] = wasmExports['png_set_progressive_read_fn'];
-  _png_get_progressive_ptr = Module['_png_get_progressive_ptr'] = wasmExports['png_get_progressive_ptr'];
-  _png_create_read_struct_2 = Module['_png_create_read_struct_2'] = wasmExports['png_create_read_struct_2'];
-  _png_read_sig = Module['_png_read_sig'] = wasmExports['png_read_sig'];
-  _png_read_start_row = Module['_png_read_start_row'] = wasmExports['png_read_start_row'];
-  _png_read_transform_info = Module['_png_read_transform_info'] = wasmExports['png_read_transform_info'];
-  _png_start_read_image = Module['_png_start_read_image'] = wasmExports['png_start_read_image'];
-  _png_read_finish_row = Module['_png_read_finish_row'] = wasmExports['png_read_finish_row'];
-  _png_read_IDAT_data = Module['_png_read_IDAT_data'] = wasmExports['png_read_IDAT_data'];
-  _png_read_rows = Module['_png_read_rows'] = wasmExports['png_read_rows'];
-  _png_read_finish_IDAT = Module['_png_read_finish_IDAT'] = wasmExports['png_read_finish_IDAT'];
-  _png_set_read_status_fn = Module['_png_set_read_status_fn'] = wasmExports['png_set_read_status_fn'];
-  _png_read_png = Module['_png_read_png'] = wasmExports['png_read_png'];
-  _png_set_scale_16 = Module['_png_set_scale_16'] = wasmExports['png_set_scale_16'];
-  _png_set_strip_alpha = Module['_png_set_strip_alpha'] = wasmExports['png_set_strip_alpha'];
-  _png_set_packswap = Module['_png_set_packswap'] = wasmExports['png_set_packswap'];
-  _png_set_invert_mono = Module['_png_set_invert_mono'] = wasmExports['png_set_invert_mono'];
-  _png_set_shift = Module['_png_set_shift'] = wasmExports['png_set_shift'];
-  _png_set_bgr = Module['_png_set_bgr'] = wasmExports['png_set_bgr'];
-  _png_set_swap_alpha = Module['_png_set_swap_alpha'] = wasmExports['png_set_swap_alpha'];
-  _png_set_swap = Module['_png_set_swap'] = wasmExports['png_set_swap'];
-  _png_set_invert_alpha = Module['_png_set_invert_alpha'] = wasmExports['png_set_invert_alpha'];
-  _png_set_expand_16 = Module['_png_set_expand_16'] = wasmExports['png_set_expand_16'];
-  _png_image_begin_read_from_stdio = Module['_png_image_begin_read_from_stdio'] = wasmExports['png_image_begin_read_from_stdio'];
-  _png_set_benign_errors = Module['_png_set_benign_errors'] = wasmExports['png_set_benign_errors'];
-  _png_image_begin_read_from_file = Module['_png_image_begin_read_from_file'] = wasmExports['png_image_begin_read_from_file'];
-  _png_image_begin_read_from_memory = Module['_png_image_begin_read_from_memory'] = wasmExports['png_image_begin_read_from_memory'];
-  _png_image_finish_read = Module['_png_image_finish_read'] = wasmExports['png_image_finish_read'];
-  _png_set_background_fixed = Module['_png_set_background_fixed'] = wasmExports['png_set_background_fixed'];
-  _png_set_rgb_to_gray_fixed = Module['_png_set_rgb_to_gray_fixed'] = wasmExports['png_set_rgb_to_gray_fixed'];
-  _png_resolve_file_gamma = Module['_png_resolve_file_gamma'] = wasmExports['png_resolve_file_gamma'];
-  _png_set_tRNS_to_alpha = Module['_png_set_tRNS_to_alpha'] = wasmExports['png_set_tRNS_to_alpha'];
-  _png_set_alpha_mode_fixed = Module['_png_set_alpha_mode_fixed'] = wasmExports['png_set_alpha_mode_fixed'];
-  _png_set_keep_unknown_chunks = Module['_png_set_keep_unknown_chunks'] = wasmExports['png_set_keep_unknown_chunks'];
-  _png_set_add_alpha = Module['_png_set_add_alpha'] = wasmExports['png_set_add_alpha'];
-  _png_read_data = Module['_png_read_data'] = wasmExports['png_read_data'];
-  _png_default_read_data = Module['_png_default_read_data'] = wasmExports['png_default_read_data'];
-  _png_set_background = Module['_png_set_background'] = wasmExports['png_set_background'];
-  _png_set_alpha_mode = Module['_png_set_alpha_mode'] = wasmExports['png_set_alpha_mode'];
-  _png_set_quantize = Module['_png_set_quantize'] = wasmExports['png_set_quantize'];
-  _png_set_gamma_fixed = Module['_png_set_gamma_fixed'] = wasmExports['png_set_gamma_fixed'];
-  _png_set_gamma = Module['_png_set_gamma'] = wasmExports['png_set_gamma'];
-  _png_set_palette_to_rgb = Module['_png_set_palette_to_rgb'] = wasmExports['png_set_palette_to_rgb'];
-  _png_set_expand_gray_1_2_4_to_8 = Module['_png_set_expand_gray_1_2_4_to_8'] = wasmExports['png_set_expand_gray_1_2_4_to_8'];
-  _png_set_rgb_to_gray = Module['_png_set_rgb_to_gray'] = wasmExports['png_set_rgb_to_gray'];
-  _png_set_read_user_transform_fn = Module['_png_set_read_user_transform_fn'] = wasmExports['png_set_read_user_transform_fn'];
-  _png_init_read_transformations = Module['_png_init_read_transformations'] = wasmExports['png_init_read_transformations'];
-  _png_do_strip_channel = Module['_png_do_strip_channel'] = wasmExports['png_do_strip_channel'];
-  _png_do_invert = Module['_png_do_invert'] = wasmExports['png_do_invert'];
-  _png_do_check_palette_indexes = Module['_png_do_check_palette_indexes'] = wasmExports['png_do_check_palette_indexes'];
-  _png_do_bgr = Module['_png_do_bgr'] = wasmExports['png_do_bgr'];
-  _png_do_packswap = Module['_png_do_packswap'] = wasmExports['png_do_packswap'];
-  _png_do_swap = Module['_png_do_swap'] = wasmExports['png_do_swap'];
-  _png_get_uint_32 = Module['_png_get_uint_32'] = wasmExports['png_get_uint_32'];
-  _png_get_int_32 = Module['_png_get_int_32'] = wasmExports['png_get_int_32'];
-  _png_get_uint_16 = Module['_png_get_uint_16'] = wasmExports['png_get_uint_16'];
-  _png_set_unknown_chunks = Module['_png_set_unknown_chunks'] = wasmExports['png_set_unknown_chunks'];
-  _inflateReset2 = Module['_inflateReset2'] = wasmExports['inflateReset2'];
-  _png_set_bKGD = Module['_png_set_bKGD'] = wasmExports['png_set_bKGD'];
-  _png_set_cHRM_fixed = Module['_png_set_cHRM_fixed'] = wasmExports['png_set_cHRM_fixed'];
-  _png_set_cICP = Module['_png_set_cICP'] = wasmExports['png_set_cICP'];
-  _png_set_cLLI_fixed = Module['_png_set_cLLI_fixed'] = wasmExports['png_set_cLLI_fixed'];
-  _png_set_eXIf_1 = Module['_png_set_eXIf_1'] = wasmExports['png_set_eXIf_1'];
-  _png_set_gAMA_fixed = Module['_png_set_gAMA_fixed'] = wasmExports['png_set_gAMA_fixed'];
-  _png_set_hIST = Module['_png_set_hIST'] = wasmExports['png_set_hIST'];
-  _png_set_text_2 = Module['_png_set_text_2'] = wasmExports['png_set_text_2'];
-  _png_set_mDCV_fixed = Module['_png_set_mDCV_fixed'] = wasmExports['png_set_mDCV_fixed'];
-  _png_set_oFFs = Module['_png_set_oFFs'] = wasmExports['png_set_oFFs'];
-  _png_set_pCAL = Module['_png_set_pCAL'] = wasmExports['png_set_pCAL'];
-  _png_set_pHYs = Module['_png_set_pHYs'] = wasmExports['png_set_pHYs'];
-  _png_set_sBIT = Module['_png_set_sBIT'] = wasmExports['png_set_sBIT'];
-  _png_set_sCAL_s = Module['_png_set_sCAL_s'] = wasmExports['png_set_sCAL_s'];
-  _png_set_sPLT = Module['_png_set_sPLT'] = wasmExports['png_set_sPLT'];
-  _png_set_sRGB = Module['_png_set_sRGB'] = wasmExports['png_set_sRGB'];
-  _png_set_tIME = Module['_png_set_tIME'] = wasmExports['png_set_tIME'];
-  _png_set_tRNS = Module['_png_set_tRNS'] = wasmExports['png_set_tRNS'];
-  _png_set_cHRM_XYZ_fixed = Module['_png_set_cHRM_XYZ_fixed'] = wasmExports['png_set_cHRM_XYZ_fixed'];
-  _png_set_cHRM = Module['_png_set_cHRM'] = wasmExports['png_set_cHRM'];
-  _png_set_cHRM_XYZ = Module['_png_set_cHRM_XYZ'] = wasmExports['png_set_cHRM_XYZ'];
-  _png_set_cLLI = Module['_png_set_cLLI'] = wasmExports['png_set_cLLI'];
-  _png_set_mDCV = Module['_png_set_mDCV'] = wasmExports['png_set_mDCV'];
-  _png_set_eXIf = Module['_png_set_eXIf'] = wasmExports['png_set_eXIf'];
-  _png_set_gAMA = Module['_png_set_gAMA'] = wasmExports['png_set_gAMA'];
-  _png_set_sCAL = Module['_png_set_sCAL'] = wasmExports['png_set_sCAL'];
-  _png_set_sCAL_fixed = Module['_png_set_sCAL_fixed'] = wasmExports['png_set_sCAL_fixed'];
-  _png_set_sRGB_gAMA_and_cHRM = Module['_png_set_sRGB_gAMA_and_cHRM'] = wasmExports['png_set_sRGB_gAMA_and_cHRM'];
-  _png_set_iCCP = Module['_png_set_iCCP'] = wasmExports['png_set_iCCP'];
-  _png_set_text = Module['_png_set_text'] = wasmExports['png_set_text'];
-  _png_set_unknown_chunk_location = Module['_png_set_unknown_chunk_location'] = wasmExports['png_set_unknown_chunk_location'];
-  _png_permit_mng_features = Module['_png_permit_mng_features'] = wasmExports['png_permit_mng_features'];
-  _png_set_read_user_chunk_fn = Module['_png_set_read_user_chunk_fn'] = wasmExports['png_set_read_user_chunk_fn'];
-  _png_set_compression_buffer_size = Module['_png_set_compression_buffer_size'] = wasmExports['png_set_compression_buffer_size'];
-  _png_free_buffer_list = Module['_png_free_buffer_list'] = wasmExports['png_free_buffer_list'];
-  _png_set_invalid = Module['_png_set_invalid'] = wasmExports['png_set_invalid'];
-  _png_set_user_limits = Module['_png_set_user_limits'] = wasmExports['png_set_user_limits'];
-  _png_set_chunk_cache_max = Module['_png_set_chunk_cache_max'] = wasmExports['png_set_chunk_cache_max'];
-  _png_set_chunk_malloc_max = Module['_png_set_chunk_malloc_max'] = wasmExports['png_set_chunk_malloc_max'];
-  _png_set_check_for_invalid_index = Module['_png_set_check_for_invalid_index'] = wasmExports['png_set_check_for_invalid_index'];
-  _png_check_keyword = Module['_png_check_keyword'] = wasmExports['png_check_keyword'];
-  _png_set_filler = Module['_png_set_filler'] = wasmExports['png_set_filler'];
-  _png_set_user_transform_info = Module['_png_set_user_transform_info'] = wasmExports['png_set_user_transform_info'];
-  _png_get_user_transform_ptr = Module['_png_get_user_transform_ptr'] = wasmExports['png_get_user_transform_ptr'];
-  _png_get_current_row_number = Module['_png_get_current_row_number'] = wasmExports['png_get_current_row_number'];
-  _png_get_current_pass_number = Module['_png_get_current_pass_number'] = wasmExports['png_get_current_pass_number'];
-  _png_write_data = Module['_png_write_data'] = wasmExports['png_write_data'];
-  _png_default_write_data = Module['_png_default_write_data'] = wasmExports['png_default_write_data'];
-  _png_flush = Module['_png_flush'] = wasmExports['png_flush'];
-  _png_default_flush = Module['_png_default_flush'] = wasmExports['png_default_flush'];
-  _png_write_info_before_PLTE = Module['_png_write_info_before_PLTE'] = wasmExports['png_write_info_before_PLTE'];
-  _png_write_sig = Module['_png_write_sig'] = wasmExports['png_write_sig'];
-  _png_write_IHDR = Module['_png_write_IHDR'] = wasmExports['png_write_IHDR'];
-  _png_write_sBIT = Module['_png_write_sBIT'] = wasmExports['png_write_sBIT'];
-  _png_write_cLLI_fixed = Module['_png_write_cLLI_fixed'] = wasmExports['png_write_cLLI_fixed'];
-  _png_write_mDCV_fixed = Module['_png_write_mDCV_fixed'] = wasmExports['png_write_mDCV_fixed'];
-  _png_write_cICP = Module['_png_write_cICP'] = wasmExports['png_write_cICP'];
-  _png_write_iCCP = Module['_png_write_iCCP'] = wasmExports['png_write_iCCP'];
-  _png_write_sRGB = Module['_png_write_sRGB'] = wasmExports['png_write_sRGB'];
-  _png_write_gAMA_fixed = Module['_png_write_gAMA_fixed'] = wasmExports['png_write_gAMA_fixed'];
-  _png_write_cHRM_fixed = Module['_png_write_cHRM_fixed'] = wasmExports['png_write_cHRM_fixed'];
-  _png_write_chunk = Module['_png_write_chunk'] = wasmExports['png_write_chunk'];
-  _png_write_info = Module['_png_write_info'] = wasmExports['png_write_info'];
-  _png_write_PLTE = Module['_png_write_PLTE'] = wasmExports['png_write_PLTE'];
-  _png_write_tRNS = Module['_png_write_tRNS'] = wasmExports['png_write_tRNS'];
-  _png_write_bKGD = Module['_png_write_bKGD'] = wasmExports['png_write_bKGD'];
-  _png_write_eXIf = Module['_png_write_eXIf'] = wasmExports['png_write_eXIf'];
-  _png_write_hIST = Module['_png_write_hIST'] = wasmExports['png_write_hIST'];
-  _png_write_oFFs = Module['_png_write_oFFs'] = wasmExports['png_write_oFFs'];
-  _png_write_pCAL = Module['_png_write_pCAL'] = wasmExports['png_write_pCAL'];
-  _png_write_sCAL_s = Module['_png_write_sCAL_s'] = wasmExports['png_write_sCAL_s'];
-  _png_write_pHYs = Module['_png_write_pHYs'] = wasmExports['png_write_pHYs'];
-  _png_write_tIME = Module['_png_write_tIME'] = wasmExports['png_write_tIME'];
-  _png_write_sPLT = Module['_png_write_sPLT'] = wasmExports['png_write_sPLT'];
-  _png_write_iTXt = Module['_png_write_iTXt'] = wasmExports['png_write_iTXt'];
-  _png_write_zTXt = Module['_png_write_zTXt'] = wasmExports['png_write_zTXt'];
-  _png_write_tEXt = Module['_png_write_tEXt'] = wasmExports['png_write_tEXt'];
-  _png_write_end = Module['_png_write_end'] = wasmExports['png_write_end'];
-  _png_write_IEND = Module['_png_write_IEND'] = wasmExports['png_write_IEND'];
-  _png_convert_from_struct_tm = Module['_png_convert_from_struct_tm'] = wasmExports['png_convert_from_struct_tm'];
-  _png_convert_from_time_t = Module['_png_convert_from_time_t'] = wasmExports['png_convert_from_time_t'];
-  _png_create_write_struct_2 = Module['_png_create_write_struct_2'] = wasmExports['png_create_write_struct_2'];
-  _png_write_rows = Module['_png_write_rows'] = wasmExports['png_write_rows'];
-  _png_write_row = Module['_png_write_row'] = wasmExports['png_write_row'];
-  _png_write_start_row = Module['_png_write_start_row'] = wasmExports['png_write_start_row'];
-  _png_write_finish_row = Module['_png_write_finish_row'] = wasmExports['png_write_finish_row'];
-  _png_do_write_interlace = Module['_png_do_write_interlace'] = wasmExports['png_do_write_interlace'];
-  _png_do_write_transformations = Module['_png_do_write_transformations'] = wasmExports['png_do_write_transformations'];
-  _png_write_find_filter = Module['_png_write_find_filter'] = wasmExports['png_write_find_filter'];
-  _png_write_image = Module['_png_write_image'] = wasmExports['png_write_image'];
-  _png_set_flush = Module['_png_set_flush'] = wasmExports['png_set_flush'];
-  _png_write_flush = Module['_png_write_flush'] = wasmExports['png_write_flush'];
-  _png_compress_IDAT = Module['_png_compress_IDAT'] = wasmExports['png_compress_IDAT'];
-  _png_set_filter = Module['_png_set_filter'] = wasmExports['png_set_filter'];
-  _png_set_filter_heuristics = Module['_png_set_filter_heuristics'] = wasmExports['png_set_filter_heuristics'];
-  _png_set_filter_heuristics_fixed = Module['_png_set_filter_heuristics_fixed'] = wasmExports['png_set_filter_heuristics_fixed'];
-  _png_set_compression_level = Module['_png_set_compression_level'] = wasmExports['png_set_compression_level'];
-  _png_set_compression_mem_level = Module['_png_set_compression_mem_level'] = wasmExports['png_set_compression_mem_level'];
-  _png_set_compression_strategy = Module['_png_set_compression_strategy'] = wasmExports['png_set_compression_strategy'];
-  _png_set_compression_window_bits = Module['_png_set_compression_window_bits'] = wasmExports['png_set_compression_window_bits'];
-  _png_set_compression_method = Module['_png_set_compression_method'] = wasmExports['png_set_compression_method'];
-  _png_set_text_compression_level = Module['_png_set_text_compression_level'] = wasmExports['png_set_text_compression_level'];
-  _png_set_text_compression_mem_level = Module['_png_set_text_compression_mem_level'] = wasmExports['png_set_text_compression_mem_level'];
-  _png_set_text_compression_strategy = Module['_png_set_text_compression_strategy'] = wasmExports['png_set_text_compression_strategy'];
-  _png_set_text_compression_window_bits = Module['_png_set_text_compression_window_bits'] = wasmExports['png_set_text_compression_window_bits'];
-  _png_set_text_compression_method = Module['_png_set_text_compression_method'] = wasmExports['png_set_text_compression_method'];
-  _png_set_write_status_fn = Module['_png_set_write_status_fn'] = wasmExports['png_set_write_status_fn'];
-  _png_set_write_user_transform_fn = Module['_png_set_write_user_transform_fn'] = wasmExports['png_set_write_user_transform_fn'];
-  _png_image_write_to_memory = Module['_png_image_write_to_memory'] = wasmExports['png_image_write_to_memory'];
-  _png_image_write_to_stdio = Module['_png_image_write_to_stdio'] = wasmExports['png_image_write_to_stdio'];
-  _png_image_write_to_file = Module['_png_image_write_to_file'] = wasmExports['png_image_write_to_file'];
-  _png_save_uint_16 = Module['_png_save_uint_16'] = wasmExports['png_save_uint_16'];
-  _png_write_chunk_start = Module['_png_write_chunk_start'] = wasmExports['png_write_chunk_start'];
-  _png_write_chunk_data = Module['_png_write_chunk_data'] = wasmExports['png_write_chunk_data'];
-  _png_write_chunk_end = Module['_png_write_chunk_end'] = wasmExports['png_write_chunk_end'];
-  _deflateReset = Module['_deflateReset'] = wasmExports['deflateReset'];
+  _af_shaper_get_cluster = Module['_af_shaper_get_cluster'] = wasmExports['af_shaper_get_cluster'];
+  _FT_Get_Advance = Module['_FT_Get_Advance'] = wasmExports['FT_Get_Advance'];
+  _FT_MulDiv = Module['_FT_MulDiv'] = wasmExports['FT_MulDiv'];
+  _ft_hash_num_init = Module['_ft_hash_num_init'] = wasmExports['ft_hash_num_init'];
+  _ft_hash_num_insert = Module['_ft_hash_num_insert'] = wasmExports['ft_hash_num_insert'];
+  _ft_hash_str_free = Module['_ft_hash_str_free'] = wasmExports['ft_hash_str_free'];
+  _ft_hash_num_lookup = Module['_ft_hash_num_lookup'] = wasmExports['ft_hash_num_lookup'];
+  _FT_Matrix_Invert = Module['_FT_Matrix_Invert'] = wasmExports['FT_Matrix_Invert'];
+  _FT_Vector_Transform = Module['_FT_Vector_Transform'] = wasmExports['FT_Vector_Transform'];
+  _FT_Outline_Translate = Module['_FT_Outline_Translate'] = wasmExports['FT_Outline_Translate'];
+  _FT_Outline_Transform = Module['_FT_Outline_Transform'] = wasmExports['FT_Outline_Transform'];
+  _FT_Outline_Get_CBox = Module['_FT_Outline_Get_CBox'] = wasmExports['FT_Outline_Get_CBox'];
+  _af_shaper_get_coverage = Module['_af_shaper_get_coverage'] = wasmExports['af_shaper_get_coverage'];
+  _af_shaper_buf_create = Module['_af_shaper_buf_create'] = wasmExports['af_shaper_buf_create'];
+  _af_shaper_buf_destroy = Module['_af_shaper_buf_destroy'] = wasmExports['af_shaper_buf_destroy'];
+  _af_shaper_get_elem = Module['_af_shaper_get_elem'] = wasmExports['af_shaper_get_elem'];
+  _FT_Outline_Get_Orientation = Module['_FT_Outline_Get_Orientation'] = wasmExports['FT_Outline_Get_Orientation'];
+  _FT_DivFix = Module['_FT_DivFix'] = wasmExports['FT_DivFix'];
+  _FT_Outline_EmboldenXY = Module['_FT_Outline_EmboldenXY'] = wasmExports['FT_Outline_EmboldenXY'];
+  _FT_Get_Next_Char = Module['_FT_Get_Next_Char'] = wasmExports['FT_Get_Next_Char'];
+  _ft_hash_str_lookup = Module['_ft_hash_str_lookup'] = wasmExports['ft_hash_str_lookup'];
+  _ft_hash_str_init = Module['_ft_hash_str_init'] = wasmExports['ft_hash_str_init'];
+  _ft_hash_str_insert = Module['_ft_hash_str_insert'] = wasmExports['ft_hash_str_insert'];
+  _FT_Get_Module = Module['_FT_Get_Module'] = wasmExports['FT_Get_Module'];
+  _FT_Set_Named_Instance = Module['_FT_Set_Named_Instance'] = wasmExports['FT_Set_Named_Instance'];
+  _FT_RoundFix = Module['_FT_RoundFix'] = wasmExports['FT_RoundFix'];
+  _ps_property_set = Module['_ps_property_set'] = wasmExports['ps_property_set'];
+  _ps_property_get = Module['_ps_property_get'] = wasmExports['ps_property_get'];
+  _FT_Get_Advances = Module['_FT_Get_Advances'] = wasmExports['FT_Get_Advances'];
+  _FT_Palette_Data_Get = Module['_FT_Palette_Data_Get'] = wasmExports['FT_Palette_Data_Get'];
+  _FT_Palette_Select = Module['_FT_Palette_Select'] = wasmExports['FT_Palette_Select'];
+  _FT_Palette_Set_Foreground_Color = Module['_FT_Palette_Set_Foreground_Color'] = wasmExports['FT_Palette_Set_Foreground_Color'];
+  _FT_Error_String = Module['_FT_Error_String'] = wasmExports['FT_Error_String'];
+  _FT_Get_Font_Format = Module['_FT_Get_Font_Format'] = wasmExports['FT_Get_Font_Format'];
+  _FT_Get_X11_Font_Format = Module['_FT_Get_X11_Font_Format'] = wasmExports['FT_Get_X11_Font_Format'];
+  _ft_hash_str_insert_no_overwrite = Module['_ft_hash_str_insert_no_overwrite'] = wasmExports['ft_hash_str_insert_no_overwrite'];
+  _ft_hash_num_insert_no_overwrite = Module['_ft_hash_num_insert_no_overwrite'] = wasmExports['ft_hash_num_insert_no_overwrite'];
+  _ft_hash_num_iterator = Module['_ft_hash_num_iterator'] = wasmExports['ft_hash_num_iterator'];
+  _ft_hash_str_iterator = Module['_ft_hash_str_iterator'] = wasmExports['ft_hash_str_iterator'];
+  _FT_Library_SetLcdFilterWeights = Module['_FT_Library_SetLcdFilterWeights'] = wasmExports['FT_Library_SetLcdFilterWeights'];
+  _FT_Library_SetLcdFilter = Module['_FT_Library_SetLcdFilter'] = wasmExports['FT_Library_SetLcdFilter'];
+  _FT_Library_SetLcdGeometry = Module['_FT_Library_SetLcdGeometry'] = wasmExports['FT_Library_SetLcdGeometry'];
+  _FT_Get_Transform = Module['_FT_Get_Transform'] = wasmExports['FT_Get_Transform'];
+  _FT_Outline_Check = Module['_FT_Outline_Check'] = wasmExports['FT_Outline_Check'];
+  _FT_Load_Char = Module['_FT_Load_Char'] = wasmExports['FT_Load_Char'];
+  _FT_Get_CMap_Format = Module['_FT_Get_CMap_Format'] = wasmExports['FT_Get_CMap_Format'];
+  _FT_Attach_File = Module['_FT_Attach_File'] = wasmExports['FT_Attach_File'];
+  _FT_Attach_Stream = Module['_FT_Attach_Stream'] = wasmExports['FT_Attach_Stream'];
+  _FT_Reference_Face = Module['_FT_Reference_Face'] = wasmExports['FT_Reference_Face'];
+  _FT_List_Find = Module['_FT_List_Find'] = wasmExports['FT_List_Find'];
+  _FT_List_Remove = Module['_FT_List_Remove'] = wasmExports['FT_List_Remove'];
+  _FT_List_Add = Module['_FT_List_Add'] = wasmExports['FT_List_Add'];
+  _FT_Select_Size = Module['_FT_Select_Size'] = wasmExports['FT_Select_Size'];
+  _FT_Get_Track_Kerning = Module['_FT_Get_Track_Kerning'] = wasmExports['FT_Get_Track_Kerning'];
+  _FT_Set_Charmap = Module['_FT_Set_Charmap'] = wasmExports['FT_Set_Charmap'];
+  _FT_Get_Charmap_Index = Module['_FT_Get_Charmap_Index'] = wasmExports['FT_Get_Charmap_Index'];
+  _FT_Get_First_Char = Module['_FT_Get_First_Char'] = wasmExports['FT_Get_First_Char'];
+  _FT_Face_GetCharVariantIndex = Module['_FT_Face_GetCharVariantIndex'] = wasmExports['FT_Face_GetCharVariantIndex'];
+  _FT_Face_GetCharVariantIsDefault = Module['_FT_Face_GetCharVariantIsDefault'] = wasmExports['FT_Face_GetCharVariantIsDefault'];
+  _FT_Face_GetVariantSelectors = Module['_FT_Face_GetVariantSelectors'] = wasmExports['FT_Face_GetVariantSelectors'];
+  _FT_Face_GetVariantsOfChar = Module['_FT_Face_GetVariantsOfChar'] = wasmExports['FT_Face_GetVariantsOfChar'];
+  _FT_Face_GetCharsOfVariant = Module['_FT_Face_GetCharsOfVariant'] = wasmExports['FT_Face_GetCharsOfVariant'];
+  _FT_Get_Name_Index = Module['_FT_Get_Name_Index'] = wasmExports['FT_Get_Name_Index'];
+  _FT_Get_Glyph_Name = Module['_FT_Get_Glyph_Name'] = wasmExports['FT_Get_Glyph_Name'];
+  _FT_Get_Postscript_Name = Module['_FT_Get_Postscript_Name'] = wasmExports['FT_Get_Postscript_Name'];
+  _FT_Sfnt_Table_Info = Module['_FT_Sfnt_Table_Info'] = wasmExports['FT_Sfnt_Table_Info'];
+  _FT_Get_CMap_Language_ID = Module['_FT_Get_CMap_Language_ID'] = wasmExports['FT_Get_CMap_Language_ID'];
+  _FT_Get_Renderer = Module['_FT_Get_Renderer'] = wasmExports['FT_Get_Renderer'];
+  _FT_Set_Renderer = Module['_FT_Set_Renderer'] = wasmExports['FT_Set_Renderer'];
+  _FT_List_Up = Module['_FT_List_Up'] = wasmExports['FT_List_Up'];
+  _FT_Get_Color_Glyph_Layer = Module['_FT_Get_Color_Glyph_Layer'] = wasmExports['FT_Get_Color_Glyph_Layer'];
+  _FT_Add_Module = Module['_FT_Add_Module'] = wasmExports['FT_Add_Module'];
+  _FT_Remove_Module = Module['_FT_Remove_Module'] = wasmExports['FT_Remove_Module'];
+  _FT_Property_Set = Module['_FT_Property_Set'] = wasmExports['FT_Property_Set'];
+  _FT_Property_Get = Module['_FT_Property_Get'] = wasmExports['FT_Property_Get'];
+  _FT_Reference_Library = Module['_FT_Reference_Library'] = wasmExports['FT_Reference_Library'];
+  _FT_Library_Version = Module['_FT_Library_Version'] = wasmExports['FT_Library_Version'];
+  _FT_Set_Debug_Hook = Module['_FT_Set_Debug_Hook'] = wasmExports['FT_Set_Debug_Hook'];
+  _FT_Get_TrueType_Engine_Type = Module['_FT_Get_TrueType_Engine_Type'] = wasmExports['FT_Get_TrueType_Engine_Type'];
+  _FT_Get_SubGlyph_Info = Module['_FT_Get_SubGlyph_Info'] = wasmExports['FT_Get_SubGlyph_Info'];
+  _FT_Get_Color_Glyph_Paint = Module['_FT_Get_Color_Glyph_Paint'] = wasmExports['FT_Get_Color_Glyph_Paint'];
+  _FT_Get_Color_Glyph_ClipBox = Module['_FT_Get_Color_Glyph_ClipBox'] = wasmExports['FT_Get_Color_Glyph_ClipBox'];
+  _FT_Get_Paint_Layers = Module['_FT_Get_Paint_Layers'] = wasmExports['FT_Get_Paint_Layers'];
+  _FT_Get_Paint = Module['_FT_Get_Paint'] = wasmExports['FT_Get_Paint'];
+  _FT_Get_Colorline_Stops = Module['_FT_Get_Colorline_Stops'] = wasmExports['FT_Get_Colorline_Stops'];
+  _FT_Outline_Decompose = Module['_FT_Outline_Decompose'] = wasmExports['FT_Outline_Decompose'];
+  _FT_Outline_New = Module['_FT_Outline_New'] = wasmExports['FT_Outline_New'];
+  _FT_Outline_Done = Module['_FT_Outline_Done'] = wasmExports['FT_Outline_Done'];
+  _FT_Outline_Copy = Module['_FT_Outline_Copy'] = wasmExports['FT_Outline_Copy'];
+  _FT_Outline_Reverse = Module['_FT_Outline_Reverse'] = wasmExports['FT_Outline_Reverse'];
+  _FT_Outline_Render = Module['_FT_Outline_Render'] = wasmExports['FT_Outline_Render'];
+  _FT_Outline_Get_Bitmap = Module['_FT_Outline_Get_Bitmap'] = wasmExports['FT_Outline_Get_Bitmap'];
+  _FT_Outline_Embolden = Module['_FT_Outline_Embolden'] = wasmExports['FT_Outline_Embolden'];
+  _FT_Get_Sfnt_LangTag = Module['_FT_Get_Sfnt_LangTag'] = wasmExports['FT_Get_Sfnt_LangTag'];
+  _FT_Cos = Module['_FT_Cos'] = wasmExports['FT_Cos'];
+  _FT_Vector_Unit = Module['_FT_Vector_Unit'] = wasmExports['FT_Vector_Unit'];
+  _FT_Sin = Module['_FT_Sin'] = wasmExports['FT_Sin'];
+  _FT_Tan = Module['_FT_Tan'] = wasmExports['FT_Tan'];
+  _FT_Atan2 = Module['_FT_Atan2'] = wasmExports['FT_Atan2'];
+  _FT_Vector_Rotate = Module['_FT_Vector_Rotate'] = wasmExports['FT_Vector_Rotate'];
+  _FT_Vector_Length = Module['_FT_Vector_Length'] = wasmExports['FT_Vector_Length'];
+  _FT_Vector_Polarize = Module['_FT_Vector_Polarize'] = wasmExports['FT_Vector_Polarize'];
+  _FT_Vector_From_Polar = Module['_FT_Vector_From_Polar'] = wasmExports['FT_Vector_From_Polar'];
+  _FT_Angle_Diff = Module['_FT_Angle_Diff'] = wasmExports['FT_Angle_Diff'];
+  _FT_CeilFix = Module['_FT_CeilFix'] = wasmExports['FT_CeilFix'];
+  _FT_FloorFix = Module['_FT_FloorFix'] = wasmExports['FT_FloorFix'];
+  _FT_MulFix = Module['_FT_MulFix'] = wasmExports['FT_MulFix'];
+  _FT_Matrix_Multiply = Module['_FT_Matrix_Multiply'] = wasmExports['FT_Matrix_Multiply'];
+  _FT_List_Insert = Module['_FT_List_Insert'] = wasmExports['FT_List_Insert'];
+  _FT_List_Iterate = Module['_FT_List_Iterate'] = wasmExports['FT_List_Iterate'];
+  _FT_List_Finalize = Module['_FT_List_Finalize'] = wasmExports['FT_List_Finalize'];
+  _FT_Outline_Get_BBox = Module['_FT_Outline_Get_BBox'] = wasmExports['FT_Outline_Get_BBox'];
+  _FT_Get_BDF_Charset_ID = Module['_FT_Get_BDF_Charset_ID'] = wasmExports['FT_Get_BDF_Charset_ID'];
+  _FT_Get_BDF_Property = Module['_FT_Get_BDF_Property'] = wasmExports['FT_Get_BDF_Property'];
+  _FT_Bitmap_Init = Module['_FT_Bitmap_Init'] = wasmExports['FT_Bitmap_Init'];
+  _FT_Bitmap_New = Module['_FT_Bitmap_New'] = wasmExports['FT_Bitmap_New'];
+  _FT_Bitmap_Copy = Module['_FT_Bitmap_Copy'] = wasmExports['FT_Bitmap_Copy'];
+  _FT_Bitmap_Convert = Module['_FT_Bitmap_Convert'] = wasmExports['FT_Bitmap_Convert'];
+  _FT_Bitmap_Done = Module['_FT_Bitmap_Done'] = wasmExports['FT_Bitmap_Done'];
+  _FT_Bitmap_Blend = Module['_FT_Bitmap_Blend'] = wasmExports['FT_Bitmap_Blend'];
+  _FT_Stream_OpenBzip2 = Module['_FT_Stream_OpenBzip2'] = wasmExports['FT_Stream_OpenBzip2'];
+  _FTC_ImageCache_New = Module['_FTC_ImageCache_New'] = wasmExports['FTC_ImageCache_New'];
+  _FTC_ImageCache_Lookup = Module['_FTC_ImageCache_Lookup'] = wasmExports['FTC_ImageCache_Lookup'];
+  _FTC_ImageCache_LookupScaler = Module['_FTC_ImageCache_LookupScaler'] = wasmExports['FTC_ImageCache_LookupScaler'];
+  _FTC_SBitCache_New = Module['_FTC_SBitCache_New'] = wasmExports['FTC_SBitCache_New'];
+  _FTC_SBitCache_Lookup = Module['_FTC_SBitCache_Lookup'] = wasmExports['FTC_SBitCache_Lookup'];
+  _FTC_SBitCache_LookupScaler = Module['_FTC_SBitCache_LookupScaler'] = wasmExports['FTC_SBitCache_LookupScaler'];
+  _FTC_CMapCache_New = Module['_FTC_CMapCache_New'] = wasmExports['FTC_CMapCache_New'];
+  _FTC_CMapCache_Lookup = Module['_FTC_CMapCache_Lookup'] = wasmExports['FTC_CMapCache_Lookup'];
+  _FTC_Manager_LookupFace = Module['_FTC_Manager_LookupFace'] = wasmExports['FTC_Manager_LookupFace'];
+  _FTC_Manager_LookupSize = Module['_FTC_Manager_LookupSize'] = wasmExports['FTC_Manager_LookupSize'];
+  _FTC_Manager_New = Module['_FTC_Manager_New'] = wasmExports['FTC_Manager_New'];
+  _FTC_Manager_Done = Module['_FTC_Manager_Done'] = wasmExports['FTC_Manager_Done'];
+  _FTC_Manager_Reset = Module['_FTC_Manager_Reset'] = wasmExports['FTC_Manager_Reset'];
+  _FTC_Manager_RemoveFaceID = Module['_FTC_Manager_RemoveFaceID'] = wasmExports['FTC_Manager_RemoveFaceID'];
+  _FTC_Node_Unref = Module['_FTC_Node_Unref'] = wasmExports['FTC_Node_Unref'];
+  _FT_Get_CID_Registry_Ordering_Supplement = Module['_FT_Get_CID_Registry_Ordering_Supplement'] = wasmExports['FT_Get_CID_Registry_Ordering_Supplement'];
+  _FT_Get_CID_Is_Internally_CID_Keyed = Module['_FT_Get_CID_Is_Internally_CID_Keyed'] = wasmExports['FT_Get_CID_Is_Internally_CID_Keyed'];
+  _FT_Get_CID_From_Glyph_Index = Module['_FT_Get_CID_From_Glyph_Index'] = wasmExports['FT_Get_CID_From_Glyph_Index'];
+  _FT_Trace_Set_Level = Module['_FT_Trace_Set_Level'] = wasmExports['FT_Trace_Set_Level'];
+  _FT_Trace_Set_Default_Level = Module['_FT_Trace_Set_Default_Level'] = wasmExports['FT_Trace_Set_Default_Level'];
+  _FT_Set_Log_Handler = Module['_FT_Set_Log_Handler'] = wasmExports['FT_Set_Log_Handler'];
+  _FT_Set_Default_Log_Handler = Module['_FT_Set_Default_Log_Handler'] = wasmExports['FT_Set_Default_Log_Handler'];
+  _FT_Get_FSType_Flags = Module['_FT_Get_FSType_Flags'] = wasmExports['FT_Get_FSType_Flags'];
+  _FT_Get_Gasp = Module['_FT_Get_Gasp'] = wasmExports['FT_Get_Gasp'];
+  _FT_New_Glyph = Module['_FT_New_Glyph'] = wasmExports['FT_New_Glyph'];
+  _FT_Glyph_Transform = Module['_FT_Glyph_Transform'] = wasmExports['FT_Glyph_Transform'];
+  _FT_Glyph_Get_CBox = Module['_FT_Glyph_Get_CBox'] = wasmExports['FT_Glyph_Get_CBox'];
+  _FT_TrueTypeGX_Validate = Module['_FT_TrueTypeGX_Validate'] = wasmExports['FT_TrueTypeGX_Validate'];
+  _FT_TrueTypeGX_Free = Module['_FT_TrueTypeGX_Free'] = wasmExports['FT_TrueTypeGX_Free'];
+  _FT_ClassicKern_Validate = Module['_FT_ClassicKern_Validate'] = wasmExports['FT_ClassicKern_Validate'];
+  _FT_ClassicKern_Free = Module['_FT_ClassicKern_Free'] = wasmExports['FT_ClassicKern_Free'];
+  _FT_Stream_OpenGzip = Module['_FT_Stream_OpenGzip'] = wasmExports['FT_Stream_OpenGzip'];
+  _FT_Gzip_Uncompress = Module['_FT_Gzip_Uncompress'] = wasmExports['FT_Gzip_Uncompress'];
+  _FT_Set_Default_Properties = Module['_FT_Set_Default_Properties'] = wasmExports['FT_Set_Default_Properties'];
+  _FT_Stream_OpenLZW = Module['_FT_Stream_OpenLZW'] = wasmExports['FT_Stream_OpenLZW'];
+  _FT_Get_Multi_Master = Module['_FT_Get_Multi_Master'] = wasmExports['FT_Get_Multi_Master'];
+  _FT_Get_MM_Var = Module['_FT_Get_MM_Var'] = wasmExports['FT_Get_MM_Var'];
+  _FT_Done_MM_Var = Module['_FT_Done_MM_Var'] = wasmExports['FT_Done_MM_Var'];
+  _FT_Set_MM_Design_Coordinates = Module['_FT_Set_MM_Design_Coordinates'] = wasmExports['FT_Set_MM_Design_Coordinates'];
+  _FT_Set_MM_WeightVector = Module['_FT_Set_MM_WeightVector'] = wasmExports['FT_Set_MM_WeightVector'];
+  _FT_Get_MM_WeightVector = Module['_FT_Get_MM_WeightVector'] = wasmExports['FT_Get_MM_WeightVector'];
+  _FT_Set_Var_Design_Coordinates = Module['_FT_Set_Var_Design_Coordinates'] = wasmExports['FT_Set_Var_Design_Coordinates'];
+  _FT_Get_Var_Design_Coordinates = Module['_FT_Get_Var_Design_Coordinates'] = wasmExports['FT_Get_Var_Design_Coordinates'];
+  _FT_Set_MM_Blend_Coordinates = Module['_FT_Set_MM_Blend_Coordinates'] = wasmExports['FT_Set_MM_Blend_Coordinates'];
+  _FT_Set_Var_Blend_Coordinates = Module['_FT_Set_Var_Blend_Coordinates'] = wasmExports['FT_Set_Var_Blend_Coordinates'];
+  _FT_Get_MM_Blend_Coordinates = Module['_FT_Get_MM_Blend_Coordinates'] = wasmExports['FT_Get_MM_Blend_Coordinates'];
+  _FT_Get_Var_Blend_Coordinates = Module['_FT_Get_Var_Blend_Coordinates'] = wasmExports['FT_Get_Var_Blend_Coordinates'];
+  _FT_Get_Var_Axis_Flags = Module['_FT_Get_Var_Axis_Flags'] = wasmExports['FT_Get_Var_Axis_Flags'];
+  _FT_Get_Default_Named_Instance = Module['_FT_Get_Default_Named_Instance'] = wasmExports['FT_Get_Default_Named_Instance'];
+  _FT_OpenType_Validate = Module['_FT_OpenType_Validate'] = wasmExports['FT_OpenType_Validate'];
+  _FT_OpenType_Free = Module['_FT_OpenType_Free'] = wasmExports['FT_OpenType_Free'];
+  _FT_Face_CheckTrueTypePatents = Module['_FT_Face_CheckTrueTypePatents'] = wasmExports['FT_Face_CheckTrueTypePatents'];
+  _FT_Face_SetUnpatentedHinting = Module['_FT_Face_SetUnpatentedHinting'] = wasmExports['FT_Face_SetUnpatentedHinting'];
+  _FT_Get_PFR_Metrics = Module['_FT_Get_PFR_Metrics'] = wasmExports['FT_Get_PFR_Metrics'];
+  _FT_Get_PFR_Kerning = Module['_FT_Get_PFR_Kerning'] = wasmExports['FT_Get_PFR_Kerning'];
+  _FT_Get_PFR_Advance = Module['_FT_Get_PFR_Advance'] = wasmExports['FT_Get_PFR_Advance'];
+  _FT_Outline_GetInsideBorder = Module['_FT_Outline_GetInsideBorder'] = wasmExports['FT_Outline_GetInsideBorder'];
+  _FT_Outline_GetOutsideBorder = Module['_FT_Outline_GetOutsideBorder'] = wasmExports['FT_Outline_GetOutsideBorder'];
+  _FT_Stroker_New = Module['_FT_Stroker_New'] = wasmExports['FT_Stroker_New'];
+  _FT_Stroker_Set = Module['_FT_Stroker_Set'] = wasmExports['FT_Stroker_Set'];
+  _FT_Stroker_Rewind = Module['_FT_Stroker_Rewind'] = wasmExports['FT_Stroker_Rewind'];
+  _FT_Stroker_Done = Module['_FT_Stroker_Done'] = wasmExports['FT_Stroker_Done'];
+  _FT_Stroker_LineTo = Module['_FT_Stroker_LineTo'] = wasmExports['FT_Stroker_LineTo'];
+  _FT_Stroker_ConicTo = Module['_FT_Stroker_ConicTo'] = wasmExports['FT_Stroker_ConicTo'];
+  _FT_Stroker_CubicTo = Module['_FT_Stroker_CubicTo'] = wasmExports['FT_Stroker_CubicTo'];
+  _FT_Stroker_BeginSubPath = Module['_FT_Stroker_BeginSubPath'] = wasmExports['FT_Stroker_BeginSubPath'];
+  _FT_Stroker_EndSubPath = Module['_FT_Stroker_EndSubPath'] = wasmExports['FT_Stroker_EndSubPath'];
+  _FT_Stroker_GetBorderCounts = Module['_FT_Stroker_GetBorderCounts'] = wasmExports['FT_Stroker_GetBorderCounts'];
+  _FT_Stroker_GetCounts = Module['_FT_Stroker_GetCounts'] = wasmExports['FT_Stroker_GetCounts'];
+  _FT_Stroker_ExportBorder = Module['_FT_Stroker_ExportBorder'] = wasmExports['FT_Stroker_ExportBorder'];
+  _FT_Stroker_Export = Module['_FT_Stroker_Export'] = wasmExports['FT_Stroker_Export'];
+  _FT_Stroker_ParseOutline = Module['_FT_Stroker_ParseOutline'] = wasmExports['FT_Stroker_ParseOutline'];
+  _FT_Glyph_Stroke = Module['_FT_Glyph_Stroke'] = wasmExports['FT_Glyph_Stroke'];
+  _FT_Glyph_StrokeBorder = Module['_FT_Glyph_StrokeBorder'] = wasmExports['FT_Glyph_StrokeBorder'];
+  _FT_GlyphSlot_Slant = Module['_FT_GlyphSlot_Slant'] = wasmExports['FT_GlyphSlot_Slant'];
+  _FT_GlyphSlot_AdjustWeight = Module['_FT_GlyphSlot_AdjustWeight'] = wasmExports['FT_GlyphSlot_AdjustWeight'];
+  _open = Module['_open'] = wasmExports['open'];
+  _mmap = Module['_mmap'] = wasmExports['mmap'];
+  _munmap = Module['_munmap'] = wasmExports['munmap'];
+  _FT_Get_PS_Font_Info = Module['_FT_Get_PS_Font_Info'] = wasmExports['FT_Get_PS_Font_Info'];
+  _FT_Has_PS_Glyph_Names = Module['_FT_Has_PS_Glyph_Names'] = wasmExports['FT_Has_PS_Glyph_Names'];
+  _FT_Get_PS_Font_Private = Module['_FT_Get_PS_Font_Private'] = wasmExports['FT_Get_PS_Font_Private'];
+  _FT_Get_PS_Font_Value = Module['_FT_Get_PS_Font_Value'] = wasmExports['FT_Get_PS_Font_Value'];
+  _FT_Get_WinFNT_Header = Module['_FT_Get_WinFNT_Header'] = wasmExports['FT_Get_WinFNT_Header'];
+  _ps_hints_apply = Module['_ps_hints_apply'] = wasmExports['ps_hints_apply'];
+  _TT_RunIns = Module['_TT_RunIns'] = wasmExports['TT_RunIns'];
+  _TT_New_Context = Module['_TT_New_Context'] = wasmExports['TT_New_Context'];
+  _DGifOpenFileName = Module['_DGifOpenFileName'] = wasmExports['DGifOpenFileName'];
+  _DGifOpenFileHandle = Module['_DGifOpenFileHandle'] = wasmExports['DGifOpenFileHandle'];
+  _fdopen = Module['_fdopen'] = wasmExports['fdopen'];
+  _DGifGetScreenDesc = Module['_DGifGetScreenDesc'] = wasmExports['DGifGetScreenDesc'];
+  _GifFreeMapObject = Module['_GifFreeMapObject'] = wasmExports['GifFreeMapObject'];
+  _GifMakeMapObject = Module['_GifMakeMapObject'] = wasmExports['GifMakeMapObject'];
+  _DGifGetGifVersion = Module['_DGifGetGifVersion'] = wasmExports['DGifGetGifVersion'];
+  _DGifGetRecordType = Module['_DGifGetRecordType'] = wasmExports['DGifGetRecordType'];
+  _DGifGetImageHeader = Module['_DGifGetImageHeader'] = wasmExports['DGifGetImageHeader'];
+  _DGifGetImageDesc = Module['_DGifGetImageDesc'] = wasmExports['DGifGetImageDesc'];
+  _openbsd_reallocarray = Module['_openbsd_reallocarray'] = wasmExports['openbsd_reallocarray'];
+  _DGifGetLine = Module['_DGifGetLine'] = wasmExports['DGifGetLine'];
+  _DGifGetCodeNext = Module['_DGifGetCodeNext'] = wasmExports['DGifGetCodeNext'];
+  _DGifGetPixel = Module['_DGifGetPixel'] = wasmExports['DGifGetPixel'];
+  _DGifGetExtension = Module['_DGifGetExtension'] = wasmExports['DGifGetExtension'];
+  _DGifGetExtensionNext = Module['_DGifGetExtensionNext'] = wasmExports['DGifGetExtensionNext'];
+  _DGifSavedExtensionToGCB = Module['_DGifSavedExtensionToGCB'] = wasmExports['DGifSavedExtensionToGCB'];
+  _GifFreeSavedImages = Module['_GifFreeSavedImages'] = wasmExports['GifFreeSavedImages'];
+  _GifFreeExtensions = Module['_GifFreeExtensions'] = wasmExports['GifFreeExtensions'];
+  _DGifGetCode = Module['_DGifGetCode'] = wasmExports['DGifGetCode'];
+  _DGifGetLZCodes = Module['_DGifGetLZCodes'] = wasmExports['DGifGetLZCodes'];
+  _GifAddExtensionBlock = Module['_GifAddExtensionBlock'] = wasmExports['GifAddExtensionBlock'];
+  _EGifOpenFileName = Module['_EGifOpenFileName'] = wasmExports['EGifOpenFileName'];
+  _EGifOpenFileHandle = Module['_EGifOpenFileHandle'] = wasmExports['EGifOpenFileHandle'];
+  __InitHashTable = Module['__InitHashTable'] = wasmExports['_InitHashTable'];
+  _EGifOpen = Module['_EGifOpen'] = wasmExports['EGifOpen'];
+  _EGifGetGifVersion = Module['_EGifGetGifVersion'] = wasmExports['EGifGetGifVersion'];
+  _EGifSetGifVersion = Module['_EGifSetGifVersion'] = wasmExports['EGifSetGifVersion'];
+  _EGifPutScreenDesc = Module['_EGifPutScreenDesc'] = wasmExports['EGifPutScreenDesc'];
+  _EGifPutImageDesc = Module['_EGifPutImageDesc'] = wasmExports['EGifPutImageDesc'];
+  __ClearHashTable = Module['__ClearHashTable'] = wasmExports['_ClearHashTable'];
+  _EGifPutLine = Module['_EGifPutLine'] = wasmExports['EGifPutLine'];
+  __ExistsHashTable = Module['__ExistsHashTable'] = wasmExports['_ExistsHashTable'];
+  __InsertHashTable = Module['__InsertHashTable'] = wasmExports['_InsertHashTable'];
+  _EGifPutPixel = Module['_EGifPutPixel'] = wasmExports['EGifPutPixel'];
+  _EGifPutComment = Module['_EGifPutComment'] = wasmExports['EGifPutComment'];
+  _EGifPutExtension = Module['_EGifPutExtension'] = wasmExports['EGifPutExtension'];
+  _EGifPutExtensionLeader = Module['_EGifPutExtensionLeader'] = wasmExports['EGifPutExtensionLeader'];
+  _EGifPutExtensionBlock = Module['_EGifPutExtensionBlock'] = wasmExports['EGifPutExtensionBlock'];
+  _EGifPutExtensionTrailer = Module['_EGifPutExtensionTrailer'] = wasmExports['EGifPutExtensionTrailer'];
+  _EGifGCBToExtension = Module['_EGifGCBToExtension'] = wasmExports['EGifGCBToExtension'];
+  _EGifGCBToSavedExtension = Module['_EGifGCBToSavedExtension'] = wasmExports['EGifGCBToSavedExtension'];
+  _EGifPutCode = Module['_EGifPutCode'] = wasmExports['EGifPutCode'];
+  _EGifPutCodeNext = Module['_EGifPutCodeNext'] = wasmExports['EGifPutCodeNext'];
+  _EGifCloseFile = Module['_EGifCloseFile'] = wasmExports['EGifCloseFile'];
+  _EGifSpew = Module['_EGifSpew'] = wasmExports['EGifSpew'];
+  _GAGetArgs = Module['_GAGetArgs'] = wasmExports['GAGetArgs'];
+  _GAPrintErrMsg = Module['_GAPrintErrMsg'] = wasmExports['GAPrintErrMsg'];
+  _GAPrintHowTo = Module['_GAPrintHowTo'] = wasmExports['GAPrintHowTo'];
+  _GifDrawText8x8 = Module['_GifDrawText8x8'] = wasmExports['GifDrawText8x8'];
+  _GifDrawBox = Module['_GifDrawBox'] = wasmExports['GifDrawBox'];
+  _GifDrawRectangle = Module['_GifDrawRectangle'] = wasmExports['GifDrawRectangle'];
+  _GifDrawBoxedText8x8 = Module['_GifDrawBoxedText8x8'] = wasmExports['GifDrawBoxedText8x8'];
+  _strtok_r = Module['_strtok_r'] = wasmExports['strtok_r'];
+  _GifBitSize = Module['_GifBitSize'] = wasmExports['GifBitSize'];
+  _GifUnionColorMap = Module['_GifUnionColorMap'] = wasmExports['GifUnionColorMap'];
+  _GifApplyTranslation = Module['_GifApplyTranslation'] = wasmExports['GifApplyTranslation'];
+  _FreeLastSavedImage = Module['_FreeLastSavedImage'] = wasmExports['FreeLastSavedImage'];
+  _GifMakeSavedImage = Module['_GifMakeSavedImage'] = wasmExports['GifMakeSavedImage'];
+  _GifQprintf = Module['_GifQprintf'] = wasmExports['GifQprintf'];
+  _PrintGifError = Module['_PrintGifError'] = wasmExports['PrintGifError'];
+  _GifQuantizeBuffer = Module['_GifQuantizeBuffer'] = wasmExports['GifQuantizeBuffer'];
+  _jpeg_CreateCompress = Module['_jpeg_CreateCompress'] = wasmExports['jpeg_CreateCompress'];
+  _jinit_memory_mgr = Module['_jinit_memory_mgr'] = wasmExports['jinit_memory_mgr'];
+  _jpeg_destroy_compress = Module['_jpeg_destroy_compress'] = wasmExports['jpeg_destroy_compress'];
+  _jpeg_destroy = Module['_jpeg_destroy'] = wasmExports['jpeg_destroy'];
+  _jpeg_abort_compress = Module['_jpeg_abort_compress'] = wasmExports['jpeg_abort_compress'];
+  _jpeg_abort = Module['_jpeg_abort'] = wasmExports['jpeg_abort'];
+  _jpeg_suppress_tables = Module['_jpeg_suppress_tables'] = wasmExports['jpeg_suppress_tables'];
+  _jpeg_finish_compress = Module['_jpeg_finish_compress'] = wasmExports['jpeg_finish_compress'];
+  _jpeg_write_marker = Module['_jpeg_write_marker'] = wasmExports['jpeg_write_marker'];
+  _jpeg_write_m_header = Module['_jpeg_write_m_header'] = wasmExports['jpeg_write_m_header'];
+  _jpeg_write_m_byte = Module['_jpeg_write_m_byte'] = wasmExports['jpeg_write_m_byte'];
+  _jpeg_write_tables = Module['_jpeg_write_tables'] = wasmExports['jpeg_write_tables'];
+  _jinit_marker_writer = Module['_jinit_marker_writer'] = wasmExports['jinit_marker_writer'];
+  _jpeg_start_compress = Module['_jpeg_start_compress'] = wasmExports['jpeg_start_compress'];
+  _jinit_compress_master = Module['_jinit_compress_master'] = wasmExports['jinit_compress_master'];
+  _jpeg_write_scanlines = Module['_jpeg_write_scanlines'] = wasmExports['jpeg_write_scanlines'];
+  _jpeg_write_raw_data = Module['_jpeg_write_raw_data'] = wasmExports['jpeg_write_raw_data'];
+  _jinit_arith_encoder = Module['_jinit_arith_encoder'] = wasmExports['jinit_arith_encoder'];
+  _jinit_c_coef_controller = Module['_jinit_c_coef_controller'] = wasmExports['jinit_c_coef_controller'];
+  _jround_up = Module['_jround_up'] = wasmExports['jround_up'];
+  _jinit_color_converter = Module['_jinit_color_converter'] = wasmExports['jinit_color_converter'];
+  _jinit_forward_dct = Module['_jinit_forward_dct'] = wasmExports['jinit_forward_dct'];
+  _jpeg_fdct_1x1 = Module['_jpeg_fdct_1x1'] = wasmExports['jpeg_fdct_1x1'];
+  _jpeg_fdct_3x3 = Module['_jpeg_fdct_3x3'] = wasmExports['jpeg_fdct_3x3'];
+  _jpeg_fdct_4x4 = Module['_jpeg_fdct_4x4'] = wasmExports['jpeg_fdct_4x4'];
+  _jpeg_fdct_5x5 = Module['_jpeg_fdct_5x5'] = wasmExports['jpeg_fdct_5x5'];
+  _jpeg_fdct_6x6 = Module['_jpeg_fdct_6x6'] = wasmExports['jpeg_fdct_6x6'];
+  _jpeg_fdct_7x7 = Module['_jpeg_fdct_7x7'] = wasmExports['jpeg_fdct_7x7'];
+  _jpeg_fdct_10x10 = Module['_jpeg_fdct_10x10'] = wasmExports['jpeg_fdct_10x10'];
+  _jpeg_fdct_11x11 = Module['_jpeg_fdct_11x11'] = wasmExports['jpeg_fdct_11x11'];
+  _jpeg_fdct_12x12 = Module['_jpeg_fdct_12x12'] = wasmExports['jpeg_fdct_12x12'];
+  _jpeg_fdct_13x13 = Module['_jpeg_fdct_13x13'] = wasmExports['jpeg_fdct_13x13'];
+  _jpeg_fdct_14x14 = Module['_jpeg_fdct_14x14'] = wasmExports['jpeg_fdct_14x14'];
+  _jpeg_fdct_15x15 = Module['_jpeg_fdct_15x15'] = wasmExports['jpeg_fdct_15x15'];
+  _jpeg_fdct_16x16 = Module['_jpeg_fdct_16x16'] = wasmExports['jpeg_fdct_16x16'];
+  _jpeg_fdct_16x8 = Module['_jpeg_fdct_16x8'] = wasmExports['jpeg_fdct_16x8'];
+  _jpeg_fdct_14x7 = Module['_jpeg_fdct_14x7'] = wasmExports['jpeg_fdct_14x7'];
+  _jpeg_fdct_12x6 = Module['_jpeg_fdct_12x6'] = wasmExports['jpeg_fdct_12x6'];
+  _jpeg_fdct_10x5 = Module['_jpeg_fdct_10x5'] = wasmExports['jpeg_fdct_10x5'];
+  _jpeg_fdct_8x4 = Module['_jpeg_fdct_8x4'] = wasmExports['jpeg_fdct_8x4'];
+  _jpeg_fdct_6x3 = Module['_jpeg_fdct_6x3'] = wasmExports['jpeg_fdct_6x3'];
+  _jpeg_fdct_4x2 = Module['_jpeg_fdct_4x2'] = wasmExports['jpeg_fdct_4x2'];
+  _jpeg_fdct_2x1 = Module['_jpeg_fdct_2x1'] = wasmExports['jpeg_fdct_2x1'];
+  _jpeg_fdct_8x16 = Module['_jpeg_fdct_8x16'] = wasmExports['jpeg_fdct_8x16'];
+  _jpeg_fdct_7x14 = Module['_jpeg_fdct_7x14'] = wasmExports['jpeg_fdct_7x14'];
+  _jpeg_fdct_6x12 = Module['_jpeg_fdct_6x12'] = wasmExports['jpeg_fdct_6x12'];
+  _jpeg_fdct_5x10 = Module['_jpeg_fdct_5x10'] = wasmExports['jpeg_fdct_5x10'];
+  _jpeg_fdct_4x8 = Module['_jpeg_fdct_4x8'] = wasmExports['jpeg_fdct_4x8'];
+  _jpeg_fdct_3x6 = Module['_jpeg_fdct_3x6'] = wasmExports['jpeg_fdct_3x6'];
+  _jpeg_fdct_2x4 = Module['_jpeg_fdct_2x4'] = wasmExports['jpeg_fdct_2x4'];
+  _jpeg_fdct_1x2 = Module['_jpeg_fdct_1x2'] = wasmExports['jpeg_fdct_1x2'];
+  _jpeg_fdct_islow = Module['_jpeg_fdct_islow'] = wasmExports['jpeg_fdct_islow'];
+  _jpeg_fdct_2x2 = Module['_jpeg_fdct_2x2'] = wasmExports['jpeg_fdct_2x2'];
+  _jpeg_fdct_float = Module['_jpeg_fdct_float'] = wasmExports['jpeg_fdct_float'];
+  _jpeg_fdct_ifast = Module['_jpeg_fdct_ifast'] = wasmExports['jpeg_fdct_ifast'];
+  _jpeg_fdct_9x9 = Module['_jpeg_fdct_9x9'] = wasmExports['jpeg_fdct_9x9'];
+  _jinit_huff_encoder = Module['_jinit_huff_encoder'] = wasmExports['jinit_huff_encoder'];
+  _jpeg_alloc_huff_table = Module['_jpeg_alloc_huff_table'] = wasmExports['jpeg_alloc_huff_table'];
+  _jpeg_std_huff_table = Module['_jpeg_std_huff_table'] = wasmExports['jpeg_std_huff_table'];
+  _jpeg_calc_jpeg_dimensions = Module['_jpeg_calc_jpeg_dimensions'] = wasmExports['jpeg_calc_jpeg_dimensions'];
+  _jdiv_round_up = Module['_jdiv_round_up'] = wasmExports['jdiv_round_up'];
+  _jinit_c_master_control = Module['_jinit_c_master_control'] = wasmExports['jinit_c_master_control'];
+  _jinit_downsampler = Module['_jinit_downsampler'] = wasmExports['jinit_downsampler'];
+  _jinit_c_prep_controller = Module['_jinit_c_prep_controller'] = wasmExports['jinit_c_prep_controller'];
+  _jinit_c_main_controller = Module['_jinit_c_main_controller'] = wasmExports['jinit_c_main_controller'];
+  _jpeg_alloc_quant_table = Module['_jpeg_alloc_quant_table'] = wasmExports['jpeg_alloc_quant_table'];
+  _jpeg_add_quant_table = Module['_jpeg_add_quant_table'] = wasmExports['jpeg_add_quant_table'];
+  _jpeg_default_qtables = Module['_jpeg_default_qtables'] = wasmExports['jpeg_default_qtables'];
+  _jpeg_set_linear_quality = Module['_jpeg_set_linear_quality'] = wasmExports['jpeg_set_linear_quality'];
+  _jpeg_quality_scaling = Module['_jpeg_quality_scaling'] = wasmExports['jpeg_quality_scaling'];
+  _jpeg_set_quality = Module['_jpeg_set_quality'] = wasmExports['jpeg_set_quality'];
+  _jpeg_set_defaults = Module['_jpeg_set_defaults'] = wasmExports['jpeg_set_defaults'];
+  _jpeg_default_colorspace = Module['_jpeg_default_colorspace'] = wasmExports['jpeg_default_colorspace'];
+  _jpeg_set_colorspace = Module['_jpeg_set_colorspace'] = wasmExports['jpeg_set_colorspace'];
+  _jpeg_simple_progression = Module['_jpeg_simple_progression'] = wasmExports['jpeg_simple_progression'];
+  _jcopy_sample_rows = Module['_jcopy_sample_rows'] = wasmExports['jcopy_sample_rows'];
+  _jpeg_write_coefficients = Module['_jpeg_write_coefficients'] = wasmExports['jpeg_write_coefficients'];
+  _jpeg_copy_critical_parameters = Module['_jpeg_copy_critical_parameters'] = wasmExports['jpeg_copy_critical_parameters'];
+  _jinit_marker_reader = Module['_jinit_marker_reader'] = wasmExports['jinit_marker_reader'];
+  _jinit_input_controller = Module['_jinit_input_controller'] = wasmExports['jinit_input_controller'];
+  _jpeg_abort_decompress = Module['_jpeg_abort_decompress'] = wasmExports['jpeg_abort_decompress'];
+  _jpeg_consume_input = Module['_jpeg_consume_input'] = wasmExports['jpeg_consume_input'];
+  _jpeg_input_complete = Module['_jpeg_input_complete'] = wasmExports['jpeg_input_complete'];
+  _jpeg_has_multiple_scans = Module['_jpeg_has_multiple_scans'] = wasmExports['jpeg_has_multiple_scans'];
+  _jinit_master_decompress = Module['_jinit_master_decompress'] = wasmExports['jinit_master_decompress'];
+  _jpeg_read_raw_data = Module['_jpeg_read_raw_data'] = wasmExports['jpeg_read_raw_data'];
+  _jpeg_start_output = Module['_jpeg_start_output'] = wasmExports['jpeg_start_output'];
+  _jpeg_finish_output = Module['_jpeg_finish_output'] = wasmExports['jpeg_finish_output'];
+  _jinit_arith_decoder = Module['_jinit_arith_decoder'] = wasmExports['jinit_arith_decoder'];
+  _jpeg_stdio_dest = Module['_jpeg_stdio_dest'] = wasmExports['jpeg_stdio_dest'];
+  _jpeg_mem_dest = Module['_jpeg_mem_dest'] = wasmExports['jpeg_mem_dest'];
+  _jpeg_stdio_src = Module['_jpeg_stdio_src'] = wasmExports['jpeg_stdio_src'];
+  _jpeg_mem_src = Module['_jpeg_mem_src'] = wasmExports['jpeg_mem_src'];
+  _jinit_d_coef_controller = Module['_jinit_d_coef_controller'] = wasmExports['jinit_d_coef_controller'];
+  _jcopy_block_row = Module['_jcopy_block_row'] = wasmExports['jcopy_block_row'];
+  _jinit_color_deconverter = Module['_jinit_color_deconverter'] = wasmExports['jinit_color_deconverter'];
+  _jinit_inverse_dct = Module['_jinit_inverse_dct'] = wasmExports['jinit_inverse_dct'];
+  _jpeg_idct_1x1 = Module['_jpeg_idct_1x1'] = wasmExports['jpeg_idct_1x1'];
+  _jpeg_idct_3x3 = Module['_jpeg_idct_3x3'] = wasmExports['jpeg_idct_3x3'];
+  _jpeg_idct_4x4 = Module['_jpeg_idct_4x4'] = wasmExports['jpeg_idct_4x4'];
+  _jpeg_idct_5x5 = Module['_jpeg_idct_5x5'] = wasmExports['jpeg_idct_5x5'];
+  _jpeg_idct_6x6 = Module['_jpeg_idct_6x6'] = wasmExports['jpeg_idct_6x6'];
+  _jpeg_idct_7x7 = Module['_jpeg_idct_7x7'] = wasmExports['jpeg_idct_7x7'];
+  _jpeg_idct_10x10 = Module['_jpeg_idct_10x10'] = wasmExports['jpeg_idct_10x10'];
+  _jpeg_idct_11x11 = Module['_jpeg_idct_11x11'] = wasmExports['jpeg_idct_11x11'];
+  _jpeg_idct_12x12 = Module['_jpeg_idct_12x12'] = wasmExports['jpeg_idct_12x12'];
+  _jpeg_idct_13x13 = Module['_jpeg_idct_13x13'] = wasmExports['jpeg_idct_13x13'];
+  _jpeg_idct_14x14 = Module['_jpeg_idct_14x14'] = wasmExports['jpeg_idct_14x14'];
+  _jpeg_idct_15x15 = Module['_jpeg_idct_15x15'] = wasmExports['jpeg_idct_15x15'];
+  _jpeg_idct_16x16 = Module['_jpeg_idct_16x16'] = wasmExports['jpeg_idct_16x16'];
+  _jpeg_idct_16x8 = Module['_jpeg_idct_16x8'] = wasmExports['jpeg_idct_16x8'];
+  _jpeg_idct_14x7 = Module['_jpeg_idct_14x7'] = wasmExports['jpeg_idct_14x7'];
+  _jpeg_idct_12x6 = Module['_jpeg_idct_12x6'] = wasmExports['jpeg_idct_12x6'];
+  _jpeg_idct_10x5 = Module['_jpeg_idct_10x5'] = wasmExports['jpeg_idct_10x5'];
+  _jpeg_idct_8x4 = Module['_jpeg_idct_8x4'] = wasmExports['jpeg_idct_8x4'];
+  _jpeg_idct_6x3 = Module['_jpeg_idct_6x3'] = wasmExports['jpeg_idct_6x3'];
+  _jpeg_idct_4x2 = Module['_jpeg_idct_4x2'] = wasmExports['jpeg_idct_4x2'];
+  _jpeg_idct_2x1 = Module['_jpeg_idct_2x1'] = wasmExports['jpeg_idct_2x1'];
+  _jpeg_idct_8x16 = Module['_jpeg_idct_8x16'] = wasmExports['jpeg_idct_8x16'];
+  _jpeg_idct_7x14 = Module['_jpeg_idct_7x14'] = wasmExports['jpeg_idct_7x14'];
+  _jpeg_idct_6x12 = Module['_jpeg_idct_6x12'] = wasmExports['jpeg_idct_6x12'];
+  _jpeg_idct_5x10 = Module['_jpeg_idct_5x10'] = wasmExports['jpeg_idct_5x10'];
+  _jpeg_idct_4x8 = Module['_jpeg_idct_4x8'] = wasmExports['jpeg_idct_4x8'];
+  _jpeg_idct_3x6 = Module['_jpeg_idct_3x6'] = wasmExports['jpeg_idct_3x6'];
+  _jpeg_idct_2x4 = Module['_jpeg_idct_2x4'] = wasmExports['jpeg_idct_2x4'];
+  _jpeg_idct_1x2 = Module['_jpeg_idct_1x2'] = wasmExports['jpeg_idct_1x2'];
+  _jpeg_idct_islow = Module['_jpeg_idct_islow'] = wasmExports['jpeg_idct_islow'];
+  _jpeg_idct_ifast = Module['_jpeg_idct_ifast'] = wasmExports['jpeg_idct_ifast'];
+  _jpeg_idct_2x2 = Module['_jpeg_idct_2x2'] = wasmExports['jpeg_idct_2x2'];
+  _jpeg_idct_float = Module['_jpeg_idct_float'] = wasmExports['jpeg_idct_float'];
+  _jpeg_idct_9x9 = Module['_jpeg_idct_9x9'] = wasmExports['jpeg_idct_9x9'];
+  _jinit_huff_decoder = Module['_jinit_huff_decoder'] = wasmExports['jinit_huff_decoder'];
+  _jpeg_core_output_dimensions = Module['_jpeg_core_output_dimensions'] = wasmExports['jpeg_core_output_dimensions'];
+  _jinit_d_main_controller = Module['_jinit_d_main_controller'] = wasmExports['jinit_d_main_controller'];
+  _jpeg_save_markers = Module['_jpeg_save_markers'] = wasmExports['jpeg_save_markers'];
+  _jpeg_set_marker_processor = Module['_jpeg_set_marker_processor'] = wasmExports['jpeg_set_marker_processor'];
+  _jpeg_calc_output_dimensions = Module['_jpeg_calc_output_dimensions'] = wasmExports['jpeg_calc_output_dimensions'];
+  _jpeg_new_colormap = Module['_jpeg_new_colormap'] = wasmExports['jpeg_new_colormap'];
+  _jinit_1pass_quantizer = Module['_jinit_1pass_quantizer'] = wasmExports['jinit_1pass_quantizer'];
+  _jinit_2pass_quantizer = Module['_jinit_2pass_quantizer'] = wasmExports['jinit_2pass_quantizer'];
+  _jinit_merged_upsampler = Module['_jinit_merged_upsampler'] = wasmExports['jinit_merged_upsampler'];
+  _jinit_upsampler = Module['_jinit_upsampler'] = wasmExports['jinit_upsampler'];
+  _jinit_d_post_controller = Module['_jinit_d_post_controller'] = wasmExports['jinit_d_post_controller'];
+  _jpeg_read_coefficients = Module['_jpeg_read_coefficients'] = wasmExports['jpeg_read_coefficients'];
+  _jpeg_mem_init = Module['_jpeg_mem_init'] = wasmExports['jpeg_mem_init'];
+  _jpeg_get_small = Module['_jpeg_get_small'] = wasmExports['jpeg_get_small'];
+  _jpeg_mem_term = Module['_jpeg_mem_term'] = wasmExports['jpeg_mem_term'];
+  _jpeg_get_large = Module['_jpeg_get_large'] = wasmExports['jpeg_get_large'];
+  _jpeg_mem_available = Module['_jpeg_mem_available'] = wasmExports['jpeg_mem_available'];
+  _jpeg_open_backing_store = Module['_jpeg_open_backing_store'] = wasmExports['jpeg_open_backing_store'];
+  _jpeg_free_large = Module['_jpeg_free_large'] = wasmExports['jpeg_free_large'];
+  _jpeg_free_small = Module['_jpeg_free_small'] = wasmExports['jpeg_free_small'];
+  _jinit_read_bmp = Module['_jinit_read_bmp'] = wasmExports['jinit_read_bmp'];
+  _getc = Module['_getc'] = wasmExports['getc'];
+  _read_color_map = Module['_read_color_map'] = wasmExports['read_color_map'];
+  _jinit_read_gif = Module['_jinit_read_gif'] = wasmExports['jinit_read_gif'];
+  _jinit_read_ppm = Module['_jinit_read_ppm'] = wasmExports['jinit_read_ppm'];
+  _read_quant_tables = Module['_read_quant_tables'] = wasmExports['read_quant_tables'];
+  _read_scan_script = Module['_read_scan_script'] = wasmExports['read_scan_script'];
+  _ungetc = Module['_ungetc'] = wasmExports['ungetc'];
+  _set_quality_ratings = Module['_set_quality_ratings'] = wasmExports['set_quality_ratings'];
+  _set_quant_slots = Module['_set_quant_slots'] = wasmExports['set_quant_slots'];
+  _set_sample_factors = Module['_set_sample_factors'] = wasmExports['set_sample_factors'];
+  _jinit_read_targa = Module['_jinit_read_targa'] = wasmExports['jinit_read_targa'];
+  _jtransform_parse_crop_spec = Module['_jtransform_parse_crop_spec'] = wasmExports['jtransform_parse_crop_spec'];
+  _jtransform_request_workspace = Module['_jtransform_request_workspace'] = wasmExports['jtransform_request_workspace'];
+  _jtransform_perfect_transform = Module['_jtransform_perfect_transform'] = wasmExports['jtransform_perfect_transform'];
+  _jtransform_adjust_parameters = Module['_jtransform_adjust_parameters'] = wasmExports['jtransform_adjust_parameters'];
+  _jtransform_execute_transform = Module['_jtransform_execute_transform'] = wasmExports['jtransform_execute_transform'];
+  _jcopy_markers_setup = Module['_jcopy_markers_setup'] = wasmExports['jcopy_markers_setup'];
+  _jcopy_markers_execute = Module['_jcopy_markers_execute'] = wasmExports['jcopy_markers_execute'];
+  _jinit_write_bmp = Module['_jinit_write_bmp'] = wasmExports['jinit_write_bmp'];
+  _putc = Module['_putc'] = wasmExports['putc'];
+  _jinit_write_gif = Module['_jinit_write_gif'] = wasmExports['jinit_write_gif'];
+  _jinit_write_ppm = Module['_jinit_write_ppm'] = wasmExports['jinit_write_ppm'];
+  _jinit_write_targa = Module['_jinit_write_targa'] = wasmExports['jinit_write_targa'];
+  _vorbis_analysis = Module['_vorbis_analysis'] = wasmExports['vorbis_analysis'];
+  _oggpack_reset = Module['_oggpack_reset'] = wasmExports['oggpack_reset'];
+  _vorbis_bitrate_managed = Module['_vorbis_bitrate_managed'] = wasmExports['vorbis_bitrate_managed'];
+  _oggpack_get_buffer = Module['_oggpack_get_buffer'] = wasmExports['oggpack_get_buffer'];
+  _oggpack_bytes = Module['_oggpack_bytes'] = wasmExports['oggpack_bytes'];
+  _vorbis_bitrate_init = Module['_vorbis_bitrate_init'] = wasmExports['vorbis_bitrate_init'];
+  _vorbis_bitrate_clear = Module['_vorbis_bitrate_clear'] = wasmExports['vorbis_bitrate_clear'];
+  _vorbis_bitrate_addblock = Module['_vorbis_bitrate_addblock'] = wasmExports['vorbis_bitrate_addblock'];
+  _oggpack_writetrunc = Module['_oggpack_writetrunc'] = wasmExports['oggpack_writetrunc'];
+  _oggpack_write = Module['_oggpack_write'] = wasmExports['oggpack_write'];
+  _vorbis_bitrate_flushpacket = Module['_vorbis_bitrate_flushpacket'] = wasmExports['vorbis_bitrate_flushpacket'];
+  _oggpack_writeinit = Module['_oggpack_writeinit'] = wasmExports['oggpack_writeinit'];
+  __vorbis_block_alloc = Module['__vorbis_block_alloc'] = wasmExports['_vorbis_block_alloc'];
+  __vorbis_block_ripcord = Module['__vorbis_block_ripcord'] = wasmExports['_vorbis_block_ripcord'];
+  _oggpack_writeclear = Module['_oggpack_writeclear'] = wasmExports['oggpack_writeclear'];
+  _vorbis_analysis_init = Module['_vorbis_analysis_init'] = wasmExports['vorbis_analysis_init'];
+  __vp_global_look = Module['__vp_global_look'] = wasmExports['_vp_global_look'];
+  __ve_envelope_init = Module['__ve_envelope_init'] = wasmExports['_ve_envelope_init'];
+  _ov_ilog = Module['_ov_ilog'] = wasmExports['ov_ilog'];
+  _mdct_init = Module['_mdct_init'] = wasmExports['mdct_init'];
+  _drft_init = Module['_drft_init'] = wasmExports['drft_init'];
+  _vorbis_book_init_encode = Module['_vorbis_book_init_encode'] = wasmExports['vorbis_book_init_encode'];
+  __vp_psy_init = Module['__vp_psy_init'] = wasmExports['_vp_psy_init'];
+  _vorbis_book_init_decode = Module['_vorbis_book_init_decode'] = wasmExports['vorbis_book_init_decode'];
+  _vorbis_staticbook_destroy = Module['_vorbis_staticbook_destroy'] = wasmExports['vorbis_staticbook_destroy'];
+  __ve_envelope_clear = Module['__ve_envelope_clear'] = wasmExports['_ve_envelope_clear'];
+  _mdct_clear = Module['_mdct_clear'] = wasmExports['mdct_clear'];
+  __vp_psy_clear = Module['__vp_psy_clear'] = wasmExports['_vp_psy_clear'];
+  __vp_global_free = Module['__vp_global_free'] = wasmExports['_vp_global_free'];
+  _drft_clear = Module['_drft_clear'] = wasmExports['drft_clear'];
+  _vorbis_analysis_buffer = Module['_vorbis_analysis_buffer'] = wasmExports['vorbis_analysis_buffer'];
+  _vorbis_analysis_wrote = Module['_vorbis_analysis_wrote'] = wasmExports['vorbis_analysis_wrote'];
+  _vorbis_lpc_from_data = Module['_vorbis_lpc_from_data'] = wasmExports['vorbis_lpc_from_data'];
+  _vorbis_lpc_predict = Module['_vorbis_lpc_predict'] = wasmExports['vorbis_lpc_predict'];
+  _vorbis_analysis_blockout = Module['_vorbis_analysis_blockout'] = wasmExports['vorbis_analysis_blockout'];
+  __ve_envelope_search = Module['__ve_envelope_search'] = wasmExports['_ve_envelope_search'];
+  __ve_envelope_mark = Module['__ve_envelope_mark'] = wasmExports['_ve_envelope_mark'];
+  __vp_ampmax_decay = Module['__vp_ampmax_decay'] = wasmExports['_vp_ampmax_decay'];
+  __ve_envelope_shift = Module['__ve_envelope_shift'] = wasmExports['_ve_envelope_shift'];
+  _vorbis_synthesis_restart = Module['_vorbis_synthesis_restart'] = wasmExports['vorbis_synthesis_restart'];
+  __vorbis_window_get = Module['__vorbis_window_get'] = wasmExports['_vorbis_window_get'];
+  _vorbis_synthesis_lapout = Module['_vorbis_synthesis_lapout'] = wasmExports['vorbis_synthesis_lapout'];
+  _vorbis_window = Module['_vorbis_window'] = wasmExports['vorbis_window'];
+  _vorbis_staticbook_pack = Module['_vorbis_staticbook_pack'] = wasmExports['vorbis_staticbook_pack'];
+  __book_maptype1_quantvals = Module['__book_maptype1_quantvals'] = wasmExports['_book_maptype1_quantvals'];
+  _vorbis_staticbook_unpack = Module['_vorbis_staticbook_unpack'] = wasmExports['vorbis_staticbook_unpack'];
+  _oggpack_read = Module['_oggpack_read'] = wasmExports['oggpack_read'];
+  _vorbis_book_encode = Module['_vorbis_book_encode'] = wasmExports['vorbis_book_encode'];
+  _vorbis_book_decode = Module['_vorbis_book_decode'] = wasmExports['vorbis_book_decode'];
+  _oggpack_look = Module['_oggpack_look'] = wasmExports['oggpack_look'];
+  _oggpack_adv = Module['_oggpack_adv'] = wasmExports['oggpack_adv'];
+  _vorbis_book_decodevs_add = Module['_vorbis_book_decodevs_add'] = wasmExports['vorbis_book_decodevs_add'];
+  _vorbis_book_decodev_add = Module['_vorbis_book_decodev_add'] = wasmExports['vorbis_book_decodev_add'];
+  _vorbis_book_decodev_set = Module['_vorbis_book_decodev_set'] = wasmExports['vorbis_book_decodev_set'];
+  _vorbis_book_decodevv_add = Module['_vorbis_book_decodevv_add'] = wasmExports['vorbis_book_decodevv_add'];
+  _mdct_forward = Module['_mdct_forward'] = wasmExports['mdct_forward'];
+  _vorbis_lsp_to_curve = Module['_vorbis_lsp_to_curve'] = wasmExports['vorbis_lsp_to_curve'];
+  _floor1_fit = Module['_floor1_fit'] = wasmExports['floor1_fit'];
+  _floor1_interpolate_fit = Module['_floor1_interpolate_fit'] = wasmExports['floor1_interpolate_fit'];
+  _floor1_encode = Module['_floor1_encode'] = wasmExports['floor1_encode'];
+  _vorbis_comment_add = Module['_vorbis_comment_add'] = wasmExports['vorbis_comment_add'];
+  _vorbis_comment_add_tag = Module['_vorbis_comment_add_tag'] = wasmExports['vorbis_comment_add_tag'];
+  _vorbis_comment_query = Module['_vorbis_comment_query'] = wasmExports['vorbis_comment_query'];
+  _vorbis_comment_query_count = Module['_vorbis_comment_query_count'] = wasmExports['vorbis_comment_query_count'];
+  _vorbis_info_blocksize = Module['_vorbis_info_blocksize'] = wasmExports['vorbis_info_blocksize'];
+  _vorbis_book_clear = Module['_vorbis_book_clear'] = wasmExports['vorbis_book_clear'];
+  __vi_psy_free = Module['__vi_psy_free'] = wasmExports['_vi_psy_free'];
+  _vorbis_synthesis_idheader = Module['_vorbis_synthesis_idheader'] = wasmExports['vorbis_synthesis_idheader'];
+  _oggpack_readinit = Module['_oggpack_readinit'] = wasmExports['oggpack_readinit'];
+  _vorbis_commentheader_out = Module['_vorbis_commentheader_out'] = wasmExports['vorbis_commentheader_out'];
+  _vorbis_analysis_headerout = Module['_vorbis_analysis_headerout'] = wasmExports['vorbis_analysis_headerout'];
+  _vorbis_granule_time = Module['_vorbis_granule_time'] = wasmExports['vorbis_granule_time'];
+  _vorbis_version_string = Module['_vorbis_version_string'] = wasmExports['vorbis_version_string'];
+  _vorbis_lpc_to_lsp = Module['_vorbis_lpc_to_lsp'] = wasmExports['vorbis_lpc_to_lsp'];
+  __vorbis_apply_window = Module['__vorbis_apply_window'] = wasmExports['_vorbis_apply_window'];
+  _drft_forward = Module['_drft_forward'] = wasmExports['drft_forward'];
+  __vp_noisemask = Module['__vp_noisemask'] = wasmExports['_vp_noisemask'];
+  __vp_tonemask = Module['__vp_tonemask'] = wasmExports['_vp_tonemask'];
+  __vp_offset_and_mix = Module['__vp_offset_and_mix'] = wasmExports['_vp_offset_and_mix'];
+  __vp_couple_quantize_normalize = Module['__vp_couple_quantize_normalize'] = wasmExports['_vp_couple_quantize_normalize'];
+  _mdct_backward = Module['_mdct_backward'] = wasmExports['mdct_backward'];
+  __vi_gpsy_free = Module['__vi_gpsy_free'] = wasmExports['_vi_gpsy_free'];
+  _res0_free_info = Module['_res0_free_info'] = wasmExports['res0_free_info'];
+  _res0_free_look = Module['_res0_free_look'] = wasmExports['res0_free_look'];
+  _res0_pack = Module['_res0_pack'] = wasmExports['res0_pack'];
+  _res0_unpack = Module['_res0_unpack'] = wasmExports['res0_unpack'];
+  _res0_look = Module['_res0_look'] = wasmExports['res0_look'];
+  _res0_inverse = Module['_res0_inverse'] = wasmExports['res0_inverse'];
+  _res1_forward = Module['_res1_forward'] = wasmExports['res1_forward'];
+  _res1_class = Module['_res1_class'] = wasmExports['res1_class'];
+  _res1_inverse = Module['_res1_inverse'] = wasmExports['res1_inverse'];
+  _res2_class = Module['_res2_class'] = wasmExports['res2_class'];
+  _res2_forward = Module['_res2_forward'] = wasmExports['res2_forward'];
+  _res2_inverse = Module['_res2_inverse'] = wasmExports['res2_inverse'];
+  __float32_pack = Module['__float32_pack'] = wasmExports['_float32_pack'];
+  __float32_unpack = Module['__float32_unpack'] = wasmExports['_float32_unpack'];
+  __make_words = Module['__make_words'] = wasmExports['_make_words'];
+  __book_unquantize = Module['__book_unquantize'] = wasmExports['_book_unquantize'];
+  _vorbis_book_codeword = Module['_vorbis_book_codeword'] = wasmExports['vorbis_book_codeword'];
+  _vorbis_book_codelen = Module['_vorbis_book_codelen'] = wasmExports['vorbis_book_codelen'];
+  _drft_backward = Module['_drft_backward'] = wasmExports['drft_backward'];
+  _vorbis_synthesis_trackonly = Module['_vorbis_synthesis_trackonly'] = wasmExports['vorbis_synthesis_trackonly'];
+  _vorbis_packet_blocksize = Module['_vorbis_packet_blocksize'] = wasmExports['vorbis_packet_blocksize'];
+  _vorbis_synthesis_halfrate = Module['_vorbis_synthesis_halfrate'] = wasmExports['vorbis_synthesis_halfrate'];
+  _vorbis_synthesis_halfrate_p = Module['_vorbis_synthesis_halfrate_p'] = wasmExports['vorbis_synthesis_halfrate_p'];
+  _vorbis_encode_setup_init = Module['_vorbis_encode_setup_init'] = wasmExports['vorbis_encode_setup_init'];
+  _vorbis_encode_setup_vbr = Module['_vorbis_encode_setup_vbr'] = wasmExports['vorbis_encode_setup_vbr'];
+  _vorbis_encode_init_vbr = Module['_vorbis_encode_init_vbr'] = wasmExports['vorbis_encode_init_vbr'];
+  _vorbis_encode_setup_managed = Module['_vorbis_encode_setup_managed'] = wasmExports['vorbis_encode_setup_managed'];
+  _vorbis_encode_init = Module['_vorbis_encode_init'] = wasmExports['vorbis_encode_init'];
+  _vorbis_encode_ctl = Module['_vorbis_encode_ctl'] = wasmExports['vorbis_encode_ctl'];
+  _ov_raw_seek = Module['_ov_raw_seek'] = wasmExports['ov_raw_seek'];
+  _ov_open = Module['_ov_open'] = wasmExports['ov_open'];
+  _ov_fopen = Module['_ov_fopen'] = wasmExports['ov_fopen'];
+  _ov_halfrate = Module['_ov_halfrate'] = wasmExports['ov_halfrate'];
+  _ov_pcm_seek_page = Module['_ov_pcm_seek_page'] = wasmExports['ov_pcm_seek_page'];
+  _ogg_stream_packetpeek = Module['_ogg_stream_packetpeek'] = wasmExports['ogg_stream_packetpeek'];
+  _ov_pcm_total = Module['_ov_pcm_total'] = wasmExports['ov_pcm_total'];
+  _ogg_stream_reset_serialno = Module['_ogg_stream_reset_serialno'] = wasmExports['ogg_stream_reset_serialno'];
+  _ov_halfrate_p = Module['_ov_halfrate_p'] = wasmExports['ov_halfrate_p'];
+  _ov_test_callbacks = Module['_ov_test_callbacks'] = wasmExports['ov_test_callbacks'];
+  _ov_test = Module['_ov_test'] = wasmExports['ov_test'];
+  _ov_test_open = Module['_ov_test_open'] = wasmExports['ov_test_open'];
+  _ov_streams = Module['_ov_streams'] = wasmExports['ov_streams'];
+  _ov_seekable = Module['_ov_seekable'] = wasmExports['ov_seekable'];
+  _ov_bitrate = Module['_ov_bitrate'] = wasmExports['ov_bitrate'];
+  _ov_bitrate_instant = Module['_ov_bitrate_instant'] = wasmExports['ov_bitrate_instant'];
+  _ov_serialnumber = Module['_ov_serialnumber'] = wasmExports['ov_serialnumber'];
+  _ov_raw_total = Module['_ov_raw_total'] = wasmExports['ov_raw_total'];
+  _ogg_sync_reset = Module['_ogg_sync_reset'] = wasmExports['ogg_sync_reset'];
+  _ogg_stream_reset = Module['_ogg_stream_reset'] = wasmExports['ogg_stream_reset'];
+  _ogg_page_eos = Module['_ogg_page_eos'] = wasmExports['ogg_page_eos'];
+  _ogg_sync_pageseek = Module['_ogg_sync_pageseek'] = wasmExports['ogg_sync_pageseek'];
+  _ogg_page_granulepos = Module['_ogg_page_granulepos'] = wasmExports['ogg_page_granulepos'];
+  _ogg_page_continued = Module['_ogg_page_continued'] = wasmExports['ogg_page_continued'];
+  _ov_time_seek = Module['_ov_time_seek'] = wasmExports['ov_time_seek'];
+  _ov_time_seek_page = Module['_ov_time_seek_page'] = wasmExports['ov_time_seek_page'];
+  _ov_raw_tell = Module['_ov_raw_tell'] = wasmExports['ov_raw_tell'];
+  _ov_pcm_tell = Module['_ov_pcm_tell'] = wasmExports['ov_pcm_tell'];
+  _ov_time_tell = Module['_ov_time_tell'] = wasmExports['ov_time_tell'];
+  _ov_comment = Module['_ov_comment'] = wasmExports['ov_comment'];
+  _ov_read_filter = Module['_ov_read_filter'] = wasmExports['ov_read_filter'];
+  _ov_read_float = Module['_ov_read_float'] = wasmExports['ov_read_float'];
+  _ov_crosslap = Module['_ov_crosslap'] = wasmExports['ov_crosslap'];
+  _ov_raw_seek_lap = Module['_ov_raw_seek_lap'] = wasmExports['ov_raw_seek_lap'];
+  _ov_pcm_seek_lap = Module['_ov_pcm_seek_lap'] = wasmExports['ov_pcm_seek_lap'];
+  _ov_pcm_seek_page_lap = Module['_ov_pcm_seek_page_lap'] = wasmExports['ov_pcm_seek_page_lap'];
+  _ov_time_seek_lap = Module['_ov_time_seek_lap'] = wasmExports['ov_time_seek_lap'];
+  _ov_time_seek_page_lap = Module['_ov_time_seek_page_lap'] = wasmExports['ov_time_seek_page_lap'];
+  _oggpackB_writeinit = Module['_oggpackB_writeinit'] = wasmExports['oggpackB_writeinit'];
+  _oggpack_writecheck = Module['_oggpack_writecheck'] = wasmExports['oggpack_writecheck'];
+  _oggpackB_writecheck = Module['_oggpackB_writecheck'] = wasmExports['oggpackB_writecheck'];
+  _oggpackB_writetrunc = Module['_oggpackB_writetrunc'] = wasmExports['oggpackB_writetrunc'];
+  _oggpackB_write = Module['_oggpackB_write'] = wasmExports['oggpackB_write'];
+  _oggpack_writealign = Module['_oggpack_writealign'] = wasmExports['oggpack_writealign'];
+  _oggpackB_writealign = Module['_oggpackB_writealign'] = wasmExports['oggpackB_writealign'];
+  _oggpack_writecopy = Module['_oggpack_writecopy'] = wasmExports['oggpack_writecopy'];
+  _oggpackB_writecopy = Module['_oggpackB_writecopy'] = wasmExports['oggpackB_writecopy'];
+  _oggpackB_reset = Module['_oggpackB_reset'] = wasmExports['oggpackB_reset'];
+  _oggpackB_writeclear = Module['_oggpackB_writeclear'] = wasmExports['oggpackB_writeclear'];
+  _oggpackB_readinit = Module['_oggpackB_readinit'] = wasmExports['oggpackB_readinit'];
+  _oggpackB_look = Module['_oggpackB_look'] = wasmExports['oggpackB_look'];
+  _oggpack_look1 = Module['_oggpack_look1'] = wasmExports['oggpack_look1'];
+  _oggpackB_look1 = Module['_oggpackB_look1'] = wasmExports['oggpackB_look1'];
+  _oggpackB_adv = Module['_oggpackB_adv'] = wasmExports['oggpackB_adv'];
+  _oggpack_adv1 = Module['_oggpack_adv1'] = wasmExports['oggpack_adv1'];
+  _oggpackB_adv1 = Module['_oggpackB_adv1'] = wasmExports['oggpackB_adv1'];
+  _oggpackB_read = Module['_oggpackB_read'] = wasmExports['oggpackB_read'];
+  _oggpack_read1 = Module['_oggpack_read1'] = wasmExports['oggpack_read1'];
+  _oggpackB_read1 = Module['_oggpackB_read1'] = wasmExports['oggpackB_read1'];
+  _oggpack_bits = Module['_oggpack_bits'] = wasmExports['oggpack_bits'];
+  _oggpackB_bytes = Module['_oggpackB_bytes'] = wasmExports['oggpackB_bytes'];
+  _oggpackB_bits = Module['_oggpackB_bits'] = wasmExports['oggpackB_bits'];
+  _oggpackB_get_buffer = Module['_oggpackB_get_buffer'] = wasmExports['oggpackB_get_buffer'];
+  _ogg_page_version = Module['_ogg_page_version'] = wasmExports['ogg_page_version'];
+  _ogg_page_pageno = Module['_ogg_page_pageno'] = wasmExports['ogg_page_pageno'];
+  _ogg_page_packets = Module['_ogg_page_packets'] = wasmExports['ogg_page_packets'];
+  _ogg_stream_check = Module['_ogg_stream_check'] = wasmExports['ogg_stream_check'];
+  _ogg_stream_destroy = Module['_ogg_stream_destroy'] = wasmExports['ogg_stream_destroy'];
+  _ogg_page_checksum_set = Module['_ogg_page_checksum_set'] = wasmExports['ogg_page_checksum_set'];
+  _ogg_stream_iovecin = Module['_ogg_stream_iovecin'] = wasmExports['ogg_stream_iovecin'];
+  _ogg_stream_packetin = Module['_ogg_stream_packetin'] = wasmExports['ogg_stream_packetin'];
+  _ogg_stream_flush = Module['_ogg_stream_flush'] = wasmExports['ogg_stream_flush'];
+  _ogg_stream_flush_fill = Module['_ogg_stream_flush_fill'] = wasmExports['ogg_stream_flush_fill'];
+  _ogg_stream_pageout = Module['_ogg_stream_pageout'] = wasmExports['ogg_stream_pageout'];
+  _ogg_stream_pageout_fill = Module['_ogg_stream_pageout_fill'] = wasmExports['ogg_stream_pageout_fill'];
+  _ogg_stream_eos = Module['_ogg_stream_eos'] = wasmExports['ogg_stream_eos'];
+  _ogg_sync_destroy = Module['_ogg_sync_destroy'] = wasmExports['ogg_sync_destroy'];
+  _ogg_sync_check = Module['_ogg_sync_check'] = wasmExports['ogg_sync_check'];
+  _ogg_packet_clear = Module['_ogg_packet_clear'] = wasmExports['ogg_packet_clear'];
   _SDL_ExitProcess = Module['_SDL_ExitProcess'] = wasmExports['SDL_ExitProcess'];
   _SDL_SetAppMetadata = Module['_SDL_SetAppMetadata'] = wasmExports['SDL_SetAppMetadata'];
   _SDL_SetError = Module['_SDL_SetError'] = wasmExports['SDL_SetError'];
@@ -94117,7 +94396,6 @@ function assignWasmExports(wasmExports) {
   _SDL_vswprintf = Module['_SDL_vswprintf'] = wasmExports['SDL_vswprintf'];
   _SDL_strpbrk = Module['_SDL_strpbrk'] = wasmExports['SDL_strpbrk'];
   _SDL_strtok_r = Module['_SDL_strtok_r'] = wasmExports['SDL_strtok_r'];
-  _strtok_r = Module['_strtok_r'] = wasmExports['strtok_r'];
   _SDL_CalculateSurfaceSize = Module['_SDL_CalculateSurfaceSize'] = wasmExports['SDL_CalculateSurfaceSize'];
   _SDL_CalculateYUVSize = Module['_SDL_CalculateYUVSize'] = wasmExports['SDL_CalculateYUVSize'];
   _SDL_GetSurfacePalette = Module['_SDL_GetSurfacePalette'] = wasmExports['SDL_GetSurfacePalette'];
@@ -94392,451 +94670,360 @@ function assignWasmExports(wasmExports) {
   _SDL_SW_QueryYUVTexturePixels = Module['_SDL_SW_QueryYUVTexturePixels'] = wasmExports['SDL_SW_QueryYUVTexturePixels'];
   _SDL_SW_UnlockYUVTexture = Module['_SDL_SW_UnlockYUVTexture'] = wasmExports['SDL_SW_UnlockYUVTexture'];
   _rgb24_yuv420_std = Module['_rgb24_yuv420_std'] = wasmExports['rgb24_yuv420_std'];
-  _jpeg_CreateCompress = Module['_jpeg_CreateCompress'] = wasmExports['jpeg_CreateCompress'];
-  _jinit_memory_mgr = Module['_jinit_memory_mgr'] = wasmExports['jinit_memory_mgr'];
-  _jpeg_destroy_compress = Module['_jpeg_destroy_compress'] = wasmExports['jpeg_destroy_compress'];
-  _jpeg_destroy = Module['_jpeg_destroy'] = wasmExports['jpeg_destroy'];
-  _jpeg_abort_compress = Module['_jpeg_abort_compress'] = wasmExports['jpeg_abort_compress'];
-  _jpeg_abort = Module['_jpeg_abort'] = wasmExports['jpeg_abort'];
-  _jpeg_suppress_tables = Module['_jpeg_suppress_tables'] = wasmExports['jpeg_suppress_tables'];
-  _jpeg_finish_compress = Module['_jpeg_finish_compress'] = wasmExports['jpeg_finish_compress'];
-  _jpeg_write_marker = Module['_jpeg_write_marker'] = wasmExports['jpeg_write_marker'];
-  _jpeg_write_m_header = Module['_jpeg_write_m_header'] = wasmExports['jpeg_write_m_header'];
-  _jpeg_write_m_byte = Module['_jpeg_write_m_byte'] = wasmExports['jpeg_write_m_byte'];
-  _jpeg_write_tables = Module['_jpeg_write_tables'] = wasmExports['jpeg_write_tables'];
-  _jinit_marker_writer = Module['_jinit_marker_writer'] = wasmExports['jinit_marker_writer'];
-  _jpeg_start_compress = Module['_jpeg_start_compress'] = wasmExports['jpeg_start_compress'];
-  _jinit_compress_master = Module['_jinit_compress_master'] = wasmExports['jinit_compress_master'];
-  _jpeg_write_scanlines = Module['_jpeg_write_scanlines'] = wasmExports['jpeg_write_scanlines'];
-  _jpeg_write_raw_data = Module['_jpeg_write_raw_data'] = wasmExports['jpeg_write_raw_data'];
-  _jinit_arith_encoder = Module['_jinit_arith_encoder'] = wasmExports['jinit_arith_encoder'];
-  _jinit_c_coef_controller = Module['_jinit_c_coef_controller'] = wasmExports['jinit_c_coef_controller'];
-  _jround_up = Module['_jround_up'] = wasmExports['jround_up'];
-  _jinit_color_converter = Module['_jinit_color_converter'] = wasmExports['jinit_color_converter'];
-  _jinit_forward_dct = Module['_jinit_forward_dct'] = wasmExports['jinit_forward_dct'];
-  _jpeg_fdct_1x1 = Module['_jpeg_fdct_1x1'] = wasmExports['jpeg_fdct_1x1'];
-  _jpeg_fdct_3x3 = Module['_jpeg_fdct_3x3'] = wasmExports['jpeg_fdct_3x3'];
-  _jpeg_fdct_4x4 = Module['_jpeg_fdct_4x4'] = wasmExports['jpeg_fdct_4x4'];
-  _jpeg_fdct_5x5 = Module['_jpeg_fdct_5x5'] = wasmExports['jpeg_fdct_5x5'];
-  _jpeg_fdct_6x6 = Module['_jpeg_fdct_6x6'] = wasmExports['jpeg_fdct_6x6'];
-  _jpeg_fdct_7x7 = Module['_jpeg_fdct_7x7'] = wasmExports['jpeg_fdct_7x7'];
-  _jpeg_fdct_10x10 = Module['_jpeg_fdct_10x10'] = wasmExports['jpeg_fdct_10x10'];
-  _jpeg_fdct_11x11 = Module['_jpeg_fdct_11x11'] = wasmExports['jpeg_fdct_11x11'];
-  _jpeg_fdct_12x12 = Module['_jpeg_fdct_12x12'] = wasmExports['jpeg_fdct_12x12'];
-  _jpeg_fdct_13x13 = Module['_jpeg_fdct_13x13'] = wasmExports['jpeg_fdct_13x13'];
-  _jpeg_fdct_14x14 = Module['_jpeg_fdct_14x14'] = wasmExports['jpeg_fdct_14x14'];
-  _jpeg_fdct_15x15 = Module['_jpeg_fdct_15x15'] = wasmExports['jpeg_fdct_15x15'];
-  _jpeg_fdct_16x16 = Module['_jpeg_fdct_16x16'] = wasmExports['jpeg_fdct_16x16'];
-  _jpeg_fdct_16x8 = Module['_jpeg_fdct_16x8'] = wasmExports['jpeg_fdct_16x8'];
-  _jpeg_fdct_14x7 = Module['_jpeg_fdct_14x7'] = wasmExports['jpeg_fdct_14x7'];
-  _jpeg_fdct_12x6 = Module['_jpeg_fdct_12x6'] = wasmExports['jpeg_fdct_12x6'];
-  _jpeg_fdct_10x5 = Module['_jpeg_fdct_10x5'] = wasmExports['jpeg_fdct_10x5'];
-  _jpeg_fdct_8x4 = Module['_jpeg_fdct_8x4'] = wasmExports['jpeg_fdct_8x4'];
-  _jpeg_fdct_6x3 = Module['_jpeg_fdct_6x3'] = wasmExports['jpeg_fdct_6x3'];
-  _jpeg_fdct_4x2 = Module['_jpeg_fdct_4x2'] = wasmExports['jpeg_fdct_4x2'];
-  _jpeg_fdct_2x1 = Module['_jpeg_fdct_2x1'] = wasmExports['jpeg_fdct_2x1'];
-  _jpeg_fdct_8x16 = Module['_jpeg_fdct_8x16'] = wasmExports['jpeg_fdct_8x16'];
-  _jpeg_fdct_7x14 = Module['_jpeg_fdct_7x14'] = wasmExports['jpeg_fdct_7x14'];
-  _jpeg_fdct_6x12 = Module['_jpeg_fdct_6x12'] = wasmExports['jpeg_fdct_6x12'];
-  _jpeg_fdct_5x10 = Module['_jpeg_fdct_5x10'] = wasmExports['jpeg_fdct_5x10'];
-  _jpeg_fdct_4x8 = Module['_jpeg_fdct_4x8'] = wasmExports['jpeg_fdct_4x8'];
-  _jpeg_fdct_3x6 = Module['_jpeg_fdct_3x6'] = wasmExports['jpeg_fdct_3x6'];
-  _jpeg_fdct_2x4 = Module['_jpeg_fdct_2x4'] = wasmExports['jpeg_fdct_2x4'];
-  _jpeg_fdct_1x2 = Module['_jpeg_fdct_1x2'] = wasmExports['jpeg_fdct_1x2'];
-  _jpeg_fdct_islow = Module['_jpeg_fdct_islow'] = wasmExports['jpeg_fdct_islow'];
-  _jpeg_fdct_2x2 = Module['_jpeg_fdct_2x2'] = wasmExports['jpeg_fdct_2x2'];
-  _jpeg_fdct_float = Module['_jpeg_fdct_float'] = wasmExports['jpeg_fdct_float'];
-  _jpeg_fdct_ifast = Module['_jpeg_fdct_ifast'] = wasmExports['jpeg_fdct_ifast'];
-  _jpeg_fdct_9x9 = Module['_jpeg_fdct_9x9'] = wasmExports['jpeg_fdct_9x9'];
-  _jinit_huff_encoder = Module['_jinit_huff_encoder'] = wasmExports['jinit_huff_encoder'];
-  _jpeg_alloc_huff_table = Module['_jpeg_alloc_huff_table'] = wasmExports['jpeg_alloc_huff_table'];
-  _jpeg_std_huff_table = Module['_jpeg_std_huff_table'] = wasmExports['jpeg_std_huff_table'];
-  _jpeg_calc_jpeg_dimensions = Module['_jpeg_calc_jpeg_dimensions'] = wasmExports['jpeg_calc_jpeg_dimensions'];
-  _jdiv_round_up = Module['_jdiv_round_up'] = wasmExports['jdiv_round_up'];
-  _jinit_c_master_control = Module['_jinit_c_master_control'] = wasmExports['jinit_c_master_control'];
-  _jinit_downsampler = Module['_jinit_downsampler'] = wasmExports['jinit_downsampler'];
-  _jinit_c_prep_controller = Module['_jinit_c_prep_controller'] = wasmExports['jinit_c_prep_controller'];
-  _jinit_c_main_controller = Module['_jinit_c_main_controller'] = wasmExports['jinit_c_main_controller'];
-  _jpeg_alloc_quant_table = Module['_jpeg_alloc_quant_table'] = wasmExports['jpeg_alloc_quant_table'];
-  _jpeg_add_quant_table = Module['_jpeg_add_quant_table'] = wasmExports['jpeg_add_quant_table'];
-  _jpeg_default_qtables = Module['_jpeg_default_qtables'] = wasmExports['jpeg_default_qtables'];
-  _jpeg_set_linear_quality = Module['_jpeg_set_linear_quality'] = wasmExports['jpeg_set_linear_quality'];
-  _jpeg_quality_scaling = Module['_jpeg_quality_scaling'] = wasmExports['jpeg_quality_scaling'];
-  _jpeg_set_quality = Module['_jpeg_set_quality'] = wasmExports['jpeg_set_quality'];
-  _jpeg_set_defaults = Module['_jpeg_set_defaults'] = wasmExports['jpeg_set_defaults'];
-  _jpeg_default_colorspace = Module['_jpeg_default_colorspace'] = wasmExports['jpeg_default_colorspace'];
-  _jpeg_set_colorspace = Module['_jpeg_set_colorspace'] = wasmExports['jpeg_set_colorspace'];
-  _jpeg_simple_progression = Module['_jpeg_simple_progression'] = wasmExports['jpeg_simple_progression'];
-  _jcopy_sample_rows = Module['_jcopy_sample_rows'] = wasmExports['jcopy_sample_rows'];
-  _jpeg_write_coefficients = Module['_jpeg_write_coefficients'] = wasmExports['jpeg_write_coefficients'];
-  _jpeg_copy_critical_parameters = Module['_jpeg_copy_critical_parameters'] = wasmExports['jpeg_copy_critical_parameters'];
-  _jinit_marker_reader = Module['_jinit_marker_reader'] = wasmExports['jinit_marker_reader'];
-  _jinit_input_controller = Module['_jinit_input_controller'] = wasmExports['jinit_input_controller'];
-  _jpeg_abort_decompress = Module['_jpeg_abort_decompress'] = wasmExports['jpeg_abort_decompress'];
-  _jpeg_consume_input = Module['_jpeg_consume_input'] = wasmExports['jpeg_consume_input'];
-  _jpeg_input_complete = Module['_jpeg_input_complete'] = wasmExports['jpeg_input_complete'];
-  _jpeg_has_multiple_scans = Module['_jpeg_has_multiple_scans'] = wasmExports['jpeg_has_multiple_scans'];
-  _jinit_master_decompress = Module['_jinit_master_decompress'] = wasmExports['jinit_master_decompress'];
-  _jpeg_read_raw_data = Module['_jpeg_read_raw_data'] = wasmExports['jpeg_read_raw_data'];
-  _jpeg_start_output = Module['_jpeg_start_output'] = wasmExports['jpeg_start_output'];
-  _jpeg_finish_output = Module['_jpeg_finish_output'] = wasmExports['jpeg_finish_output'];
-  _jinit_arith_decoder = Module['_jinit_arith_decoder'] = wasmExports['jinit_arith_decoder'];
-  _jpeg_stdio_dest = Module['_jpeg_stdio_dest'] = wasmExports['jpeg_stdio_dest'];
-  _jpeg_mem_dest = Module['_jpeg_mem_dest'] = wasmExports['jpeg_mem_dest'];
-  _jpeg_stdio_src = Module['_jpeg_stdio_src'] = wasmExports['jpeg_stdio_src'];
-  _jpeg_mem_src = Module['_jpeg_mem_src'] = wasmExports['jpeg_mem_src'];
-  _jinit_d_coef_controller = Module['_jinit_d_coef_controller'] = wasmExports['jinit_d_coef_controller'];
-  _jcopy_block_row = Module['_jcopy_block_row'] = wasmExports['jcopy_block_row'];
-  _jinit_color_deconverter = Module['_jinit_color_deconverter'] = wasmExports['jinit_color_deconverter'];
-  _jinit_inverse_dct = Module['_jinit_inverse_dct'] = wasmExports['jinit_inverse_dct'];
-  _jpeg_idct_1x1 = Module['_jpeg_idct_1x1'] = wasmExports['jpeg_idct_1x1'];
-  _jpeg_idct_3x3 = Module['_jpeg_idct_3x3'] = wasmExports['jpeg_idct_3x3'];
-  _jpeg_idct_4x4 = Module['_jpeg_idct_4x4'] = wasmExports['jpeg_idct_4x4'];
-  _jpeg_idct_5x5 = Module['_jpeg_idct_5x5'] = wasmExports['jpeg_idct_5x5'];
-  _jpeg_idct_6x6 = Module['_jpeg_idct_6x6'] = wasmExports['jpeg_idct_6x6'];
-  _jpeg_idct_7x7 = Module['_jpeg_idct_7x7'] = wasmExports['jpeg_idct_7x7'];
-  _jpeg_idct_10x10 = Module['_jpeg_idct_10x10'] = wasmExports['jpeg_idct_10x10'];
-  _jpeg_idct_11x11 = Module['_jpeg_idct_11x11'] = wasmExports['jpeg_idct_11x11'];
-  _jpeg_idct_12x12 = Module['_jpeg_idct_12x12'] = wasmExports['jpeg_idct_12x12'];
-  _jpeg_idct_13x13 = Module['_jpeg_idct_13x13'] = wasmExports['jpeg_idct_13x13'];
-  _jpeg_idct_14x14 = Module['_jpeg_idct_14x14'] = wasmExports['jpeg_idct_14x14'];
-  _jpeg_idct_15x15 = Module['_jpeg_idct_15x15'] = wasmExports['jpeg_idct_15x15'];
-  _jpeg_idct_16x16 = Module['_jpeg_idct_16x16'] = wasmExports['jpeg_idct_16x16'];
-  _jpeg_idct_16x8 = Module['_jpeg_idct_16x8'] = wasmExports['jpeg_idct_16x8'];
-  _jpeg_idct_14x7 = Module['_jpeg_idct_14x7'] = wasmExports['jpeg_idct_14x7'];
-  _jpeg_idct_12x6 = Module['_jpeg_idct_12x6'] = wasmExports['jpeg_idct_12x6'];
-  _jpeg_idct_10x5 = Module['_jpeg_idct_10x5'] = wasmExports['jpeg_idct_10x5'];
-  _jpeg_idct_8x4 = Module['_jpeg_idct_8x4'] = wasmExports['jpeg_idct_8x4'];
-  _jpeg_idct_6x3 = Module['_jpeg_idct_6x3'] = wasmExports['jpeg_idct_6x3'];
-  _jpeg_idct_4x2 = Module['_jpeg_idct_4x2'] = wasmExports['jpeg_idct_4x2'];
-  _jpeg_idct_2x1 = Module['_jpeg_idct_2x1'] = wasmExports['jpeg_idct_2x1'];
-  _jpeg_idct_8x16 = Module['_jpeg_idct_8x16'] = wasmExports['jpeg_idct_8x16'];
-  _jpeg_idct_7x14 = Module['_jpeg_idct_7x14'] = wasmExports['jpeg_idct_7x14'];
-  _jpeg_idct_6x12 = Module['_jpeg_idct_6x12'] = wasmExports['jpeg_idct_6x12'];
-  _jpeg_idct_5x10 = Module['_jpeg_idct_5x10'] = wasmExports['jpeg_idct_5x10'];
-  _jpeg_idct_4x8 = Module['_jpeg_idct_4x8'] = wasmExports['jpeg_idct_4x8'];
-  _jpeg_idct_3x6 = Module['_jpeg_idct_3x6'] = wasmExports['jpeg_idct_3x6'];
-  _jpeg_idct_2x4 = Module['_jpeg_idct_2x4'] = wasmExports['jpeg_idct_2x4'];
-  _jpeg_idct_1x2 = Module['_jpeg_idct_1x2'] = wasmExports['jpeg_idct_1x2'];
-  _jpeg_idct_islow = Module['_jpeg_idct_islow'] = wasmExports['jpeg_idct_islow'];
-  _jpeg_idct_ifast = Module['_jpeg_idct_ifast'] = wasmExports['jpeg_idct_ifast'];
-  _jpeg_idct_2x2 = Module['_jpeg_idct_2x2'] = wasmExports['jpeg_idct_2x2'];
-  _jpeg_idct_float = Module['_jpeg_idct_float'] = wasmExports['jpeg_idct_float'];
-  _jpeg_idct_9x9 = Module['_jpeg_idct_9x9'] = wasmExports['jpeg_idct_9x9'];
-  _jinit_huff_decoder = Module['_jinit_huff_decoder'] = wasmExports['jinit_huff_decoder'];
-  _jpeg_core_output_dimensions = Module['_jpeg_core_output_dimensions'] = wasmExports['jpeg_core_output_dimensions'];
-  _jinit_d_main_controller = Module['_jinit_d_main_controller'] = wasmExports['jinit_d_main_controller'];
-  _jpeg_save_markers = Module['_jpeg_save_markers'] = wasmExports['jpeg_save_markers'];
-  _jpeg_set_marker_processor = Module['_jpeg_set_marker_processor'] = wasmExports['jpeg_set_marker_processor'];
-  _jpeg_calc_output_dimensions = Module['_jpeg_calc_output_dimensions'] = wasmExports['jpeg_calc_output_dimensions'];
-  _jpeg_new_colormap = Module['_jpeg_new_colormap'] = wasmExports['jpeg_new_colormap'];
-  _jinit_1pass_quantizer = Module['_jinit_1pass_quantizer'] = wasmExports['jinit_1pass_quantizer'];
-  _jinit_2pass_quantizer = Module['_jinit_2pass_quantizer'] = wasmExports['jinit_2pass_quantizer'];
-  _jinit_merged_upsampler = Module['_jinit_merged_upsampler'] = wasmExports['jinit_merged_upsampler'];
-  _jinit_upsampler = Module['_jinit_upsampler'] = wasmExports['jinit_upsampler'];
-  _jinit_d_post_controller = Module['_jinit_d_post_controller'] = wasmExports['jinit_d_post_controller'];
-  _jpeg_read_coefficients = Module['_jpeg_read_coefficients'] = wasmExports['jpeg_read_coefficients'];
-  _jpeg_mem_init = Module['_jpeg_mem_init'] = wasmExports['jpeg_mem_init'];
-  _jpeg_get_small = Module['_jpeg_get_small'] = wasmExports['jpeg_get_small'];
-  _jpeg_mem_term = Module['_jpeg_mem_term'] = wasmExports['jpeg_mem_term'];
-  _jpeg_get_large = Module['_jpeg_get_large'] = wasmExports['jpeg_get_large'];
-  _jpeg_mem_available = Module['_jpeg_mem_available'] = wasmExports['jpeg_mem_available'];
-  _jpeg_open_backing_store = Module['_jpeg_open_backing_store'] = wasmExports['jpeg_open_backing_store'];
-  _jpeg_free_large = Module['_jpeg_free_large'] = wasmExports['jpeg_free_large'];
-  _jpeg_free_small = Module['_jpeg_free_small'] = wasmExports['jpeg_free_small'];
-  _jinit_read_bmp = Module['_jinit_read_bmp'] = wasmExports['jinit_read_bmp'];
-  _getc = Module['_getc'] = wasmExports['getc'];
-  _read_color_map = Module['_read_color_map'] = wasmExports['read_color_map'];
-  _jinit_read_gif = Module['_jinit_read_gif'] = wasmExports['jinit_read_gif'];
-  _jinit_read_ppm = Module['_jinit_read_ppm'] = wasmExports['jinit_read_ppm'];
-  _read_quant_tables = Module['_read_quant_tables'] = wasmExports['read_quant_tables'];
-  _read_scan_script = Module['_read_scan_script'] = wasmExports['read_scan_script'];
-  _ungetc = Module['_ungetc'] = wasmExports['ungetc'];
-  _set_quality_ratings = Module['_set_quality_ratings'] = wasmExports['set_quality_ratings'];
-  _set_quant_slots = Module['_set_quant_slots'] = wasmExports['set_quant_slots'];
-  _set_sample_factors = Module['_set_sample_factors'] = wasmExports['set_sample_factors'];
-  _jinit_read_targa = Module['_jinit_read_targa'] = wasmExports['jinit_read_targa'];
-  _jtransform_parse_crop_spec = Module['_jtransform_parse_crop_spec'] = wasmExports['jtransform_parse_crop_spec'];
-  _jtransform_request_workspace = Module['_jtransform_request_workspace'] = wasmExports['jtransform_request_workspace'];
-  _jtransform_perfect_transform = Module['_jtransform_perfect_transform'] = wasmExports['jtransform_perfect_transform'];
-  _jtransform_adjust_parameters = Module['_jtransform_adjust_parameters'] = wasmExports['jtransform_adjust_parameters'];
-  _jtransform_execute_transform = Module['_jtransform_execute_transform'] = wasmExports['jtransform_execute_transform'];
-  _jcopy_markers_setup = Module['_jcopy_markers_setup'] = wasmExports['jcopy_markers_setup'];
-  _jcopy_markers_execute = Module['_jcopy_markers_execute'] = wasmExports['jcopy_markers_execute'];
-  _jinit_write_bmp = Module['_jinit_write_bmp'] = wasmExports['jinit_write_bmp'];
-  _putc = Module['_putc'] = wasmExports['putc'];
-  _jinit_write_gif = Module['_jinit_write_gif'] = wasmExports['jinit_write_gif'];
-  _jinit_write_ppm = Module['_jinit_write_ppm'] = wasmExports['jinit_write_ppm'];
-  _jinit_write_targa = Module['_jinit_write_targa'] = wasmExports['jinit_write_targa'];
-  _DGifOpenFileName = Module['_DGifOpenFileName'] = wasmExports['DGifOpenFileName'];
-  _open = Module['_open'] = wasmExports['open'];
-  _DGifOpenFileHandle = Module['_DGifOpenFileHandle'] = wasmExports['DGifOpenFileHandle'];
-  _fdopen = Module['_fdopen'] = wasmExports['fdopen'];
-  _DGifGetScreenDesc = Module['_DGifGetScreenDesc'] = wasmExports['DGifGetScreenDesc'];
-  _GifFreeMapObject = Module['_GifFreeMapObject'] = wasmExports['GifFreeMapObject'];
-  _GifMakeMapObject = Module['_GifMakeMapObject'] = wasmExports['GifMakeMapObject'];
-  _DGifGetGifVersion = Module['_DGifGetGifVersion'] = wasmExports['DGifGetGifVersion'];
-  _DGifGetRecordType = Module['_DGifGetRecordType'] = wasmExports['DGifGetRecordType'];
-  _DGifGetImageHeader = Module['_DGifGetImageHeader'] = wasmExports['DGifGetImageHeader'];
-  _DGifGetImageDesc = Module['_DGifGetImageDesc'] = wasmExports['DGifGetImageDesc'];
-  _openbsd_reallocarray = Module['_openbsd_reallocarray'] = wasmExports['openbsd_reallocarray'];
-  _DGifGetLine = Module['_DGifGetLine'] = wasmExports['DGifGetLine'];
-  _DGifGetCodeNext = Module['_DGifGetCodeNext'] = wasmExports['DGifGetCodeNext'];
-  _DGifGetPixel = Module['_DGifGetPixel'] = wasmExports['DGifGetPixel'];
-  _DGifGetExtension = Module['_DGifGetExtension'] = wasmExports['DGifGetExtension'];
-  _DGifGetExtensionNext = Module['_DGifGetExtensionNext'] = wasmExports['DGifGetExtensionNext'];
-  _DGifSavedExtensionToGCB = Module['_DGifSavedExtensionToGCB'] = wasmExports['DGifSavedExtensionToGCB'];
-  _GifFreeSavedImages = Module['_GifFreeSavedImages'] = wasmExports['GifFreeSavedImages'];
-  _GifFreeExtensions = Module['_GifFreeExtensions'] = wasmExports['GifFreeExtensions'];
-  _DGifGetCode = Module['_DGifGetCode'] = wasmExports['DGifGetCode'];
-  _DGifGetLZCodes = Module['_DGifGetLZCodes'] = wasmExports['DGifGetLZCodes'];
-  _GifAddExtensionBlock = Module['_GifAddExtensionBlock'] = wasmExports['GifAddExtensionBlock'];
-  _EGifOpenFileName = Module['_EGifOpenFileName'] = wasmExports['EGifOpenFileName'];
-  _EGifOpenFileHandle = Module['_EGifOpenFileHandle'] = wasmExports['EGifOpenFileHandle'];
-  __InitHashTable = Module['__InitHashTable'] = wasmExports['_InitHashTable'];
-  _EGifOpen = Module['_EGifOpen'] = wasmExports['EGifOpen'];
-  _EGifGetGifVersion = Module['_EGifGetGifVersion'] = wasmExports['EGifGetGifVersion'];
-  _EGifSetGifVersion = Module['_EGifSetGifVersion'] = wasmExports['EGifSetGifVersion'];
-  _EGifPutScreenDesc = Module['_EGifPutScreenDesc'] = wasmExports['EGifPutScreenDesc'];
-  _EGifPutImageDesc = Module['_EGifPutImageDesc'] = wasmExports['EGifPutImageDesc'];
-  __ClearHashTable = Module['__ClearHashTable'] = wasmExports['_ClearHashTable'];
-  _EGifPutLine = Module['_EGifPutLine'] = wasmExports['EGifPutLine'];
-  __ExistsHashTable = Module['__ExistsHashTable'] = wasmExports['_ExistsHashTable'];
-  __InsertHashTable = Module['__InsertHashTable'] = wasmExports['_InsertHashTable'];
-  _EGifPutPixel = Module['_EGifPutPixel'] = wasmExports['EGifPutPixel'];
-  _EGifPutComment = Module['_EGifPutComment'] = wasmExports['EGifPutComment'];
-  _EGifPutExtension = Module['_EGifPutExtension'] = wasmExports['EGifPutExtension'];
-  _EGifPutExtensionLeader = Module['_EGifPutExtensionLeader'] = wasmExports['EGifPutExtensionLeader'];
-  _EGifPutExtensionBlock = Module['_EGifPutExtensionBlock'] = wasmExports['EGifPutExtensionBlock'];
-  _EGifPutExtensionTrailer = Module['_EGifPutExtensionTrailer'] = wasmExports['EGifPutExtensionTrailer'];
-  _EGifGCBToExtension = Module['_EGifGCBToExtension'] = wasmExports['EGifGCBToExtension'];
-  _EGifGCBToSavedExtension = Module['_EGifGCBToSavedExtension'] = wasmExports['EGifGCBToSavedExtension'];
-  _EGifPutCode = Module['_EGifPutCode'] = wasmExports['EGifPutCode'];
-  _EGifPutCodeNext = Module['_EGifPutCodeNext'] = wasmExports['EGifPutCodeNext'];
-  _EGifCloseFile = Module['_EGifCloseFile'] = wasmExports['EGifCloseFile'];
-  _EGifSpew = Module['_EGifSpew'] = wasmExports['EGifSpew'];
-  _GAGetArgs = Module['_GAGetArgs'] = wasmExports['GAGetArgs'];
-  _GAPrintErrMsg = Module['_GAPrintErrMsg'] = wasmExports['GAPrintErrMsg'];
-  _GAPrintHowTo = Module['_GAPrintHowTo'] = wasmExports['GAPrintHowTo'];
-  _GifDrawText8x8 = Module['_GifDrawText8x8'] = wasmExports['GifDrawText8x8'];
-  _GifDrawBox = Module['_GifDrawBox'] = wasmExports['GifDrawBox'];
-  _GifDrawRectangle = Module['_GifDrawRectangle'] = wasmExports['GifDrawRectangle'];
-  _GifDrawBoxedText8x8 = Module['_GifDrawBoxedText8x8'] = wasmExports['GifDrawBoxedText8x8'];
-  _GifBitSize = Module['_GifBitSize'] = wasmExports['GifBitSize'];
-  _GifUnionColorMap = Module['_GifUnionColorMap'] = wasmExports['GifUnionColorMap'];
-  _GifApplyTranslation = Module['_GifApplyTranslation'] = wasmExports['GifApplyTranslation'];
-  _FreeLastSavedImage = Module['_FreeLastSavedImage'] = wasmExports['FreeLastSavedImage'];
-  _GifMakeSavedImage = Module['_GifMakeSavedImage'] = wasmExports['GifMakeSavedImage'];
-  _GifQprintf = Module['_GifQprintf'] = wasmExports['GifQprintf'];
-  _PrintGifError = Module['_PrintGifError'] = wasmExports['PrintGifError'];
-  _GifQuantizeBuffer = Module['_GifQuantizeBuffer'] = wasmExports['GifQuantizeBuffer'];
-  _af_shaper_get_cluster = Module['_af_shaper_get_cluster'] = wasmExports['af_shaper_get_cluster'];
-  _FT_Get_Advance = Module['_FT_Get_Advance'] = wasmExports['FT_Get_Advance'];
-  _FT_MulDiv = Module['_FT_MulDiv'] = wasmExports['FT_MulDiv'];
-  _ft_hash_num_init = Module['_ft_hash_num_init'] = wasmExports['ft_hash_num_init'];
-  _ft_hash_num_insert = Module['_ft_hash_num_insert'] = wasmExports['ft_hash_num_insert'];
-  _ft_hash_str_free = Module['_ft_hash_str_free'] = wasmExports['ft_hash_str_free'];
-  _ft_hash_num_lookup = Module['_ft_hash_num_lookup'] = wasmExports['ft_hash_num_lookup'];
-  _FT_Matrix_Invert = Module['_FT_Matrix_Invert'] = wasmExports['FT_Matrix_Invert'];
-  _FT_Vector_Transform = Module['_FT_Vector_Transform'] = wasmExports['FT_Vector_Transform'];
-  _FT_Outline_Translate = Module['_FT_Outline_Translate'] = wasmExports['FT_Outline_Translate'];
-  _FT_Outline_Transform = Module['_FT_Outline_Transform'] = wasmExports['FT_Outline_Transform'];
-  _FT_Outline_Get_CBox = Module['_FT_Outline_Get_CBox'] = wasmExports['FT_Outline_Get_CBox'];
-  _af_shaper_get_coverage = Module['_af_shaper_get_coverage'] = wasmExports['af_shaper_get_coverage'];
-  _af_shaper_buf_create = Module['_af_shaper_buf_create'] = wasmExports['af_shaper_buf_create'];
-  _af_shaper_buf_destroy = Module['_af_shaper_buf_destroy'] = wasmExports['af_shaper_buf_destroy'];
-  _af_shaper_get_elem = Module['_af_shaper_get_elem'] = wasmExports['af_shaper_get_elem'];
-  _FT_Outline_Get_Orientation = Module['_FT_Outline_Get_Orientation'] = wasmExports['FT_Outline_Get_Orientation'];
-  _FT_DivFix = Module['_FT_DivFix'] = wasmExports['FT_DivFix'];
-  _FT_Outline_EmboldenXY = Module['_FT_Outline_EmboldenXY'] = wasmExports['FT_Outline_EmboldenXY'];
-  _FT_Get_Next_Char = Module['_FT_Get_Next_Char'] = wasmExports['FT_Get_Next_Char'];
-  _ft_hash_str_lookup = Module['_ft_hash_str_lookup'] = wasmExports['ft_hash_str_lookup'];
-  _ft_hash_str_init = Module['_ft_hash_str_init'] = wasmExports['ft_hash_str_init'];
-  _ft_hash_str_insert = Module['_ft_hash_str_insert'] = wasmExports['ft_hash_str_insert'];
-  _FT_Get_Module = Module['_FT_Get_Module'] = wasmExports['FT_Get_Module'];
-  _FT_Set_Named_Instance = Module['_FT_Set_Named_Instance'] = wasmExports['FT_Set_Named_Instance'];
-  _FT_RoundFix = Module['_FT_RoundFix'] = wasmExports['FT_RoundFix'];
-  _ps_property_set = Module['_ps_property_set'] = wasmExports['ps_property_set'];
-  _ps_property_get = Module['_ps_property_get'] = wasmExports['ps_property_get'];
-  _FT_Get_Advances = Module['_FT_Get_Advances'] = wasmExports['FT_Get_Advances'];
-  _FT_Palette_Data_Get = Module['_FT_Palette_Data_Get'] = wasmExports['FT_Palette_Data_Get'];
-  _FT_Palette_Select = Module['_FT_Palette_Select'] = wasmExports['FT_Palette_Select'];
-  _FT_Palette_Set_Foreground_Color = Module['_FT_Palette_Set_Foreground_Color'] = wasmExports['FT_Palette_Set_Foreground_Color'];
-  _FT_Error_String = Module['_FT_Error_String'] = wasmExports['FT_Error_String'];
-  _FT_Get_Font_Format = Module['_FT_Get_Font_Format'] = wasmExports['FT_Get_Font_Format'];
-  _FT_Get_X11_Font_Format = Module['_FT_Get_X11_Font_Format'] = wasmExports['FT_Get_X11_Font_Format'];
-  _ft_hash_str_insert_no_overwrite = Module['_ft_hash_str_insert_no_overwrite'] = wasmExports['ft_hash_str_insert_no_overwrite'];
-  _ft_hash_num_insert_no_overwrite = Module['_ft_hash_num_insert_no_overwrite'] = wasmExports['ft_hash_num_insert_no_overwrite'];
-  _ft_hash_num_iterator = Module['_ft_hash_num_iterator'] = wasmExports['ft_hash_num_iterator'];
-  _ft_hash_str_iterator = Module['_ft_hash_str_iterator'] = wasmExports['ft_hash_str_iterator'];
-  _FT_Library_SetLcdFilterWeights = Module['_FT_Library_SetLcdFilterWeights'] = wasmExports['FT_Library_SetLcdFilterWeights'];
-  _FT_Library_SetLcdFilter = Module['_FT_Library_SetLcdFilter'] = wasmExports['FT_Library_SetLcdFilter'];
-  _FT_Library_SetLcdGeometry = Module['_FT_Library_SetLcdGeometry'] = wasmExports['FT_Library_SetLcdGeometry'];
-  _FT_Get_Transform = Module['_FT_Get_Transform'] = wasmExports['FT_Get_Transform'];
-  _FT_Outline_Check = Module['_FT_Outline_Check'] = wasmExports['FT_Outline_Check'];
-  _FT_Load_Char = Module['_FT_Load_Char'] = wasmExports['FT_Load_Char'];
-  _FT_Get_CMap_Format = Module['_FT_Get_CMap_Format'] = wasmExports['FT_Get_CMap_Format'];
-  _FT_Attach_File = Module['_FT_Attach_File'] = wasmExports['FT_Attach_File'];
-  _FT_Attach_Stream = Module['_FT_Attach_Stream'] = wasmExports['FT_Attach_Stream'];
-  _FT_Reference_Face = Module['_FT_Reference_Face'] = wasmExports['FT_Reference_Face'];
-  _FT_List_Find = Module['_FT_List_Find'] = wasmExports['FT_List_Find'];
-  _FT_List_Remove = Module['_FT_List_Remove'] = wasmExports['FT_List_Remove'];
-  _FT_List_Add = Module['_FT_List_Add'] = wasmExports['FT_List_Add'];
-  _FT_Select_Size = Module['_FT_Select_Size'] = wasmExports['FT_Select_Size'];
-  _FT_Get_Track_Kerning = Module['_FT_Get_Track_Kerning'] = wasmExports['FT_Get_Track_Kerning'];
-  _FT_Set_Charmap = Module['_FT_Set_Charmap'] = wasmExports['FT_Set_Charmap'];
-  _FT_Get_Charmap_Index = Module['_FT_Get_Charmap_Index'] = wasmExports['FT_Get_Charmap_Index'];
-  _FT_Get_First_Char = Module['_FT_Get_First_Char'] = wasmExports['FT_Get_First_Char'];
-  _FT_Face_GetCharVariantIndex = Module['_FT_Face_GetCharVariantIndex'] = wasmExports['FT_Face_GetCharVariantIndex'];
-  _FT_Face_GetCharVariantIsDefault = Module['_FT_Face_GetCharVariantIsDefault'] = wasmExports['FT_Face_GetCharVariantIsDefault'];
-  _FT_Face_GetVariantSelectors = Module['_FT_Face_GetVariantSelectors'] = wasmExports['FT_Face_GetVariantSelectors'];
-  _FT_Face_GetVariantsOfChar = Module['_FT_Face_GetVariantsOfChar'] = wasmExports['FT_Face_GetVariantsOfChar'];
-  _FT_Face_GetCharsOfVariant = Module['_FT_Face_GetCharsOfVariant'] = wasmExports['FT_Face_GetCharsOfVariant'];
-  _FT_Get_Name_Index = Module['_FT_Get_Name_Index'] = wasmExports['FT_Get_Name_Index'];
-  _FT_Get_Glyph_Name = Module['_FT_Get_Glyph_Name'] = wasmExports['FT_Get_Glyph_Name'];
-  _FT_Get_Postscript_Name = Module['_FT_Get_Postscript_Name'] = wasmExports['FT_Get_Postscript_Name'];
-  _FT_Sfnt_Table_Info = Module['_FT_Sfnt_Table_Info'] = wasmExports['FT_Sfnt_Table_Info'];
-  _FT_Get_CMap_Language_ID = Module['_FT_Get_CMap_Language_ID'] = wasmExports['FT_Get_CMap_Language_ID'];
-  _FT_Get_Renderer = Module['_FT_Get_Renderer'] = wasmExports['FT_Get_Renderer'];
-  _FT_Set_Renderer = Module['_FT_Set_Renderer'] = wasmExports['FT_Set_Renderer'];
-  _FT_List_Up = Module['_FT_List_Up'] = wasmExports['FT_List_Up'];
-  _FT_Get_Color_Glyph_Layer = Module['_FT_Get_Color_Glyph_Layer'] = wasmExports['FT_Get_Color_Glyph_Layer'];
-  _FT_Add_Module = Module['_FT_Add_Module'] = wasmExports['FT_Add_Module'];
-  _FT_Remove_Module = Module['_FT_Remove_Module'] = wasmExports['FT_Remove_Module'];
-  _FT_Property_Set = Module['_FT_Property_Set'] = wasmExports['FT_Property_Set'];
-  _FT_Property_Get = Module['_FT_Property_Get'] = wasmExports['FT_Property_Get'];
-  _FT_Reference_Library = Module['_FT_Reference_Library'] = wasmExports['FT_Reference_Library'];
-  _FT_Library_Version = Module['_FT_Library_Version'] = wasmExports['FT_Library_Version'];
-  _FT_Set_Debug_Hook = Module['_FT_Set_Debug_Hook'] = wasmExports['FT_Set_Debug_Hook'];
-  _FT_Get_TrueType_Engine_Type = Module['_FT_Get_TrueType_Engine_Type'] = wasmExports['FT_Get_TrueType_Engine_Type'];
-  _FT_Get_SubGlyph_Info = Module['_FT_Get_SubGlyph_Info'] = wasmExports['FT_Get_SubGlyph_Info'];
-  _FT_Get_Color_Glyph_Paint = Module['_FT_Get_Color_Glyph_Paint'] = wasmExports['FT_Get_Color_Glyph_Paint'];
-  _FT_Get_Color_Glyph_ClipBox = Module['_FT_Get_Color_Glyph_ClipBox'] = wasmExports['FT_Get_Color_Glyph_ClipBox'];
-  _FT_Get_Paint_Layers = Module['_FT_Get_Paint_Layers'] = wasmExports['FT_Get_Paint_Layers'];
-  _FT_Get_Paint = Module['_FT_Get_Paint'] = wasmExports['FT_Get_Paint'];
-  _FT_Get_Colorline_Stops = Module['_FT_Get_Colorline_Stops'] = wasmExports['FT_Get_Colorline_Stops'];
-  _FT_Outline_Decompose = Module['_FT_Outline_Decompose'] = wasmExports['FT_Outline_Decompose'];
-  _FT_Outline_New = Module['_FT_Outline_New'] = wasmExports['FT_Outline_New'];
-  _FT_Outline_Done = Module['_FT_Outline_Done'] = wasmExports['FT_Outline_Done'];
-  _FT_Outline_Copy = Module['_FT_Outline_Copy'] = wasmExports['FT_Outline_Copy'];
-  _FT_Outline_Reverse = Module['_FT_Outline_Reverse'] = wasmExports['FT_Outline_Reverse'];
-  _FT_Outline_Render = Module['_FT_Outline_Render'] = wasmExports['FT_Outline_Render'];
-  _FT_Outline_Get_Bitmap = Module['_FT_Outline_Get_Bitmap'] = wasmExports['FT_Outline_Get_Bitmap'];
-  _FT_Outline_Embolden = Module['_FT_Outline_Embolden'] = wasmExports['FT_Outline_Embolden'];
-  _FT_Get_Sfnt_LangTag = Module['_FT_Get_Sfnt_LangTag'] = wasmExports['FT_Get_Sfnt_LangTag'];
-  _FT_Cos = Module['_FT_Cos'] = wasmExports['FT_Cos'];
-  _FT_Vector_Unit = Module['_FT_Vector_Unit'] = wasmExports['FT_Vector_Unit'];
-  _FT_Sin = Module['_FT_Sin'] = wasmExports['FT_Sin'];
-  _FT_Tan = Module['_FT_Tan'] = wasmExports['FT_Tan'];
-  _FT_Atan2 = Module['_FT_Atan2'] = wasmExports['FT_Atan2'];
-  _FT_Vector_Rotate = Module['_FT_Vector_Rotate'] = wasmExports['FT_Vector_Rotate'];
-  _FT_Vector_Length = Module['_FT_Vector_Length'] = wasmExports['FT_Vector_Length'];
-  _FT_Vector_Polarize = Module['_FT_Vector_Polarize'] = wasmExports['FT_Vector_Polarize'];
-  _FT_Vector_From_Polar = Module['_FT_Vector_From_Polar'] = wasmExports['FT_Vector_From_Polar'];
-  _FT_Angle_Diff = Module['_FT_Angle_Diff'] = wasmExports['FT_Angle_Diff'];
-  _FT_CeilFix = Module['_FT_CeilFix'] = wasmExports['FT_CeilFix'];
-  _FT_FloorFix = Module['_FT_FloorFix'] = wasmExports['FT_FloorFix'];
-  _FT_MulFix = Module['_FT_MulFix'] = wasmExports['FT_MulFix'];
-  _FT_Matrix_Multiply = Module['_FT_Matrix_Multiply'] = wasmExports['FT_Matrix_Multiply'];
-  _FT_List_Insert = Module['_FT_List_Insert'] = wasmExports['FT_List_Insert'];
-  _FT_List_Iterate = Module['_FT_List_Iterate'] = wasmExports['FT_List_Iterate'];
-  _FT_List_Finalize = Module['_FT_List_Finalize'] = wasmExports['FT_List_Finalize'];
-  _FT_Outline_Get_BBox = Module['_FT_Outline_Get_BBox'] = wasmExports['FT_Outline_Get_BBox'];
-  _FT_Get_BDF_Charset_ID = Module['_FT_Get_BDF_Charset_ID'] = wasmExports['FT_Get_BDF_Charset_ID'];
-  _FT_Get_BDF_Property = Module['_FT_Get_BDF_Property'] = wasmExports['FT_Get_BDF_Property'];
-  _FT_Bitmap_Init = Module['_FT_Bitmap_Init'] = wasmExports['FT_Bitmap_Init'];
-  _FT_Bitmap_New = Module['_FT_Bitmap_New'] = wasmExports['FT_Bitmap_New'];
-  _FT_Bitmap_Copy = Module['_FT_Bitmap_Copy'] = wasmExports['FT_Bitmap_Copy'];
-  _FT_Bitmap_Convert = Module['_FT_Bitmap_Convert'] = wasmExports['FT_Bitmap_Convert'];
-  _FT_Bitmap_Done = Module['_FT_Bitmap_Done'] = wasmExports['FT_Bitmap_Done'];
-  _FT_Bitmap_Blend = Module['_FT_Bitmap_Blend'] = wasmExports['FT_Bitmap_Blend'];
-  _FT_Stream_OpenBzip2 = Module['_FT_Stream_OpenBzip2'] = wasmExports['FT_Stream_OpenBzip2'];
-  _FTC_ImageCache_New = Module['_FTC_ImageCache_New'] = wasmExports['FTC_ImageCache_New'];
-  _FTC_ImageCache_Lookup = Module['_FTC_ImageCache_Lookup'] = wasmExports['FTC_ImageCache_Lookup'];
-  _FTC_ImageCache_LookupScaler = Module['_FTC_ImageCache_LookupScaler'] = wasmExports['FTC_ImageCache_LookupScaler'];
-  _FTC_SBitCache_New = Module['_FTC_SBitCache_New'] = wasmExports['FTC_SBitCache_New'];
-  _FTC_SBitCache_Lookup = Module['_FTC_SBitCache_Lookup'] = wasmExports['FTC_SBitCache_Lookup'];
-  _FTC_SBitCache_LookupScaler = Module['_FTC_SBitCache_LookupScaler'] = wasmExports['FTC_SBitCache_LookupScaler'];
-  _FTC_CMapCache_New = Module['_FTC_CMapCache_New'] = wasmExports['FTC_CMapCache_New'];
-  _FTC_CMapCache_Lookup = Module['_FTC_CMapCache_Lookup'] = wasmExports['FTC_CMapCache_Lookup'];
-  _FTC_Manager_LookupFace = Module['_FTC_Manager_LookupFace'] = wasmExports['FTC_Manager_LookupFace'];
-  _FTC_Manager_LookupSize = Module['_FTC_Manager_LookupSize'] = wasmExports['FTC_Manager_LookupSize'];
-  _FTC_Manager_New = Module['_FTC_Manager_New'] = wasmExports['FTC_Manager_New'];
-  _FTC_Manager_Done = Module['_FTC_Manager_Done'] = wasmExports['FTC_Manager_Done'];
-  _FTC_Manager_Reset = Module['_FTC_Manager_Reset'] = wasmExports['FTC_Manager_Reset'];
-  _FTC_Manager_RemoveFaceID = Module['_FTC_Manager_RemoveFaceID'] = wasmExports['FTC_Manager_RemoveFaceID'];
-  _FTC_Node_Unref = Module['_FTC_Node_Unref'] = wasmExports['FTC_Node_Unref'];
-  _FT_Get_CID_Registry_Ordering_Supplement = Module['_FT_Get_CID_Registry_Ordering_Supplement'] = wasmExports['FT_Get_CID_Registry_Ordering_Supplement'];
-  _FT_Get_CID_Is_Internally_CID_Keyed = Module['_FT_Get_CID_Is_Internally_CID_Keyed'] = wasmExports['FT_Get_CID_Is_Internally_CID_Keyed'];
-  _FT_Get_CID_From_Glyph_Index = Module['_FT_Get_CID_From_Glyph_Index'] = wasmExports['FT_Get_CID_From_Glyph_Index'];
-  _FT_Trace_Set_Level = Module['_FT_Trace_Set_Level'] = wasmExports['FT_Trace_Set_Level'];
-  _FT_Trace_Set_Default_Level = Module['_FT_Trace_Set_Default_Level'] = wasmExports['FT_Trace_Set_Default_Level'];
-  _FT_Set_Log_Handler = Module['_FT_Set_Log_Handler'] = wasmExports['FT_Set_Log_Handler'];
-  _FT_Set_Default_Log_Handler = Module['_FT_Set_Default_Log_Handler'] = wasmExports['FT_Set_Default_Log_Handler'];
-  _FT_Get_FSType_Flags = Module['_FT_Get_FSType_Flags'] = wasmExports['FT_Get_FSType_Flags'];
-  _FT_Get_Gasp = Module['_FT_Get_Gasp'] = wasmExports['FT_Get_Gasp'];
-  _FT_New_Glyph = Module['_FT_New_Glyph'] = wasmExports['FT_New_Glyph'];
-  _FT_Glyph_Transform = Module['_FT_Glyph_Transform'] = wasmExports['FT_Glyph_Transform'];
-  _FT_Glyph_Get_CBox = Module['_FT_Glyph_Get_CBox'] = wasmExports['FT_Glyph_Get_CBox'];
-  _FT_TrueTypeGX_Validate = Module['_FT_TrueTypeGX_Validate'] = wasmExports['FT_TrueTypeGX_Validate'];
-  _FT_TrueTypeGX_Free = Module['_FT_TrueTypeGX_Free'] = wasmExports['FT_TrueTypeGX_Free'];
-  _FT_ClassicKern_Validate = Module['_FT_ClassicKern_Validate'] = wasmExports['FT_ClassicKern_Validate'];
-  _FT_ClassicKern_Free = Module['_FT_ClassicKern_Free'] = wasmExports['FT_ClassicKern_Free'];
-  _FT_Stream_OpenGzip = Module['_FT_Stream_OpenGzip'] = wasmExports['FT_Stream_OpenGzip'];
-  _FT_Gzip_Uncompress = Module['_FT_Gzip_Uncompress'] = wasmExports['FT_Gzip_Uncompress'];
-  _FT_Set_Default_Properties = Module['_FT_Set_Default_Properties'] = wasmExports['FT_Set_Default_Properties'];
-  _FT_Stream_OpenLZW = Module['_FT_Stream_OpenLZW'] = wasmExports['FT_Stream_OpenLZW'];
-  _FT_Get_Multi_Master = Module['_FT_Get_Multi_Master'] = wasmExports['FT_Get_Multi_Master'];
-  _FT_Get_MM_Var = Module['_FT_Get_MM_Var'] = wasmExports['FT_Get_MM_Var'];
-  _FT_Done_MM_Var = Module['_FT_Done_MM_Var'] = wasmExports['FT_Done_MM_Var'];
-  _FT_Set_MM_Design_Coordinates = Module['_FT_Set_MM_Design_Coordinates'] = wasmExports['FT_Set_MM_Design_Coordinates'];
-  _FT_Set_MM_WeightVector = Module['_FT_Set_MM_WeightVector'] = wasmExports['FT_Set_MM_WeightVector'];
-  _FT_Get_MM_WeightVector = Module['_FT_Get_MM_WeightVector'] = wasmExports['FT_Get_MM_WeightVector'];
-  _FT_Set_Var_Design_Coordinates = Module['_FT_Set_Var_Design_Coordinates'] = wasmExports['FT_Set_Var_Design_Coordinates'];
-  _FT_Get_Var_Design_Coordinates = Module['_FT_Get_Var_Design_Coordinates'] = wasmExports['FT_Get_Var_Design_Coordinates'];
-  _FT_Set_MM_Blend_Coordinates = Module['_FT_Set_MM_Blend_Coordinates'] = wasmExports['FT_Set_MM_Blend_Coordinates'];
-  _FT_Set_Var_Blend_Coordinates = Module['_FT_Set_Var_Blend_Coordinates'] = wasmExports['FT_Set_Var_Blend_Coordinates'];
-  _FT_Get_MM_Blend_Coordinates = Module['_FT_Get_MM_Blend_Coordinates'] = wasmExports['FT_Get_MM_Blend_Coordinates'];
-  _FT_Get_Var_Blend_Coordinates = Module['_FT_Get_Var_Blend_Coordinates'] = wasmExports['FT_Get_Var_Blend_Coordinates'];
-  _FT_Get_Var_Axis_Flags = Module['_FT_Get_Var_Axis_Flags'] = wasmExports['FT_Get_Var_Axis_Flags'];
-  _FT_Get_Default_Named_Instance = Module['_FT_Get_Default_Named_Instance'] = wasmExports['FT_Get_Default_Named_Instance'];
-  _FT_OpenType_Validate = Module['_FT_OpenType_Validate'] = wasmExports['FT_OpenType_Validate'];
-  _FT_OpenType_Free = Module['_FT_OpenType_Free'] = wasmExports['FT_OpenType_Free'];
-  _FT_Face_CheckTrueTypePatents = Module['_FT_Face_CheckTrueTypePatents'] = wasmExports['FT_Face_CheckTrueTypePatents'];
-  _FT_Face_SetUnpatentedHinting = Module['_FT_Face_SetUnpatentedHinting'] = wasmExports['FT_Face_SetUnpatentedHinting'];
-  _FT_Get_PFR_Metrics = Module['_FT_Get_PFR_Metrics'] = wasmExports['FT_Get_PFR_Metrics'];
-  _FT_Get_PFR_Kerning = Module['_FT_Get_PFR_Kerning'] = wasmExports['FT_Get_PFR_Kerning'];
-  _FT_Get_PFR_Advance = Module['_FT_Get_PFR_Advance'] = wasmExports['FT_Get_PFR_Advance'];
-  _FT_Outline_GetInsideBorder = Module['_FT_Outline_GetInsideBorder'] = wasmExports['FT_Outline_GetInsideBorder'];
-  _FT_Outline_GetOutsideBorder = Module['_FT_Outline_GetOutsideBorder'] = wasmExports['FT_Outline_GetOutsideBorder'];
-  _FT_Stroker_New = Module['_FT_Stroker_New'] = wasmExports['FT_Stroker_New'];
-  _FT_Stroker_Set = Module['_FT_Stroker_Set'] = wasmExports['FT_Stroker_Set'];
-  _FT_Stroker_Rewind = Module['_FT_Stroker_Rewind'] = wasmExports['FT_Stroker_Rewind'];
-  _FT_Stroker_Done = Module['_FT_Stroker_Done'] = wasmExports['FT_Stroker_Done'];
-  _FT_Stroker_LineTo = Module['_FT_Stroker_LineTo'] = wasmExports['FT_Stroker_LineTo'];
-  _FT_Stroker_ConicTo = Module['_FT_Stroker_ConicTo'] = wasmExports['FT_Stroker_ConicTo'];
-  _FT_Stroker_CubicTo = Module['_FT_Stroker_CubicTo'] = wasmExports['FT_Stroker_CubicTo'];
-  _FT_Stroker_BeginSubPath = Module['_FT_Stroker_BeginSubPath'] = wasmExports['FT_Stroker_BeginSubPath'];
-  _FT_Stroker_EndSubPath = Module['_FT_Stroker_EndSubPath'] = wasmExports['FT_Stroker_EndSubPath'];
-  _FT_Stroker_GetBorderCounts = Module['_FT_Stroker_GetBorderCounts'] = wasmExports['FT_Stroker_GetBorderCounts'];
-  _FT_Stroker_GetCounts = Module['_FT_Stroker_GetCounts'] = wasmExports['FT_Stroker_GetCounts'];
-  _FT_Stroker_ExportBorder = Module['_FT_Stroker_ExportBorder'] = wasmExports['FT_Stroker_ExportBorder'];
-  _FT_Stroker_Export = Module['_FT_Stroker_Export'] = wasmExports['FT_Stroker_Export'];
-  _FT_Stroker_ParseOutline = Module['_FT_Stroker_ParseOutline'] = wasmExports['FT_Stroker_ParseOutline'];
-  _FT_Glyph_Stroke = Module['_FT_Glyph_Stroke'] = wasmExports['FT_Glyph_Stroke'];
-  _FT_Glyph_StrokeBorder = Module['_FT_Glyph_StrokeBorder'] = wasmExports['FT_Glyph_StrokeBorder'];
-  _FT_GlyphSlot_Slant = Module['_FT_GlyphSlot_Slant'] = wasmExports['FT_GlyphSlot_Slant'];
-  _FT_GlyphSlot_AdjustWeight = Module['_FT_GlyphSlot_AdjustWeight'] = wasmExports['FT_GlyphSlot_AdjustWeight'];
-  _mmap = Module['_mmap'] = wasmExports['mmap'];
-  _munmap = Module['_munmap'] = wasmExports['munmap'];
-  _FT_Get_PS_Font_Info = Module['_FT_Get_PS_Font_Info'] = wasmExports['FT_Get_PS_Font_Info'];
-  _FT_Has_PS_Glyph_Names = Module['_FT_Has_PS_Glyph_Names'] = wasmExports['FT_Has_PS_Glyph_Names'];
-  _FT_Get_PS_Font_Private = Module['_FT_Get_PS_Font_Private'] = wasmExports['FT_Get_PS_Font_Private'];
-  _FT_Get_PS_Font_Value = Module['_FT_Get_PS_Font_Value'] = wasmExports['FT_Get_PS_Font_Value'];
-  _FT_Get_WinFNT_Header = Module['_FT_Get_WinFNT_Header'] = wasmExports['FT_Get_WinFNT_Header'];
-  _ps_hints_apply = Module['_ps_hints_apply'] = wasmExports['ps_hints_apply'];
-  _TT_RunIns = Module['_TT_RunIns'] = wasmExports['TT_RunIns'];
-  _TT_New_Context = Module['_TT_New_Context'] = wasmExports['TT_New_Context'];
+  _png_error = Module['_png_error'] = wasmExports['png_error'];
+  _png_sig_cmp = Module['_png_sig_cmp'] = wasmExports['png_sig_cmp'];
+  _png_zalloc = Module['_png_zalloc'] = wasmExports['png_zalloc'];
+  _png_warning = Module['_png_warning'] = wasmExports['png_warning'];
+  _png_malloc_warn = Module['_png_malloc_warn'] = wasmExports['png_malloc_warn'];
+  _png_zfree = Module['_png_zfree'] = wasmExports['png_zfree'];
+  _png_free = Module['_png_free'] = wasmExports['png_free'];
+  _png_reset_crc = Module['_png_reset_crc'] = wasmExports['png_reset_crc'];
+  _png_calculate_crc = Module['_png_calculate_crc'] = wasmExports['png_calculate_crc'];
+  _png_user_version_check = Module['_png_user_version_check'] = wasmExports['png_user_version_check'];
+  _png_safecat = Module['_png_safecat'] = wasmExports['png_safecat'];
+  _png_create_png_struct = Module['_png_create_png_struct'] = wasmExports['png_create_png_struct'];
+  _png_set_mem_fn = Module['_png_set_mem_fn'] = wasmExports['png_set_mem_fn'];
+  _png_malloc_base = Module['_png_malloc_base'] = wasmExports['png_malloc_base'];
+  _png_destroy_info_struct = Module['_png_destroy_info_struct'] = wasmExports['png_destroy_info_struct'];
+  _png_free_data = Module['_png_free_data'] = wasmExports['png_free_data'];
+  _png_info_init_3 = Module['_png_info_init_3'] = wasmExports['png_info_init_3'];
+  _png_data_freer = Module['_png_data_freer'] = wasmExports['png_data_freer'];
+  _png_init_io = Module['_png_init_io'] = wasmExports['png_init_io'];
+  _png_save_int_32 = Module['_png_save_int_32'] = wasmExports['png_save_int_32'];
+  _png_save_uint_32 = Module['_png_save_uint_32'] = wasmExports['png_save_uint_32'];
+  _png_convert_to_rfc1123_buffer = Module['_png_convert_to_rfc1123_buffer'] = wasmExports['png_convert_to_rfc1123_buffer'];
+  _png_format_number = Module['_png_format_number'] = wasmExports['png_format_number'];
+  _png_convert_to_rfc1123 = Module['_png_convert_to_rfc1123'] = wasmExports['png_convert_to_rfc1123'];
+  _png_get_copyright = Module['_png_get_copyright'] = wasmExports['png_get_copyright'];
+  _png_get_libpng_ver = Module['_png_get_libpng_ver'] = wasmExports['png_get_libpng_ver'];
+  _png_get_header_ver = Module['_png_get_header_ver'] = wasmExports['png_get_header_ver'];
+  _png_get_header_version = Module['_png_get_header_version'] = wasmExports['png_get_header_version'];
+  _png_build_grayscale_palette = Module['_png_build_grayscale_palette'] = wasmExports['png_build_grayscale_palette'];
+  _png_handle_as_unknown = Module['_png_handle_as_unknown'] = wasmExports['png_handle_as_unknown'];
+  _png_chunk_unknown_handling = Module['_png_chunk_unknown_handling'] = wasmExports['png_chunk_unknown_handling'];
+  _png_reset_zstream = Module['_png_reset_zstream'] = wasmExports['png_reset_zstream'];
+  _png_access_version_number = Module['_png_access_version_number'] = wasmExports['png_access_version_number'];
+  _png_zstream_error = Module['_png_zstream_error'] = wasmExports['png_zstream_error'];
+  _png_xy_from_XYZ = Module['_png_xy_from_XYZ'] = wasmExports['png_xy_from_XYZ'];
+  _png_muldiv = Module['_png_muldiv'] = wasmExports['png_muldiv'];
+  _png_XYZ_from_xy = Module['_png_XYZ_from_xy'] = wasmExports['png_XYZ_from_xy'];
+  _png_reciprocal = Module['_png_reciprocal'] = wasmExports['png_reciprocal'];
+  _png_icc_check_length = Module['_png_icc_check_length'] = wasmExports['png_icc_check_length'];
+  _png_chunk_benign_error = Module['_png_chunk_benign_error'] = wasmExports['png_chunk_benign_error'];
+  _png_icc_check_header = Module['_png_icc_check_header'] = wasmExports['png_icc_check_header'];
+  _png_icc_check_tag_table = Module['_png_icc_check_tag_table'] = wasmExports['png_icc_check_tag_table'];
+  _png_set_rgb_coefficients = Module['_png_set_rgb_coefficients'] = wasmExports['png_set_rgb_coefficients'];
+  _png_check_IHDR = Module['_png_check_IHDR'] = wasmExports['png_check_IHDR'];
+  _png_check_fp_number = Module['_png_check_fp_number'] = wasmExports['png_check_fp_number'];
+  _png_check_fp_string = Module['_png_check_fp_string'] = wasmExports['png_check_fp_string'];
+  _png_ascii_from_fp = Module['_png_ascii_from_fp'] = wasmExports['png_ascii_from_fp'];
+  _png_ascii_from_fixed = Module['_png_ascii_from_fixed'] = wasmExports['png_ascii_from_fixed'];
+  _png_fixed = Module['_png_fixed'] = wasmExports['png_fixed'];
+  _png_fixed_error = Module['_png_fixed_error'] = wasmExports['png_fixed_error'];
+  _png_fixed_ITU = Module['_png_fixed_ITU'] = wasmExports['png_fixed_ITU'];
+  _png_gamma_significant = Module['_png_gamma_significant'] = wasmExports['png_gamma_significant'];
+  _png_reciprocal2 = Module['_png_reciprocal2'] = wasmExports['png_reciprocal2'];
+  _png_gamma_8bit_correct = Module['_png_gamma_8bit_correct'] = wasmExports['png_gamma_8bit_correct'];
+  _png_gamma_16bit_correct = Module['_png_gamma_16bit_correct'] = wasmExports['png_gamma_16bit_correct'];
+  _png_gamma_correct = Module['_png_gamma_correct'] = wasmExports['png_gamma_correct'];
+  _png_destroy_gamma_table = Module['_png_destroy_gamma_table'] = wasmExports['png_destroy_gamma_table'];
+  _png_build_gamma_table = Module['_png_build_gamma_table'] = wasmExports['png_build_gamma_table'];
+  _png_malloc = Module['_png_malloc'] = wasmExports['png_malloc'];
+  _png_calloc = Module['_png_calloc'] = wasmExports['png_calloc'];
+  _png_set_option = Module['_png_set_option'] = wasmExports['png_set_option'];
+  _png_image_free = Module['_png_image_free'] = wasmExports['png_image_free'];
+  _png_image_error = Module['_png_image_error'] = wasmExports['png_image_error'];
+  _png_longjmp = Module['_png_longjmp'] = wasmExports['png_longjmp'];
+  _png_warning_parameter = Module['_png_warning_parameter'] = wasmExports['png_warning_parameter'];
+  _png_warning_parameter_unsigned = Module['_png_warning_parameter_unsigned'] = wasmExports['png_warning_parameter_unsigned'];
+  _png_warning_parameter_signed = Module['_png_warning_parameter_signed'] = wasmExports['png_warning_parameter_signed'];
+  _png_formatted_warning = Module['_png_formatted_warning'] = wasmExports['png_formatted_warning'];
+  _png_benign_error = Module['_png_benign_error'] = wasmExports['png_benign_error'];
+  _png_chunk_error = Module['_png_chunk_error'] = wasmExports['png_chunk_error'];
+  _png_chunk_warning = Module['_png_chunk_warning'] = wasmExports['png_chunk_warning'];
+  _png_app_warning = Module['_png_app_warning'] = wasmExports['png_app_warning'];
+  _png_app_error = Module['_png_app_error'] = wasmExports['png_app_error'];
+  _png_chunk_report = Module['_png_chunk_report'] = wasmExports['png_chunk_report'];
+  _png_set_longjmp_fn = Module['_png_set_longjmp_fn'] = wasmExports['png_set_longjmp_fn'];
+  _png_free_jmpbuf = Module['_png_free_jmpbuf'] = wasmExports['png_free_jmpbuf'];
+  _png_get_error_ptr = Module['_png_get_error_ptr'] = wasmExports['png_get_error_ptr'];
+  _png_safe_error = Module['_png_safe_error'] = wasmExports['png_safe_error'];
+  _png_safe_warning = Module['_png_safe_warning'] = wasmExports['png_safe_warning'];
+  _png_safe_execute = Module['_png_safe_execute'] = wasmExports['png_safe_execute'];
+  _png_get_rowbytes = Module['_png_get_rowbytes'] = wasmExports['png_get_rowbytes'];
+  _png_get_rows = Module['_png_get_rows'] = wasmExports['png_get_rows'];
+  _png_get_image_width = Module['_png_get_image_width'] = wasmExports['png_get_image_width'];
+  _png_get_image_height = Module['_png_get_image_height'] = wasmExports['png_get_image_height'];
+  _png_get_bit_depth = Module['_png_get_bit_depth'] = wasmExports['png_get_bit_depth'];
+  _png_get_color_type = Module['_png_get_color_type'] = wasmExports['png_get_color_type'];
+  _png_get_filter_type = Module['_png_get_filter_type'] = wasmExports['png_get_filter_type'];
+  _png_get_interlace_type = Module['_png_get_interlace_type'] = wasmExports['png_get_interlace_type'];
+  _png_get_compression_type = Module['_png_get_compression_type'] = wasmExports['png_get_compression_type'];
+  _png_get_x_pixels_per_meter = Module['_png_get_x_pixels_per_meter'] = wasmExports['png_get_x_pixels_per_meter'];
+  _png_get_y_pixels_per_meter = Module['_png_get_y_pixels_per_meter'] = wasmExports['png_get_y_pixels_per_meter'];
+  _png_get_pixels_per_meter = Module['_png_get_pixels_per_meter'] = wasmExports['png_get_pixels_per_meter'];
+  _png_get_pixel_aspect_ratio = Module['_png_get_pixel_aspect_ratio'] = wasmExports['png_get_pixel_aspect_ratio'];
+  _png_get_pixel_aspect_ratio_fixed = Module['_png_get_pixel_aspect_ratio_fixed'] = wasmExports['png_get_pixel_aspect_ratio_fixed'];
+  _png_get_x_offset_microns = Module['_png_get_x_offset_microns'] = wasmExports['png_get_x_offset_microns'];
+  _png_get_y_offset_microns = Module['_png_get_y_offset_microns'] = wasmExports['png_get_y_offset_microns'];
+  _png_get_x_offset_pixels = Module['_png_get_x_offset_pixels'] = wasmExports['png_get_x_offset_pixels'];
+  _png_get_y_offset_pixels = Module['_png_get_y_offset_pixels'] = wasmExports['png_get_y_offset_pixels'];
+  _png_get_pixels_per_inch = Module['_png_get_pixels_per_inch'] = wasmExports['png_get_pixels_per_inch'];
+  _png_get_x_pixels_per_inch = Module['_png_get_x_pixels_per_inch'] = wasmExports['png_get_x_pixels_per_inch'];
+  _png_get_y_pixels_per_inch = Module['_png_get_y_pixels_per_inch'] = wasmExports['png_get_y_pixels_per_inch'];
+  _png_get_x_offset_inches_fixed = Module['_png_get_x_offset_inches_fixed'] = wasmExports['png_get_x_offset_inches_fixed'];
+  _png_get_y_offset_inches_fixed = Module['_png_get_y_offset_inches_fixed'] = wasmExports['png_get_y_offset_inches_fixed'];
+  _png_get_x_offset_inches = Module['_png_get_x_offset_inches'] = wasmExports['png_get_x_offset_inches'];
+  _png_get_y_offset_inches = Module['_png_get_y_offset_inches'] = wasmExports['png_get_y_offset_inches'];
+  _png_get_pHYs_dpi = Module['_png_get_pHYs_dpi'] = wasmExports['png_get_pHYs_dpi'];
+  _png_get_channels = Module['_png_get_channels'] = wasmExports['png_get_channels'];
+  _png_get_signature = Module['_png_get_signature'] = wasmExports['png_get_signature'];
+  _png_get_bKGD = Module['_png_get_bKGD'] = wasmExports['png_get_bKGD'];
+  _png_get_cHRM = Module['_png_get_cHRM'] = wasmExports['png_get_cHRM'];
+  _png_get_cHRM_XYZ = Module['_png_get_cHRM_XYZ'] = wasmExports['png_get_cHRM_XYZ'];
+  _png_get_cHRM_XYZ_fixed = Module['_png_get_cHRM_XYZ_fixed'] = wasmExports['png_get_cHRM_XYZ_fixed'];
+  _png_get_cHRM_fixed = Module['_png_get_cHRM_fixed'] = wasmExports['png_get_cHRM_fixed'];
+  _png_get_gAMA_fixed = Module['_png_get_gAMA_fixed'] = wasmExports['png_get_gAMA_fixed'];
+  _png_get_gAMA = Module['_png_get_gAMA'] = wasmExports['png_get_gAMA'];
+  _png_get_sRGB = Module['_png_get_sRGB'] = wasmExports['png_get_sRGB'];
+  _png_get_iCCP = Module['_png_get_iCCP'] = wasmExports['png_get_iCCP'];
+  _png_get_sPLT = Module['_png_get_sPLT'] = wasmExports['png_get_sPLT'];
+  _png_get_cICP = Module['_png_get_cICP'] = wasmExports['png_get_cICP'];
+  _png_get_cLLI_fixed = Module['_png_get_cLLI_fixed'] = wasmExports['png_get_cLLI_fixed'];
+  _png_get_cLLI = Module['_png_get_cLLI'] = wasmExports['png_get_cLLI'];
+  _png_get_mDCV_fixed = Module['_png_get_mDCV_fixed'] = wasmExports['png_get_mDCV_fixed'];
+  _png_get_mDCV = Module['_png_get_mDCV'] = wasmExports['png_get_mDCV'];
+  _png_get_eXIf = Module['_png_get_eXIf'] = wasmExports['png_get_eXIf'];
+  _png_get_eXIf_1 = Module['_png_get_eXIf_1'] = wasmExports['png_get_eXIf_1'];
+  _png_get_hIST = Module['_png_get_hIST'] = wasmExports['png_get_hIST'];
+  _png_get_oFFs = Module['_png_get_oFFs'] = wasmExports['png_get_oFFs'];
+  _png_get_pCAL = Module['_png_get_pCAL'] = wasmExports['png_get_pCAL'];
+  _png_get_sCAL_fixed = Module['_png_get_sCAL_fixed'] = wasmExports['png_get_sCAL_fixed'];
+  _png_get_sCAL = Module['_png_get_sCAL'] = wasmExports['png_get_sCAL'];
+  _png_get_sCAL_s = Module['_png_get_sCAL_s'] = wasmExports['png_get_sCAL_s'];
+  _png_get_pHYs = Module['_png_get_pHYs'] = wasmExports['png_get_pHYs'];
+  _png_get_sBIT = Module['_png_get_sBIT'] = wasmExports['png_get_sBIT'];
+  _png_get_text = Module['_png_get_text'] = wasmExports['png_get_text'];
+  _png_get_tIME = Module['_png_get_tIME'] = wasmExports['png_get_tIME'];
+  _png_get_unknown_chunks = Module['_png_get_unknown_chunks'] = wasmExports['png_get_unknown_chunks'];
+  _png_get_rgb_to_gray_status = Module['_png_get_rgb_to_gray_status'] = wasmExports['png_get_rgb_to_gray_status'];
+  _png_get_user_chunk_ptr = Module['_png_get_user_chunk_ptr'] = wasmExports['png_get_user_chunk_ptr'];
+  _png_get_compression_buffer_size = Module['_png_get_compression_buffer_size'] = wasmExports['png_get_compression_buffer_size'];
+  _png_get_user_width_max = Module['_png_get_user_width_max'] = wasmExports['png_get_user_width_max'];
+  _png_get_user_height_max = Module['_png_get_user_height_max'] = wasmExports['png_get_user_height_max'];
+  _png_get_chunk_cache_max = Module['_png_get_chunk_cache_max'] = wasmExports['png_get_chunk_cache_max'];
+  _png_get_chunk_malloc_max = Module['_png_get_chunk_malloc_max'] = wasmExports['png_get_chunk_malloc_max'];
+  _png_get_io_state = Module['_png_get_io_state'] = wasmExports['png_get_io_state'];
+  _png_get_io_chunk_type = Module['_png_get_io_chunk_type'] = wasmExports['png_get_io_chunk_type'];
+  _png_get_palette_max = Module['_png_get_palette_max'] = wasmExports['png_get_palette_max'];
+  _png_destroy_png_struct = Module['_png_destroy_png_struct'] = wasmExports['png_destroy_png_struct'];
+  _png_malloc_array = Module['_png_malloc_array'] = wasmExports['png_malloc_array'];
+  _png_realloc_array = Module['_png_realloc_array'] = wasmExports['png_realloc_array'];
+  _png_malloc_default = Module['_png_malloc_default'] = wasmExports['png_malloc_default'];
+  _png_free_default = Module['_png_free_default'] = wasmExports['png_free_default'];
+  _png_get_mem_ptr = Module['_png_get_mem_ptr'] = wasmExports['png_get_mem_ptr'];
+  _png_process_data = Module['_png_process_data'] = wasmExports['png_process_data'];
+  _png_push_read_chunk = Module['_png_push_read_chunk'] = wasmExports['png_push_read_chunk'];
+  _png_push_read_IDAT = Module['_png_push_read_IDAT'] = wasmExports['png_push_read_IDAT'];
+  _png_push_read_sig = Module['_png_push_read_sig'] = wasmExports['png_push_read_sig'];
+  _png_push_restore_buffer = Module['_png_push_restore_buffer'] = wasmExports['png_push_restore_buffer'];
+  _png_process_some_data = Module['_png_process_some_data'] = wasmExports['png_process_some_data'];
+  _png_process_data_pause = Module['_png_process_data_pause'] = wasmExports['png_process_data_pause'];
+  _png_push_save_buffer = Module['_png_push_save_buffer'] = wasmExports['png_push_save_buffer'];
+  _png_process_data_skip = Module['_png_process_data_skip'] = wasmExports['png_process_data_skip'];
+  _png_read_chunk_header = Module['_png_read_chunk_header'] = wasmExports['png_read_chunk_header'];
+  _png_handle_chunk = Module['_png_handle_chunk'] = wasmExports['png_handle_chunk'];
+  _png_handle_unknown = Module['_png_handle_unknown'] = wasmExports['png_handle_unknown'];
+  _png_get_uint_31 = Module['_png_get_uint_31'] = wasmExports['png_get_uint_31'];
+  _png_crc_read = Module['_png_crc_read'] = wasmExports['png_crc_read'];
+  _png_process_IDAT_data = Module['_png_process_IDAT_data'] = wasmExports['png_process_IDAT_data'];
+  _png_crc_finish = Module['_png_crc_finish'] = wasmExports['png_crc_finish'];
+  _png_push_fill_buffer = Module['_png_push_fill_buffer'] = wasmExports['png_push_fill_buffer'];
+  _png_push_have_end = Module['_png_push_have_end'] = wasmExports['png_push_have_end'];
+  _png_push_have_info = Module['_png_push_have_info'] = wasmExports['png_push_have_info'];
+  _png_zlib_inflate = Module['_png_zlib_inflate'] = wasmExports['png_zlib_inflate'];
+  _png_push_process_row = Module['_png_push_process_row'] = wasmExports['png_push_process_row'];
+  _png_read_filter_row = Module['_png_read_filter_row'] = wasmExports['png_read_filter_row'];
+  _png_do_read_transformations = Module['_png_do_read_transformations'] = wasmExports['png_do_read_transformations'];
+  _png_do_read_interlace = Module['_png_do_read_interlace'] = wasmExports['png_do_read_interlace'];
+  _png_read_push_finish_row = Module['_png_read_push_finish_row'] = wasmExports['png_read_push_finish_row'];
+  _png_push_have_row = Module['_png_push_have_row'] = wasmExports['png_push_have_row'];
+  _png_progressive_combine_row = Module['_png_progressive_combine_row'] = wasmExports['png_progressive_combine_row'];
+  _png_combine_row = Module['_png_combine_row'] = wasmExports['png_combine_row'];
+  _png_set_progressive_read_fn = Module['_png_set_progressive_read_fn'] = wasmExports['png_set_progressive_read_fn'];
+  _png_get_progressive_ptr = Module['_png_get_progressive_ptr'] = wasmExports['png_get_progressive_ptr'];
+  _png_create_read_struct_2 = Module['_png_create_read_struct_2'] = wasmExports['png_create_read_struct_2'];
+  _png_read_sig = Module['_png_read_sig'] = wasmExports['png_read_sig'];
+  _png_read_start_row = Module['_png_read_start_row'] = wasmExports['png_read_start_row'];
+  _png_read_transform_info = Module['_png_read_transform_info'] = wasmExports['png_read_transform_info'];
+  _png_start_read_image = Module['_png_start_read_image'] = wasmExports['png_start_read_image'];
+  _png_read_finish_row = Module['_png_read_finish_row'] = wasmExports['png_read_finish_row'];
+  _png_read_IDAT_data = Module['_png_read_IDAT_data'] = wasmExports['png_read_IDAT_data'];
+  _png_read_rows = Module['_png_read_rows'] = wasmExports['png_read_rows'];
+  _png_read_finish_IDAT = Module['_png_read_finish_IDAT'] = wasmExports['png_read_finish_IDAT'];
+  _png_set_read_status_fn = Module['_png_set_read_status_fn'] = wasmExports['png_set_read_status_fn'];
+  _png_read_png = Module['_png_read_png'] = wasmExports['png_read_png'];
+  _png_set_scale_16 = Module['_png_set_scale_16'] = wasmExports['png_set_scale_16'];
+  _png_set_strip_alpha = Module['_png_set_strip_alpha'] = wasmExports['png_set_strip_alpha'];
+  _png_set_packswap = Module['_png_set_packswap'] = wasmExports['png_set_packswap'];
+  _png_set_invert_mono = Module['_png_set_invert_mono'] = wasmExports['png_set_invert_mono'];
+  _png_set_shift = Module['_png_set_shift'] = wasmExports['png_set_shift'];
+  _png_set_bgr = Module['_png_set_bgr'] = wasmExports['png_set_bgr'];
+  _png_set_swap_alpha = Module['_png_set_swap_alpha'] = wasmExports['png_set_swap_alpha'];
+  _png_set_swap = Module['_png_set_swap'] = wasmExports['png_set_swap'];
+  _png_set_invert_alpha = Module['_png_set_invert_alpha'] = wasmExports['png_set_invert_alpha'];
+  _png_set_expand_16 = Module['_png_set_expand_16'] = wasmExports['png_set_expand_16'];
+  _png_image_begin_read_from_stdio = Module['_png_image_begin_read_from_stdio'] = wasmExports['png_image_begin_read_from_stdio'];
+  _png_set_benign_errors = Module['_png_set_benign_errors'] = wasmExports['png_set_benign_errors'];
+  _png_image_begin_read_from_file = Module['_png_image_begin_read_from_file'] = wasmExports['png_image_begin_read_from_file'];
+  _png_image_begin_read_from_memory = Module['_png_image_begin_read_from_memory'] = wasmExports['png_image_begin_read_from_memory'];
+  _png_image_finish_read = Module['_png_image_finish_read'] = wasmExports['png_image_finish_read'];
+  _png_set_background_fixed = Module['_png_set_background_fixed'] = wasmExports['png_set_background_fixed'];
+  _png_set_rgb_to_gray_fixed = Module['_png_set_rgb_to_gray_fixed'] = wasmExports['png_set_rgb_to_gray_fixed'];
+  _png_resolve_file_gamma = Module['_png_resolve_file_gamma'] = wasmExports['png_resolve_file_gamma'];
+  _png_set_tRNS_to_alpha = Module['_png_set_tRNS_to_alpha'] = wasmExports['png_set_tRNS_to_alpha'];
+  _png_set_alpha_mode_fixed = Module['_png_set_alpha_mode_fixed'] = wasmExports['png_set_alpha_mode_fixed'];
+  _png_set_keep_unknown_chunks = Module['_png_set_keep_unknown_chunks'] = wasmExports['png_set_keep_unknown_chunks'];
+  _png_set_add_alpha = Module['_png_set_add_alpha'] = wasmExports['png_set_add_alpha'];
+  _png_read_data = Module['_png_read_data'] = wasmExports['png_read_data'];
+  _png_default_read_data = Module['_png_default_read_data'] = wasmExports['png_default_read_data'];
+  _png_set_background = Module['_png_set_background'] = wasmExports['png_set_background'];
+  _png_set_alpha_mode = Module['_png_set_alpha_mode'] = wasmExports['png_set_alpha_mode'];
+  _png_set_quantize = Module['_png_set_quantize'] = wasmExports['png_set_quantize'];
+  _png_set_gamma_fixed = Module['_png_set_gamma_fixed'] = wasmExports['png_set_gamma_fixed'];
+  _png_set_gamma = Module['_png_set_gamma'] = wasmExports['png_set_gamma'];
+  _png_set_palette_to_rgb = Module['_png_set_palette_to_rgb'] = wasmExports['png_set_palette_to_rgb'];
+  _png_set_expand_gray_1_2_4_to_8 = Module['_png_set_expand_gray_1_2_4_to_8'] = wasmExports['png_set_expand_gray_1_2_4_to_8'];
+  _png_set_rgb_to_gray = Module['_png_set_rgb_to_gray'] = wasmExports['png_set_rgb_to_gray'];
+  _png_set_read_user_transform_fn = Module['_png_set_read_user_transform_fn'] = wasmExports['png_set_read_user_transform_fn'];
+  _png_init_read_transformations = Module['_png_init_read_transformations'] = wasmExports['png_init_read_transformations'];
+  _png_do_strip_channel = Module['_png_do_strip_channel'] = wasmExports['png_do_strip_channel'];
+  _png_do_invert = Module['_png_do_invert'] = wasmExports['png_do_invert'];
+  _png_do_check_palette_indexes = Module['_png_do_check_palette_indexes'] = wasmExports['png_do_check_palette_indexes'];
+  _png_do_bgr = Module['_png_do_bgr'] = wasmExports['png_do_bgr'];
+  _png_do_packswap = Module['_png_do_packswap'] = wasmExports['png_do_packswap'];
+  _png_do_swap = Module['_png_do_swap'] = wasmExports['png_do_swap'];
+  _png_get_uint_32 = Module['_png_get_uint_32'] = wasmExports['png_get_uint_32'];
+  _png_get_int_32 = Module['_png_get_int_32'] = wasmExports['png_get_int_32'];
+  _png_get_uint_16 = Module['_png_get_uint_16'] = wasmExports['png_get_uint_16'];
+  _png_set_unknown_chunks = Module['_png_set_unknown_chunks'] = wasmExports['png_set_unknown_chunks'];
+  _inflateReset2 = Module['_inflateReset2'] = wasmExports['inflateReset2'];
+  _png_set_bKGD = Module['_png_set_bKGD'] = wasmExports['png_set_bKGD'];
+  _png_set_cHRM_fixed = Module['_png_set_cHRM_fixed'] = wasmExports['png_set_cHRM_fixed'];
+  _png_set_cICP = Module['_png_set_cICP'] = wasmExports['png_set_cICP'];
+  _png_set_cLLI_fixed = Module['_png_set_cLLI_fixed'] = wasmExports['png_set_cLLI_fixed'];
+  _png_set_eXIf_1 = Module['_png_set_eXIf_1'] = wasmExports['png_set_eXIf_1'];
+  _png_set_gAMA_fixed = Module['_png_set_gAMA_fixed'] = wasmExports['png_set_gAMA_fixed'];
+  _png_set_hIST = Module['_png_set_hIST'] = wasmExports['png_set_hIST'];
+  _png_set_text_2 = Module['_png_set_text_2'] = wasmExports['png_set_text_2'];
+  _png_set_mDCV_fixed = Module['_png_set_mDCV_fixed'] = wasmExports['png_set_mDCV_fixed'];
+  _png_set_oFFs = Module['_png_set_oFFs'] = wasmExports['png_set_oFFs'];
+  _png_set_pCAL = Module['_png_set_pCAL'] = wasmExports['png_set_pCAL'];
+  _png_set_pHYs = Module['_png_set_pHYs'] = wasmExports['png_set_pHYs'];
+  _png_set_sBIT = Module['_png_set_sBIT'] = wasmExports['png_set_sBIT'];
+  _png_set_sCAL_s = Module['_png_set_sCAL_s'] = wasmExports['png_set_sCAL_s'];
+  _png_set_sPLT = Module['_png_set_sPLT'] = wasmExports['png_set_sPLT'];
+  _png_set_sRGB = Module['_png_set_sRGB'] = wasmExports['png_set_sRGB'];
+  _png_set_tIME = Module['_png_set_tIME'] = wasmExports['png_set_tIME'];
+  _png_set_tRNS = Module['_png_set_tRNS'] = wasmExports['png_set_tRNS'];
+  _png_set_cHRM_XYZ_fixed = Module['_png_set_cHRM_XYZ_fixed'] = wasmExports['png_set_cHRM_XYZ_fixed'];
+  _png_set_cHRM = Module['_png_set_cHRM'] = wasmExports['png_set_cHRM'];
+  _png_set_cHRM_XYZ = Module['_png_set_cHRM_XYZ'] = wasmExports['png_set_cHRM_XYZ'];
+  _png_set_cLLI = Module['_png_set_cLLI'] = wasmExports['png_set_cLLI'];
+  _png_set_mDCV = Module['_png_set_mDCV'] = wasmExports['png_set_mDCV'];
+  _png_set_eXIf = Module['_png_set_eXIf'] = wasmExports['png_set_eXIf'];
+  _png_set_gAMA = Module['_png_set_gAMA'] = wasmExports['png_set_gAMA'];
+  _png_set_sCAL = Module['_png_set_sCAL'] = wasmExports['png_set_sCAL'];
+  _png_set_sCAL_fixed = Module['_png_set_sCAL_fixed'] = wasmExports['png_set_sCAL_fixed'];
+  _png_set_sRGB_gAMA_and_cHRM = Module['_png_set_sRGB_gAMA_and_cHRM'] = wasmExports['png_set_sRGB_gAMA_and_cHRM'];
+  _png_set_iCCP = Module['_png_set_iCCP'] = wasmExports['png_set_iCCP'];
+  _png_set_text = Module['_png_set_text'] = wasmExports['png_set_text'];
+  _png_set_unknown_chunk_location = Module['_png_set_unknown_chunk_location'] = wasmExports['png_set_unknown_chunk_location'];
+  _png_permit_mng_features = Module['_png_permit_mng_features'] = wasmExports['png_permit_mng_features'];
+  _png_set_read_user_chunk_fn = Module['_png_set_read_user_chunk_fn'] = wasmExports['png_set_read_user_chunk_fn'];
+  _png_set_compression_buffer_size = Module['_png_set_compression_buffer_size'] = wasmExports['png_set_compression_buffer_size'];
+  _png_free_buffer_list = Module['_png_free_buffer_list'] = wasmExports['png_free_buffer_list'];
+  _png_set_invalid = Module['_png_set_invalid'] = wasmExports['png_set_invalid'];
+  _png_set_user_limits = Module['_png_set_user_limits'] = wasmExports['png_set_user_limits'];
+  _png_set_chunk_cache_max = Module['_png_set_chunk_cache_max'] = wasmExports['png_set_chunk_cache_max'];
+  _png_set_chunk_malloc_max = Module['_png_set_chunk_malloc_max'] = wasmExports['png_set_chunk_malloc_max'];
+  _png_set_check_for_invalid_index = Module['_png_set_check_for_invalid_index'] = wasmExports['png_set_check_for_invalid_index'];
+  _png_check_keyword = Module['_png_check_keyword'] = wasmExports['png_check_keyword'];
+  _png_set_filler = Module['_png_set_filler'] = wasmExports['png_set_filler'];
+  _png_set_user_transform_info = Module['_png_set_user_transform_info'] = wasmExports['png_set_user_transform_info'];
+  _png_get_user_transform_ptr = Module['_png_get_user_transform_ptr'] = wasmExports['png_get_user_transform_ptr'];
+  _png_get_current_row_number = Module['_png_get_current_row_number'] = wasmExports['png_get_current_row_number'];
+  _png_get_current_pass_number = Module['_png_get_current_pass_number'] = wasmExports['png_get_current_pass_number'];
+  _png_write_data = Module['_png_write_data'] = wasmExports['png_write_data'];
+  _png_default_write_data = Module['_png_default_write_data'] = wasmExports['png_default_write_data'];
+  _png_flush = Module['_png_flush'] = wasmExports['png_flush'];
+  _png_default_flush = Module['_png_default_flush'] = wasmExports['png_default_flush'];
+  _png_write_info_before_PLTE = Module['_png_write_info_before_PLTE'] = wasmExports['png_write_info_before_PLTE'];
+  _png_write_sig = Module['_png_write_sig'] = wasmExports['png_write_sig'];
+  _png_write_IHDR = Module['_png_write_IHDR'] = wasmExports['png_write_IHDR'];
+  _png_write_sBIT = Module['_png_write_sBIT'] = wasmExports['png_write_sBIT'];
+  _png_write_cLLI_fixed = Module['_png_write_cLLI_fixed'] = wasmExports['png_write_cLLI_fixed'];
+  _png_write_mDCV_fixed = Module['_png_write_mDCV_fixed'] = wasmExports['png_write_mDCV_fixed'];
+  _png_write_cICP = Module['_png_write_cICP'] = wasmExports['png_write_cICP'];
+  _png_write_iCCP = Module['_png_write_iCCP'] = wasmExports['png_write_iCCP'];
+  _png_write_sRGB = Module['_png_write_sRGB'] = wasmExports['png_write_sRGB'];
+  _png_write_gAMA_fixed = Module['_png_write_gAMA_fixed'] = wasmExports['png_write_gAMA_fixed'];
+  _png_write_cHRM_fixed = Module['_png_write_cHRM_fixed'] = wasmExports['png_write_cHRM_fixed'];
+  _png_write_chunk = Module['_png_write_chunk'] = wasmExports['png_write_chunk'];
+  _png_write_info = Module['_png_write_info'] = wasmExports['png_write_info'];
+  _png_write_PLTE = Module['_png_write_PLTE'] = wasmExports['png_write_PLTE'];
+  _png_write_tRNS = Module['_png_write_tRNS'] = wasmExports['png_write_tRNS'];
+  _png_write_bKGD = Module['_png_write_bKGD'] = wasmExports['png_write_bKGD'];
+  _png_write_eXIf = Module['_png_write_eXIf'] = wasmExports['png_write_eXIf'];
+  _png_write_hIST = Module['_png_write_hIST'] = wasmExports['png_write_hIST'];
+  _png_write_oFFs = Module['_png_write_oFFs'] = wasmExports['png_write_oFFs'];
+  _png_write_pCAL = Module['_png_write_pCAL'] = wasmExports['png_write_pCAL'];
+  _png_write_sCAL_s = Module['_png_write_sCAL_s'] = wasmExports['png_write_sCAL_s'];
+  _png_write_pHYs = Module['_png_write_pHYs'] = wasmExports['png_write_pHYs'];
+  _png_write_tIME = Module['_png_write_tIME'] = wasmExports['png_write_tIME'];
+  _png_write_sPLT = Module['_png_write_sPLT'] = wasmExports['png_write_sPLT'];
+  _png_write_iTXt = Module['_png_write_iTXt'] = wasmExports['png_write_iTXt'];
+  _png_write_zTXt = Module['_png_write_zTXt'] = wasmExports['png_write_zTXt'];
+  _png_write_tEXt = Module['_png_write_tEXt'] = wasmExports['png_write_tEXt'];
+  _png_write_end = Module['_png_write_end'] = wasmExports['png_write_end'];
+  _png_write_IEND = Module['_png_write_IEND'] = wasmExports['png_write_IEND'];
+  _png_convert_from_struct_tm = Module['_png_convert_from_struct_tm'] = wasmExports['png_convert_from_struct_tm'];
+  _png_convert_from_time_t = Module['_png_convert_from_time_t'] = wasmExports['png_convert_from_time_t'];
+  _png_create_write_struct_2 = Module['_png_create_write_struct_2'] = wasmExports['png_create_write_struct_2'];
+  _png_write_rows = Module['_png_write_rows'] = wasmExports['png_write_rows'];
+  _png_write_row = Module['_png_write_row'] = wasmExports['png_write_row'];
+  _png_write_start_row = Module['_png_write_start_row'] = wasmExports['png_write_start_row'];
+  _png_write_finish_row = Module['_png_write_finish_row'] = wasmExports['png_write_finish_row'];
+  _png_do_write_interlace = Module['_png_do_write_interlace'] = wasmExports['png_do_write_interlace'];
+  _png_do_write_transformations = Module['_png_do_write_transformations'] = wasmExports['png_do_write_transformations'];
+  _png_write_find_filter = Module['_png_write_find_filter'] = wasmExports['png_write_find_filter'];
+  _png_write_image = Module['_png_write_image'] = wasmExports['png_write_image'];
+  _png_set_flush = Module['_png_set_flush'] = wasmExports['png_set_flush'];
+  _png_write_flush = Module['_png_write_flush'] = wasmExports['png_write_flush'];
+  _png_compress_IDAT = Module['_png_compress_IDAT'] = wasmExports['png_compress_IDAT'];
+  _png_set_filter = Module['_png_set_filter'] = wasmExports['png_set_filter'];
+  _png_set_filter_heuristics = Module['_png_set_filter_heuristics'] = wasmExports['png_set_filter_heuristics'];
+  _png_set_filter_heuristics_fixed = Module['_png_set_filter_heuristics_fixed'] = wasmExports['png_set_filter_heuristics_fixed'];
+  _png_set_compression_level = Module['_png_set_compression_level'] = wasmExports['png_set_compression_level'];
+  _png_set_compression_mem_level = Module['_png_set_compression_mem_level'] = wasmExports['png_set_compression_mem_level'];
+  _png_set_compression_strategy = Module['_png_set_compression_strategy'] = wasmExports['png_set_compression_strategy'];
+  _png_set_compression_window_bits = Module['_png_set_compression_window_bits'] = wasmExports['png_set_compression_window_bits'];
+  _png_set_compression_method = Module['_png_set_compression_method'] = wasmExports['png_set_compression_method'];
+  _png_set_text_compression_level = Module['_png_set_text_compression_level'] = wasmExports['png_set_text_compression_level'];
+  _png_set_text_compression_mem_level = Module['_png_set_text_compression_mem_level'] = wasmExports['png_set_text_compression_mem_level'];
+  _png_set_text_compression_strategy = Module['_png_set_text_compression_strategy'] = wasmExports['png_set_text_compression_strategy'];
+  _png_set_text_compression_window_bits = Module['_png_set_text_compression_window_bits'] = wasmExports['png_set_text_compression_window_bits'];
+  _png_set_text_compression_method = Module['_png_set_text_compression_method'] = wasmExports['png_set_text_compression_method'];
+  _png_set_write_status_fn = Module['_png_set_write_status_fn'] = wasmExports['png_set_write_status_fn'];
+  _png_set_write_user_transform_fn = Module['_png_set_write_user_transform_fn'] = wasmExports['png_set_write_user_transform_fn'];
+  _png_image_write_to_memory = Module['_png_image_write_to_memory'] = wasmExports['png_image_write_to_memory'];
+  _png_image_write_to_stdio = Module['_png_image_write_to_stdio'] = wasmExports['png_image_write_to_stdio'];
+  _png_image_write_to_file = Module['_png_image_write_to_file'] = wasmExports['png_image_write_to_file'];
+  _png_save_uint_16 = Module['_png_save_uint_16'] = wasmExports['png_save_uint_16'];
+  _png_write_chunk_start = Module['_png_write_chunk_start'] = wasmExports['png_write_chunk_start'];
+  _png_write_chunk_data = Module['_png_write_chunk_data'] = wasmExports['png_write_chunk_data'];
+  _png_write_chunk_end = Module['_png_write_chunk_end'] = wasmExports['png_write_chunk_end'];
+  _deflateReset = Module['_deflateReset'] = wasmExports['deflateReset'];
   _adler32_z = Module['_adler32_z'] = wasmExports['adler32_z'];
   _adler32 = Module['_adler32'] = wasmExports['adler32'];
   _adler32_combine = Module['_adler32_combine'] = wasmExports['adler32_combine'];
@@ -94933,196 +95120,6 @@ function assignWasmExports(wasmExports) {
   _zlibVersion = Module['_zlibVersion'] = wasmExports['zlibVersion'];
   _zlibCompileFlags = Module['_zlibCompileFlags'] = wasmExports['zlibCompileFlags'];
   _zError = Module['_zError'] = wasmExports['zError'];
-  _vorbis_analysis = Module['_vorbis_analysis'] = wasmExports['vorbis_analysis'];
-  _oggpack_reset = Module['_oggpack_reset'] = wasmExports['oggpack_reset'];
-  _vorbis_bitrate_managed = Module['_vorbis_bitrate_managed'] = wasmExports['vorbis_bitrate_managed'];
-  _oggpack_get_buffer = Module['_oggpack_get_buffer'] = wasmExports['oggpack_get_buffer'];
-  _oggpack_bytes = Module['_oggpack_bytes'] = wasmExports['oggpack_bytes'];
-  _vorbis_bitrate_init = Module['_vorbis_bitrate_init'] = wasmExports['vorbis_bitrate_init'];
-  _vorbis_bitrate_clear = Module['_vorbis_bitrate_clear'] = wasmExports['vorbis_bitrate_clear'];
-  _vorbis_bitrate_addblock = Module['_vorbis_bitrate_addblock'] = wasmExports['vorbis_bitrate_addblock'];
-  _oggpack_writetrunc = Module['_oggpack_writetrunc'] = wasmExports['oggpack_writetrunc'];
-  _oggpack_write = Module['_oggpack_write'] = wasmExports['oggpack_write'];
-  _vorbis_bitrate_flushpacket = Module['_vorbis_bitrate_flushpacket'] = wasmExports['vorbis_bitrate_flushpacket'];
-  _oggpack_writeinit = Module['_oggpack_writeinit'] = wasmExports['oggpack_writeinit'];
-  __vorbis_block_alloc = Module['__vorbis_block_alloc'] = wasmExports['_vorbis_block_alloc'];
-  __vorbis_block_ripcord = Module['__vorbis_block_ripcord'] = wasmExports['_vorbis_block_ripcord'];
-  _oggpack_writeclear = Module['_oggpack_writeclear'] = wasmExports['oggpack_writeclear'];
-  _vorbis_analysis_init = Module['_vorbis_analysis_init'] = wasmExports['vorbis_analysis_init'];
-  __vp_global_look = Module['__vp_global_look'] = wasmExports['_vp_global_look'];
-  __ve_envelope_init = Module['__ve_envelope_init'] = wasmExports['_ve_envelope_init'];
-  _ov_ilog = Module['_ov_ilog'] = wasmExports['ov_ilog'];
-  _mdct_init = Module['_mdct_init'] = wasmExports['mdct_init'];
-  _drft_init = Module['_drft_init'] = wasmExports['drft_init'];
-  _vorbis_book_init_encode = Module['_vorbis_book_init_encode'] = wasmExports['vorbis_book_init_encode'];
-  __vp_psy_init = Module['__vp_psy_init'] = wasmExports['_vp_psy_init'];
-  _vorbis_book_init_decode = Module['_vorbis_book_init_decode'] = wasmExports['vorbis_book_init_decode'];
-  _vorbis_staticbook_destroy = Module['_vorbis_staticbook_destroy'] = wasmExports['vorbis_staticbook_destroy'];
-  __ve_envelope_clear = Module['__ve_envelope_clear'] = wasmExports['_ve_envelope_clear'];
-  _mdct_clear = Module['_mdct_clear'] = wasmExports['mdct_clear'];
-  __vp_psy_clear = Module['__vp_psy_clear'] = wasmExports['_vp_psy_clear'];
-  __vp_global_free = Module['__vp_global_free'] = wasmExports['_vp_global_free'];
-  _drft_clear = Module['_drft_clear'] = wasmExports['drft_clear'];
-  _vorbis_analysis_buffer = Module['_vorbis_analysis_buffer'] = wasmExports['vorbis_analysis_buffer'];
-  _vorbis_analysis_wrote = Module['_vorbis_analysis_wrote'] = wasmExports['vorbis_analysis_wrote'];
-  _vorbis_lpc_from_data = Module['_vorbis_lpc_from_data'] = wasmExports['vorbis_lpc_from_data'];
-  _vorbis_lpc_predict = Module['_vorbis_lpc_predict'] = wasmExports['vorbis_lpc_predict'];
-  _vorbis_analysis_blockout = Module['_vorbis_analysis_blockout'] = wasmExports['vorbis_analysis_blockout'];
-  __ve_envelope_search = Module['__ve_envelope_search'] = wasmExports['_ve_envelope_search'];
-  __ve_envelope_mark = Module['__ve_envelope_mark'] = wasmExports['_ve_envelope_mark'];
-  __vp_ampmax_decay = Module['__vp_ampmax_decay'] = wasmExports['_vp_ampmax_decay'];
-  __ve_envelope_shift = Module['__ve_envelope_shift'] = wasmExports['_ve_envelope_shift'];
-  _vorbis_synthesis_restart = Module['_vorbis_synthesis_restart'] = wasmExports['vorbis_synthesis_restart'];
-  __vorbis_window_get = Module['__vorbis_window_get'] = wasmExports['_vorbis_window_get'];
-  _vorbis_synthesis_lapout = Module['_vorbis_synthesis_lapout'] = wasmExports['vorbis_synthesis_lapout'];
-  _vorbis_window = Module['_vorbis_window'] = wasmExports['vorbis_window'];
-  _vorbis_staticbook_pack = Module['_vorbis_staticbook_pack'] = wasmExports['vorbis_staticbook_pack'];
-  __book_maptype1_quantvals = Module['__book_maptype1_quantvals'] = wasmExports['_book_maptype1_quantvals'];
-  _vorbis_staticbook_unpack = Module['_vorbis_staticbook_unpack'] = wasmExports['vorbis_staticbook_unpack'];
-  _oggpack_read = Module['_oggpack_read'] = wasmExports['oggpack_read'];
-  _vorbis_book_encode = Module['_vorbis_book_encode'] = wasmExports['vorbis_book_encode'];
-  _vorbis_book_decode = Module['_vorbis_book_decode'] = wasmExports['vorbis_book_decode'];
-  _oggpack_look = Module['_oggpack_look'] = wasmExports['oggpack_look'];
-  _oggpack_adv = Module['_oggpack_adv'] = wasmExports['oggpack_adv'];
-  _vorbis_book_decodevs_add = Module['_vorbis_book_decodevs_add'] = wasmExports['vorbis_book_decodevs_add'];
-  _vorbis_book_decodev_add = Module['_vorbis_book_decodev_add'] = wasmExports['vorbis_book_decodev_add'];
-  _vorbis_book_decodev_set = Module['_vorbis_book_decodev_set'] = wasmExports['vorbis_book_decodev_set'];
-  _vorbis_book_decodevv_add = Module['_vorbis_book_decodevv_add'] = wasmExports['vorbis_book_decodevv_add'];
-  _mdct_forward = Module['_mdct_forward'] = wasmExports['mdct_forward'];
-  _vorbis_lsp_to_curve = Module['_vorbis_lsp_to_curve'] = wasmExports['vorbis_lsp_to_curve'];
-  _floor1_fit = Module['_floor1_fit'] = wasmExports['floor1_fit'];
-  _floor1_interpolate_fit = Module['_floor1_interpolate_fit'] = wasmExports['floor1_interpolate_fit'];
-  _floor1_encode = Module['_floor1_encode'] = wasmExports['floor1_encode'];
-  _vorbis_comment_add = Module['_vorbis_comment_add'] = wasmExports['vorbis_comment_add'];
-  _vorbis_comment_add_tag = Module['_vorbis_comment_add_tag'] = wasmExports['vorbis_comment_add_tag'];
-  _vorbis_comment_query = Module['_vorbis_comment_query'] = wasmExports['vorbis_comment_query'];
-  _vorbis_comment_query_count = Module['_vorbis_comment_query_count'] = wasmExports['vorbis_comment_query_count'];
-  _vorbis_info_blocksize = Module['_vorbis_info_blocksize'] = wasmExports['vorbis_info_blocksize'];
-  _vorbis_book_clear = Module['_vorbis_book_clear'] = wasmExports['vorbis_book_clear'];
-  __vi_psy_free = Module['__vi_psy_free'] = wasmExports['_vi_psy_free'];
-  _vorbis_synthesis_idheader = Module['_vorbis_synthesis_idheader'] = wasmExports['vorbis_synthesis_idheader'];
-  _oggpack_readinit = Module['_oggpack_readinit'] = wasmExports['oggpack_readinit'];
-  _vorbis_commentheader_out = Module['_vorbis_commentheader_out'] = wasmExports['vorbis_commentheader_out'];
-  _vorbis_analysis_headerout = Module['_vorbis_analysis_headerout'] = wasmExports['vorbis_analysis_headerout'];
-  _vorbis_granule_time = Module['_vorbis_granule_time'] = wasmExports['vorbis_granule_time'];
-  _vorbis_version_string = Module['_vorbis_version_string'] = wasmExports['vorbis_version_string'];
-  _vorbis_lpc_to_lsp = Module['_vorbis_lpc_to_lsp'] = wasmExports['vorbis_lpc_to_lsp'];
-  __vorbis_apply_window = Module['__vorbis_apply_window'] = wasmExports['_vorbis_apply_window'];
-  _drft_forward = Module['_drft_forward'] = wasmExports['drft_forward'];
-  __vp_noisemask = Module['__vp_noisemask'] = wasmExports['_vp_noisemask'];
-  __vp_tonemask = Module['__vp_tonemask'] = wasmExports['_vp_tonemask'];
-  __vp_offset_and_mix = Module['__vp_offset_and_mix'] = wasmExports['_vp_offset_and_mix'];
-  __vp_couple_quantize_normalize = Module['__vp_couple_quantize_normalize'] = wasmExports['_vp_couple_quantize_normalize'];
-  _mdct_backward = Module['_mdct_backward'] = wasmExports['mdct_backward'];
-  __vi_gpsy_free = Module['__vi_gpsy_free'] = wasmExports['_vi_gpsy_free'];
-  _res0_free_info = Module['_res0_free_info'] = wasmExports['res0_free_info'];
-  _res0_free_look = Module['_res0_free_look'] = wasmExports['res0_free_look'];
-  _res0_pack = Module['_res0_pack'] = wasmExports['res0_pack'];
-  _res0_unpack = Module['_res0_unpack'] = wasmExports['res0_unpack'];
-  _res0_look = Module['_res0_look'] = wasmExports['res0_look'];
-  _res0_inverse = Module['_res0_inverse'] = wasmExports['res0_inverse'];
-  _res1_forward = Module['_res1_forward'] = wasmExports['res1_forward'];
-  _res1_class = Module['_res1_class'] = wasmExports['res1_class'];
-  _res1_inverse = Module['_res1_inverse'] = wasmExports['res1_inverse'];
-  _res2_class = Module['_res2_class'] = wasmExports['res2_class'];
-  _res2_forward = Module['_res2_forward'] = wasmExports['res2_forward'];
-  _res2_inverse = Module['_res2_inverse'] = wasmExports['res2_inverse'];
-  __float32_pack = Module['__float32_pack'] = wasmExports['_float32_pack'];
-  __float32_unpack = Module['__float32_unpack'] = wasmExports['_float32_unpack'];
-  __make_words = Module['__make_words'] = wasmExports['_make_words'];
-  __book_unquantize = Module['__book_unquantize'] = wasmExports['_book_unquantize'];
-  _vorbis_book_codeword = Module['_vorbis_book_codeword'] = wasmExports['vorbis_book_codeword'];
-  _vorbis_book_codelen = Module['_vorbis_book_codelen'] = wasmExports['vorbis_book_codelen'];
-  _drft_backward = Module['_drft_backward'] = wasmExports['drft_backward'];
-  _vorbis_synthesis_trackonly = Module['_vorbis_synthesis_trackonly'] = wasmExports['vorbis_synthesis_trackonly'];
-  _vorbis_packet_blocksize = Module['_vorbis_packet_blocksize'] = wasmExports['vorbis_packet_blocksize'];
-  _vorbis_synthesis_halfrate = Module['_vorbis_synthesis_halfrate'] = wasmExports['vorbis_synthesis_halfrate'];
-  _vorbis_synthesis_halfrate_p = Module['_vorbis_synthesis_halfrate_p'] = wasmExports['vorbis_synthesis_halfrate_p'];
-  _vorbis_encode_setup_init = Module['_vorbis_encode_setup_init'] = wasmExports['vorbis_encode_setup_init'];
-  _vorbis_encode_setup_vbr = Module['_vorbis_encode_setup_vbr'] = wasmExports['vorbis_encode_setup_vbr'];
-  _vorbis_encode_init_vbr = Module['_vorbis_encode_init_vbr'] = wasmExports['vorbis_encode_init_vbr'];
-  _vorbis_encode_setup_managed = Module['_vorbis_encode_setup_managed'] = wasmExports['vorbis_encode_setup_managed'];
-  _vorbis_encode_init = Module['_vorbis_encode_init'] = wasmExports['vorbis_encode_init'];
-  _vorbis_encode_ctl = Module['_vorbis_encode_ctl'] = wasmExports['vorbis_encode_ctl'];
-  _ov_raw_seek = Module['_ov_raw_seek'] = wasmExports['ov_raw_seek'];
-  _ov_open = Module['_ov_open'] = wasmExports['ov_open'];
-  _ov_fopen = Module['_ov_fopen'] = wasmExports['ov_fopen'];
-  _ov_halfrate = Module['_ov_halfrate'] = wasmExports['ov_halfrate'];
-  _ov_pcm_seek_page = Module['_ov_pcm_seek_page'] = wasmExports['ov_pcm_seek_page'];
-  _ogg_stream_packetpeek = Module['_ogg_stream_packetpeek'] = wasmExports['ogg_stream_packetpeek'];
-  _ov_pcm_total = Module['_ov_pcm_total'] = wasmExports['ov_pcm_total'];
-  _ogg_stream_reset_serialno = Module['_ogg_stream_reset_serialno'] = wasmExports['ogg_stream_reset_serialno'];
-  _ov_halfrate_p = Module['_ov_halfrate_p'] = wasmExports['ov_halfrate_p'];
-  _ov_test_callbacks = Module['_ov_test_callbacks'] = wasmExports['ov_test_callbacks'];
-  _ov_test = Module['_ov_test'] = wasmExports['ov_test'];
-  _ov_test_open = Module['_ov_test_open'] = wasmExports['ov_test_open'];
-  _ov_streams = Module['_ov_streams'] = wasmExports['ov_streams'];
-  _ov_seekable = Module['_ov_seekable'] = wasmExports['ov_seekable'];
-  _ov_bitrate = Module['_ov_bitrate'] = wasmExports['ov_bitrate'];
-  _ov_bitrate_instant = Module['_ov_bitrate_instant'] = wasmExports['ov_bitrate_instant'];
-  _ov_serialnumber = Module['_ov_serialnumber'] = wasmExports['ov_serialnumber'];
-  _ov_raw_total = Module['_ov_raw_total'] = wasmExports['ov_raw_total'];
-  _ogg_sync_reset = Module['_ogg_sync_reset'] = wasmExports['ogg_sync_reset'];
-  _ogg_stream_reset = Module['_ogg_stream_reset'] = wasmExports['ogg_stream_reset'];
-  _ogg_page_eos = Module['_ogg_page_eos'] = wasmExports['ogg_page_eos'];
-  _ogg_sync_pageseek = Module['_ogg_sync_pageseek'] = wasmExports['ogg_sync_pageseek'];
-  _ogg_page_granulepos = Module['_ogg_page_granulepos'] = wasmExports['ogg_page_granulepos'];
-  _ogg_page_continued = Module['_ogg_page_continued'] = wasmExports['ogg_page_continued'];
-  _ov_time_seek = Module['_ov_time_seek'] = wasmExports['ov_time_seek'];
-  _ov_time_seek_page = Module['_ov_time_seek_page'] = wasmExports['ov_time_seek_page'];
-  _ov_raw_tell = Module['_ov_raw_tell'] = wasmExports['ov_raw_tell'];
-  _ov_pcm_tell = Module['_ov_pcm_tell'] = wasmExports['ov_pcm_tell'];
-  _ov_time_tell = Module['_ov_time_tell'] = wasmExports['ov_time_tell'];
-  _ov_comment = Module['_ov_comment'] = wasmExports['ov_comment'];
-  _ov_read_filter = Module['_ov_read_filter'] = wasmExports['ov_read_filter'];
-  _ov_read_float = Module['_ov_read_float'] = wasmExports['ov_read_float'];
-  _ov_crosslap = Module['_ov_crosslap'] = wasmExports['ov_crosslap'];
-  _ov_raw_seek_lap = Module['_ov_raw_seek_lap'] = wasmExports['ov_raw_seek_lap'];
-  _ov_pcm_seek_lap = Module['_ov_pcm_seek_lap'] = wasmExports['ov_pcm_seek_lap'];
-  _ov_pcm_seek_page_lap = Module['_ov_pcm_seek_page_lap'] = wasmExports['ov_pcm_seek_page_lap'];
-  _ov_time_seek_lap = Module['_ov_time_seek_lap'] = wasmExports['ov_time_seek_lap'];
-  _ov_time_seek_page_lap = Module['_ov_time_seek_page_lap'] = wasmExports['ov_time_seek_page_lap'];
-  _oggpackB_writeinit = Module['_oggpackB_writeinit'] = wasmExports['oggpackB_writeinit'];
-  _oggpack_writecheck = Module['_oggpack_writecheck'] = wasmExports['oggpack_writecheck'];
-  _oggpackB_writecheck = Module['_oggpackB_writecheck'] = wasmExports['oggpackB_writecheck'];
-  _oggpackB_writetrunc = Module['_oggpackB_writetrunc'] = wasmExports['oggpackB_writetrunc'];
-  _oggpackB_write = Module['_oggpackB_write'] = wasmExports['oggpackB_write'];
-  _oggpack_writealign = Module['_oggpack_writealign'] = wasmExports['oggpack_writealign'];
-  _oggpackB_writealign = Module['_oggpackB_writealign'] = wasmExports['oggpackB_writealign'];
-  _oggpack_writecopy = Module['_oggpack_writecopy'] = wasmExports['oggpack_writecopy'];
-  _oggpackB_writecopy = Module['_oggpackB_writecopy'] = wasmExports['oggpackB_writecopy'];
-  _oggpackB_reset = Module['_oggpackB_reset'] = wasmExports['oggpackB_reset'];
-  _oggpackB_writeclear = Module['_oggpackB_writeclear'] = wasmExports['oggpackB_writeclear'];
-  _oggpackB_readinit = Module['_oggpackB_readinit'] = wasmExports['oggpackB_readinit'];
-  _oggpackB_look = Module['_oggpackB_look'] = wasmExports['oggpackB_look'];
-  _oggpack_look1 = Module['_oggpack_look1'] = wasmExports['oggpack_look1'];
-  _oggpackB_look1 = Module['_oggpackB_look1'] = wasmExports['oggpackB_look1'];
-  _oggpackB_adv = Module['_oggpackB_adv'] = wasmExports['oggpackB_adv'];
-  _oggpack_adv1 = Module['_oggpack_adv1'] = wasmExports['oggpack_adv1'];
-  _oggpackB_adv1 = Module['_oggpackB_adv1'] = wasmExports['oggpackB_adv1'];
-  _oggpackB_read = Module['_oggpackB_read'] = wasmExports['oggpackB_read'];
-  _oggpack_read1 = Module['_oggpack_read1'] = wasmExports['oggpack_read1'];
-  _oggpackB_read1 = Module['_oggpackB_read1'] = wasmExports['oggpackB_read1'];
-  _oggpack_bits = Module['_oggpack_bits'] = wasmExports['oggpack_bits'];
-  _oggpackB_bytes = Module['_oggpackB_bytes'] = wasmExports['oggpackB_bytes'];
-  _oggpackB_bits = Module['_oggpackB_bits'] = wasmExports['oggpackB_bits'];
-  _oggpackB_get_buffer = Module['_oggpackB_get_buffer'] = wasmExports['oggpackB_get_buffer'];
-  _ogg_page_version = Module['_ogg_page_version'] = wasmExports['ogg_page_version'];
-  _ogg_page_pageno = Module['_ogg_page_pageno'] = wasmExports['ogg_page_pageno'];
-  _ogg_page_packets = Module['_ogg_page_packets'] = wasmExports['ogg_page_packets'];
-  _ogg_stream_check = Module['_ogg_stream_check'] = wasmExports['ogg_stream_check'];
-  _ogg_stream_destroy = Module['_ogg_stream_destroy'] = wasmExports['ogg_stream_destroy'];
-  _ogg_page_checksum_set = Module['_ogg_page_checksum_set'] = wasmExports['ogg_page_checksum_set'];
-  _ogg_stream_iovecin = Module['_ogg_stream_iovecin'] = wasmExports['ogg_stream_iovecin'];
-  _ogg_stream_packetin = Module['_ogg_stream_packetin'] = wasmExports['ogg_stream_packetin'];
-  _ogg_stream_flush = Module['_ogg_stream_flush'] = wasmExports['ogg_stream_flush'];
-  _ogg_stream_flush_fill = Module['_ogg_stream_flush_fill'] = wasmExports['ogg_stream_flush_fill'];
-  _ogg_stream_pageout = Module['_ogg_stream_pageout'] = wasmExports['ogg_stream_pageout'];
-  _ogg_stream_pageout_fill = Module['_ogg_stream_pageout_fill'] = wasmExports['ogg_stream_pageout_fill'];
-  _ogg_stream_eos = Module['_ogg_stream_eos'] = wasmExports['ogg_stream_eos'];
-  _ogg_sync_destroy = Module['_ogg_sync_destroy'] = wasmExports['ogg_sync_destroy'];
-  _ogg_sync_check = Module['_ogg_sync_check'] = wasmExports['ogg_sync_check'];
-  _ogg_packet_clear = Module['_ogg_packet_clear'] = wasmExports['ogg_packet_clear'];
   _emscripten_GetProcAddress = Module['_emscripten_GetProcAddress'] = wasmExports['emscripten_GetProcAddress'];
   _emscripten_webgl1_get_proc_address = Module['_emscripten_webgl1_get_proc_address'] = wasmExports['emscripten_webgl1_get_proc_address'];
   __webgl1_match_ext_proc_address_without_suffix = Module['__webgl1_match_ext_proc_address_without_suffix'] = wasmExports['_webgl1_match_ext_proc_address_without_suffix'];
@@ -95174,7 +95171,6 @@ function assignWasmExports(wasmExports) {
   _setgroups = Module['_setgroups'] = wasmExports['setgroups'];
   _sigaltstack = Module['_sigaltstack'] = wasmExports['sigaltstack'];
   _getloadavg = Module['_getloadavg'] = wasmExports['getloadavg'];
-  ___syscall_uname = Module['___syscall_uname'] = wasmExports['__syscall_uname'];
   ___syscall_setpgid = Module['___syscall_setpgid'] = wasmExports['__syscall_setpgid'];
   ___syscall_sync = Module['___syscall_sync'] = wasmExports['__syscall_sync'];
   ___syscall_getsid = Module['___syscall_getsid'] = wasmExports['__syscall_getsid'];
@@ -95944,6 +95940,7 @@ function assignWasmExports(wasmExports) {
   _logbf = Module['_logbf'] = wasmExports['logbf'];
   _logbl = Module['_logbl'] = wasmExports['logbl'];
   _setsid = Module['_setsid'] = wasmExports['setsid'];
+  _freeaddrinfo = Module['_freeaddrinfo'] = wasmExports['freeaddrinfo'];
   _nrand48 = Module['_nrand48'] = wasmExports['nrand48'];
   _lrand48 = Module['_lrand48'] = wasmExports['lrand48'];
   _lrint = Module['_lrint'] = wasmExports['lrint'];
@@ -99578,7 +99575,6 @@ function assignWasmExports(wasmExports) {
   __ZNSt10bad_typeidC1Ev = Module['__ZNSt10bad_typeidC1Ev'] = wasmExports['_ZNSt10bad_typeidC1Ev'];
   _accept = Module['_accept'] = wasmExports['accept'];
   _accept4 = Module['_accept4'] = wasmExports['accept4'];
-  _freeaddrinfo = Module['_freeaddrinfo'] = wasmExports['freeaddrinfo'];
   _gethostbyaddr = Module['_gethostbyaddr'] = wasmExports['gethostbyaddr'];
   _gethostbyaddr_r = Module['_gethostbyaddr_r'] = wasmExports['gethostbyaddr_r'];
   _gethostbyname = Module['_gethostbyname'] = wasmExports['gethostbyname'];
@@ -99638,11 +99634,11 @@ function assignWasmExports(wasmExports) {
   dynCall_jij = dynCalls['jij'] = Module['dynCall_jij'] = wasmExports['dynCall_jij'];
   dynCall_dij = dynCalls['dij'] = Module['dynCall_dij'] = wasmExports['dynCall_dij'];
   dynCall_iiid = dynCalls['iiid'] = Module['dynCall_iiid'] = wasmExports['dynCall_iiid'];
+  dynCall_iid = dynCalls['iid'] = Module['dynCall_iid'] = wasmExports['dynCall_iid'];
   dynCall_viiifi = dynCalls['viiifi'] = Module['dynCall_viiifi'] = wasmExports['dynCall_viiifi'];
   dynCall_iiiij = dynCalls['iiiij'] = Module['dynCall_iiiij'] = wasmExports['dynCall_iiiij'];
   dynCall_iiiiiiiiiiiiiiff = dynCalls['iiiiiiiiiiiiiiff'] = Module['dynCall_iiiiiiiiiiiiiiff'] = wasmExports['dynCall_iiiiiiiiiiiiiiff'];
   dynCall_iiiiiidiiff = dynCalls['iiiiiidiiff'] = Module['dynCall_iiiiiidiiff'] = wasmExports['dynCall_iiiiiidiiff'];
-  dynCall_iid = dynCalls['iid'] = Module['dynCall_iid'] = wasmExports['dynCall_iid'];
   dynCall_iidiiiii = dynCalls['iidiiiii'] = Module['dynCall_iidiiiii'] = wasmExports['dynCall_iidiiiii'];
   dynCall_viijii = dynCalls['viijii'] = Module['dynCall_viijii'] = wasmExports['dynCall_viijii'];
   dynCall_iiiiij = dynCalls['iiiiij'] = Module['dynCall_iiiiij'] = wasmExports['dynCall_iiiiij'];
@@ -101533,7 +101529,6 @@ function assignWasmExports(wasmExports) {
   __ZTIN10Networking17NetworkReadStreamE = Module['__ZTIN10Networking17NetworkReadStreamE'] = wasmExports['_ZTIN10Networking17NetworkReadStreamE'].value;
   __ZTSN10Networking17NetworkReadStreamE = Module['__ZTSN10Networking17NetworkReadStreamE'] = wasmExports['_ZTSN10Networking17NetworkReadStreamE'].value;
   __ZTSN10Networking27NetworkReadStreamEmscriptenE = Module['__ZTSN10Networking27NetworkReadStreamEmscriptenE'] = wasmExports['_ZTSN10Networking27NetworkReadStreamEmscriptenE'].value;
-  __ZTIN6Common15PrintingManagerE = Module['__ZTIN6Common15PrintingManagerE'] = wasmExports['_ZTIN6Common15PrintingManagerE'].value;
   __ZTV22EmscriptenTimerManager = Module['__ZTV22EmscriptenTimerManager'] = wasmExports['_ZTV22EmscriptenTimerManager'].value;
   __ZTI22EmscriptenTimerManager = Module['__ZTI22EmscriptenTimerManager'] = wasmExports['_ZTI22EmscriptenTimerManager'].value;
   __ZTS22EmscriptenTimerManager = Module['__ZTS22EmscriptenTimerManager'] = wasmExports['_ZTS22EmscriptenTimerManager'].value;
@@ -101564,6 +101559,7 @@ function assignWasmExports(wasmExports) {
   __ZTI29EmscriptenTextToSpeechManager = Module['__ZTI29EmscriptenTextToSpeechManager'] = wasmExports['_ZTI29EmscriptenTextToSpeechManager'].value;
   __ZTS29EmscriptenTextToSpeechManager = Module['__ZTS29EmscriptenTextToSpeechManager'] = wasmExports['_ZTS29EmscriptenTextToSpeechManager'].value;
   __ZTIN6Common19TextToSpeechManagerE = Module['__ZTIN6Common19TextToSpeechManagerE'] = wasmExports['_ZTIN6Common19TextToSpeechManagerE'].value;
+  __ZTIN6Common15PrintingManagerE = Module['__ZTIN6Common15PrintingManagerE'] = wasmExports['_ZTIN6Common15PrintingManagerE'].value;
   __ZTVN6Common15VirtualKeyboardE = Module['__ZTVN6Common15VirtualKeyboardE'] = wasmExports['_ZTVN6Common15VirtualKeyboardE'].value;
   __ZTIN6Common15VirtualKeyboardE = Module['__ZTIN6Common15VirtualKeyboardE'] = wasmExports['_ZTIN6Common15VirtualKeyboardE'].value;
   __ZTSN6Common15VirtualKeyboardE = Module['__ZTSN6Common15VirtualKeyboardE'] = wasmExports['_ZTSN6Common15VirtualKeyboardE'].value;
@@ -104564,43 +104560,6 @@ function assignWasmExports(wasmExports) {
   _fribidi_version_info = Module['_fribidi_version_info'] = wasmExports['fribidi_version_info'].value;
   _mandatory_liga_table = Module['_mandatory_liga_table'] = wasmExports['mandatory_liga_table'].value;
   _console_liga_table = Module['_console_liga_table'] = wasmExports['console_liga_table'].value;
-  _png_sRGB_table = Module['_png_sRGB_table'] = wasmExports['png_sRGB_table'].value;
-  _png_sRGB_base = Module['_png_sRGB_base'] = wasmExports['png_sRGB_base'].value;
-  _png_sRGB_delta = Module['_png_sRGB_delta'] = wasmExports['png_sRGB_delta'].value;
-  _SDL_expand_byte = Module['_SDL_expand_byte'] = wasmExports['SDL_expand_byte'].value;
-  _EMSCRIPTENAUDIO_bootstrap = Module['_EMSCRIPTENAUDIO_bootstrap'] = wasmExports['EMSCRIPTENAUDIO_bootstrap'].value;
-  _DISKAUDIO_bootstrap = Module['_DISKAUDIO_bootstrap'] = wasmExports['DISKAUDIO_bootstrap'].value;
-  _DUMMYAUDIO_bootstrap = Module['_DUMMYAUDIO_bootstrap'] = wasmExports['DUMMYAUDIO_bootstrap'].value;
-  _SDL_GeneratedBlitFuncTable = Module['_SDL_GeneratedBlitFuncTable'] = wasmExports['SDL_GeneratedBlitFuncTable'].value;
-  _EMSCRIPTENCAMERA_bootstrap = Module['_EMSCRIPTENCAMERA_bootstrap'] = wasmExports['EMSCRIPTENCAMERA_bootstrap'].value;
-  _DUMMYCAMERA_bootstrap = Module['_DUMMYCAMERA_bootstrap'] = wasmExports['DUMMYCAMERA_bootstrap'].value;
-  _SDL_DUMMY_SensorDriver = Module['_SDL_DUMMY_SensorDriver'] = wasmExports['SDL_DUMMY_SensorDriver'].value;
-  _Emscripten_fill_document_window = Module['_Emscripten_fill_document_window'] = wasmExports['Emscripten_fill_document_window'].value;
-  _Emscripten_bootstrap = Module['_Emscripten_bootstrap'] = wasmExports['Emscripten_bootstrap'].value;
-  _SDL_object_validation = Module['_SDL_object_validation'] = wasmExports['SDL_object_validation'].value;
-  _GENERIC_titlebootstrap = Module['_GENERIC_titlebootstrap'] = wasmExports['GENERIC_titlebootstrap'].value;
-  _GENERIC_userbootstrap = Module['_GENERIC_userbootstrap'] = wasmExports['GENERIC_userbootstrap'].value;
-  _environ = Module['_environ'] = wasmExports['environ'].value;
-  _SDL_EMSCRIPTEN_JoystickDriver = Module['_SDL_EMSCRIPTEN_JoystickDriver'] = wasmExports['SDL_EMSCRIPTEN_JoystickDriver'].value;
-  _SDL_VIRTUAL_JoystickDriver = Module['_SDL_VIRTUAL_JoystickDriver'] = wasmExports['SDL_VIRTUAL_JoystickDriver'].value;
-  _DUMMY_bootstrap = Module['_DUMMY_bootstrap'] = wasmExports['DUMMY_bootstrap'].value;
-  _OFFSCREEN_bootstrap = Module['_OFFSCREEN_bootstrap'] = wasmExports['OFFSCREEN_bootstrap'].value;
-  _SDL_expand_byte_10 = Module['_SDL_expand_byte_10'] = wasmExports['SDL_expand_byte_10'].value;
-  _GLES2_RenderDriver = Module['_GLES2_RenderDriver'] = wasmExports['GLES2_RenderDriver'].value;
-  _GPU_RenderDriver = Module['_GPU_RenderDriver'] = wasmExports['GPU_RenderDriver'].value;
-  _SW_RenderDriver = Module['_SW_RenderDriver'] = wasmExports['SW_RenderDriver'].value;
-  _appindicator_names = Module['_appindicator_names'] = wasmExports['appindicator_names'].value;
-  _jpeg_aritab = Module['_jpeg_aritab'] = wasmExports['jpeg_aritab'].value;
-  _jpeg_natural_order = Module['_jpeg_natural_order'] = wasmExports['jpeg_natural_order'].value;
-  _jpeg_natural_order2 = Module['_jpeg_natural_order2'] = wasmExports['jpeg_natural_order2'].value;
-  _jpeg_natural_order3 = Module['_jpeg_natural_order3'] = wasmExports['jpeg_natural_order3'].value;
-  _jpeg_natural_order4 = Module['_jpeg_natural_order4'] = wasmExports['jpeg_natural_order4'].value;
-  _jpeg_natural_order5 = Module['_jpeg_natural_order5'] = wasmExports['jpeg_natural_order5'].value;
-  _jpeg_natural_order6 = Module['_jpeg_natural_order6'] = wasmExports['jpeg_natural_order6'].value;
-  _jpeg_natural_order7 = Module['_jpeg_natural_order7'] = wasmExports['jpeg_natural_order7'].value;
-  _jpeg_std_message_table = Module['_jpeg_std_message_table'] = wasmExports['jpeg_std_message_table'].value;
-  _GifAsciiTable8x8 = Module['_GifAsciiTable8x8'] = wasmExports['GifAsciiTable8x8'].value;
-  _GifNoisyPrint = Module['_GifNoisyPrint'] = wasmExports['GifNoisyPrint'].value;
   _af_adlm_dflt_style_class = Module['_af_adlm_dflt_style_class'] = wasmExports['af_adlm_dflt_style_class'].value;
   _af_cjk_writing_system_class = Module['_af_cjk_writing_system_class'] = wasmExports['af_cjk_writing_system_class'].value;
   _af_dummy_writing_system_class = Module['_af_dummy_writing_system_class'] = wasmExports['af_dummy_writing_system_class'].value;
@@ -104932,11 +104891,17 @@ function assignWasmExports(wasmExports) {
   _tt_cmap14_class_rec = Module['_tt_cmap14_class_rec'] = wasmExports['tt_cmap14_class_rec'].value;
   _ft_grays_raster = Module['_ft_grays_raster'] = wasmExports['ft_grays_raster'].value;
   _tt_default_graphics_state = Module['_tt_default_graphics_state'] = wasmExports['tt_default_graphics_state'].value;
-  _z_errmsg = Module['_z_errmsg'] = wasmExports['z_errmsg'].value;
-  __length_code = Module['__length_code'] = wasmExports['_length_code'].value;
-  __dist_code = Module['__dist_code'] = wasmExports['_dist_code'].value;
-  _deflate_copyright = Module['_deflate_copyright'] = wasmExports['deflate_copyright'].value;
-  _inflate_copyright = Module['_inflate_copyright'] = wasmExports['inflate_copyright'].value;
+  _GifAsciiTable8x8 = Module['_GifAsciiTable8x8'] = wasmExports['GifAsciiTable8x8'].value;
+  _GifNoisyPrint = Module['_GifNoisyPrint'] = wasmExports['GifNoisyPrint'].value;
+  _jpeg_aritab = Module['_jpeg_aritab'] = wasmExports['jpeg_aritab'].value;
+  _jpeg_natural_order = Module['_jpeg_natural_order'] = wasmExports['jpeg_natural_order'].value;
+  _jpeg_natural_order2 = Module['_jpeg_natural_order2'] = wasmExports['jpeg_natural_order2'].value;
+  _jpeg_natural_order3 = Module['_jpeg_natural_order3'] = wasmExports['jpeg_natural_order3'].value;
+  _jpeg_natural_order4 = Module['_jpeg_natural_order4'] = wasmExports['jpeg_natural_order4'].value;
+  _jpeg_natural_order5 = Module['_jpeg_natural_order5'] = wasmExports['jpeg_natural_order5'].value;
+  _jpeg_natural_order6 = Module['_jpeg_natural_order6'] = wasmExports['jpeg_natural_order6'].value;
+  _jpeg_natural_order7 = Module['_jpeg_natural_order7'] = wasmExports['jpeg_natural_order7'].value;
+  _jpeg_std_message_table = Module['_jpeg_std_message_table'] = wasmExports['jpeg_std_message_table'].value;
   __mapping_P = Module['__mapping_P'] = wasmExports['_mapping_P'].value;
   __floor_P = Module['__floor_P'] = wasmExports['_floor_P'].value;
   __residue_P = Module['__residue_P'] = wasmExports['_residue_P'].value;
@@ -104946,6 +104911,37 @@ function assignWasmExports(wasmExports) {
   _residue0_exportbundle = Module['_residue0_exportbundle'] = wasmExports['residue0_exportbundle'].value;
   _residue1_exportbundle = Module['_residue1_exportbundle'] = wasmExports['residue1_exportbundle'].value;
   _residue2_exportbundle = Module['_residue2_exportbundle'] = wasmExports['residue2_exportbundle'].value;
+  _SDL_expand_byte = Module['_SDL_expand_byte'] = wasmExports['SDL_expand_byte'].value;
+  _EMSCRIPTENAUDIO_bootstrap = Module['_EMSCRIPTENAUDIO_bootstrap'] = wasmExports['EMSCRIPTENAUDIO_bootstrap'].value;
+  _DISKAUDIO_bootstrap = Module['_DISKAUDIO_bootstrap'] = wasmExports['DISKAUDIO_bootstrap'].value;
+  _DUMMYAUDIO_bootstrap = Module['_DUMMYAUDIO_bootstrap'] = wasmExports['DUMMYAUDIO_bootstrap'].value;
+  _SDL_GeneratedBlitFuncTable = Module['_SDL_GeneratedBlitFuncTable'] = wasmExports['SDL_GeneratedBlitFuncTable'].value;
+  _EMSCRIPTENCAMERA_bootstrap = Module['_EMSCRIPTENCAMERA_bootstrap'] = wasmExports['EMSCRIPTENCAMERA_bootstrap'].value;
+  _DUMMYCAMERA_bootstrap = Module['_DUMMYCAMERA_bootstrap'] = wasmExports['DUMMYCAMERA_bootstrap'].value;
+  _SDL_DUMMY_SensorDriver = Module['_SDL_DUMMY_SensorDriver'] = wasmExports['SDL_DUMMY_SensorDriver'].value;
+  _Emscripten_fill_document_window = Module['_Emscripten_fill_document_window'] = wasmExports['Emscripten_fill_document_window'].value;
+  _Emscripten_bootstrap = Module['_Emscripten_bootstrap'] = wasmExports['Emscripten_bootstrap'].value;
+  _SDL_object_validation = Module['_SDL_object_validation'] = wasmExports['SDL_object_validation'].value;
+  _GENERIC_titlebootstrap = Module['_GENERIC_titlebootstrap'] = wasmExports['GENERIC_titlebootstrap'].value;
+  _GENERIC_userbootstrap = Module['_GENERIC_userbootstrap'] = wasmExports['GENERIC_userbootstrap'].value;
+  _environ = Module['_environ'] = wasmExports['environ'].value;
+  _SDL_EMSCRIPTEN_JoystickDriver = Module['_SDL_EMSCRIPTEN_JoystickDriver'] = wasmExports['SDL_EMSCRIPTEN_JoystickDriver'].value;
+  _SDL_VIRTUAL_JoystickDriver = Module['_SDL_VIRTUAL_JoystickDriver'] = wasmExports['SDL_VIRTUAL_JoystickDriver'].value;
+  _DUMMY_bootstrap = Module['_DUMMY_bootstrap'] = wasmExports['DUMMY_bootstrap'].value;
+  _OFFSCREEN_bootstrap = Module['_OFFSCREEN_bootstrap'] = wasmExports['OFFSCREEN_bootstrap'].value;
+  _SDL_expand_byte_10 = Module['_SDL_expand_byte_10'] = wasmExports['SDL_expand_byte_10'].value;
+  _GLES2_RenderDriver = Module['_GLES2_RenderDriver'] = wasmExports['GLES2_RenderDriver'].value;
+  _GPU_RenderDriver = Module['_GPU_RenderDriver'] = wasmExports['GPU_RenderDriver'].value;
+  _SW_RenderDriver = Module['_SW_RenderDriver'] = wasmExports['SW_RenderDriver'].value;
+  _appindicator_names = Module['_appindicator_names'] = wasmExports['appindicator_names'].value;
+  _png_sRGB_table = Module['_png_sRGB_table'] = wasmExports['png_sRGB_table'].value;
+  _png_sRGB_base = Module['_png_sRGB_base'] = wasmExports['png_sRGB_base'].value;
+  _png_sRGB_delta = Module['_png_sRGB_delta'] = wasmExports['png_sRGB_delta'].value;
+  _z_errmsg = Module['_z_errmsg'] = wasmExports['z_errmsg'].value;
+  __length_code = Module['__length_code'] = wasmExports['_length_code'].value;
+  __dist_code = Module['__dist_code'] = wasmExports['_dist_code'].value;
+  _deflate_copyright = Module['_deflate_copyright'] = wasmExports['deflate_copyright'].value;
+  _inflate_copyright = Module['_inflate_copyright'] = wasmExports['inflate_copyright'].value;
   ___tls_locale = Module['___tls_locale'] = wasmExports['__tls_locale'].value;
   ___environ = Module['___environ'] = wasmExports['__environ'].value;
   ____environ = Module['____environ'] = wasmExports['___environ'].value;
@@ -106336,6 +106332,8 @@ var wasmImports = {
   /** @export */
   __syscall_umask: ___syscall_umask,
   /** @export */
+  __syscall_uname: ___syscall_uname,
+  /** @export */
   __syscall_unlinkat: ___syscall_unlinkat,
   /** @export */
   __syscall_utimensat: ___syscall_utimensat,
@@ -106363,8 +106361,6 @@ var wasmImports = {
   _emscripten_get_progname: __emscripten_get_progname,
   /** @export */
   _emscripten_log_formatted: __emscripten_log_formatted,
-  /** @export */
-  _emscripten_lookup_name: __emscripten_lookup_name,
   /** @export */
   _emscripten_push_main_loop_blocker: __emscripten_push_main_loop_blocker,
   /** @export */
@@ -106711,6 +106707,10 @@ var wasmImports = {
   emscripten_destroy_worker: _emscripten_destroy_worker,
   /** @export */
   emscripten_enter_soft_fullscreen: _emscripten_enter_soft_fullscreen,
+  /** @export */
+  emscripten_epoll_listener_add: _emscripten_epoll_listener_add,
+  /** @export */
+  emscripten_epoll_listener_remove: _emscripten_epoll_listener_remove,
   /** @export */
   emscripten_err: _emscripten_err,
   /** @export */
@@ -107689,6 +107689,8 @@ var wasmImports = {
   emscripten_webgl_do_commit_frame: _emscripten_webgl_do_commit_frame,
   /** @export */
   emscripten_webgl_do_create_context: _emscripten_webgl_do_create_context,
+  /** @export */
+  emscripten_webgl_do_destroy_context: _emscripten_webgl_do_destroy_context,
   /** @export */
   emscripten_webgl_do_get_current_context: _emscripten_webgl_do_get_current_context,
   /** @export */
