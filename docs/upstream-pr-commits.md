@@ -9,62 +9,62 @@ Review base: `upstream/master` (`ed949213a23`). 4 review commits, 4 including pr
 - [b9a73fb3c76](https://github.com/chkuendig/scummvm/commit/b9a73fb3c760209215cec616c6aaf141b349f57a) EMSCRIPTEN: Extract WebMIDI into a JavaScript library
 - [50cd93b54b9](https://github.com/chkuendig/scummvm/commit/50cd93b54b9a52345d4b55111480075f27dd6280) EMSCRIPTEN: Extract text-to-speech into a JavaScript library
 - [d9ed2610ee8](https://github.com/chkuendig/scummvm/commit/d9ed2610ee8bf0891ab45d62a446d9f54dc6110f) EMSCRIPTEN: Extract browser backend APIs into a JavaScript library
-- [4968b30962b](https://github.com/chkuendig/scummvm/commit/4968b30962b603e73a3bcc277d3c87ec93029aae) EMSCRIPTEN: Update to SDK 6.0.13 and refresh dependencies
+- [c569c52908c](https://github.com/chkuendig/scummvm/commit/c569c52908c612c620c7e966b992091e4981babb) EMSCRIPTEN: Update to SDK 6.0.13 and refresh dependencies
 
 ## upstream/emscripten-opengl
 
 Review base: `upstream/master` (`ed949213a23`). 4 review commits, 4 including prerequisites.
 
 - [b7e92acd643](https://github.com/chkuendig/scummvm/commit/b7e92acd6435dce9077b0c53a3ff037f7a02f424) EMSCRIPTEN: Keep the WebGL canvas background opaque
-- [5ee92ede633](https://github.com/chkuendig/scummvm/commit/5ee92ede6336c4049f703f0d114bdd5ddedb00cf) EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable
-- [18e198169c5](https://github.com/chkuendig/scummvm/commit/18e198169c573909962665836a92dd1b1e5acc46) EMSCRIPTEN: Match OpenGL video modes to browser window dimensions
-- [d003357706b](https://github.com/chkuendig/scummvm/commit/d003357706b8b596ae66604e97e29c10c8a1f3a4) EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default
+- [38edb63e696](https://github.com/chkuendig/scummvm/commit/38edb63e6968b10855132e42ccea917184a8d6d8) EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable
+- [31134f1aecd](https://github.com/chkuendig/scummvm/commit/31134f1aecd58c40e3756e6f96e0b695cf4d3f2d) EMSCRIPTEN: Match OpenGL video modes to browser window dimensions
+- [c83ccc32509](https://github.com/chkuendig/scummvm/commit/c83ccc32509d19c1e69391f6376746b7f4387f94) EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default
 
 ## upstream/emscripten-filesystem
 
-Review base: `upstream/emscripten-update-cleanup` (`4968b30962b`). 3 review commits, 7 including prerequisites.
+Review base: `upstream/emscripten-update-cleanup` (`c569c52908c`). 3 review commits, 7 including prerequisites.
 
-- [fb455e28ef8](https://github.com/chkuendig/scummvm/commit/fb455e28ef85c76d8b4e35f285236a47c8a05800) EMSCRIPTEN: Stream HTTP files through a bounded virtual filesystem
-- [59a0d6a2d7d](https://github.com/chkuendig/scummvm/commit/59a0d6a2d7d76300a64f38bd3e35298b91a7606e) EMSCRIPTEN: Mount dropped files and import Roland ROMs
-- [bcd09c38b74](https://github.com/chkuendig/scummvm/commit/bcd09c38b7492f5f9ead7188f4987790bc8e0f9a) EMSCRIPTEN: Persist settings storage and use supported FS APIs
+- [24539766ae3](https://github.com/chkuendig/scummvm/commit/24539766ae36ff99bee5dfe05e3cbe97458c2350) EMSCRIPTEN: Stream HTTP files through a bounded virtual filesystem
+- [93a93efabcb](https://github.com/chkuendig/scummvm/commit/93a93efabcb411259e9d052d7dd7a3356b0be99a) EMSCRIPTEN: Mount dropped files and import Roland ROMs
+- [e91b0eeb30a](https://github.com/chkuendig/scummvm/commit/e91b0eeb30a244643e1da935c32fd32d125a5d24) EMSCRIPTEN: Persist settings storage and use supported FS APIs
 
 ## upstream/emscripten-printing
 
-Review base: `upstream/emscripten-update-cleanup` (`4968b30962b`). 1 review commit, 5 including prerequisites.
+Review base: `upstream/emscripten-update-cleanup` (`c569c52908c`). 1 review commit, 5 including prerequisites.
 
-- [45b99081b33](https://github.com/chkuendig/scummvm/commit/45b99081b333223f8fcb66fc39f41bbada3b718c) EMSCRIPTEN: Download game print-outs through the browser
+- [6cb3af3d8a8](https://github.com/chkuendig/scummvm/commit/6cb3af3d8a853732374a16306bafbc53cfbdd3a5) EMSCRIPTEN: Download game print-outs through the browser
 
 ## upstream/emscripten-loading-progress
 
-Review base: `upstream/emscripten-update-cleanup` (`4968b30962b`). 1 review commit, 5 including prerequisites.
+Review base: `upstream/emscripten-update-cleanup` (`c569c52908c`). 1 review commit, 5 including prerequisites.
 
-- [b94cd468d3a](https://github.com/chkuendig/scummvm/commit/b94cd468d3a9cba88ce32ad02b824fcd8f43fd50) EMSCRIPTEN: Show download and initialization progress
+- [5d74baad5e1](https://github.com/chkuendig/scummvm/commit/5d74baad5e175f956db33db8ee513392738a1a85) EMSCRIPTEN: Show download and initialization progress
 
 ## upstream/cloud-streaming
 
-Review base: `upstream/emscripten-filesystem` (`bcd09c38b74`). 3 review commits, 10 including prerequisites.
+Review base: `upstream/emscripten-filesystem` (`e91b0eeb30a`). 3 review commits, 10 including prerequisites.
 
-- [97969e53dee](https://github.com/chkuendig/scummvm/commit/97969e53deee6886dbb77729a9ea0bb1ce856f25) CLOUD: Support efficient ranged downloads
-- [654a17f616b](https://github.com/chkuendig/scummvm/commit/654a17f616b7687e18e652e0a1bb15e568b911d1) CLOUD: Handle access tokens and browser refresh failures
-- [5ecdf1c77e2](https://github.com/chkuendig/scummvm/commit/5ecdf1c77e2da4aa19efe68df8403cecc27918b1) EMSCRIPTEN: Stream cloud files through the shared filesystem
+- [938c562299e](https://github.com/chkuendig/scummvm/commit/938c562299ea64c017ada3a728b82616e16876bb) CLOUD: Support efficient ranged downloads
+- [6ad0ef3c46b](https://github.com/chkuendig/scummvm/commit/6ad0ef3c46b59c9ef9e7f509f69cbc0adeeaa17c) CLOUD: Handle access tokens and browser refresh failures
+- [5e641b2e4d0](https://github.com/chkuendig/scummvm/commit/5e641b2e4d01093309b8b76239ea0889a90bca8a) EMSCRIPTEN: Stream cloud files through the shared filesystem
 
 ## upstream/hpl1-webgl
 
-Review base: `upstream/emscripten-opengl` (`d003357706b`). 5 review commits, 9 including prerequisites.
+Review base: `upstream/emscripten-opengl` (`c83ccc32509`). 5 review commits, 9 including prerequisites.
 
-- [8ca5d51e444](https://github.com/chkuendig/scummvm/commit/8ca5d51e4441f20f1d24eaf6e5a30fa551eb8aa9) HPL1: Bundle shaders and adapt them for GLES
-- [e381df261fa](https://github.com/chkuendig/scummvm/commit/e381df261fa87e09bb9e63eb7aab0132f87b54f9) HPL1: Add the WebGL2 renderer and GLES compatibility layer
-- [9c965fc9d6e](https://github.com/chkuendig/scummvm/commit/9c965fc9d6e03f2e42d89a0784437f33ac354bfa) HPL1: Add controller bindings and menu focus navigation
-- [097aab1030f](https://github.com/chkuendig/scummvm/commit/097aab1030fd2c55aa1bffb94e3addee7de93348) KEYMAPPER: Provide shared engine-axis actions for HPL1
-- [96cfc2faa16](https://github.com/chkuendig/scummvm/commit/96cfc2faa1651e8bdd96eb7e663a067721891c94) HPL1: Handle native camera axes and preserve touch response
+- [5f68543a302](https://github.com/chkuendig/scummvm/commit/5f68543a30211a265fd24efb00d2a3631758c98b) HPL1: Bundle shaders and adapt them for GLES
+- [0475b151bc7](https://github.com/chkuendig/scummvm/commit/0475b151bc79e4367757e2a8da181eea920bb44a) HPL1: Add the WebGL2 renderer and GLES compatibility layer
+- [53c98ac232e](https://github.com/chkuendig/scummvm/commit/53c98ac232e73140edcd5726eaf89f16d3950e89) HPL1: Add controller bindings and menu focus navigation
+- [ad64fc8cde7](https://github.com/chkuendig/scummvm/commit/ad64fc8cde7fd55b13ce468b5f074c88e958c202) KEYMAPPER: Provide shared engine-axis actions for HPL1
+- [4fef1d8726c](https://github.com/chkuendig/scummvm/commit/4fef1d8726c1363d0dd9a9530139f25ad7cd584c) HPL1: Handle native camera axes and preserve touch response
 
 ## upstream/emscripten-recorder
 
-Review base: `upstream/emscripten-filesystem` (`bcd09c38b74`). 3 review commits, 10 including prerequisites.
+Review base: `upstream/emscripten-filesystem` (`e91b0eeb30a`). 3 review commits, 10 including prerequisites.
 
-- [1e5c707959f](https://github.com/chkuendig/scummvm/commit/1e5c707959fbdca4c1edf896849b076a56086549) COMMON: Propagate finalize() through buffered and recorder write streams
-- [14c78382f93](https://github.com/chkuendig/scummvm/commit/14c78382f937d791713bde81394398b24934a0a7) BACKENDS: EMSCRIPTEN: Support browser recording, replay and viewport controls
-- [0d0fa8e1a38](https://github.com/chkuendig/scummvm/commit/0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8) BACKENDS: EMSCRIPTEN: Keep the SDL audio callback out of the event recorder
+- [4777621a179](https://github.com/chkuendig/scummvm/commit/4777621a1795a4d41450343680d465c483fc6f77) COMMON: Propagate finalize() through buffered and recorder write streams
+- [6299941f524](https://github.com/chkuendig/scummvm/commit/6299941f524ccd8080d864e97c4135d7040559a5) BACKENDS: EMSCRIPTEN: Support browser recording, replay and viewport controls
+- [1c518f34be5](https://github.com/chkuendig/scummvm/commit/1c518f34be5990b6689cbecc8857901da065a8e6) BACKENDS: EMSCRIPTEN: Keep the SDL audio callback out of the event recorder
 
 ## upstream/touch-controls
 
