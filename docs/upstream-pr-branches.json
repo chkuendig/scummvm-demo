@@ -2031,7 +2031,7 @@
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "SDK 6.0.13 source and workflow pins updated; local port/Asyncify preflight passed. Full build and browser validation pending. Live deployment remains SDK 6.0.11.",
+    "status": "SDK 6.0.13 validation run dispatched with deploy=false; local port/Asyncify preflight passed. Full build and browser validation pending. Live deployment remains SDK 6.0.11.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
@@ -2953,7 +2953,7 @@
     "base": "f631a289b7137cf324e0032db9b87c0af26271e9"
   },
   "emscriptenUpgradePlan": {
-    "status": "SDK pins applied; local preflight passed; full validation build pending",
+    "status": "SDK pins applied; local preflight passed; full validation build dispatched",
     "current": "6.0.13",
     "target": "6.0.13",
     "branch": "upstream/emscripten-update-cleanup",
@@ -2990,6 +2990,17 @@
       "experimentalSDLWarning": false,
       "removedFsApiInGeneratedGlue": false,
       "browserAudioBehavior": "pending full build and browser validation"
+    },
+    "validationRun": {
+      "url": "https://github.com/chkuendig/scummvm-demo/actions/runs/39426597295",
+      "id": 39426597295,
+      "demoCommit": "ddc4aeccde6fc2f0bdd5c8acc7fb543a93dd234b",
+      "scummvmCommit": "9e52e845659e3ec37112c5ae37cd52a2aaa44aa3",
+      "sdk": "6.0.13",
+      "deploy": false,
+      "statusAtDispatch": "queued",
+      "gameSync": "skipped",
+      "cloudDeployment": "skipped"
     }
   }
 }
