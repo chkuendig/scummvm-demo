@@ -2204,7 +2204,7 @@
         "Preserve upstream HPL1 Glowstick KEYCODE_g fix"
       ],
       "fullBuild": {
-        "status": "dispatched; result pending",
+        "status": "superseded by dependency follow-up validation",
         "run": {
           "url": "https://github.com/chkuendig/scummvm-demo/actions/runs/39477133908",
           "id": 39477133908,
@@ -2309,7 +2309,12 @@
         }
       },
       "sourceDiffFromPrevious": "only dists/emscripten/build.sh; other source blobs unchanged",
-      "fullBuild": "pending"
+      "fullBuild": {
+        "status": "dispatched; result pending",
+        "url": "https://github.com/chkuendig/scummvm-demo/actions/runs/39478998521",
+        "demoCommit": "78c684ff7d48936bfcd3d5f0b9f9559b120a8b61",
+        "deploy": false
+      }
     }
   },
   "publication": {
