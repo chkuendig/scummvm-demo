@@ -10,6 +10,11 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy after a successful build
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -17,7 +22,7 @@ permissions:
 env:
   SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud"
   SCUMMVM_CONFIGURE_LIBS: " --enable-a52 --enable-faad --enable-fluidlite --enable-freetype2 --enable-fribidi --enable-gif --enable-gif --enable-jpeg --enable-jpeg --enable-mad --enable-mad --enable-mikmod --enable-mpcdec --enable-mpeg2 --enable-ogg --enable-png --enable-retrowave --enable-theoradec --enable-vorbis --enable-vpx --enable-zlib"
-  EMSDK_VERSION: "6.0.11"
+  EMSDK_VERSION: "6.0.13"
   DATA_BASEURL: "https://scummvm-data.kuendig.io"
   # Extra link flags for Sentry wasm symbolication + catchable OOM. configure
   # honors env LDFLAGS (seeds both the executable and plugin links), so no
@@ -72,7 +77,7 @@ jobs:
             scummvm/engines/engines.mk 
             scummvm/engines/detection_table.h 
             scummvm/engines/plugins_table.h
-          key: scummvm-configure-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
+          key: scummvm-configure-${{ env.EMSDK_VERSION }}-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
      
       - uses: actions/cache@v4 
         name: Cache Build artifacts 📦
@@ -82,7 +87,7 @@ jobs:
             scummvm/build-emscripten/
             scummvm/**/lib*.a  
             scummvm/**/*.o
-          key: build-emscripten-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
+          key: build-emscripten-${{ env.EMSDK_VERSION }}-${{ env.SCUMMVM_COMMIT}}-${{ hashFiles('config_vars.txt') }}-${{ hashFiles('config_lib_vars.txt') }}
 
       - if: ${{ steps.cache-configure.outputs.cache-hit != 'true' }}
         name: Configure ScummVM
@@ -126,9 +131,9 @@ jobs:
           ./sentry-cli releases finalize "$REL" || true
       - name: Record integration build provenance
         run: |
-          jq --arg demo "$GITHUB_SHA" --arg scummvm "$SCUMMVM_COMMIT" \
+          jq --arg demo "$GITHUB_SHA" --arg scummvm "$SCUMMVM_COMMIT" --arg sdk "$EMSDK_VERSION" \
             '{demoCommit: $demo, scummvmCommit: $scummvm, upstreamBase,
-              branches: [.branches[] | {name, head}], eventRecorder: false}' \
+              branches: [.branches[] | {name, head}], eventRecorder: false, emsdkVersion: $sdk}' \
             docs/upstream-pr-branches.json > scummvm/build-emscripten/build-info.json
       - name: Save Build
         uses: actions/cache/save@v4
@@ -136,6 +141,12 @@ jobs:
           path: |
             scummvm/build-emscripten/
           key: build-emscripten-${{ github.run_id }}
+      - name: Upload SDK validation build
+        if: github.event_name == 'workflow_dispatch' && !inputs.deploy
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdk-validation-build
+          path: scummvm/build-emscripten/
   update-icons:
     name: Update Icons 🎨
     runs-on: ubuntu-latest
@@ -159,6 +170,7 @@ jobs:
           scripts/update-icons.sh
           python3 scummvm/dists/emscripten/build-make_http_index.py scummvm/build-emscripten/data/
   sync-games:
+    if: github.event_name != 'workflow_dispatch' || inputs.deploy
     name: Sync Games 🎮
     runs-on: ubuntu-latest
     steps:
@@ -182,9 +194,9 @@ jobs:
             scummvm/build-emscripten/games.json
           key: games-metadata-${{ github.run_id }}
   deploy-cloud:
+    if: github.event_name != 'workflow_dispatch' || inputs.deploy
     name: Deploy Cloud Backend ☁️
     runs-on: ubuntu-latest
-    needs: []
     steps:
       - name: Checkout  🛎️
         uses: actions/checkout@v4
@@ -234,6 +246,7 @@ jobs:
         run: exit 1
 
   deploy-demo:
+    if: github.event_name != 'workflow_dispatch' || inputs.deploy
     name: Deploy Demo Page 🚀
     runs-on: ubuntu-latest
     needs:  [update-icons, sync-games, build-scummvm] # [detect-games, update-icons]

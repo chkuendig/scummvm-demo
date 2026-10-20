@@ -1,6 +1,10 @@
-# Emscripten 6.0.13 upgrade plan
+# Emscripten 6.0.13 upgrade
 
-The target is 6.0.13, released on 2026-10-19. This is a planned follow-up to the upstream branch split; source and demo workflow pins currently remain at 6.0.11. Implement the SDK change in `upstream/emscripten-update-cleanup` and update the demo workflow pin when integrating it.
+Source and demo workflow pins now target 6.0.13 (released on 2026-10-19). The source bump is folded into the existing `upstream/emscripten-update-cleanup` SDK commit; dependent review branches are reparented and all commit limits still hold. The demo source pin is `9e52e845659e3ec37112c5ae37cd52a2aaa44aa3`. Full build and browser validation are pending; the live deployment remains on 6.0.11.
+
+A clean local SDK install built SDL 3.4.2, FreeType 2.14.3 and libpng 1.6.59, linked them with Asyncify, and ran a library-version smoke program using SDK Node 24.19.0. The existing generated-JavaScript patches matched two silence callbacks, one recording callback and one playback callback; applying them again was idempotent. No SDL3 experimental warning or `FS.filesystems` reference appeared in that generated glue. These checks establish build/patch compatibility; browser audio behavior still needs validation.
+
+The workflow now supports `workflow_dispatch` with `deploy=false`: build the full configured engine set, save an SDK validation artifact, and skip game synchronization and both publishing jobs. SDK, dependencies, configure and object caches include the SDK version. Build provenance records `emsdkVersion`. The workflow passes actionlint 1.7.12.
 
 The [6.0.13 release notes](https://github.com/emscripten-core/emscripten/releases/tag/6.0.13) record libpng 1.6.58 → 1.6.59 and removal of the undocumented `FS.filesystems` object. The [SDK changelog](https://github.com/emscripten-core/emscripten/blob/6.0.13/ChangeLog.md) places SDL3's non-experimental status in 6.0.10 and FreeType 2.14.3 in 6.0.7, so both are already included in the current 6.0.11 pin. Verify the actual port versions during the upgrade rather than treating those as new 6.0.13 changes.
 
@@ -13,4 +17,4 @@ The [6.0.13 release notes](https://github.com/emscripten-core/emscripten/release
 7. Check WebGL2 startup, the opaque canvas/OSD/touch overlays and HPL1/Grim startup on Chromium and Safari/iOS where available. Retain clear distinctions between browser automation and physical-device gameplay checks.
 8. Deploy only the validated integration, record the SDK and source/branch provenance, and verify the live build information. Preserve the current 6.0.11 deployment as the rollback reference until the new browser checks pass.
 
-The split leaves room for this upgrade within the requested commit limit. Prefer one SDK/build compatibility commit and, if needed, a separate SDL3 compatibility fix; keep the update/cleanup review series at five commits or fewer.
+The SDK bump is included in the existing build commit, leaving the update/cleanup series at three commits and the largest complete stack (recorder) at ten. No additional SDL3 patch was needed for the local compatibility check.
