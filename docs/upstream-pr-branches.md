@@ -1,37 +1,29 @@
 # ScummVM upstream branch set
 
-The runtime series is split into filesystem work, standalone browser features, and update/cleanup work. All eight branches below are pushed. The former `upstream/emscripten-runtime` and `upstream/emscripten-url-reload` branches are retired; their old tips and original commit mappings are retained in local backup branches and the JSON history.
+All nine review branches and the consolidated demo source are pushed and based on upstream `ed949213a23440447ea402e263daa871394b6bf9`. The former monolithic runtime and URL-reload branches remain retired.
 
-Counts are relative to each review base. Every review series has at most five commits, and no branch exceeds ten commits even including its stacked prerequisites. The common source base remains `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`.
-
-| Branch | Review base | Commits | Including prerequisites | Scope |
+| Branch | Review base | Own commits | Including prerequisites | Scope |
 | --- | --- | ---: | ---: | --- |
-| `upstream/emscripten-update-cleanup` | `upstream/master` | 3 | 3 | SDK/dependencies, JS extraction, browser and URL reload fixes, WebGL and audio handling |
-| `upstream/emscripten-filesystem` | `upstream/emscripten-update-cleanup` | 3 | 6 | HTTP ranges and VFS streaming/cache, drag/drop/ROM import and persistent settings |
-| `upstream/emscripten-printing` | `upstream/emscripten-update-cleanup` | 1 | 4 | Download game print-outs through the browser |
-| `upstream/emscripten-loading-progress` | `upstream/emscripten-update-cleanup` | 1 | 4 | Wasm download and initialization progress |
-| `upstream/cloud-streaming` | `upstream/emscripten-filesystem` | 3 | 9 | Stream cloud providers through the shared VFS |
-| `upstream/hpl1-webgl` | `upstream/emscripten-update-cleanup` | 5 | 8 | GLES rendering/shaders, menu navigation and native camera input |
-| `upstream/emscripten-recorder` | `upstream/emscripten-filesystem` | 4 | 10 | Browser recording/export/replay and viewport-aware controls |
+| `upstream/emscripten-update-cleanup` | `upstream/master` | 4 | 4 | SDK/dependencies and separate WebMIDI, speech and browser JavaScript libraries |
+| `upstream/emscripten-opengl` | `upstream/emscripten-update-cleanup` | 1 | 5 | WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending |
+| `upstream/emscripten-filesystem` | `upstream/emscripten-update-cleanup` | 3 | 7 | HTTP ranges and VFS streaming/cache, drag/drop/ROM import and persistent settings |
+| `upstream/emscripten-printing` | `upstream/emscripten-update-cleanup` | 1 | 5 | Download game print-outs through the browser |
+| `upstream/emscripten-loading-progress` | `upstream/emscripten-update-cleanup` | 1 | 5 | Wasm download and initialization progress |
+| `upstream/cloud-streaming` | `upstream/emscripten-filesystem` | 3 | 10 | Stream cloud providers through the shared VFS |
+| `upstream/hpl1-webgl` | `upstream/emscripten-opengl` | 5 | 10 | GLES rendering/shaders, menu navigation and native camera input |
+| `upstream/emscripten-recorder` | `upstream/emscripten-filesystem` | 3 | 10 | Browser recording/export/replay and viewport-aware controls |
 | `upstream/touch-controls` | `upstream/master` | 3 | 3 | Shared touch preferences, controller availability and analog input |
 
-The printing and loading-progress branches depend only on update/cleanup. URL reload is folded into the existing JavaScript/browser cleanup commit. Filesystem work also builds on update/cleanup; cloud streaming and the browser recorder build on the filesystem branch. HPL1 builds on update/cleanup and includes a copy of the shared axis-event/keymapper prerequisite from touch controls. Once that shared support lands upstream, omit the duplicate prerequisite when rebasing HPL1.
+Cleanup now has one commit each for WebMIDI, text-to-speech, browser-backend JavaScript and SDK/dependency/build updates. The browser commit also contains URL reload. Its diff contains no engine or OpenGL changes. `upstream/emscripten-opengl` owns WebGL2/ES3 context selection, capability detection and surface fallback, browser-window resizing, and Emscripten-only canvas-alpha preservation. HPL1 builds on that rendering branch.
 
-The speculative audio-guard test script, unused Asyncify import-list generator and stale import-list JSON are absent throughout every new review series. The actual SDL3 silence/playback/recording guards remain. Both transparency blend changes are now gated by `__EMSCRIPTEN__`, preserving the original native OpenGL behavior. Plugin builds continue to use wildcard Asyncify imports in both release and debug configurations.
+Filesystem work builds on cleanup; cloud and recorder build on filesystem. The recorder UI changes are folded into its browser recorder feature commit to keep complete stacks within ten commits. The recorder-specific `SDL_GetTicks()` fix remains. HPL1 includes the shared engine-axis support mirrored from touch controls; omit that duplicate prerequisite once the API lands upstream.
 
-The runtime components recombine without merge conflicts. The reorganized runtime source matches the previous published runtime apart from the intentional tooling removals, blend guard, equivalent plugin configuration, module-object ordering and URL listener placement. Touch controls has exactly the previous source tree; HPL1-owned files match the validated input/rendering snapshot. Eight branch diff checks, fourteen C++ syntax checks with cached Emscripten 6.0.2, thirteen unique JavaScript/HTML/shell syntax checks, and both blend-guard preprocessing checks pass. A fresh full SDK build was not run for this history split. The pre-split 429-test suite and 1,728 camera-input comparisons remain recorded in the JSON validation history.
+All build-time source and generated-JavaScript patching is removed from the cleanup, its dependents and the demo. Pristine libmad 0.15.1b configures with the same `-Oz` flags and all eleven source files compile with SDK 6.0.13. The SCUMM `sound.cpp` warning edit is reverted. The removed audio-test script and obsolete Asyncify import tooling remain absent throughout every review series.
 
-The demo source branch includes the runtime cleanup and SDK 6.0.13 pin at `9e52e845659e3ec37112c5ae37cd52a2aaa44aa3`. The [successful deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39470229200) publishes demo `c8aa6ef69bc7266b21c27bbb305d9dd7c4032c92`. Live build information matches SDK 6.0.13, the consolidated source and all eight upstream branch heads. Chromium launcher/HTTP browsing, Grim and Penumbra startup and touch smoke checks passed. Physical-device gameplay feel remains unverified.
+The Emscripten-specific mixer and timer were already merged upstream in `1dccebfb0c2` and `26fa61ad5ee` and remain active. They keep audio mixing/file I/O out of SDL audio callbacks and pump timers cooperatively. The recorder-specific callback fix uses `SDL_GetTicks()` to avoid recorder timer/mixer recursion. The generated-JavaScript guards were not established as necessary for ordinary builds: with all four guards removed, Chromium processed 512 active audio callbacks during main-stack suspension without errors. A separate simulated autoplay-blocked case processed 74 silence callbacks and 389 subsequent active callbacks without errors while browsing HTTP directories. Asyncify reports Normal while the main stack is suspended, so the removed state guards did not block that case.
 
-URL reload has been folded into cleanup without adding a commit; dependent branches contain that same existing five-line listener. The demo integration tree is unchanged by this regrouping. The SDK defaults and workflow now target 6.0.13. The bump is folded into the existing update/cleanup SDK commit, and dependent branches are reparented without adding commits. A clean local SDK port build and Asyncify link passed with SDL 3.4.2, FreeType 2.14.3 and libpng 1.6.59. Existing audio guard patterns matched all four generated callbacks and remained idempotent. The [full SDK validation build](https://github.com/chkuendig/scummvm-demo/actions/runs/39426597295) passed with all deployment jobs skipped. The [upgrade record](emscripten-6.0.13-upgrade.md) records the successful deployment and browser smoke checks; Safari/iOS and physical-device gameplay remain untested.
+Nine branch/per-commit diff checks, fourteen unique JavaScript/HTML/shell syntax checks, and six C++ syntax checks with SDK 6.0.13 pass. Library commit scopes and the absence of engine/OpenGL changes in cleanup are checked. The rebase preserves upstream’s FAAD mirror fix and HPL1 Glowstick key fix. The consolidated source retains the cleaned demo integration with exactly the new upstream file updates and includes all nine branch heads in its ancestry.
 
-Review each branch against its listed base; the [23 review commits](upstream-pr-commits.md) are listed separately; exact SHAs, original mappings and deployment history are in [upstream-pr-branches.json](upstream-pr-branches.json). For example:
+The consolidated source is `f1eb58b234a8aba09ceafd5f297444a9a3c67431`. Its refreshed full build is pending. The [last successful deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39470229200) still uses SDK 6.0.13, demo `c8aa6ef69bc7266b21c27bbb305d9dd7c4032c92` and source `9e52e845659e3ec37112c5ae37cd52a2aaa44aa3`. This review refresh has not redeployed the site. Physical-device gameplay feel and Safari/iOS remain untested by these checks.
 
-```sh
-git -C scummvm diff upstream/master...upstream/emscripten-update-cleanup
-git -C scummvm diff upstream/emscripten-update-cleanup...upstream/emscripten-filesystem
-git -C scummvm diff upstream/emscripten-update-cleanup...upstream/emscripten-printing
-git -C scummvm diff upstream/emscripten-filesystem...upstream/cloud-streaming
-```
-
-Human authorship is preserved. Reorganized commits disclose assistance using the repository-required `Assisted-by` trailer. No upstream PRs have been opened by this work.
+The [commit list](upstream-pr-commits.md), [manifest and historical provenance](upstream-pr-branches.json), and [SDK upgrade record](emscripten-6.0.13-upgrade.md) contain the exact references. Reorganized commits preserve human authorship and disclose assistance with `Assisted-by`. No upstream PRs have been opened by this work.
