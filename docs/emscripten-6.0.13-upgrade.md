@@ -1,0 +1,16 @@
+# Emscripten 6.0.13 upgrade plan
+
+The target is 6.0.13, released on 2026-10-19. This is a planned follow-up to the upstream branch split; source and demo workflow pins currently remain at 6.0.11. Implement the SDK change in `upstream/emscripten-update-cleanup` and update the demo workflow pin when integrating it.
+
+The [6.0.13 release notes](https://github.com/emscripten-core/emscripten/releases/tag/6.0.13) record libpng 1.6.58 → 1.6.59 and removal of the undocumented `FS.filesystems` object. The [SDK changelog](https://github.com/emscripten-core/emscripten/blob/6.0.13/ChangeLog.md) places SDL3's non-experimental status in 6.0.10 and FreeType 2.14.3 in 6.0.7, so both are already included in the current 6.0.11 pin. Verify the actual port versions during the upgrade rather than treating those as new 6.0.13 changes.
+
+1. Audit the browser libraries and generated glue for removed APIs, especially `FS.filesystems`. Use the exported filesystem symbols directly. The current port source has no `FS.filesystems` references; verify the generated build and dependencies too. Keep the existing `FS.stat` migration and persistent IDBFS behavior.
+2. Update the default SDK version in `dists/emscripten/build.sh` and `EMSDK_VERSION` in the demo's `.github/workflows/main.yml` together. Check documentation and cache keys for version-specific assumptions. Keep wildcard plugin Asyncify imports.
+3. Inspect 6.0.13's SDL3 audio glue against the existing Asyncify callback guards. Check autoplay-blocked silence, active playback and recording. Update or retire guard patterns only after checking the new callbacks; do not restore `test-asyncify-audio-guard.sh` or the obsolete import-list generator.
+4. Build the main module, every enabled dependency and all dynamic plugins from clean caches with the same SDK. Emscripten does not promise ABI compatibility between SDK versions. Do not mix 6.0.11 archives or plugins into a 6.0.13 build. Start with a small configuration, then run the existing full all-engine demo configuration.
+5. Check the updated FreeType/libpng ports through CJK/font rendering, GUI themes, PNG decoding and browser printing/export. Verify the SDL3 build emits no experimental-port warning.
+6. Exercise HTTP range reads and cache eviction, directory browsing, drag-and-drop/ROM import, persistent settings/save reload, Wasm progress and URL-fragment launches. Exercise active audio while opening the file browser and suspending for streamed reads. Run the existing recorder/replay check and native input tests.
+7. Check WebGL2 startup, the opaque canvas/OSD/touch overlays and HPL1/Grim startup on Chromium and Safari/iOS where available. Retain clear distinctions between browser automation and physical-device gameplay checks.
+8. Deploy only the validated integration, record the SDK and source/branch provenance, and verify the live build information. Preserve the current 6.0.11 deployment as the rollback reference until the new browser checks pass.
+
+The split leaves room for this upgrade within the requested commit limit. Prefer one SDK/build compatibility commit and, if needed, a separate SDL3 compatibility fix; keep the update/cleanup review series at five commits or fewer.

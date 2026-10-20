@@ -1,69 +1,38 @@
 # ScummVM upstream branch set
 
-The current demo source pin is `d1905802c06d6d3e8487e9e122b2df325b3150f9`. HPL1 handles right-stick camera input through native engine axis actions. Ordinary controller axes drive frame-time-based rotation with a radial deadzone; the existing player sensitivity, invert-Y and interaction handling still apply. SDL emits standard joystick axes and retains optional relative touch data so its established acceleration, sensitivity and subpixel response stay unchanged. HPL1 consumes that data directly, without synthesizing mouse movements for camera look. Inventory and related menus retain stick cursor motion.
+The runtime series is split into filesystem work, standalone browser features, and update/cleanup work. All nine branches below are pushed. The former `upstream/emscripten-runtime` branch is retired; its old tips and original commit mappings are retained in local backup branches and the JSON history.
 
-The source changes are on `upstream/touch-controls` at `a36875d34b2697caa92ff464ebd894953be8ac88` and `upstream/hpl1-webgl` at `4905418de9ac8930c934cab9ccdb575b596b4b86`. All 429 native tests pass, including eight HPL1 input tests. Across 1,728 production SDL/keymapper/HPL1 traces, camera input exactly matches the pre-conversion response, including different input batching, with zero emulated camera mouse moves. Recorder version 3 preserves raw and mapped axis data; 200 round trips and 100 version-2 compatibility cases pass. HPL1 and recorder-enabled syntax checks pass; the unchanged SDL touch implementation previously passed SDL2 and SDL3 checks.
+Counts are relative to each review base. Every review series has at most five commits, and no branch exceeds ten commits even including its stacked prerequisites. The common source base remains `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`.
 
-The [full build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148) succeeded from demo `70926e9d42a1c36a21a36bdc623b7730e5848357`, with matching live source and branch provenance. An emulated-touch browser rendered Grim, exercised the preserved indicator, cleared it on release and switched to touchpad without page errors or failed requests. Penumbra also rendered its intro, setup and main menu, accepted a held on-screen confirm press and received native stick events without browser errors. HPL1 camera input parity is covered by the native traces; gameplay feel on a physical device has not been tested.
+| Branch | Review base | Commits | Including prerequisites | Scope |
+| --- | --- | ---: | ---: | --- |
+| `upstream/emscripten-update-cleanup` | `upstream/master` | 3 | 3 | SDK/dependencies, JS extraction, browser fixes, WebGL and audio handling |
+| `upstream/emscripten-filesystem` | `upstream/emscripten-update-cleanup` | 3 | 6 | HTTP ranges and VFS streaming/cache, drag/drop/ROM import and persistent settings |
+| `upstream/emscripten-printing` | `upstream/emscripten-update-cleanup` | 1 | 4 | Download game print-outs through the browser |
+| `upstream/emscripten-loading-progress` | `upstream/emscripten-update-cleanup` | 1 | 4 | Wasm download and initialization progress |
+| `upstream/emscripten-url-reload` | `upstream/emscripten-update-cleanup` | 1 | 4 | Reload when URL launch parameters change |
+| `upstream/cloud-streaming` | `upstream/emscripten-filesystem` | 3 | 9 | Stream cloud providers through the shared VFS |
+| `upstream/hpl1-webgl` | `upstream/emscripten-update-cleanup` | 5 | 8 | GLES rendering/shaders, menu navigation and native camera input |
+| `upstream/emscripten-recorder` | `upstream/emscripten-filesystem` | 4 | 10 | Browser recording/export/replay and viewport-aware controls |
+| `upstream/touch-controls` | `upstream/master` | 3 | 3 | Shared touch preferences, controller availability and analog input |
 
-iOS physical and OS-provided virtual sticks emit joystick axes; Android physical sticks do too. Android's built-in touch pad in this checkout emits digital D-pad/button events. Engine keymaps select native actions or shared virtual-mouse cursor emulation. Direct touch and touchpad modes already provide pointer control. The optional relative data is currently supplied by SDL to preserve its earlier touch response.
+The printing, loading-progress and URL-reload branches depend only on update/cleanup. Filesystem work also builds on update/cleanup; cloud streaming and the browser recorder build on the filesystem branch. HPL1 builds on update/cleanup and includes a copy of the shared axis-event/keymapper prerequisite from touch controls. Once that shared support lands upstream, omit the duplicate prerequisite when rebasing HPL1.
 
-The previous demo source pin was `a61201a6eb3deef1626722dc4336e04f06a58cb1`. It includes an HPL1 fix for right-stick camera movement being erased by zero-delta cursor-warp and button events. Mouse motion now accumulates within each input update. The original failure was reproduced with the real HPL1 mouse implementation; held input, quarter/half/full deflection in all four directions, batched motion, buttons, frame reset and neutral-release checks pass. The fix is on `upstream/hpl1-webgl` at `f323d26895b2e519795277914784fb8b0424f7d9`. The [full build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39249588450) passed from demo commit `c4a12bd2fd5d640da58afa0379e31394610d078e`, and live provenance matched that deployment’s source pin. An emulated-touch browser rendered Penumbra’s setup/main menus and intro, and activated menu choices through the on-screen confirm button, with no page errors or failed requests. First-level loading did not finish within the bounded browser check; in-game camera response and physical-device feel remain unverified there. The native regression harness verifies that quarter/half/full stick movement reaches the real HPL1 mouse consumer without being erased.
+The speculative audio-guard test script, unused Asyncify import-list generator and stale import-list JSON are absent throughout every new review series. The actual SDL3 silence/playback/recording guards remain. Both transparency blend changes are now gated by `__EMSCRIPTEN__`, preserving the original native OpenGL behavior. Plugin builds continue to use wildcard Asyncify imports in both release and debug configurations.
 
-The previous demo source pin was `ccab4f0fe3d6b4e784430884900dbd755aa0fe4a`. It includes SDL analog right-stick events (`b1aeeac29935bc5f1852de0273008a738c4dc034`) and HPL1 keymaps using shared virtual-mouse action constants (`266a6e1c4bb284c1361b3b6accde99b0f2d635ee`). Axis-range, saturation, DPI, hold, release/cancel and camera-consumer checks passed, along with SDL2/SDL3/HPL1 syntax checks. The [full build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39218144935) succeeded from demo commit `da1dc33f17076ebbbe48e90060ce9a253dbee833`, and live build provenance matches this pin. An emulated-touchscreen browser rendered Grim Fandango, held and released the floating right stick with its knob clamped to the stick radius, and switched to touchpad mode without page errors or failed requests. Physical-device testing remains unverified.
+The five runtime components recombine without merge conflicts. Their source matches the previous published runtime apart from the intentional tooling removals, blend guard, equivalent plugin configuration, module-object ordering and URL listener placement. Touch controls has exactly the previous source tree; HPL1-owned files match the validated input/rendering snapshot. Nine branch diff checks, fourteen C++ syntax checks with cached Emscripten 6.0.2, fourteen unique JavaScript/HTML/shell syntax checks, and both blend-guard preprocessing checks pass. A fresh full SDK build was not run for this history split. The pre-split 429-test suite and 1,728 camera-input comparisons remain recorded in the JSON validation history.
 
-The demo source integration was rebased, preserving merges, onto ScummVM upstream master `f631a289b7137cf324e0032db9b87c0af26271e9` on 2026-10-19. Touch-controls cleanup `a96d92559e76a7fefe2953b60547510716b327be` was cherry-picked as `a11aa5f098b2024d94c7f32cf89bc67ea4c55972` and both branches were pushed. That integration was the previous demo source pin. Its [manual build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) succeeded, with matching live build provenance at the time.
+The demo source branch includes the same net cleanup at `62a08def7f207a5ae33e14e91ad824c2faebb147`. The live demo still runs the [previous successful deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148), from demo `70926e9d42a1c36a21a36bdc623b7730e5848357` and source `d1905802c06d6d3e8487e9e122b2df325b3150f9`. Its five recorded branch tips describe that historical build. This branch maintenance did not redeploy the site. Physical-device gameplay feel remains unverified.
 
-The five source branches live in the `scummvm/` submodule. The original branch set was prepared from the deployed integration on upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5` on 2026-10-05. No upstream PRs have been opened.
+The SDK stays at 6.0.11 for this split. The [6.0.13 upgrade plan](emscripten-6.0.13-upgrade.md) covers the pin changes, SDK/port compatibility checks, clean dependency/plugin rebuild and browser validation before deployment.
 
-## Suggested PR order
-
-| Order | Branch | Review base | Scope |
-| --- | --- | --- | --- |
-| 1 | `upstream/emscripten-runtime` | `upstream/master` | Shared Emscripten runtime, streamed VFS, SDK update, Asyncify configuration and loading progress |
-| 2 | `upstream/cloud-streaming` | runtime | Range downloads and cloud filesystem streaming |
-| 3 | `upstream/touch-controls` | `upstream/master` | Touch presets, on-screen controls and controller switching |
-| 4 | `upstream/hpl1-webgl` | runtime | HPL1 WebGL2 rendering, shaders, native stick look and controller-friendly menus |
-| 5 | `upstream/emscripten-recorder` | runtime | Browser event recording, replay and timer integration |
-
-HPL1 native look also needs the shared joystick payload and engine-axis/keymapper support from the touch-controls branch. The HPL1 branch carries that support in `47a98c7bbe8d42578efcd5531ad3337a548fff3a` so it builds on its runtime review base. Once the shared support lands upstream, omit that duplicate import when rebasing the HPL1 series. The demo integration already includes the shared implementation once.
-
-The published branch tips match the manifest, and all five published branch diffs pass `git diff --check`. The latest controls changes are pushed on both source branches. A direct merge of the touch and HPL1 source branches still needs resolutions in `backends/keymapper/virtual-mouse.h` and `backends/platform/sdl/sdl.cpp`; the deployed demo integration contains the resolved combination. The older local runtime cleanup at `ac8535226f8` remains unpublished and is separate from this controls update.
-
-Runtime is the foundation for cloud streaming, HPL1 WebGL and the recorder. Touch controls now has an independent upstream base. The demo contains rebased copies of the original branch commits plus the touch-controls cleanup; the source branches retain their own histories. Branch heads, commit lists, file counts and exact bases are recorded in [upstream-pr-branches.json](upstream-pr-branches.json).
-
-## Runtime details
-
-The runtime branch includes the browser loading-progress correction: the fill now tracks the downloaded-byte text without a lagging CSS transition, and unknown or zero content lengths avoid invalid percentages. It also includes the SDL3 audio callback Asyncify guard. The Add Game exception was not reproduced during live browsing; a live-code A/B probe verified the guard returns before a callback enters wasm while Asyncify is suspended. The transient HTTP retry change remains deferred because its C++ implementation has not yet been compiled or runtime-tested.
-
-The Emscripten dependency script now downloads a52dec 0.7.4 from Debian's original source archive and verifies its SHA-256 before extraction. The prior VideoLAN endpoint returned an Anubis challenge page to GitHub Actions. The separate libmpeg2 URL, pinned to commit `946bf4b5…`, returned a valid archive during this refresh, so it remains pinned to that source rather than substituting Debian's older 0.5.1 package.
-
-Full Asyncify imports are used for plugin builds, including release builds. The narrowed import list had omitted recorder/plugin imports. The current demo omits `--enable-eventrecorder`; recorder-enabled deployments below are historical.
-
-## AI attribution
-
-The repository's [AI-GUIDELINES.md](../scummvm/AI-GUIDELINES.md) requires commit-message disclosure with `Assisted-by: AGENT_NAME:MODEL_VERSION` and prohibits AI authorship or co-authorship. The prepared commits preserve Christian Kündig as author and record assistance in trailers. Historical model labels were preserved from existing metadata; no AI co-author trailers remain. Human contributors remain responsible for review and testing.
-
-## Validation and deployment
-
-For the 2026-10-19 source refresh, all five touch-policy tests passed. SDL2, SDL3 and GUI syntax checks passed on the combined integration, as did Emscripten build-script shell syntax and theme-archive/source consistency. Seven focused SDL3 hotplug cases passed on the touch-controls branch. The subsequent [manual workflow](https://github.com/chkuendig/scummvm-demo/actions/runs/39171216016) built and deployed all engines successfully. An emulated-touchscreen browser rendered Grim Fandango with the on-screen pad and switched to touchpad mode, with no page errors or failed requests. Physical-device tests remain unverified. The older deployment evidence below records the previous integration.
-
-Use the [game-library Grim launch](https://scummvm.kuendig.io/scummvm.html#--path=/data/games/grim-win-demo1-en%20grim:grim) for testing. The pre-added launcher entry still points to an obsolete `grimdemo` subfolder.
-
-The previous deployed integration was `demo/upstream-integration` at `de7b4e39851d0111ec7e3f1165fd9c2997ee9419`, based on `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`, combining all five branches. `git diff --check`, shell syntax checks, the Asyncify audio-guard fixture test, JavaScript syntax/logic checks, and verification of the replacement source archive passed. The [final build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/37308666206) succeeded. Live build-info matches demo commit `cae236857f07589dece40df3c606fad6e798ada9`, integration `de7b4e39851d0111ec7e3f1165fd9c2997ee9419`, upstream base `71cb05b1c03aa6bdcd34f78c20cef12c10067ba5`, all five then-current branch tips, and `eventRecorder=true`.
-
-The Add Game trap was not reproduced organically in live browser testing; browsing into `/data` produced no JavaScript exceptions or failed requests. A stress scan did produce an HTTP 429 and fatal dialog; its proposed transient-request retry is intentionally excluded from this deployment until it is compiled and exercised. The golden event-recorder replay passed against the final live integration: it loaded `ftdemo.r00`, fetched the Full Throttle demo files, and passed one framebuffer MD5 check with no mismatches, page errors, or failed requests. The dedicated event-recorder workspace remains available for follow-up investigations.
-
-No iOS build, cloud-account gameplay test, physical touch/controller test, or HPL1 gameplay test has been completed for this refreshed branch set. The successful deployment build and emulated-touch browser smoke validate the combined integration; those platform-specific checks remain outstanding.
-
-## Review commands
+Review each branch against its listed base; exact SHAs, commit lists, original mappings and deployment history are in [upstream-pr-branches.json](upstream-pr-branches.json). For example:
 
 ```sh
-git -C scummvm diff upstream/master...upstream/emscripten-runtime
-git -C scummvm diff upstream/emscripten-runtime...upstream/cloud-streaming
-git -C scummvm diff upstream/master...upstream/touch-controls
-git -C scummvm diff upstream/emscripten-runtime...upstream/hpl1-webgl
-git -C scummvm diff upstream/emscripten-runtime...upstream/emscripten-recorder
+git -C scummvm diff upstream/master...upstream/emscripten-update-cleanup
+git -C scummvm diff upstream/emscripten-update-cleanup...upstream/emscripten-filesystem
+git -C scummvm diff upstream/emscripten-update-cleanup...upstream/emscripten-printing
+git -C scummvm diff upstream/emscripten-filesystem...upstream/cloud-streaming
 ```
 
-The live [demo](https://scummvm.kuendig.io/scummvm.html) and its [build provenance](https://scummvm.kuendig.io/build-info.json) identify the deployed source and all five branch tips. See the JSON manifest for exact SHAs, current publication state and test evidence.
+Human authorship is preserved. Reorganized commits disclose assistance using the repository-required `Assisted-by` trailer. No upstream PRs have been opened by this work.
