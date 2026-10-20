@@ -35,16 +35,19 @@
     {
       "order": 2,
       "name": "upstream/emscripten-opengl",
-      "head": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+      "head": "d003357706b8b596ae66604e97e29c10c8a1f3a4",
       "base": "ed949213a23440447ea402e263daa871394b6bf9",
       "reviewBase": "upstream/master",
       "scope": "WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending",
-      "commits": 1,
-      "commitsIncludingPrerequisites": 1,
+      "commits": 4,
+      "commitsIncludingPrerequisites": 4,
       "files": 4,
       "diff": "4 files changed, 71 insertions(+), 26 deletions(-)",
       "ownCommits": [
-        "1dc74cae145863ec3e79935c7341b57128a0ba1a"
+        "b7e92acd6435dce9077b0c53a3ff037f7a02f424",
+        "5ee92ede6336c4049f703f0d114bdd5ddedb00cf",
+        "18e198169c573909962665836a92dd1b1e5acc46",
+        "d003357706b8b596ae66604e97e29c10c8a1f3a4"
       ]
     },
     {
@@ -114,22 +117,22 @@
     {
       "order": 7,
       "name": "upstream/hpl1-webgl",
-      "head": "685fdd4e5f387cb96138868fbbd7749f74d85045",
-      "base": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+      "head": "96cfc2faa1651e8bdd96eb7e663a067721891c94",
+      "base": "d003357706b8b596ae66604e97e29c10c8a1f3a4",
       "reviewBase": "upstream/emscripten-opengl",
       "scope": "GLES rendering/shaders, menu navigation and native camera input",
       "commits": 5,
-      "commitsIncludingPrerequisites": 6,
+      "commitsIncludingPrerequisites": 9,
       "files": 60,
       "diff": "60 files changed, 4300 insertions(+), 216 deletions(-)",
       "ownCommits": [
-        "0b7f2619fa5ab57077a196d5237fe6a0309c84e0",
-        "4d18365dd4bf9a8612b0de15b1d24fba61c96e09",
-        "14aedcae5c7eb6782815c296d675e1ec972d2803",
-        "d02af301bc74d2213aab6e8563b1d4ed8526837e",
-        "685fdd4e5f387cb96138868fbbd7749f74d85045"
+        "8ca5d51e4441f20f1d24eaf6e5a30fa551eb8aa9",
+        "e381df261fa87e09bb9e63eb7aab0132f87b54f9",
+        "9c965fc9d6e03f2e42d89a0784437f33ac354bfa",
+        "097aab1030fd2c55aa1bffb94e3addee7de93348",
+        "96cfc2faa1651e8bdd96eb7e663a067721891c94"
       ],
-      "sharedSupportImport": "d02af301bc74d2213aab6e8563b1d4ed8526837e",
+      "sharedSupportImport": "097aab1030fd2c55aa1bffb94e3addee7de93348",
       "landingNote": "The shared-support commit mirrors the touch branch axis API. Once that API is upstream, omit the duplicate prerequisite during rebase."
     },
     {
@@ -231,15 +234,50 @@
       ]
     },
     {
-      "sourceCommit": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
-      "subject": "EMSCRIPTEN: Scope WebGL rendering fixes to the browser",
+      "sourceCommit": "b7e92acd6435dce9077b0c53a3ff037f7a02f424",
+      "subject": "EMSCRIPTEN: Keep the WebGL canvas background opaque",
       "parts": [
         {
           "branch": "upstream/emscripten-opengl",
           "paths": [
-            "backends/graphics/opengl/framebuffer.cpp",
-            "backends/graphics/openglsdl/openglsdl-graphics.cpp",
+            "backends/graphics/opengl/framebuffer.cpp"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "5ee92ede6336c4049f703f0d114bdd5ddedb00cf",
+      "subject": "EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-opengl",
+          "paths": [
             "backends/platform/sdl/sdl.cpp",
+            "configure"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "18e198169c573909962665836a92dd1b1e5acc46",
+      "subject": "EMSCRIPTEN: Match OpenGL video modes to browser window dimensions",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-opengl",
+          "paths": [
+            "backends/graphics/openglsdl/openglsdl-graphics.cpp"
+          ]
+        }
+      ]
+    },
+    {
+      "sourceCommit": "d003357706b8b596ae66604e97e29c10c8a1f3a4",
+      "subject": "EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default",
+      "parts": [
+        {
+          "branch": "upstream/emscripten-opengl",
+          "paths": [
+            "backends/graphics/openglsdl/openglsdl-graphics.cpp",
             "configure"
           ]
         }
@@ -400,7 +438,7 @@
       ]
     },
     {
-      "sourceCommit": "0b7f2619fa5ab57077a196d5237fe6a0309c84e0",
+      "sourceCommit": "8ca5d51e4441f20f1d24eaf6e5a30fa551eb8aa9",
       "subject": "HPL1: Bundle shaders and adapt them for GLES",
       "parts": [
         {
@@ -425,7 +463,7 @@
       ]
     },
     {
-      "sourceCommit": "4d18365dd4bf9a8612b0de15b1d24fba61c96e09",
+      "sourceCommit": "e381df261fa87e09bb9e63eb7aab0132f87b54f9",
       "subject": "HPL1: Add the WebGL2 renderer and GLES compatibility layer",
       "parts": [
         {
@@ -460,7 +498,7 @@
       ]
     },
     {
-      "sourceCommit": "14aedcae5c7eb6782815c296d675e1ec972d2803",
+      "sourceCommit": "9c965fc9d6e03f2e42d89a0784437f33ac354bfa",
       "subject": "HPL1: Add controller bindings and menu focus navigation",
       "parts": [
         {
@@ -474,7 +512,7 @@
       ]
     },
     {
-      "sourceCommit": "d02af301bc74d2213aab6e8563b1d4ed8526837e",
+      "sourceCommit": "097aab1030fd2c55aa1bffb94e3addee7de93348",
       "subject": "KEYMAPPER: Provide shared engine-axis actions for HPL1",
       "parts": [
         {
@@ -495,7 +533,7 @@
       ]
     },
     {
-      "sourceCommit": "685fdd4e5f387cb96138868fbbd7749f74d85045",
+      "sourceCommit": "96cfc2faa1651e8bdd96eb7e663a067721891c94",
       "subject": "HPL1: Handle native camera axes and preserve touch response",
       "parts": [
         {
@@ -3096,6 +3134,252 @@
         "conclusion": "cancelled",
         "reason": "Superseded while queued by the configure review and refreshed demo integration."
       }
+    },
+    "openglSplit": {
+      "branches": [
+        {
+          "branch": "upstream/emscripten-update-cleanup",
+          "head": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+          "commits": 4,
+          "includingPrerequisites": 4
+        },
+        {
+          "branch": "upstream/emscripten-opengl",
+          "head": "d003357706b8b596ae66604e97e29c10c8a1f3a4",
+          "commits": 4,
+          "includingPrerequisites": 4
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "head": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+          "commits": 3,
+          "includingPrerequisites": 7
+        },
+        {
+          "branch": "upstream/emscripten-printing",
+          "head": "45b99081b333223f8fcb66fc39f41bbada3b718c",
+          "commits": 1,
+          "includingPrerequisites": 5
+        },
+        {
+          "branch": "upstream/emscripten-loading-progress",
+          "head": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
+          "commits": 1,
+          "includingPrerequisites": 5
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "head": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
+          "commits": 3,
+          "includingPrerequisites": 10
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "head": "96cfc2faa1651e8bdd96eb7e663a067721891c94",
+          "commits": 5,
+          "includingPrerequisites": 9
+        },
+        {
+          "branch": "upstream/emscripten-recorder",
+          "head": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
+          "commits": 3,
+          "includingPrerequisites": 10
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "head": "052dd2269c345b1dda12132613b500df6621aa17",
+          "commits": 3,
+          "includingPrerequisites": 3
+        }
+      ],
+      "openglCommitScopes": "passed",
+      "functionalCodeUnchanged": true,
+      "onlySourceChange": "Replace the ES3 rationale comment with Alcachofa/iOS references",
+      "configureSyntax": "passed for all four OpenGL commits",
+      "diffChecks": "passed for all 27 review commits",
+      "browserEvidence": "Previous SDK 6.0.13 Chromium WebGL on/off checks remain applicable: code unchanged. No rebuild required for commit split and comment edit.",
+      "cherryPicks": 27,
+      "demoCherryPicks": {
+        "commits": [
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "b9a73fb3c760209215cec616c6aaf141b349f57a",
+            "cherryPick": "01c58c47ff3a0f473e8f8842d59c35abde50b04c",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "50cd93b54b9a52345d4b55111480075f27dd6280",
+            "cherryPick": "03b2a425dad1e5b3eae6f1983684cfaed42d9b73",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "d9ed2610ee8bf0891ab45d62a446d9f54dc6110f",
+            "cherryPick": "6a4e5608bdcc2f8acf0387bb264295b8b0acbcf5",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-update-cleanup",
+            "source": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+            "cherryPick": "7e2c8bec52d11d5f4339da77b0aa192f9aab9698",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-opengl",
+            "source": "b7e92acd6435dce9077b0c53a3ff037f7a02f424",
+            "cherryPick": "b42296c4fc5d1450638183df9f3c9abb48f65874",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-opengl",
+            "source": "5ee92ede6336c4049f703f0d114bdd5ddedb00cf",
+            "cherryPick": "4d36bcda88b5124ec63393b4b9631e815a540e97",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-opengl",
+            "source": "18e198169c573909962665836a92dd1b1e5acc46",
+            "cherryPick": "83733e335abfd8b638580517a852256dfb9e5adf",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-opengl",
+            "source": "d003357706b8b596ae66604e97e29c10c8a1f3a4",
+            "cherryPick": "d2303f797cc20d11d53199e3ee5d54d5acc1cbd4",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-filesystem",
+            "source": "fb455e28ef85c76d8b4e35f285236a47c8a05800",
+            "cherryPick": "49a4f7b4cd02d761235e21f0a651b27357e4670e",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-filesystem",
+            "source": "59a0d6a2d7d76300a64f38bd3e35298b91a7606e",
+            "cherryPick": "69bddaf2c5ba2a8b2b7804f78ec25277d1e8db9e",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-filesystem",
+            "source": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+            "cherryPick": "03439c234ba15098cf682a7388b2d1b3ae09eab2",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-printing",
+            "source": "45b99081b333223f8fcb66fc39f41bbada3b718c",
+            "cherryPick": "61993e386609fe5ab3eebe2974d1a8e7a57f632b",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-loading-progress",
+            "source": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
+            "cherryPick": "5d2ae78367ae203503df52083042d93cb15907ec",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "source": "97969e53deee6886dbb77729a9ea0bb1ce856f25",
+            "cherryPick": "9fab17c424c940633d568d231dac3db04e4abcfa",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "source": "654a17f616b7687e18e652e0a1bb15e568b911d1",
+            "cherryPick": "a795da2891385f71bc1e38b36c58a542ea68cd45",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/cloud-streaming",
+            "source": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
+            "cherryPick": "247ec89bb859cff47910779a2988c12a51009cf2",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/touch-controls",
+            "source": "ebd7fe8c6db2dc2077d67d86cb47736d43dbed3d",
+            "cherryPick": "9498cbcdc77cab37dce220acdb30e253d3a43149",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/touch-controls",
+            "source": "63f6fabc919d178890a30184888bc9f054a7a3f1",
+            "cherryPick": "8703696554702e1d9b8a3ae36a2754922092d2b2",
+            "conflictsResolvedFromPreservedDemoTree": [
+              "backends/platform/sdl/sdl.cpp"
+            ]
+          },
+          {
+            "branch": "upstream/touch-controls",
+            "source": "052dd2269c345b1dda12132613b500df6621aa17",
+            "cherryPick": "acdcdaae81baa3499ebd1958b73edd78c7654257",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "8ca5d51e4441f20f1d24eaf6e5a30fa551eb8aa9",
+            "cherryPick": "cbe6d2b28fac13051e75c202aa9cb40468fcbb26",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "e381df261fa87e09bb9e63eb7aab0132f87b54f9",
+            "cherryPick": "92d80d9e5381b6b2e842636d2eefa6febf91df1f",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "9c965fc9d6e03f2e42d89a0784437f33ac354bfa",
+            "cherryPick": "2528e424a2683cd9f01db4790121f30e636045a4",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "097aab1030fd2c55aa1bffb94e3addee7de93348",
+            "cherryPick": "94ee16cf8dc9bd9555fc1cf4204d3d17e0ffd54f",
+            "conflictsResolvedFromPreservedDemoTree": [
+              "backends/keymapper/virtual-mouse.h"
+            ]
+          },
+          {
+            "branch": "upstream/hpl1-webgl",
+            "source": "96cfc2faa1651e8bdd96eb7e663a067721891c94",
+            "cherryPick": "db3b8772f8ec6e8e467bbbabaa554746a21841c9",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-recorder",
+            "source": "1e5c707959fbdca4c1edf896849b076a56086549",
+            "cherryPick": "df53e730d7cd3935b45eef18f1c0b7ccac509171",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-recorder",
+            "source": "14c78382f937d791713bde81394398b24934a0a7",
+            "cherryPick": "6e4bcdfa34a5a7bf81874a44f8528d06f51c5f22",
+            "conflictsResolvedFromPreservedDemoTree": []
+          },
+          {
+            "branch": "upstream/emscripten-recorder",
+            "source": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
+            "cherryPick": "895f0cd06391d2454c24595796a61985d539a65c",
+            "conflictsResolvedFromPreservedDemoTree": []
+          }
+        ],
+        "seriesHead": "895f0cd06391d2454c24595796a61985d539a65c",
+        "preservedDemoPaths": [
+          "backends/platform/sdl/emscripten/emscripten.cpp",
+          "dists/emscripten/build.sh"
+        ],
+        "integrationTreeMatchesPreparedSource": true
+      },
+      "rationaleSources": {
+        "Alcachofa": "engines/alcachofa/graphics-opengl.cpp:95 (GL_TEXTURE_MAX_LEVEL)",
+        "iOS/tvOS": "backends/platform/ios7/ios7_video.mm:157 (kEAGLRenderingAPIOpenGLES3, GLES2 fallback)"
+      },
+      "browserEvidenceCommit": "1dc74cae145863ec3e79935c7341b57128a0ba1a"
     }
   },
   "publication": {
@@ -3110,7 +3394,7 @@
       {
         "name": "upstream/emscripten-opengl",
         "repository": "chkuendig/scummvm",
-        "head": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+        "head": "d003357706b8b596ae66604e97e29c10c8a1f3a4",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/emscripten-opengl"
       },
       {
@@ -3140,8 +3424,8 @@
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "685fdd4e5f387cb96138868fbbd7749f74d85045",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/1dc74cae145863ec3e79935c7341b57128a0ba1a...upstream/hpl1-webgl"
+        "head": "96cfc2faa1651e8bdd96eb7e663a067721891c94",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/d003357706b8b596ae66604e97e29c10c8a1f3a4...upstream/hpl1-webgl"
       },
       {
         "name": "upstream/emscripten-recorder",
@@ -3160,7 +3444,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "b0354958e1eb74017a98b725a710c3af47556267",
+      "head": "74831e85ed1273f1747f8ead027fe2f6d6758949",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -3200,12 +3484,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "b0354958e1eb74017a98b725a710c3af47556267",
+    "head": "74831e85ed1273f1747f8ead027fe2f6d6758949",
     "upstreamBase": "ed949213a23440447ea402e263daa871394b6bf9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Configure review and two C/JS bridge renames pushed across nine review branches and consolidated demo source. The OpenGL branch owns the Emscripten ImGui capability probe fix. Upstream memory settings restored. Local browser checks validate WebGL-unavailable surface fallback; full demo rebuild/deployment remains pending. Live deployment stays on the previously validated SDK 6.0.13 build.",
+    "status": "Four independent OpenGL review commits pushed, HPL1 rebased and all 27 review commits cherry-picked into the demo integration. Only the ES3 rationale comment changed; existing SDK 6.0.13 browser validation still applies. Full demo rebuild/deployment remains pending.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
@@ -4130,7 +4414,7 @@
     "base": "f631a289b7137cf324e0032db9b87c0af26271e9"
   },
   "emscriptenUpgradePlan": {
-    "status": "SDK 6.0.13 remains deployed; configure fixes, independent OpenGL and bridge renames pushed and locally browser-tested. Full refreshed demo build/deployment pending.",
+    "status": "SDK 6.0.13 remains deployed; four OpenGL commits, rebased HPL1 and all 27 demo cherry-picks are pushed. Functional code matches the validated browser build; a full refreshed demo build/deployment is pending.",
     "current": "6.0.13",
     "target": "6.0.13",
     "branch": "upstream/emscripten-update-cleanup",
@@ -4292,5 +4576,163 @@
       "upstream/touch-controls": "052dd2269c345b1dda12132613b500df6621aa17"
     },
     "integrationHead": "0a9be9ca753fbf9a7665148efb395a2b8fa4e006"
+  },
+  "beforeOpenGLSplit": {
+    "manifestCommit": "9e0715b4f5688cc5cb2d507b1299e6d7da5310ee",
+    "branches": [
+      {
+        "order": 1,
+        "name": "upstream/emscripten-update-cleanup",
+        "head": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+        "base": "ed949213a23440447ea402e263daa871394b6bf9",
+        "reviewBase": "upstream/master",
+        "scope": "SDK/dependencies and separate WebMIDI, speech and browser JavaScript libraries",
+        "commits": 4,
+        "commitsIncludingPrerequisites": 4,
+        "files": 14,
+        "diff": "14 files changed, 582 insertions(+), 357 deletions(-)",
+        "ownCommits": [
+          "b9a73fb3c760209215cec616c6aaf141b349f57a",
+          "50cd93b54b9a52345d4b55111480075f27dd6280",
+          "d9ed2610ee8bf0891ab45d62a446d9f54dc6110f",
+          "4968b30962b603e73a3bcc277d3c87ec93029aae"
+        ]
+      },
+      {
+        "order": 2,
+        "name": "upstream/emscripten-opengl",
+        "head": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+        "base": "ed949213a23440447ea402e263daa871394b6bf9",
+        "reviewBase": "upstream/master",
+        "scope": "WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending",
+        "commits": 1,
+        "commitsIncludingPrerequisites": 1,
+        "files": 4,
+        "diff": "4 files changed, 71 insertions(+), 26 deletions(-)",
+        "ownCommits": [
+          "1dc74cae145863ec3e79935c7341b57128a0ba1a"
+        ]
+      },
+      {
+        "order": 3,
+        "name": "upstream/emscripten-filesystem",
+        "head": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+        "base": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+        "reviewBase": "upstream/emscripten-update-cleanup",
+        "scope": "HTTP ranges and VFS streaming/cache, drag/drop/ROM import and persistent settings",
+        "commits": 3,
+        "commitsIncludingPrerequisites": 7,
+        "files": 28,
+        "diff": "28 files changed, 2116 insertions(+), 306 deletions(-)",
+        "ownCommits": [
+          "fb455e28ef85c76d8b4e35f285236a47c8a05800",
+          "59a0d6a2d7d76300a64f38bd3e35298b91a7606e",
+          "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a"
+        ]
+      },
+      {
+        "order": 4,
+        "name": "upstream/emscripten-printing",
+        "head": "45b99081b333223f8fcb66fc39f41bbada3b718c",
+        "base": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+        "reviewBase": "upstream/emscripten-update-cleanup",
+        "scope": "Download game print-outs through the browser",
+        "commits": 1,
+        "commitsIncludingPrerequisites": 5,
+        "files": 4,
+        "diff": "4 files changed, 137 insertions(+)",
+        "ownCommits": [
+          "45b99081b333223f8fcb66fc39f41bbada3b718c"
+        ]
+      },
+      {
+        "order": 5,
+        "name": "upstream/emscripten-loading-progress",
+        "head": "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50",
+        "base": "4968b30962b603e73a3bcc277d3c87ec93029aae",
+        "reviewBase": "upstream/emscripten-update-cleanup",
+        "scope": "Wasm download and initialization progress",
+        "commits": 1,
+        "commitsIncludingPrerequisites": 5,
+        "files": 2,
+        "diff": "2 files changed, 202 insertions(+), 73 deletions(-)",
+        "ownCommits": [
+          "b94cd468d3a9cba88ce32ad02b824fcd8f43fd50"
+        ]
+      },
+      {
+        "order": 6,
+        "name": "upstream/cloud-streaming",
+        "head": "5ecdf1c77e2da4aa19efe68df8403cecc27918b1",
+        "base": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+        "reviewBase": "upstream/emscripten-filesystem",
+        "scope": "Stream cloud providers through the shared VFS",
+        "commits": 3,
+        "commitsIncludingPrerequisites": 10,
+        "files": 23,
+        "diff": "23 files changed, 422 insertions(+), 210 deletions(-)",
+        "ownCommits": [
+          "97969e53deee6886dbb77729a9ea0bb1ce856f25",
+          "654a17f616b7687e18e652e0a1bb15e568b911d1",
+          "5ecdf1c77e2da4aa19efe68df8403cecc27918b1"
+        ]
+      },
+      {
+        "order": 7,
+        "name": "upstream/hpl1-webgl",
+        "head": "685fdd4e5f387cb96138868fbbd7749f74d85045",
+        "base": "1dc74cae145863ec3e79935c7341b57128a0ba1a",
+        "reviewBase": "upstream/emscripten-opengl",
+        "scope": "GLES rendering/shaders, menu navigation and native camera input",
+        "commits": 5,
+        "commitsIncludingPrerequisites": 6,
+        "files": 60,
+        "diff": "60 files changed, 4300 insertions(+), 216 deletions(-)",
+        "ownCommits": [
+          "0b7f2619fa5ab57077a196d5237fe6a0309c84e0",
+          "4d18365dd4bf9a8612b0de15b1d24fba61c96e09",
+          "14aedcae5c7eb6782815c296d675e1ec972d2803",
+          "d02af301bc74d2213aab6e8563b1d4ed8526837e",
+          "685fdd4e5f387cb96138868fbbd7749f74d85045"
+        ],
+        "sharedSupportImport": "d02af301bc74d2213aab6e8563b1d4ed8526837e",
+        "landingNote": "The shared-support commit mirrors the touch branch axis API. Once that API is upstream, omit the duplicate prerequisite during rebase."
+      },
+      {
+        "order": 8,
+        "name": "upstream/emscripten-recorder",
+        "head": "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8",
+        "base": "bcd09c38b7492f5f9ead7188f4987790bc8e0f9a",
+        "reviewBase": "upstream/emscripten-filesystem",
+        "scope": "Browser recording/export/replay and viewport-aware controls",
+        "commits": 3,
+        "commitsIncludingPrerequisites": 10,
+        "files": 13,
+        "diff": "13 files changed, 237 insertions(+), 8 deletions(-)",
+        "ownCommits": [
+          "1e5c707959fbdca4c1edf896849b076a56086549",
+          "14c78382f937d791713bde81394398b24934a0a7",
+          "0d0fa8e1a383cb76466b566e67ec8a71c0bb21d8"
+        ]
+      },
+      {
+        "order": 9,
+        "name": "upstream/touch-controls",
+        "head": "052dd2269c345b1dda12132613b500df6621aa17",
+        "base": "ed949213a23440447ea402e263daa871394b6bf9",
+        "reviewBase": "upstream/master",
+        "scope": "Shared touch preferences, controller availability and analog input",
+        "commits": 3,
+        "commitsIncludingPrerequisites": 3,
+        "files": 76,
+        "diff": "76 files changed, 3674 insertions(+), 586 deletions(-)",
+        "ownCommits": [
+          "ebd7fe8c6db2dc2077d67d86cb47736d43dbed3d",
+          "63f6fabc919d178890a30184888bc9f054a7a3f1",
+          "052dd2269c345b1dda12132613b500df6621aa17"
+        ]
+      }
+    ],
+    "integration": "b0354958e1eb74017a98b725a710c3af47556267"
   }
 }

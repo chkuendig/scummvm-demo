@@ -1,6 +1,6 @@
 # Upstream review commits
 
-There are 24 commits across nine review series, rebased onto upstream `ed949213a23440447ea402e263daa871394b6bf9`. Counts exclude each listed review base. Every review series has at most five commits and every complete stack at most ten.
+There are 27 commits across nine review series, rebased onto upstream `ed949213a23440447ea402e263daa871394b6bf9`. Counts exclude each listed review base. Every review series has at most five commits and every complete stack at most ten.
 
 ## upstream/emscripten-update-cleanup
 
@@ -13,9 +13,12 @@ Review base: `upstream/master` (`ed949213a23`). 4 review commits, 4 including pr
 
 ## upstream/emscripten-opengl
 
-Review base: `upstream/master` (`ed949213a23`). 1 review commit, 1 including prerequisites.
+Review base: `upstream/master` (`ed949213a23`). 4 review commits, 4 including prerequisites.
 
-- [1dc74cae145](https://github.com/chkuendig/scummvm/commit/1dc74cae145863ec3e79935c7341b57128a0ba1a) EMSCRIPTEN: Scope WebGL rendering fixes to the browser
+- [b7e92acd643](https://github.com/chkuendig/scummvm/commit/b7e92acd6435dce9077b0c53a3ff037f7a02f424) EMSCRIPTEN: Keep the WebGL canvas background opaque
+- [5ee92ede633](https://github.com/chkuendig/scummvm/commit/5ee92ede6336c4049f703f0d114bdd5ddedb00cf) EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable
+- [18e198169c5](https://github.com/chkuendig/scummvm/commit/18e198169c573909962665836a92dd1b1e5acc46) EMSCRIPTEN: Match OpenGL video modes to browser window dimensions
+- [d003357706b](https://github.com/chkuendig/scummvm/commit/d003357706b8b596ae66604e97e29c10c8a1f3a4) EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default
 
 ## upstream/emscripten-filesystem
 
@@ -47,13 +50,13 @@ Review base: `upstream/emscripten-filesystem` (`bcd09c38b74`). 3 review commits,
 
 ## upstream/hpl1-webgl
 
-Review base: `upstream/emscripten-opengl` (`1dc74cae145`). 5 review commits, 6 including prerequisites.
+Review base: `upstream/emscripten-opengl` (`d003357706b`). 5 review commits, 9 including prerequisites.
 
-- [0b7f2619fa5](https://github.com/chkuendig/scummvm/commit/0b7f2619fa5ab57077a196d5237fe6a0309c84e0) HPL1: Bundle shaders and adapt them for GLES
-- [4d18365dd4b](https://github.com/chkuendig/scummvm/commit/4d18365dd4bf9a8612b0de15b1d24fba61c96e09) HPL1: Add the WebGL2 renderer and GLES compatibility layer
-- [14aedcae5c7](https://github.com/chkuendig/scummvm/commit/14aedcae5c7eb6782815c296d675e1ec972d2803) HPL1: Add controller bindings and menu focus navigation
-- [d02af301bc7](https://github.com/chkuendig/scummvm/commit/d02af301bc74d2213aab6e8563b1d4ed8526837e) KEYMAPPER: Provide shared engine-axis actions for HPL1
-- [685fdd4e5f3](https://github.com/chkuendig/scummvm/commit/685fdd4e5f387cb96138868fbbd7749f74d85045) HPL1: Handle native camera axes and preserve touch response
+- [8ca5d51e444](https://github.com/chkuendig/scummvm/commit/8ca5d51e4441f20f1d24eaf6e5a30fa551eb8aa9) HPL1: Bundle shaders and adapt them for GLES
+- [e381df261fa](https://github.com/chkuendig/scummvm/commit/e381df261fa87e09bb9e63eb7aab0132f87b54f9) HPL1: Add the WebGL2 renderer and GLES compatibility layer
+- [9c965fc9d6e](https://github.com/chkuendig/scummvm/commit/9c965fc9d6e03f2e42d89a0784437f33ac354bfa) HPL1: Add controller bindings and menu focus navigation
+- [097aab1030f](https://github.com/chkuendig/scummvm/commit/097aab1030fd2c55aa1bffb94e3addee7de93348) KEYMAPPER: Provide shared engine-axis actions for HPL1
+- [96cfc2faa16](https://github.com/chkuendig/scummvm/commit/96cfc2faa1651e8bdd96eb7e663a067721891c94) HPL1: Handle native camera axes and preserve touch response
 
 ## upstream/emscripten-recorder
 
