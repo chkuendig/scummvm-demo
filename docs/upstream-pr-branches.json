@@ -35,7 +35,7 @@
     {
       "order": 2,
       "name": "upstream/emscripten-opengl",
-      "head": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
+      "head": "929e13b40b3e067650ceac237f39f4f2a46a640d",
       "base": "ed949213a23440447ea402e263daa871394b6bf9",
       "reviewBase": "upstream/master",
       "scope": "WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending",
@@ -45,9 +45,9 @@
       "diff": "4 files changed, 63 insertions(+), 25 deletions(-)",
       "ownCommits": [
         "b7e92acd6435dce9077b0c53a3ff037f7a02f424",
-        "fd4a3ebfde0ce05a5e2f602dae43a60823aecea4",
-        "cb0020dd4dfd3a536a59885084e557561ee7a9fc",
-        "872e9f67538ef0b94b63e3b418b2ac62dc25e34f"
+        "7da7123fe0487fddb815bf9f240c3738ef7f01cb",
+        "90619d004b3087d1bbaf4044aab7c7830c35397e",
+        "929e13b40b3e067650ceac237f39f4f2a46a640d"
       ],
       "landingNote": "The Emscripten cleanup branch owns port-library filtering needed for reliable ImGui SDL3 discovery with SDK 6.0.13. This rendering branch remains based directly on upstream master."
     },
@@ -118,8 +118,8 @@
     {
       "order": 7,
       "name": "upstream/hpl1-webgl",
-      "head": "35f7ef041f4d906a0f2fe61f9582cefa93eec24f",
-      "base": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
+      "head": "e7760ed02cd01bdbf6413acb09a58ab220b6149a",
+      "base": "929e13b40b3e067650ceac237f39f4f2a46a640d",
       "reviewBase": "upstream/emscripten-opengl",
       "scope": "GLES rendering/shaders, menu navigation and native camera input",
       "commits": 5,
@@ -127,13 +127,13 @@
       "files": 60,
       "diff": "60 files changed, 4300 insertions(+), 216 deletions(-)",
       "ownCommits": [
-        "bd757118569d1a1bc2f543c38c1d4b9fcc3d15cf",
-        "fe83b59ba99e9ef53ee405cab619b2fc4190b338",
-        "a4a1a8c5cf8d86d845f8e0a9619b2e311a8a4d97",
-        "1bfa0774dffeed752fcbbf6db0648a6db97a0c5f",
-        "35f7ef041f4d906a0f2fe61f9582cefa93eec24f"
+        "2c61490ce40564880ecb132458e5f75986930ead",
+        "a05636857627fba406d6d60656b45c0eba3b04d4",
+        "ba95cb6316952387e4b6ba3467c81a1434a58891",
+        "68c39ca6e267b901c1db26c06640223dc4b1ba24",
+        "e7760ed02cd01bdbf6413acb09a58ab220b6149a"
       ],
-      "sharedSupportImport": "1bfa0774dffeed752fcbbf6db0648a6db97a0c5f",
+      "sharedSupportImport": "68c39ca6e267b901c1db26c06640223dc4b1ba24",
       "landingNote": "The shared-support commit mirrors the touch branch axis API. Once that API is upstream, omit the duplicate prerequisite during rebase."
     },
     {
@@ -156,7 +156,7 @@
     {
       "order": 9,
       "name": "upstream/touch-controls",
-      "head": "052dd2269c345b1dda12132613b500df6621aa17",
+      "head": "d3ad51ee5f868ffa826967301055ec5d665d1217",
       "base": "ed949213a23440447ea402e263daa871394b6bf9",
       "reviewBase": "upstream/master",
       "scope": "Shared touch preferences, controller availability and analog input",
@@ -165,9 +165,9 @@
       "files": 76,
       "diff": "76 files changed, 3674 insertions(+), 586 deletions(-)",
       "ownCommits": [
-        "ebd7fe8c6db2dc2077d67d86cb47736d43dbed3d",
-        "63f6fabc919d178890a30184888bc9f054a7a3f1",
-        "052dd2269c345b1dda12132613b500df6621aa17"
+        "5299812069d678710c725a3d1144d73f9fbaec79",
+        "b3b5ce5e35279d79dd77a1ae927a32b327d230a7",
+        "d3ad51ee5f868ffa826967301055ec5d665d1217"
       ]
     }
   ],
@@ -247,7 +247,7 @@
       ]
     },
     {
-      "sourceCommit": "fd4a3ebfde0ce05a5e2f602dae43a60823aecea4",
+      "sourceCommit": "7da7123fe0487fddb815bf9f240c3738ef7f01cb",
       "subject": "EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable",
       "parts": [
         {
@@ -259,7 +259,7 @@
       ]
     },
     {
-      "sourceCommit": "cb0020dd4dfd3a536a59885084e557561ee7a9fc",
+      "sourceCommit": "90619d004b3087d1bbaf4044aab7c7830c35397e",
       "subject": "EMSCRIPTEN: Match OpenGL video modes to browser window dimensions",
       "parts": [
         {
@@ -271,7 +271,7 @@
       ]
     },
     {
-      "sourceCommit": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
+      "sourceCommit": "929e13b40b3e067650ceac237f39f4f2a46a640d",
       "subject": "EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default",
       "parts": [
         {
@@ -438,7 +438,7 @@
       ]
     },
     {
-      "sourceCommit": "bd757118569d1a1bc2f543c38c1d4b9fcc3d15cf",
+      "sourceCommit": "2c61490ce40564880ecb132458e5f75986930ead",
       "subject": "HPL1: Bundle shaders and adapt them for GLES",
       "parts": [
         {
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "sourceCommit": "fe83b59ba99e9ef53ee405cab619b2fc4190b338",
+      "sourceCommit": "a05636857627fba406d6d60656b45c0eba3b04d4",
       "subject": "HPL1: Add the WebGL2 renderer and GLES compatibility layer",
       "parts": [
         {
@@ -498,7 +498,7 @@
       ]
     },
     {
-      "sourceCommit": "a4a1a8c5cf8d86d845f8e0a9619b2e311a8a4d97",
+      "sourceCommit": "ba95cb6316952387e4b6ba3467c81a1434a58891",
       "subject": "HPL1: Add controller bindings and menu focus navigation",
       "parts": [
         {
@@ -512,7 +512,7 @@
       ]
     },
     {
-      "sourceCommit": "1bfa0774dffeed752fcbbf6db0648a6db97a0c5f",
+      "sourceCommit": "68c39ca6e267b901c1db26c06640223dc4b1ba24",
       "subject": "KEYMAPPER: Provide shared engine-axis actions for HPL1",
       "parts": [
         {
@@ -533,7 +533,7 @@
       ]
     },
     {
-      "sourceCommit": "35f7ef041f4d906a0f2fe61f9582cefa93eec24f",
+      "sourceCommit": "e7760ed02cd01bdbf6413acb09a58ab220b6149a",
       "subject": "HPL1: Handle native camera axes and preserve touch response",
       "parts": [
         {
@@ -602,7 +602,7 @@
       ]
     },
     {
-      "sourceCommit": "ebd7fe8c6db2dc2077d67d86cb47736d43dbed3d",
+      "sourceCommit": "5299812069d678710c725a3d1144d73f9fbaec79",
       "subject": "BACKENDS: Add shared on-screen controls and touch preferences",
       "parts": [
         {
@@ -659,7 +659,7 @@
       ]
     },
     {
-      "sourceCommit": "63f6fabc919d178890a30184888bc9f054a7a3f1",
+      "sourceCommit": "b3b5ce5e35279d79dd77a1ae927a32b327d230a7",
       "subject": "BACKENDS: Harmonize controller availability and touch switching",
       "parts": [
         {
@@ -722,7 +722,7 @@
       ]
     },
     {
-      "sourceCommit": "052dd2269c345b1dda12132613b500df6621aa17",
+      "sourceCommit": "d3ad51ee5f868ffa826967301055ec5d665d1217",
       "subject": "BACKENDS: Emit touch joystick axes with the established response",
       "parts": [
         {
@@ -3842,6 +3842,321 @@
       "previousIntegration": "f7f03f80f83d161d8f971ac5411039190bd16cc6",
       "integration": "6d3f5d98de5a44ae8803cb6dd966c04a76f12aab",
       "es3Commit": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f"
+    },
+    "cppStyleReview": {
+      "passed": true,
+      "scope": "six control-statement spacing corrections across review branches; five demo lines (one was already correct in demo)",
+      "semanticDiff": "none (git diff -w)",
+      "commitMessages": "unchanged",
+      "reviewCommits": 27,
+      "demoCherryPicks": 27,
+      "addedControlStatementSpacing": "passed",
+      "formatter": "clang-format version 18.1.8",
+      "fullFormattingCheck": "additional findings remain; not a clean full-format result",
+      "filesChecked": 167,
+      "filesWithFormattingChanges": 59,
+      "replacementsOnChangedLines": 487,
+      "previousIntegration": "6d3f5d98de5a44ae8803cb6dd966c04a76f12aab",
+      "integration": "14db919f611fbafb82a20073a1450cf70b2c712e",
+      "formattingGateInCheckedInCI": false,
+      "previousValidationLimitation": "git diff --check, syntax and build checks had been run; C++ clang-format checking had not",
+      "filesWithRemainingFindings": [
+        {
+          "branch": "upstream/emscripten-update-cleanup",
+          "path": "backends/platform/sdl/emscripten/emscripten.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-update-cleanup",
+          "path": "gui/cloudconnectionwizard.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-opengl",
+          "path": "backends/graphics/openglsdl/openglsdl-graphics.cpp",
+          "replacements": 3
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "path": "backends/events/emscriptensdl/emscriptensdl-events.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "path": "backends/fs/emscripten/dragdrop-fs.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "path": "backends/fs/emscripten/dragdrop-readstream.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "path": "backends/fs/emscripten/emscripten-fs-factory.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "path": "backends/networking/http/sessionrequest.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "path": "backends/platform/sdl/emscripten/emscripten.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-printing",
+          "path": "backends/printing/emscripten/emscripten-printman.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "path": "backends/cloud/box/boxstorage.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "path": "backends/cloud/downloadrequest.cpp",
+          "replacements": 5
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "path": "backends/cloud/dropbox/dropboxstorage.cpp",
+          "replacements": 2
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "path": "backends/cloud/googledrive/googledrivestorage.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "path": "backends/cloud/onedrive/onedrivestorage.cpp",
+          "replacements": 6
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "path": "backends/fs/emscripten/cloud-readstream.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "path": "backends/fs/emscripten/cloud-readstream.h",
+          "replacements": 3
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "backends/keymapper/keymapper.cpp",
+          "replacements": 8
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "common/events.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/impl/CGProgram.cpp",
+          "replacements": 8
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/impl/LowLevelGraphicsGLES.cpp",
+          "replacements": 155
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/impl/LowLevelGraphicsGLES.h",
+          "replacements": 8
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/impl/SDLTexture.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/impl/VertexBufferVBO.cpp",
+          "replacements": 2
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/input/Gamepad.cpp",
+          "replacements": 16
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/input/Input.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/input/Input.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/engine/input/LowLevelInput.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "engines/hpl1/opengl.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "test/backends/keymapper.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "test/common/joystick-events.h",
+          "replacements": 3
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "path": "test/engines/hpl1/gamepad.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-recorder",
+          "path": "backends/platform/sdl/emscripten/emscripten.cpp",
+          "replacements": 6
+        },
+        {
+          "branch": "upstream/emscripten-recorder",
+          "path": "gui/EventRecorder.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/emscripten-recorder",
+          "path": "gui/recorderdialog.cpp",
+          "replacements": 2
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/events/sdl/sdl-common-events.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/events/sdl/sdl2-events.cpp",
+          "replacements": 4
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/events/sdl/sdl3-events.cpp",
+          "replacements": 9
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/graphics/android/android-graphics.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/graphics/openglsdl/openglsdl-graphics.cpp",
+          "replacements": 20
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/graphics/surfacesdl/surfacesdl-graphics.cpp",
+          "replacements": 4
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/keymapper/keymapper.cpp",
+          "replacements": 8
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/android/android.cpp",
+          "replacements": 2
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/android/jni-android.cpp",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/android/options.cpp",
+          "replacements": 2
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/ios7/ios7_common.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/ios7/ios7_gamepad_controller.mm",
+          "replacements": 16
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/ios7/ios7_options.mm",
+          "replacements": 4
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/ios7/ios7_osys_video.mm",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/ios7/ios7_video.mm",
+          "replacements": 4
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/sdl/sdl.cpp",
+          "replacements": 10
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/sdl/sdl.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/sdl/touchcontrols.cpp",
+          "replacements": 85
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "backends/platform/sdl/touchcontrols.h",
+          "replacements": 40
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "common/events.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "common/touch-mode.h",
+          "replacements": 8
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "gui/options.cpp",
+          "replacements": 14
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "test/backends/keymapper.h",
+          "replacements": 1
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "path": "test/common/events.h",
+          "replacements": 1
+        }
+      ]
     }
   },
   "publication": {
@@ -3856,7 +4171,7 @@
       {
         "name": "upstream/emscripten-opengl",
         "repository": "chkuendig/scummvm",
-        "head": "872e9f67538ef0b94b63e3b418b2ac62dc25e34f",
+        "head": "929e13b40b3e067650ceac237f39f4f2a46a640d",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/emscripten-opengl"
       },
       {
@@ -3886,8 +4201,8 @@
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "35f7ef041f4d906a0f2fe61f9582cefa93eec24f",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/872e9f67538ef0b94b63e3b418b2ac62dc25e34f...upstream/hpl1-webgl"
+        "head": "e7760ed02cd01bdbf6413acb09a58ab220b6149a",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/929e13b40b3e067650ceac237f39f4f2a46a640d...upstream/hpl1-webgl"
       },
       {
         "name": "upstream/emscripten-recorder",
@@ -3898,7 +4213,7 @@
       {
         "name": "upstream/touch-controls",
         "repository": "chkuendig/scummvm",
-        "head": "052dd2269c345b1dda12132613b500df6621aa17",
+        "head": "d3ad51ee5f868ffa826967301055ec5d665d1217",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/touch-controls"
       }
     ],
@@ -3906,7 +4221,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "6d3f5d98de5a44ae8803cb6dd966c04a76f12aab",
+      "head": "14db919f611fbafb82a20073a1450cf70b2c712e",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -3946,12 +4261,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "6d3f5d98de5a44ae8803cb6dd966c04a76f12aab",
+    "head": "14db919f611fbafb82a20073a1450cf70b2c712e",
     "upstreamBase": "ed949213a23440447ea402e263daa871394b6bf9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Redundant GLES3 configure comment removed from the existing ES3 commit, HPL1 and demo. Commit messages and executable configuration unchanged; refreshed heads and all 27 demo cherry-picks pushed. Full demo rebuild/deployment remains pending.",
+    "status": "Missing spaces after control keywords fixed in OpenGL, HPL1 and touch review commits and demo. Changes are whitespace-only. Repository clang-format audit executed on added/modified C/C++ lines; additional formatting findings remain, so this is not a clean formatting result. No new full build or deployment.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
@@ -4876,7 +5191,7 @@
     "base": "f631a289b7137cf324e0032db9b87c0af26271e9"
   },
   "emscriptenUpgradePlan": {
-    "status": "SDK 6.0.13 remains deployed. The GLES3 rationale comment was removed from the refreshed review/demo source; executable configuration is unchanged. Full refreshed demo build/deployment remains pending.",
+    "status": "SDK 6.0.13 remains deployed. Review/demo control-statement spacing fixes are pushed; additional formatting findings remain. Full refreshed demo build/deployment remains pending.",
     "current": "6.0.13",
     "target": "6.0.13",
     "branch": "upstream/emscripten-update-cleanup",

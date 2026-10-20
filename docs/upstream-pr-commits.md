@@ -16,9 +16,9 @@ Review base: `upstream/master` (`ed949213a23`). 4 review commits, 4 including pr
 Review base: `upstream/master` (`ed949213a23`). 4 review commits, 4 including prerequisites.
 
 - [b7e92acd643](https://github.com/chkuendig/scummvm/commit/b7e92acd6435dce9077b0c53a3ff037f7a02f424) EMSCRIPTEN: Keep the WebGL canvas background opaque
-- [fd4a3ebfde0](https://github.com/chkuendig/scummvm/commit/fd4a3ebfde0ce05a5e2f602dae43a60823aecea4) EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable
-- [cb0020dd4df](https://github.com/chkuendig/scummvm/commit/cb0020dd4dfd3a536a59885084e557561ee7a9fc) EMSCRIPTEN: Match OpenGL video modes to browser window dimensions
-- [872e9f67538](https://github.com/chkuendig/scummvm/commit/872e9f67538ef0b94b63e3b418b2ac62dc25e34f) EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default
+- [7da7123fe04](https://github.com/chkuendig/scummvm/commit/7da7123fe0487fddb815bf9f240c3738ef7f01cb) EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable
+- [90619d004b3](https://github.com/chkuendig/scummvm/commit/90619d004b3087d1bbaf4044aab7c7830c35397e) EMSCRIPTEN: Match OpenGL video modes to browser window dimensions
+- [929e13b40b3](https://github.com/chkuendig/scummvm/commit/929e13b40b3e067650ceac237f39f4f2a46a640d) EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default
 
 ## upstream/emscripten-filesystem
 
@@ -52,11 +52,11 @@ Review base: `upstream/emscripten-filesystem` (`e91b0eeb30a`). 3 review commits,
 
 Review base: `upstream/emscripten-opengl` (`c83ccc32509`). 5 review commits, 9 including prerequisites.
 
-- [bd757118569](https://github.com/chkuendig/scummvm/commit/bd757118569d1a1bc2f543c38c1d4b9fcc3d15cf) HPL1: Bundle shaders and adapt them for GLES
-- [fe83b59ba99](https://github.com/chkuendig/scummvm/commit/fe83b59ba99e9ef53ee405cab619b2fc4190b338) HPL1: Add the WebGL2 renderer and GLES compatibility layer
-- [a4a1a8c5cf8](https://github.com/chkuendig/scummvm/commit/a4a1a8c5cf8d86d845f8e0a9619b2e311a8a4d97) HPL1: Add controller bindings and menu focus navigation
-- [1bfa0774dff](https://github.com/chkuendig/scummvm/commit/1bfa0774dffeed752fcbbf6db0648a6db97a0c5f) KEYMAPPER: Provide shared engine-axis actions for HPL1
-- [35f7ef041f4](https://github.com/chkuendig/scummvm/commit/35f7ef041f4d906a0f2fe61f9582cefa93eec24f) HPL1: Handle native camera axes and preserve touch response
+- [2c61490ce40](https://github.com/chkuendig/scummvm/commit/2c61490ce40564880ecb132458e5f75986930ead) HPL1: Bundle shaders and adapt them for GLES
+- [a0563685762](https://github.com/chkuendig/scummvm/commit/a05636857627fba406d6d60656b45c0eba3b04d4) HPL1: Add the WebGL2 renderer and GLES compatibility layer
+- [ba95cb63169](https://github.com/chkuendig/scummvm/commit/ba95cb6316952387e4b6ba3467c81a1434a58891) HPL1: Add controller bindings and menu focus navigation
+- [68c39ca6e26](https://github.com/chkuendig/scummvm/commit/68c39ca6e267b901c1db26c06640223dc4b1ba24) KEYMAPPER: Provide shared engine-axis actions for HPL1
+- [e7760ed02cd](https://github.com/chkuendig/scummvm/commit/e7760ed02cd01bdbf6413acb09a58ab220b6149a) HPL1: Handle native camera axes and preserve touch response
 
 ## upstream/emscripten-recorder
 
@@ -70,6 +70,6 @@ Review base: `upstream/emscripten-filesystem` (`e91b0eeb30a`). 3 review commits,
 
 Review base: `upstream/master` (`ed949213a23`). 3 review commits, 3 including prerequisites.
 
-- [ebd7fe8c6db](https://github.com/chkuendig/scummvm/commit/ebd7fe8c6db2dc2077d67d86cb47736d43dbed3d) BACKENDS: Add shared on-screen controls and touch preferences
-- [63f6fabc919](https://github.com/chkuendig/scummvm/commit/63f6fabc919d178890a30184888bc9f054a7a3f1) BACKENDS: Harmonize controller availability and touch switching
-- [052dd2269c3](https://github.com/chkuendig/scummvm/commit/052dd2269c345b1dda12132613b500df6621aa17) BACKENDS: Emit touch joystick axes with the established response
+- [5299812069d](https://github.com/chkuendig/scummvm/commit/5299812069d678710c725a3d1144d73f9fbaec79) BACKENDS: Add shared on-screen controls and touch preferences
+- [b3b5ce5e352](https://github.com/chkuendig/scummvm/commit/b3b5ce5e35279d79dd77a1ae927a32b327d230a7) BACKENDS: Harmonize controller availability and touch switching
+- [d3ad51ee5f8](https://github.com/chkuendig/scummvm/commit/d3ad51ee5f868ffa826967301055ec5d665d1217) BACKENDS: Emit touch joystick axes with the established response
