@@ -2203,7 +2203,16 @@
         "Preserve upstream FreewareAdvancedAudio FAAD mirror/archive fix",
         "Preserve upstream HPL1 Glowstick KEYCODE_g fix"
       ],
-      "fullBuild": "pending"
+      "fullBuild": {
+        "status": "dispatched; result pending",
+        "run": {
+          "url": "https://github.com/chkuendig/scummvm-demo/actions/runs/39477133908",
+          "id": 39477133908,
+          "demoCommit": "f16597e8071778e8033d15c1da74192b675c355a",
+          "deploy": false,
+          "sdk": "6.0.13"
+        }
+      }
     }
   },
   "publication": {
@@ -2313,7 +2322,7 @@
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Rebased source and nine review branches pushed; generated-JavaScript and libmad patches removed, SCUMM warning change reverted. Full refreshed build pending. Live deployment remains the previously validated SDK 6.0.13 build.",
+    "status": "Rebased source and nine review branches pushed; generated-JavaScript and libmad patches removed, SCUMM warning change reverted. Full refreshed build dispatched with deploy=false; result pending. Live deployment remains the previously validated SDK 6.0.13 build.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
