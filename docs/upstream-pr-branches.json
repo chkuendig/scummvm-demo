@@ -1908,6 +1908,39 @@
       "diffChecks": "passed",
       "syntaxChecks": 13,
       "retiredBranch": "upstream/emscripten-url-reload"
+    },
+    "sdk6013Deployment": {
+      "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39470229200",
+      "sdk": "6.0.13",
+      "source": "9e52e845659e3ec37112c5ae37cd52a2aaa44aa3",
+      "demo": "c8aa6ef69bc7266b21c27bbb305d9dd7c4032c92",
+      "liveProvenance": "matched all eight branch heads",
+      "checks": [
+        {
+          "name": "launcher",
+          "passed": true,
+          "pageErrors": [],
+          "requestFailures": [],
+          "httpErrors": []
+        },
+        {
+          "name": "grim",
+          "passed": true,
+          "pageErrors": [],
+          "requestFailures": [],
+          "httpErrors": []
+        },
+        {
+          "name": "penumbra",
+          "passed": true,
+          "pageErrors": [],
+          "requestFailures": [],
+          "httpErrors": []
+        }
+      ],
+      "limitations": [
+        "Physical-device gameplay feel and Safari/iOS were not tested in this deployment check."
+      ]
     }
   },
   "publication": {
@@ -2011,22 +2044,25 @@
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "SDK 6.0.13 full validation build passed with deploy=false. Browser validation pending. URL reload is folded into cleanup review history; integration source is unchanged. Live deployment remains SDK 6.0.11.",
+    "status": "All eight upstream branches and consolidated source pushed. SDK 6.0.13 demo and cloud backend deployed successfully. Live provenance verified; Chromium launcher/HTTP browsing, Grim and Penumbra startup and touch smoke checks passed. Physical-device feel remains unverified.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148",
-    "deployedDemoCommit": "70926e9d42a1c36a21a36bdc623b7730e5848357",
-    "deployedScummvmCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39470229200",
+    "deployedDemoCommit": "c8aa6ef69bc7266b21c27bbb305d9dd7c4032c92",
+    "deployedScummvmCommit": "9e52e845659e3ec37112c5ae37cd52a2aaa44aa3",
     "deployedBranchHeads": {
-      "upstream/emscripten-runtime": "6d523b035c3418fef86e100edb8f94f07e99281e",
-      "upstream/cloud-streaming": "c21d8d52df39211960765e9136605ba41d8f8d26",
-      "upstream/touch-controls": "a36875d34b2697caa92ff464ebd894953be8ac88",
-      "upstream/hpl1-webgl": "4905418de9ac8930c934cab9ccdb575b596b4b86",
-      "upstream/emscripten-recorder": "9517cd7b05194ec8b756f8505f80bdea49a3dd8f"
+      "upstream/emscripten-update-cleanup": "d6b65d41d683724dada5b4573ebb94f47e39ce46",
+      "upstream/emscripten-filesystem": "02ae5145991b9ea9c1754f12a381650ec7bb5f75",
+      "upstream/emscripten-printing": "aa6e5dc729e5d6f57e2693b49f177726e9ea686e",
+      "upstream/emscripten-loading-progress": "13cbcd7458cdd12bcbd988ef0e57b97196f7a110",
+      "upstream/cloud-streaming": "5718ef42c81b98854c0957d253153cec0215566a",
+      "upstream/hpl1-webgl": "a4358d6b082d052d6cb49df36f8b488ccccc893a",
+      "upstream/emscripten-recorder": "3e3831a6ba8620c532c8f3c7bd0af7669a012d38",
+      "upstream/touch-controls": "8ef1023b2b8ee6413c44e76f1e3ca4abfbf54246"
     },
     "emsdkVersion": "6.0.13",
-    "deployedEmsdkVersion": "6.0.11"
+    "deployedEmsdkVersion": "6.0.13"
   },
   "updated": "2026-10-20",
   "beforeRuntimeSplit": {
@@ -2933,7 +2969,7 @@
     "base": "f631a289b7137cf324e0032db9b87c0af26271e9"
   },
   "emscriptenUpgradePlan": {
-    "status": "SDK 6.0.13 full validation build passed; browser validation pending",
+    "status": "SDK 6.0.13 deployed; live provenance and Chromium smoke checks passed",
     "current": "6.0.13",
     "target": "6.0.13",
     "branch": "upstream/emscripten-update-cleanup",
@@ -2950,7 +2986,7 @@
       "verify SDL3 audio guards and Asyncify behavior",
       "exercise HTTP/IDBFS/dragdrop, printing, fonts/PNG, WebGL/touch and recorder replay before deployment"
     ],
-    "deployed": "6.0.11",
+    "deployed": "6.0.13",
     "preflight": {
       "sdk": "6.0.13",
       "compiler": "e13ee988ce3d87a738dd8f3661d02223308c412a",
@@ -2995,7 +3031,8 @@
         "upstream/emscripten-recorder": "a8e5e9c5d95def785958563a972407d366b45fed",
         "upstream/touch-controls": "8ef1023b2b8ee6413c44e76f1e3ca4abfbf54246"
       }
-    }
+    },
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39470229200"
   },
   "beforeUrlReloadFold": {
     "manifestCommit": "1f6346790e89ba4d7a946757a1659dc462fc2d12",
@@ -3036,5 +3073,18 @@
       "8ef1023b2b8ee6413c44e76f1e3ca4abfbf54246": "8ef1023b2b8ee6413c44e76f1e3ca4abfbf54246",
       "0226523707e04c143ac41f11a18434ce84e0c79f": "350a7d43eae219c5f8d8e4bc4bb9b9c81be810e8"
     }
+  },
+  "previousDeploymentBeforeSdk6013": {
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39321081148",
+    "deployedDemoCommit": "70926e9d42a1c36a21a36bdc623b7730e5848357",
+    "deployedScummvmCommit": "d1905802c06d6d3e8487e9e122b2df325b3150f9",
+    "deployedBranchHeads": {
+      "upstream/emscripten-runtime": "6d523b035c3418fef86e100edb8f94f07e99281e",
+      "upstream/cloud-streaming": "c21d8d52df39211960765e9136605ba41d8f8d26",
+      "upstream/touch-controls": "a36875d34b2697caa92ff464ebd894953be8ac88",
+      "upstream/hpl1-webgl": "4905418de9ac8930c934cab9ccdb575b596b4b86",
+      "upstream/emscripten-recorder": "9517cd7b05194ec8b756f8505f80bdea49a3dd8f"
+    },
+    "deployedEmsdkVersion": "6.0.11"
   }
 }
