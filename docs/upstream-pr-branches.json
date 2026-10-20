@@ -35,19 +35,19 @@
     {
       "order": 2,
       "name": "upstream/emscripten-opengl",
-      "head": "c83ccc32509d19c1e69391f6376746b7f4387f94",
+      "head": "7585c61a6564ac280bf6b1e49ba40e6accb1de4c",
       "base": "ed949213a23440447ea402e263daa871394b6bf9",
       "reviewBase": "upstream/master",
       "scope": "WebGL2 context selection, availability/surface fallback, browser resizing and opaque canvas blending",
       "commits": 4,
       "commitsIncludingPrerequisites": 4,
       "files": 4,
-      "diff": "4 files changed, 93 insertions(+), 45 deletions(-)",
+      "diff": "4 files changed, 94 insertions(+), 45 deletions(-)",
       "ownCommits": [
         "b7e92acd6435dce9077b0c53a3ff037f7a02f424",
-        "38edb63e6968b10855132e42ccea917184a8d6d8",
-        "31134f1aecd58c40e3756e6f96e0b695cf4d3f2d",
-        "c83ccc32509d19c1e69391f6376746b7f4387f94"
+        "b08ca402fa8049e0d28d7fb76ea7152b403d7ad1",
+        "292778368430b9da364135b78a864e5619f7116d",
+        "7585c61a6564ac280bf6b1e49ba40e6accb1de4c"
       ]
     },
     {
@@ -117,8 +117,8 @@
     {
       "order": 7,
       "name": "upstream/hpl1-webgl",
-      "head": "4fef1d8726c1363d0dd9a9530139f25ad7cd584c",
-      "base": "c83ccc32509d19c1e69391f6376746b7f4387f94",
+      "head": "57c02d3df44fc779ab52f8ca2925c26e07820b3a",
+      "base": "7585c61a6564ac280bf6b1e49ba40e6accb1de4c",
       "reviewBase": "upstream/emscripten-opengl",
       "scope": "GLES rendering/shaders, menu navigation and native camera input",
       "commits": 5,
@@ -126,13 +126,13 @@
       "files": 60,
       "diff": "60 files changed, 4300 insertions(+), 216 deletions(-)",
       "ownCommits": [
-        "5f68543a30211a265fd24efb00d2a3631758c98b",
-        "0475b151bc79e4367757e2a8da181eea920bb44a",
-        "53c98ac232e73140edcd5726eaf89f16d3950e89",
-        "ad64fc8cde7fd55b13ce468b5f074c88e958c202",
-        "4fef1d8726c1363d0dd9a9530139f25ad7cd584c"
+        "053650f01d23d625d2c4becd3bed63fe6c2b117f",
+        "74c6f88283ce0ba62522e473efced9f0553a3c62",
+        "00787fad92414cf6aad1410b906602c20f8ea365",
+        "247a73709587a63b22eee9723f433d9b6bbcd2d5",
+        "57c02d3df44fc779ab52f8ca2925c26e07820b3a"
       ],
-      "sharedSupportImport": "ad64fc8cde7fd55b13ce468b5f074c88e958c202",
+      "sharedSupportImport": "247a73709587a63b22eee9723f433d9b6bbcd2d5",
       "landingNote": "The shared-support commit mirrors the touch branch axis API. Once that API is upstream, omit the duplicate prerequisite during rebase."
     },
     {
@@ -246,7 +246,7 @@
       ]
     },
     {
-      "sourceCommit": "38edb63e6968b10855132e42ccea917184a8d6d8",
+      "sourceCommit": "b08ca402fa8049e0d28d7fb76ea7152b403d7ad1",
       "subject": "EMSCRIPTEN: Fall back to SurfaceSDL when WebGL is unavailable",
       "parts": [
         {
@@ -259,7 +259,7 @@
       ]
     },
     {
-      "sourceCommit": "31134f1aecd58c40e3756e6f96e0b695cf4d3f2d",
+      "sourceCommit": "292778368430b9da364135b78a864e5619f7116d",
       "subject": "EMSCRIPTEN: Match OpenGL video modes to browser window dimensions",
       "parts": [
         {
@@ -271,7 +271,7 @@
       ]
     },
     {
-      "sourceCommit": "c83ccc32509d19c1e69391f6376746b7f4387f94",
+      "sourceCommit": "7585c61a6564ac280bf6b1e49ba40e6accb1de4c",
       "subject": "EMSCRIPTEN: Use OpenGL ES 3 and WebGL2 by default",
       "parts": [
         {
@@ -438,7 +438,7 @@
       ]
     },
     {
-      "sourceCommit": "5f68543a30211a265fd24efb00d2a3631758c98b",
+      "sourceCommit": "053650f01d23d625d2c4becd3bed63fe6c2b117f",
       "subject": "HPL1: Bundle shaders and adapt them for GLES",
       "parts": [
         {
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "sourceCommit": "0475b151bc79e4367757e2a8da181eea920bb44a",
+      "sourceCommit": "74c6f88283ce0ba62522e473efced9f0553a3c62",
       "subject": "HPL1: Add the WebGL2 renderer and GLES compatibility layer",
       "parts": [
         {
@@ -498,7 +498,7 @@
       ]
     },
     {
-      "sourceCommit": "53c98ac232e73140edcd5726eaf89f16d3950e89",
+      "sourceCommit": "00787fad92414cf6aad1410b906602c20f8ea365",
       "subject": "HPL1: Add controller bindings and menu focus navigation",
       "parts": [
         {
@@ -512,7 +512,7 @@
       ]
     },
     {
-      "sourceCommit": "ad64fc8cde7fd55b13ce468b5f074c88e958c202",
+      "sourceCommit": "247a73709587a63b22eee9723f433d9b6bbcd2d5",
       "subject": "KEYMAPPER: Provide shared engine-axis actions for HPL1",
       "parts": [
         {
@@ -533,7 +533,7 @@
       ]
     },
     {
-      "sourceCommit": "4fef1d8726c1363d0dd9a9530139f25ad7cd584c",
+      "sourceCommit": "57c02d3df44fc779ab52f8ca2925c26e07820b3a",
       "subject": "HPL1: Handle native camera axes and preserve touch response",
       "parts": [
         {
@@ -3646,6 +3646,99 @@
       },
       "genericFixCommit": "38edb63e6968b10855132e42ccea917184a8d6d8",
       "es3Commit": "c83ccc32509d19c1e69391f6376746b7f4387f94"
+    },
+    "emscriptenPortScope": {
+      "passed": true,
+      "branches": [
+        {
+          "branch": "upstream/emscripten-update-cleanup",
+          "head": "c569c52908c612c620c7e966b992091e4981babb",
+          "commits": 4,
+          "includingPrerequisites": 4
+        },
+        {
+          "branch": "upstream/emscripten-opengl",
+          "head": "7585c61a6564ac280bf6b1e49ba40e6accb1de4c",
+          "commits": 4,
+          "includingPrerequisites": 4
+        },
+        {
+          "branch": "upstream/emscripten-filesystem",
+          "head": "e91b0eeb30a244643e1da935c32fd32d125a5d24",
+          "commits": 3,
+          "includingPrerequisites": 7
+        },
+        {
+          "branch": "upstream/emscripten-printing",
+          "head": "6cb3af3d8a853732374a16306bafbc53cfbdd3a5",
+          "commits": 1,
+          "includingPrerequisites": 5
+        },
+        {
+          "branch": "upstream/emscripten-loading-progress",
+          "head": "5d74baad5e175f956db33db8ee513392738a1a85",
+          "commits": 1,
+          "includingPrerequisites": 5
+        },
+        {
+          "branch": "upstream/cloud-streaming",
+          "head": "5e641b2e4d01093309b8b76239ea0889a90bca8a",
+          "commits": 3,
+          "includingPrerequisites": 10
+        },
+        {
+          "branch": "upstream/hpl1-webgl",
+          "head": "57c02d3df44fc779ab52f8ca2925c26e07820b3a",
+          "commits": 5,
+          "includingPrerequisites": 9
+        },
+        {
+          "branch": "upstream/emscripten-recorder",
+          "head": "1c518f34be5990b6689cbecc8857901da065a8e6",
+          "commits": 3,
+          "includingPrerequisites": 10
+        },
+        {
+          "branch": "upstream/touch-controls",
+          "head": "052dd2269c345b1dda12132613b500df6621aa17",
+          "commits": 3,
+          "includingPrerequisites": 3
+        }
+      ],
+      "reviewCommits": 27,
+      "demoCherryPicks": 27,
+      "assistanceTrailers": {
+        "auditedCommits": 55,
+        "maximumLinesPerCommit": 1
+      },
+      "es3Message": "matches requested sentence",
+      "sourceChange": "configure only",
+      "shellAndSdkProbes": "passed",
+      "probeChecks": {
+        "passed": true,
+        "checks": [
+          "Active ports; exact matches, repeated flags, order and quoted arguments",
+          "Native checks preserve every argument even with a populated Emscripten list",
+          "Inactive ports preserve library inputs",
+          "Empty port list preserves empty and multiword arguments",
+          "Compile-only checks preserve -c",
+          "Unrelated missing dependencies still fail",
+          "Final LIBS uses the same exact-match registry"
+        ]
+      },
+      "sdkChecks": {
+        "passed": true,
+        "sdk": "6.0.13",
+        "fullConfigure": "passed with all seven compiler port settings",
+        "imguiSdlRenderer": "detected through unmodified ImGui probe",
+        "duplicatePortLibraries": "common compiler check links successfully",
+        "missingNonPortLibrary": "fails as expected",
+        "generatedLibs": "-sUSE_SDL=3 -lm -sUSE_FREETYPE -s FULL_ES3=1 -s MAX_WEBGL_VERSION=2 -s MIN_WEBGL_VERSION=2 -lGLESv2",
+        "portAliasesInGeneratedLibs": 0
+      },
+      "genericFixCommit": "b08ca402fa8049e0d28d7fb76ea7152b403d7ad1",
+      "demoCherryPickCount": 27,
+      "scope": "emscripten_builtin_libs is initialized only in Emscripten backend setup; cc_check_no_clean filters only for _backend=emscripten; no generic helper"
     }
   },
   "publication": {
@@ -3660,7 +3753,7 @@
       {
         "name": "upstream/emscripten-opengl",
         "repository": "chkuendig/scummvm",
-        "head": "c83ccc32509d19c1e69391f6376746b7f4387f94",
+        "head": "7585c61a6564ac280bf6b1e49ba40e6accb1de4c",
         "compareUrl": "https://github.com/chkuendig/scummvm/compare/ed949213a23440447ea402e263daa871394b6bf9...upstream/emscripten-opengl"
       },
       {
@@ -3690,8 +3783,8 @@
       {
         "name": "upstream/hpl1-webgl",
         "repository": "chkuendig/scummvm",
-        "head": "4fef1d8726c1363d0dd9a9530139f25ad7cd584c",
-        "compareUrl": "https://github.com/chkuendig/scummvm/compare/c83ccc32509d19c1e69391f6376746b7f4387f94...upstream/hpl1-webgl"
+        "head": "57c02d3df44fc779ab52f8ca2925c26e07820b3a",
+        "compareUrl": "https://github.com/chkuendig/scummvm/compare/7585c61a6564ac280bf6b1e49ba40e6accb1de4c...upstream/hpl1-webgl"
       },
       {
         "name": "upstream/emscripten-recorder",
@@ -3710,7 +3803,7 @@
     "pullRequestsOpened": false,
     "integrationBranch": {
       "name": "demo/upstream-integration",
-      "head": "4c06c43a7688b693e7939716bb254f334edffda3",
+      "head": "152ab1830522107487639605c1b78bea4702ef3b",
       "repository": "chkuendig/scummvm",
       "url": "https://github.com/chkuendig/scummvm/tree/demo/upstream-integration"
     },
@@ -3750,12 +3843,12 @@
   },
   "demoIntegration": {
     "branch": "demo/upstream-integration",
-    "head": "4c06c43a7688b693e7939716bb254f334edffda3",
+    "head": "152ab1830522107487639605c1b78bea4702ef3b",
     "upstreamBase": "ed949213a23440447ea402e263daa871394b6bf9",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Generic toolchain-library filtering replaces the ImGui-specific exception. All nine review branches and 27 demo cherry-picks are pushed with one assistance trailer per commit; the ES3 message uses the requested sentence. Full SDK 6.0.13 configure and focused link checks pass. A full refreshed demo build/deployment remains pending.",
+    "status": "Port-library filtering is explicitly scoped to Emscripten, with no generic built-in-library helper. All nine review heads and 27 demo cherry-picks are pushed. SDK 6.0.13 configure and focused link checks pass; a full refreshed demo build/deployment remains pending.",
     "previousHead": "36d1c8930189050ea13ecc5021f4b66d6beac982",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
@@ -4680,7 +4773,7 @@
     "base": "f631a289b7137cf324e0032db9b87c0af26271e9"
   },
   "emscriptenUpgradePlan": {
-    "status": "SDK 6.0.13 remains deployed. Generic toolchain-library filtering replaces the ImGui-specific exception. All nine review branches and 27 demo cherry-picks are pushed with one assistance trailer per commit; the ES3 message uses the requested sentence. Full SDK 6.0.13 configure and focused link checks pass. A full refreshed demo build/deployment remains pending.",
+    "status": "SDK 6.0.13 remains deployed. Port-library filtering is explicitly scoped to Emscripten, with no generic built-in-library helper. All nine review heads and 27 demo cherry-picks are pushed. SDK 6.0.13 configure and focused link checks pass; a full refreshed demo build/deployment remains pending.",
     "current": "6.0.13",
     "target": "6.0.13",
     "branch": "upstream/emscripten-update-cleanup",
@@ -5161,5 +5254,20 @@
       }
     ],
     "integration": "74831e85ed1273f1747f8ead027fe2f6d6758949"
+  },
+  "beforeEmscriptenPortScope": {
+    "manifestCommit": "7784ba4ebd916c4ccf4611d23e2671b4f7e77be1",
+    "branchHeads": {
+      "upstream/emscripten-update-cleanup": "c569c52908c612c620c7e966b992091e4981babb",
+      "upstream/emscripten-opengl": "c83ccc32509d19c1e69391f6376746b7f4387f94",
+      "upstream/emscripten-filesystem": "e91b0eeb30a244643e1da935c32fd32d125a5d24",
+      "upstream/emscripten-printing": "6cb3af3d8a853732374a16306bafbc53cfbdd3a5",
+      "upstream/emscripten-loading-progress": "5d74baad5e175f956db33db8ee513392738a1a85",
+      "upstream/cloud-streaming": "5e641b2e4d01093309b8b76239ea0889a90bca8a",
+      "upstream/hpl1-webgl": "4fef1d8726c1363d0dd9a9530139f25ad7cd584c",
+      "upstream/emscripten-recorder": "1c518f34be5990b6689cbecc8857901da065a8e6",
+      "upstream/touch-controls": "052dd2269c345b1dda12132613b500df6621aa17"
+    },
+    "integration": "4c06c43a7688b693e7939716bb254f334edffda3"
   }
 }
