@@ -22,7 +22,7 @@ The filesystem series has four commits: HTTP streaming/cache, dropped-file and R
 
 Commit messages use short subjects and explanations only where they add useful context. Every review commit has one combined `Assisted-by` trailer and Christian as sole author and committer. The audit restored lost historical Claude credits, normalizing `Opus-5.5` to `claude-opus-5-5` while retaining other recorded model names. Detailed provenance is archived in the manifest.
 
-The consolidated demo source is `e06972c3b9dbf756af23ebdaf3e08670fd8611d8`. All 32 review commits were cherry-picked with source markers, and all nine branch heads are ancestors. Compared with the preceding demo, the source changes only two HTTP guards in `gui/EventRecorder.cpp`; demo-specific changes are retained.
+The consolidated demo source is `e06972c3b9dbf756af23ebdaf3e08670fd8611d8`. All 32 review commits were cherry-picked with source markers, and all nine branch heads are ancestors. The independent-branch integration added two optional-HTTP guards in `gui/EventRecorder.cpp`. The latest rebase adds exactly the two new upstream commits; demo-specific changes are retained.
 
 Validation: all review commit and branch whitespace checks pass, as do 18 unique shell/JavaScript/HTML syntax inputs, 28 standalone SDK 6.0.13 C++ syntax checks, six additional cloud C++ checks and two recorder preprocessor checks with HTTP on/off. Loading behavior tests cover known/unknown/compressed download sizes, initialization progress, response preservation, ordinary fetches, MIDI initialization and URL arguments. These are focused checks, not full standalone builds. No new browser run, full build or deployment was performed; earlier formatter findings are not all resolved.
 
@@ -33,3 +33,5 @@ The removed Asyncify test/tooling and generated-JavaScript audio patches remain 
 See the [commit list](upstream-pr-commits.md), [manifest and historical validation](upstream-pr-branches.json), and [SDK upgrade record](emscripten-6.0.13-upgrade.md).
 
 On 2026-10-21 all nine series were rebased onto upstream `964f9ed828fc8538def571ca25b33d6dfbca1bbc` and all 32 commits reintegrated. Feature patches and messages are identical; the demo gains exactly the two new upstream commits. A fresh full SDK 6.0.13 build and deployment is requested for this revision.
+
+The [fresh full build and deployment](https://github.com/chkuendig/scummvm-demo/actions/runs/39507150146) targets demo `d3879dcd2e9062ba952e37f5652963d73e6480f2` and source `e06972c3b9dbf756af23ebdaf3e08670fd8611d8`. At this record it is queued for GitHub-hosted runners; the last successful deployment remains unchanged.

@@ -893,7 +893,7 @@
       "gui/themes/scummremastered.zip",
       "gui/themes/scummremastered/THEMERC"
     ],
-    "integrationTree": "e2de4a067bb52c690d40f2257a0b87bf7a29fc4a",
+    "integrationTree": "9d11c7a2b74971960c2fcd2ea7116f864450f842",
     "allBranchesMergeCleanly": false,
     "allDiffChecksPass": true,
     "rawIntegration": "59e074b67ffec467082f56769a977de67863bb54",
@@ -911,7 +911,7 @@
       "format": "SCUMMVM_STX0.9.25",
       "defaultIncludeRegeneratesIdentically": true
     },
-    "sourceTree": "e2de4a067bb52c690d40f2257a0b87bf7a29fc4a",
+    "sourceTree": "9d11c7a2b74971960c2fcd2ea7116f864450f842",
     "rawIntegrationTree": "4d4906fcca507f421256d21fbaaa51612d232032",
     "rawExcludedPaths": [
       "engines/saga/detection_tables.h",
@@ -6603,6 +6603,30 @@
           "dists/emscripten/build.sh"
         ],
         "integrationTreeMatchesPreparedSource": true
+      },
+      "loadingBehavior": {
+        "passed": true,
+        "branch": "e18bfabc7eec61057c94ad456533ab4e9c8d33cc",
+        "checks": [
+          "known, unknown and compressed transfer sizes",
+          "100% through runtime initialization",
+          "response headers and payload preserved",
+          "ordinary requests unchanged",
+          "upstream MIDI initialization retained",
+          "URL arguments retained"
+        ]
+      },
+      "portArgumentChecks": {
+        "passed": true,
+        "checks": [
+          "Active ports; exact matches, repeated flags, order and quoted arguments",
+          "Native checks preserve every argument even with a populated Emscripten list",
+          "Inactive ports preserve library inputs",
+          "Empty port list preserves empty and multiword arguments",
+          "Compile-only checks preserve -c",
+          "Unrelated missing dependencies still fail",
+          "Final LIBS uses the same exact-match registry"
+        ]
       }
     }
   },
@@ -9833,5 +9857,13 @@
         ]
       }
     ]
+  },
+  "pendingDeployment": {
+    "run": "https://github.com/chkuendig/scummvm-demo/actions/runs/39507150146",
+    "demo": "d3879dcd2e9062ba952e37f5652963d73e6480f2",
+    "source": "e06972c3b9dbf756af23ebdaf3e08670fd8611d8",
+    "upstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc",
+    "sdk": "6.0.13",
+    "statusAtRecord": "queued; waiting for GitHub-hosted runners"
   }
 }
