@@ -1,18 +1,19 @@
 # Upstream review commits
 
-There are 30 commits across nine review series, rebased onto upstream `ed949213a23440447ea402e263daa871394b6bf9`. The ten-commit limit applies to each review series above its listed base, excluding prerequisites. Cleanup has seven commits; the other series have at most five.
+There are 31 commits across nine review series, rebased onto upstream `ed949213a23440447ea402e263daa871394b6bf9`. The ten-commit limit applies to each review series above its listed base, excluding prerequisites. Cleanup has eight commits; the other series have at most five.
 
 ## upstream/emscripten-update-cleanup
 
-Review base: `upstream/master` (`ed949213a23`). 7 review commits, 7 including prerequisites.
+Review base: `upstream/master` (`ed949213a23`). 8 review commits, 8 including prerequisites.
 
-- [b9a73fb3c76](https://github.com/chkuendig/scummvm/commit/b9a73fb3c760209215cec616c6aaf141b349f57a) EMSCRIPTEN: Extract WebMIDI into a JavaScript library
-- [50cd93b54b9](https://github.com/chkuendig/scummvm/commit/50cd93b54b9a52345d4b55111480075f27dd6280) EMSCRIPTEN: Extract text-to-speech into a JavaScript library
-- [52ad32a9712](https://github.com/chkuendig/scummvm/commit/52ad32a971296188859cb23ae1c415b99972c8e2) EMSCRIPTEN: Extract browser backend APIs into a JavaScript library
-- [6b6fb53cb8b](https://github.com/chkuendig/scummvm/commit/6b6fb53cb8b513c650eeaa7c3534ef2618a5eae1) EMSCRIPTEN: Update to SDK 6.0.13
-- [7c7d5d0d71e](https://github.com/chkuendig/scummvm/commit/7c7d5d0d71eba02e73679dca2975455b18bcf47b) EMSCRIPTEN: Update libtheora and RetroWave
-- [6d2d864bcea](https://github.com/chkuendig/scummvm/commit/6d2d864bcea4eb1cf93a7a63a4d6c4285cfc85f9) EMSCRIPTEN: Filter linker aliases supplied by compiler ports
-- [81a24b609a2](https://github.com/chkuendig/scummvm/commit/81a24b609a2dfaf495974f3e06309549cbad5bc5) EMSCRIPTEN: Include large engine data in distributions
+- [e4ec2302e10](https://github.com/chkuendig/scummvm/commit/e4ec2302e106e2c0d00a8226eb05823ab8953046) EMSCRIPTEN: Extract WebMIDI into a JavaScript library
+- [949ebeb94b8](https://github.com/chkuendig/scummvm/commit/949ebeb94b8f56ff696bc0229d25b5787e8ed884) EMSCRIPTEN: Extract text-to-speech into a JavaScript library
+- [8a920121b75](https://github.com/chkuendig/scummvm/commit/8a920121b754d4a1624ff9ebbf6bf0d407e86ad7) EMSCRIPTEN: Extract backend APIs into a JavaScript library
+- [badafbbec50](https://github.com/chkuendig/scummvm/commit/badafbbec50cba92c86263b9ccfc08513655d55a) EMSCRIPTEN: Enable the browser virtual keyboard by default
+- [b2feddd5f92](https://github.com/chkuendig/scummvm/commit/b2feddd5f9210b0141492caa2d3f307069c73d20) EMSCRIPTEN: Guard signal delivery on page unload
+- [55ab3e7023b](https://github.com/chkuendig/scummvm/commit/55ab3e7023b18d0d445be8443bfac2fad43a0822) EMSCRIPTEN: Update Emscripten, RetroWave and libtheora
+- [30457d55de4](https://github.com/chkuendig/scummvm/commit/30457d55de46a17d9561507e7f64e3cb8d05f080) EMSCRIPTEN: Filter linker aliases supplied by compiler ports
+- [d9594d50608](https://github.com/chkuendig/scummvm/commit/d9594d50608288a36684f55dea65d153dac72201) EMSCRIPTEN: Include large engine data in distributions
 
 ## upstream/emscripten-opengl
 
@@ -25,31 +26,31 @@ Review base: `upstream/master` (`ed949213a23`). 4 review commits, 4 including pr
 
 ## upstream/emscripten-filesystem
 
-Review base: `upstream/emscripten-update-cleanup` (`81a24b609a2`). 3 review commits, 10 including prerequisites.
+Review base: `upstream/emscripten-update-cleanup` (`d9594d50608`). 3 review commits, 11 including prerequisites.
 
-- [18334538e75](https://github.com/chkuendig/scummvm/commit/18334538e750e3691d11cbcf246d0b6783408ea5) EMSCRIPTEN: Stream HTTP files through a bounded virtual filesystem
-- [9584e111d37](https://github.com/chkuendig/scummvm/commit/9584e111d377d8f409a141da9d83c707dfedcc61) EMSCRIPTEN: Mount dropped files and import Roland ROMs
-- [0f517a13bd9](https://github.com/chkuendig/scummvm/commit/0f517a13bd927dd27ee48159ab49478aed450e83) EMSCRIPTEN: Persist settings storage and use supported FS APIs
+- [ec38d2a4cfc](https://github.com/chkuendig/scummvm/commit/ec38d2a4cfc5fde387f5559806da5a441928d51b) EMSCRIPTEN: Stream HTTP files through a bounded virtual filesystem
+- [61c1e38c570](https://github.com/chkuendig/scummvm/commit/61c1e38c57078ad1b1de9d599a89b5dde82a44b1) EMSCRIPTEN: Mount dropped files and import Roland ROMs
+- [64a66d6231c](https://github.com/chkuendig/scummvm/commit/64a66d6231c8eca4b6eada5db383d638fed5a6b6) EMSCRIPTEN: Persist settings storage and use supported FS APIs
 
 ## upstream/emscripten-printing
 
-Review base: `upstream/emscripten-update-cleanup` (`81a24b609a2`). 1 review commit, 8 including prerequisites.
+Review base: `upstream/emscripten-update-cleanup` (`d9594d50608`). 1 review commit, 9 including prerequisites.
 
-- [4675b6a6f74](https://github.com/chkuendig/scummvm/commit/4675b6a6f748f215a2b6950ecc1436a0b3dcd7ff) EMSCRIPTEN: Download game print-outs through the browser
+- [54ecbc138c6](https://github.com/chkuendig/scummvm/commit/54ecbc138c635edd9bb26acebd6391fee38fb258) EMSCRIPTEN: Download game print-outs through the browser
 
 ## upstream/emscripten-loading-progress
 
-Review base: `upstream/emscripten-update-cleanup` (`81a24b609a2`). 1 review commit, 8 including prerequisites.
+Review base: `upstream/emscripten-update-cleanup` (`d9594d50608`). 1 review commit, 9 including prerequisites.
 
-- [a592eee7cd8](https://github.com/chkuendig/scummvm/commit/a592eee7cd877066fc55bd54b8795bc76393b027) EMSCRIPTEN: Show download and initialization progress
+- [edddf2de872](https://github.com/chkuendig/scummvm/commit/edddf2de8726c88979029ddfeb81f15f7b225371) EMSCRIPTEN: Show download and initialization progress
 
 ## upstream/cloud-streaming
 
-Review base: `upstream/emscripten-filesystem` (`0f517a13bd9`). 3 review commits, 13 including prerequisites.
+Review base: `upstream/emscripten-filesystem` (`64a66d6231c`). 3 review commits, 14 including prerequisites.
 
-- [fa051463bcb](https://github.com/chkuendig/scummvm/commit/fa051463bcb249b1ddb747e135a1ff7f298d7e30) CLOUD: Support efficient ranged downloads
-- [96d0b5c28a0](https://github.com/chkuendig/scummvm/commit/96d0b5c28a04fd13c28b076e8f5dc6475a02696a) CLOUD: Handle access tokens and browser refresh failures
-- [f20d2565e93](https://github.com/chkuendig/scummvm/commit/f20d2565e93b849fcf8f6a499dd4efa448b7a4d3) EMSCRIPTEN: Stream cloud files through the shared filesystem
+- [e7eb81a8533](https://github.com/chkuendig/scummvm/commit/e7eb81a8533e2879acf363bd4f251231f603632b) CLOUD: Support efficient ranged downloads
+- [941629afdf4](https://github.com/chkuendig/scummvm/commit/941629afdf4c2ee1afba35038713e4a55b9afde7) CLOUD: Handle access tokens and browser refresh failures
+- [2d6d2f38ef1](https://github.com/chkuendig/scummvm/commit/2d6d2f38ef16ad137a569ba56c17036c734b0a05) EMSCRIPTEN: Stream cloud files through the shared filesystem
 
 ## upstream/hpl1-webgl
 
@@ -63,11 +64,11 @@ Review base: `upstream/emscripten-opengl` (`929e13b40b3`). 5 review commits, 9 i
 
 ## upstream/emscripten-recorder
 
-Review base: `upstream/emscripten-filesystem` (`0f517a13bd9`). 3 review commits, 13 including prerequisites.
+Review base: `upstream/emscripten-filesystem` (`64a66d6231c`). 3 review commits, 14 including prerequisites.
 
-- [3641f88987b](https://github.com/chkuendig/scummvm/commit/3641f88987b6cbda1b65f9dac3d1ecb9f691275b) COMMON: Propagate finalize() through buffered and recorder write streams
-- [e7407cc0df3](https://github.com/chkuendig/scummvm/commit/e7407cc0df315fe7c5f73d054152d83684bbe7f7) BACKENDS: EMSCRIPTEN: Support browser recording, replay and viewport controls
-- [e629259f839](https://github.com/chkuendig/scummvm/commit/e629259f8396f7e1495a2f36907d65ae7db5c8cf) BACKENDS: EMSCRIPTEN: Keep the SDL audio callback out of the event recorder
+- [e4b9e82606a](https://github.com/chkuendig/scummvm/commit/e4b9e82606a63d3b39330704a0b7390af2e018ca) COMMON: Propagate finalize() through buffered and recorder write streams
+- [d9856d93c22](https://github.com/chkuendig/scummvm/commit/d9856d93c223563ed9d26c251583c7294b2f8dc6) BACKENDS: EMSCRIPTEN: Support browser recording, replay and viewport controls
+- [5aa6a2a8597](https://github.com/chkuendig/scummvm/commit/5aa6a2a859734e5572b01f6779de07cfe7f81edc) BACKENDS: EMSCRIPTEN: Keep the SDL audio callback out of the event recorder
 
 ## upstream/touch-controls
 
