@@ -1,39 +1,43 @@
 {
-  "demoCommit": "c8aa6ef69bc7266b21c27bbb305d9dd7c4032c92",
-  "scummvmCommit": "9e52e845659e3ec37112c5ae37cd52a2aaa44aa3",
-  "upstreamBase": "71cb05b1c03aa6bdcd34f78c20cef12c10067ba5",
+  "demoCommit": "d3879dcd2e9062ba952e37f5652963d73e6480f2",
+  "scummvmCommit": "e06972c3b9dbf756af23ebdaf3e08670fd8611d8",
+  "upstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc",
   "branches": [
     {
       "name": "upstream/emscripten-update-cleanup",
-      "head": "d6b65d41d683724dada5b4573ebb94f47e39ce46"
+      "head": "9280b78182332fb9ec4bc0ed56e2a7b4e032c7e9"
+    },
+    {
+      "name": "upstream/emscripten-opengl",
+      "head": "0f4e32c0aa5e2e09e6f13e08ba19c79b63ea176f"
     },
     {
       "name": "upstream/emscripten-filesystem",
-      "head": "02ae5145991b9ea9c1754f12a381650ec7bb5f75"
+      "head": "7d736eeb9575105353c2841409e716bc5ae80372"
     },
     {
       "name": "upstream/emscripten-printing",
-      "head": "aa6e5dc729e5d6f57e2693b49f177726e9ea686e"
+      "head": "be5c10388cb547ffdb0e468058e163431ed27ac3"
     },
     {
       "name": "upstream/emscripten-loading-progress",
-      "head": "13cbcd7458cdd12bcbd988ef0e57b97196f7a110"
+      "head": "e18bfabc7eec61057c94ad456533ab4e9c8d33cc"
     },
     {
       "name": "upstream/cloud-streaming",
-      "head": "5718ef42c81b98854c0957d253153cec0215566a"
+      "head": "e3517dc3136779f035513e377086e79a723bb43d"
     },
     {
       "name": "upstream/hpl1-webgl",
-      "head": "a4358d6b082d052d6cb49df36f8b488ccccc893a"
+      "head": "784f843f4d9029e54976c9d0ac8c148c8aa1e5ec"
     },
     {
       "name": "upstream/emscripten-recorder",
-      "head": "3e3831a6ba8620c532c8f3c7bd0af7669a012d38"
+      "head": "3ebd51acd865f0eb6ecc9e4b5088c886771a6858"
     },
     {
       "name": "upstream/touch-controls",
-      "head": "8ef1023b2b8ee6413c44e76f1e3ca4abfbf54246"
+      "head": "c56c0a92588ed5a203ec9cdea491ec21499a1f25"
     }
   ],
   "eventRecorder": false,
