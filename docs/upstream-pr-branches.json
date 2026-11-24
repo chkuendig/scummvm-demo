@@ -6737,13 +6737,13 @@
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "Full recorder-enabled SDK 6.0.13 build and golden replay passed (one framebuffer check, zero mismatches). Public recorder-disabled build/deployment queued.",
+    "status": "Deployed and live-validated. Golden recorder replay passed; public demo has event recorder disabled.",
     "previousHead": "e06972c3b9dbf756af23ebdaf3e08670fd8611d8",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
-    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39470229200",
-    "deployedDemoCommit": "c8aa6ef69bc7266b21c27bbb305d9dd7c4032c92",
-    "deployedScummvmCommit": "9e52e845659e3ec37112c5ae37cd52a2aaa44aa3",
+    "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/45355245557",
+    "deployedDemoCommit": "8097061c25f2223a96ccd931f0eea43eea0da679",
+    "deployedScummvmCommit": "0f7a44f1061b19842f1dfcf5a4afbea7d39a087f",
     "deployedBranchHeads": {
       "upstream/emscripten-update-cleanup": "d6b65d41d683724dada5b4573ebb94f47e39ce46",
       "upstream/emscripten-filesystem": "02ae5145991b9ea9c1754f12a381650ec7bb5f75",
@@ -9864,7 +9864,7 @@
     "source": "0f7a44f1061b19842f1dfcf5a4afbea7d39a087f",
     "upstreamBase": "026c00f44cf338836898bded74196ceba768b983",
     "sdk": "6.0.13",
-    "statusAtRecord": "queued",
+    "statusAtRecord": "success; build-info.json and Chromium launcher validated",
     "eventRecorder": false
   },
   "reviewBranchesUpstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc",
@@ -9876,5 +9876,17 @@
     "screenshotSuccesses": 1,
     "screenshotFailures": 0,
     "result": "success"
+  },
+  "liveValidation": {
+    "date": "2026-11-24",
+    "scummvmCommit": "0f7a44f1061b19842f1dfcf5a4afbea7d39a087f",
+    "upstreamBase": "026c00f44cf338836898bded74196ceba768b983",
+    "eventRecorder": false,
+    "emsdkVersion": "6.0.13",
+    "browser": "Headless Chromium via tvdb-playwright:local",
+    "launcherRendered": true,
+    "uncaughtJavaScriptErrors": 0,
+    "failedHttpResponses": 0,
+    "scope": "Launcher startup only; no physical-device gameplay validation. Speech-voice availability and ScriptProcessor deprecation warnings observed. Initial Module.calledRun probe timed out because the SDK does not expose this property; follow-up screenshot and network/console capture confirmed startup."
   }
 }
