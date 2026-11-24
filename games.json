@@ -1760,6 +1760,13 @@
     "platform": "DOS"
   },
   {
+    "relative_path": "puzzlecastle-windows-demo",
+    "id": "mediastation:puzzlecastle",
+    "description": "Windows Demo",
+    "download_url": "https://downloads.scummvm.org/frs/demos/mediastation/puzzlecastle-windows-demo.zip",
+    "platform": "Windows"
+  },
+  {
     "relative_path": "cloudsofxeen-dos-demo-en-ni",
     "id": "mm:cloudsofxeen",
     "description": "DOS Non-Interactive Demo",

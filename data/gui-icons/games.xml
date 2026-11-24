@@ -2,6 +2,9 @@
 <games>
 	
 	
+	<game id="101dalmatians" name="Disney's Animated Storybook: 101 Dalmatians" engine_id="mediastation" company_id="mediastation" year="1996" moby_id="128919" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="11h" name="The 11th Hour: The Sequel to The 7th Guest" engine_id="groovie" company_id="trilobyte" year="1995" moby_id="567" steam_id="255940" gog_id="the_11th_hour" zoom_id="" additional_stores="" datafiles="The_11th_Hour" wikipedia_page="The_11th_Hour_(video_game)" series_id="t7g"/>
 	
 	
@@ -291,6 +294,9 @@
 	
 	
 	<game id="barbapoca2" name="El Engaño de Barbapoca: Capítulo 2 - Competencia Fantasmal" engine_id="wintermute" company_id="lajaraventuras" year="2013" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="barbieasrapunzel" name="Magic Fairy Tales: Barbie as Rapunzel" engine_id="mediastation" company_id="mediastation" year="1997" moby_id="51384" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="bargon" name="Bargon Attack" engine_id="gob" company_id="coktel" year="1992" moby_id="13178" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Bargon_Attack" wikipedia_page="Bargon_Attack" series_id=""/>
@@ -1176,6 +1182,9 @@
 	<game id="freddypharkas" name="Freddy Pharkas: Frontier Pharmacist" engine_id="sci" company_id="sierra" year="1993" moby_id="1785" steam_id="" gog_id="freddy_pharkas_frontier_pharmacist" zoom_id="" additional_stores="" datafiles="Freddy_Pharkas" wikipedia_page="Freddy_Pharkas:_Frontier_Pharmacist" series_id=""/>
 	
 	
+	<game id="frogprince" name="Fractured Fairy Tales: The Frog Prince" engine_id="mediastation" company_id="mediastation" year="1996" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="ft" name="Full Throttle" engine_id="scumm" company_id="lucasarts" year="1995" moby_id="940" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Full_Throttle" wikipedia_page="Full_Throttle_(1995_video_game)" series_id=""/>
 	
 	
@@ -1392,6 +1401,9 @@
 	<game id="herby" name="Herby" engine_id="ags" company_id="crystalshard" year="2020" moby_id="142013" steam_id="" gog_id="" zoom_id="" additional_stores="- [Itch.io](https://radiant.itch.io/)" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="herculesasb" name="Disney's Animated Storybook: Hercules" engine_id="mediastation" company_id="mediastation" year="1997" moby_id="69700" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="herdiscoming" name="Herd is Coming" engine_id="ags" company_id="proximity" year="2019" moby_id="136715" steam_id="1028740" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
@@ -1426,6 +1438,12 @@
 	
 	
 	<game id="hodjnpodj" name="Hodj 'n' Podj" engine_id="bagel" company_id="boffo" year="1995" moby_id="268" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Hodj_%27n%27_Podj" wikipedia_page="Hodj_%27n%27_Podj" series_id=""/>
+	
+	
+	<game id="hollywood" name="Hollywood Monsters" engine_id="hollywood" company_id="pendulo" year="1997" moby_id="3696" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Hollywood_Monsters" wikipedia_page="Hollywood_Monsters_(video_game)" series_id=""/>
+	
+	
+	<game id="honeytree" name="Disney's Animated Storybook: Winnie the Pooh and the Honey Tree" engine_id="mediastation" company_id="mediastation" year="1996" moby_id="108724" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="hopkins" name="Hopkins FBI" engine_id="hopkins" company_id="mpe" year="1998" moby_id="3994" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Hopkins_FBI" wikipedia_page="Hopkins_FBI" series_id=""/>
@@ -1598,6 +1616,9 @@
 	<game id="jamesperis2" name="James Peris 2: The Fountain of Eternal Drunkenness" engine_id="wintermute" company_id="pavo" year="2022" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="janpienkowski" name="Jan Pieńkowski Haunted House" engine_id="mediastation" company_id="mediastation" year="1995" moby_id="40935" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="japanart07" name="Japan Art Today 07: Takashi Murakami - A Romantic Evening" engine_id="director" company_id="aloalo" year="1993" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
@@ -1739,6 +1760,9 @@
 	<game id="lacroixpan" name="La Croix Pan" engine_id="ags" company_id="jnuen" year="2007" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
 	
 	
+	<game id="lambchop" name="Lamb Chop Loves Music" engine_id="mediastation" company_id="mediastation" year="1995" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="lamplightcity" name="Lamplight City" engine_id="ags" company_id="grundislav" year="2018" moby_id="113618" steam_id="761460" gog_id="lamplight_city" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="Lamplight_City" series_id=""/>
 	
 	
@@ -1812,6 +1836,9 @@
 	
 	
 	<game id="limeylizardwastewizard" name="Limey Lizard: Waste Wizard!" engine_id="ags" company_id="progzmax" year="2008" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="lionking" name="Disney's Animated Storybook: The Lion King" engine_id="mediastation" company_id="mediastation" year="1995" moby_id="121090" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="lit" name="Lost in Time" engine_id="gob" company_id="coktel" year="1993" moby_id="6098" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Lost_in_Time" wikipedia_page="Lost_in_Time_(video_game)" series_id=""/>
@@ -2077,6 +2104,9 @@
 	<game id="mountainsofmadness" name="Chronicle of Innsmouth: Mountains of Madness" engine_id="ags" company_id="psychodev" year="2021" moby_id="169469" steam_id="962700" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id="innsmouth"/>
 	
 	
+	<game id="mousecookie" name="If You Give a Mouse a Cookie Interactive Storybook" engine_id="mediastation" company_id="mediastation" year="1995" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="msastrochicken" name="Ms. Astro Chicken" engine_id="sci" company_id="sierra" year="1991" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Space_Quest_IV#Ms._Astro_Chicken" series_id="sq"/>
 	
 	
@@ -2249,6 +2279,9 @@
 	
 	
 	<game id="nosebound" name="Nose Bound - Episode 1" engine_id="wintermute" company_id="quarantine" year="2024" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
+	<game id="notredame" name="Disney's Animated Storybook: The Hunchback of Notre Dame" engine_id="mediastation" company_id="mediastation" year="1996" moby_id="128921" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="nsc" name="Nathan's Second Chance" engine_id="sludge" company_id="unknown" year="2005" moby_id="-1" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Nathan%27s_Second_Chance" wikipedia_page="" series_id="sludge"/>
@@ -2479,6 +2512,9 @@
 	<game id="pn" name="Personal Nightmare" engine_id="agos" company_id="adventuresoft" year="1989" moby_id="7457" steam_id="" gog_id="personal_nightmare" zoom_id="" additional_stores="" datafiles="Personal_Nightmare" wikipedia_page="Personal_Nightmare" series_id=""/>
 	
 	
+	<game id="pocahontas" name="Disney's Animated Storybook: Pocahontas" engine_id="mediastation" company_id="mediastation" year="1996" moby_id="125030" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
+	
+	
 	<game id="pokus" name="The Pink Panther: Hokus Pokus Pink" engine_id="pink" company_id="wanderlust" year="1998" moby_id="41450" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Pink_Panther:_Hokus_Pokus_Pink" wikipedia_page="The_Pink_Panther:_Hokus_Pokus_Pink" series_id="pink"/>
 	
 	
@@ -2567,6 +2603,9 @@
 	
 	
 	<game id="puzzlebots" name="Puzzle Bots" engine_id="ags" company_id="wadjet" year="2010" moby_id="46461" steam_id="80300" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="Puzzle_Bots" series_id=""/>
+	
+	
+	<game id="puzzlecastle" name="Puzzle Castle" engine_id="mediastation" company_id="mediastation" year="1996" moby_id="169252" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="" series_id=""/>
 	
 	
 	<game id="pxenophobe" name="Project Xenophobe" engine_id="ags" company_id="sektor13" year="2004" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id=""/>
@@ -2889,6 +2928,9 @@
 	
 	
 	<game id="sleepingcub" name="Magic Tales: Sleeping Cub's Test of Courage" engine_id="composer" company_id="animationmagic" year="1996" moby_id="124458" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="" wikipedia_page="Magic_Tales" series_id="magictales"/>
+	
+	
+	<game id="snatcher" name="Snatcher" engine_id="snatcher" company_id="konami" year="1994" moby_id="7524" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="Snatcher" wikipedia_page="Snatcher_(video_game)" series_id=""/>
 	
 	
 	<game id="snipermotherland" name="Sniper and spotter serving the motherland" engine_id="ags" company_id="blondbraid" year="2017" moby_id="" steam_id="" gog_id="" zoom_id="" additional_stores="" datafiles="AGS/Games" wikipedia_page="" series_id="sniper"/>

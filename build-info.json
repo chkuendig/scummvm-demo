@@ -1,7 +1,7 @@
 {
-  "demoCommit": "d3879dcd2e9062ba952e37f5652963d73e6480f2",
-  "scummvmCommit": "e06972c3b9dbf756af23ebdaf3e08670fd8611d8",
-  "upstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc",
+  "demoCommit": "8097061c25f2223a96ccd931f0eea43eea0da679",
+  "scummvmCommit": "0f7a44f1061b19842f1dfcf5a4afbea7d39a087f",
+  "upstreamBase": "026c00f44cf338836898bded74196ceba768b983",
   "branches": [
     {
       "name": "upstream/emscripten-update-cleanup",

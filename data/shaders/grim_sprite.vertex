@@ -1,0 +1,25 @@
+in vec3 position;
+in vec2 texcoord;
+in vec4 color;
+
+uniform highp mat4 modelMatrix;
+uniform highp mat4 viewMatrix;
+uniform highp mat4 projMatrix;
+uniform highp mat4 extraMatrix;
+uniform highp vec3 spritePos;
+uniform highp vec2 spriteSize;
+
+out vec2 Texcoord;
+out vec4 Color;
+out float ClipDist;
+
+void main() {
+	vec4 anchor = modelMatrix * extraMatrix * vec4(spritePos, 1.0);
+	vec4 viewPos = viewMatrix * anchor;
+	viewPos.xy += position.xy * spriteSize;
+	gl_Position = projMatrix * viewPos;
+
+	ClipDist = 1.0;
+	Color = color;
+	Texcoord = texcoord;
+}

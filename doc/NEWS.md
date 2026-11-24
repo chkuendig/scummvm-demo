@@ -10,11 +10,42 @@ For a more comprehensive changelog of the latest experimental code, see:
    - Added support for Uninvited.
    - Added support for The Colony.
 
+ GRIM:
+   - Rewrote iMUSE to match the original, adding 3D speech positioning.
+   - Rewrote SMUSH video playback to match the original.
+   - Many fixes to the OpenGL shaders renderer.
+   - Fixed various text, collision and movement issues.
+
  M4:
-   - Missing Animation and journal fixes for Ripley's Riddle of Master Lu
- 
+   - Missing Animation and journal fixes for Ripley's Riddle of Master Lu.
+   - Fix Riddle crash on Mei animation when visiting Peiping temple for the final time.
+
  MADS:
-   - MT32 crash fixes for Dragonsphere
+   - MT32 crash fixes for Dragonsphere.
+
+ MM:
+   - Integrated Dragoo84's M&M1 Bugfix and Enhanced Mode improvements pack
+   - Party XP gain and training now work correctly.
+   - A blue arrow is shown beside XP value to indicate when a level-up is possible.
+   - Certain party members are now eligible for multiple attacks per turn, as originally intended.
+   - Added G/S (Gather/Share) button on character screen, normally available in classic mode.
+   - Spellbook improved - manual spell sorting with X and scrolling with PgUp/PgDn.
+   - Quest log implemented - keep track of quests with K.
+   - Battle log implemented - keep track of damage, spells and statuses during combat with L.
+   - Bestiary implemented - unlock enemy units and their stats through encounters and check
+     with N or click the black skull icon in the interface corner.
+   - Post-combat loot (sacks, boxes and chests) are now finally enabled, as intended. Previously,
+     only gold and gems were received (yeah, sucks).
+   - Many game-breaking quest bugs corrected.
+   - Spell behaviour corrected.
+   - Fixed several tavern bugs.
+
+ SCUMM:
+   - Added optional hotspot highlighting with object names.
+   - Various fixes to Full Throttle bike fights.
+
+ Sherlock:
+   - Improved resource handling by not keeping entire resource files in memory at all times.
 
 #### 2026.4.0 "Never-slop" (2026-10-10)
 

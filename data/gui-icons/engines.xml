@@ -51,6 +51,7 @@
 	<engine id="hadesch" name="Hades' Challenge" alt_name="" enabled="TRUE"/>
 	<engine id="harvester" name="Harvester" alt_name="" enabled="TRUE"/>
 	<engine id="hdb" name="Hyperspace Delivery Boy!" alt_name="" enabled="TRUE"/>
+	<engine id="hollywood" name="Hollywood Monsters" alt_name="" enabled="TRUE"/>
 	<engine id="hopkins" name="Hopkins FBI" alt_name="" enabled="TRUE"/>
 	<engine id="hpl1" name="HPL 1" alt_name="" enabled="TRUE"/>
 	<engine id="hugo" name="Hugo" alt_name="" enabled="TRUE"/>
@@ -68,6 +69,7 @@
 	<engine id="macs2" name="GMACS II Interpreter V1.00" alt_name="Modular Adventure Control System" enabled="TRUE"/>
 	<engine id="macventure" name="MacVenture" alt_name="" enabled="TRUE"/>
 	<engine id="made" name="MADE" alt_name="Multimedia Applications Development Environment" enabled="TRUE"/>
+	<engine id="mediastation" name="Media Station" alt_name="" enabled="FALSE"/>
 	<engine id="mads" name="MADS" alt_name="MicroProse Adventure Development System" enabled="TRUE"/>
 	<engine id="mm" name="Might and Magic" alt_name="" enabled="TRUE"/>
 	<engine id="mohawk" name="Mohawk" alt_name="" enabled="TRUE"/>
@@ -97,6 +99,7 @@
 	<engine id="sherlock" name="Sherlock" alt_name="" enabled="TRUE"/>
 	<engine id="sky" name="Sky" alt_name="Beneath a Steel Sky" enabled="TRUE"/>
 	<engine id="sludge" name="SLUDGE" alt_name="Scripting Language for Unhindered Development of a Gaming Environment" enabled="TRUE"/>
+	<engine id="snatcher" name="Snatcher" alt_name="" enabled="TRUE"/>
 	<engine id="stark" name="Stark" alt_name="" enabled="TRUE"/>
 	<engine id="startrek" name="Star Trek" alt_name="" enabled="FALSE"/>
 	<engine id="supernova" name="Supernova" alt_name="" enabled="TRUE"/>
