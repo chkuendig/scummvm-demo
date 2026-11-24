@@ -1,32 +1,12 @@
 // Minimal static file server with correct HTTP Range support, to faithfully
-// mimic the production (nginx) server for the Emscripten virtual-fs.
-//
-// Also proxies /__cdn/<path> to CDN_BASE (Range passed through), so the page
-// only ever makes same-origin requests: the real CDN's CORS headers proved
-// flaky from CI egress (edge caches occasionally drop Access-Control-Allow-
-// Origin, and there is no Vary: Origin), which broke test runs.
+// mimic the production (nginx) server for the Emscripten virtual-fs. The replay
+// workflow prepares its game data locally, so all test requests stay local.
 const http = require('http');
-const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = process.env.ROOT || process.cwd();
 const PORT = parseInt(process.env.PORT || '8232', 10);
-const CDN_BASE = process.env.CDN_BASE || 'https://scummvm-data.kuendig.io';
-
-function proxyCdn(req, res, urlPath) {
-  const target = CDN_BASE + urlPath.slice('/__cdn'.length);
-  const headers = {};
-  if (req.headers.range) headers.Range = req.headers.range;
-  https.get(target, { headers }, (up) => {
-    const h = { 'Accept-Ranges': 'bytes' };
-    for (const k of ['content-type', 'content-length', 'content-range']) {
-      if (up.headers[k]) h[k] = up.headers[k];
-    }
-    res.writeHead(up.statusCode, h);
-    up.pipe(res);
-  }).on('error', (e) => { res.writeHead(502); res.end(String(e)); });
-}
 
 const MIME = {
   '.html': 'text/html', '.js': 'text/javascript', '.wasm': 'application/wasm',
@@ -38,7 +18,6 @@ const MIME = {
 http.createServer((req, res) => {
   try {
     const urlPath = decodeURIComponent(req.url.split('?')[0]);
-    if (urlPath.startsWith('/__cdn/')) return proxyCdn(req, res, urlPath);
     let filePath = path.join(ROOT, urlPath);
     if (!filePath.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
     let stat;

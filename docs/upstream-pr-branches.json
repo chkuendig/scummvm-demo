@@ -12,7 +12,7 @@
     "htmlSha256": "2ab613330c16c07ee7913684025665aabbcdc6e501b4839c1dd1b6498901eb36",
     "sentryRelease": "194fa8f51e44"
   },
-  "upstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc",
+  "upstreamBase": "026c00f44cf338836898bded74196ceba768b983",
   "branches": [
     {
       "order": 1,
@@ -6731,14 +6731,14 @@
     "upstream/emscripten-recorder": "519426fdff1ac9294169e7480efd3a564174bd0a"
   },
   "demoIntegration": {
-    "branch": "demo/upstream-integration",
-    "head": "e06972c3b9dbf756af23ebdaf3e08670fd8611d8",
-    "upstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc",
+    "branch": "demo/replay-upstream-20261124",
+    "head": "0f7a44f1061b19842f1dfcf5a4afbea7d39a087f",
+    "upstreamBase": "026c00f44cf338836898bded74196ceba768b983",
     "eventRecorder": false,
     "website": "https://scummvm.kuendig.io/scummvm.html",
     "buildInfo": "https://scummvm.kuendig.io/build-info.json",
-    "status": "All nine restructured review branches rebased onto current master and integrated into the demo; full SDK 6.0.13 build and deployment requested.",
-    "previousHead": "0c0d5223713e69da854d849b85b65836b9a4c261",
+    "status": "Rebased demo integration only; recorder replay and deployment validation pending. Review branches retain their October heads and bases. Theme archives regenerated from merged sources.",
+    "previousHead": "e06972c3b9dbf756af23ebdaf3e08670fd8611d8",
     "previousHeadTag": "demo/integration-2026-09-13",
     "preTouchCleanupHead": "de7b4e39851d0111ec7e3f1165fd9c2997ee9419",
     "deploymentRun": "https://github.com/chkuendig/scummvm-demo/actions/runs/39470229200",
@@ -6757,7 +6757,7 @@
     "emsdkVersion": "6.0.13",
     "deployedEmsdkVersion": "6.0.13"
   },
-  "updated": "2026-10-21",
+  "updated": "2026-11-24",
   "beforeRuntimeSplit": {
     "date": "2026-10-20",
     "branches": [
@@ -9865,5 +9865,6 @@
     "upstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc",
     "sdk": "6.0.13",
     "statusAtRecord": "queued; waiting for GitHub-hosted runners"
-  }
+  },
+  "reviewBranchesUpstreamBase": "964f9ed828fc8538def571ca25b33d6dfbca1bbc"
 }

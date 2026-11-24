@@ -5,8 +5,8 @@ name: Event-Recorder Replay Test 🎬
 # framebuffer-MD5 checks pass. Catches regressions in engine determinism,
 # the emscripten timer/event plumbing, and the recorder itself.
 #
-# This scheduled regression check maintains its own cached build. The demo
-# also enables the event recorder while testing the upstream branch set.
+# This scheduled regression check maintains its own recorder-enabled build.
+# The public demo does not enable the event recorder.
 
 on:
   workflow_dispatch:
@@ -16,8 +16,7 @@ on:
 env:
   SCUMMVM_CONFIGURE: "--enable-release --enable-plugins --enable-all-engines --default-dynamic --enable-cloud --enable-eventrecorder"
   SCUMMVM_CONFIGURE_LIBS: " --enable-a52 --enable-faad --enable-fluidlite --enable-freetype2 --enable-fribidi --enable-gif --enable-gif --enable-jpeg --enable-jpeg --enable-mad --enable-mad --enable-mikmod --enable-mpcdec --enable-mpeg2 --enable-ogg --enable-png --enable-retrowave --enable-theoradec --enable-vorbis --enable-vpx --enable-zlib"
-  EMSDK_VERSION: "6.0.11"
-  DATA_BASEURL: "https://scummvm-data.kuendig.io"
+  EMSDK_VERSION: "6.0.13"
 
 jobs:
   replay:
@@ -46,7 +45,7 @@ jobs:
           path: scummvm/dists/emscripten/libs/build
           key: scummvm-libs-${{ env.EMSDK_VERSION }}-${{ hashFiles('config_lib_vars.txt') }}
 
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
         id: cache-build
         with:
           path: |
@@ -54,7 +53,7 @@ jobs:
             scummvm/scummvm.wasm
             scummvm/scummvm.js
             scummvm/scummvm.html
-          key: replay-build-${{ env.SCUMMVM_COMMIT }}-${{ hashFiles('config_vars.txt') }}
+          key: replay-build-${{ env.EMSDK_VERSION }}-${{ env.SCUMMVM_COMMIT }}-${{ hashFiles('config_vars.txt') }}
 
       - name: Configure ScummVM (recorder build) ⚙️
         if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
@@ -64,11 +63,27 @@ jobs:
         if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
         run: cd scummvm && dists/emscripten/build.sh make dist
 
-      - name: Point game data at the CDN (via same-origin proxy) 🌐
-        # serve.js proxies /__cdn/* to DATA_BASEURL - the CDN's CORS headers are
-        # flaky from CI egress, so the page must only make same-origin requests.
+      - name: Save recorder build cache
+        if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            scummvm/build-emscripten
+            scummvm/scummvm.wasm
+            scummvm/scummvm.js
+            scummvm/scummvm.html
+          key: ${{ steps.cache-build.outputs.cache-primary-key }}
+
+      - name: Prepare local Full Throttle demo fixture 🌐
         run: |
-          jq '.games = {"baseUrl": "http://127.0.0.1:8232/__cdn"}' scummvm/build-emscripten/data/index.json \
+          curl --fail --location --retry 5 --retry-all-errors \
+            --connect-timeout 30 --max-time 600 \
+            https://downloads.scummvm.org/frs/demos/scumm/ft-dos-demo-en.zip \
+            --output /tmp/ft-dos-demo-en.zip
+          python3 tests/replay/prepare-demo-fixture.py \
+            --archive /tmp/ft-dos-demo-en.zip \
+            --data-dir scummvm/build-emscripten/data
+          jq '.games = {"baseUrl": "http://127.0.0.1:8232/data/games"}' scummvm/build-emscripten/data/index.json \
             > /tmp/index.json && mv /tmp/index.json scummvm/build-emscripten/data/index.json
 
       - name: Install Playwright 🎭
